@@ -1,0 +1,71 @@
+---
+import { reviews } from '../data/reviews.js'
+---
+
+<section class="review-section" aria-labelledby="reviews-heading">
+  <div class="site-container review-layout">
+    <div class="review-intro reveal" data-review-intro>
+      <p class="eyebrow eyebrow-light">The people we work with</p>
+      <h2 id="reviews-heading">
+        Trust is earned one{' '}
+        <span class="hero-title-accent">decision at a time.</span>
+      </h2>
+      <p class="review-intro-copy">
+        We combine technology expertise, business understanding, and reliable
+        delivery to create trusted solutions and lasting client relationships.
+      </p>
+    </div>
+
+    <div
+      class="review-marquee reveal"
+      role="region"
+      aria-label="Client and sample reviews"
+    >
+      <div class="review-marquee-window">
+        <div class="review-marquee-track">
+          {[0, 1].map((copy) => (
+            <div
+              class="review-marquee-group"
+              role="list"
+              aria-hidden={copy === 1 ? 'true' : undefined}
+            >
+              {reviews.map((review) => (
+                <article
+                  class="review-card"
+                  role="listitem"
+                  tabindex={copy === 0 ? '0' : undefined}
+                >
+                  <div class="review-card-logo" aria-hidden="true">
+                    {review.logo ? (
+                      <img
+                        class="review-card-logo-mark"
+                        src={review.logo.src}
+                        width={review.logo.width}
+                        height={review.logo.height}
+                        alt=""
+                        loading="eager"
+                        decoding="async"
+                        style={
+                          review.logoScale
+                            ? `--logo-scale: ${review.logoScale}`
+                            : undefined
+                        }
+                      />
+                    ) : (
+                      <span class="review-card-logo-empty"></span>
+                    )}
+                  </div>
+                  <blockquote class="review-quote">“{review.quote}”</blockquote>
+                  <div class="review-attribution">
+                    <strong>{review.name}</strong>
+                    <span class="review-status">{review.role}</span>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,437 @@
+---
+import InsightArtwork from './InsightArtwork.astro'
+import InsightCard from './InsightCard.astro'
+import { articles } from '../data/articles.js'
+
+const { article } = Astro.props
+const slugify = (value) =>
+  value
+    .toLocaleLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+const relatedArticles = articles
+  .filter(
+    (item) => item.slug !== article.slug && item.category === article.category,
+  )
+  .concat(
+    articles.filter(
+      (item) =>
+        item.slug !== article.slug && item.category !== article.category,
+    ),
+  )
+  .slice(0, 3)
+---
+
+<div class="insight-article-page">
+  <header class="article-intro">
+    <div class="site-container article-intro-inner">
+      <nav class="article-breadcrumbs" aria-label="Breadcrumb">
+        <a href="/insights/">Insights</a>
+        <span aria-hidden="true">/</span>
+        <span>{article.category}</span>
+      </nav>
+      <p class="eyebrow">{article.category}</p>
+      <h1>{article.title}</h1>
+      <p class="article-deck">{article.excerpt}</p>
+      <div class="article-meta" aria-label="Article details">
+        <span>Sample editorial draft</span>
+        <span>Date to be confirmed</span>
+        <span>Estimated {article.readMinutes} min read</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="article-main">
+    <div class="site-container">
+      <figure class="article-cover reveal">
+        <InsightArtwork
+          variant={article.variant}
+          title={`Illustration for ${article.title}`}
+          prefix={article.slug}
+        />
+      </figure>
+      <p class="article-draft-warning">
+        Sample editorial content for page development. Replace with approved
+        Incaendo material before publication; no publication date or author has
+        been assigned.
+      </p>
+
+      <div class="article-reading-layout">
+        <aside class="article-toc" aria-labelledby="article-toc-heading">
+          <p class="eyebrow" id="article-toc-heading">
+            In this article
+          </p>
+          <ol>
+            {article.sections.map((section, index) => (
+              <li>
+                <a href={`#${slugify(section.heading)}`}>{section.heading}</a>
+              </li>
+            ))}
+          </ol>
+          <a class="article-back-link" href="/insights/">
+            ← All insights
+          </a>
+        </aside>
+
+        <article class="article-body">
+          {article.sections.map((section) => (
+            <section
+              id={slugify(section.heading)}
+              aria-labelledby={`${slugify(section.heading)}-heading`}
+            >
+              <h2 id={`${slugify(section.heading)}-heading`}>
+                {section.heading}
+              </h2>
+              {section.paragraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+              {section.list && (
+                <ul>
+                  {section.list.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              )}
+              {section.code && <pre><code>{section.code}</code></pre>}
+            </section>
+          ))}
+          <p class="article-endnote">
+            This article is a sample editorial draft. Technical examples are
+            illustrative and should be reviewed before publication.
+          </p>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <section
+    class="article-related section"
+    aria-labelledby="related-insights-heading"
+  >
+    <div class="site-container">
+      <div class="article-related-heading">
+        <div>
+          <p class="eyebrow">Keep exploring</p>
+          <h2 id="related-insights-heading">More ideas to consider.</h2>
+        </div>
+        <a class="article-back-link" href="/insights/">
+          Browse all insights <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <div class="article-related-grid">
+        {relatedArticles.map((relatedArticle) => (
+          <InsightCard article={relatedArticle} variant="related" />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="article-closing" aria-labelledby="article-closing-heading">
+    <div class="site-container article-closing-inner">
+      <div>
+        <p class="eyebrow eyebrow-light">Put an idea into context</p>
+        <h2 id="article-closing-heading">
+          Have a challenge you’re working through?
+        </h2>
+      </div>
+      <a class="button button-light" href="/contact">
+        Talk with Incaendo <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </section>
+</div>
+
+<style>
+  .article-intro {
+    padding-block: 3.3rem 2.5rem;
+    background: #f1efeb;
+  }
+
+  .article-intro-inner {
+    max-width: 920px;
+  }
+
+  .article-breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-bottom: 2.6rem;
+    color: #828b97;
+    font-size: 0.69rem;
+  }
+
+  .article-breadcrumbs a {
+    color: var(--color-orange-dark);
+    font-weight: 650;
+  }
+
+  .article-intro .eyebrow {
+    margin-bottom: 0.75rem;
+  }
+
+  .article-intro h1 {
+    max-width: 880px;
+    margin: 0 0 1rem;
+    font-size: var(--type-page-title-size);
+    font-weight: var(--type-display-weight);
+    letter-spacing: var(--type-display-letter-spacing);
+    line-height: var(--type-display-line-height);
+  }
+
+  .article-deck {
+    max-width: 760px;
+    margin: 0;
+    color: #5d6878;
+    font-size: var(--type-lead-size);
+    line-height: 1.55;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 1rem;
+    margin-top: 1.35rem;
+    color: #7e8895;
+    font-size: 0.67rem;
+  }
+
+  .article-main {
+    padding-block: 2.8rem 5rem;
+    background: #fbfaf8;
+  }
+
+  .article-cover {
+    max-width: 1080px;
+    margin: 0 auto 0.75rem;
+    overflow: hidden;
+    border: 1px solid #e7e4de;
+    border-radius: var(--radius-large);
+    box-shadow: 0 20px 55px rgb(16 27 45 / 8%);
+  }
+
+  .article-cover :global(.insight-art) {
+    aspect-ratio: 18 / 9;
+  }
+
+  .article-draft-warning {
+    max-width: 1080px;
+    margin: 0 auto 3.7rem;
+    color: #89919c;
+    font-size: 0.66rem;
+    line-height: 1.5;
+  }
+
+  .article-reading-layout {
+    display: grid;
+    max-width: 1080px;
+    grid-template-columns: minmax(190px, 0.36fr) minmax(0, 1fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    margin-inline: auto;
+  }
+
+  .article-toc {
+    position: sticky;
+    top: calc(var(--site-header-height) + 2rem);
+    align-self: start;
+  }
+
+  .article-toc .eyebrow {
+    margin-bottom: 0.8rem;
+    font-size: 0.61rem;
+  }
+
+  .article-toc ol {
+    display: grid;
+    gap: 0.65rem;
+    margin: 0;
+    padding: 0 0 1.2rem;
+    border-bottom: 1px solid var(--color-line);
+    list-style: none;
+  }
+
+  .article-toc a {
+    color: #657183;
+    font-size: 0.72rem;
+    line-height: 1.5;
+    transition: color 180ms ease;
+  }
+
+  .article-toc a:hover {
+    color: var(--color-orange-dark);
+  }
+
+  .article-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 1rem;
+    color: var(--color-orange-dark);
+    font-size: 0.72rem;
+    font-weight: 650;
+  }
+
+  .article-body {
+    max-width: 700px;
+  }
+
+  .article-body section + section {
+    margin-top: 3rem;
+  }
+
+  .article-body h2 {
+    margin: 0 0 0.85rem;
+    font-size: var(--type-compact-heading-size);
+    font-weight: 620;
+    letter-spacing: -0.05em;
+    line-height: 1.2;
+  }
+
+  .article-body p,
+  .article-body li {
+    color: #465466;
+    font-size: 0.94rem;
+    line-height: 1.82;
+  }
+
+  .article-body p {
+    margin-bottom: 1rem;
+  }
+
+  .article-body ul {
+    display: grid;
+    gap: 0.45rem;
+    margin: 0 0 1.25rem;
+    padding-left: 1.2rem;
+  }
+
+  .article-body li::marker {
+    color: var(--color-orange-dark);
+  }
+
+  .article-body pre {
+    overflow-x: auto;
+    margin: 1.25rem 0 0;
+    padding: 1.15rem 1.3rem;
+    border: 1px solid rgb(255 255 255 / 10%);
+    border-radius: var(--radius-medium);
+    background: #17283d;
+    color: #f1d0bf;
+    font-size: 0.8rem;
+    line-height: 1.7;
+  }
+
+  .article-endnote {
+    margin-top: 2.8rem !important;
+    padding: 0.9rem 1rem;
+    border-left: 2px solid var(--color-orange-dark);
+    background: #f2efeb;
+    color: #778292 !important;
+    font-size: 0.72rem !important;
+  }
+
+  .article-related {
+    background: #f1efeb;
+  }
+
+  .article-related-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .article-related-heading h2 {
+    margin: 0;
+    font-size: var(--type-section-size);
+    font-weight: var(--type-heading-weight);
+    letter-spacing: var(--type-section-letter-spacing);
+  }
+
+  .article-related-heading .eyebrow {
+    margin-bottom: 0.65rem;
+  }
+
+  .article-related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
+    gap: 1rem;
+  }
+
+  .article-closing {
+    padding-block: 3rem;
+    background: var(--color-navy);
+  }
+
+  .article-closing-inner {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .article-closing h2 {
+    margin: 0;
+    color: white;
+    font-size: var(--type-compact-heading-size);
+    font-weight: 600;
+  }
+
+  .article-closing .eyebrow {
+    margin-bottom: 0.6rem;
+  }
+
+  @media (max-width: 850px) {
+    .article-reading-layout {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 2rem;
+    }
+    .article-toc {
+      position: static;
+    }
+    .article-toc ol {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .article-related-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 600px) {
+    .article-intro {
+      padding-block: 2.5rem 2rem;
+    }
+    .article-breadcrumbs {
+      margin-bottom: 1.8rem;
+    }
+    .article-intro h1 {
+      font-size: clamp(2.5rem, 10vw, 3.45rem);
+    }
+    .article-cover {
+      border-radius: var(--radius-medium);
+    }
+    .article-cover :global(.insight-art) {
+      aspect-ratio: 16 / 10;
+    }
+    .article-draft-warning {
+      margin-bottom: 2.4rem;
+    }
+    .article-toc ol,
+    .article-related-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .article-reading-layout {
+      gap: 1.5rem;
+    }
+    .article-body p,
+    .article-body li {
+      font-size: 0.88rem;
+    }
+    .article-related-heading,
+    .article-closing-inner {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+</style>

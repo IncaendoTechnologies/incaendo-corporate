@@ -1,0 +1,227 @@
+---
+import InsightCard from './InsightCard.astro'
+import aiDashboard from '../assets/AI-Powered Impact Dashboard.png'
+import aiNetwork from '../assets/hero-orbittt.png'
+import engineeringDesk from '../assets/hero-orbit.png'
+import {
+  featuredArticles,
+  heroArticle,
+  latestArticles,
+} from '../data/articles.js'
+
+const homeArticles = [
+  heroArticle,
+  featuredArticles[0],
+  latestArticles[0],
+].filter(Boolean)
+
+const articleThumbnails = [aiDashboard, aiNetwork, engineeringDesk]
+---
+
+<section class="home-insights-section" aria-labelledby="home-insights-heading">
+  <div class="site-container home-insights-content">
+    <div class="home-insights-intro reveal">
+      <div class="home-insights-heading-group">
+        <p class="eyebrow">Insights &amp; ideas</p>
+        <h2 id="home-insights-heading">
+          Practical perspectives for{' '}
+          <span class="hero-title-accent">building useful technology.</span>
+        </h2>
+        <p class="section-intro">
+          Explore thoughtful articles on AI, software engineering and digital
+          products—and the decisions behind making them useful.
+        </p>
+      </div>
+      <a class="home-insights-action button button-primary" href="/insights/">
+        Explore all insights <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+
+    <div class="home-insights-grid reveal" data-reveal-stagger>
+      {homeArticles.map((article, index) => (
+        <InsightCard
+          article={article}
+          variant="standard"
+          thumbnail={articleThumbnails[index]}
+        />
+      ))}
+    </div>
+  </div>
+</section>
+<style>
+  .home-insights-section {
+    padding-block: clamp(4rem, 7vw, 6rem);
+    background: var(--color-paper);
+  }
+
+  .home-insights-content {
+    display: grid;
+    gap: clamp(2rem, 3.8vw, 3rem);
+  }
+
+  .home-insights-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 690px) minmax(0, 1fr);
+    align-items: end;
+    column-gap: clamp(2rem, 5vw, 5rem);
+  }
+
+  .home-insights-heading-group {
+    max-width: 690px;
+  }
+
+  .home-insights-intro .eyebrow {
+    margin-bottom: 0.75rem;
+  }
+
+  .home-insights-intro h2 {
+    max-width: 690px;
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-heading);
+    font-size: var(--type-section-size);
+    font-weight: var(--type-heading-weight);
+    letter-spacing: var(--type-section-letter-spacing);
+    line-height: var(--type-section-line-height);
+  }
+
+  .home-insights-heading-group .section-intro {
+    max-width: 690px;
+    margin: 1rem 0 0;
+    color: var(--color-body);
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-line-height);
+  }
+
+  .home-insights-action {
+    justify-self: end;
+    align-self: end;
+    margin-bottom: 0.15rem;
+  }
+
+  .home-insights-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+    gap: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  .home-insights-grid :global(.insight-card) {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+  }
+
+  .home-insights-grid :global(.insight-card-art-link) {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+  }
+
+  .home-insights-grid :global(.insight-card-content) {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: clamp(1.1rem, 1.65vw, 1.45rem);
+  }
+
+  .home-insights-grid :global(.insight-card-kicker) {
+    min-height: 1.1em;
+  }
+
+  .home-insights-grid :global(.insight-card h2) {
+    margin: 0.65rem 0 0.55rem;
+    font-size: clamp(1.08rem, 1.3vw, 1.3rem);
+    line-height: 1.32;
+  }
+
+  .home-insights-grid :global(.insight-card-excerpt) {
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+
+  .home-insights-grid :global(.insight-card-footer) {
+    align-items: flex-end;
+    margin-top: auto;
+    padding-top: 0.9rem;
+  }
+
+  .home-insights-grid :global(.insight-photo) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 500ms var(--ease-out);
+  }
+
+  .home-insights-grid :global(.insight-card:hover .insight-photo) {
+    transform: scale(1.035);
+  }
+
+  @media (max-width: 900px) {
+    .home-insights-intro {
+      grid-template-columns: minmax(0, 1.1fr) minmax(220px, 0.7fr);
+      column-gap: 2rem;
+    }
+
+    .home-insights-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .home-insights-grid :global(.insight-card:nth-child(3):last-child) {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: calc((100% - 1rem) / 2);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .home-insights-section {
+      padding-block: 3.5rem;
+    }
+
+    .home-insights-intro {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    .home-insights-heading-group .section-intro {
+      margin: 1rem 0 1rem;
+    }
+
+    .home-insights-action {
+      justify-self: start;
+      align-self: start;
+      margin: 0;
+    }
+
+    .home-insights-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.1rem;
+    }
+
+    .home-insights-grid :global(.insight-card:nth-child(3):last-child) {
+      grid-column: auto;
+      width: 100%;
+    }
+
+    .home-insights-grid :global(.insight-card-art-link) {
+      aspect-ratio: 16 / 10;
+    }
+
+    .home-insights-grid :global(.insight-card-content) {
+      padding: 1rem;
+    }
+
+    .home-insights-grid :global(.insight-card-footer) {
+      align-items: flex-start;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-insights-grid :global(.insight-photo),
+    .home-insights-grid :global(.insight-card:hover .insight-photo) {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>

@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PageIntro from '../components/PageIntro.astro'
+import ReviewNotice from '../components/ReviewNotice.astro'
+import { pages } from '../data/site-content.js'
+---
+
+<BaseLayout title={pages.careers.title} description={pages.careers.description}>
+  <main id="main-content">
+    <PageIntro
+      eyebrow="Careers at Incaendo"
+      title="Do thoughtful work with good people."
+      description="We’re preparing a clear picture of the roles, opportunities, and working culture at Incaendo."
+      index="07 / 09"
+    />
+    <section class="section careers-section" aria-labelledby="careers-heading">
+      <div class="site-container careers-empty">
+        <p class="eyebrow">Opportunities</p>
+        <h2 id="careers-heading">No verified openings are listed right now.</h2>
+        <p>
+          We’ll publish roles here when the details and application process are
+          ready. We don’t collect CVs through this site yet.
+        </p>
+        <ReviewNotice title="Careers information to confirm">
+          Add current openings, location and work model, hiring contact, and a
+          clear applicant privacy process before inviting applications.
+        </ReviewNotice>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

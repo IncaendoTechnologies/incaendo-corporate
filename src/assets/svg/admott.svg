@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 23 864 186" width="100%" height="100%">
+  <defs>
+    <!-- Yellow to Pink Gradient for Play Ribbon -->
+    <linearGradient id="ribbonGrad" x1="0%" y1="0%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="#FFE600"/>
+      <stop offset="45%" stop-color="#FF5900"/>
+      <stop offset="100%" stop-color="#E6007A"/>
+    </linearGradient>
+
+    <!-- Orange/Yellow Drop Line Gradient -->
+    <linearGradient id="dropGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFE600"/>
+      <stop offset="60%" stop-color="#FF8800"/>
+      <stop offset="100%" stop-color="#FF4500"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ================= LEFT ICON ================= -->
+  <g transform="translate(30, 20)">
+    <!-- Main Play Loop -->
+    <path d="M 10 30 C 10 18 20 12 32 20 L 88 56 C 98 62 98 74 88 80 L 62 98 C 52 105 48 115 50 128 L 51 145 C 51 150 45 154 40 150 C 36 147 37 138 37 130 L 37 92 C 37 84 42 78 48 74 L 66 62 L 28 36 C 24 33 22 36 22 42 L 22 120 C 22 126 16 128 12 124 C 10 122 10 116 10 110 Z" 
+          fill="url(#ribbonGrad)"/>
+
+    <!-- Small Floating Cap Dot -->
+    <ellipse cx="48" cy="22" rx="7" ry="9" fill="#FF4500"/>
+
+    <!-- Dripping Bars -->
+    <rect x="22" y="80" width="8" height="28" rx="4" fill="#FFE600"/>
+    <rect x="36" y="60" width="8" height="85" rx="4" fill="url(#dropGrad)"/>
+    <ellipse cx="40" cy="158" rx="5" ry="7" fill="#FF4500"/>
+
+    <!-- Splash Droplets -->
+    <circle cx="56" cy="138" r="4.5" fill="#E6007A"/>
+    <circle cx="40" cy="174" r="3.5" fill="#FF3300"/>
+  </g>
+
+  <!-- ================= ADMOTT AS PURE VECTOR PATHS ================= -->
+  <g fill="#0A0642" transform="translate(160, 48)">
+    <!-- A -->
+    <path d="M 0 102 L 34 0 L 76 0 L 110 102 L 77 102 L 70 78 L 40 78 L 33 102 Z M 46 56 L 64 56 L 55 24 Z"/>
+    
+    <!-- D -->
+    <path d="M 120 0 L 175 0 C 205 0 226 18 226 51 C 226 84 205 102 175 102 L 120 102 Z M 153 28 L 153 74 L 172 74 C 187 74 195 65 195 51 C 195 37 187 28 172 28 Z"/>
+    
+    <!-- M -->
+    <path d="M 238 0 L 274 0 L 298 56 L 322 0 L 358 0 L 358 102 L 329 102 L 329 42 L 308 90 L 288 90 L 267 42 L 267 102 L 238 102 Z"/>
+    
+    <!-- O -->
+    <path d="M 425 0 C 460 0 482 24 482 51 C 482 78 460 102 425 102 C 390 102 368 78 368 51 C 368 24 390 0 425 0 Z M 425 28 C 410 28 400 37 400 51 C 400 65 410 74 425 74 C 440 74 450 65 450 51 C 450 37 440 28 425 28 Z"/>
+    
+    <!-- T 1 -->
+    <path d="M 490 0 L 560 0 L 560 28 L 541 28 L 541 102 L 509 102 L 509 28 L 490 28 Z"/>
+    
+    <!-- T 2 -->
+    <path d="M 552 0 L 622 0 L 622 28 L 603 28 L 603 102 L 571 102 L 571 28 L 552 28 Z"/>
+
+    <!-- Registered Symbol (®) -->
+    <g transform="translate(630, 2)">
+      <circle cx="10" cy="10" r="9" fill="none" stroke="#0A0642" stroke-width="2"/>
+      <path d="M 7 5 L 11 5 C 13 5 14 6 14 8 C 14 9.5 13 10.5 11.5 10.5 L 13.5 15 L 11.5 15 L 9.8 11 L 8.5 11 L 8.5 15 L 7 15 Z M 8.5 6.5 L 8.5 9.5 L 11 9.5 C 11.8 9.5 12.5 9 12.5 8 C 12.5 7 11.8 6.5 11 6.5 Z"/>
+    </g>
+  </g>
+</svg>

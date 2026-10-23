@@ -1,0 +1,663 @@
+---
+import TeamProfile from './TeamProfile.astro'
+import { Image } from 'astro:assets'
+import { teamMembers } from '../data/team.js'
+import teamHeroImage from '../assets/services-hero-team.png'
+import teamProductImage from '../assets/service-custom-software.webp'
+---
+
+<section class="team-hero page-intro" aria-labelledby="team-page-heading">
+  <div class="site-container team-hero-inner">
+    <div class="team-hero-copy reveal">
+      <p class="eyebrow">People & expertise</p>
+      <h1 id="team-page-heading">
+        Good technology is a <span>team effort.</span>
+      </h1>
+      <p class="page-intro-description">
+        Meet the people and disciplines behind Incaendo—from leadership and
+        software engineering to architecture, quality and business operations.
+      </p>
+      <div class="team-hero-actions">
+        <a class="button button-primary" href="#team-directory">
+          Meet the team <span aria-hidden="true">↘</span>
+        </a>
+        <a class="button button-outline" href="#team-expertise">
+          Explore our expertise <span aria-hidden="true">↘</span>
+        </a>
+      </div>
+      <a class="team-hero-work-link" href="/projects">
+        Explore our work <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+
+    <div class="team-hero-visual reveal">
+      <figure class="team-hero-photo team-hero-photo-main">
+        <Image
+          src={teamHeroImage}
+          alt="Software teammates collaborating around product and engineering screens"
+          width={1600}
+          sizes="(max-width: 700px) 92vw, (max-width: 1100px) 44vw, 48vw"
+          quality={88}
+          loading="eager"
+        />
+        <figcaption>People behind digital products</figcaption>
+      </figure>
+      <figure class="team-hero-photo team-hero-photo-detail">
+        <Image
+          src={teamProductImage}
+          alt="Product team discussing a custom software interface"
+          width={900}
+          sizes="(max-width: 700px) 42vw, 20vw"
+          quality={88}
+          loading="eager"
+        />
+      </figure>
+      <span class="team-hero-photo-index" aria-hidden="true">
+        INCAENDO / PEOPLE &amp; PRODUCT
+      </span>
+    </div>
+  </div>
+</section>
+
+<section
+  class="team-directory-section section"
+  id="team-directory"
+  aria-labelledby="team-directory-heading"
+>
+  <div class="site-container">
+    <header class="team-section-heading reveal">
+      <div>
+        <p class="eyebrow">The people behind the work</p>
+        <h2 id="team-directory-heading">
+          Meet the <span>team.</span>
+        </h2>
+      </div>
+      <p>
+        Meet the people behind our work. Profiles show confirmed roster details;
+        biographies and project credits will be added only when approved.
+      </p>
+    </header>
+
+    <div class="team-profile-grid reveal" data-reveal-stagger>
+      {teamMembers.map((member, index) => (
+        <TeamProfile member={member} index={index} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<section
+  class="team-expertise-section section section-soft"
+  id="team-expertise"
+  aria-labelledby="team-expertise-heading"
+>
+  <div class="site-container">
+    <header class="team-section-heading team-expertise-heading reveal">
+      <div>
+        <p class="eyebrow">Expertise across roles</p>
+        <h2 id="team-expertise-heading">
+          Different perspectives.
+          <br />
+          <span>Shared delivery.</span>
+        </h2>
+      </div>
+      <p>
+        The published designations point to several perspectives that support
+        software work. They describe the roster—not individual project
+        assignments or unverified skill sets.
+      </p>
+    </header>
+
+    <div class="team-discipline-grid reveal" data-reveal-stagger>
+      <article class="team-discipline" data-reveal-item>
+        <span class="team-discipline-number">01</span>
+        <h3>Software engineering</h3>
+        <p>
+          Software engineering and engineering management roles are represented
+          in the team roster.
+        </p>
+        <span class="team-discipline-roles">
+          Engineering · Senior engineering · Management
+        </span>
+      </article>
+      <article class="team-discipline" data-reveal-item>
+        <span class="team-discipline-number">02</span>
+        <h3>Architecture & technical leadership</h3>
+        <p>
+          System architecture and technical lead designations bring technical
+          direction into the organization.
+        </p>
+        <span class="team-discipline-roles">
+          System architecture · Technical leadership
+        </span>
+      </article>
+      <article class="team-discipline" data-reveal-item>
+        <span class="team-discipline-number">03</span>
+        <h3>Quality assurance</h3>
+        <p>
+          A Quality Analyst role is listed alongside the engineering and
+          technical positions.
+        </p>
+        <span class="team-discipline-roles">Quality analysis</span>
+      </article>
+      <article class="team-discipline" data-reveal-item>
+        <span class="team-discipline-number">04</span>
+        <h3>Business operations</h3>
+        <p>
+          Finance and HR designations represent business-support roles within
+          the published team.
+        </p>
+        <span class="team-discipline-roles">Finance · People operations</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section
+  class="team-collaboration-section section"
+  aria-labelledby="team-collaboration-heading"
+>
+  <div class="site-container">
+    <header class="team-collaboration-intro reveal">
+      <p class="eyebrow">A connected way of working</p>
+      <h2 id="team-collaboration-heading">
+        Good decisions keep the work <span>moving.</span>
+      </h2>
+      <p>
+        Incaendo’s published delivery approach connects discovery, planning,
+        engineering, review and continued improvement. The right team mix
+        depends on the requirements and systems involved.
+      </p>
+    </header>
+
+    <ol class="team-journey reveal" data-reveal-stagger>
+      <li data-reveal-item>
+        <span>01</span>
+        <h3>Understand</h3>
+        <p>Clarify goals, users, constraints and existing workflows.</p>
+      </li>
+      <li data-reveal-item>
+        <span>02</span>
+        <h3>Plan</h3>
+        <p>Shape scope and make practical design and technical decisions.</p>
+      </li>
+      <li data-reveal-item>
+        <span>03</span>
+        <h3>Build & review</h3>
+        <p>Develop in steps, share progress and validate the solution.</p>
+      </li>
+      <li data-reveal-item>
+        <span>04</span>
+        <h3>Improve</h3>
+        <p>Prepare for release and consider what should evolve next.</p>
+      </li>
+    </ol>
+    <a class="team-text-link" href="/services#how-we-work">
+      Explore how we work <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .team-hero {
+    padding-block: clamp(4.5rem, 8vw, 6.5rem) clamp(3.8rem, 6vw, 5rem);
+    background:
+      radial-gradient(
+        ellipse at 92% 12%,
+        rgb(244 233 223 / 74%),
+        transparent 34%
+      ),
+      linear-gradient(125deg, #fbfaf8 0%, var(--color-paper) 53%, #f0ece6 100%);
+  }
+
+  .team-hero::after {
+    top: -65%;
+    right: -8%;
+    width: min(52vw, 720px);
+    opacity: 0.76;
+  }
+
+  .team-hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    align-items: center;
+    gap: clamp(2.5rem, 6vw, 6rem);
+  }
+
+  .team-hero-copy {
+    max-width: 700px;
+  }
+
+  .team-hero h1 {
+    max-width: 690px;
+    margin-bottom: 1.25rem;
+  }
+
+  .team-hero h1 span,
+  .team-section-heading h2 span,
+  .team-collaboration-intro h2 span {
+    color: var(--color-orange-dark);
+  }
+
+  .team-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 1.65rem;
+  }
+
+  .team-hero-work-link,
+  .team-text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--color-orange-dark);
+    font-size: 0.79rem;
+    font-weight: 650;
+  }
+
+  .team-hero-work-link {
+    margin-top: 1.25rem;
+  }
+
+  .team-hero-work-link span,
+  .team-text-link span {
+    transition: transform 200ms var(--ease-out);
+  }
+
+  .team-hero-work-link:hover span,
+  .team-text-link:hover span {
+    transform: translate(2px, -2px);
+  }
+
+  .team-hero-visual {
+    position: relative;
+    min-width: 0;
+    min-height: 430px;
+  }
+
+  .team-hero-photo {
+    position: absolute;
+    overflow: hidden;
+    margin: 0;
+    border: 1px solid rgb(16 27 45 / 10%);
+    border-radius: var(--radius-large);
+    background: #ebe8e2;
+    box-shadow: 0 24px 60px rgb(16 27 45 / 11%);
+  }
+
+  .team-hero-photo-main {
+    inset: 0 0 2.4rem 2rem;
+  }
+
+  .team-hero-photo-detail {
+    bottom: 0;
+    left: 0;
+    width: 39%;
+    aspect-ratio: 1.48;
+    border: 4px solid #fbfaf8;
+    border-radius: var(--radius-medium);
+  }
+
+  .team-hero-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 500ms var(--ease-out);
+  }
+
+  .team-hero-photo:hover img {
+    transform: scale(1.025);
+  }
+
+  .team-hero-photo-main figcaption {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    padding: 0.5rem 0.7rem;
+    border: 1px solid rgb(255 255 255 / 58%);
+    border-radius: 999px;
+    background: rgb(255 255 255 / 88%);
+    color: var(--color-navy);
+    font-size: 0.68rem;
+    font-weight: 650;
+  }
+
+  .team-hero-photo-index {
+    position: absolute;
+    right: 0.1rem;
+    bottom: 0.8rem;
+    color: var(--color-muted);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+
+  .team-section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2.5rem;
+    margin-bottom: 2.25rem;
+  }
+
+  .team-section-heading > div {
+    max-width: 650px;
+  }
+
+  .team-section-heading h2,
+  .team-collaboration-intro h2 {
+    margin: 0;
+    font-size: var(--type-section-size);
+    font-weight: var(--type-heading-weight);
+    letter-spacing: var(--type-section-letter-spacing);
+    line-height: var(--type-section-line-height);
+  }
+
+  .team-section-heading > p {
+    max-width: 410px;
+    margin: 0 0 0.15rem;
+    color: var(--color-body);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .team-directory-section {
+    background:
+      radial-gradient(ellipse at 10% 4%, rgb(84 123 157 / 7%), transparent 30%),
+      linear-gradient(180deg, #fbfaf8 0%, #f7f5f1 100%);
+  }
+
+  .team-profile-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .team-profile-grid > :global(.team-profile) {
+    flex: 0 1 calc((100% - 3rem) / 4);
+    min-width: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .team-hero-photo img {
+      transition: none;
+    }
+
+    .team-hero-photo:hover img {
+      transform: none;
+    }
+  }
+
+  .team-expertise-section {
+    overflow: hidden;
+    background:
+      radial-gradient(
+        ellipse at 98% 8%,
+        rgb(244 233 223 / 72%),
+        transparent 38%
+      ),
+      #f2f0ec;
+  }
+
+  .team-expertise-heading {
+    margin-bottom: 2rem;
+  }
+
+  .team-discipline-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid #d9d4cd;
+    border-bottom: 1px solid #d9d4cd;
+  }
+
+  .team-discipline {
+    min-width: 0;
+    padding: 1.3rem 1.2rem 1.35rem;
+    border-right: 1px solid #d9d4cd;
+  }
+
+  .team-discipline:first-child {
+    padding-left: 0;
+  }
+  .team-discipline:last-child {
+    padding-right: 0;
+    border-right: 0;
+  }
+
+  .team-discipline-number {
+    color: var(--color-orange-dark);
+    font-size: 0.64rem;
+    font-weight: 750;
+    letter-spacing: 0.12em;
+  }
+
+  .team-discipline h3 {
+    margin: 1.15rem 0 0.65rem;
+    font-size: 1rem;
+    font-weight: 650;
+    line-height: 1.3;
+  }
+
+  .team-discipline p {
+    min-height: 4.5rem;
+    margin: 0 0 1rem;
+    color: #657183;
+    font-size: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .team-discipline-roles {
+    display: block;
+    color: #828b97;
+    font-size: 0.62rem;
+    line-height: 1.5;
+  }
+
+  .team-collaboration-section {
+    background: #fbfaf8;
+  }
+
+  .team-collaboration-intro {
+    max-width: 740px;
+    margin-bottom: 2rem;
+  }
+
+  .team-collaboration-intro h2 {
+    margin-bottom: 0.9rem;
+  }
+
+  .team-collaboration-intro > p:last-child {
+    max-width: 650px;
+    margin-bottom: 0;
+    color: var(--color-body);
+    font-size: 0.9rem;
+  }
+
+  .team-journey {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 0 0 1.25rem;
+    padding: 0;
+    border-top: 1px solid var(--color-line);
+    list-style: none;
+  }
+
+  .team-journey li {
+    position: relative;
+    min-width: 0;
+    padding: 1.1rem 1rem 0.4rem 0;
+  }
+
+  .team-journey li + li {
+    padding-left: 1rem;
+  }
+
+  .team-journey li::before {
+    position: absolute;
+    top: -4px;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-orange-dark);
+    content: '';
+  }
+
+  .team-journey span {
+    color: #a1a6ad;
+    font-size: 0.63rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+
+  .team-journey h3 {
+    margin: 0.6rem 0 0.45rem;
+    font-size: 0.97rem;
+    font-weight: 650;
+  }
+
+  .team-journey p {
+    max-width: 230px;
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.73rem;
+    line-height: 1.55;
+  }
+
+  .team-text-link {
+    margin-top: 0.2rem;
+  }
+
+  @media (max-width: 1100px) {
+    .team-profile-grid > :global(.team-profile) {
+      flex-basis: calc((100% - 2rem) / 3);
+    }
+    .team-discipline-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .team-discipline:nth-child(2) {
+      border-right: 0;
+    }
+    .team-discipline:nth-child(n + 3) {
+      border-top: 1px solid #d9d4cd;
+    }
+    .team-discipline:nth-child(3) {
+      padding-left: 0;
+    }
+    .team-discipline p {
+      min-height: 3.2rem;
+    }
+  }
+
+  @media (max-width: 899px) {
+    .team-hero-inner {
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 0.8fr);
+      gap: 2rem;
+    }
+    .team-hero-visual {
+      min-height: 350px;
+    }
+    .team-section-heading {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+    .team-section-heading > p {
+      max-width: 620px;
+    }
+    .team-profile-grid > :global(.team-profile) {
+      flex-basis: calc((100% - 1rem) / 2);
+    }
+    .team-journey {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      row-gap: 1rem;
+    }
+    .team-journey li:nth-child(3) {
+      padding-left: 0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .team-hero {
+      padding-block: 4rem 3.5rem;
+    }
+    .team-hero-inner {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 2rem;
+    }
+    .team-hero h1 {
+      font-size: clamp(2.65rem, 11vw, 3.5rem);
+    }
+    .team-hero-actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+    .team-hero-actions .button {
+      justify-content: space-between;
+    }
+    .team-hero-visual {
+      min-height: 320px;
+    }
+    .team-hero-photo-main {
+      inset: 0 0 1.7rem 1rem;
+    }
+    .team-hero-photo-detail {
+      width: 42%;
+    }
+    .team-hero-photo-main figcaption {
+      top: 0.7rem;
+      left: 0.7rem;
+      font-size: 0.62rem;
+    }
+    .team-hero-photo-index {
+      right: 0;
+      bottom: 0.45rem;
+      font-size: 0.49rem;
+    }
+    .team-section-heading h2 {
+      font-size: clamp(2rem, 9vw, 2.7rem);
+    }
+    .team-profile-grid > :global(.team-profile) {
+      flex-basis: 100%;
+    }
+    .team-discipline-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .team-discipline,
+    .team-discipline:first-child,
+    .team-discipline:last-child,
+    .team-discipline:nth-child(3) {
+      padding: 1.1rem 0;
+      border-right: 0;
+    }
+    .team-discipline + .team-discipline {
+      border-top: 1px solid #d9d4cd;
+    }
+    .team-discipline h3 {
+      margin-top: 0.7rem;
+    }
+    .team-discipline p {
+      min-height: 0;
+    }
+    .team-journey {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 0.35rem;
+    }
+    .team-journey li,
+    .team-journey li + li,
+    .team-journey li:nth-child(3) {
+      padding: 0.8rem 0 0.7rem 1rem;
+      border-left: 1px solid var(--color-line);
+    }
+    .team-journey li::before {
+      top: 1.05rem;
+      left: -4px;
+    }
+    .team-journey p {
+      max-width: none;
+    }
+  }
+</style>

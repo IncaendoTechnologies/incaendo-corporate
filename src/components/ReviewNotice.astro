@@ -1,0 +1,13 @@
+---
+const { title = 'Details being prepared', children } = Astro.props
+---
+
+<aside class="review-notice" aria-label="Content status">
+  <span class="review-notice-indicator" aria-hidden="true"></span>
+  <div>
+    <strong>{title}</strong>
+    <div class="review-notice-copy">
+      <slot />
+    </div>
+  </div>
+</aside>

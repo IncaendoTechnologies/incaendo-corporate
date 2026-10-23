@@ -1,0 +1,1027 @@
+---
+import { Image } from 'astro:assets'
+import { projects, projectCategories } from '../data/projects.js'
+
+const tomo = projects.find((project) => project.name === 'Tomo')
+const dominos = projects.find((project) => project.name === "Domino's")
+const zeeMedia = projects.find((project) => project.name === 'Zee Media')
+---
+
+<section class="projects-hero" aria-labelledby="projects-page-heading">
+  <div class="site-container projects-hero-layout">
+    <div class="projects-hero-copy">
+      <p class="eyebrow">
+        <span class="eyebrow-dot"></span> Selected work
+      </p>
+      <h1 id="projects-page-heading">
+        A portfolio of <span>digital work</span>, shaped around what matters.
+      </h1>
+      <p class="projects-hero-description">
+        Explore products, platforms, and digital experiences from across
+        Incaendo’s project portfolio. Each reflects a different audience,
+        challenge, and role for technology.
+      </p>
+      <div class="projects-hero-actions">
+        <a class="button button-primary" href="/contact">
+          Discuss your project <span aria-hidden="true">↗</span>
+        </a>
+        <a class="text-link" href="#project-portfolio">
+          Explore the portfolio <span aria-hidden="true">↓</span>
+        </a>
+      </div>
+      <div class="projects-hero-meta" aria-label="Portfolio coverage">
+        <span>Mobile products</span>
+        <span>Web platforms</span>
+        <span>Connected services</span>
+      </div>
+    </div>
+
+    <div class="projects-hero-visual" aria-hidden="true">
+      <div class="hero-visual-halo" aria-hidden="true"></div>
+      <figure class="hero-screen hero-screen-main">
+        <Image
+          src={dominos.image}
+          alt=""
+          width={640}
+          sizes="(max-width: 900px) 80vw, 40vw"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <figcaption>
+          {dominos.name}
+          <span>Commerce</span>
+        </figcaption>
+      </figure>
+      <figure class="hero-screen hero-screen-left">
+        <Image
+          src={tomo.image}
+          alt=""
+          width={360}
+          sizes="(max-width: 700px) 36vw, 18vw"
+          loading="eager"
+        />
+        <figcaption>{tomo.name}</figcaption>
+      </figure>
+      <figure class="hero-screen hero-screen-right">
+        <Image
+          src={zeeMedia.image}
+          alt=""
+          width={380}
+          sizes="(max-width: 700px) 38vw, 19vw"
+          loading="eager"
+        />
+        <figcaption>{zeeMedia.name}</figcaption>
+      </figure>
+      <span class="hero-visual-index" aria-hidden="true">
+        INCAENDO / PROJECTS
+      </span>
+    </div>
+  </div>
+</section>
+
+<section
+  class="portfolio-section section"
+  id="project-portfolio"
+  aria-labelledby="portfolio-heading"
+>
+  <div class="site-container">
+    <div class="portfolio-intro">
+      <div>
+        <p class="eyebrow">Project portfolio</p>
+        <h2 id="portfolio-heading">
+          Different challenges. <span>Thoughtful digital work.</span>
+        </h2>
+      </div>
+      <p>
+        Browse a selection across digital products, media, commerce, financial
+        services, operations, and learning. Expand a project to see the
+        documented approach and technical evidence. Details not present in the
+        source material are called out for confirmation.
+      </p>
+    </div>
+
+    <div class="portfolio-toolbar">
+      <div class="project-filters" role="group" aria-label="Filter projects">
+        {projectCategories.map((category, index) => (
+          <button
+            type="button"
+            class:list={['project-filter', index === 0 && 'is-active']}
+            data-project-filter={index === 0 ? 'all' : category}
+            aria-pressed={index === 0 ? 'true' : 'false'}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+      <p class="portfolio-count" data-project-count aria-live="polite">
+        12 project entries
+      </p>
+    </div>
+
+    <div class="case-study-list reveal" data-reveal-stagger>
+      {projects.map((project, index) => (
+        <article
+          class:list={['case-study', index % 2 === 1 && 'case-study-reversed']}
+          data-portfolio-card
+          data-category={project.category}
+          data-reveal-item
+        >
+          <figure class="case-study-image">
+            <Image
+              src={project.image}
+              alt={project.alt}
+              width={980}
+              sizes="(max-width: 760px) 92vw, (max-width: 1100px) 45vw, 42vw"
+              quality={90}
+              loading={index < 3 ? 'eager' : 'lazy'}
+            />
+          </figure>
+          <div class="case-study-copy">
+            <div class="case-study-kicker">
+              <span>{project.category}</span>
+              <span>Project {String(index + 1).padStart(2, '0')}</span>
+            </div>
+            <h3 id={`project-${index + 1}-heading`}>{project.name}</h3>
+            <section
+              class="project-overview"
+              aria-labelledby={`project-${index + 1}-overview`}
+            >
+              <h4 id={`project-${index + 1}-overview`}>Project overview</h4>
+              <p>{project.overview}</p>
+            </section>
+            <dl class="project-scope">
+              <div>
+                <dt>Industry</dt>
+                <dd>{project.industry}</dd>
+              </div>
+              <div>
+                <dt>Documented scope</dt>
+                <dd>{project.documentedScope}</dd>
+              </div>
+            </dl>
+            <details class="project-details">
+              <summary>
+                <span class="details-closed">Explore technical details</span>
+                <span class="details-open">Hide technical details</span>
+                <span class="details-evidence">Project evidence</span>
+              </summary>
+              <div class="project-details-content">
+                <div class="project-detail-grid">
+                  {project.sections.map((section) => (
+                    <section>
+                      <h4>{section.title}</h4>
+                      <p>{section.text}</p>
+                    </section>
+                  ))}
+                </div>
+                <p class="project-confirmation">
+                  <strong>Details to confirm</strong>
+                  {project.confirm}
+                </p>
+              </div>
+            </details>
+          </div>
+        </article>
+      ))}
+    </div>
+    <p class="portfolio-empty" data-project-empty hidden>
+      No projects in this category yet. Choose another area to explore.
+    </p>
+  </div>
+</section>
+
+<script>
+  const portfolio = document.querySelector('.portfolio-section')
+
+  if (portfolio instanceof HTMLElement) {
+    const filters = portfolio.querySelectorAll('[data-project-filter]')
+    const cards = portfolio.querySelectorAll('[data-portfolio-card]')
+    const count = portfolio.querySelector('[data-project-count]')
+    const emptyState = portfolio.querySelector('[data-project-empty]')
+
+    filters.forEach((filter) => {
+      filter.addEventListener('click', () => {
+        const category = filter.getAttribute('data-project-filter')
+        let visibleCount = 0
+
+        filters.forEach((button) => {
+          const isActive = button === filter
+          button.classList.toggle('is-active', isActive)
+          button.setAttribute('aria-pressed', String(isActive))
+        })
+
+        cards.forEach((card) => {
+          const matches =
+            category === 'all' ||
+            card.getAttribute('data-category') === category
+          card.hidden = !matches
+          if (matches) visibleCount += 1
+        })
+
+        if (count) {
+          count.textContent = `${visibleCount} project ${visibleCount === 1 ? 'entry' : 'entries'}`
+        }
+        if (emptyState) emptyState.hidden = visibleCount !== 0
+      })
+    })
+  }
+</script>
+
+<style>
+  .projects-hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(3.7rem, 6vw, 5.5rem) clamp(4.25rem, 7vw, 6.25rem);
+    background:
+      radial-gradient(
+        ellipse at 78% 46%,
+        rgb(244 233 223 / 76%),
+        transparent 34%
+      ),
+      #f1efeb;
+  }
+
+  .projects-hero::before,
+  .projects-hero::after {
+    position: absolute;
+    z-index: 0;
+    width: min(47vw, 620px);
+    aspect-ratio: 1;
+    border: 1px solid rgb(201 84 43 / 8%);
+    border-radius: 50%;
+    content: '';
+    pointer-events: none;
+  }
+
+  .projects-hero::before {
+    top: -65%;
+    right: -9%;
+    box-shadow: 0 0 0 40px rgb(201 84 43 / 2%);
+  }
+
+  .projects-hero::after {
+    right: 17%;
+    bottom: -84%;
+    width: min(33vw, 430px);
+    border-color: rgb(84 123 157 / 8%);
+  }
+
+  .projects-hero-layout {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    min-height: 510px;
+    grid-template-columns: minmax(0, 0.93fr) minmax(0, 1.07fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+  }
+
+  .projects-hero-copy {
+    max-width: 620px;
+  }
+
+  .projects-hero-copy .eyebrow {
+    margin-bottom: 1.2rem;
+  }
+
+  .projects-hero h1 {
+    max-width: 650px;
+    margin-bottom: 1.35rem;
+    color: var(--color-navy);
+    font-size: var(--type-page-hero-size);
+    font-weight: var(--type-display-weight);
+    letter-spacing: var(--type-display-letter-spacing);
+    line-height: var(--type-page-hero-line-height);
+  }
+
+  .projects-hero h1 span,
+  .portfolio-intro h2 span {
+    color: var(--color-orange-dark);
+  }
+
+  .projects-hero-description {
+    max-width: 570px;
+    margin-bottom: 1.7rem;
+    color: #5c6878;
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-line-height);
+  }
+
+  .projects-hero-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.2rem 1.7rem;
+  }
+
+  .projects-hero-actions .text-link {
+    font-size: 0.81rem;
+    font-weight: 650;
+  }
+
+  .projects-hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.15rem;
+    margin-top: 2.4rem;
+    color: #667283;
+    font-size: 0.69rem;
+    font-weight: 600;
+  }
+
+  .projects-hero-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .projects-hero-meta span::before {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-orange);
+    content: '';
+  }
+
+  .projects-hero-visual {
+    position: relative;
+    min-width: 0;
+    min-height: 490px;
+    isolation: isolate;
+  }
+
+  .hero-visual-halo {
+    position: absolute;
+    top: 16%;
+    left: 16%;
+    width: 72%;
+    aspect-ratio: 1;
+    border: 1px solid rgb(84 123 157 / 19%);
+    border-radius: 50%;
+    box-shadow:
+      0 0 0 28px rgb(84 123 157 / 3%),
+      0 0 0 68px rgb(201 84 43 / 3%);
+  }
+
+  .hero-screen {
+    position: absolute;
+    z-index: 1;
+    overflow: hidden;
+    margin: 0;
+    border: 1px solid rgb(255 255 255 / 85%);
+    border-radius: 14px;
+    background: var(--color-white);
+    box-shadow: 0 24px 70px rgb(16 27 45 / 17%);
+    transform: translateZ(0);
+  }
+
+  .hero-screen img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-screen-main {
+    top: 12%;
+    right: 1%;
+    width: 77%;
+    height: 69%;
+    transform: rotate(2deg);
+  }
+
+  .hero-screen-left {
+    z-index: 2;
+    bottom: 4%;
+    left: 1%;
+    width: 41%;
+    height: 43%;
+    transform: rotate(-5deg);
+  }
+
+  .hero-screen-right {
+    z-index: 3;
+    right: 0;
+    bottom: 2%;
+    width: 42%;
+    height: 37%;
+    transform: rotate(5deg);
+  }
+
+  .hero-screen figcaption {
+    position: absolute;
+    right: 0.55rem;
+    bottom: 0.55rem;
+    left: 0.55rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid rgb(255 255 255 / 80%);
+    border-radius: 6px;
+    background: rgb(255 255 255 / 92%);
+    color: var(--color-navy);
+    font-size: 0.68rem;
+    font-weight: 700;
+    line-height: 1.25;
+    backdrop-filter: blur(10px);
+  }
+
+  .hero-screen figcaption span {
+    color: var(--color-muted);
+    font-size: 0.58rem;
+    font-weight: 600;
+  }
+
+  .hero-visual-index {
+    position: absolute;
+    right: 0.2rem;
+    bottom: 0;
+    color: #8e9298;
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.17em;
+  }
+
+  .portfolio-section {
+    background:
+      radial-gradient(ellipse at 10% 4%, rgb(84 123 157 / 7%), transparent 30%),
+      linear-gradient(180deg, #fbfaf8 0%, #f7f5f1 100%);
+  }
+
+  .portfolio-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.7fr);
+    align-items: end;
+    gap: 3rem;
+    margin-bottom: 2.8rem;
+  }
+
+  .portfolio-intro .eyebrow {
+    margin-bottom: 0.8rem;
+  }
+
+  .portfolio-intro h2 {
+    max-width: 740px;
+    margin: 0;
+    font-size: var(--type-section-size);
+    font-weight: var(--type-heading-weight);
+    letter-spacing: var(--type-section-letter-spacing);
+    line-height: var(--type-section-line-height);
+  }
+
+  .portfolio-intro > p {
+    max-width: 465px;
+    margin: 0 0 0.25rem;
+    color: #657182;
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  .portfolio-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-block: 0.8rem;
+    border-block: 1px solid var(--color-line);
+  }
+
+  .project-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .project-filter {
+    min-height: 37px;
+    padding: 0.45rem 0.75rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background: transparent;
+    color: #677384;
+    cursor: pointer;
+    font-size: 0.69rem;
+    font-weight: 650;
+    line-height: 1.2;
+    transition:
+      color var(--duration-fast) ease,
+      background var(--duration-fast) ease,
+      border-color var(--duration-fast) ease,
+      transform var(--duration-fast) ease;
+  }
+
+  .project-filter:hover {
+    border-color: #dfd4cc;
+    color: var(--color-orange-dark);
+    transform: translateY(-1px);
+  }
+
+  .project-filter.is-active {
+    border-color: #ead1c4;
+    background: #f8eee8;
+    color: var(--color-orange-dark);
+  }
+
+  .portfolio-count {
+    flex: 0 0 auto;
+    margin: 0;
+    color: #8a929d;
+    font-size: 0.67rem;
+    font-weight: 600;
+  }
+
+  .case-study-list {
+    display: grid;
+    gap: clamp(1rem, 2.3vw, 1.8rem);
+  }
+
+  .case-study {
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    align-items: center;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    padding: clamp(1.2rem, 2.6vw, 2rem);
+    border: 1px solid rgb(16 27 45 / 8%);
+    border-radius: var(--radius-large);
+    background: linear-gradient(135deg, #fff 0%, #fbf9f6 100%);
+    box-shadow: 0 12px 34px rgb(16 27 45 / 4%);
+    transition:
+      border-color 260ms var(--ease-out),
+      box-shadow 260ms var(--ease-out),
+      background-color 260ms var(--ease-out);
+  }
+
+  .case-study:nth-child(even) {
+    border-color: rgb(84 123 157 / 14%);
+    background: linear-gradient(135deg, #f4f7f9 0%, #fff 100%);
+  }
+
+  .case-study:hover,
+  .case-study:focus-within {
+    border-color: rgb(201 84 43 / 28%);
+    box-shadow: 0 18px 40px rgb(16 27 45 / 8%);
+  }
+
+  .case-study[hidden] {
+    display: none;
+  }
+
+  .case-study-reversed .case-study-image {
+    order: 2;
+  }
+
+  .case-study-image {
+    position: relative;
+    align-self: start;
+    overflow: hidden;
+    aspect-ratio: 1.72;
+    margin: 0;
+    border: 1px solid rgb(16 27 45 / 9%);
+    border-radius: var(--radius-large);
+    background: var(--color-paper);
+    box-shadow: 0 12px 30px rgb(16 27 45 / 7%);
+    transition:
+      border-color 260ms var(--ease-out),
+      box-shadow 260ms var(--ease-out);
+  }
+
+  .case-study-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 450ms var(--ease-out);
+  }
+
+  .case-study:hover .case-study-image,
+  .case-study:focus-within .case-study-image {
+    border-color: rgb(201 84 43 / 30%);
+    box-shadow: 0 18px 42px rgb(16 27 45 / 12%);
+  }
+
+  .case-study:hover .case-study-image img,
+  .case-study:focus-within .case-study-image img {
+    transform: scale(1.018);
+  }
+
+  .case-study-copy {
+    min-width: 0;
+    padding-top: 0.15rem;
+  }
+
+  .case-study-kicker {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.7rem;
+    margin-bottom: 0.7rem;
+    color: var(--color-orange-dark);
+    font-size: 0.63rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .case-study-kicker span:last-child {
+    color: #929aa4;
+    font-size: 0.58rem;
+    letter-spacing: 0.09em;
+  }
+
+  .case-study h3 {
+    margin: 0 0 1.1rem;
+    color: var(--color-navy);
+    font-size: clamp(1.8rem, 2.65vw, 2.5rem);
+    font-weight: var(--type-heading-weight);
+    letter-spacing: var(--type-section-letter-spacing);
+    line-height: 1.08;
+  }
+
+  .project-overview {
+    margin-bottom: 1rem;
+  }
+
+  .project-overview h4,
+  .project-detail-grid h4 {
+    margin: 0 0 0.4rem;
+    color: #7c5948;
+    font-family: var(--font-body);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .project-overview p {
+    max-width: 650px;
+    margin: 0;
+    color: var(--color-body);
+    font-family: var(--font-heading);
+    font-size: clamp(0.95rem, 1.18vw, 1.08rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.62;
+  }
+
+  .project-scope {
+    display: grid;
+    grid-template-columns: minmax(125px, 0.42fr) minmax(0, 1fr);
+    gap: 0.65rem 1rem;
+    margin: 1.1rem 0 1.25rem;
+    padding: 1rem 0;
+    border-block: 1px solid #e8e4de;
+  }
+
+  .project-scope div {
+    display: grid;
+    gap: 0.15rem;
+  }
+
+  .project-scope dt {
+    color: #939ba5;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .project-scope dd {
+    margin: 0;
+    color: #4b596b;
+    font-size: 0.7rem;
+    line-height: 1.55;
+  }
+
+  .project-details {
+    border-top: 1px solid #e8e4de;
+  }
+
+  .project-details summary {
+    display: flex;
+    min-height: 52px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.7rem;
+    color: var(--color-navy);
+    cursor: pointer;
+    font-size: 0.74rem;
+    font-weight: 700;
+    list-style: none;
+  }
+
+  .project-details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .project-details summary::after {
+    display: grid;
+    width: 25px;
+    height: 25px;
+    flex: 0 0 25px;
+    place-items: center;
+    border: 1px solid #e2d5cc;
+    border-radius: 50%;
+    color: var(--color-orange-dark);
+    content: '+';
+    font-size: 1rem;
+    font-weight: 500;
+    transition:
+      color var(--duration-fast) ease,
+      background var(--duration-fast) ease,
+      transform var(--duration-standard) var(--ease-out);
+  }
+
+  .project-details summary:hover {
+    color: var(--color-orange-dark);
+  }
+
+  .project-details summary:hover::after {
+    background: #f8eee8;
+  }
+
+  .project-details[open] summary::after {
+    background: #f8eee8;
+    transform: rotate(45deg);
+  }
+
+  .details-open {
+    display: none;
+  }
+
+  .project-details[open] .details-closed {
+    display: none;
+  }
+
+  .project-details[open] .details-open {
+    display: inline;
+  }
+
+  .details-evidence {
+    margin-left: auto;
+    color: #929aa4;
+    font-size: 0.61rem;
+    font-weight: 500;
+  }
+
+  .project-details-content {
+    padding: 0.3rem 0 1.1rem;
+    animation: details-enter 220ms var(--ease-out) both;
+  }
+
+  .project-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.1rem 1.25rem;
+  }
+
+  .project-detail-grid section {
+    min-width: 0;
+  }
+
+  .project-detail-grid p {
+    margin: 0;
+    color: #657182;
+    font-size: 0.72rem;
+    line-height: 1.65;
+  }
+
+  .project-confirmation {
+    margin: 1.2rem 0 0;
+    padding: 0.8rem 0.9rem;
+    border-left: 2px solid #cb7955;
+    background: #f7f1ec;
+    color: #71665e;
+    font-size: 0.68rem;
+    line-height: 1.62;
+  }
+
+  .project-confirmation strong {
+    display: block;
+    margin-bottom: 0.15rem;
+    color: #745340;
+    font-size: 0.62rem;
+  }
+
+  @keyframes details-enter {
+    from {
+      opacity: 0;
+      transform: translateY(7px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .portfolio-empty {
+    padding: 2rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-medium);
+    background: white;
+    color: var(--color-body);
+    text-align: center;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .projects-hero-copy {
+      animation: projects-rise-in 650ms var(--ease-out) both;
+    }
+
+    .projects-hero-visual {
+      animation: projects-rise-in 800ms 100ms var(--ease-out) both;
+    }
+
+    @keyframes projects-rise-in {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  @media (max-width: 1050px) {
+    .projects-hero-layout {
+      min-height: 455px;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 2rem;
+    }
+
+    .projects-hero h1 {
+      font-size: clamp(2.65rem, 5vw, 3.6rem);
+    }
+
+    .projects-hero-visual {
+      min-height: 420px;
+    }
+
+    .case-study {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 2rem;
+    }
+
+    .case-study-image {
+      aspect-ratio: 1.72;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .projects-hero {
+      padding-block: 3.5rem 4rem;
+    }
+
+    .projects-hero-layout {
+      min-height: 0;
+      grid-template-columns: 1fr;
+      gap: 0.7rem;
+    }
+
+    .projects-hero-copy {
+      max-width: 680px;
+    }
+
+    .projects-hero h1 {
+      max-width: 640px;
+      font-size: clamp(2.6rem, 8vw, 3.7rem);
+    }
+
+    .projects-hero-meta {
+      margin-top: 1.5rem;
+    }
+
+    .projects-hero-visual {
+      width: 100%;
+      max-width: 590px;
+      min-height: clamp(320px, 69vw, 420px);
+      margin-inline: auto;
+    }
+
+    .hero-screen-main {
+      top: 9%;
+      right: 3%;
+      width: 76%;
+      height: 70%;
+    }
+
+    .hero-screen-left {
+      bottom: 4%;
+      left: 1%;
+      width: 40%;
+      height: 41%;
+    }
+
+    .hero-screen-right {
+      right: 1%;
+      bottom: 2%;
+      width: 40%;
+      height: 36%;
+    }
+
+    .portfolio-intro {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .portfolio-toolbar {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .portfolio-count {
+      padding-left: 0.7rem;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .projects-hero h1 {
+      font-size: clamp(2.45rem, 10vw, 3.15rem);
+    }
+
+    .projects-hero-actions {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.95rem;
+    }
+
+    .projects-hero-visual {
+      min-height: 310px;
+    }
+
+    .hero-screen {
+      border-radius: 9px;
+    }
+
+    .hero-screen figcaption {
+      right: 0.35rem;
+      bottom: 0.35rem;
+      left: 0.35rem;
+      padding: 0.4rem 0.5rem;
+      font-size: 0.58rem;
+    }
+
+    .hero-screen figcaption span {
+      display: none;
+    }
+
+    .case-study {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.25rem;
+      padding-block: 2.2rem;
+    }
+
+    .case-study-reversed .case-study-image {
+      order: 0;
+    }
+
+    .case-study-image {
+      aspect-ratio: 1.72;
+      border-radius: var(--radius-medium);
+    }
+
+    .project-scope {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.65rem;
+    }
+
+    .project-detail-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.95rem;
+    }
+
+    .project-filters {
+      gap: 0.25rem;
+    }
+
+    .project-filter {
+      min-height: 35px;
+      padding-inline: 0.6rem;
+      font-size: 0.65rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .case-study,
+    .case-study-image,
+    .case-study-image img,
+    .project-details-content,
+    .project-filter {
+      transition: none;
+      animation: none;
+    }
+
+    .case-study:hover .case-study-image img,
+    .case-study:focus-within .case-study-image img {
+      transform: none;
+    }
+  }
+</style>

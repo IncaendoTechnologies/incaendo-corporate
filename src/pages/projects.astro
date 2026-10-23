@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import ProjectsPage from '../components/ProjectsPage.astro'
+import { pages } from '../data/site-content.js'
+---
+
+<BaseLayout
+  title={pages.projects.title}
+  description={pages.projects.description}
+>
+  <main id="main-content">
+    <ProjectsPage />
+  </main>
+</BaseLayout>

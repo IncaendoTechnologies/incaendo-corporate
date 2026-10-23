@@ -1,0 +1,269 @@
+---
+import { Image } from 'astro:assets'
+import BaseLayout from '../layouts/BaseLayout.astro'
+import SectionHeading from '../components/SectionHeading.astro'
+import ServiceGrid from '../components/ServiceGrid.astro'
+import FAQList from '../components/FAQList.astro'
+import AICapabilityShowcase from '../components/AICapabilityShowcase.astro'
+import ClientLogoMarquee from '../components/ClientLogoMarquee.astro'
+import ReviewMarquee from '../components/ReviewMarquee.astro'
+import IndustriesPower from '../components/IndustriesPower.astro'
+import DeliveryProcess from '../components/DeliveryProcess.astro'
+import HomeInsights from '../components/HomeInsights.astro'
+import HomeProjects from '../components/HomeProjects.astro'
+import { pages } from '../data/site-content.js'
+import award01 from '../assets/award 01.png'
+import award02 from '../assets/award 02.png'
+import award03 from '../assets/award 03.png'
+---
+
+<BaseLayout title={pages.home.title} description={pages.home.description}>
+  <main id="main-content" class="home-page">
+    <section class="hero-section">
+      <div class="site-container hero-layout">
+        <div class="hero-copy">
+          <p class="eyebrow eyebrow-dark">
+            <span class="eyebrow-dot"></span> Software development &amp;
+            technology
+          </p>
+          <h1>
+            <span class="hero-headline-line">
+              Engineering <span class="hero-headline-accent">digital</span>
+            </span>
+            <span class="hero-headline-line">
+              <span class="hero-headline-accent">solutions</span> that move
+            </span>
+            <span class="hero-headline-line">businesses forward.</span>
+          </h1>
+          <p class="hero-description">
+            <span class="hero-description-line">
+              With 15+ years of experience, we build reliable software, scalable
+              cloud platforms,
+            </span>{' '}
+            <span class="hero-description-line">
+              and practical AI solutions that help businesses simplify complex
+              workflows and turn ideas into
+            </span>{' '}
+            <span class="hero-description-line">
+              measurable outcomes. We focus on secure, maintainable technology
+              designed around real business needs.
+            </span>
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="/contact">
+              Discuss your project <span aria-hidden="true">↗</span>
+            </a>
+            <a class="button button-outline" href="/projects">
+              Explore our work <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <ClientLogoMarquee />
+
+    <section
+      class="section section-services"
+      id="services"
+      aria-labelledby="services-heading"
+    >
+      <div class="site-container">
+        <SectionHeading
+          headingId="services-heading"
+          reveal={true}
+          eyebrow="Services & solutions"
+          title="Technology services for the "
+          titleAccent="work ahead."
+          description="From applied AI and custom software to web, mobile, enterprise, and cloud data solutions, Incaendo helps teams turn complex needs into reliable digital products."
+          link="/services"
+          linkLabel="View all services"
+        />
+        <ServiceGrid variant="home" />
+      </div>
+    </section>
+
+    <section
+      class="section section-intro-block"
+      id="ai-highlight"
+      aria-labelledby="ai-heading"
+    >
+      <div class="site-container">
+        <AICapabilityShowcase />
+      </div>
+    </section>
+
+    <ReviewMarquee />
+
+    <section class="awards-section" aria-labelledby="awards-heading">
+      <div class="site-container awards-content">
+        <div class="awards-intro reveal" data-awards-intro>
+          <p class="eyebrow">Recognition &amp; partnerships</p>
+          <h2 id="awards-heading">
+            Recognised for partnerships{' '}
+            <span class="hero-title-accent">that deliver lasting value.</span>
+          </h2>
+          <p class="awards-intro-copy">
+            Strong technology is built on trust, collaboration, and consistent
+            delivery. Our industry recognitions reflect the partnerships behind
+            our work and our commitment to creating meaningful business
+            outcomes.
+          </p>
+        </div>
+        <div class="awards-grid reveal" data-reveal-stagger>
+          <article class="award-card" data-reveal-item>
+            <div class="award-image-frame">
+              <Image
+                src={award01}
+                alt="Gold globe trophy for the 2014 Business Partnership Award, with Domino’s Pizza, Jubilant FoodWorks, and Dunkin’ Donuts logos on its plaque."
+                class="award-image"
+                loading="lazy"
+              />
+            </div>
+            <p class="award-caption">
+              <strong>Business Partnership Award</strong>
+              <span>2014 · Trophy</span>
+            </p>
+          </article>
+          <article class="award-card" data-reveal-item>
+            <div class="award-image-frame">
+              <Image
+                src={award02}
+                alt="Framed 2014 Business Partnership Award plaque featuring Domino’s Pizza, Jubilant FoodWorks, and Dunkin’ Donuts logos."
+                class="award-image"
+                loading="lazy"
+              />
+            </div>
+            <p class="award-caption">
+              <strong>Business Partnership Award</strong>
+              <span>2014 · Plaque</span>
+            </p>
+          </article>
+          <article class="award-card" data-reveal-item>
+            <div class="award-image-frame">
+              <Image
+                src={award03}
+                alt="Gold star trophy for the 2013 Business Partnership Award, with Domino’s Pizza, Jubilant FoodWorks, and Dunkin’ Donuts logos on its plaque."
+                class="award-image"
+                loading="lazy"
+              />
+            </div>
+            <p class="award-caption">
+              <strong>Business Partnership Award</strong>
+              <span>2013 · Trophy</span>
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <HomeInsights />
+
+    <IndustriesPower />
+
+    <HomeProjects />
+
+    <DeliveryProcess />
+
+    <!-- <section class="client-section" aria-labelledby="clients-heading">
+      <div class="site-container client-row">
+        <div class="client-intro">
+          <p class="eyebrow">Built on relationships</p>
+          <h2 id="clients-heading">Good work begins with trust.</h2>
+        </div>
+        <div class="client-proof-card">
+          <span class="client-card-mark" aria-hidden="true">
+            +
+          </span>
+          <div>
+            <strong>Client names and logo assets</strong>
+            <p>
+              Awaiting verified company information and permission to publish.
+            </p>
+          </div>
+          <a href="/contact" aria-label="Discuss Incaendo's client work">
+            ↗
+          </a>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- <section
+      class="section section-projects"
+      aria-labelledby="projects-heading"
+    >
+      <div class="site-container">
+        <SectionHeading
+          eyebrow="Selected work"
+          title="The work should speak for itself."
+          description="We’re preparing clear, client-approved stories that show the challenge, the thinking, and the result."
+          link="/projects"
+          linkLabel="Visit projects"
+        />
+        <div class="project-empty reveal">
+          <div class="project-empty-graphic" aria-hidden="true">
+            <span class="project-line project-line-one"></span>
+            <span class="project-line project-line-two"></span>
+            <span class="project-line project-line-three"></span>
+            <span class="project-node project-node-one"></span>
+            <span class="project-node project-node-two"></span>
+            <span class="project-node project-node-three"></span>
+          </div>
+          <div class="project-empty-copy">
+            <span class="project-index">CASE STUDIES · IN PREPARATION</span>
+            <h3>
+              Real challenges.
+              <br />
+              Thoughtful engineering.
+            </h3>
+            <p>
+              Project names, visuals, and outcomes will be added after the
+              details are verified and approved for publication.
+            </p>
+            <a class="text-link" href="/projects">
+              About the project archive <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+    <section class="reachout-section" aria-labelledby="reachout-heading">
+      <div class="site-container reachout-inner">
+        <div>
+          <p class="eyebrow">A good place to start</p>
+          <h2 id="reachout-heading">
+            Tell us what you’re
+            <br />
+            working toward.
+          </h2>
+        </div>
+        <div class="reachout-action">
+          <p>Share the challenge. We’ll help shape the next conversation.</p>
+          <a class="button button-primary" href="/contact">
+            Discuss your project <span aria-hidden="true">↗</span>
+          </a>
+          <span class="small-note">
+            Contact details and message delivery are being configured.
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-faq" aria-labelledby="faq-heading">
+      <div class="site-container faq-layout">
+        <div>
+          <p class="eyebrow">A few useful answers</p>
+          <h2 id="faq-heading">
+            Frequently
+            <br />
+            asked questions.
+          </h2>
+          <a class="text-link" href="/contact">
+            Have another question? <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+        <FAQList />
+      </div>
+    </section>
+  </main>
+</BaseLayout>

@@ -1,0 +1,17 @@
+---
+import { faqs } from '../data/site-content.js'
+---
+
+<div class="faq-list">
+  {faqs.map((faq, index) => (
+    <details class="faq-item reveal" open={index === 0}>
+      <summary>
+        <span>{faq.question}</span>
+        <span class="faq-mark" aria-hidden="true"></span>
+      </summary>
+      <div class="faq-answer">
+        <p>{faq.answer}</p>
+      </div>
+    </details>
+  ))}
+</div>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="33 -28 585 562" width="100%" height="100%">
+  <!-- Top Emblem (Flame & Books) -->
+  <g transform="translate(25, 0)">
+    <!-- Red Flame / Drop -->
+    <path d="M 300 48 C 272 48 266 84 271 106 C 281 128 300 148 300 148 C 300 148 319 128 329 106 C 334 84 328 48 300 48 Z" fill="#BA2327"/>
+
+    <!-- Black Book Layers & Arc -->
+    <g fill="#1D1D1B">
+      <!-- Halo Arc -->
+      <path d="M 300 18 C 255 18 244 55 244 80 L 264 80 C 264 62 272 38 300 38 C 328 38 336 62 336 80 L 356 80 C 356 55 345 18 300 18 Z"/>
+
+      <!-- Layer 1 -->
+      <path d="M 300 146 C 282 133 248 128 212 130 L 212 144 C 238 141 278 144 300 159 C 322 144 362 141 388 144 L 388 130 C 352 128 318 133 300 146 Z"/>
+      
+      <!-- Layer 2 -->
+      <path d="M 300 178 C 274 163 234 158 192 160 L 192 176 C 224 172 272 176 300 193 C 328 176 376 172 408 176 L 408 160 C 366 158 326 163 300 178 Z"/>
+
+      <!-- Layer 3 -->
+      <path d="M 300 212 C 266 195 218 190 170 192 L 170 210 C 208 206 264 210 300 230 C 336 210 392 206 430 210 L 430 192 C 382 190 334 195 300 212 Z"/>
+
+      <!-- Layer 4 (Base Book) -->
+      <path d="M 300 252 C 254 230 196 226 148 228 L 148 250 C 196 244 260 252 300 274 C 340 252 404 244 452 250 L 452 228 C 404 226 346 230 300 252 Z"/>
+
+      <!-- Bottom Spine Point -->
+      <path d="M 300 278 C 265 258 205 256 162 260 L 162 270 L 300 322 L 438 270 L 438 260 C 395 256 335 258 300 278 Z"/>
+
+      <!-- Registered Mark (R) -->
+      <g transform="translate(352, 10)">
+        <circle cx="15" cy="15" r="14" fill="none" stroke="#1D1D1B" stroke-width="3"/>
+        <path d="M 11 8 L 16.5 8 C 19 8 20.5 9.2 20.5 11.2 C 20.5 13 19.2 14 17.5 14.2 L 20.8 22 L 17.2 22 L 14.2 14.8 L 13.8 14.8 L 13.8 22 L 11 22 Z M 13.8 10.2 L 13.8 12.8 L 16.2 12.8 C 17.2 12.8 17.8 12.2 17.8 11.5 C 17.8 10.8 17.2 10.2 16.2 10.2 Z"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Clean, Solid, Symmetrical Typography -->
+  <text x="325" y="475" 
+        text-anchor="middle" 
+        fill="#1D1D1B" 
+        font-family="'Arial Black', 'Helvetica Neue', 'Arial', sans-serif" 
+        font-weight="900" 
+        font-size="96" 
+        letter-spacing="5">
+    S. CHAND
+  </text>
+</svg>

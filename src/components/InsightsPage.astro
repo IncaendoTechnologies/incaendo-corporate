@@ -1,0 +1,694 @@
+---
+import InsightCard from './InsightCard.astro'
+import InsightsHeroVisual from './InsightsHeroVisual.astro'
+import {
+  articles,
+  featuredArticles,
+  heroArticle,
+  insightCategories,
+  latestArticles,
+} from '../data/articles.js'
+
+const categoryKey = (category) =>
+  category
+    .toLocaleLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+---
+
+<div class="insights-page">
+  <section class="insights-hero" aria-labelledby="insights-page-heading">
+    <div class="site-container insights-hero-inner">
+      <div class="insights-hero-copy reveal" data-reveal-stagger>
+        <p class="eyebrow" data-reveal-item>
+          <span class="insights-eyebrow-dot"></span> Insights & ideas
+        </p>
+        <h1 id="insights-page-heading" data-reveal-item>
+          Better technology starts with <span>better questions.</span>
+        </h1>
+        <p class="insights-hero-description" data-reveal-item>
+          Practical perspectives on AI, software engineering and digital
+          products—made to help teams understand the choices behind useful,
+          maintainable technology.
+        </p>
+        <div class="insights-hero-actions" data-reveal-item>
+          <a class="button button-primary" href="#article-archive">
+            Explore insights <span aria-hidden="true">↘</span>
+          </a>
+          <a class="text-link" href="/contact">
+            Discuss a challenge <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+        <p class="insights-hero-footnote" data-reveal-item>
+          Field notes on building and operating digital systems.
+        </p>
+      </div>
+      <InsightsHeroVisual />
+    </div>
+  </section>
+
+  <section
+    class="insights-featured-section section"
+    aria-labelledby="featured-insights-heading"
+    data-insight-featured-section
+  >
+    <div class="site-container">
+      <header class="insights-section-heading reveal">
+        <div>
+          <p class="eyebrow">Featured insights</p>
+          <h2 id="featured-insights-heading">
+            Ideas to take <span>further.</span>
+          </h2>
+        </div>
+        <p>
+          Selected sample topics spanning practical AI, product architecture and
+          the engineering decisions in between.
+        </p>
+      </header>
+      <div class="insights-featured-grid reveal" data-reveal-stagger>
+        {[heroArticle, ...featuredArticles].map((article, index) => (
+          <InsightCard
+            article={article}
+            variant={index === 0 ? 'lead' : 'featured'}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="insights-archive-section section"
+    id="article-archive"
+    aria-labelledby="latest-insights-heading"
+  >
+    <div class="site-container">
+      <header class="insights-section-heading insights-archive-heading reveal">
+        <div>
+          <p class="eyebrow">The article archive</p>
+          <h2 id="latest-insights-heading">
+            Browse the <span>latest thinking.</span>
+          </h2>
+        </div>
+        <p>
+          Search sample articles by title, summary or topic. Use a category to
+          narrow the collection.
+        </p>
+      </header>
+
+      <p class="insights-draft-note">
+        <span aria-hidden="true">i</span>
+        Sample editorial drafts for page development. Publication dates and
+        authors have not been assigned.
+      </p>
+
+      <div class="insights-toolbar" data-insights-toolbar>
+        <label class="insights-search-label" for="insights-search">
+          Search articles
+        </label>
+        <div class="insights-search-row">
+          <div class="insights-search-box">
+            <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+              <circle cx="10.8" cy="10.8" r="6.3"></circle>
+              <path d="m15.5 15.5 4.1 4.1"></path>
+            </svg>
+            <input
+              id="insights-search"
+              type="search"
+              placeholder="Title, summary or topic"
+              autocomplete="off"
+              data-insights-search
+            />
+          </div>
+          <button class="insights-reset" type="button" data-insights-reset>
+            Clear filters
+          </button>
+          <p
+            class="insights-result-count"
+            data-insights-count
+            aria-live="polite"
+          >
+            {articles.length} sample articles
+          </p>
+        </div>
+        <div
+          class="insights-filters"
+          role="group"
+          aria-label="Filter articles by category"
+        >
+          <button
+            class="insights-filter is-active"
+            type="button"
+            data-insights-filter="all"
+            aria-pressed="true"
+          >
+            All <span>{articles.length}</span>
+          </button>
+          {insightCategories.map((category) => (
+            <button
+              class="insights-filter"
+              type="button"
+              data-insights-filter={categoryKey(category)}
+              aria-pressed="false"
+            >
+              {category}
+              <span>
+                {
+                  articles.filter((article) => article.category === category)
+                    .length
+                }
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div class="insights-latest-layout">
+        <div
+          class="insights-latest-grid reveal"
+          data-reveal-stagger
+          data-insights-latest
+        >
+          {latestArticles.map((article) => (
+            <InsightCard article={article} variant="standard" />
+          ))}
+        </div>
+        <p
+          class="insights-feature-match-note"
+          data-insights-feature-match
+          hidden
+        >
+          Matching sample articles are featured above.
+        </p>
+        <p class="insights-empty-state" data-insights-empty hidden>
+          No sample articles match that search. Clear the filters or try another
+          topic.
+        </p>
+        <p class="insights-total-note" data-insights-total>
+          Publication dates and bylines are intentionally omitted until approved
+          content is available.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  const setupInsights = () => {
+    const page = document.querySelector('.insights-page')
+    if (!page || page.dataset.insightsReady === 'true') return
+    page.dataset.insightsReady = 'true'
+
+    const search = page.querySelector('[data-insights-search]')
+    const reset = page.querySelector('[data-insights-reset]')
+    const filters = [...page.querySelectorAll('[data-insights-filter]')]
+    const cards = [...page.querySelectorAll('[data-insight-card]')]
+    const count = page.querySelector('[data-insights-count]')
+    const empty = page.querySelector('[data-insights-empty]')
+    const archive = page.querySelector('[data-insights-latest]')
+    const featureSection = page.querySelector('[data-insight-featured-section]')
+    const matchNote = page.querySelector('[data-insights-feature-match]')
+    let activeCategory = 'all'
+
+    const update = () => {
+      const query = search.value.trim().toLocaleLowerCase()
+      let matching = 0
+      let archiveMatches = 0
+
+      cards.forEach((card) => {
+        const matchesQuery = card.dataset.insightSearch.includes(query)
+        const matchesCategory =
+          activeCategory === 'all' ||
+          card.dataset.insightCategory === activeCategory
+        card.hidden = !(matchesQuery && matchesCategory)
+        if (!card.hidden) {
+          matching += 1
+          if (card.closest('[data-insights-latest]')) archiveMatches += 1
+        }
+      })
+
+      const visibleFeatures = [
+        ...featureSection.querySelectorAll('[data-insight-card]'),
+      ]
+      featureSection.hidden = !visibleFeatures.some((card) => !card.hidden)
+      archive.hidden = archiveMatches === 0
+      count.textContent = `${matching} ${matching === 1 ? 'article' : 'articles'} found`
+      empty.hidden = matching !== 0
+      matchNote.hidden = matching === 0 || archiveMatches !== 0
+      reset.disabled = !query && activeCategory === 'all'
+    }
+
+    search.addEventListener('input', update)
+    filters.forEach((filter) => {
+      filter.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return
+        event.preventDefault()
+        filter.click()
+      })
+      filter.addEventListener('click', () => {
+        activeCategory = filter.dataset.insightsFilter
+        filters.forEach((button) => {
+          const selected = button === filter
+          button.classList.toggle('is-active', selected)
+          button.setAttribute('aria-pressed', String(selected))
+        })
+        update()
+      })
+    })
+    reset.addEventListener('click', () => {
+      search.value = ''
+      activeCategory = 'all'
+      filters.forEach((button) => {
+        const selected = button.dataset.insightsFilter === 'all'
+        button.classList.toggle('is-active', selected)
+        button.setAttribute('aria-pressed', String(selected))
+      })
+      update()
+      search.focus()
+    })
+    update()
+  }
+
+  setupInsights()
+  document.addEventListener('astro:page-load', setupInsights)
+</script>
+
+<style>
+  .insights-hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(4rem, 6vw, 5.5rem);
+    background:
+      radial-gradient(
+        ellipse at 91% 11%,
+        rgb(244 233 223 / 76%),
+        transparent 34%
+      ),
+      linear-gradient(125deg, #fbfaf8 0%, var(--color-paper) 53%, #f0ece6 100%);
+  }
+
+  .insights-hero::after {
+    position: absolute;
+    top: -88%;
+    right: -8%;
+    width: min(50vw, 720px);
+    aspect-ratio: 1;
+    border: 1px solid rgb(201 84 43 / 10%);
+    border-radius: 50%;
+    box-shadow:
+      0 0 0 44px rgb(201 84 43 / 2%),
+      0 0 0 98px rgb(201 84 43 / 2%);
+    content: '';
+    pointer-events: none;
+  }
+
+  .insights-hero-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+  }
+
+  .insights-hero-copy {
+    max-width: 600px;
+  }
+
+  .insights-eyebrow-dot {
+    display: inline-block;
+    width: 0.42rem;
+    height: 0.42rem;
+    margin-right: 0.4rem;
+    border-radius: 50%;
+    background: var(--color-orange-dark);
+    box-shadow: 0 0 0 4px rgb(168 65 33 / 10%);
+    vertical-align: 0.08rem;
+  }
+
+  .insights-hero h1 {
+    max-width: 650px;
+    margin: 0 0 1.1rem;
+    font-size: var(--type-page-hero-size);
+    font-weight: var(--type-display-weight);
+    letter-spacing: var(--type-display-letter-spacing);
+    line-height: var(--type-page-hero-line-height);
+  }
+
+  .insights-hero h1 span,
+  .insights-section-heading h2 span {
+    color: var(--color-orange-dark);
+  }
+
+  .insights-hero-description {
+    max-width: 520px;
+    margin: 0;
+    color: var(--color-body);
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-line-height);
+  }
+
+  .insights-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.25rem;
+    margin-top: 1.65rem;
+  }
+
+  .insights-hero-footnote {
+    margin: 1.25rem 0 0;
+    color: var(--color-muted);
+    font-size: 0.68rem;
+  }
+
+  .insights-section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .insights-section-heading > div {
+    max-width: 670px;
+  }
+
+  .insights-section-heading h2 {
+    margin: 0;
+    font-size: var(--type-section-size);
+    font-weight: var(--type-heading-weight);
+    letter-spacing: var(--type-section-letter-spacing);
+    line-height: var(--type-section-line-height);
+  }
+
+  .insights-section-heading > p {
+    max-width: 400px;
+    margin: 0 0 0.15rem;
+    color: var(--color-body);
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  .insights-featured-section {
+    background:
+      radial-gradient(ellipse at 8% 2%, rgb(84 123 157 / 6%), transparent 28%),
+      linear-gradient(180deg, #fbfaf8 0%, #f8f7f4 100%);
+  }
+
+  .insights-featured-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .insights-archive-section {
+    background:
+      radial-gradient(
+        ellipse at 2% 1%,
+        rgb(244 233 223 / 42%),
+        transparent 30%
+      ),
+      #f1efeb;
+  }
+
+  .insights-draft-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    margin: 0 0 1rem;
+    padding: 0.75rem 0.85rem;
+    border-left: 2px solid var(--color-orange-dark);
+    background: rgb(255 255 255 / 54%);
+    color: #687587;
+    font-size: 0.7rem;
+    line-height: 1.5;
+  }
+
+  .insights-draft-note span {
+    display: grid;
+    width: 1rem;
+    height: 1rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 50%;
+    background: #f1e2d9;
+    color: var(--color-orange-dark);
+    font-size: 0.62rem;
+    font-weight: 750;
+  }
+
+  .insights-toolbar {
+    margin-bottom: 1.65rem;
+    padding: 1.15rem 1.2rem 1rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-medium);
+    background: rgb(255 255 255 / 84%);
+    box-shadow: 0 8px 24px rgb(16 27 45 / 3%);
+  }
+
+  .insights-search-label {
+    display: block;
+    margin-bottom: 0.48rem;
+    color: var(--color-ink);
+    font-size: 0.72rem;
+    font-weight: 650;
+  }
+
+  .insights-search-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .insights-search-box {
+    display: flex;
+    width: min(100%, 480px);
+    min-height: 44px;
+    align-items: center;
+    gap: 0.55rem;
+    padding-inline: 0.8rem;
+    border: 1px solid #d5d9dc;
+    border-radius: var(--radius-small);
+    background: white;
+    transition:
+      border-color 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .insights-search-box:focus-within {
+    border-color: var(--color-orange-dark);
+    box-shadow: 0 0 0 3px rgb(168 65 33 / 10%);
+  }
+
+  .insights-search-box svg {
+    width: 1.05rem;
+    flex: 0 0 auto;
+    fill: none;
+    stroke: #768393;
+    stroke-linecap: round;
+    stroke-width: 1.7;
+  }
+
+  .insights-search-box input {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--color-ink);
+    font-size: 0.78rem;
+  }
+
+  .insights-search-box input::placeholder {
+    color: #8992a0;
+  }
+
+  .insights-reset {
+    min-height: 40px;
+    padding: 0.55rem 0.65rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius-small);
+    background: transparent;
+    color: var(--color-orange-dark);
+    cursor: pointer;
+    font-size: 0.7rem;
+    font-weight: 650;
+  }
+
+  .insights-reset:hover:not(:disabled) {
+    border-color: rgb(168 65 33 / 20%);
+    background: #fff7f3;
+  }
+
+  .insights-reset:focus-visible,
+  .insights-filter:focus-visible {
+    outline: 3px solid rgb(84 123 157 / 32%);
+    outline-offset: 2px;
+  }
+
+  .insights-reset:disabled {
+    color: #9ba2ab;
+    cursor: not-allowed;
+  }
+
+  .insights-result-count {
+    margin: 0 0 0 auto;
+    color: var(--color-muted);
+    font-size: 0.68rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .insights-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 0.78rem;
+  }
+
+  .insights-filter {
+    display: inline-flex;
+    min-height: 34px;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.4rem 0.7rem;
+    border: 1px solid #dfe3e5;
+    border-radius: 999px;
+    background: transparent;
+    color: #596678;
+    cursor: pointer;
+    font-size: 0.65rem;
+    font-weight: 600;
+    transition:
+      color 180ms ease,
+      background 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .insights-filter span {
+    color: #949ba5;
+    font-size: 0.59rem;
+    font-weight: 700;
+  }
+
+  .insights-filter:hover,
+  .insights-filter.is-active {
+    border-color: var(--color-orange-dark);
+    background: #fff7f3;
+    color: var(--color-orange-dark);
+  }
+
+  .insights-filter.is-active span {
+    color: var(--color-orange-dark);
+  }
+
+  .insights-latest-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .insights-latest-grid > :global(.insight-card) {
+    flex: 0 1 calc((100% - 2rem) / 3);
+    min-width: 0;
+  }
+
+  .insights-latest-grid[hidden],
+  .insights-featured-section[hidden],
+  .insights-featured-section [hidden],
+  .insights-feature-match-note[hidden],
+  .insights-empty-state[hidden] {
+    display: none !important;
+  }
+
+  .insights-feature-match-note,
+  .insights-empty-state {
+    margin: 0;
+    padding: 1.5rem;
+    border: 1px dashed #d4d0ca;
+    border-radius: var(--radius-medium);
+    color: #697586;
+    font-size: 0.82rem;
+    text-align: center;
+  }
+
+  .insights-total-note {
+    margin: 1rem 0 0;
+    color: #87909b;
+    font-size: 0.65rem;
+  }
+
+  @media (max-width: 1050px) {
+    .insights-hero-inner {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 2rem;
+    }
+    .insights-latest-grid > :global(.insight-card) {
+      flex-basis: calc((100% - 1rem) / 2);
+    }
+  }
+
+  @media (max-width: 800px) {
+    .insights-hero-inner {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .insights-hero-copy {
+      max-width: 760px;
+    }
+    .insights-hero-inner > :global(.insights-hero-visual) {
+      width: min(100%, 680px);
+      margin-inline: auto;
+    }
+    .insights-section-heading {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .insights-section-heading > p {
+      max-width: 600px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .insights-hero {
+      padding-block: 3.8rem 3.25rem;
+    }
+    .insights-hero h1 {
+      font-size: clamp(2.35rem, 10vw, 3.15rem);
+    }
+    .insights-hero-actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+    .insights-hero-actions .button {
+      justify-content: space-between;
+    }
+    .insights-featured-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .insights-latest-grid > :global(.insight-card) {
+      flex-basis: 100%;
+    }
+    .insights-search-row {
+      flex-wrap: wrap;
+    }
+    .insights-search-box {
+      width: 100%;
+    }
+    .insights-result-count {
+      margin-left: 0;
+    }
+    .insights-filters {
+      gap: 0.38rem;
+    }
+    .insights-filter {
+      flex: 1 1 auto;
+      justify-content: center;
+    }
+    .insights-search-row {
+      gap: 0.45rem;
+    }
+  }
+</style>

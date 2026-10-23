@@ -1,0 +1,77 @@
+---
+import activate from '../assets/svg/activate.svg'
+import admott from '../assets/svg/admott.svg'
+import dominos from '../assets/svg/dominos.svg'
+import hereAndNow from '../assets/svg/Here_&_Now_(WBUR)_masthead.svg'
+import italia from '../assets/svg/italia.svg'
+import jubilant from '../assets/svg/jubilant.svg'
+import policybazaar from '../assets/svg/policybazaar.svg'
+import procterGamble from '../assets/svg/ProcterGamble.svg'
+import schand from '../assets/svg/schand.svg'
+import spicejet from '../assets/svg/spicejet.svg'
+import theSeam from '../assets/svg/the seam.svg'
+import uflex from '../assets/svg/uflex.svg'
+import wagonex from '../assets/svg/wagonex.svg'
+import zeeMedia from '../assets/svg/ZeeMedia.svg'
+
+// Each source SVG's viewBox is cropped to its visible artwork bounds (see
+// src/assets/svg/*.svg), so every logo fills its card consistently via
+// .client-logo-mark's width/height/object-fit in global.css without needing
+// a per-logo transform hack.
+const logos = [
+  { src: activate, alt: 'Activate Studio' },
+  { src: dominos, alt: "Domino's" },
+  { src: jubilant, alt: 'Jubilant FoodWorks' },
+  { src: policybazaar, alt: 'Policybazaar' },
+  { src: schand, alt: 'S. Chand' },
+  { src: theSeam, alt: 'The Seam' },
+  { src: wagonex, alt: 'Wagonex' },
+  { src: admott, alt: 'Admott' },
+  { src: hereAndNow, alt: 'Here & Now (WBUR)' },
+  // This wordmark is a single text line with a much wider aspect ratio than
+  // the icon+wordmark logos around it, so it gets slightly tighter inline
+  // padding (same card size) to maximize its usable width.
+  { src: italia, alt: 'Good Morning Italia', narrowPadding: true },
+  { src: procterGamble, alt: 'Procter & Gamble' },
+  { src: spicejet, alt: 'SpiceJet' },
+  { src: uflex, alt: 'Uflex' },
+  { src: zeeMedia, alt: 'Zee Media' },
+]
+---
+
+<section
+  class="client-marquee-section"
+  aria-labelledby="client-marquee-heading"
+>
+  <div class="site-container client-marquee-content">
+    <div class="client-marquee-intro reveal" data-client-intro>
+      <p class="eyebrow">Client &amp; partner network</p>
+      <h2 id="client-marquee-heading">
+        Good technology moves <span>forward together.</span>
+      </h2>
+      <p class="section-intro">
+        Strong partnerships turn ambitious ideas into thoughtful, dependable
+        digital experiences.
+      </p>
+    </div>
+
+    <ul class="client-logo-grid reveal" aria-label="Client and partner logos">
+      {logos.map((logo) => (
+        <li class:list={['client-logo-card', logo.narrowPadding && 'client-logo-card-narrow-padding']}>
+          <img
+            class="client-logo-mark"
+            src={logo.src.src}
+            width={logo.src.width}
+            height={logo.src.height}
+            alt={logo.alt}
+            loading="eager"
+            decoding="async"
+          />
+        </li>
+      ))}
+    </ul>
+    <p class="client-marquee-note">
+      Logos shown represent current and past client and partner engagements.
+    </p>
+  </div>
+</section>

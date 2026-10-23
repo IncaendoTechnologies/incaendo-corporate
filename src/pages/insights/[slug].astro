@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import InsightArticlePage from '../../components/InsightArticlePage.astro'
+import { articles } from '../../data/articles.js'
+
+export function getStaticPaths() {
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }))
+}
+
+const { article } = Astro.props
+---
+
+<BaseLayout
+  title={`${article.title} | Incaendo Insights`}
+  description={article.excerpt}
+  openGraphType="article"
+>
+  <main id="main-content">
+    <InsightArticlePage article={article} />
+  </main>
+</BaseLayout>

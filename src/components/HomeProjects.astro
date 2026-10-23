@@ -1,0 +1,388 @@
+---
+import { Image } from 'astro:assets'
+import { projects } from '../data/projects.js'
+
+const featuredProject = projects.find((project) => project.name === "Domino's")
+const supportingProjects = ['Tomo', 'Good Morning Italia']
+  .map((name) => projects.find((project) => project.name === name))
+  .filter(Boolean)
+
+const projectHref = (project) =>
+  `/projects/#project-${projects.indexOf(project) + 1}-heading`
+---
+
+<section class="home-projects-section" aria-labelledby="home-projects-heading">
+  <div class="site-container home-projects-content">
+    <div class="home-projects-intro reveal">
+      <div>
+        <p class="eyebrow">Selected projects</p>
+        <h2 id="home-projects-heading">
+          Different challenges.{' '}
+          <span class="hero-title-accent">Thoughtful digital work.</span>
+        </h2>
+        <p class="section-intro">
+          Explore products and platforms across commerce, mobile experiences,
+          and publishing—each shaped around a different audience and business
+          context.
+        </p>
+      </div>
+      <a class="button button-primary" href="/projects/">
+        Explore all projects <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+
+    <div class="home-projects-grid reveal" data-reveal-stagger>
+      {featuredProject && (
+        <article
+          class="home-project-card home-project-card-featured"
+          data-reveal-item
+        >
+          <a
+            class="home-project-image"
+            href={projectHref(featuredProject)}
+            aria-label={`Explore ${featuredProject.name}`}
+          >
+            <Image
+              src={featuredProject.image}
+              alt={featuredProject.alt}
+              width={1000}
+              sizes="(max-width: 900px) 92vw, 52vw"
+              loading="lazy"
+            />
+            <span class="home-project-image-index" aria-hidden="true">
+              01 / 03
+            </span>
+          </a>
+          <div class="home-project-copy">
+            <p class="home-project-category">{featuredProject.category}</p>
+            <h3>{featuredProject.name}</h3>
+            <p class="home-project-description">{featuredProject.overview}</p>
+            <a class="home-project-link" href={projectHref(featuredProject)}>
+              View project overview <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </article>
+      )}
+
+      <div class="home-projects-supporting">
+        {supportingProjects.map((project, index) => (
+          <article
+            class="home-project-card home-project-card-supporting"
+            data-reveal-item
+          >
+            <a
+              class="home-project-image"
+              href={projectHref(project)}
+              aria-label={`Explore ${project.name}`}
+            >
+              <Image
+                src={project.image}
+                alt={project.alt}
+                width={720}
+                sizes="(max-width: 900px) 46vw, 20vw"
+                loading="lazy"
+              />
+              <span class="home-project-image-index" aria-hidden="true">
+                0{index + 2} / 03
+              </span>
+            </a>
+            <div class="home-project-copy">
+              <p class="home-project-category">{project.category}</p>
+              <h3>{project.name}</h3>
+              <p class="home-project-description">{project.overview}</p>
+              <a class="home-project-link" href={projectHref(project)}>
+                View project overview <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-projects-section {
+    padding-block: clamp(4rem, 7vw, 6rem);
+    background: var(--color-paper);
+  }
+
+  .home-projects-content {
+    display: grid;
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+
+  .home-projects-intro {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .home-projects-intro > div {
+    max-width: 760px;
+  }
+
+  .home-projects-intro .eyebrow {
+    margin-bottom: 0.75rem;
+  }
+
+  .home-projects-intro h2 {
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-heading);
+    font-size: var(--type-section-size);
+    font-weight: var(--type-heading-weight);
+    letter-spacing: var(--type-section-letter-spacing);
+    line-height: var(--type-section-line-height);
+  }
+
+  .home-projects-intro .section-intro {
+    max-width: 630px;
+    margin: 0.9rem 0 0;
+    color: var(--color-body);
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-line-height);
+  }
+
+  .home-projects-intro > .button {
+    flex: 0 0 auto;
+  }
+
+  .home-projects-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .home-project-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-medium);
+    background: var(--color-white);
+    box-shadow: 0 10px 30px rgb(16 27 45 / 4%);
+    transition:
+      transform 280ms var(--ease-out),
+      border-color 280ms ease,
+      box-shadow 280ms ease;
+  }
+
+  .home-project-card:hover {
+    transform: translateY(-4px);
+    border-color: rgb(168 65 33 / 35%);
+    box-shadow: 0 18px 42px rgb(16 27 45 / 9%);
+  }
+
+  .home-project-card:focus-within {
+    border-color: var(--color-orange-dark);
+    box-shadow: 0 0 0 3px rgb(168 65 33 / 14%);
+  }
+
+  .home-project-image {
+    position: relative;
+    display: block;
+    height: 100%;
+    min-height: 100%;
+    overflow: hidden;
+    background: var(--color-peach);
+  }
+
+  .home-project-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    transition: transform 450ms var(--ease-out);
+  }
+
+  .home-project-card:hover .home-project-image img {
+    transform: scale(1.025);
+  }
+
+  .home-project-image-index {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    padding: 0.4rem 0.55rem;
+    border: 1px solid rgb(255 255 255 / 32%);
+    background: rgb(16 27 45 / 78%);
+    color: var(--color-white);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+
+  .home-project-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: clamp(1.1rem, 2vw, 1.6rem);
+  }
+
+  .home-project-category {
+    margin: 0;
+    color: var(--color-orange-dark);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .home-project-copy h3 {
+    margin: 0.6rem 0 0;
+    color: var(--color-navy);
+    font-family: var(--font-heading);
+    font-size: clamp(1.3rem, 2vw, 1.8rem);
+    font-weight: 620;
+    letter-spacing: -0.045em;
+    line-height: 1.2;
+  }
+
+  .home-project-description {
+    margin: 0.7rem 0 1rem;
+    color: var(--color-body);
+    font-size: 0.84rem;
+    line-height: 1.65;
+  }
+
+  .home-project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: auto;
+    color: var(--color-ink);
+    font-size: 0.76rem;
+    font-weight: 650;
+  }
+
+  .home-project-link span {
+    color: var(--color-orange-dark);
+    transition: transform 180ms var(--ease-out);
+  }
+
+  .home-project-link:hover span {
+    transform: translate(2px, -2px);
+  }
+
+  .home-projects-grid {
+    min-height: 390px;
+  }
+
+  .home-project-card-featured {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  }
+
+  .home-project-card-featured .home-project-image {
+    min-height: 390px;
+  }
+
+  .home-projects-supporting {
+    display: grid;
+    min-width: 0;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .home-project-card-supporting {
+    display: grid;
+    grid-template-columns: minmax(112px, 0.72fr) minmax(0, 1.28fr);
+  }
+
+  .home-project-card-supporting .home-project-copy {
+    padding: 1rem;
+  }
+
+  .home-project-card-supporting .home-project-copy h3 {
+    margin-top: 0.4rem;
+    font-size: 1.08rem;
+  }
+
+  .home-project-card-supporting .home-project-description {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    margin-block: 0.45rem 0.65rem;
+    font-size: 0.76rem;
+  }
+
+  .home-project-card-supporting .home-project-image-index {
+    right: 0.5rem;
+    bottom: 0.5rem;
+    font-size: 0.52rem;
+  }
+
+  @media (max-width: 900px) {
+    .home-projects-intro {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .home-projects-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .home-project-card-featured {
+      min-height: 340px;
+    }
+
+    .home-project-card-featured .home-project-image {
+      min-height: 340px;
+    }
+
+    .home-projects-supporting {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: auto;
+    }
+
+    .home-project-card-supporting {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .home-project-card-supporting .home-project-image {
+      min-height: 0;
+      aspect-ratio: 16 / 10;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .home-projects-section {
+      padding-block: 3.5rem;
+    }
+
+    .home-projects-supporting {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .home-project-card-featured {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .home-project-card-featured .home-project-image {
+      min-height: 0;
+      aspect-ratio: 16 / 10;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-project-card,
+    .home-project-image img,
+    .home-project-link span {
+      transition: none;
+    }
+
+    .home-project-card:hover,
+    .home-project-card:hover .home-project-image img,
+    .home-project-link:hover span {
+      transform: none;
+    }
+  }
+</style>

@@ -1,0 +1,3275 @@
+---
+const stages = [
+  {
+    number: '01',
+    title: 'Discover',
+    navTitle: 'Discover',
+    label: 'Understand the challenge',
+    description:
+      'We start by understanding your business objectives, users, existing systems, and constraints before deciding what the solution should be.',
+    activities: [
+      'Stakeholder discussions and discovery workshops',
+      'Requirements gathering and workflow mapping',
+      'Business objectives, constraints, and success metrics',
+    ],
+    deliverables: [
+      'Discovery brief',
+      'Prioritised requirements',
+      'Agreed project scope',
+    ],
+    visual: 'discover',
+    visualLabel: 'Business context map',
+  },
+  {
+    number: '02',
+    title: 'Define & Design',
+    navTitle: 'Define',
+    label: 'Plan the right solution',
+    description:
+      'We turn requirements into clear user journeys, intuitive interfaces, and a practical technical architecture your team can review with confidence.',
+    activities: [
+      'User journeys, wireframes, and UI/UX design',
+      'Technical architecture and technology selection',
+      'Prototype reviews and design validation',
+    ],
+    deliverables: [
+      'Approved design direction',
+      'Technical architecture plan',
+      'Delivery roadmap',
+    ],
+    visual: 'design',
+    visualLabel: 'Solution blueprint',
+  },
+  {
+    number: '03',
+    title: 'Build & Integrate',
+    navTitle: 'Build',
+    label: 'Engineer the solution',
+    description:
+      'We develop in focused iterations, connect relevant systems, and share regular progress so the product takes shape with your feedback in view.',
+    activities: [
+      'Structured development sprints',
+      'API, platform, and third-party integrations',
+      'Code reviews, working demos, and progress feedback',
+    ],
+    deliverables: [
+      'Working product features',
+      'Integrated systems',
+      'Sprint updates and demonstrable progress',
+    ],
+    visual: 'build',
+    visualLabel: 'Engineering pipeline',
+  },
+  {
+    number: '04',
+    title: 'Validate & Refine',
+    navTitle: 'Validate',
+    label: 'Quality before release',
+    description:
+      'We test the solution against its requirements and refine it with the intended users before it is released into the environments where it will be used.',
+    activities: [
+      'Functional and regression testing',
+      'Security, performance, and usability checks',
+      'User acceptance testing and issue resolution',
+    ],
+    deliverables: [
+      'Test results',
+      'Resolved defects',
+      'Release-readiness confirmation',
+    ],
+    visual: 'validate',
+    visualLabel: 'Quality checks',
+  },
+  {
+    number: '05',
+    title: 'Launch & Evolve',
+    navTitle: 'Launch',
+    label: 'Deliver lasting value',
+    description:
+      'We plan and support the production release, monitor how the product performs, and shape improvements around real feedback and business needs.',
+    activities: [
+      'Deployment planning and release checks',
+      'Production monitoring and issue resolution',
+      'Continuous improvements and future enhancements',
+    ],
+    deliverables: [
+      'Production release',
+      'Appropriate handover documentation',
+      'Improvement roadmap',
+    ],
+    visual: 'launch',
+    visualLabel: 'Release & monitoring',
+  },
+]
+---
+
+<section
+  class="delivery-process"
+  id="delivery-process"
+  aria-labelledby="delivery-process-heading"
+  data-delivery-process
+>
+  <div class="site-container delivery-process-container">
+    <header class="delivery-intro">
+      <p class="eyebrow">Our delivery process</p>
+      <h2 id="delivery-process-heading">
+        From bold ideas to <span>real-world impact.</span>
+      </h2>
+      <p class="delivery-intro-copy">
+        A transparent, collaborative process that turns complex challenges into
+        reliable digital solutions.
+      </p>
+    </header>
+
+    <div class="delivery-layout">
+      <nav class="delivery-navigation" aria-label="Delivery stages">
+        <p class="delivery-navigation-label">A clear path forward</p>
+        <div
+          class="delivery-step-list"
+          role="tablist"
+          aria-label="Select a delivery stage"
+          aria-orientation="vertical"
+          data-delivery-tabs
+        >
+          {stages.map((stage, index) => (
+            <button
+              class="delivery-step"
+              id={`delivery-tab-${stage.number}`}
+              type="button"
+              role="tab"
+              aria-controls={`delivery-panel-${stage.number}`}
+              aria-selected={index === 0 ? 'true' : 'false'}
+              tabindex={index === 0 ? 0 : -1}
+              data-delivery-tab
+              data-stage-index={index}
+            >
+              <span class="delivery-step-number" aria-hidden="true">
+                {stage.number}
+              </span>
+              <span class="delivery-step-copy">
+                <strong>
+                  <span class="delivery-step-full">{stage.title}</span>
+                  <span class="delivery-step-short">{stage.navTitle}</span>
+                </strong>
+                <span>{stage.label}</span>
+              </span>
+              <span class="delivery-step-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </button>
+          ))}
+        </div>
+      </nav>
+
+      <div class="delivery-workspace">
+        <div
+          class="delivery-live-visual"
+          data-delivery-live-visual
+          aria-hidden="true"
+        >
+          <div class="delivery-visual-meta">
+            <span class="delivery-visual-label">
+              <span class="delivery-visual-pulse" />
+              <span data-delivery-visual-label>Discovery network</span>
+            </span>
+            <span class="delivery-visual-count" data-delivery-visual-count>
+              01 / 05
+            </span>
+          </div>
+          <div class="delivery-scene-stage" data-delivery-scene-stage />
+        </div>
+        {stages.map((stage, index) => (
+          <article
+            class="delivery-panel"
+            id={`delivery-panel-${stage.number}`}
+            role="tabpanel"
+            aria-labelledby={`delivery-tab-${stage.number}`}
+            tabindex="0"
+            data-delivery-panel
+            data-stage-index={index}
+            data-visual-label={stage.visualLabel}
+            hidden={index !== 0}
+          >
+            <div class="delivery-visual" aria-hidden="true">
+              <div class="delivery-visual-meta">
+                <span class="delivery-visual-label">
+                  <span class="delivery-visual-pulse" />
+                  {stage.visualLabel}
+                </span>
+                <span class="delivery-visual-count">{stage.number} / 05</span>
+              </div>
+
+              {stage.visual === 'discover' && (
+                <svg
+                  class="delivery-scene"
+                  viewBox="0 0 640 330"
+                  fill="none"
+                  focusable="false"
+                >
+                  <path class="dp-link" d="M174 100 260 140m-86 92 86-45m120-47 86-40m-86 85 86 41" />
+                  <path class="dp-link-soft" d="M174 100 260 140m-86 92 86-45m120-47 86-40m-86 85 86 41" />
+                  <circle class="dp-flow dp-flow-a" cx="174" cy="100" r="3.5" />
+                  <circle class="dp-flow dp-flow-b" cx="174" cy="232" r="3.5" />
+                  <circle class="dp-flow dp-flow-c" cx="466" cy="92" r="3.5" />
+                  <circle class="dp-flow dp-flow-d" cx="466" cy="233" r="3.5" />
+                  <g class="dp-discovery-card dp-enter dp-enter-one">
+                    <rect class="dp-card" x="30" y="65" width="144" height="72" rx="13" />
+                    <circle class="dp-icon-disc" cx="51" cy="90" r="10" />
+                    <path class="dp-icon" d="M47 91a4 4 0 1 1 8 0m-10 6c1-4 11-4 12 0m-6-15v2" />
+                    <text class="dp-heading" x="68" y="88">STAKEHOLDERS</text>
+                    <text class="dp-copy" x="47" y="116">People · users · teams</text>
+                    <circle class="dp-card-status" cx="158" cy="80" r="3" />
+                  </g>
+                  <g class="dp-discovery-card dp-enter dp-enter-two">
+                    <rect class="dp-card" x="30" y="197" width="144" height="72" rx="13" />
+                    <circle class="dp-icon-disc" cx="51" cy="222" r="10" />
+                    <path class="dp-icon" d="M47 218h8m-8 4h8m-8 4h5" />
+                    <text class="dp-heading" x="68" y="220">REQUIREMENTS</text>
+                    <text class="dp-copy" x="47" y="248">Needs · workflows · scope</text>
+                    <circle class="dp-card-status" cx="158" cy="212" r="3" />
+                  </g>
+                  <g class="dp-discovery-card dp-enter dp-enter-three">
+                    <rect class="dp-card" x="466" y="65" width="144" height="72" rx="13" />
+                    <circle class="dp-icon-disc dp-icon-disc-accent" cx="487" cy="90" r="10" />
+                    <path class="dp-icon" d="M482 94v-5l5-4 5 4v5m-7 0v-4h4v4" />
+                    <text class="dp-heading" x="504" y="88">SUCCESS METRICS</text>
+                    <text class="dp-copy" x="483" y="116">Outcomes · measures</text>
+                    <circle class="dp-card-status dp-card-status-accent" cx="594" cy="80" r="3" />
+                  </g>
+                  <g class="dp-discovery-card dp-enter dp-enter-four">
+                    <rect class="dp-card" x="466" y="197" width="144" height="72" rx="13" />
+                    <circle class="dp-icon-disc" cx="487" cy="222" r="10" />
+                    <path class="dp-icon" d="M483 218h8m-8 4h5m-5 4h8" />
+                    <text class="dp-heading" x="504" y="220">CONSTRAINTS</text>
+                    <text class="dp-copy" x="483" y="248">Systems · time · risk</text>
+                    <circle class="dp-card-status" cx="594" cy="212" r="3" />
+                  </g>
+                  <g class="dp-goal-core dp-enter dp-enter-core">
+                    <circle class="dp-core-halo" cx="320" cy="166" r="67" />
+                    <circle class="dp-core-ring" cx="320" cy="166" r="51" />
+                    <rect class="dp-core-card" x="265" y="124" width="110" height="84" rx="20" />
+                    <path class="dp-goal-icon" d="M320 144v25m-12-12h24m-19-10 7 5 7-5" />
+                    <text class="dp-core-title" x="320" y="181" text-anchor="middle">BUSINESS</text>
+                    <text class="dp-core-title" x="320" y="197" text-anchor="middle">GOALS</text>
+                  </g>
+                  <text class="dp-kicker" x="320" y="291" text-anchor="middle">ALIGN THE CONTEXT BEFORE DEFINING THE SOLUTION</text>
+                </svg>
+              )}
+
+              {stage.visual === 'design' && (
+                <svg
+                  class="delivery-scene"
+                  viewBox="0 0 640 330"
+                  fill="none"
+                  focusable="false"
+                >
+                  <path class="dp-link" d="M157 151h23v-31h24m-24 31v69h24m225-100h28v69h-28m28 0v-69h28" />
+                  <path class="dp-link-soft" d="M157 151h23v-31h24m-24 31v69h24m225-100h28v69h-28m28 0v-69h28" />
+                  <circle class="dp-flow dp-flow-a" cx="157" cy="151" r="3.5" />
+                  <circle class="dp-flow dp-flow-b" cx="204" cy="220" r="3.5" />
+                  <circle class="dp-flow dp-flow-c" cx="433" cy="151" r="3.5" />
+                  <g class="dp-enter dp-enter-one">
+                    <rect class="dp-card dp-requirements" x="28" y="94" width="129" height="116" rx="13" />
+                    <text class="dp-heading" x="43" y="116">BUSINESS INPUT</text>
+                    <circle class="dp-check" cx="46" cy="139" r="3" /><text class="dp-copy" x="56" y="142">User needs</text>
+                    <circle class="dp-check" cx="46" cy="160" r="3" /><text class="dp-copy" x="56" y="163">Workflows</text>
+                    <circle class="dp-check" cx="46" cy="181" r="3" /><text class="dp-copy" x="56" y="184">Constraints</text>
+                    <rect class="dp-progress-track" x="43" y="195" width="98" height="3" rx="1.5" />
+                    <rect class="dp-progress-fill dp-progress-requirements" x="43" y="195" width="98" height="3" rx="1.5" />
+                  </g>
+                  <g class="dp-enter dp-enter-two">
+                    <rect class="dp-architecture" x="204" y="58" width="229" height="207" rx="16" />
+                    <text class="dp-heading" x="220" y="80">SOLUTION BLUEPRINT</text>
+                    <text class="dp-copy" x="220" y="94">Reviewed system layers</text>
+                    <path class="dp-arch-spine" d="M316 118v112" />
+                    <rect class="dp-layer" x="220" y="108" width="90" height="49" rx="9" />
+                    <rect class="dp-layer dp-layer-accent" x="322" y="108" width="95" height="49" rx="9" />
+                    <rect class="dp-layer" x="220" y="171" width="90" height="49" rx="9" />
+                    <rect class="dp-layer" x="322" y="171" width="95" height="49" rx="9" />
+                    <path class="dp-layer-icon" d="M232 123h18v21h-18zm4 4h10m-10 5h10" />
+                    <path class="dp-layer-icon" d="M335 121h16v15h-16zm3 4h10m-10 4h7" />
+                    <ellipse class="dp-layer-icon" cx="241" cy="185" rx="9" ry="4" /><path class="dp-layer-icon" d="M232 185v13c0 5 18 5 18 0v-13m-18 6c0 5 18 5 18 0" />
+                    <path class="dp-layer-icon" d="M335 187h18m-9-8v16m0-8 9-8m-9 8 9 8" />
+                    <text class="dp-layer-title" x="258" y="131">UI / UX</text>
+                    <text class="dp-layer-copy" x="258" y="144">User journeys</text>
+                    <text class="dp-layer-title" x="360" y="131">API / SERVICES</text>
+                    <text class="dp-layer-copy" x="360" y="144">API contracts</text>
+                    <text class="dp-layer-title" x="258" y="193">DATA</text>
+                    <text class="dp-layer-copy" x="258" y="206">Data models</text>
+                    <text class="dp-layer-title" x="360" y="193">INTEGRATIONS</text>
+                    <text class="dp-layer-copy" x="360" y="206">Connected tools</text>
+                    <circle class="dp-layer-node" cx="316" cy="165" r="4" />
+                    <rect class="dp-blueprint-foot" x="220" y="232" width="197" height="19" rx="9.5" />
+                    <circle class="dp-card-status" cx="232" cy="241.5" r="3" />
+                    <text class="dp-foot-label" x="242" y="245">ARCHITECTURE READY FOR REVIEW</text>
+                  </g>
+                  <g class="dp-enter dp-enter-three">
+                    <rect class="dp-card dp-output" x="483" y="94" width="129" height="116" rx="13" />
+                    <circle class="dp-output-halo" cx="547" cy="133" r="20" />
+                    <path class="dp-output-icon" d="M536 131h22m-22 7h22m-18-14h14" />
+                    <text class="dp-heading" x="547" y="168" text-anchor="middle">PROPOSED</text>
+                    <text class="dp-heading" x="547" y="184" text-anchor="middle">SOLUTION</text>
+                    <text class="dp-copy" x="547" y="198" text-anchor="middle">Plan → prototype</text>
+                  </g>
+                  <circle class="dp-flow dp-flow-e" cx="183" cy="120" r="3.5" />
+                  <circle class="dp-flow dp-flow-f" cx="433" cy="189" r="3.5" />
+                  <circle class="dp-flow dp-arch-flow" cx="457" cy="185" r="3.5" />
+                  <text class="dp-kicker" x="320" y="291" text-anchor="middle">REQUIREMENTS BECOME A REVIEWABLE SYSTEM PLAN</text>
+                </svg>
+              )}
+
+              {stage.visual === 'build' && (
+                <svg
+                  class="delivery-scene"
+                  viewBox="0 0 640 330"
+                  fill="none"
+                  focusable="false"
+                >
+                  <path class="dp-link" d="M151 157h25m126 0h24m126 0h24" />
+                  <path class="dp-link-soft" d="M151 157h25m126 0h24m126 0h24" />
+                  <g class="dp-pipeline-card dp-enter dp-enter-one">
+                    <rect class="dp-card" x="25" y="99" width="126" height="119" rx="14" />
+                    <text class="dp-heading" x="40" y="119">CODE</text>
+                    <text class="dp-copy" x="40" y="133">Components</text>
+                    <rect class="dp-code-screen" x="40" y="146" width="96" height="42" rx="7" />
+                    <path class="dp-code-glyph" d="m53 159-5 4 5 4m10-8 5 4-5 4m11 0 6-9" />
+                    <path class="dp-code-line" d="M50 179h37m-37 5h54" />
+                    <circle class="dp-card-status" cx="134" cy="113" r="3" />
+                    <text class="dp-micro" x="40" y="205">BUILDING</text>
+                  </g>
+                  <g class="dp-pipeline-card dp-enter dp-enter-two">
+                    <rect class="dp-card" x="176" y="99" width="126" height="119" rx="14" />
+                    <text class="dp-heading" x="191" y="119">API</text>
+                    <text class="dp-copy" x="191" y="133">Services</text>
+                    <rect class="dp-service-node" x="192" y="149" width="40" height="20" rx="6" />
+                    <rect class="dp-service-node dp-service-node-accent" x="247" y="149" width="40" height="20" rx="6" />
+                    <text class="dp-micro" x="212" y="162" text-anchor="middle">CORE</text>
+                    <text class="dp-micro" x="267" y="162" text-anchor="middle">API</text>
+                    <path class="dp-mini-link" d="M232 159h15" />
+                    <path class="dp-code-line" d="M192 184h91" />
+                    <circle class="dp-card-status" cx="285" cy="185" r="3" />
+                    <text class="dp-micro" x="191" y="205">CONNECTED</text>
+                  </g>
+                  <g class="dp-pipeline-card dp-enter dp-enter-three">
+                    <rect class="dp-card" x="327" y="99" width="126" height="119" rx="14" />
+                    <text class="dp-heading" x="342" y="119">DATA</text>
+                    <text class="dp-copy" x="342" y="133">Integrations</text>
+                    <ellipse class="dp-db" cx="389" cy="153" rx="28" ry="8" />
+                    <path class="dp-db" d="M361 153v25c0 11 56 11 56 0v-25" />
+                    <path class="dp-db-line" d="M361 165c0 11 56 11 56 0m-56 8c0 11 56 11 56 0" />
+                    <circle class="dp-integration-dot" cx="432" cy="153" r="5" />
+                    <path class="dp-mini-link" d="M417 153h10" />
+                    <text class="dp-micro" x="342" y="205">SYNCED</text>
+                  </g>
+                  <g class="dp-pipeline-card dp-enter dp-enter-four">
+                    <rect class="dp-product-card" x="478" y="99" width="137" height="119" rx="14" />
+                    <text class="dp-heading" x="493" y="119">APPLICATION</text>
+                    <rect class="dp-app-window" x="493" y="132" width="107" height="57" rx="8" />
+                    <path class="dp-app-top" d="M493 145h107" />
+                    <circle class="dp-app-dot" cx="503" cy="139" r="2.5" /><circle class="dp-app-dot dp-app-dot-accent" cx="512" cy="139" r="2.5" />
+                    <rect class="dp-app-module" x="502" y="153" width="35" height="26" rx="4" />
+                    <rect class="dp-app-module dp-app-module-accent" x="543" y="153" width="47" height="11" rx="4" />
+                    <path class="dp-app-line" d="M543 171h39m-39 6h27" />
+                    <text class="dp-micro dp-micro-ready" x="493" y="205">WORKING PRODUCT</text>
+                  </g>
+                  <path class="dp-arrow-head" d="m168 153 7 4-7 4m126-8 7 4-7 4m126-8 7 4-7 4" />
+                  <circle class="dp-pipeline-flow dp-pipeline-flow-one" cx="151" cy="157" r="4" />
+                  <circle class="dp-pipeline-flow dp-pipeline-flow-two" cx="302" cy="157" r="4" />
+                  <circle class="dp-pipeline-flow dp-pipeline-flow-three" cx="453" cy="157" r="4" />
+                  <rect class="dp-sprint-track" x="25" y="242" width="590" height="34" rx="12" />
+                  <text class="dp-heading" x="42" y="263">SPRINT 04</text>
+                  <rect class="dp-progress-track" x="148" y="255" width="310" height="6" rx="3" />
+                  <rect class="dp-progress-fill dp-sprint-progress" x="148" y="255" width="205" height="6" rx="3" />
+                  <text class="dp-foot-label" x="477" y="263">FEATURES INTEGRATING</text>
+                  <circle class="dp-card-status" cx="596" cy="259" r="3" />
+                </svg>
+              )}
+
+              {stage.visual === 'validate' && (
+                <svg
+                  class="delivery-scene"
+                  viewBox="0 0 640 330"
+                  fill="none"
+                  focusable="false"
+                >
+                  <rect class="dp-qa-dashboard" x="30" y="52" width="580" height="231" rx="17" />
+                  <text class="dp-heading" x="50" y="76">QUALITY GATES</text>
+                  <text class="dp-copy" x="50" y="91">Illustrative test run · sample data</text>
+                  <rect class="dp-run-badge" x="465" y="64" width="123" height="23" rx="11.5" />
+                  <circle class="dp-card-status" cx="480" cy="75.5" r="3" />
+                  <text class="dp-foot-label" x="490" y="79">RELEASE REVIEW</text>
+                  <g class="dp-qa-card dp-enter dp-enter-one">
+                    <rect class="dp-card" x="50" y="108" width="178" height="62" rx="10" />
+                    <circle class="dp-qa-check dp-qa-check-one" cx="69" cy="128" r="8" />
+                    <path class="dp-qa-mark" d="m65 128 3 3 5-6" />
+                    <text class="dp-heading" x="84" y="129">FUNCTIONAL</text>
+                    <text class="dp-copy" x="64" y="153">User flows</text>
+                    <rect class="dp-qa-track" x="119" y="149" width="91" height="5" rx="2.5" />
+                    <rect class="dp-qa-progress dp-qa-progress-one" x="119" y="149" width="91" height="5" rx="2.5" />
+                    <text class="dp-qa-status" x="211" y="129" text-anchor="end">PASS</text>
+                  </g>
+                  <g class="dp-qa-card dp-enter dp-enter-two">
+                    <rect class="dp-card" x="240" y="108" width="178" height="62" rx="10" />
+                    <circle class="dp-qa-check dp-qa-check-two" cx="259" cy="128" r="8" />
+                    <path class="dp-qa-mark" d="m255 128 3 3 5-6" />
+                    <text class="dp-heading dp-qa-long-heading" x="274" y="129">INTEGRATION</text>
+                    <text class="dp-copy" x="254" y="153">API contracts</text>
+                    <rect class="dp-qa-track" x="338" y="149" width="66" height="5" rx="2.5" />
+                    <rect class="dp-qa-progress dp-qa-progress-two" x="338" y="149" width="66" height="5" rx="2.5" />
+                    <text class="dp-qa-status" x="401" y="129" text-anchor="end">PASS</text>
+                  </g>
+                  <g class="dp-qa-card dp-enter dp-enter-three">
+                    <rect class="dp-card" x="50" y="181" width="178" height="62" rx="10" />
+                    <circle class="dp-qa-review" cx="69" cy="201" r="8" />
+                    <path class="dp-qa-mark-review" d="M69 197v5m0 3v.5" />
+                    <text class="dp-heading dp-qa-long-heading" x="84" y="202">PERFORMANCE</text>
+                    <text class="dp-copy" x="64" y="226">Load profile</text>
+                    <rect class="dp-qa-track" x="119" y="222" width="91" height="5" rx="2.5" />
+                    <rect class="dp-qa-progress dp-qa-progress-three" x="119" y="222" width="91" height="5" rx="2.5" />
+                    <text class="dp-qa-status dp-qa-status-review" x="211" y="202" text-anchor="end">REVIEW</text>
+                  </g>
+                  <g class="dp-qa-card dp-enter dp-enter-four">
+                    <rect class="dp-card" x="240" y="181" width="178" height="62" rx="10" />
+                    <circle class="dp-qa-check dp-qa-check-four" cx="259" cy="201" r="8" />
+                    <path class="dp-qa-mark" d="m255 201 3 3 5-6" />
+                    <text class="dp-heading" x="274" y="202">SECURITY</text>
+                    <text class="dp-copy" x="254" y="226">Access + data</text>
+                    <rect class="dp-qa-track" x="338" y="222" width="66" height="5" rx="2.5" />
+                    <rect class="dp-qa-progress dp-qa-progress-four" x="338" y="222" width="66" height="5" rx="2.5" />
+                    <text class="dp-qa-status" x="401" y="202" text-anchor="end">PASS</text>
+                  </g>
+                  <g class="dp-quality-score dp-enter dp-enter-score">
+                    <rect class="dp-score-panel" x="434" y="108" width="154" height="135" rx="12" />
+                    <text class="dp-copy" x="451" y="130">OVERALL QUALITY</text>
+                    <circle class="dp-score-track" cx="511" cy="177" r="31" />
+                    <circle class="dp-score-ring" cx="511" cy="177" r="31" />
+                    <text class="dp-score-number" x="511" y="181" text-anchor="middle">92%</text>
+                    <text class="dp-score-caption" x="511" y="224" text-anchor="middle">SAMPLE SCORE</text>
+                    <text class="dp-score-status" x="511" y="238" text-anchor="middle">3 PASS · 1 REVIEW</text>
+                  </g>
+                  <text class="dp-kicker" x="320" y="270" text-anchor="middle">EXAMPLE STATUS ONLY · FINAL READINESS FOLLOWS REVIEW</text>
+                </svg>
+              )}
+
+              {stage.visual === 'launch' && (
+                <svg
+                  class="delivery-scene"
+                  viewBox="0 0 640 330"
+                  fill="none"
+                  focusable="false"
+                >
+                  <path class="dp-deploy-link" d="M145 153h28m94 0h29m108 0h39" />
+                  <path class="dp-deploy-feedback" d="M540 272v7H80v-57" />
+                  <circle class="dp-deploy-flow dp-deploy-flow-a" cx="145" cy="153" r="4" />
+                  <circle class="dp-deploy-flow dp-deploy-flow-b" cx="296" cy="153" r="4" />
+                  <circle class="dp-deploy-flow dp-deploy-flow-c" cx="404" cy="153" r="4" />
+                  <g class="dp-enter dp-enter-one">
+                    <rect class="dp-card" x="28" y="104" width="117" height="106" rx="14" />
+                    <text class="dp-heading" x="44" y="126">BUILD</text>
+                    <text class="dp-copy" x="44" y="141">Release bundle</text>
+                    <rect class="dp-build-bar" x="44" y="153" width="85" height="7" rx="3.5" />
+                    <rect class="dp-build-fill" x="44" y="153" width="65" height="7" rx="3.5" />
+                    <path class="dp-build-lines" d="M44 175h82m-82 10h58" />
+                    <circle class="dp-card-status" cx="126" cy="121" r="3" />
+                    <text class="dp-micro" x="44" y="198">SIGNED · READY</text>
+                  </g>
+                  <g class="dp-enter dp-enter-two">
+                    <rect class="dp-card" x="173" y="116" width="94" height="82" rx="13" />
+                    <circle class="dp-env-halo" cx="220" cy="144" r="17" />
+                    <path class="dp-env-icon" d="M212 140h16m-13 5h10m-7-10v10" />
+                    <text class="dp-heading" x="220" y="176" text-anchor="middle">STAGING</text>
+                    <text class="dp-copy" x="220" y="189" text-anchor="middle">Smoke checks</text>
+                  </g>
+                  <g class="dp-enter dp-enter-three">
+                    <rect class="dp-production-card" x="296" y="116" width="108" height="82" rx="13" />
+                    <circle class="dp-prod-halo" cx="350" cy="144" r="20" />
+                    <path class="dp-prod-icon" d="M339 140h22m-22 7h22m-17-14h12" />
+                    <circle class="dp-card-status" cx="384" cy="130" r="3" />
+                    <text class="dp-heading" x="350" y="176" text-anchor="middle">PRODUCTION</text>
+                    <text class="dp-copy" x="350" y="189" text-anchor="middle">Live release</text>
+                  </g>
+                  <g class="dp-enter dp-enter-four">
+                    <rect class="dp-monitor-panel" x="443" y="57" width="168" height="180" rx="15" />
+                    <text class="dp-heading" x="460" y="79">LIVE MONITORING</text>
+                    <text class="dp-micro" x="460" y="93">ILLUSTRATIVE SIGNALS</text>
+                    <path class="dp-spark-grid" d="M460 123h133m-133 25h133m-133 25h133" />
+                    <path class="dp-spark-line" d="m461 116 20-9 16 4 15-1 15-16 17 14 15-5 17 5 17-11" />
+                    <circle class="dp-spark-dot" cx="576" cy="108" r="3" />
+                    <path class="dp-signal-rule" d="M460 188h133" />
+                    <circle class="dp-signal-dot" cx="466" cy="202" r="3" /><text class="dp-signal-label" x="475" y="205">AVAILABILITY</text><text class="dp-signal-value" x="594" y="205" text-anchor="end">99.9%</text>
+                    <circle class="dp-signal-dot" cx="466" cy="218" r="3" /><text class="dp-signal-label" x="475" y="221">PERFORMANCE</text><text class="dp-signal-value" x="594" y="221" text-anchor="end">124ms</text>
+                  </g>
+                  <g class="dp-enter dp-enter-alert">
+                    <rect class="dp-alert-pill" x="443" y="245" width="168" height="27" rx="13.5" />
+                    <circle class="dp-alert-dot" cx="458" cy="258.5" r="3.5" />
+                    <text class="dp-signal-label" x="469" y="262">ALERTS  02 · USER FEEDBACK</text>
+                  </g>
+                  <path class="dp-feedback-arrow" d="m79 210 5 8-9 0" />
+                  <text class="dp-feedback-label" x="320" y="272" text-anchor="middle">FEEDBACK RETURNS TO THE NEXT IMPROVEMENT CYCLE</text>
+                </svg>
+              )}
+            </div>
+
+            <div class="delivery-panel-content">
+              <div class="delivery-panel-heading">
+                <span class="delivery-stage-label">
+                  {stage.number} · Delivery stage
+                </span>
+                <h3>{stage.title}</h3>
+                <p>{stage.description}</p>
+              </div>
+              <div class="delivery-detail-grid">
+                <div>
+                  <h4>Key activities</h4>
+                  <ul>
+                    {stage.activities.map((activity) => (
+                      <li>{activity}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h4>Deliverables</h4>
+                  <ul class="delivery-deliverables">
+                    {stage.deliverables.map((deliverable) => (
+                      <li>{deliverable}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+        ))}
+
+        <div class="delivery-controls">
+          <button
+            class="delivery-control-button delivery-control-previous"
+            type="button"
+            data-delivery-previous
+            disabled
+          >
+            <span aria-hidden="true">←</span> Previous
+          </button>
+          <div class="delivery-progress-wrap">
+            <div class="delivery-progress-copy">
+              <span data-delivery-current aria-live="polite">
+                Stage 01 of 05
+              </span>
+              <span>Delivery progress</span>
+            </div>
+            <div
+              class="delivery-progress-track"
+              role="progressbar"
+              aria-label="Delivery process progress"
+              aria-valuemin="1"
+              aria-valuemax="5"
+              aria-valuenow="1"
+              data-delivery-progress
+            >
+              <span data-delivery-progress-fill />
+            </div>
+          </div>
+          <button
+            class="delivery-control-button delivery-control-next"
+            type="button"
+            data-delivery-next
+          >
+            Next stage <span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </div>
+
+      <aside
+        class="delivery-collaboration"
+        aria-label="Continuous collaboration"
+      >
+        <span class="delivery-collaboration-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" focusable="false">
+            <path d="M7 8.5 12 5l5 3.5M5.5 13v5h13v-5M8 13v5m8-5v5M12 5v5m-5 2 5-2 5 2" />
+            <circle cx="12" cy="10" r="2" />
+          </svg>
+        </span>
+        <span>
+          <strong>Continuous collaboration</strong>
+          <span>
+            Feedback, communication and quality checks throughout the entire
+            journey.
+          </span>
+        </span>
+        <span class="delivery-collaboration-rule" aria-hidden="true"></span>
+        <span class="delivery-collaboration-note">Shared at every stage</span>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<script>
+  function setupDeliveryProcess() {
+    document.querySelectorAll('[data-delivery-process]').forEach((root) => {
+      if (root.dataset.deliveryReady === 'true') return
+      root.dataset.deliveryReady = 'true'
+
+      const tabs = [...root.querySelectorAll('[data-delivery-tab]')]
+      const panels = [...root.querySelectorAll('[data-delivery-panel]')]
+      const currentLabel = root.querySelector('[data-delivery-current]')
+      const progress = root.querySelector('[data-delivery-progress]')
+      const progressFill = root.querySelector('[data-delivery-progress-fill]')
+      const previous = root.querySelector('[data-delivery-previous]')
+      const next = root.querySelector('[data-delivery-next]')
+      const tabList = root.querySelector('[data-delivery-tabs]')
+      const sceneStage = root.querySelector('[data-delivery-scene-stage]')
+      const visualLabel = root.querySelector('[data-delivery-visual-label]')
+      const visualCount = root.querySelector('[data-delivery-visual-count]')
+      const horizontalLayout = window.matchMedia('(max-width: 1023px)')
+      const controller = new AbortController()
+      let activeIndex = 0
+
+      const scenes = panels.map((panel, index) => {
+        const source = panel.querySelector('.delivery-visual')
+        const scene = source?.querySelector('svg')
+        if (!scene) return null
+
+        // Keep the SVG's viewBox proportions so diagrams remain legible at every panel size.
+        scene.setAttribute('preserveAspectRatio', 'xMidYMid meet')
+        scene.classList.add('delivery-live-scene')
+        scene.dataset.deliveryVisual = String(index)
+        scene.classList.toggle('is-active', index === activeIndex)
+        scene.setAttribute('aria-hidden', String(index !== activeIndex))
+        sceneStage.append(scene)
+        source.remove()
+        return scene
+      })
+
+      root.classList.add('is-ready')
+
+      function updateTabOrientation() {
+        tabList.setAttribute(
+          'aria-orientation',
+          horizontalLayout.matches ? 'horizontal' : 'vertical',
+        )
+      }
+
+      updateTabOrientation()
+      horizontalLayout.addEventListener('change', updateTabOrientation, {
+        signal: controller.signal,
+      })
+
+      function selectStage(index, focusTab = false) {
+        if (index < 0 || index >= tabs.length || index === activeIndex) return
+        activeIndex = index
+
+        tabs.forEach((tab, tabIndex) => {
+          const selected = tabIndex === activeIndex
+          tab.setAttribute('aria-selected', String(selected))
+          tab.tabIndex = selected ? 0 : -1
+          if (focusTab && selected) tab.focus()
+        })
+
+        panels.forEach((panel, panelIndex) => {
+          panel.hidden = panelIndex !== activeIndex
+          panel.classList.remove('is-entering')
+        })
+
+        const activePanel = panels[activeIndex]
+        void activePanel.offsetWidth
+        activePanel.classList.add('is-entering')
+
+        scenes.forEach((scene, sceneIndex) => {
+          if (!scene) return
+          const selected = sceneIndex === activeIndex
+          scene.classList.toggle('is-active', selected)
+          scene.setAttribute('aria-hidden', String(!selected))
+        })
+
+        const stageNumber = String(activeIndex + 1).padStart(2, '0')
+        const activeVisual = panels[activeIndex].dataset.visualLabel
+        currentLabel.textContent = `Stage ${stageNumber} of 05`
+        visualCount.textContent = `${stageNumber} / 05`
+        visualLabel.textContent = activeVisual || 'Delivery stage'
+        progress.setAttribute('aria-valuenow', String(activeIndex + 1))
+        progress.setAttribute(
+          'aria-valuetext',
+          `Stage ${activeIndex + 1} of ${tabs.length}`,
+        )
+        progressFill.style.transform = `scaleX(${(activeIndex + 1) / tabs.length})`
+        previous.disabled = activeIndex === 0
+        next.disabled = activeIndex === tabs.length - 1
+      }
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => selectStage(index), {
+          signal: controller.signal,
+        })
+      })
+
+      tabList.addEventListener(
+        'keydown',
+        (event) => {
+          const currentIndex = tabs.indexOf(document.activeElement)
+          let nextIndex = currentIndex
+
+          if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+            nextIndex = (currentIndex + 1) % tabs.length
+          } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+            nextIndex = (currentIndex - 1 + tabs.length) % tabs.length
+          } else if (event.key === 'Home') {
+            nextIndex = 0
+          } else if (event.key === 'End') {
+            nextIndex = tabs.length - 1
+          } else {
+            return
+          }
+
+          event.preventDefault()
+          selectStage(nextIndex, true)
+        },
+        { signal: controller.signal },
+      )
+
+      previous.addEventListener('click', () => selectStage(activeIndex - 1), {
+        signal: controller.signal,
+      })
+      next.addEventListener('click', () => selectStage(activeIndex + 1), {
+        signal: controller.signal,
+      })
+
+      root._cleanupDeliveryProcess = () => {
+        controller.abort()
+        delete root.dataset.deliveryReady
+        delete root._cleanupDeliveryProcess
+      }
+    })
+  }
+
+  function cleanupDeliveryProcess() {
+    document.querySelectorAll('[data-delivery-process]').forEach((root) => {
+      root._cleanupDeliveryProcess?.()
+    })
+  }
+
+  setupDeliveryProcess()
+  document.addEventListener('astro:page-load', setupDeliveryProcess)
+  document.addEventListener('astro:before-swap', cleanupDeliveryProcess)
+</script>
+
+<style>
+  .delivery-process {
+    --delivery-line: rgb(16 27 45 / 10%);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding-block: clamp(2.75rem, 4vw, 3.5rem);
+    background:
+      radial-gradient(
+        ellipse at 5% 12%,
+        rgb(201 84 43 / 7%),
+        transparent 30rem
+      ),
+      radial-gradient(
+        ellipse at 97% 76%,
+        rgb(84 123 157 / 8%),
+        transparent 32rem
+      ),
+      linear-gradient(180deg, #fbfaf8 0%, var(--color-paper) 100%);
+  }
+
+  .delivery-process::before,
+  .delivery-process::after {
+    position: absolute;
+    z-index: -1;
+    width: 34rem;
+    height: 34rem;
+    border: 1px solid rgb(168 65 33 / 6%);
+    border-radius: 50%;
+    content: '';
+    pointer-events: none;
+  }
+
+  .delivery-process::before {
+    top: 7rem;
+    left: -25rem;
+    box-shadow:
+      0 0 0 3.5rem rgb(168 65 33 / 2%),
+      0 0 0 7rem rgb(84 123 157 / 2%);
+  }
+
+  .delivery-process::after {
+    right: -26rem;
+    bottom: 4rem;
+    border-color: rgb(84 123 157 / 8%);
+    box-shadow: 0 0 0 4rem rgb(84 123 157 / 2%);
+  }
+
+  .delivery-intro {
+    max-width: 790px;
+    margin: 0 auto clamp(1.5rem, 2.6vw, 2.2rem);
+    text-align: center;
+  }
+
+  .delivery-intro .eyebrow {
+    margin-bottom: 0.9rem;
+  }
+
+  .delivery-intro h2 {
+    margin-bottom: 1rem;
+    color: var(--color-ink);
+    font-size: var(--type-section-size);
+    font-weight: var(--type-heading-weight);
+    letter-spacing: var(--type-section-letter-spacing);
+    line-height: var(--type-section-line-height);
+  }
+
+  .delivery-intro h2 span {
+    color: var(--color-orange-dark);
+  }
+
+  .delivery-intro-copy {
+    max-width: 690px;
+    margin: 0 auto;
+    color: var(--color-body);
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-line-height);
+  }
+
+  .delivery-layout {
+    display: grid;
+    grid-template-columns: minmax(250px, 0.62fr) minmax(0, 1.8fr);
+    align-items: start;
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+  }
+
+  .delivery-navigation {
+    min-width: 0;
+  }
+
+  .delivery-navigation-label {
+    margin: 0 0 0.9rem 0.85rem;
+    color: var(--color-muted);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .delivery-step-list {
+    position: relative;
+    display: grid;
+    gap: 0.42rem;
+  }
+
+  .delivery-step-list::before {
+    position: absolute;
+    top: 2rem;
+    bottom: 2rem;
+    left: 1.8rem;
+    width: 1px;
+    background: linear-gradient(
+      180deg,
+      rgb(168 65 33 / 35%),
+      rgb(84 123 157 / 16%)
+    );
+    content: '';
+    pointer-events: none;
+  }
+
+  .delivery-step {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    width: 100%;
+    min-width: 0;
+    grid-template-columns: 2.45rem minmax(0, 1fr) 1rem;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.82rem 0.8rem;
+    border: 1px solid transparent;
+    border-radius: 15px;
+    background: transparent;
+    color: var(--color-navy);
+    cursor: pointer;
+    text-align: left;
+    transition:
+      transform 260ms var(--ease-out),
+      border-color 260ms var(--ease-out),
+      background-color 260ms var(--ease-out),
+      box-shadow 260ms var(--ease-out);
+  }
+
+  .delivery-step:hover {
+    z-index: 2;
+    transform: translateX(3px) scale(1.01);
+    border-color: rgb(168 65 33 / 20%);
+    background: rgb(255 255 255 / 78%);
+    box-shadow: 0 10px 24px rgb(16 27 45 / 7%);
+  }
+
+  .delivery-step[aria-selected='true'] {
+    border-color: rgb(168 65 33 / 26%);
+    background: #fff;
+    box-shadow: 0 12px 28px rgb(16 27 45 / 8%);
+  }
+
+  .delivery-step:focus-visible {
+    outline: 3px solid #e1784f;
+    outline-offset: 3px;
+  }
+
+  .delivery-step-number {
+    position: relative;
+    display: grid;
+    width: 2.35rem;
+    height: 2.35rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid rgb(84 123 157 / 25%);
+    border-radius: 50%;
+    background: #f9f8f6;
+    color: var(--color-blue);
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    transition:
+      border-color 260ms var(--ease-out),
+      background-color 260ms var(--ease-out),
+      color 260ms var(--ease-out),
+      box-shadow 260ms var(--ease-out);
+  }
+
+  .delivery-step[aria-selected='true'] .delivery-step-number {
+    border-color: var(--color-orange-dark);
+    background: var(--color-orange-dark);
+    box-shadow: 0 0 0 5px rgb(168 65 33 / 10%);
+    color: #fff;
+  }
+
+  .delivery-step-copy {
+    display: grid;
+    min-width: 0;
+    gap: 0.22rem;
+  }
+
+  .delivery-step-copy strong {
+    color: var(--color-navy);
+    font-family: var(--font-heading);
+    font-size: 0.92rem;
+    font-weight: 650;
+    letter-spacing: -0.025em;
+    line-height: 1.25;
+  }
+
+  .delivery-step-copy > span {
+    color: var(--color-muted);
+    font-size: 0.7rem;
+    line-height: 1.35;
+  }
+
+  .delivery-step-short {
+    display: none;
+  }
+
+  .delivery-step-arrow {
+    color: var(--color-orange-dark);
+    font-size: 0.9rem;
+    opacity: 0;
+    transform: translate(-3px, 3px);
+    transition:
+      opacity 220ms var(--ease-out),
+      transform 220ms var(--ease-out);
+  }
+
+  .delivery-step:hover .delivery-step-arrow,
+  .delivery-step[aria-selected='true'] .delivery-step-arrow {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  .delivery-workspace {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgb(16 27 45 / 9%);
+    border-radius: 22px;
+    background: rgb(255 255 255 / 90%);
+    box-shadow:
+      0 24px 64px rgb(16 27 45 / 8%),
+      0 4px 18px rgb(168 65 33 / 4%);
+  }
+
+  .delivery-live-visual {
+    display: none;
+  }
+
+  .delivery-process.is-ready .delivery-workspace {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    align-items: stretch;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .delivery-process.is-ready .delivery-live-visual {
+    position: relative;
+    display: grid;
+    min-width: 0;
+    min-height: 330px;
+    place-items: center;
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 13%);
+    border-radius: 16px;
+    background:
+      radial-gradient(ellipse at 82% 12%, rgb(84 123 157 / 21%), transparent 34%),
+      radial-gradient(ellipse at 12% 100%, rgb(201 84 43 / 15%), transparent 36%),
+      var(--color-navy);
+    box-shadow: 0 18px 42px rgb(16 27 45 / 14%);
+  }
+
+  .delivery-process.is-ready .delivery-live-visual::before {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgb(255 255 255 / 4%) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 4%) 1px, transparent 1px);
+    background-size: 42px 42px;
+    content: '';
+    mask-image: radial-gradient(ellipse at center, black 12%, transparent 80%);
+    pointer-events: none;
+  }
+
+  .delivery-process.is-ready .delivery-visual-meta {
+    color: rgb(255 255 255 / 78%);
+  }
+
+  .delivery-process.is-ready .delivery-visual-count {
+    color: rgb(255 255 255 / 72%);
+  }
+
+  .delivery-scene-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    overflow: hidden;
+  }
+
+  .delivery-process.is-ready .delivery-live-scene {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    max-height: 360px;
+    padding: 2.5rem 0.25rem 0.15rem;
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+    transition:
+      opacity 360ms var(--ease-out),
+      transform 420ms var(--ease-out),
+      visibility 360ms;
+    visibility: hidden;
+  }
+
+  .delivery-process.is-ready .delivery-live-scene.is-active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    visibility: visible;
+  }
+
+  .delivery-process.is-ready .delivery-live-scene:not(.is-active) * {
+    animation-play-state: paused !important;
+  }
+
+  .delivery-process.is-ready .delivery-panel {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+    align-self: center;
+  }
+
+  .delivery-process.is-ready .delivery-panel-content {
+    padding: 0.25rem 0.3rem;
+  }
+
+  .delivery-process.is-ready .delivery-panel-heading {
+    max-width: none;
+  }
+
+  .delivery-process.is-ready .delivery-panel-heading p {
+    margin-bottom: 0.9rem;
+    font-size: 0.84rem;
+    line-height: 1.52;
+  }
+
+  .delivery-process.is-ready .delivery-stage-label {
+    margin-bottom: 0.35rem;
+    font-size: 0.61rem;
+  }
+
+  .delivery-process.is-ready .delivery-panel-heading h3 {
+    margin-bottom: 0.45rem;
+    font-size: clamp(1.35rem, 1.65vw, 1.65rem);
+  }
+
+  .delivery-process.is-ready .delivery-detail-grid {
+    gap: 0.9rem;
+    padding-top: 0.8rem;
+  }
+
+  .delivery-process.is-ready .delivery-detail-grid h4 {
+    margin-bottom: 0.48rem;
+    font-size: 0.63rem;
+  }
+
+  .delivery-process.is-ready .delivery-detail-grid ul {
+    gap: 0.34rem;
+  }
+
+  .delivery-process.is-ready .delivery-detail-grid li {
+    padding-left: 0.78rem;
+    font-size: 0.74rem;
+    line-height: 1.4;
+  }
+
+  .delivery-process.is-ready .delivery-detail-grid li::before {
+    width: 0.31rem;
+    height: 0.31rem;
+  }
+
+  .delivery-panel[hidden] {
+    display: none !important;
+  }
+
+  .delivery-panel.is-entering {
+    animation: delivery-panel-enter 360ms var(--ease-out) both;
+  }
+
+  @keyframes delivery-panel-enter {
+    from {
+      opacity: 0.45;
+      transform: translateY(7px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .delivery-visual {
+    position: relative;
+    display: grid;
+    min-height: 250px;
+    aspect-ratio: 640 / 330;
+    place-items: center;
+    overflow: hidden;
+    border-bottom: 1px solid rgb(16 27 45 / 8%);
+    background:
+      radial-gradient(
+        ellipse at 50% 56%,
+        rgb(84 123 157 / 12%),
+        transparent 50%
+      ),
+      linear-gradient(135deg, #f6f4f0 0%, #f9f8f6 54%, #f3f5f6 100%);
+  }
+
+  .delivery-visual::before {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgb(16 27 45 / 3%) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(16 27 45 / 3%) 1px, transparent 1px);
+    background-size: 28px 28px;
+    content: '';
+    mask-image: radial-gradient(ellipse at center, black 12%, transparent 80%);
+    pointer-events: none;
+  }
+
+  .delivery-visual-meta {
+    position: absolute;
+    z-index: 2;
+    top: 1rem;
+    right: 1.2rem;
+    left: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    color: var(--color-muted);
+    font-size: 0.61rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .delivery-visual-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .delivery-visual-pulse {
+    width: 0.43rem;
+    height: 0.43rem;
+    border-radius: 50%;
+    background: var(--color-orange-dark);
+    box-shadow: 0 0 0 4px rgb(168 65 33 / 10%);
+    animation: delivery-status-pulse 2.8s ease-in-out infinite;
+  }
+
+  .delivery-visual-count {
+    color: var(--color-navy-soft);
+    font-variant-numeric: tabular-nums;
+  }
+
+  @keyframes delivery-status-pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 4px rgb(168 65 33 / 9%);
+    }
+    50% {
+      box-shadow: 0 0 0 7px rgb(168 65 33 / 3%);
+    }
+  }
+
+  .delivery-scene {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: min(100%, 640px);
+    height: 100%;
+    overflow: visible;
+    padding: 2.2rem 0.55rem 0.45rem;
+  }
+
+  .delivery-route,
+  .delivery-orbit-ring,
+  .delivery-screen-top,
+  .delivery-blueprint-line,
+  .delivery-blueprint-link,
+  .delivery-api-link,
+  .delivery-product-top,
+  .delivery-qa-progress,
+  .delivery-check-mark,
+  .delivery-release-line,
+  .delivery-monitor-line,
+  .delivery-feedback-loop,
+  .delivery-feedback-arrow,
+  .delivery-core-icon {
+    vector-effect: non-scaling-stroke;
+  }
+
+  .delivery-route {
+    stroke: rgb(84 123 157 / 38%);
+    stroke-width: 1.5;
+  }
+
+  .delivery-route-soft {
+    stroke: rgb(84 123 157 / 17%);
+    stroke-width: 1;
+  }
+
+  .delivery-route-dash {
+    stroke-dasharray: 5 8;
+    animation: delivery-route-flow 14s linear infinite;
+  }
+
+  @keyframes delivery-route-flow {
+    to {
+      stroke-dashoffset: -104;
+    }
+  }
+
+  .delivery-orbit-ring {
+    stroke: rgb(84 123 157 / 13%);
+    stroke-dasharray: 2 8;
+    stroke-width: 1;
+    transform-origin: center;
+    animation: delivery-orbit 45s linear infinite;
+  }
+
+  @keyframes delivery-orbit {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .delivery-node-card,
+  .delivery-screen,
+  .delivery-blueprint-panel,
+  .delivery-code-panel,
+  .delivery-api-card,
+  .delivery-product-panel,
+  .delivery-qa-panel,
+  .delivery-release-card,
+  .delivery-monitor-card,
+  .delivery-feedback-card {
+    fill: rgb(255 255 255 / 90%);
+    stroke: rgb(16 27 45 / 10%);
+    stroke-width: 1;
+  }
+
+  .delivery-node-card,
+  .delivery-screen,
+  .delivery-code-panel,
+  .delivery-api-card,
+  .delivery-release-card,
+  .delivery-monitor-card,
+  .delivery-feedback-card {
+    filter: drop-shadow(0 5px 9px rgb(16 27 45 / 6%));
+  }
+
+  .delivery-node-line,
+  .delivery-blueprint-line,
+  .delivery-release-line {
+    stroke: rgb(84 123 157 / 33%);
+    stroke-linecap: round;
+    stroke-width: 3;
+  }
+
+  .delivery-node-dot,
+  .delivery-screen-dot,
+  .delivery-window-dot {
+    fill: var(--color-blue);
+  }
+
+  .delivery-dot-blue {
+    fill: var(--color-blue);
+  }
+
+  .delivery-dot-orange,
+  .delivery-window-dot-orange {
+    fill: var(--color-orange-dark);
+  }
+
+  .delivery-svg-label {
+    fill: #8793a0;
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .delivery-core-halo,
+  .delivery-production-halo {
+    fill: rgb(84 123 157 / 6%);
+    stroke: rgb(84 123 157 / 16%);
+    stroke-width: 1;
+  }
+
+  .delivery-core-halo {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: delivery-core-pulse 4.8s ease-in-out infinite;
+  }
+
+  @keyframes delivery-core-pulse {
+    0%,
+    100% {
+      opacity: 0.65;
+      transform: scale(0.96);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.04);
+    }
+  }
+
+  .delivery-core-ring,
+  .delivery-production-ring {
+    fill: rgb(255 255 255 / 75%);
+    stroke: rgb(84 123 157 / 28%);
+    stroke-width: 1.5;
+  }
+
+  .delivery-core-dot {
+    fill: var(--color-navy);
+    stroke: rgb(168 65 33 / 60%);
+    stroke-width: 2;
+  }
+
+  .delivery-core-icon {
+    fill: none;
+    stroke: #fff;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+  }
+
+  .delivery-core-label,
+  .delivery-check-label {
+    fill: var(--color-navy-soft);
+    font-family: var(--font-body);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .delivery-particle {
+    fill: var(--color-orange-dark);
+    filter: drop-shadow(0 0 4px rgb(168 65 33 / 35%));
+    animation: delivery-particle-pulse 3.1s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .delivery-particle-two {
+    fill: var(--color-blue);
+    animation-delay: 1.2s;
+  }
+
+  @keyframes delivery-particle-pulse {
+    0%,
+    100% {
+      opacity: 0.5;
+      transform: scale(0.78);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+
+  .delivery-float {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: delivery-float 5s ease-in-out infinite;
+  }
+
+  .delivery-float-two {
+    animation-delay: -1.6s;
+  }
+
+  .delivery-float-three {
+    animation-delay: -2.8s;
+  }
+
+  .delivery-float-four {
+    animation-delay: -0.9s;
+  }
+
+  @keyframes delivery-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+
+  .delivery-screen-top {
+    stroke: rgb(16 27 45 / 10%);
+  }
+
+  .delivery-wire-block {
+    fill: rgb(84 123 157 / 12%);
+    stroke: rgb(84 123 157 / 18%);
+  }
+
+  .delivery-wire-accent {
+    fill: rgb(168 65 33 / 78%);
+  }
+
+  .delivery-blueprint-panel {
+    fill: rgb(246 248 249 / 95%);
+    stroke: rgb(84 123 157 / 24%);
+  }
+
+  .delivery-blueprint-line {
+    stroke: rgb(84 123 157 / 30%);
+    stroke-linecap: round;
+    stroke-width: 3;
+  }
+
+  .delivery-blueprint-node {
+    fill: #fff;
+    stroke: var(--color-blue);
+    stroke-width: 2;
+  }
+
+  .delivery-blueprint-node-accent {
+    fill: var(--color-orange-dark);
+    stroke: #fff;
+  }
+
+  .delivery-blueprint-link {
+    stroke: rgb(84 123 157 / 45%);
+    stroke-width: 2;
+  }
+
+  .delivery-blueprint-component {
+    fill: var(--color-navy-soft);
+    font-family: var(--font-body);
+    font-size: 6px;
+    font-weight: 700;
+    letter-spacing: 0.35px;
+  }
+
+  .delivery-code-line {
+    fill: none;
+    stroke: var(--color-orange-dark);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+  }
+
+  .delivery-api-node {
+    fill: #fff;
+    stroke: var(--color-blue);
+    stroke-width: 2;
+  }
+
+  .delivery-api-link {
+    stroke: rgb(84 123 157 / 45%);
+    stroke-dasharray: 4 5;
+    stroke-width: 1.5;
+    animation: delivery-route-flow 12s linear infinite;
+  }
+
+  .delivery-product-panel {
+    fill: #fff;
+    stroke: rgb(84 123 157 / 35%);
+  }
+
+  .delivery-product-top {
+    stroke: rgb(16 27 45 / 10%);
+  }
+
+  .delivery-product-module {
+    fill: rgb(84 123 157 / 13%);
+    stroke: rgb(84 123 157 / 25%);
+  }
+
+  .delivery-product-module-accent {
+    fill: rgb(168 65 33 / 14%);
+    stroke: rgb(168 65 33 / 38%);
+  }
+
+  .delivery-qa-panel {
+    fill: rgb(255 255 255 / 91%);
+    stroke: rgb(16 27 45 / 11%);
+    filter: drop-shadow(0 12px 20px rgb(16 27 45 / 6%));
+  }
+
+  .delivery-qa-progress {
+    stroke: rgb(84 123 157 / 28%);
+    stroke-linecap: round;
+    stroke-width: 3;
+  }
+
+  .delivery-check-halo {
+    fill: rgb(84 123 157 / 8%);
+    animation: delivery-check-halo 3.4s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .delivery-check-two .delivery-check-halo {
+    animation-delay: 0.7s;
+  }
+
+  .delivery-check-three .delivery-check-halo {
+    animation-delay: 1.4s;
+  }
+
+  .delivery-check-four .delivery-check-halo {
+    animation-delay: 2.1s;
+  }
+
+  @keyframes delivery-check-halo {
+    0%,
+    100% {
+      opacity: 0.55;
+      transform: scale(0.92);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+  }
+
+  .delivery-check-ring {
+    fill: #fff;
+    stroke: var(--color-blue);
+    stroke-width: 1.5;
+  }
+
+  .delivery-check-ring-accent {
+    stroke: var(--color-orange-dark);
+  }
+
+  .delivery-check-mark {
+    fill: none;
+    stroke: var(--color-blue);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+  }
+
+  .delivery-check-three .delivery-check-mark {
+    stroke: var(--color-orange-dark);
+  }
+
+  .delivery-check-label {
+    font-size: 8.5px;
+  }
+
+  .delivery-check-warning {
+    fill: var(--color-orange-dark);
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  .delivery-result-chip {
+    fill: rgb(84 123 157 / 9%);
+    stroke: rgb(84 123 157 / 24%);
+  }
+
+  .delivery-result-dot {
+    fill: var(--color-orange-dark);
+  }
+
+  .delivery-result-label {
+    fill: var(--color-navy-soft);
+    font-family: var(--font-body);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+  }
+
+  .delivery-production-node {
+    fill: var(--color-navy);
+    stroke: rgb(84 123 157 / 55%);
+    stroke-width: 1;
+  }
+
+  .delivery-production-node-two {
+    fill: #1b2a40;
+  }
+
+  .delivery-production-status {
+    fill: #72bd91;
+    filter: drop-shadow(0 0 4px rgb(114 189 145 / 60%));
+  }
+
+  .delivery-monitor-grid {
+    stroke: rgb(84 123 157 / 22%);
+    stroke-dasharray: 2 4;
+  }
+
+  .delivery-monitor-line {
+    fill: none;
+    stroke: var(--color-orange-dark);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+    stroke-dasharray: 180;
+    animation: delivery-draw-line 4.8s ease-in-out infinite alternate;
+  }
+
+  .delivery-staging-card {
+    fill: rgb(255 255 255 / 96%);
+    stroke: rgb(84 123 157 / 32%);
+    stroke-width: 1;
+    filter: drop-shadow(0 5px 9px rgb(16 27 45 / 7%));
+  }
+
+  .delivery-staging-status {
+    fill: var(--color-blue);
+    filter: drop-shadow(0 0 3px rgb(84 123 157 / 45%));
+  }
+
+  .delivery-staging-label,
+  .delivery-monitor-metric,
+  .delivery-feedback-caption {
+    fill: var(--color-navy-soft);
+    font-family: var(--font-body);
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.45px;
+  }
+
+  .delivery-staging-line {
+    stroke: rgb(84 123 157 / 38%);
+    stroke-linecap: round;
+    stroke-width: 2;
+  }
+
+  .delivery-monitor-metric {
+    fill: var(--color-blue);
+    font-size: 5.5px;
+    letter-spacing: 0.2px;
+  }
+
+  .delivery-feedback-caption {
+    fill: #8793a0;
+    font-size: 5px;
+    letter-spacing: 0.35px;
+  }
+
+  @keyframes delivery-draw-line {
+    from {
+      stroke-dashoffset: 180;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .delivery-feedback-loop,
+  .delivery-feedback-arrow {
+    fill: none;
+    stroke: var(--color-blue);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+  }
+
+  .delivery-feedback-arrow {
+    stroke: var(--color-orange-dark);
+    stroke-width: 1.6;
+  }
+
+  .delivery-panel-content {
+    padding: clamp(1.35rem, 2.6vw, 2rem) clamp(1.25rem, 3.2vw, 2.5rem) 1.5rem;
+  }
+
+  .delivery-panel-heading {
+    max-width: 710px;
+  }
+
+  .delivery-stage-label {
+    display: inline-block;
+    margin-bottom: 0.55rem;
+    color: var(--color-orange-dark);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+
+  .delivery-panel-heading h3 {
+    margin-bottom: 0.55rem;
+    color: var(--color-navy);
+    font-size: clamp(1.45rem, 2vw, 1.9rem);
+    font-weight: var(--type-heading-weight);
+    letter-spacing: -0.05em;
+    line-height: 1.16;
+  }
+
+  .delivery-panel-heading p {
+    max-width: 670px;
+    margin-bottom: 1.4rem;
+    color: var(--color-body);
+    font-size: 0.91rem;
+    line-height: 1.65;
+  }
+
+  .delivery-detail-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    gap: 1.4rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--delivery-line);
+  }
+
+  .delivery-detail-grid h4 {
+    margin-bottom: 0.7rem;
+    color: var(--color-navy-soft);
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  .delivery-detail-grid ul {
+    display: grid;
+    gap: 0.52rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .delivery-detail-grid li {
+    position: relative;
+    padding-left: 1rem;
+    color: var(--color-body);
+    font-size: 0.77rem;
+    line-height: 1.45;
+  }
+
+  .delivery-detail-grid li::before {
+    position: absolute;
+    top: 0.48em;
+    left: 0;
+    width: 0.38rem;
+    height: 0.38rem;
+    border: 1px solid rgb(84 123 157 / 60%);
+    border-radius: 50%;
+    background: rgb(84 123 157 / 12%);
+    content: '';
+  }
+
+  .delivery-deliverables li::before {
+    border-color: rgb(168 65 33 / 65%);
+    background: rgb(168 65 33 / 12%);
+  }
+
+  .delivery-controls {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(100px, 1fr) minmax(130px, 1.3fr) minmax(
+        100px,
+        1fr
+      );
+    align-items: center;
+    gap: 1rem;
+    padding: 0.2rem 0 0.1rem;
+  }
+
+  .delivery-control-button {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid rgb(16 27 45 / 11%);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--color-navy);
+    cursor: pointer;
+    font-size: 0.74rem;
+    font-weight: 650;
+    transition:
+      transform 220ms var(--ease-out),
+      border-color 220ms var(--ease-out),
+      background-color 220ms var(--ease-out),
+      color 220ms var(--ease-out),
+      box-shadow 220ms var(--ease-out);
+  }
+
+  .delivery-control-button:not(:disabled):hover {
+    transform: translateY(-2px);
+    border-color: rgb(168 65 33 / 40%);
+    box-shadow: 0 7px 17px rgb(16 27 45 / 8%);
+    color: var(--color-orange-dark);
+  }
+
+  .delivery-control-button:focus-visible {
+    outline: 3px solid #e1784f;
+    outline-offset: 3px;
+  }
+
+  .delivery-control-button:disabled {
+    background: #f7f6f3;
+    color: #a2a8ad;
+    cursor: not-allowed;
+    opacity: 0.75;
+  }
+
+  .delivery-control-next {
+    border-color: var(--color-navy);
+    background: var(--color-navy);
+    color: #fff;
+  }
+
+  .delivery-control-next:not(:disabled):hover {
+    border-color: var(--color-orange-dark);
+    background: var(--color-orange-dark);
+    color: #fff;
+  }
+
+  .delivery-progress-wrap {
+    min-width: 0;
+  }
+
+  .delivery-progress-copy {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.45rem;
+    color: var(--color-muted);
+    font-size: 0.59rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .delivery-progress-copy span:first-child {
+    color: var(--color-navy-soft);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .delivery-progress-track {
+    height: 4px;
+    overflow: hidden;
+    border-radius: 99px;
+    background: rgb(84 123 157 / 14%);
+  }
+
+  .delivery-progress-track > span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(
+      90deg,
+      var(--color-blue),
+      var(--color-orange-dark)
+    );
+    transform: scaleX(0.2);
+    transform-origin: left center;
+    transition: transform 400ms var(--ease-out);
+  }
+
+  .delivery-collaboration {
+    display: flex;
+    grid-column: 2;
+    align-items: center;
+    gap: 0.85rem;
+    margin-top: -0.15rem;
+    padding: 0.72rem 0.9rem;
+    border: 1px solid rgb(84 123 157 / 15%);
+    border-radius: 14px;
+    background: rgb(255 255 255 / 55%);
+  }
+
+  .delivery-collaboration-icon {
+    display: grid;
+    width: 2.25rem;
+    height: 2.25rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid rgb(84 123 157 / 18%);
+    border-radius: 50%;
+    background: rgb(84 123 157 / 8%);
+    color: var(--color-blue);
+  }
+
+  .delivery-collaboration-icon svg {
+    width: 1.05rem;
+    height: 1.05rem;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.5;
+  }
+
+  .delivery-collaboration > span:nth-child(2) {
+    display: grid;
+    min-width: 0;
+    gap: 0.1rem;
+  }
+
+  .delivery-collaboration strong {
+    color: var(--color-navy);
+    font-family: var(--font-heading);
+    font-size: 0.78rem;
+    font-weight: 650;
+  }
+
+  .delivery-collaboration > span:nth-child(2) > span {
+    color: var(--color-body);
+    font-size: 0.7rem;
+    line-height: 1.4;
+  }
+
+  .delivery-collaboration-rule {
+    width: 1px;
+    height: 1.75rem;
+    flex: 0 0 auto;
+    margin-left: auto;
+    background: var(--delivery-line);
+  }
+
+  .delivery-collaboration-note {
+    flex: 0 0 auto;
+    color: var(--color-muted);
+    font-size: 0.62rem;
+    font-weight: 650;
+    letter-spacing: 0.04em;
+  }
+
+  /* Delivery stage diagrams */
+  .dp-card,
+  .dp-architecture,
+  .dp-qa-dashboard,
+  .dp-score-panel,
+  .dp-monitor-panel,
+  .dp-production-card {
+    fill: var(--color-navy-soft);
+    stroke: rgb(84 123 157 / 42%);
+    stroke-width: 1;
+    filter: drop-shadow(0 7px 12px rgb(0 0 0 / 18%));
+  }
+
+  .dp-card {
+    fill: var(--color-navy-soft);
+    stroke: rgb(84 123 157 / 42%);
+  }
+
+  .dp-card,
+  .dp-layer,
+  .dp-score-panel,
+  .dp-production-card {
+    transition:
+      stroke 180ms var(--ease-out),
+      filter 180ms var(--ease-out);
+  }
+
+  .dp-card:hover,
+  .dp-layer:hover,
+  .dp-score-panel:hover,
+  .dp-production-card:hover {
+    stroke: var(--color-orange);
+    filter: drop-shadow(0 0 7px rgb(201 84 43 / 24%));
+  }
+
+  .dp-link,
+  .dp-link-soft,
+  .dp-arch-spine,
+  .dp-mini-link,
+  .dp-deploy-link,
+  .dp-deploy-feedback {
+    fill: none;
+    stroke: var(--color-blue);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .dp-link {
+    stroke-width: 1.7;
+  }
+
+  .dp-link-soft {
+    stroke: rgb(84 123 157 / 27%);
+    stroke-dasharray: 4 8;
+    stroke-width: 3.5;
+  }
+
+  .dp-flow,
+  .dp-pipeline-flow,
+  .dp-deploy-flow {
+    fill: var(--color-blue);
+    filter: drop-shadow(0 0 4px rgb(84 123 157 / 55%));
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .dp-flow-b,
+  .dp-flow-d,
+  .dp-flow-f {
+    fill: var(--color-orange-dark);
+  }
+
+  .dp-flow-c,
+  .dp-flow-d {
+    animation-name: dp-flow-reverse;
+  }
+
+  .dp-card-status,
+  .dp-card-status-accent,
+  .dp-signal-dot {
+    fill: var(--color-blue);
+    filter: drop-shadow(0 0 3px rgb(84 123 157 / 42%));
+  }
+
+  .dp-card-status-accent,
+  .dp-signal-dot-accent {
+    fill: var(--color-orange-dark);
+  }
+
+  .dp-heading,
+  .dp-layer-title {
+    fill: #fff;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 750;
+    letter-spacing: 0.65px;
+  }
+
+  .dp-layer-title {
+    font-size: 8px;
+  }
+
+  .dp-copy,
+  .dp-layer-copy {
+    fill: rgb(211 223 237 / 75%);
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 550;
+    letter-spacing: 0.15px;
+  }
+
+  .dp-layer-copy {
+    font-size: 7px;
+    letter-spacing: 0;
+  }
+
+  .dp-kicker,
+  .dp-micro,
+  .dp-foot-label,
+  .dp-qa-status,
+  .dp-score-caption,
+  .dp-score-status,
+  .dp-signal-label,
+  .dp-signal-value,
+  .dp-feedback-label {
+    fill: rgb(169 192 214 / 78%);
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.65px;
+  }
+
+  .dp-kicker,
+  .dp-feedback-label {
+    fill: #a9c0d6;
+    font-size: 9px;
+    letter-spacing: 0.75px;
+  }
+
+  .dp-heading:not([text-anchor='middle']),
+  .dp-layer-title,
+  .dp-copy:not([text-anchor='middle']),
+  .dp-layer-copy,
+  .dp-kicker:not([text-anchor='middle']),
+  .dp-micro:not([text-anchor='middle']),
+  .dp-foot-label:not([text-anchor='middle']),
+  .dp-qa-status:not([text-anchor='middle']),
+  .dp-score-caption:not([text-anchor='middle']),
+  .dp-score-status:not([text-anchor='middle']),
+  .dp-signal-label:not([text-anchor='middle']),
+  .dp-signal-value:not([text-anchor='middle']),
+  .dp-feedback-label:not([text-anchor='middle']) {
+    transform-origin: left center;
+  }
+
+  .dp-heading[text-anchor='middle'],
+  .dp-copy[text-anchor='middle'],
+  .dp-kicker[text-anchor='middle'],
+  .dp-micro[text-anchor='middle'],
+  .dp-foot-label[text-anchor='middle'],
+  .dp-qa-status[text-anchor='middle'],
+  .dp-score-caption[text-anchor='middle'],
+  .dp-score-status[text-anchor='middle'],
+  .dp-signal-label[text-anchor='middle'],
+  .dp-signal-value[text-anchor='middle'],
+  .dp-feedback-label[text-anchor='middle'] {
+    transform-origin: center;
+  }
+
+  .dp-qa-status[text-anchor='end'],
+  .dp-signal-value[text-anchor='end'] {
+    transform-origin: right center;
+  }
+
+  .dp-icon-disc {
+    fill: rgb(84 123 157 / 22%);
+    stroke: rgb(84 123 157 / 42%);
+  }
+
+  .dp-icon-disc-accent {
+    fill: rgb(201 84 43 / 20%);
+    stroke: rgb(201 84 43 / 46%);
+  }
+
+  .dp-icon,
+  .dp-goal-icon,
+  .dp-layer-icon,
+  .dp-output-icon,
+  .dp-env-icon,
+  .dp-prod-icon {
+    fill: none;
+    stroke: var(--color-blue);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.5;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .dp-goal-core {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .dp-core-halo {
+    fill: rgb(84 123 157 / 6%);
+    stroke: rgb(84 123 157 / 18%);
+    stroke-width: 1;
+  }
+
+  .dp-core-ring {
+    fill: none;
+    stroke: rgb(84 123 157 / 42%);
+    stroke-dasharray: 3 5;
+    stroke-width: 1.2;
+  }
+
+  .dp-core-card {
+    fill: var(--color-navy);
+    stroke: rgb(84 123 157 / 75%);
+    stroke-width: 1;
+    filter: drop-shadow(0 8px 14px rgb(16 27 45 / 17%));
+  }
+
+  .dp-goal-icon {
+    stroke: #fff;
+    stroke-width: 1.8;
+  }
+
+  .dp-core-title {
+    fill: #fff;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 1px;
+  }
+
+  .dp-discovery-card .dp-heading {
+    font-size: 11px;
+  }
+
+  .dp-discovery-card.dp-enter-three .dp-heading {
+    font-size: 8px;
+  }
+
+  .dp-architecture {
+    fill: rgb(16 27 45 / 96%);
+    stroke: rgb(84 123 157 / 52%);
+  }
+
+  .dp-layer {
+    fill: rgb(84 123 157 / 15%);
+    stroke: rgb(84 123 157 / 38%);
+  }
+
+  .dp-layer-accent {
+    fill: rgb(201 84 43 / 17%);
+    stroke: rgb(201 84 43 / 48%);
+  }
+
+  .dp-arch-spine,
+  .dp-mini-link {
+    stroke: rgb(84 123 157 / 46%);
+    stroke-dasharray: 3 4;
+    stroke-width: 1.4;
+  }
+
+  .dp-layer-node {
+    fill: var(--color-orange-dark);
+    stroke: #fff;
+    stroke-width: 2;
+  }
+
+  .dp-blueprint-foot,
+  .dp-run-badge {
+    fill: rgb(84 123 157 / 17%);
+    stroke: rgb(84 123 157 / 34%);
+  }
+
+  .dp-output-halo,
+  .dp-env-halo {
+    fill: rgb(84 123 157 / 20%);
+    stroke: rgb(84 123 157 / 38%);
+  }
+
+  .dp-code-screen,
+  .dp-service-node,
+  .dp-app-window {
+    fill: rgb(16 27 45 / 52%);
+    stroke: rgb(84 123 157 / 42%);
+  }
+
+  .dp-code-glyph,
+  .dp-code-line,
+  .dp-app-line,
+  .dp-build-lines {
+    fill: none;
+    stroke: rgb(169 192 214 / 62%);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.5;
+  }
+
+  .dp-code-glyph {
+    stroke: var(--color-orange-dark);
+    stroke-width: 1.8;
+  }
+
+  .dp-service-node-accent,
+  .dp-app-module-accent {
+    fill: rgb(201 84 43 / 20%);
+    stroke: rgb(201 84 43 / 46%);
+  }
+
+  .dp-micro {
+    font-size: 9px;
+    letter-spacing: 0.45px;
+  }
+
+  .dp-micro-ready,
+  .dp-qa-status {
+    fill: #a9c0d6;
+  }
+
+  .dp-db {
+    fill: rgb(84 123 157 / 24%);
+    stroke: var(--color-blue);
+    stroke-width: 1.3;
+  }
+
+  .dp-db-line {
+    fill: none;
+    stroke: rgb(169 192 214 / 55%);
+    stroke-width: 1;
+  }
+
+  .dp-integration-dot {
+    fill: var(--color-orange-dark);
+    stroke: #fff;
+    stroke-width: 1.5;
+  }
+
+  .dp-product-card {
+    fill: rgb(27 42 64 / 96%);
+    stroke: rgb(84 123 157 / 48%);
+    stroke-width: 1.2;
+    filter: drop-shadow(0 8px 14px rgb(16 27 45 / 10%));
+  }
+
+  .dp-app-top {
+    stroke: rgb(84 123 157 / 28%);
+  }
+
+  .dp-app-dot {
+    fill: var(--color-blue);
+  }
+
+  .dp-app-dot-accent {
+    fill: var(--color-orange-dark);
+  }
+
+  .dp-app-module {
+    fill: rgb(84 123 157 / 22%);
+    stroke: rgb(84 123 157 / 34%);
+  }
+
+  .dp-arrow-head {
+    fill: none;
+    stroke: var(--color-blue);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.5;
+  }
+
+  .dp-sprint-track {
+    fill: rgb(84 123 157 / 17%);
+    stroke: rgb(84 123 157 / 32%);
+  }
+
+  .dp-progress-track {
+    fill: rgb(84 123 157 / 18%);
+  }
+
+  .dp-progress-fill {
+    fill: var(--color-blue);
+    transform-box: fill-box;
+    transform-origin: left center;
+  }
+
+  .dp-sprint-progress {
+    transform: scaleX(0.66);
+  }
+
+  .dp-qa-dashboard {
+    fill: rgb(16 27 45 / 96%);
+    stroke: rgb(84 123 157 / 48%);
+    filter: drop-shadow(0 10px 20px rgb(0 0 0 / 22%));
+  }
+
+  .dp-qa-card {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .dp-qa-long-heading {
+    font-size: 10px;
+  }
+
+  .dp-qa-card .dp-card {
+    fill: var(--color-navy-soft);
+  }
+
+  .dp-qa-check,
+  .dp-qa-review {
+    fill: rgb(84 123 157 / 24%);
+    stroke: rgb(84 123 157 / 48%);
+  }
+
+  .dp-qa-review {
+    fill: rgb(201 84 43 / 22%);
+    stroke: rgb(201 84 43 / 50%);
+  }
+
+  .dp-qa-mark,
+  .dp-qa-mark-review {
+    fill: none;
+    stroke: var(--color-blue);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.5;
+  }
+
+  .dp-qa-mark-review {
+    stroke: var(--color-orange-dark);
+    stroke-width: 1.6;
+  }
+
+  .dp-qa-track {
+    fill: rgb(84 123 157 / 28%);
+  }
+
+  .dp-qa-progress {
+    fill: var(--color-blue);
+    transform-box: fill-box;
+    transform-origin: left center;
+  }
+
+  .dp-qa-progress-one,
+  .dp-qa-progress-four {
+    transform: scaleX(0.96);
+  }
+
+  .dp-qa-progress-two {
+    transform: scaleX(0.91);
+  }
+
+  .dp-qa-progress-three {
+    fill: var(--color-orange);
+    transform: scaleX(0.78);
+  }
+
+  .dp-qa-status-review,
+  .dp-score-status {
+    fill: var(--color-orange-dark);
+  }
+
+  .dp-score-panel {
+    fill: rgb(84 123 157 / 13%);
+    stroke: rgb(84 123 157 / 34%);
+    filter: none;
+  }
+
+  .dp-score-track,
+  .dp-score-ring {
+    fill: none;
+    stroke-width: 7;
+  }
+
+  .dp-score-track {
+    stroke: rgb(84 123 157 / 28%);
+  }
+
+  .dp-score-ring {
+    stroke: var(--color-blue);
+    stroke-linecap: round;
+    stroke-dasharray: 195;
+    stroke-dashoffset: 15;
+    transform: rotate(-90deg);
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .dp-score-number {
+    fill: #fff;
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 750;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .dp-score-caption {
+    font-size: 8px;
+  }
+
+  .dp-score-status {
+    font-size: 7px;
+    letter-spacing: 0.25px;
+  }
+
+  .dp-signal-label,
+  .dp-signal-value {
+    font-size: 7px;
+    letter-spacing: 0.35px;
+  }
+
+  .dp-deploy-link {
+    stroke: rgb(84 123 157 / 52%);
+    stroke-dasharray: 4 6;
+    stroke-width: 1.6;
+  }
+
+  .dp-deploy-feedback {
+    stroke: rgb(84 123 157 / 56%);
+    stroke-dasharray: 4 6;
+    stroke-width: 1.5;
+  }
+
+  .dp-deploy-flow {
+    fill: var(--color-orange-dark);
+  }
+
+  .dp-build-bar,
+  .dp-spark-grid,
+  .dp-signal-rule {
+    fill: none;
+    stroke: rgb(169 192 214 / 35%);
+    stroke-width: 1;
+  }
+
+  .dp-build-bar {
+    fill: rgb(84 123 157 / 24%);
+    stroke: none;
+  }
+
+  .dp-build-fill {
+    fill: var(--color-blue);
+    transform-box: fill-box;
+    transform-origin: left center;
+  }
+
+  .dp-production-card {
+    fill: var(--color-navy);
+    stroke: rgb(84 123 157 / 65%);
+  }
+
+  .dp-prod-halo {
+    fill: rgb(84 123 157 / 18%);
+    stroke: rgb(84 123 157 / 28%);
+  }
+
+  .dp-prod-icon {
+    stroke: #fff;
+  }
+
+  .dp-production-card .dp-heading {
+    fill: #fff;
+  }
+
+  .dp-production-card .dp-copy {
+    fill: rgb(255 255 255 / 64%);
+  }
+
+  .dp-monitor-panel {
+    fill: rgb(16 27 45 / 96%);
+    stroke: rgb(84 123 157 / 48%);
+  }
+
+  .dp-spark-grid {
+    stroke-dasharray: 2 4;
+  }
+
+  .dp-spark-line {
+    fill: none;
+    stroke: #a9c0d6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+    stroke-dasharray: 180;
+    stroke-dashoffset: 0;
+  }
+
+  .dp-spark-dot {
+    fill: var(--color-orange-dark);
+    filter: drop-shadow(0 0 4px rgb(168 65 33 / 40%));
+  }
+
+  .dp-signal-rule {
+    stroke: rgb(169 192 214 / 35%);
+  }
+
+  .dp-signal-value {
+    fill: #efaa85;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .dp-alert-pill {
+    fill: rgb(201 84 43 / 17%);
+    stroke: rgb(201 84 43 / 42%);
+  }
+
+  .dp-alert-dot {
+    fill: var(--color-orange);
+    animation: dp-alert 4s ease-in-out infinite;
+  }
+
+  .dp-feedback-arrow {
+    fill: none;
+    stroke: var(--color-orange);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.5;
+  }
+
+  .dp-enter {
+    opacity: 1;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .delivery-live-scene.is-active .dp-enter {
+    animation: dp-enter 560ms var(--ease-out) both;
+  }
+
+  .delivery-live-scene.is-active .dp-enter-two {
+    animation-delay: 90ms;
+  }
+
+  .delivery-live-scene.is-active .dp-enter-three {
+    animation-delay: 180ms;
+  }
+
+  .delivery-live-scene.is-active .dp-enter-four {
+    animation-delay: 270ms;
+  }
+
+  .delivery-live-scene.is-active .dp-enter-core,
+  .delivery-live-scene.is-active .dp-enter-score {
+    animation-delay: 360ms;
+  }
+
+  .delivery-live-scene.is-active .dp-enter-alert {
+    animation-delay: 420ms;
+  }
+
+  @keyframes dp-enter {
+    from {
+      opacity: 0;
+      transform: translateY(8px) scale(0.985);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .delivery-live-scene.is-active .dp-link-soft {
+    animation: dp-dash 7s linear infinite;
+  }
+
+  @keyframes dp-dash {
+    to {
+      stroke-dashoffset: -72;
+    }
+  }
+
+  .delivery-live-scene.is-active .dp-flow-a,
+  .delivery-live-scene.is-active .dp-flow-c {
+    animation: dp-flow-forward 2.8s ease-in-out infinite;
+  }
+
+  .delivery-live-scene.is-active .dp-flow-b,
+  .delivery-live-scene.is-active .dp-flow-d {
+    animation: dp-flow-forward-alt 3.2s ease-in-out infinite;
+  }
+
+  .delivery-live-scene.is-active .dp-flow-c {
+    animation: dp-flow-reverse 2.8s ease-in-out infinite;
+  }
+
+  .delivery-live-scene.is-active .dp-flow-d {
+    animation: dp-flow-reverse 3.2s ease-in-out infinite;
+  }
+
+  .delivery-live-scene.is-active .dp-flow-e,
+  .delivery-live-scene.is-active .dp-flow-f {
+    animation: dp-flow-short 2.5s ease-in-out infinite;
+  }
+
+  .delivery-live-scene.is-active .dp-arch-flow {
+    animation: dp-arch-rise 2.8s ease-in-out infinite;
+  }
+
+  @keyframes dp-arch-rise {
+    0%,
+    100% {
+      opacity: 0.35;
+      transform: translateY(0) scale(0.8);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(-42px) scale(1.12);
+    }
+  }
+
+  @keyframes dp-flow-forward {
+    0%,
+    100% {
+      opacity: 0.45;
+      transform: translate(0, 0) scale(0.8);
+    }
+    50% {
+      opacity: 1;
+      transform: translate(44px, 21px) scale(1.15);
+    }
+  }
+
+  @keyframes dp-flow-forward-alt {
+    0%,
+    100% {
+      opacity: 0.4;
+      transform: translate(0, 0) scale(0.8);
+    }
+    50% {
+      opacity: 1;
+      transform: translate(43px, -23px) scale(1.15);
+    }
+  }
+
+  @keyframes dp-flow-reverse {
+    0%,
+    100% {
+      opacity: 0.4;
+      transform: translate(0, 0) scale(0.8);
+    }
+    50% {
+      opacity: 1;
+      transform: translate(-43px, 20px) scale(1.15);
+    }
+  }
+
+  @keyframes dp-flow-short {
+    0%,
+    100% {
+      opacity: 0.4;
+      transform: translate(0, 0) scale(0.8);
+    }
+    50% {
+      opacity: 1;
+      transform: translate(18px, 0) scale(1.1);
+    }
+  }
+
+  .delivery-live-scene.is-active .dp-core-halo {
+    animation: dp-core-pulse 4.2s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  @keyframes dp-core-pulse {
+    50% {
+      opacity: 0.55;
+      transform: scale(1.08);
+    }
+  }
+
+  .delivery-live-scene.is-active .dp-goal-core {
+    animation: dp-core-lift 4.8s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  @keyframes dp-core-lift {
+    50% {
+      transform: translateY(-2px);
+    }
+  }
+
+  .delivery-live-scene.is-active .dp-pipeline-flow,
+  .delivery-live-scene.is-active .dp-deploy-flow {
+    animation: dp-particle-travel 1.8s ease-in-out infinite;
+  }
+
+  .delivery-live-scene.is-active .dp-pipeline-flow-two,
+  .delivery-live-scene.is-active .dp-deploy-flow-b {
+    animation-delay: 0.35s;
+  }
+
+  .delivery-live-scene.is-active .dp-pipeline-flow-three,
+  .delivery-live-scene.is-active .dp-deploy-flow-c {
+    animation-delay: 0.7s;
+  }
+
+  @keyframes dp-particle-travel {
+    0%,
+    100% {
+      opacity: 0.35;
+      transform: translateX(0) scale(0.8);
+    }
+    50% {
+      opacity: 1;
+      transform: translateX(18px) scale(1.12);
+    }
+  }
+
+  .delivery-live-scene.is-active .dp-qa-progress {
+    animation: dp-progress-in 700ms var(--ease-out) both;
+  }
+
+  .delivery-live-scene.is-active .dp-qa-progress-two {
+    animation-delay: 120ms;
+  }
+
+  .delivery-live-scene.is-active .dp-qa-progress-three {
+    animation-delay: 240ms;
+  }
+
+  .delivery-live-scene.is-active .dp-qa-progress-four {
+    animation-delay: 360ms;
+  }
+
+  @keyframes dp-progress-in {
+    from {
+      transform: scaleX(0.03);
+    }
+  }
+
+  .delivery-live-scene.is-active .dp-score-ring {
+    animation: dp-score-draw 900ms var(--ease-out) both;
+    animation-delay: 450ms;
+  }
+
+  @keyframes dp-score-draw {
+    from {
+      stroke-dashoffset: 195;
+    }
+    to {
+      stroke-dashoffset: 15;
+    }
+  }
+
+  .delivery-live-scene.is-active .dp-spark-line {
+    animation: dp-spark-draw 1.4s var(--ease-out) both;
+    animation-delay: 420ms;
+  }
+
+  @keyframes dp-spark-draw {
+    from {
+      stroke-dashoffset: 180;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .delivery-live-scene.is-active .dp-spark-dot {
+    animation: dp-spark-pulse 2.8s ease-in-out infinite;
+    animation-delay: 1.8s;
+  }
+
+  @keyframes dp-spark-pulse {
+    50% {
+      opacity: 0.4;
+      transform: scale(0.75);
+    }
+  }
+
+  @keyframes dp-alert {
+    0%,
+    82%,
+    100% {
+      opacity: 0.65;
+      transform: scale(1);
+    }
+    90% {
+      opacity: 1;
+      transform: scale(1.35);
+    }
+  }
+
+  .delivery-live-scene.is-active .dp-deploy-feedback {
+    animation: dp-feedback-flow 6s linear infinite;
+  }
+
+  @keyframes dp-feedback-flow {
+    to {
+      stroke-dashoffset: 80;
+    }
+  }
+
+  .delivery-live-scene.is-active .dp-feedback-arrow {
+    animation: dp-feedback-pulse 3s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  @keyframes dp-feedback-pulse {
+    50% {
+      opacity: 0.45;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .delivery-layout {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    .delivery-navigation-label {
+      margin: 0 0 0.6rem 0.15rem;
+    }
+
+    .delivery-step-list {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0.35rem;
+    }
+
+    .delivery-step-list::before {
+      top: 1.2rem;
+      right: 8%;
+      bottom: auto;
+      left: 8%;
+      width: auto;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        rgb(168 65 33 / 35%),
+        rgb(84 123 157 / 16%)
+      );
+    }
+
+    .delivery-step {
+      display: flex;
+      min-height: 4.8rem;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 0.42rem;
+      padding: 0.35rem 0.25rem 0.45rem;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .delivery-step-copy {
+      display: block;
+      width: 100%;
+    }
+
+    .delivery-step-copy strong {
+      display: block;
+      font-size: 0.7rem;
+    }
+
+    .delivery-step-copy > span {
+      display: none;
+    }
+
+    .delivery-step-full {
+      display: none;
+    }
+
+    .delivery-step-short {
+      display: inline;
+    }
+
+    .delivery-step-arrow {
+      display: none;
+    }
+
+    .delivery-step-number {
+      z-index: 1;
+      width: 2rem;
+      height: 2rem;
+    }
+
+    .delivery-step-list::before {
+      left: 8%;
+    }
+
+    .delivery-collaboration-note,
+    .delivery-collaboration-rule {
+      display: none;
+    }
+
+    .delivery-collaboration {
+      grid-column: 1;
+    }
+
+    .delivery-process.is-ready .delivery-live-visual {
+      min-height: 320px;
+    }
+
+    .delivery-detail-grid {
+      gap: 1rem;
+    }
+
+    .delivery-controls {
+      grid-template-columns: minmax(92px, 0.9fr) minmax(100px, 1.2fr) minmax(
+          92px,
+          0.9fr
+        );
+      gap: 0.6rem;
+      padding-inline: 1rem;
+    }
+
+    .delivery-process.is-ready .delivery-controls {
+      padding-inline: 0;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .delivery-process {
+      padding-block: 2.5rem;
+    }
+
+    .delivery-intro {
+      margin-bottom: 1.4rem;
+    }
+
+    .delivery-layout {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    .delivery-navigation-label {
+      margin-left: 0.15rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .delivery-step-list {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0.28rem;
+    }
+
+    .delivery-step-list::before {
+      top: 1.2rem;
+      right: 8%;
+      bottom: auto;
+      left: 8%;
+      width: auto;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        rgb(168 65 33 / 35%),
+        rgb(84 123 157 / 16%)
+      );
+    }
+
+    .delivery-step {
+      display: flex;
+      min-height: 4.8rem;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 0.42rem;
+      padding: 0.35rem 0.12rem 0.45rem;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .delivery-step:hover {
+      transform: translateY(-2px) scale(1.015);
+    }
+
+    .delivery-step-number {
+      z-index: 1;
+      width: 2rem;
+      height: 2rem;
+      background: #faf9f7;
+      font-size: 0.6rem;
+    }
+
+    .delivery-step-copy {
+      display: block;
+      width: 100%;
+    }
+
+    .delivery-step-copy strong {
+      display: block;
+      font-size: 0.61rem;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .delivery-step-copy > span {
+      display: none;
+    }
+
+    .delivery-step-full {
+      display: none;
+    }
+
+    .delivery-step-short {
+      display: inline;
+    }
+
+    .delivery-workspace {
+      border-radius: 18px;
+    }
+
+    .delivery-process.is-ready .delivery-workspace {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.8rem;
+      padding: 0.7rem;
+    }
+
+    .delivery-process.is-ready .delivery-live-visual {
+      min-height: 230px;
+      aspect-ratio: 1.45;
+    }
+
+    .delivery-process.is-ready .delivery-panel {
+      grid-column: 1;
+      grid-row: 2;
+      align-self: auto;
+    }
+
+    .delivery-process.is-ready .delivery-controls {
+      grid-column: 1;
+      padding: 0.25rem 0 0.1rem;
+    }
+
+    .delivery-process.is-ready .delivery-panel-content {
+      padding: 0.45rem 0.35rem 0.2rem;
+    }
+
+    .delivery-process.is-ready .delivery-panel-heading p {
+      margin-bottom: 0.75rem;
+      font-size: 0.84rem;
+    }
+
+    .delivery-process.is-ready .delivery-detail-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.9rem;
+      padding-top: 0.75rem;
+    }
+
+    .delivery-visual {
+      min-height: 188px;
+      aspect-ratio: 1.45;
+    }
+
+    .delivery-visual-meta {
+      top: 0.75rem;
+      right: 0.8rem;
+      left: 0.8rem;
+      font-size: 0.52rem;
+    }
+
+    .delivery-scene {
+      padding: 2rem 0.1rem 0.25rem;
+    }
+
+    .delivery-panel-content {
+      padding: 1.2rem 1rem 1.15rem;
+    }
+
+    .delivery-panel-heading p {
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+    }
+
+    .delivery-detail-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.1rem;
+      padding-top: 1rem;
+    }
+
+    .delivery-detail-grid ul {
+      gap: 0.42rem;
+    }
+
+    .delivery-controls {
+      grid-template-columns: auto minmax(86px, 1fr) auto;
+      gap: 0.45rem;
+      padding: 0 0.75rem 1rem;
+    }
+
+    .delivery-control-button {
+      min-height: 38px;
+      gap: 0.25rem;
+      padding-inline: 0.45rem;
+      font-size: 0.65rem;
+      white-space: nowrap;
+    }
+
+    .delivery-progress-copy {
+      font-size: 0.51rem;
+    }
+
+    .delivery-collaboration {
+      grid-column: 1;
+      gap: 0.65rem;
+      margin-top: 0.1rem;
+      padding: 0.8rem 0.85rem;
+    }
+
+    .delivery-collaboration-icon {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    .delivery-collaboration strong {
+      font-size: 0.71rem;
+    }
+
+    .delivery-collaboration > span:nth-child(2) > span {
+      font-size: 0.64rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .delivery-step,
+    .delivery-step-number,
+    .delivery-step-arrow,
+    .delivery-control-button,
+    .delivery-progress-track > span {
+      transition: none;
+    }
+
+    .delivery-step:hover {
+      transform: none;
+    }
+
+    .delivery-step-arrow {
+      transform: none;
+    }
+
+    .delivery-panel.is-entering,
+    .delivery-process.is-ready .delivery-live-scene,
+    .delivery-visual-pulse,
+    .delivery-route-dash,
+    .delivery-orbit-ring,
+    .delivery-particle,
+    .delivery-float,
+    .delivery-check-halo,
+    .delivery-core-halo,
+    .delivery-monitor-line {
+      animation: none;
+    }
+
+    .delivery-process.is-ready .delivery-live-scene,
+    .delivery-process.is-ready .delivery-live-scene * {
+      animation: none !important;
+      transition: none !important;
+      transform: none;
+    }
+
+    .delivery-process.is-ready .delivery-live-scene .dp-score-ring {
+      transform: rotate(-90deg) !important;
+    }
+
+    .delivery-process.is-ready .delivery-live-scene .dp-score-ring {
+      transform: rotate(-90deg) !important;
+    }
+
+    .delivery-process.is-ready .delivery-live-scene .dp-sprint-progress {
+      transform: scaleX(0.66) !important;
+    }
+
+    .delivery-process.is-ready .delivery-live-scene .dp-qa-progress-one,
+    .delivery-process.is-ready .delivery-live-scene .dp-qa-progress-four {
+      transform: scaleX(0.96) !important;
+    }
+
+    .delivery-process.is-ready .delivery-live-scene .dp-qa-progress-two {
+      transform: scaleX(0.91) !important;
+    }
+
+    .delivery-process.is-ready .delivery-live-scene .dp-qa-progress-three {
+      transform: scaleX(0.78) !important;
+    }
+
+    .delivery-control-button:not(:disabled):hover {
+      transform: none;
+    }
+  }
+</style>

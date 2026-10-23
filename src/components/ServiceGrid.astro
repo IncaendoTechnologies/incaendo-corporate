@@ -1,0 +1,72 @@
+---
+import { homepageServices, services } from '../data/site-content.js'
+
+const { compact = false, variant = 'default' } = Astro.props
+const isHomepage = variant === 'home'
+const serviceItems = isHomepage ? homepageServices : services
+---
+
+<div
+  class:list={[
+    'service-grid',
+    compact && 'service-grid-compact',
+    isHomepage && 'service-grid-home reveal',
+  ]}
+  data-reveal-stagger={isHomepage ? '' : undefined}
+>
+  {serviceItems.map((service) => {
+    const Icon = service.icon
+    return (
+      <article
+        class:list={[
+          'service-card',
+          isHomepage ? 'service-card-featured' : 'reveal',
+        ]}
+        id={service.id ?? service.href.split('#')[1]}
+        data-reveal-item={isHomepage ? '' : undefined}
+        data-service-tilt={isHomepage ? '' : undefined}
+      >
+        <div class="service-card-top">
+          <span class="service-number">{service.number}</span>
+          <span class="service-icon" aria-hidden="true">
+            <Icon size={23} strokeWidth={1.6} />
+          </span>
+        </div>
+        <div class="service-card-copy">
+          <h3>{service.title}</h3>
+          <p>{service.description}</p>
+          {isHomepage && (
+            <ul class="service-points">
+              {service.points.map((point) => <li>{point}</li>)}
+            </ul>
+          )}
+        </div>
+        {isHomepage ? (
+          <a
+            class="service-card-explore"
+            href={service.href}
+            aria-label={`Explore ${service.title}`}
+          >
+            <span>Explore</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        ) : (
+          <div class="service-card-bottom">
+            <span class="review-tag">{service.detail}</span>
+            <a
+              class="icon-link"
+              href={service.href}
+              aria-label={`Explore ${service.title}`}
+            >
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        )}
+      </article>
+    )
+  })}
+</div>
+
+<script>
+  import '../scripts/service-card-tilt.js'
+</script>

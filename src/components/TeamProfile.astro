@@ -1,0 +1,204 @@
+---
+const { member, index = 0 } = Astro.props
+const initials = member.name
+  .trim()
+  .split(/\s+/)
+  .filter(Boolean)
+  .slice(0, 2)
+  .map((part) => part[0])
+  .join('')
+  .toUpperCase()
+const tones = ['clay', 'blue', 'navy', 'sage']
+const tone = tones[index % tones.length]
+let linkedinUrl = 'https://www.linkedin.com/'
+let hasConfirmedLinkedin = false
+try {
+  const candidate = new URL(member.linkedin)
+  if (
+    candidate.protocol === 'https:' &&
+    ['linkedin.com', 'www.linkedin.com'].includes(candidate.hostname) &&
+    candidate.pathname.startsWith('/in/')
+  ) {
+    linkedinUrl = candidate.href
+    hasConfirmedLinkedin = true
+  }
+} catch {}
+---
+
+<article
+  class="team-profile"
+  data-team-member
+  data-team-category={member.group}
+  data-team-name={member.name.toLowerCase()}
+  data-team-role={member.designation.toLowerCase()}
+>
+  <div
+    class={`team-avatar team-avatar-${tone}`}
+    aria-hidden={member.image ? undefined : 'true'}
+    role={member.image ? 'img' : undefined}
+    aria-label={
+      member.image ? `${member.name} — ${member.designation}` : undefined
+    }
+  >
+    {member.image ? (
+      <img src={member.image} alt="" loading="lazy" />
+    ) : (
+      <span>{initials}</span>
+    )}
+  </div>
+  <div class="team-profile-copy">
+    <div>
+      <h3>{member.name}</h3>
+      <p>{member.designation}</p>
+    </div>
+    {linkedinUrl && (
+      <a
+        class="team-profile-linkedin"
+        href={linkedinUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={
+          hasConfirmedLinkedin
+            ? `View ${member.name}'s LinkedIn profile`
+            : `LinkedIn placeholder link for ${member.name}`
+        }
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5.2 8.3H2.4V21h2.8V8.3ZM3.8 6.6a1.7 1.7 0 1 0 0-3.4 1.7 1.7 0 0 0 0 3.4ZM21.6 13.7c0-3.8-2-5.6-4.7-5.6a4.1 4.1 0 0 0-3.7 2V8.3h-2.8V21h2.8v-6.3c0-1.7.3-3.4 2.5-3.4s2.2 2 2.2 3.5V21h2.8l.9-7.3Z" />
+        </svg>
+      </a>
+    )}
+  </div>
+</article>
+
+<style>
+  .team-profile {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 0.75rem;
+    border: 1px solid rgb(16 27 45 / 9%);
+    border-radius: var(--radius-medium);
+    background: linear-gradient(145deg, #fff 0%, #fbf9f6 100%);
+    transition:
+      transform 240ms var(--ease-out),
+      border-color 240ms ease,
+      box-shadow 240ms ease;
+  }
+
+  .team-profile:hover {
+    transform: translateY(-3px);
+    border-color: rgb(168 65 33 / 32%);
+    box-shadow: 0 14px 34px rgb(16 27 45 / 8%);
+  }
+
+  .team-avatar {
+    display: grid;
+    width: 100%;
+    aspect-ratio: 1.5;
+    flex: 0 0 auto;
+    place-items: center;
+    overflow: hidden;
+    border: 1px solid rgb(16 27 45 / 7%);
+    border-radius: calc(var(--radius-medium) - 0.25rem);
+    font-family: var(--font-heading);
+    font-size: clamp(1.6rem, 3vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+  }
+
+  .team-avatar-clay {
+    background: #f3e4dc;
+    color: var(--color-orange-dark);
+  }
+
+  .team-avatar-blue {
+    background: #e5edf2;
+    color: #315878;
+  }
+
+  .team-avatar-navy {
+    background: #e6eaf0;
+    color: var(--color-navy);
+  }
+
+  .team-avatar-sage {
+    background: #e8eee8;
+    color: #42624f;
+  }
+
+  .team-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .team-profile-copy {
+    display: flex;
+    min-height: 5rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.65rem;
+    padding: 0.85rem 0.25rem 0.2rem;
+    min-width: 0;
+  }
+
+  .team-profile-copy > div {
+    min-width: 0;
+  }
+
+  .team-profile h3 {
+    margin: 0 0 0.3rem;
+    overflow-wrap: anywhere;
+    color: var(--color-navy);
+    font-size: 0.97rem;
+    font-weight: 650;
+    letter-spacing: -0.035em;
+    line-height: 1.35;
+  }
+
+  .team-profile p {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.76rem;
+    line-height: 1.45;
+  }
+
+  .team-profile-linkedin {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid var(--color-line);
+    border-radius: 50%;
+    color: var(--color-navy);
+    background: #fff;
+    transition:
+      color 180ms ease,
+      background-color 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .team-profile-linkedin svg {
+    width: 0.9rem;
+    height: 0.9rem;
+    fill: currentColor;
+  }
+
+  .team-profile-linkedin:hover {
+    border-color: var(--color-orange-dark);
+    color: white;
+    background: var(--color-orange-dark);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .team-profile {
+      transition: none;
+    }
+
+    .team-profile:hover {
+      transform: none;
+    }
+  }
+</style>

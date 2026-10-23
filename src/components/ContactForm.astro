@@ -1,0 +1,318 @@
+---
+const { endpoint = '' } = Astro.props
+---
+
+<form
+  class="contact-form"
+  data-contact-form
+  data-endpoint={endpoint}
+  novalidate
+>
+  {!endpoint && (
+    <p class="form-setup-note" id="contact-form-setup" role="status">
+      You can prepare your enquiry here. Online delivery is not configured yet;
+      we will clearly tell you if a message cannot be sent.
+    </p>
+  )}
+  <fieldset class="contact-form-group">
+    <legend>
+      <span>01</span> YOUR DETAILS
+    </legend>
+    <div class="row g-3 form-grid">
+      <div class="form-field col-md-6">
+        <label for="contact-name">
+          Full name <span aria-hidden="true">*</span>
+        </label>
+        <input
+          id="contact-name"
+          name="name"
+          autocomplete="name"
+          required
+          aria-invalid="false"
+          aria-describedby="contact-name-error"
+        />
+        <span class="form-field-error" id="contact-name-error" hidden></span>
+      </div>
+      <div class="form-field col-md-6">
+        <label for="contact-email">
+          Work email <span aria-hidden="true">*</span>
+        </label>
+        <input
+          id="contact-email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          required
+          aria-invalid="false"
+          aria-describedby="contact-email-error"
+        />
+        <span class="form-field-error" id="contact-email-error" hidden></span>
+      </div>
+      <div class="form-field col-md-6">
+        <label for="contact-company">Company name</label>
+        <input
+          id="contact-company"
+          name="company"
+          autocomplete="organization"
+        />
+      </div>
+      <div class="form-field col-md-6">
+        <label for="contact-phone">
+          Phone number <span class="form-optional">(optional)</span>
+        </label>
+        <input id="contact-phone" name="phone" type="tel" autocomplete="tel" />
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset class="contact-form-group">
+    <legend>
+      <span>02</span> THE PROJECT
+    </legend>
+    <div class="row g-3 form-grid">
+      <div class="form-field col-md-6">
+        <label for="contact-topic">
+          What can we help you with? <span aria-hidden="true">*</span>
+        </label>
+        <select
+          id="contact-topic"
+          name="topic"
+          required
+          aria-invalid="false"
+          aria-describedby="contact-topic-error"
+        >
+          <option value="" selected disabled>
+            Select a service
+          </option>
+          <option>Custom Software</option>
+          <option>AI &amp; Automation</option>
+          <option>Web Applications</option>
+          <option>Mobile Apps</option>
+          <option>Enterprise Solutions</option>
+          <option>Cloud &amp; Data</option>
+          <option>Other</option>
+        </select>
+        <span class="form-field-error" id="contact-topic-error" hidden></span>
+      </div>
+      <div class="form-field col-md-6">
+        <label for="contact-budget">
+          Project budget <span class="form-optional">(optional)</span>
+        </label>
+        <select id="contact-budget" name="budget">
+          <option value="" selected>
+            Select a range (optional)
+          </option>
+          <option>Under ₹5 lakh</option>
+          <option>₹5–15 lakh</option>
+          <option>₹15–50 lakh</option>
+          <option>Above ₹50 lakh</option>
+          <option>Prefer to discuss</option>
+        </select>
+      </div>
+      <div class="form-field col-12">
+        <label for="contact-message">
+          Project requirements <span aria-hidden="true">*</span>
+        </label>
+        <textarea
+          id="contact-message"
+          name="message"
+          rows="3"
+          required
+          placeholder="What are you planning, and what would a useful outcome look like?"
+          aria-invalid="false"
+          aria-describedby="contact-message-error"
+        ></textarea>
+        <span class="form-field-error" id="contact-message-error" hidden></span>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="contact-consent">
+    <label class="contact-privacy-consent" for="contact-privacy">
+      <input
+        id="contact-privacy"
+        name="privacyConsent"
+        type="checkbox"
+        required
+        aria-invalid="false"
+        aria-describedby="contact-privacy-error"
+      />
+      <span>
+        I agree to the <a href="/privacy">Privacy Policy</a> and understand my
+        details will be used to respond to this enquiry.
+      </span>
+    </label>
+    <span
+      class="form-field-error contact-consent-error"
+      id="contact-privacy-error"
+      hidden
+    ></span>
+    <p class="contact-privacy-note">
+      Please avoid including confidential or sensitive information. The privacy
+      information is currently a draft.
+    </p>
+  </div>
+
+  <div class="form-submit-row">
+    <button class="button button-primary" type="submit">
+      <span data-submit-label>Send project inquiry</span>
+      <span aria-hidden="true">↗</span>
+    </button>
+    <p>
+      Fields marked <span aria-hidden="true">*</span> are required.
+    </p>
+  </div>
+  <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+</form>
+
+<script>
+  function initializeContactForms() {
+    const forms = document.querySelectorAll('[data-contact-form]')
+
+    forms.forEach((form) => {
+      if (form.dataset.initialized === 'true') return
+      form.dataset.initialized = 'true'
+
+      const status = form.querySelector('[data-form-status]')
+      const submitLabel = form.querySelector('[data-submit-label]')
+      const submitButton = form.querySelector('button[type="submit"]')
+      const originalButtonText = submitLabel.textContent
+
+      const setStatus = (message, isError = false) => {
+        status.textContent = message
+        status.setAttribute('role', isError ? 'alert' : 'status')
+      }
+
+      const setFieldError = (name, message = '') => {
+        const field = form.elements.namedItem(name)
+        const error = form.querySelector(
+          `#contact-${name === 'privacyConsent' ? 'privacy' : name}-error`,
+        )
+        if (!field || !error) return
+
+        const hasError = Boolean(message)
+        field.setAttribute('aria-invalid', String(hasError))
+        error.textContent = message
+        error.hidden = !hasError
+      }
+
+      const validate = () => {
+        const errors = {
+          name: form.elements.name.value.trim() ? '' : 'Enter your full name.',
+          email: !form.elements.email.value.trim()
+            ? 'Enter your work email.'
+            : form.elements.email.validity.valid
+              ? ''
+              : 'Enter a valid email address.',
+          topic: form.elements.topic.value
+            ? ''
+            : 'Choose the service you need help with.',
+          message: form.elements.message.value.trim()
+            ? ''
+            : 'Tell us a little about your project.',
+          privacyConsent: form.elements.privacyConsent.checked
+            ? ''
+            : 'Please confirm before continuing.',
+        }
+
+        Object.entries(errors).forEach(([name, message]) =>
+          setFieldError(name, message),
+        )
+        return errors
+      }
+
+      form.addEventListener('input', (event) => {
+        const { name } = event.target
+        if (name && event.target.getAttribute('aria-invalid') === 'true') {
+          setFieldError(name)
+        }
+      })
+      form.addEventListener('change', (event) => {
+        const { name } = event.target
+        if (name && event.target.getAttribute('aria-invalid') === 'true') {
+          setFieldError(name)
+        }
+      })
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault()
+        validate()
+        const firstInvalid = form.querySelector('[aria-invalid="true"]')
+        if (firstInvalid) {
+          firstInvalid.focus()
+          return
+        }
+
+        const endpoint = form.dataset.endpoint.trim()
+        if (!endpoint) {
+          setStatus(
+            'Your message was not sent because form delivery is not configured. Please email info@incaendo.com to reach us.',
+            true,
+          )
+          return
+        }
+
+        let target
+        try {
+          target = new URL(endpoint, window.location.href)
+          if (target.protocol !== 'https:')
+            throw new Error('A secure endpoint is required.')
+        } catch {
+          setStatus(
+            'Your message was not sent because the configured form endpoint is invalid. Please email info@incaendo.com to reach us.',
+            true,
+          )
+          return
+        }
+
+        const payload = Object.fromEntries(new FormData(form).entries())
+        const controls = [
+          ...form.querySelectorAll('input, select, textarea, button'),
+        ]
+        controls.forEach((control) => {
+          control.disabled = true
+        })
+        submitLabel.textContent = 'Sending…'
+        setStatus('')
+
+        try {
+          const response = await fetch(target.href, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          })
+          if (!response.ok) throw new Error('The enquiry could not be sent.')
+
+          form.reset()
+          form.querySelectorAll('[aria-invalid="true"]').forEach((field) => {
+            field.setAttribute('aria-invalid', 'false')
+          })
+          form.querySelectorAll('.form-field-error').forEach((error) => {
+            error.textContent = ''
+            error.hidden = true
+          })
+          setStatus('Thank you. Your enquiry has been sent.')
+        } catch {
+          setStatus(
+            'We could not send your enquiry. Please try again later.',
+            true,
+          )
+        } finally {
+          controls.forEach((control) => {
+            control.disabled = false
+          })
+          submitLabel.textContent = originalButtonText
+        }
+      })
+    })
+  }
+
+  initializeContactForms()
+  document.addEventListener('astro:page-load', initializeContactForms)
+</script>
+
+<style>
+  .form-field-error[hidden] {
+    display: none !important;
+  }
+</style>

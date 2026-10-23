@@ -1,0 +1,21 @@
+---
+const {
+  eyebrow,
+  title,
+  description,
+  index,
+  tone = 'light',
+  className = '',
+} = Astro.props
+---
+
+<section class={`page-intro page-intro-${tone} ${className}`}>
+  <div class="site-container page-intro-inner">
+    <div class="page-intro-copy">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1>{title}</h1>
+      <p class="page-intro-description">{description}</p>
+    </div>
+    {index && <span class="page-index">{index}</span>}
+  </div>
+</section>

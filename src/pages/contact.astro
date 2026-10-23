@@ -1,0 +1,195 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import ContactForm from '../components/ContactForm.astro'
+import { pages } from '../data/site-content.js'
+
+const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? ''
+---
+
+<BaseLayout title={pages.contact.title} description={pages.contact.description}>
+  <main id="main-content" class="contact-page">
+    <section class="contact-hero" aria-labelledby="contact-hero-heading">
+      <div class="site-container contact-hero-grid">
+        <div class="contact-hero-copy reveal">
+          <p class="eyebrow">
+            <span class="eyebrow-dot"></span>CONTACT INCAENDO
+          </p>
+          <h1 id="contact-hero-heading">
+            The next good decision starts with <span>a conversation.</span>
+          </h1>
+          <p class="contact-hero-description">
+            Bring us the challenge, the ambition, or the question your team is
+            working through. We’ll help you find a useful place to start.
+          </p>
+          <div class="contact-hero-actions">
+            <a class="button button-primary" href="#project-inquiry">
+              Tell us about your project <span aria-hidden="true">↗</span>
+            </a>
+            <a class="contact-hero-email" href="mailto:info@incaendo.com">
+              Or email us directly <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+        <div class="contact-hero-visual reveal" aria-hidden="true">
+          <div class="contact-orbit contact-orbit-one"></div>
+          <div class="contact-orbit contact-orbit-two"></div>
+          <svg
+            class="contact-connection-lines"
+            viewBox="0 0 520 360"
+            fill="none"
+          >
+            <path d="M90 188C148 97 216 94 263 180C310 266 379 263 432 170" />
+            <path d="M90 188C170 244 207 251 263 180C319 109 368 111 432 170" />
+            <circle cx="90" cy="188" r="8" />
+            <circle cx="263" cy="180" r="12" />
+            <circle cx="432" cy="170" r="8" />
+            <circle class="contact-pulse" cx="263" cy="180" r="28" />
+          </svg>
+          <div class="contact-visual-center">
+            <span>INCAENDO</span>
+            <strong>
+              Ideas into
+              <br />
+              what’s next.
+            </strong>
+          </div>
+          <div class="contact-visual-label contact-visual-label-one">
+            <i></i>Business goals
+          </div>
+          <div class="contact-visual-label contact-visual-label-two">
+            <i></i>Technology
+          </div>
+          <div class="contact-visual-label contact-visual-label-three">
+            <i></i>Real-world value
+          </div>
+          <span class="contact-visual-index">A clearer way forward</span>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="contact-workspace"
+      id="project-inquiry"
+      aria-labelledby="contact-form-heading"
+    >
+      <div class="site-container contact-workspace-grid">
+        <div class="contact-form-card reveal">
+          <div class="contact-form-heading">
+            <p class="eyebrow">
+              PROJECT INQUIRY <span>01 / 02</span>
+            </p>
+            <h2 id="contact-form-heading">
+              Let’s make the first conversation useful.
+            </h2>
+            <p>
+              A little context is enough to get started. We’ll take it from
+              there.
+            </p>
+          </div>
+          <ContactForm endpoint={contactEndpoint} />
+        </div>
+        <aside
+          class="contact-direct-panel reveal"
+          aria-labelledby="contact-direct-heading"
+        >
+          <div class="contact-direct-heading">
+            <p class="eyebrow eyebrow-light">
+              DIRECT CONTACT <span>02 / 02</span>
+            </p>
+            <h2 id="contact-direct-heading">Prefer to talk directly?</h2>
+            <p>Reach the Incaendo team or find our office in Noida.</p>
+          </div>
+          <a class="contact-direct-email" href="mailto:info@incaendo.com">
+            <span class="contact-detail-symbol" aria-hidden="true">
+              @
+            </span>
+            <span>
+              <small>BUSINESS ENQUIRIES</small>
+              <strong>info@incaendo.com</strong>
+            </span>
+            <span class="contact-detail-arrow" aria-hidden="true">
+              ↗
+            </span>
+          </a>
+          <div class="contact-direct-address">
+            <span
+              class="contact-detail-symbol contact-pin-symbol"
+              aria-hidden="true"
+            >
+              ⌖
+            </span>
+            <div>
+              <small>OFFICE</small>
+              <address>
+                TigerCubs, B-9, B Block, Sector 2,
+                <br />
+                Noida, UP – 201301
+              </address>
+              <a
+                href="https://www.google.com/maps/dir/?api=1&destination=TigerCubs%2C%20B-9%2C%20B%20Block%2C%20Sector%202%2C%20Noida%2C%20UP%20201301"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Get directions <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+          <div class="contact-map-frame">
+            <iframe
+              title="Map showing Incaendo Technologies office in Sector 2, Noida"
+              src="https://maps.google.com/maps?q=TigerCubs%2C%20B-9%2C%20B%20Block%2C%20Sector%202%2C%20Noida%2C%20UP%20201301&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+            <a
+              class="contact-map-open"
+              href="https://www.google.com/maps/dir/?api=1&destination=TigerCubs%2C%20B-9%2C%20B%20Block%2C%20Sector%202%2C%20Noida%2C%20UP%20201301"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open map <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section
+      class="contact-followthrough"
+      aria-labelledby="contact-next-heading"
+    >
+      <div class="site-container contact-followthrough-inner">
+        <div class="contact-followthrough-intro reveal">
+          <p class="eyebrow">WHAT HAPPENS NEXT</p>
+          <h2 id="contact-next-heading">A clear start, together.</h2>
+        </div>
+        <ol class="contact-followthrough-grid reveal" data-reveal-stagger>
+          <li class="contact-followthrough-step" data-reveal-item>
+            <span>01</span>
+            <p>Share your requirements.</p>
+          </li>
+          <li class="contact-followthrough-step" data-reveal-item>
+            <span>02</span>
+            <p>We understand your goals and constraints.</p>
+          </li>
+          <li class="contact-followthrough-step" data-reveal-item>
+            <span>03</span>
+            <p>We discuss the right next steps.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="contact-finish" aria-label="Start a project conversation">
+      <div class="site-container contact-finish-inner reveal">
+        <div>
+          <p class="eyebrow eyebrow-light">THE FIRST STEP</p>
+          <h2>Ready when you are.</h2>
+        </div>
+        <a class="button button-primary" href="#project-inquiry">
+          Start a conversation <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

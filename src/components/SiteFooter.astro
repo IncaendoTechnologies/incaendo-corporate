@@ -1,0 +1,71 @@
+---
+import { navigation } from '../data/site-content.js'
+---
+
+<footer class="site-footer">
+  <div class="site-container footer-main">
+    <div class="footer-brand">
+      <a class="wordmark wordmark-light" href="/" aria-label="Incaendo home">
+        incaendo<span aria-hidden="true">.</span>
+      </a>
+      <p>Software development and technology, shaped around what matters.</p>
+    </div>
+    <div class="footer-links-group">
+      <span class="footer-label">Explore</span>
+      <ul class="footer-links">
+        {navigation.slice(1).map((item) => (
+          <li>
+            <a href={item.href}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="footer-links-group">
+      <span class="footer-label">Company</span>
+      <ul class="footer-links">
+        <li>
+          <a href="/careers">Careers</a>
+        </li>
+        <li>
+          <a href="/contact">Contact</a>
+        </li>
+        <li>
+          <a href="/privacy">Privacy</a>
+        </li>
+      </ul>
+    </div>
+    <div class="footer-cta-block reveal">
+      <div class="footer-contact-preview reveal" data-reveal-stagger>
+        <span class="footer-preview-label">
+          <span aria-hidden="true"></span> Project enquiry
+        </span>
+        <h2>Let’s talk about your project</h2>
+        <p class="footer-preview-copy">Tell us what you’re looking to build.</p>
+        <div class="footer-preview-fields" aria-hidden="true">
+          <div class="footer-preview-field" data-reveal-item>
+            <span>Your name</span>
+            <span>How should we address you?</span>
+          </div>
+          <div class="footer-preview-field" data-reveal-item>
+            <span>Work email</span>
+            <span>name@company.com</span>
+          </div>
+          <div
+            class="footer-preview-field footer-preview-field-wide"
+            data-reveal-item
+          >
+            <span>Project overview</span>
+            <span>A few details about your idea…</span>
+          </div>
+        </div>
+        <a class="footer-preview-link" href="/contact">
+          Start a conversation <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="site-container footer-bottom">
+    <span>© {new Date().getFullYear()} Incaendo</span>
+    <span>15 years of industry experience</span>
+  </div>
+</footer>

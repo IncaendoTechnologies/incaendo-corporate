@@ -1,0 +1,490 @@
+<div
+  class="insights-hero-visual reveal"
+  data-reveal-stagger
+  role="img"
+  aria-label="A visual model of business context moving through thoughtful engineering into a useful digital product"
+>
+  <div class="insights-visual-frame">
+    <div class="insights-visual-topline" data-reveal-item>
+      <span class="insights-visual-mark" aria-hidden="true"></span>
+      <span>Incaendo / Engineering notes</span>
+      <span class="insights-visual-status">Ideas in practice</span>
+    </div>
+
+    <div class="insights-visual-flow">
+      <div
+        class="insights-visual-node insights-visual-context"
+        data-reveal-item
+      >
+        <span class="insights-visual-step">01 · UNDERSTAND</span>
+        <strong>Business context</strong>
+        <span class="insights-visual-detail">People · process · data</span>
+        <span class="insights-visual-signal" aria-hidden="true">
+          <i></i>
+          <i></i>
+          <i></i>
+        </span>
+      </div>
+
+      <div class="insights-visual-connector" aria-hidden="true">
+        <span></span>
+      </div>
+
+      <div
+        class="insights-visual-node insights-visual-engineering"
+        data-reveal-item
+      >
+        <div class="insights-visual-orbit" aria-hidden="true">
+          <svg viewBox="0 0 100 100" focusable="false">
+            <circle class="insights-orbit-track" cx="50" cy="50" r="37" />
+            <circle
+              class="insights-orbit-track insights-orbit-track-inner"
+              cx="50"
+              cy="50"
+              r="25"
+            />
+            <path
+              class="insights-orbit-link"
+              d="M27 37 50 50l24-17M50 50l-2 27m2-27 24 15"
+            />
+            <circle class="insights-orbit-node" cx="27" cy="37" r="4" />
+            <circle
+              class="insights-orbit-node insights-orbit-node-accent"
+              cx="74"
+              cy="33"
+              r="4"
+            />
+            <circle class="insights-orbit-node" cx="48" cy="77" r="4" />
+            <circle class="insights-orbit-node" cx="74" cy="65" r="4" />
+            <circle class="insights-orbit-core" cx="50" cy="50" r="8" />
+          </svg>
+        </div>
+        <strong>Thoughtful engineering</strong>
+        <span class="insights-visual-detail">AI · software · cloud</span>
+      </div>
+
+      <div class="insights-visual-connector" aria-hidden="true">
+        <span></span>
+      </div>
+
+      <div
+        class="insights-visual-node insights-visual-outcome"
+        data-reveal-item
+      >
+        <span class="insights-visual-step">02 · MAKE</span>
+        <strong>Useful products</strong>
+        <span class="insights-visual-detail">Built for real work</span>
+        <span class="insights-visual-outcome-mark" aria-hidden="true">
+          ↗
+        </span>
+      </div>
+    </div>
+
+    <div class="insights-visual-bottomline" data-reveal-item>
+      <span>Clear decisions</span>
+      <span>Dependable systems</span>
+      <span>Practical outcomes</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .insights-hero-visual {
+    position: relative;
+    min-width: 0;
+    padding: 1.2rem 1.1rem 1.1rem;
+  }
+
+  .insights-hero-visual::before {
+    position: absolute;
+    inset: 8% -2% -3% 10%;
+    transform: rotate(3deg);
+    border: 1px solid rgb(84 123 157 / 15%);
+    border-radius: var(--radius-large);
+    background: rgb(255 255 255 / 42%);
+    content: '';
+  }
+
+  .insights-visual-frame {
+    position: relative;
+    z-index: 1;
+    padding: clamp(1rem, 2.4vw, 1.6rem);
+    border: 1px solid rgb(16 27 45 / 9%);
+    border-radius: var(--radius-large);
+    background:
+      radial-gradient(
+        ellipse at 84% 9%,
+        rgb(244 233 223 / 78%),
+        transparent 35%
+      ),
+      repeating-linear-gradient(
+        0deg,
+        rgb(84 123 157 / 3%) 0 1px,
+        transparent 1px 28px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgb(84 123 157 / 3%) 0 1px,
+        transparent 1px 28px
+      ),
+      linear-gradient(145deg, #fff 0%, #f7f6f2 100%);
+    box-shadow: 0 24px 60px rgb(16 27 45 / 10%);
+  }
+
+  .insights-visual-topline {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 0.55rem;
+    color: #6d7988;
+    font-size: 0.59rem;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+
+  .insights-visual-mark {
+    width: 0.42rem;
+    height: 0.42rem;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: var(--color-orange);
+    box-shadow: 0 0 0 4px rgb(201 84 43 / 10%);
+  }
+
+  .insights-visual-status {
+    margin-left: auto;
+    color: var(--color-blue);
+    letter-spacing: 0.04em;
+    text-align: right;
+    text-transform: none;
+  }
+
+  .insights-visual-flow {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1.08fr) 34px minmax(
+        0,
+        1fr
+      );
+    align-items: center;
+    gap: 0.35rem;
+    padding-block: clamp(1.5rem, 4vw, 2.7rem);
+  }
+
+  .insights-visual-node {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    min-height: 166px;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.9rem;
+    border: 1px solid rgb(16 27 45 / 9%);
+    border-radius: var(--radius-medium);
+    background: rgb(255 255 255 / 92%);
+    box-shadow: 0 12px 28px rgb(16 27 45 / 6%);
+    transition:
+      transform 220ms var(--ease-out),
+      border-color 220ms ease,
+      box-shadow 220ms ease;
+  }
+
+  .insights-visual-node:hover {
+    transform: translateY(-3px);
+    border-color: rgb(84 123 157 / 42%);
+    box-shadow: 0 16px 32px rgb(16 27 45 / 10%);
+  }
+
+  .insights-visual-step {
+    margin-bottom: 0.65rem;
+    color: var(--color-orange-dark);
+    font-size: 0.52rem;
+    font-weight: 750;
+    letter-spacing: 0.1em;
+  }
+
+  .insights-visual-node strong {
+    color: var(--color-navy);
+    font-size: clamp(0.78rem, 1.15vw, 0.95rem);
+    font-weight: 680;
+    line-height: 1.25;
+  }
+
+  .insights-visual-detail {
+    display: block;
+    margin-top: 0.45rem;
+    color: #778394;
+    font-size: 0.62rem;
+    line-height: 1.4;
+  }
+
+  .insights-visual-signal {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 0.85rem;
+  }
+
+  .insights-visual-signal i {
+    height: 0.22rem;
+    border-radius: 99px;
+    background: #dce5ea;
+  }
+
+  .insights-visual-signal i:nth-child(1) {
+    width: 36%;
+  }
+  .insights-visual-signal i:nth-child(2) {
+    width: 25%;
+    background: #e9c6b6;
+  }
+  .insights-visual-signal i:nth-child(3) {
+    width: 17%;
+  }
+
+  .insights-visual-connector {
+    position: relative;
+    height: 2px;
+    background: rgb(84 123 157 / 35%);
+  }
+
+  .insights-visual-connector span {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0.42rem;
+    height: 0.42rem;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: var(--color-orange);
+    box-shadow: 0 0 0 4px rgb(201 84 43 / 9%);
+    animation: insight-flow 2.8s ease-in-out infinite;
+  }
+
+  .insights-visual-connector:nth-of-type(4) span {
+    animation-delay: 0.65s;
+  }
+
+  .insights-visual-engineering {
+    align-items: center;
+    border-color: rgb(84 123 157 / 30%);
+    background: linear-gradient(150deg, #f4f7f8 0%, #fff 100%);
+    text-align: center;
+  }
+
+  .insights-visual-orbit {
+    width: clamp(4.5rem, 8vw, 6.25rem);
+    margin-bottom: 0.6rem;
+  }
+
+  .insights-visual-orbit svg {
+    display: block;
+    width: 100%;
+    overflow: visible;
+  }
+
+  .insights-orbit-track {
+    fill: none;
+    stroke: #b9cbd5;
+    stroke-width: 1;
+    stroke-dasharray: 3 4;
+  }
+
+  .insights-orbit-track-inner {
+    stroke: #d8e1e6;
+    stroke-dasharray: none;
+  }
+
+  .insights-orbit-link {
+    fill: none;
+    stroke: #7f9caf;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-dasharray: 4 3;
+  }
+
+  .insights-orbit-node {
+    fill: #547b9d;
+    stroke: white;
+    stroke-width: 2;
+  }
+
+  .insights-orbit-node-accent {
+    fill: var(--color-orange);
+  }
+
+  .insights-orbit-core {
+    fill: var(--color-navy);
+    stroke: white;
+    stroke-width: 3;
+  }
+
+  .insights-visual-outcome {
+    padding-right: 0.65rem;
+    background: linear-gradient(145deg, #fff 0%, #f3f6f7 100%);
+  }
+
+  .insights-visual-outcome-mark {
+    display: grid;
+    width: 1.55rem;
+    height: 1.55rem;
+    margin-top: 0.8rem;
+    place-items: center;
+    border-radius: 50%;
+    background: #f6e7df;
+    color: var(--color-orange-dark);
+    font-size: 0.88rem;
+  }
+
+  .insights-visual-bottomline {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid rgb(16 27 45 / 9%);
+    color: #69788a;
+    font-size: 0.62rem;
+    font-weight: 600;
+  }
+
+  @keyframes insight-flow {
+    0% {
+      left: 0;
+      opacity: 0;
+    }
+    12% {
+      opacity: 1;
+    }
+    88% {
+      opacity: 1;
+    }
+    100% {
+      left: calc(100% - 0.42rem);
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .insights-hero-visual {
+      padding: 0.6rem 0.25rem 0.8rem;
+    }
+
+    .insights-visual-frame {
+      padding: 1rem;
+    }
+
+    .insights-visual-topline {
+      font-size: 0.52rem;
+    }
+
+    .insights-visual-flow {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.45rem;
+      padding-block: 1.2rem;
+    }
+
+    .insights-visual-node {
+      min-height: 0;
+      padding: 0.75rem 0.85rem;
+    }
+
+    .insights-visual-context,
+    .insights-visual-outcome {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      column-gap: 0.8rem;
+    }
+
+    .insights-visual-step,
+    .insights-visual-detail {
+      margin: 0;
+    }
+
+    .insights-visual-step,
+    .insights-visual-node strong,
+    .insights-visual-detail {
+      grid-column: 1;
+    }
+
+    .insights-visual-signal,
+    .insights-visual-outcome-mark {
+      grid-column: 2;
+      grid-row: 1 / span 3;
+      margin: 0;
+    }
+
+    .insights-visual-engineering {
+      display: grid;
+      grid-template-columns: 3.5rem minmax(0, 1fr);
+      align-items: center;
+      column-gap: 0.75rem;
+      text-align: left;
+    }
+
+    .insights-visual-orbit {
+      grid-row: span 2;
+      width: 3.5rem;
+      margin: 0;
+    }
+
+    .insights-visual-engineering strong,
+    .insights-visual-engineering .insights-visual-detail {
+      grid-column: 2;
+    }
+
+    .insights-visual-connector {
+      width: 2px;
+      height: 18px;
+      justify-self: center;
+    }
+
+    .insights-visual-connector span {
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      animation-name: insight-flow-vertical;
+    }
+
+    .insights-visual-connector:nth-of-type(4) span {
+      animation-name: insight-flow-vertical;
+    }
+
+    .insights-visual-bottomline {
+      justify-content: flex-start;
+      font-size: 0.57rem;
+    }
+  }
+
+  @keyframes insight-flow-vertical {
+    0% {
+      top: 0;
+      opacity: 0;
+    }
+    12% {
+      opacity: 1;
+    }
+    88% {
+      opacity: 1;
+    }
+    100% {
+      top: calc(100% - 0.42rem);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .insights-visual-connector span {
+      animation: none;
+    }
+
+    .insights-visual-node {
+      transition: none;
+    }
+
+    .insights-visual-node:hover {
+      transform: none;
+    }
+  }
+</style>

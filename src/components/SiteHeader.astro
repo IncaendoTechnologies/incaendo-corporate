@@ -1,0 +1,96 @@
+---
+import { navigation } from '../data/site-content.js'
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
+---
+
+<header class="site-header">
+  <div class="site-container header-inner">
+    <a class="wordmark" href="/" aria-label="Incaendo home">
+      incaendo<span aria-hidden="true">.</span>
+    </a>
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="primary-navigation"
+      aria-label="Open navigation menu"
+    >
+      <span></span>
+      <span></span>
+    </button>
+    <nav
+      id="primary-navigation"
+      class="primary-navigation"
+      aria-label="Main navigation"
+    >
+      <ul>
+        {navigation.map((item) => {
+          const path = item.href.replace(/\/$/, '') || '/'
+          return (
+            <li>
+              <a
+                href={item.href}
+                aria-current={path === currentPath ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          )
+        })}
+        <li class="mobile-contact-link">
+          <a href="/contact">Contact</a>
+        </li>
+      </ul>
+    </nav>
+    <a class="button button-small button-primary header-cta" href="/contact">
+      Discuss a project <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector('.menu-toggle')
+  const navigation = document.querySelector('#primary-navigation')
+
+  if (
+    toggle instanceof HTMLButtonElement &&
+    navigation instanceof HTMLElement
+  ) {
+    const closeMenu = () => {
+      toggle.setAttribute('aria-expanded', 'false')
+      toggle.setAttribute('aria-label', 'Open navigation menu')
+      navigation.classList.remove('is-open')
+      document.body.classList.remove('menu-is-open')
+    }
+
+    toggle.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true'
+      toggle.setAttribute('aria-expanded', String(!isOpen))
+      toggle.setAttribute(
+        'aria-label',
+        isOpen ? 'Open navigation menu' : 'Close navigation menu',
+      )
+      navigation.classList.toggle('is-open', !isOpen)
+      document.body.classList.toggle('menu-is-open', !isOpen)
+    })
+
+    navigation.addEventListener('click', (event) => {
+      if (event.target instanceof HTMLAnchorElement) closeMenu()
+    })
+
+    window.addEventListener('keydown', (event) => {
+      if (
+        event.key === 'Escape' &&
+        toggle.getAttribute('aria-expanded') === 'true'
+      ) {
+        closeMenu()
+        toggle.focus()
+      }
+    })
+
+    window.addEventListener('resize', () => {
+      if (window.matchMedia('(min-width: 900px)').matches) closeMenu()
+    })
+  }
+</script>

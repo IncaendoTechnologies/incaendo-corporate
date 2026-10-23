@@ -1,0 +1,792 @@
+---
+const {
+  variant = 'web',
+  title = 'Technology insight artwork',
+  prefix = 'insight-artwork',
+} = Astro.props
+const surfaces = {
+  neural: ['#fbf3ed', '#e8eef1'],
+  workflow: ['#f8f5ef', '#e7eef1'],
+  api: ['#f2f6f8', '#e5edf1'],
+  web: ['#f5f6f4', '#e3ebef'],
+  pipeline: ['#f1f5f3', '#e3ece9'],
+  cloud: ['#f1f5f8', '#e2ebf0'],
+  data: ['#f8f4ed', '#e9edf0'],
+  accessibility: ['#f2f6f2', '#e4ece8'],
+  model: ['#f8f2ee', '#e6edf0'],
+  perspectives: ['#f8f5ef', '#e9edf0'],
+}
+const [surfaceStart, surfaceEnd] = surfaces[variant] ?? surfaces.web
+---
+
+<div class:list={['insight-art', `insight-art-${variant}`]}>
+  <svg
+    viewBox="0 0 720 440"
+    role="img"
+    aria-label={title}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <linearGradient id={`${prefix}-surface`} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color={surfaceStart} />
+        <stop offset="1" stop-color={surfaceEnd} />
+      </linearGradient>
+      <linearGradient id={`${prefix}-accent`} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#c9542b" />
+        <stop offset="1" stop-color="#a84121" />
+      </linearGradient>
+      <pattern
+        id={`${prefix}-grid`}
+        width="26"
+        height="26"
+        patternUnits="userSpaceOnUse"
+      >
+        <path
+          d="M26 0H0V26"
+          fill="none"
+          stroke="#526c7e"
+          stroke-opacity=".08"
+        />
+      </pattern>
+      <filter
+        id={`${prefix}-shadow`}
+        x="-30%"
+        y="-30%"
+        width="160%"
+        height="170%"
+      >
+        <feDropShadow
+          dx="0"
+          dy="12"
+          stdDeviation="12"
+          flood-color="#152337"
+          flood-opacity=".11"
+        />
+      </filter>
+    </defs>
+    <rect width="720" height="440" rx="20" fill={`url(#${prefix}-surface)`} />
+    <rect width="720" height="440" rx="20" fill={`url(#${prefix}-grid)`} />
+    <circle cx="612" cy="94" r="104" fill="#f1d7c9" opacity=".5" />
+    <circle
+      cx="612"
+      cy="94"
+      r="74"
+      fill="none"
+      stroke="#a84121"
+      stroke-opacity=".12"
+    />
+    <path
+      d="M0 340C148 294 258 416 392 371s202-75 328-42v111H0Z"
+      fill="#dce6eb"
+      opacity=".55"
+    />
+
+    {variant === 'neural' && (
+      <g filter={`url(#${prefix}-shadow)`}>
+        <rect x="50" y="86" width="164" height="246" rx="14" fill="#fff" />
+        <rect
+          x="70"
+          y="108"
+          width="82"
+          height="8"
+          rx="4"
+          fill="#253448"
+          opacity=".72"
+        />
+        <rect x="70" y="134" width="122" height="44" rx="8" fill="#f0f3f4" />
+        <path
+          d="M84 158h64m-64 8h38"
+          stroke="#778a9a"
+          stroke-width="5"
+          stroke-linecap="round"
+        />
+        <rect x="70" y="192" width="122" height="44" rx="8" fill="#f0f3f4" />
+        <path
+          d="M84 216h70m-70 8h45"
+          stroke="#778a9a"
+          stroke-width="5"
+          stroke-linecap="round"
+        />
+        <circle cx="92" cy="276" r="9" fill="#547b9d" />
+        <path
+          d="M112 276h77"
+          stroke="#c7d0d5"
+          stroke-width="7"
+          stroke-linecap="round"
+        />
+        <path
+          d="M214 206h87"
+          stroke="#547b9d"
+          stroke-width="3"
+          stroke-dasharray="6 8"
+        />
+        <circle cx="250" cy="206" r="6" fill="#a84121" />
+        <rect x="302" y="122" width="156" height="168" rx="18" fill="#182940" />
+        <circle
+          cx="380"
+          cy="188"
+          r="34"
+          fill="#243d57"
+          stroke="#e18b66"
+          stroke-width="2"
+        />
+        <path
+          d="m369 188 8 8 16-18"
+          fill="none"
+          stroke="#f5c6ad"
+          stroke-width="4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <rect
+          x="335"
+          y="242"
+          width="90"
+          height="6"
+          rx="3"
+          fill="#91a8bc"
+          opacity=".65"
+        />
+        <rect
+          x="347"
+          y="258"
+          width="66"
+          height="6"
+          rx="3"
+          fill="#91a8bc"
+          opacity=".4"
+        />
+        <path
+          d="M458 206h83"
+          stroke="#547b9d"
+          stroke-width="3"
+          stroke-dasharray="6 8"
+        />
+        <circle cx="496" cy="206" r="6" fill="#a84121" />
+        <rect x="542" y="146" width="128" height="120" rx="14" fill="#fff" />
+        <circle cx="572" cy="178" r="10" fill="#a84121" opacity=".88" />
+        <path
+          d="M592 176h55m-55 13h39"
+          stroke="#8a98a4"
+          stroke-width="5"
+          stroke-linecap="round"
+        />
+        <path
+          d="M564 225h84"
+          stroke="#d8e0e3"
+          stroke-width="6"
+          stroke-linecap="round"
+        />
+        <path
+          d="M564 239h58"
+          stroke="#d8e0e3"
+          stroke-width="6"
+          stroke-linecap="round"
+        />
+      </g>
+    )}
+
+    {variant === 'workflow' && (
+      <g filter={`url(#${prefix}-shadow)`}>
+        <rect x="75" y="82" width="570" height="276" rx="17" fill="#fff" />
+        <path d="M75 124h570" stroke="#e7e9e8" stroke-width="2" />
+        <circle cx="100" cy="103" r="5" fill="#a84121" />
+        <circle cx="118" cy="103" r="5" fill="#d9e2e7" />
+        <circle cx="136" cy="103" r="5" fill="#d9e2e7" />
+        <rect x="102" y="151" width="130" height="74" rx="10" fill="#edf2f4" />
+        <rect x="122" y="168" width="56" height="7" rx="3" fill="#547b9d" />
+        <rect x="122" y="184" width="88" height="7" rx="3" fill="#c6d2d8" />
+        <rect x="122" y="199" width="70" height="7" rx="3" fill="#c6d2d8" />
+        <path
+          d="M232 188h88"
+          stroke="#a84121"
+          stroke-width="3"
+          stroke-dasharray="6 8"
+        />
+        <circle cx="276" cy="188" r="7" fill="#a84121" />
+        <rect x="320" y="150" width="120" height="76" rx="10" fill="#182940" />
+        <path
+          d="M344 174h72m-72 15h56m-56 15h66"
+          stroke="#9bb0c0"
+          stroke-width="6"
+          stroke-linecap="round"
+        />
+        <path
+          d="M440 188h85"
+          stroke="#547b9d"
+          stroke-width="3"
+          stroke-dasharray="6 8"
+        />
+        <circle cx="484" cy="188" r="7" fill="#547b9d" />
+        <rect x="525" y="150" width="92" height="76" rx="10" fill="#f5e8e0" />
+        <path
+          d="m552 189 13 13 25-29"
+          fill="none"
+          stroke="#a84121"
+          stroke-width="5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <rect x="105" y="260" width="510" height="64" rx="10" fill="#f8f7f4" />
+        <circle cx="135" cy="292" r="12" fill="#547b9d" opacity=".2" />
+        <circle cx="135" cy="292" r="5" fill="#547b9d" />
+        <path
+          d="M160 286h205m-205 13h142"
+          stroke="#bdc8cf"
+          stroke-width="6"
+          stroke-linecap="round"
+        />
+        <rect x="514" y="279" width="72" height="25" rx="12" fill="#e5ede8" />
+        <path
+          d="M529 292h42"
+          stroke="#5a806c"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
+      </g>
+    )}
+
+    {variant === 'api' && (
+      <g filter={`url(#${prefix}-shadow)`}>
+        <rect x="92" y="78" width="536" height="286" rx="16" fill="#17283d" />
+        <path d="M92 122h536" stroke="#35475a" stroke-width="2" />
+        <circle cx="119" cy="100" r="5" fill="#d2704b" />
+        <circle cx="137" cy="100" r="5" fill="#7b8c9c" />
+        <circle cx="155" cy="100" r="5" fill="#7b8c9c" />
+        <rect x="122" y="148" width="116" height="38" rx="8" fill="#233a50" />
+        <text
+          x="140"
+          y="172"
+          fill="#e8ad91"
+          font-size="14"
+          font-family="monospace"
+        >
+          GET /items
+        </text>
+        <path
+          d="M142 218h128m-128 20h84m-84 20h150"
+          stroke="#7590a5"
+          stroke-width="7"
+          stroke-linecap="round"
+        />
+        <path
+          d="m316 210 24 24-24 24m35 0h42"
+          fill="none"
+          stroke="#d57956"
+          stroke-width="5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <rect x="432" y="150" width="142" height="150" rx="12" fill="#22394f" />
+        <path
+          d="M454 180h88m-88 17h62m-62 34h88m-88 17h55m-55 34h73"
+          stroke="#99adbb"
+          stroke-width="6"
+          stroke-linecap="round"
+        />
+        <circle cx="555" cy="184" r="6" fill="#8fb098" />
+        <circle cx="540" cy="231" r="6" fill="#e18b66" />
+        <circle cx="550" cy="278" r="6" fill="#8fb098" />
+        <rect x="122" y="302" width="126" height="22" rx="11" fill="#314a60" />
+        <text
+          x="139"
+          y="317"
+          fill="#d1dce2"
+          font-size="10"
+          font-family="monospace"
+        >
+          stable contract
+        </text>
+      </g>
+    )}
+
+    {variant === 'web' && (
+      <g filter={`url(#${prefix}-shadow)`}>
+        <rect x="82" y="74" width="556" height="294" rx="16" fill="#fff" />
+        <path d="M82 119h556" stroke="#e4e8e8" stroke-width="2" />
+        <circle cx="108" cy="96" r="5" fill="#a84121" />
+        <circle cx="126" cy="96" r="5" fill="#d6dfe3" />
+        <circle cx="144" cy="96" r="5" fill="#d6dfe3" />
+        <rect x="110" y="146" width="112" height="192" rx="10" fill="#f1f4f4" />
+        <rect x="128" y="166" width="72" height="7" rx="3" fill="#9cabb5" />
+        <rect x="128" y="188" width="76" height="29" rx="7" fill="#dce5e8" />
+        <rect x="128" y="229" width="76" height="29" rx="7" fill="#dce5e8" />
+        <rect x="128" y="270" width="76" height="29" rx="7" fill="#dce5e8" />
+        <rect x="250" y="146" width="354" height="192" rx="10" fill="#fbfaf8" />
+        <text
+          x="274"
+          y="174"
+          fill="#657487"
+          font-size="12"
+          font-family="Arial, sans-serif"
+        >
+          RESPONSE TIME
+        </text>
+        <path
+          d="M282 299h289M282 265h289M282 231h289"
+          stroke="#e0e5e6"
+          stroke-width="2"
+        />
+        <path
+          d="M290 282c38-12 46-42 83-29s43 12 76-20 56 19 91-23 36-15 54-28"
+          fill="none"
+          stroke="#547b9d"
+          stroke-width="5"
+          stroke-linecap="round"
+        />
+        <circle
+          cx="540"
+          cy="202"
+          r="8"
+          fill="#a84121"
+          stroke="#fff"
+          stroke-width="4"
+        />
+        <rect x="274" y="315" width="84" height="5" rx="2" fill="#d5dcde" />
+        <rect x="368" y="315" width="58" height="5" rx="2" fill="#d5dcde" />
+      </g>
+    )}
+
+    {variant === 'pipeline' && (
+      <g filter={`url(#${prefix}-shadow)`}>
+        <rect x="69" y="88" width="582" height="262" rx="16" fill="#fff" />
+        <text
+          x="101"
+          y="130"
+          fill="#68798a"
+          font-size="13"
+          font-family="Arial, sans-serif"
+        >
+          DELIVERY PIPELINE
+        </text>
+        <path
+          d="M156 220h408"
+          stroke="#cad4d9"
+          stroke-width="4"
+          stroke-dasharray="8 9"
+        />
+        <g fill="#f5e7df" stroke="#d9aa92">
+          <rect x="100" y="177" width="112" height="88" rx="12" />
+          <rect x="252" y="177" width="112" height="88" rx="12" />
+          <rect x="404" y="177" width="112" height="88" rx="12" />
+          <rect x="556" y="177" width="64" height="88" rx="12" />
+        </g>
+        <circle cx="156" cy="211" r="11" fill={`url(#${prefix}-accent)`} />
+        <path
+          d="M137 237h39"
+          stroke="#a84121"
+          stroke-width="5"
+          stroke-linecap="round"
+        />
+        <circle cx="308" cy="211" r="11" fill="#547b9d" />
+        <path
+          d="M289 237h39"
+          stroke="#547b9d"
+          stroke-width="5"
+          stroke-linecap="round"
+        />
+        <circle cx="460" cy="211" r="11" fill="#5a806c" />
+        <path
+          d="M441 237h39"
+          stroke="#5a806c"
+          stroke-width="5"
+          stroke-linecap="round"
+        />
+        <path
+          d="m574 220 9 9 17-19"
+          fill="none"
+          stroke="#a84121"
+          stroke-width="4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <text
+          x="115"
+          y="294"
+          fill="#708092"
+          font-size="10"
+          font-family="Arial, sans-serif"
+        >
+          BUILD
+        </text>
+        <text
+          x="269"
+          y="294"
+          fill="#708092"
+          font-size="10"
+          font-family="Arial, sans-serif"
+        >
+          VERIFY
+        </text>
+        <text
+          x="420"
+          y="294"
+          fill="#708092"
+          font-size="10"
+          font-family="Arial, sans-serif"
+        >
+          RELEASE
+        </text>
+      </g>
+    )}
+
+    {variant === 'cloud' && (
+      <g filter={`url(#${prefix}-shadow)`}>
+        <rect x="83" y="78" width="554" height="286" rx="16" fill="#fff" />
+        <rect x="110" y="111" width="500" height="49" rx="9" fill="#eff3f4" />
+        <circle cx="140" cy="135" r="8" fill="#5a806c" />
+        <text
+          x="161"
+          y="140"
+          fill="#34475a"
+          font-size="13"
+          font-family="Arial, sans-serif"
+        >
+          Services operational
+        </text>
+        <text
+          x="515"
+          y="140"
+          fill="#6b7a89"
+          font-size="11"
+          font-family="Arial, sans-serif"
+        >
+          LIVE SIGNALS
+        </text>
+        <rect x="110" y="181" width="205" height="151" rx="10" fill="#f8f7f4" />
+        <text
+          x="130"
+          y="208"
+          fill="#6c7b8a"
+          font-size="11"
+          font-family="Arial, sans-serif"
+        >
+          REQUESTS / MIN
+        </text>
+        <path
+          d="M132 292h161M132 265h161M132 238h161"
+          stroke="#e1e6e7"
+          stroke-width="2"
+        />
+        <path
+          d="M139 278c20 0 23-30 44-22s24 19 44-5 29 13 56-24"
+          fill="none"
+          stroke="#547b9d"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
+        <rect x="333" y="181" width="277" height="151" rx="10" fill="#f8f7f4" />
+        <text
+          x="354"
+          y="208"
+          fill="#6c7b8a"
+          font-size="11"
+          font-family="Arial, sans-serif"
+        >
+          TRACE ACROSS SERVICES
+        </text>
+        <path
+          d="M371 250h195"
+          stroke="#cbd5d9"
+          stroke-width="3"
+          stroke-dasharray="6 7"
+        />
+        <circle
+          cx="382"
+          cy="250"
+          r="13"
+          fill="#e3ebef"
+          stroke="#547b9d"
+          stroke-width="2"
+        />
+        <circle
+          cx="467"
+          cy="250"
+          r="13"
+          fill="#f5e7df"
+          stroke="#a84121"
+          stroke-width="2"
+        />
+        <circle
+          cx="553"
+          cy="250"
+          r="13"
+          fill="#e5ede8"
+          stroke="#5a806c"
+          stroke-width="2"
+        />
+        <rect x="354" y="283" width="54" height="6" rx="3" fill="#c9d2d7" />
+        <rect x="439" y="283" width="54" height="6" rx="3" fill="#c9d2d7" />
+        <rect x="526" y="283" width="54" height="6" rx="3" fill="#c9d2d7" />
+      </g>
+    )}
+
+    {variant === 'data' && (
+      <g filter={`url(#${prefix}-shadow)`}>
+        <rect x="75" y="79" width="570" height="282" rx="16" fill="#fff" />
+        <rect x="104" y="110" width="512" height="45" rx="8" fill="#f1f4f4" />
+        <circle cx="130" cy="132" r="7" fill="#547b9d" />
+        <rect x="151" y="127" width="128" height="8" rx="4" fill="#9eacb6" />
+        <rect x="104" y="176" width="228" height="154" rx="9" fill="#f8f7f4" />
+        <text
+          x="125"
+          y="204"
+          fill="#6d7d8d"
+          font-size="11"
+          font-family="Arial, sans-serif"
+        >
+          RECORD QUALITY
+        </text>
+        <rect x="132" y="265" width="27" height="46" rx="4" fill="#9cb2c1" />
+        <rect x="175" y="241" width="27" height="70" rx="4" fill="#7290a4" />
+        <rect x="218" y="225" width="27" height="86" rx="4" fill="#547b9d" />
+        <rect x="261" y="215" width="27" height="96" rx="4" fill="#a84121" />
+        <rect x="353" y="176" width="263" height="154" rx="9" fill="#f8f7f4" />
+        <text
+          x="376"
+          y="204"
+          fill="#6d7d8d"
+          font-size="11"
+          font-family="Arial, sans-serif"
+        >
+          DATA FLOW
+        </text>
+        <circle
+          cx="400"
+          cy="258"
+          r="18"
+          fill="#e4edf1"
+          stroke="#547b9d"
+          stroke-width="2"
+        />
+        <circle
+          cx="486"
+          cy="230"
+          r="18"
+          fill="#f4e4dc"
+          stroke="#a84121"
+          stroke-width="2"
+        />
+        <circle
+          cx="564"
+          cy="274"
+          r="18"
+          fill="#e7eee8"
+          stroke="#5a806c"
+          stroke-width="2"
+        />
+        <path
+          d="m418 252 50-17m36 4 44 26"
+          stroke="#9eafb9"
+          stroke-width="3"
+          stroke-dasharray="5 6"
+        />
+        <path
+          d="M392 258h16m72-28h16m59 44h16"
+          stroke="#547b9d"
+          stroke-width="3"
+        />
+      </g>
+    )}
+
+    {variant === 'accessibility' && (
+      <g filter={`url(#${prefix}-shadow)`}>
+        <rect x="72" y="81" width="576" height="278" rx="17" fill="#fff" />
+        <path d="M72 127h576" stroke="#e2e7e7" stroke-width="2" />
+        <circle cx="101" cy="104" r="5" fill="#a84121" />
+        <rect x="103" y="153" width="241" height="177" rx="10" fill="#f3f5f4" />
+        <rect x="125" y="174" width="110" height="10" rx="5" fill="#304358" />
+        <rect x="125" y="199" width="185" height="7" rx="3" fill="#c2cdd2" />
+        <rect x="125" y="216" width="162" height="7" rx="3" fill="#c2cdd2" />
+        <rect x="125" y="247" width="93" height="32" rx="5" fill="#a84121" />
+        <rect
+          x="230"
+          y="247"
+          width="91"
+          height="32"
+          rx="5"
+          fill="#fff"
+          stroke="#547b9d"
+          stroke-width="2"
+        />
+        <rect x="386" y="151" width="90" height="179" rx="13" fill="#182940" />
+        <rect x="395" y="165" width="72" height="146" rx="7" fill="#fff" />
+        <rect x="405" y="180" width="49" height="6" rx="3" fill="#547b9d" />
+        <rect x="405" y="197" width="49" height="34" rx="5" fill="#edf1f2" />
+        <rect x="405" y="242" width="49" height="6" rx="3" fill="#c9d3d7" />
+        <rect x="405" y="255" width="38" height="6" rx="3" fill="#c9d3d7" />
+        <circle cx="431" cy="320" r="3" fill="#91a5b3" />
+        <circle cx="558" cy="215" r="45" fill="#f4e6de" />
+        <path
+          d="M538 216h40m-20-20v40"
+          stroke="#a84121"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
+        <circle
+          cx="558"
+          cy="215"
+          r="58"
+          fill="none"
+          stroke="#d9b5a4"
+          stroke-dasharray="4 7"
+        />
+      </g>
+    )}
+
+    {variant === 'model' && (
+      <g filter={`url(#${prefix}-shadow)`}>
+        <rect x="78" y="81" width="564" height="278" rx="16" fill="#fff" />
+        <rect x="108" y="111" width="146" height="217" rx="10" fill="#f1f4f4" />
+        <text
+          x="128"
+          y="140"
+          fill="#6a7a89"
+          font-size="11"
+          font-family="Arial, sans-serif"
+        >
+          MODEL VERSION
+        </text>
+        <rect x="128" y="158" width="106" height="36" rx="7" fill="#fff" />
+        <circle cx="145" cy="176" r="6" fill="#a84121" />
+        <path
+          d="M160 176h55"
+          stroke="#aab7bf"
+          stroke-width="5"
+          stroke-linecap="round"
+        />
+        <rect x="128" y="205" width="106" height="36" rx="7" fill="#fff" />
+        <circle cx="145" cy="223" r="6" fill="#547b9d" />
+        <path
+          d="M160 223h55"
+          stroke="#aab7bf"
+          stroke-width="5"
+          stroke-linecap="round"
+        />
+        <rect x="128" y="252" width="106" height="36" rx="7" fill="#fff" />
+        <circle cx="145" cy="270" r="6" fill="#5a806c" />
+        <path
+          d="M160 270h55"
+          stroke="#aab7bf"
+          stroke-width="5"
+          stroke-linecap="round"
+        />
+        <rect x="282" y="111" width="331" height="217" rx="10" fill="#f8f7f4" />
+        <text
+          x="306"
+          y="140"
+          fill="#6a7a89"
+          font-size="11"
+          font-family="Arial, sans-serif"
+        >
+          QUALITY SIGNALS OVER TIME
+        </text>
+        <path
+          d="M313 284h272M313 248h272M313 212h272M313 176h272"
+          stroke="#e1e5e5"
+          stroke-width="2"
+        />
+        <path
+          d="M322 265c27-7 33-26 59-16s33 15 55-6 42 10 63-24 38 3 62-18"
+          fill="none"
+          stroke="#547b9d"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
+        <path
+          d="M322 292h118"
+          stroke="#d1d9dc"
+          stroke-width="5"
+          stroke-linecap="round"
+        />
+        <rect x="502" y="293" width="65" height="19" rx="9" fill="#e6eee7" />
+        <text
+          x="513"
+          y="306"
+          fill="#4e715c"
+          font-size="9"
+          font-family="Arial, sans-serif"
+        >
+          MONITORED
+        </text>
+      </g>
+    )}
+
+    {variant === 'perspectives' && (
+      <g filter={`url(#${prefix}-shadow)`}>
+        <rect x="85" y="84" width="550" height="272" rx="16" fill="#fff" />
+        <text
+          x="116"
+          y="123"
+          fill="#68798a"
+          font-size="12"
+          font-family="Arial, sans-serif"
+        >
+          FROM BUSINESS QUESTION TO NEXT STEP
+        </text>
+        <circle cx="180" cy="226" r="49" fill="#f3e4dc" />
+        <circle
+          cx="180"
+          cy="226"
+          r="30"
+          fill="#fff"
+          stroke="#d7a88e"
+          stroke-width="2"
+        />
+        <path
+          d="m166 227 10 10 20-23"
+          fill="none"
+          stroke="#a84121"
+          stroke-width="4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M230 226h110"
+          stroke="#b8c6cd"
+          stroke-width="3"
+          stroke-dasharray="6 8"
+        />
+        <circle cx="282" cy="226" r="7" fill="#547b9d" />
+        <rect x="340" y="170" width="233" height="42" rx="8" fill="#eef2f3" />
+        <circle cx="365" cy="191" r="7" fill="#547b9d" />
+        <path
+          d="M385 188h151m-151 10h102"
+          stroke="#a7b5bd"
+          stroke-width="5"
+          stroke-linecap="round"
+        />
+        <rect x="340" y="227" width="233" height="42" rx="8" fill="#f7ece6" />
+        <circle cx="365" cy="248" r="7" fill="#a84121" />
+        <path
+          d="M385 245h128m-128 10h88"
+          stroke="#c2aaa0"
+          stroke-width="5"
+          stroke-linecap="round"
+        />
+        <rect x="340" y="284" width="233" height="42" rx="8" fill="#eef2ef" />
+        <circle cx="365" cy="305" r="7" fill="#5a806c" />
+        <path
+          d="M385 302h145m-145 10h96"
+          stroke="#a9b9ac"
+          stroke-width="5"
+          stroke-linecap="round"
+        />
+      </g>
+    )}
+  </svg>
+</div>
+
+<style>
+  .insight-art {
+    overflow: hidden;
+    background: #e7edf0;
+  }
+
+  .insight-art svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 18 / 11;
+  }
+</style>

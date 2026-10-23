@@ -1,0 +1,2277 @@
+---
+import { homepageServices } from '../data/site-content.js'
+import { Image } from 'astro:assets'
+import servicesHeroImage from '../assets/services-hero-team.png'
+import serviceAIAutomationImage from '../assets/service-ai-automation.webp'
+import serviceCustomSoftwareImage from '../assets/service-custom-software.webp'
+import serviceWebApplicationsImage from '../assets/service-web-applications.webp'
+import serviceMobileApplicationsImage from '../assets/service-mobile-applications.webp'
+import serviceEnterpriseSolutionsImage from '../assets/service-enterprise-solutions.webp'
+import serviceCloudDataImage from '../assets/service-cloud-data.webp'
+
+const serviceDetails = [
+  {
+    id: 'ai-automation',
+    number: '01',
+    title: 'AI & Automation',
+    eyebrow: 'INTELLIGENCE, APPLIED TO THE WORK',
+    description:
+      'Use AI where it can help people move work forward: interpreting documents, finding useful knowledge, preparing a response, or coordinating a repeatable workflow. We start with the task, data, and review needs before choosing an approach.',
+    challenge:
+      'Manual handoffs, repetitive record handling, and information spread across business tools.',
+    capabilities: [
+      'Workflow mapping and automation opportunities',
+      'AI assistants and knowledge retrieval',
+      'Document extraction with validation paths',
+      'Integration with authorized tools and APIs',
+    ],
+    deliverables:
+      'A scoped workflow, connected application or assistant, and clear review and exception paths.',
+    image: serviceAIAutomationImage,
+    imageAlt: 'Colleagues reviewing an AI-assisted business workflow together',
+    link: '/ai-technology',
+    linkLabel: 'Explore AI technology',
+  },
+  {
+    id: 'custom-software-development',
+    number: '02',
+    title: 'Custom Software Development',
+    eyebrow: 'SOFTWARE THAT FITS YOUR PROCESS',
+    description:
+      'Build a product around the way your business needs to work when an off-the-shelf tool is not a good fit. We can shape the requirements, application architecture, interfaces, APIs, and integrations as one considered system.',
+    challenge:
+      'Important work depends on disconnected spreadsheets, manual processes, or tools that cannot adapt to the business.',
+    capabilities: [
+      'Business and workflow applications',
+      'Internal tools and operational systems',
+      'API design and system integrations',
+      'Product engineering and iterative enhancement',
+    ],
+    deliverables:
+      'A clear product scope, working software, integration points, and a maintainable foundation for future change.',
+    image: serviceCustomSoftwareImage,
+    imageAlt: 'Product team planning a tailored business software application',
+    link: '/contact',
+    linkLabel: 'Discuss custom software',
+  },
+  {
+    id: 'web-application-development',
+    number: '03',
+    title: 'Web Application Development',
+    eyebrow: 'CONNECTED DIGITAL EXPERIENCES',
+    description:
+      'Create responsive web applications that make complex tasks easier to complete. From customer and partner portals to dashboards and internal platforms, the experience, data, and system connections are planned together.',
+    challenge:
+      'Customers or teams need a clear digital way to access information, complete tasks, or manage an ongoing relationship.',
+    capabilities: [
+      'Customer, partner, and employee portals',
+      'Dashboards and data-rich interfaces',
+      'Responsive journeys across screen sizes',
+      'Authentication, APIs, and business integrations',
+    ],
+    deliverables:
+      'A responsive application experience with the interfaces and connections needed for its intended users.',
+    image: serviceWebApplicationsImage,
+    imageAlt:
+      'Web application dashboard displayed in a bright product workspace',
+    link: '/contact',
+    linkLabel: 'Discuss a web application',
+  },
+  {
+    id: 'mobile-app-development',
+    number: '04',
+    title: 'Mobile App Development',
+    eyebrow: 'USEFUL EXPERIENCES, WHERE WORK HAPPENS',
+    description:
+      'Plan and build mobile experiences around real user needs, device capabilities, and the systems behind the app. Platform choices are made in context, including whether native or cross-platform development best serves the product.',
+    challenge:
+      'A service or business process needs to be accessible in a focused, convenient experience on a mobile device.',
+    capabilities: [
+      'iOS and Android product planning',
+      'Native or cross-platform implementation choices',
+      'Mobile interfaces and device-aware flows',
+      'Backend, API, and account integrations',
+    ],
+    deliverables:
+      'A mobile product scope, platform-aligned experience, and connections to the services and data it depends on.',
+    image: serviceMobileApplicationsImage,
+    imageAlt: 'Business user reviewing a mobile application on a smartphone',
+    link: '/contact',
+    linkLabel: 'Discuss a mobile app',
+  },
+  {
+    id: 'enterprise-solutions',
+    number: '05',
+    title: 'Enterprise Solutions',
+    eyebrow: 'CONNECT PEOPLE, PROCESS & SYSTEMS',
+    description:
+      'Bring business processes and software together across teams. Enterprise solutions can include operational applications, workflow digitisation, role-aware interfaces, and integrations planned around how information moves through an organisation.',
+    challenge:
+      'Teams rely on fragmented systems, repeated data entry, or processes that are difficult to coordinate across roles.',
+    capabilities: [
+      'Operational platforms and business applications',
+      'Role-based workflows and interfaces',
+      'Integration across existing enterprise systems',
+      'Modernisation of specific processes or capabilities',
+    ],
+    deliverables:
+      'A mapped operating workflow, connected solution scope, and a practical integration and rollout plan.',
+    image: serviceEnterpriseSolutionsImage,
+    imageAlt: 'Cross-functional team coordinating connected enterprise systems',
+    link: '/contact',
+    linkLabel: 'Discuss an enterprise solution',
+  },
+  {
+    id: 'cloud-data',
+    number: '06',
+    title: 'Cloud & Data',
+    eyebrow: 'FOUNDATIONS FOR RELIABLE DIGITAL WORK',
+    description:
+      'Design cloud and data capabilities around the needs of the product and the team operating it. This can include application environments, integrations, data flows, reporting foundations, and the monitoring needed to understand how a service is behaving.',
+    challenge:
+      'Applications and information need a dependable foundation, clearer movement between systems, or more useful reporting.',
+    capabilities: [
+      'Cloud architecture and deployment planning',
+      'Data pipelines and system integrations',
+      'Reporting and operational insight foundations',
+      'Monitoring, maintainability, and cost considerations',
+    ],
+    deliverables:
+      'An architecture and data-flow plan, deployment foundation, and operating considerations suited to the solution.',
+    image: serviceCloudDataImage,
+    imageAlt: 'Engineer reviewing cloud data flows and reporting dashboards',
+    link: '/contact',
+    linkLabel: 'Discuss cloud & data',
+  },
+]
+
+const deliverySteps = [
+  {
+    number: '01',
+    title: 'Discover',
+    description:
+      'Understand objectives, users, current systems, constraints, and what a useful outcome means.',
+    output: 'Shared problem definition',
+  },
+  {
+    number: '02',
+    title: 'Plan & architect',
+    description:
+      'Prioritise requirements and make proportionate product, design, and technical decisions.',
+    output: 'Scope and delivery plan',
+  },
+  {
+    number: '03',
+    title: 'Design & develop',
+    description:
+      'Shape the experience and build in reviewable steps, keeping feedback close to the work.',
+    output: 'Working product increments',
+  },
+  {
+    number: '04',
+    title: 'Integrate & test',
+    description:
+      'Connect relevant systems and check behavior, usability, and quality against agreed needs.',
+    output: 'Validated release candidate',
+  },
+  {
+    number: '05',
+    title: 'Deploy',
+    description:
+      'Prepare the release, coordinate the move into its intended environment, and support handover.',
+    output: 'Production-ready release',
+  },
+  {
+    number: '06',
+    title: 'Support & improve',
+    description:
+      'Use operational feedback and changing business needs to guide maintenance and next steps.',
+    output: 'A considered improvement path',
+  },
+]
+---
+
+<div class="services-page">
+  <section class="services-hero" aria-labelledby="services-page-title">
+    <div class="site-container services-hero-grid">
+      <div class="services-hero-copy reveal">
+        <p class="eyebrow">
+          <span class="eyebrow-dot"></span> SERVICES &amp; SOLUTIONS
+        </p>
+        <h1 id="services-page-title">
+          Technology that <span>works around your business.</span>
+        </h1>
+        <p class="services-hero-lead">
+          From AI and custom software to connected web, mobile, enterprise, and
+          cloud solutions, we help turn business requirements into thoughtful,
+          useful technology.
+        </p>
+        <div class="services-hero-actions">
+          <a class="button button-primary" href="#service-overview">
+            Explore our services <span aria-hidden="true">↘</span>
+          </a>
+          <a class="text-link" href="/contact">
+            Discuss your project <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+        <div class="services-hero-proof">
+          <span class="proof-mark" aria-hidden="true">
+            ↗
+          </span>
+          <span>
+            <strong>Support across the product lifecycle</strong>
+            <small>From requirements through launch and improvement.</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="services-hero-visual reveal">
+        <Image
+          src={servicesHeroImage}
+          alt="Software developers collaborating on code, app interfaces, and cloud architecture"
+          width={1200}
+          sizes="(max-width: 900px) 92vw, 52vw"
+          loading="eager"
+          class="services-hero-image"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="services-overview section"
+    id="service-overview"
+    aria-labelledby="service-overview-title"
+  >
+    <div class="site-container">
+      <header class="services-section-heading reveal">
+        <p class="eyebrow">A connected set of capabilities</p>
+        <h2 id="service-overview-title">
+          Start with the challenge. <span>Choose the right capability.</span>
+        </h2>
+        <p>
+          Explore the service areas and the problems each one can help address.
+          The right scope depends on your users, systems, and goals.
+        </p>
+      </header>
+
+      <div class="services-overview-grid reveal" data-reveal-stagger>
+        {homepageServices.map((service, index) => {
+          const Icon = service.icon
+          return (
+            <a
+              class="service-overview-card"
+              href={`#${service.id}`}
+              data-reveal-item
+            >
+              <span class="overview-card-top">
+                <span>{service.number} / 06</span>
+                <span class="overview-card-icon" aria-hidden="true">
+                  <Icon size={21} strokeWidth={1.7} />
+                </span>
+              </span>
+              <span class="overview-card-title">{service.title}</span>
+              <span class="overview-card-copy">{service.description}</span>
+              <span class="overview-card-link">
+                View service <b aria-hidden="true">↘</b>
+              </span>
+            </a>
+          )
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="service-details section"
+    aria-labelledby="service-details-title"
+  >
+    <div class="site-container">
+      <header class="services-section-heading services-detail-heading reveal">
+        <p class="eyebrow">What the work can include</p>
+        <h2 id="service-details-title">
+          Useful technology, <span>made specific to the work.</span>
+        </h2>
+        <p>
+          Each engagement is shaped to its context. These are practical starting
+          points for a conversation about your requirements.
+        </p>
+      </header>
+
+      <div class="service-detail-list">
+        {serviceDetails.map((service, index) => (
+          <article
+            class:list={[
+              'service-detail reveal',
+              index % 2 === 1 && 'service-detail-reverse',
+            ]}
+            data-reveal-stagger
+            id={service.id}
+            aria-labelledby={`${service.id}-title`}
+          >
+            <div class="service-detail-copy" data-reveal-item>
+              <p class="service-detail-kicker">
+                <span>{service.number}</span>
+                {service.eyebrow}
+              </p>
+              <h3 id={`${service.id}-title`}>{service.title}</h3>
+              <p class="service-detail-description">{service.description}</p>
+              <div class="service-detail-challenge">
+                <span>BUSINESS CHALLENGE</span>
+                <p>{service.challenge}</p>
+              </div>
+              <div class="service-detail-scope">
+                <h4>How we can help</h4>
+                <ul>
+                  {service.capabilities.map((capability) => (
+                    <li>{capability}</li>
+                  ))}
+                </ul>
+              </div>
+              <div class="service-detail-deliverable">
+                <span>Potential outcome</span>
+                <p>{service.deliverables}</p>
+              </div>
+              <a class="text-link service-detail-link" href={service.link}>
+                {service.linkLabel} <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+
+            <div class="service-detail-visual" data-reveal-item>
+              <Image
+                src={service.image}
+                alt={service.imageAlt}
+                width={1200}
+                sizes="(max-width: 700px) 92vw, (max-width: 1000px) 44vw, 50vw"
+                loading="lazy"
+                class="service-detail-image"
+              />
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="services-experience section"
+    aria-labelledby="services-experience-title"
+  >
+    <div class="site-container experience-panel">
+      <div class="experience-number reveal">
+        <span>15</span>
+        <small>
+          YEARS OF INDUSTRY
+          <br />
+          EXPERIENCE
+        </small>
+        <i aria-hidden="true"></i>
+      </div>
+      <div class="experience-message reveal">
+        <p class="eyebrow eyebrow-light">Business context meets engineering</p>
+        <h2 id="services-experience-title">
+          Good technology starts with <span>understanding the work.</span>
+        </h2>
+        <p>
+          We bring business requirements, user needs, and existing systems into
+          the conversation before settling on a technical direction. That
+          context helps shape software around the problem it needs to solve.
+        </p>
+        <a class="text-link text-link-light" href="/projects">
+          How we share project work <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <div class="experience-principles reveal">
+        <div>
+          <span>01</span>
+          <b>Context before code</b>
+          <small>Understand the people, process, and constraints.</small>
+        </div>
+        <div>
+          <span>02</span>
+          <b>Connect what exists</b>
+          <small>Consider current systems as part of the solution.</small>
+        </div>
+        <div>
+          <span>03</span>
+          <b>Leave room to improve</b>
+          <small>Plan for operation, feedback, and change.</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="delivery-section section section-soft"
+    id="how-we-work"
+    aria-labelledby="delivery-heading"
+  >
+    <div class="site-container">
+      <header class="services-section-heading reveal">
+        <p class="eyebrow">How we work</p>
+        <h2 id="delivery-heading">
+          A clear route from <span>requirement to release.</span>
+        </h2>
+        <p>
+          Planning, engineering, review, and communication stay connected
+          throughout the work—not just at handover.
+        </p>
+      </header>
+      <div class="delivery-steps reveal" data-reveal-stagger>
+        {deliverySteps.map((step) => (
+          <article class="delivery-step" data-reveal-item>
+            <div class="delivery-step-top">
+              <span>{step.number}</span>
+              <i aria-hidden="true"></i>
+            </div>
+            <h3>{step.title}</h3>
+            <p>{step.description}</p>
+            <small>
+              <b>FOCUS</b>
+              {step.output}
+            </small>
+          </article>
+        ))}
+      </div>
+      <p class="delivery-collaboration">
+        <span aria-hidden="true">↗</span>
+        <strong>Continuous collaboration</strong> Feedback, communication, and
+        quality checks throughout the journey.
+      </p>
+    </div>
+  </section>
+
+  <section class="services-final-cta" aria-labelledby="services-final-title">
+    <div class="site-container services-final-inner reveal">
+      <div>
+        <p class="eyebrow eyebrow-light">YOUR NEXT DIGITAL STEP</p>
+        <h2 id="services-final-title">
+          Bring the challenge.{' '}
+          <span>We’ll work through the right solution.</span>
+        </h2>
+        <p>
+          Tell us what your team is trying to improve, connect, or build. We’ll
+          start with the context and explore a practical way forward.
+        </p>
+      </div>
+      <a class="button button-primary" href="/contact">
+        Discuss your project <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </section>
+</div>
+
+<style>
+  .services-page {
+    overflow: clip;
+    background: var(--color-paper);
+  }
+  .services-page section {
+    position: relative;
+  }
+  .services-page h1,
+  .services-page h2,
+  .services-page h3,
+  .services-page h4,
+  .services-page p {
+    margin-top: 0;
+  }
+  .services-page h1 span,
+  .services-page h2 span:not(.proof-mark),
+  .services-page h3 span {
+    color: var(--color-orange-dark);
+  }
+  .services-hero {
+    display: grid;
+    min-height: min(690px, calc(100svh - var(--site-header-height)));
+    align-items: center;
+    padding-block: 55px;
+    background:
+      radial-gradient(
+        ellipse at 92% 12%,
+        rgb(244 233 223 / 74%),
+        transparent 34%
+      ),
+      linear-gradient(125deg, #fbfaf8 0%, var(--color-paper) 53%, #f0ece6 100%);
+  }
+  .services-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(480px, 1.1fr);
+    align-items: center;
+    gap: clamp(2.5rem, 5.6vw, 5.3rem);
+  }
+  .services-hero-copy {
+    max-width: 575px;
+  }
+  .services-hero-copy .eyebrow {
+    margin-bottom: 1.15rem;
+  }
+  .services-hero-copy h1 {
+    max-width: 650px;
+    margin-bottom: 1.2rem;
+    color: var(--color-navy);
+    font-size: var(--type-page-hero-size);
+    font-weight: var(--type-display-weight);
+    letter-spacing: var(--type-display-letter-spacing);
+    line-height: var(--type-page-hero-line-height);
+  }
+  .services-hero-lead {
+    max-width: 550px;
+    margin-bottom: 1.55rem;
+    color: var(--color-body);
+    font-size: var(--type-lead-size);
+    line-height: var(--type-lead-line-height);
+  }
+  .services-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.35rem;
+  }
+  .services-hero-actions .button {
+    gap: 0.75rem;
+  }
+  .services-hero-proof {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+  .proof-mark {
+    display: grid;
+    width: 2.7rem;
+    height: 2.7rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid #dfc2ad;
+    border-radius: 50%;
+    color: var(--color-orange-dark);
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .services-hero-proof > span:last-child {
+    display: grid;
+    gap: 0.12rem;
+  }
+  .services-hero-proof strong {
+    color: var(--color-ink);
+    font-size: 0.78rem;
+    font-weight: 650;
+  }
+  .services-hero-proof small {
+    color: var(--color-muted);
+    font-size: 0.7rem;
+  }
+
+  .services-hero-visual {
+    position: relative;
+    display: flex;
+    min-height: 410px;
+    min-width: 0;
+    overflow: hidden;
+    aspect-ratio: 1.27;
+    align-items: stretch;
+    border-radius: var(--radius-large);
+    background: var(--color-paper);
+    box-shadow:
+      0 26px 65px rgb(16 27 45 / 18%),
+      0 3px 12px rgb(16 27 45 / 8%);
+    color: var(--color-navy);
+    isolation: isolate;
+  }
+  .services-hero-image {
+    position: absolute;
+    z-index: -2;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 48%;
+  }
+  .services-overview {
+    padding-block: clamp(4.5rem, 7vw, 6.5rem);
+  }
+  .services-section-heading {
+    max-width: 800px;
+    margin: 0 auto clamp(2.2rem, 4vw, 3rem);
+    text-align: center;
+  }
+  .services-section-heading .eyebrow {
+    margin-bottom: 0.7rem;
+  }
+  .services-section-heading h2 {
+    margin-bottom: 0.9rem;
+    color: var(--color-navy);
+    font-size: var(--type-section-size);
+    font-weight: var(--type-heading-weight);
+    letter-spacing: var(--type-section-letter-spacing);
+    line-height: var(--type-section-line-height);
+  }
+  .services-section-heading h2 span {
+    color: var(--color-orange-dark);
+  }
+  .services-section-heading > p:last-child {
+    max-width: 690px;
+    margin: 0 auto;
+    color: var(--color-body);
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-line-height);
+  }
+  .services-overview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .service-overview-card {
+    --card-lift: 0px;
+    position: relative;
+    display: flex;
+    min-width: 0;
+    min-height: 232px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.35rem 1.4rem 1.2rem;
+    overflow: hidden;
+    border: 1px solid rgb(16 27 45 / 9%);
+    border-radius: var(--radius-medium);
+    background: linear-gradient(145deg, #fff, #fbf9f6);
+    box-shadow: 0 12px 34px rgb(16 27 45 / 5%);
+    color: var(--color-ink);
+    transform: translateY(var(--card-lift));
+    transition:
+      transform 260ms var(--ease-out),
+      border-color 260ms var(--ease-out),
+      box-shadow 260ms var(--ease-out),
+      background 260ms var(--ease-out);
+  }
+  .service-overview-card::before {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      var(--color-orange),
+      #e09a63,
+      transparent
+    );
+    content: '';
+    opacity: 0.55;
+    transition: opacity 260ms var(--ease-out);
+  }
+  .service-overview-card:hover,
+  .service-overview-card:focus-visible {
+    --card-lift: -5px;
+    border-color: rgb(168 65 33 / 35%);
+    background: #fff;
+    box-shadow:
+      0 20px 38px rgb(16 27 45 / 12%),
+      0 5px 16px rgb(168 65 33 / 6%);
+    color: var(--color-ink);
+  }
+  .service-overview-card:hover::before,
+  .service-overview-card:focus-visible::before {
+    opacity: 1;
+  }
+  .overview-card-top {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.1rem;
+  }
+  .overview-card-top > span:first-child {
+    color: var(--color-muted);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+  }
+  .overview-card-icon {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border: 1px solid rgb(168 65 33 / 15%);
+    border-radius: 14px;
+    background: #f4e9df;
+    color: var(--color-orange-dark);
+    transition:
+      transform 260ms var(--ease-out),
+      background 260ms var(--ease-out);
+  }
+  .service-overview-card:hover .overview-card-icon,
+  .service-overview-card:focus-visible .overview-card-icon {
+    transform: translateY(-2px) scale(1.04);
+    background: #fff2e9;
+  }
+  .overview-card-title {
+    margin-bottom: 0.45rem;
+    color: var(--color-navy);
+    font-family: var(--font-heading);
+    font-size: var(--type-card-heading-size);
+    font-weight: 650;
+    letter-spacing: -0.035em;
+    line-height: 1.25;
+  }
+  .overview-card-copy {
+    margin-bottom: 1rem;
+    color: var(--color-body);
+    font-size: 0.8rem;
+    line-height: 1.55;
+  }
+  .overview-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: auto;
+    padding-top: 0.65rem;
+    border-top: 1px solid var(--color-line);
+    color: var(--color-navy);
+    font-size: 0.75rem;
+    font-weight: 650;
+  }
+  .overview-card-link b {
+    color: var(--color-orange-dark);
+    transition: transform 240ms var(--ease-out);
+  }
+  .service-overview-card:hover .overview-card-link b,
+  .service-overview-card:focus-visible .overview-card-link b {
+    transform: translate(2px, 2px);
+  }
+
+  .service-details {
+    padding-block: clamp(4.5rem, 7vw, 6.5rem);
+    background:
+      radial-gradient(ellipse at 10% 4%, rgb(84 123 157 / 7%), transparent 30%),
+      linear-gradient(180deg, #fbfaf8 0%, #f7f5f1 100%);
+  }
+  .services-detail-heading {
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+  .service-detail-list {
+    display: grid;
+    gap: clamp(1rem, 2.3vw, 1.8rem);
+  }
+  .service-detail {
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+    padding: clamp(1.35rem, 3vw, 2.4rem);
+    border: 1px solid rgb(16 27 45 / 8%);
+    border-radius: var(--radius-large);
+    background: linear-gradient(135deg, #fff 0%, #fbf9f6 100%);
+    box-shadow: 0 12px 34px rgb(16 27 45 / 4%);
+    scroll-margin-top: calc(var(--site-header-height) + 1rem);
+    transition:
+      border-color 260ms var(--ease-out),
+      box-shadow 260ms var(--ease-out),
+      background-color 260ms var(--ease-out);
+  }
+  .service-detail:nth-child(even) {
+    border-color: rgb(84 123 157 / 14%);
+    background: linear-gradient(135deg, #f4f7f9 0%, #fff 100%);
+  }
+  .service-detail:hover {
+    border-color: rgb(201 84 43 / 28%);
+    box-shadow: 0 18px 40px rgb(16 27 45 / 8%);
+  }
+  .service-detail-reverse .service-detail-copy {
+    order: 2;
+  }
+  .service-detail-reverse .service-detail-visual {
+    order: 1;
+  }
+  .service-detail-copy {
+    min-width: 0;
+  }
+  .service-detail-kicker {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-bottom: 0.9rem;
+    color: var(--color-orange-dark);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+  }
+  .service-detail-kicker span {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border: 1px solid #e3c6b3;
+    border-radius: 50%;
+    font-size: 0.65rem;
+    letter-spacing: 0;
+  }
+  .service-detail-copy h3 {
+    margin-bottom: 0.8rem;
+    color: var(--color-navy);
+    font-size: clamp(1.8rem, 2.7vw, 2.55rem);
+    font-weight: var(--type-heading-weight);
+    letter-spacing: var(--type-section-letter-spacing);
+    line-height: 1.12;
+  }
+  .service-detail-description {
+    margin-bottom: 1.1rem;
+    color: var(--color-body);
+    font-size: 0.94rem;
+    line-height: 1.7;
+  }
+  .service-detail-challenge {
+    padding: 0.85rem 1rem;
+    border-left: 2px solid var(--color-orange);
+    background: #f3eee8;
+  }
+  .service-detail-challenge > span,
+  .service-detail-deliverable > span {
+    display: block;
+    margin-bottom: 0.3rem;
+    color: var(--color-orange-dark);
+    font-size: 0.59rem;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+  }
+  .service-detail-challenge p {
+    margin-bottom: 0;
+    color: var(--color-ink);
+    font-size: 0.78rem;
+    line-height: 1.55;
+  }
+  .service-detail-scope {
+    margin-top: 1rem;
+  }
+  .service-detail-scope h4 {
+    margin-bottom: 0.55rem;
+    color: var(--color-navy);
+    font-family: var(--font-heading);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .service-detail-scope ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem 0.9rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .service-detail-scope li {
+    position: relative;
+    padding-left: 0.9rem;
+    color: var(--color-body);
+    font-size: 0.75rem;
+    line-height: 1.48;
+  }
+  .service-detail-scope li::before {
+    position: absolute;
+    top: 0.48em;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-orange);
+    content: '';
+  }
+  .service-detail-deliverable {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: baseline;
+    gap: 0.35rem 0.7rem;
+    margin-top: 1rem;
+  }
+  .service-detail-deliverable > span {
+    margin: 0;
+    white-space: nowrap;
+  }
+  .service-detail-deliverable p {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.7rem;
+    line-height: 1.45;
+  }
+  .service-detail-link {
+    margin-top: 1rem;
+    color: var(--color-orange-dark);
+    font-size: 0.78rem;
+  }
+  .service-detail-visual {
+    position: relative;
+    min-width: 0;
+    min-height: 370px;
+    overflow: hidden;
+    border: 1px solid rgb(16 27 45 / 10%);
+    border-radius: var(--radius-large);
+    background: #e9eef2;
+    box-shadow: 0 18px 48px rgb(16 27 45 / 8%);
+    transition:
+      transform 360ms var(--ease-out),
+      box-shadow 360ms var(--ease-out),
+      border-color 260ms var(--ease-out);
+  }
+  .service-detail-image {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 700ms var(--ease-out);
+  }
+  .service-detail:hover .service-detail-visual {
+    transform: translateY(-3px);
+    border-color: rgb(201 84 43 / 32%);
+    box-shadow: 0 22px 52px rgb(16 27 45 / 13%);
+  }
+  .service-detail:hover .service-detail-image {
+    transform: scale(1.045);
+  }
+  .detail-visual-head,
+  .detail-visual-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.65rem;
+  }
+  .detail-visual-head {
+    position: relative;
+    z-index: 1;
+    padding: 0.7rem 0.8rem;
+    border: 1px solid rgb(16 27 45 / 9%);
+    border-radius: 999px;
+    background: rgb(255 255 255 / 82%);
+    box-shadow: 0 8px 24px rgb(16 27 45 / 8%);
+    backdrop-filter: blur(12px);
+    color: var(--color-muted);
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+  .detail-visual-state {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--color-body);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+  .detail-visual-state i {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-orange);
+    box-shadow: 0 0 0 4px rgb(201 84 43 / 10%);
+  }
+  .detail-visual-foot {
+    position: relative;
+    z-index: 1;
+    padding-top: 0.65rem;
+    border-top: 1px solid rgb(16 27 45 / 9%);
+    color: var(--color-muted);
+    font-size: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-shadow: 0 1px 8px rgb(255 255 255 / 80%);
+  }
+  .automation-flow {
+    position: relative;
+    display: grid;
+    width: min(100%, 440px);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.15rem;
+    align-self: center;
+    padding: 1.1rem 0;
+  }
+  .automation-node {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    min-height: 84px;
+    align-content: center;
+    gap: 0.32rem;
+    padding: 0.75rem 0.85rem;
+    border: 1px solid rgb(16 27 45 / 10%);
+    border-radius: 10px;
+    background: rgb(255 255 255 / 90%);
+    box-shadow: 0 10px 25px rgb(16 27 45 / 6%);
+  }
+  .automation-node span {
+    color: var(--color-muted);
+    font-size: 0.53rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+  .automation-node b {
+    color: var(--color-navy);
+    font-size: 0.85rem;
+    font-weight: 650;
+  }
+  .automation-node-accent {
+    border-color: rgb(168 65 33 / 24%);
+    background: #fff8f3;
+  }
+  .automation-node-review {
+    border-color: rgb(84 123 157 / 23%);
+    background: #f7fafc;
+  }
+  .automation-path {
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    right: 15%;
+    left: 15%;
+    height: 1px;
+    background: linear-gradient(90deg, #9bb4c7, var(--color-orange), #9bb4c7);
+    transform: rotate(26deg);
+  }
+  .automation-path i {
+    position: absolute;
+    top: -2px;
+    left: 25%;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-orange);
+    box-shadow: 0 0 10px rgb(201 84 43 / 48%);
+    animation: service-packet 3.8s ease-in-out infinite;
+  }
+  .automation-path i:nth-child(2) {
+    left: 68%;
+    animation-delay: -1.8s;
+  }
+  .automation-path i:nth-child(3) {
+    left: 47%;
+    background: var(--color-blue);
+    animation-delay: -2.8s;
+  }
+  .automation-caption {
+    grid-column: 1 / -1;
+    justify-self: center;
+    color: var(--color-muted);
+    font-size: 0.63rem;
+    letter-spacing: 0.02em;
+    text-align: center;
+  }
+  .software-board {
+    position: relative;
+    display: grid;
+    width: min(100%, 450px);
+    min-height: 250px;
+    grid-template-columns: 36px minmax(0, 1fr);
+    align-self: center;
+    padding: 1.1rem 1rem 2.2rem;
+    border: 1px solid #d9dfe4;
+    border-radius: 13px;
+    background: #fff;
+    box-shadow: 0 18px 35px rgb(16 27 45 / 9%);
+  }
+  .software-sidebar {
+    display: grid;
+    align-content: start;
+    justify-items: center;
+    gap: 0.8rem;
+    padding-top: 0.3rem;
+    border-right: 1px solid #edf0f2;
+  }
+  .software-sidebar span,
+  .software-sidebar i {
+    width: 13px;
+    height: 13px;
+    border-radius: 4px;
+    background: #e9eef2;
+  }
+  .software-sidebar span:first-child {
+    background: #df9574;
+  }
+  .software-sidebar i {
+    margin-top: 0.4rem;
+    border-radius: 50%;
+    background: #dfe8ee;
+  }
+  .software-workspace {
+    display: grid;
+    min-width: 0;
+    gap: 0.7rem;
+    padding-left: 0.8rem;
+  }
+  .software-workspace-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid #edf0f2;
+  }
+  .software-workspace-top span {
+    width: 38%;
+    height: 7px;
+    border-radius: 8px;
+    background: #dce4e9;
+  }
+  .software-workspace-top i {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: #f3e7de;
+  }
+  .software-module {
+    display: grid;
+    min-width: 0;
+    gap: 0.35rem;
+    padding: 0.55rem;
+    border: 1px solid #e6e9eb;
+    border-radius: 7px;
+    background: #fbfcfc;
+  }
+  .software-module-wide {
+    padding: 0.55rem 0.7rem;
+  }
+  .software-module small {
+    color: var(--color-muted);
+    font-size: 0.48rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+  .software-module b {
+    color: var(--color-navy);
+    font-family: var(--font-heading);
+    font-size: 0.76rem;
+    font-weight: 650;
+  }
+  .software-module > span {
+    width: 70%;
+    height: 4px;
+    border-radius: 4px;
+    background: #e4e9ec;
+  }
+  .software-module > span:last-child {
+    width: 48%;
+  }
+  .software-module-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
+  }
+  .software-module-grid .software-module {
+    min-height: 56px;
+  }
+  .software-module-grid .software-module i {
+    width: 13px;
+    height: 13px;
+    border-radius: 4px;
+    background: #e2ebf0;
+  }
+  .software-module-grid .software-module-highlight {
+    border-color: #eed7c8;
+    background: #fff8f3;
+  }
+  .software-module-highlight i {
+    background: #f0d8c7 !important;
+  }
+  .software-board-caption {
+    position: absolute;
+    right: 1rem;
+    bottom: 0.75rem;
+    color: var(--color-muted);
+    font-size: 0.57rem;
+  }
+  .software-board-caption b,
+  .browser-caption b {
+    color: var(--color-orange);
+  }
+  .web-browser {
+    width: min(100%, 470px);
+    align-self: center;
+    overflow: hidden;
+    border: 1px solid #d9dfe4;
+    border-radius: 11px;
+    background: #fff;
+    box-shadow: 0 18px 35px rgb(16 27 45 / 9%);
+  }
+  .browser-bar {
+    display: flex;
+    height: 33px;
+    align-items: center;
+    gap: 5px;
+    padding-inline: 0.7rem;
+    border-bottom: 1px solid #e7eaec;
+    background: #fbfcfc;
+  }
+  .browser-bar > span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #d7dcdf;
+  }
+  .browser-bar > span:first-child {
+    background: #d88768;
+  }
+  .browser-bar i {
+    margin-left: 0.6rem;
+    color: #8793a0;
+    font-size: 0.52rem;
+    font-style: normal;
+  }
+  .web-dashboard {
+    display: grid;
+    min-height: 205px;
+    grid-template-columns: 42px minmax(0, 1fr);
+  }
+  .web-dashboard aside {
+    display: grid;
+    align-content: start;
+    justify-items: center;
+    gap: 0.65rem;
+    padding-top: 0.85rem;
+    border-right: 1px solid #edf0f2;
+  }
+  .web-dashboard aside b,
+  .web-dashboard aside span {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    background: #e4eaee;
+  }
+  .web-dashboard aside b {
+    background: #d98766;
+  }
+  .web-dashboard-main {
+    display: grid;
+    align-content: start;
+    gap: 0.4rem;
+    padding: 0.75rem;
+  }
+  .web-dashboard-main > small {
+    color: var(--color-orange-dark);
+    font-size: 0.47rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+  .web-dashboard-main > strong {
+    color: var(--color-navy);
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 650;
+  }
+  .web-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.35rem;
+  }
+  .web-stats i {
+    display: grid;
+    gap: 0.3rem;
+    padding: 0.38rem;
+    border: 1px solid #e9ecee;
+    border-radius: 5px;
+    background: #fbfcfc;
+  }
+  .web-stats b {
+    width: 42%;
+    height: 6px;
+    border-radius: 4px;
+    background: #e7c7b4;
+  }
+  .web-stats span {
+    width: 75%;
+    height: 4px;
+    border-radius: 4px;
+    background: #e5eaed;
+  }
+  .web-chart {
+    position: relative;
+    height: 63px;
+    overflow: hidden;
+    border: 1px solid #e9ecee;
+    border-radius: 5px;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0 15px,
+      #edf0f2 16px 17px
+    );
+  }
+  .web-chart > div {
+    position: absolute;
+    inset: auto 0 0;
+    display: flex;
+    height: 100%;
+    align-items: end;
+    justify-content: space-around;
+    padding-inline: 0.6rem;
+  }
+  .web-chart > div span {
+    width: 5%;
+    height: 35%;
+    border-radius: 3px 3px 0 0;
+    background: rgb(84 123 157 / 20%);
+  }
+  .web-chart > div span:nth-child(2n) {
+    height: 57%;
+  }
+  .web-chart > div span:nth-child(3n) {
+    height: 78%;
+    background: rgb(201 84 43 / 32%);
+  }
+  .web-chart svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .web-chart svg path {
+    fill: none;
+    stroke: #a84121;
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+  }
+  .browser-caption {
+    padding: 0.6rem 0.8rem;
+    border-top: 1px solid #e9ecee;
+    color: var(--color-muted);
+    font-size: 0.55rem;
+    text-align: center;
+  }
+  .mobile-product {
+    position: relative;
+    display: flex;
+    min-height: 270px;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .mobile-device {
+    position: relative;
+    width: 142px;
+    height: 230px;
+    padding: 1.1rem 0.65rem 0.65rem;
+    border: 4px solid #1b2a40;
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: 0 17px 35px rgb(16 27 45 / 15%);
+  }
+  .mobile-device-back {
+    width: 125px;
+    height: 205px;
+    margin-top: 1.4rem;
+    border-color: #547b9d;
+    background: #f7fafb;
+    transform: rotate(-7deg);
+  }
+  .mobile-device-front {
+    z-index: 1;
+    margin-bottom: 0.8rem;
+    transform: rotate(4deg);
+  }
+  .device-speaker {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    width: 36px;
+    height: 4px;
+    border-radius: 4px;
+    background: #b7c0c6;
+    transform: translateX(-50%);
+  }
+  .mobile-mini-head {
+    width: 60%;
+    height: 15px;
+    margin-bottom: 0.6rem;
+    border-radius: 4px;
+    background: #e7edf1;
+  }
+  .mobile-mini-row {
+    height: 17px;
+    margin-bottom: 0.35rem;
+    border: 1px solid #e9edef;
+    border-radius: 5px;
+  }
+  .mobile-mini-card {
+    display: grid;
+    gap: 0.35rem;
+    margin-top: 0.6rem;
+    padding: 0.55rem;
+    border: 1px solid #ead8cd;
+    border-radius: 7px;
+    background: #fff9f5;
+  }
+  .mobile-mini-card i {
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    background: #efddcf;
+  }
+  .mobile-mini-card span,
+  .mobile-mini-button {
+    height: 4px;
+    border-radius: 4px;
+    background: #e8ecee;
+  }
+  .mobile-mini-card span:last-child {
+    width: 65%;
+  }
+  .mobile-mini-button {
+    width: 70%;
+    height: 13px;
+    margin: 0.7rem auto 0;
+    background: #c9542b;
+  }
+  .mobile-device-top {
+    display: grid;
+    gap: 0.35rem;
+    margin-bottom: 0.7rem;
+  }
+  .mobile-device-top span {
+    color: var(--color-orange-dark);
+    font-size: 0.4rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+  .mobile-device-top b {
+    color: var(--color-navy);
+    font-family: var(--font-heading);
+    font-size: 0.68rem;
+    line-height: 1.25;
+  }
+  .mobile-task {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-bottom: 0.4rem;
+    padding: 0.4rem;
+    border: 1px solid #e8ecee;
+    border-radius: 6px;
+  }
+  .mobile-task > i {
+    display: grid;
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 5px;
+    background: #f4e9df;
+    color: var(--color-orange-dark);
+    font-size: 0.42rem;
+    font-style: normal;
+  }
+  .mobile-task > span {
+    display: grid;
+    min-width: 0;
+  }
+  .mobile-task b {
+    overflow: hidden;
+    color: var(--color-navy);
+    font-size: 0.5rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .mobile-task small {
+    color: var(--color-muted);
+    font-size: 0.42rem;
+  }
+  .mobile-task em {
+    margin-left: auto;
+    color: var(--color-orange-dark);
+    font-size: 0.65rem;
+    font-style: normal;
+  }
+  .mobile-mobile-nav {
+    position: absolute;
+    right: 0.65rem;
+    bottom: 0.48rem;
+    left: 0.65rem;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 0.4rem;
+    border-top: 1px solid #edf0f2;
+  }
+  .mobile-mobile-nav i {
+    width: 12px;
+    height: 5px;
+    border-radius: 4px;
+    background: #d9e1e6;
+  }
+  .mobile-mobile-nav i:first-child {
+    background: #c9542b;
+  }
+  .mobile-caption {
+    position: absolute;
+    right: 0;
+    bottom: -0.25rem;
+    left: 0;
+    color: var(--color-muted);
+    font-size: 0.58rem;
+    text-align: center;
+  }
+  .enterprise-map {
+    position: relative;
+    width: min(100%, 500px);
+    min-height: 260px;
+    align-self: center;
+  }
+  .enterprise-map svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .enterprise-map svg path {
+    fill: none;
+    stroke: rgb(84 123 157 / 35%);
+    stroke-width: 1.5;
+    vector-effect: non-scaling-stroke;
+  }
+  .enterprise-map svg .enterprise-map-pulse {
+    stroke: #c9542b;
+    stroke-dasharray: 3 10;
+    animation: service-flow 6s linear infinite;
+  }
+  .enterprise-hub {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: grid;
+    width: 110px;
+    height: 110px;
+    align-content: center;
+    justify-items: center;
+    border: 1px solid rgb(168 65 33 / 22%);
+    border-radius: 50%;
+    background: radial-gradient(circle at 36% 30%, #fff, #f2e9e2);
+    box-shadow: 0 14px 32px rgb(16 27 45 / 10%);
+    text-align: center;
+    transform: translate(-50%, -50%);
+  }
+  .enterprise-hub span {
+    color: var(--color-orange-dark);
+    font-size: 0.48rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+  .enterprise-hub b {
+    margin-top: 0.28rem;
+    color: var(--color-navy);
+    font-family: var(--font-heading);
+    font-size: 0.78rem;
+    line-height: 1.22;
+  }
+  .enterprise-node {
+    position: absolute;
+    display: flex;
+    min-width: 133px;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 0.65rem;
+    border: 1px solid #dfe4e7;
+    border-radius: 8px;
+    background: rgb(255 255 255 / 94%);
+    box-shadow: 0 9px 22px rgb(16 27 45 / 7%);
+  }
+  .enterprise-node i {
+    color: var(--color-orange-dark);
+    font-size: 0.5rem;
+    font-style: normal;
+    font-weight: 700;
+  }
+  .enterprise-node b {
+    color: var(--color-navy);
+    font-size: 0.68rem;
+    font-weight: 600;
+  }
+  .enterprise-node-one {
+    top: 7%;
+    left: 2%;
+  }
+  .enterprise-node-two {
+    top: 7%;
+    right: 2%;
+  }
+  .enterprise-node-three {
+    bottom: 7%;
+    left: 2%;
+  }
+  .enterprise-node-four {
+    right: 2%;
+    bottom: 7%;
+  }
+  .enterprise-map-caption {
+    position: absolute;
+    right: 0;
+    bottom: 0.25rem;
+    left: 0;
+    color: var(--color-muted);
+    font-size: 0.57rem;
+    text-align: center;
+  }
+  .automation-caption,
+  .software-board-caption,
+  .browser-caption,
+  .mobile-caption,
+  .enterprise-map-caption {
+    z-index: 1;
+    padding: 0.38rem 0.62rem;
+    border: 1px solid rgb(16 27 45 / 8%);
+    border-radius: 0.65rem;
+    background: rgb(255 255 255 / 86%);
+    box-shadow: 0 5px 16px rgb(16 27 45 / 7%);
+    backdrop-filter: blur(10px);
+    color: var(--color-body);
+    line-height: 1.4;
+  }
+  .cloud-pipeline {
+    display: grid;
+    width: min(100%, 480px);
+    gap: 1.15rem;
+    align-self: center;
+  }
+  .cloud-pipeline-nodes {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 24px minmax(0, 1fr) 24px minmax(
+        0,
+        1fr
+      );
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .cloud-pipeline-nodes > div {
+    display: grid;
+    min-height: 86px;
+    align-content: center;
+    gap: 0.25rem;
+    padding: 0.6rem;
+    border: 1px solid rgb(16 27 45 / 10%);
+    border-radius: 9px;
+    background: #fff;
+    box-shadow: 0 9px 22px rgb(16 27 45 / 6%);
+  }
+  .cloud-pipeline-nodes > div > i {
+    color: var(--color-orange-dark);
+    font-size: 0.48rem;
+    font-style: normal;
+    font-weight: 700;
+  }
+  .cloud-pipeline-nodes > div > b {
+    color: var(--color-navy);
+    font-size: 0.66rem;
+    font-weight: 650;
+    line-height: 1.25;
+  }
+  .cloud-pipeline-nodes > div > small {
+    color: var(--color-muted);
+    font-size: 0.48rem;
+    line-height: 1.3;
+  }
+  .cloud-pipeline-nodes .cloud-pipeline-center {
+    border-color: rgb(84 123 157 / 28%);
+    background: #f7fafc;
+  }
+  .pipeline-line {
+    position: relative;
+    height: 1px;
+    background: #b3c5d1;
+  }
+  .pipeline-line i {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-orange);
+    animation: service-packet 2.6s ease-in-out infinite;
+  }
+  .pipeline-line:nth-of-type(2) i {
+    animation-delay: -1.3s;
+  }
+  .cloud-console {
+    padding: 0.65rem 0.8rem 0.55rem;
+    border: 1px solid rgb(16 27 45 / 10%);
+    border-radius: 9px;
+    background: #fff;
+    box-shadow: 0 9px 22px rgb(16 27 45 / 5%);
+  }
+  .cloud-console-head,
+  .cloud-console-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .cloud-console-head {
+    color: var(--color-muted);
+    font-size: 0.47rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+  .cloud-console-head i {
+    color: var(--color-orange-dark);
+    font-size: 0.45rem;
+    font-style: normal;
+  }
+  .cloud-bars {
+    display: flex;
+    height: 62px;
+    align-items: end;
+    justify-content: space-around;
+    gap: 0.35rem;
+    margin-block: 0.6rem;
+    border-bottom: 1px solid #e8ecee;
+  }
+  .cloud-bars span {
+    width: 7%;
+    height: var(--bar);
+    border-radius: 3px 3px 0 0;
+    background: linear-gradient(
+      180deg,
+      rgb(84 123 157 / 70%),
+      rgb(84 123 157 / 24%)
+    );
+  }
+  .cloud-bars span:nth-child(3n) {
+    background: linear-gradient(
+      180deg,
+      rgb(201 84 43 / 66%),
+      rgb(201 84 43 / 20%)
+    );
+  }
+  .cloud-console-foot {
+    color: var(--color-muted);
+    font-size: 0.52rem;
+  }
+  .cloud-console-foot b {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--color-body);
+    font-weight: 600;
+  }
+  .cloud-console-foot i {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-green);
+  }
+
+  .delivery-section {
+    padding-block: clamp(4.5rem, 7vw, 6rem);
+  }
+  .delivery-section .services-section-heading {
+    margin-bottom: 2.5rem;
+  }
+  .delivery-steps {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+  .delivery-step {
+    min-width: 0;
+    padding: 0.75rem 0.85rem 0.9rem;
+    border-top: 1px solid #d6d0c9;
+    transition:
+      border-color 240ms var(--ease-out),
+      transform 240ms var(--ease-out);
+  }
+  .delivery-step:hover {
+    border-color: var(--color-orange);
+    transform: translateY(-3px);
+  }
+  .delivery-step-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+  .delivery-step-top span {
+    color: var(--color-orange-dark);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+  .delivery-step-top i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #d5cfc8;
+  }
+  .delivery-step:first-child .delivery-step-top i,
+  .delivery-step:hover .delivery-step-top i {
+    background: var(--color-orange);
+    box-shadow: 0 0 0 4px rgb(201 84 43 / 9%);
+  }
+  .delivery-step h3 {
+    margin-bottom: 0.5rem;
+    color: var(--color-navy);
+    font-size: 0.98rem;
+    font-weight: 650;
+    letter-spacing: -0.035em;
+  }
+  .delivery-step p {
+    min-height: 5.2rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-body);
+    font-size: 0.69rem;
+    line-height: 1.52;
+  }
+  .delivery-step small {
+    display: grid;
+    gap: 0.2rem;
+    color: var(--color-navy-soft);
+    font-size: 0.63rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  .delivery-step small b {
+    color: var(--color-muted);
+    font-size: 0.48rem;
+    letter-spacing: 0.1em;
+  }
+  .delivery-collaboration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    margin: 1.9rem 0 0;
+    color: var(--color-muted);
+    font-size: 0.76rem;
+    text-align: center;
+  }
+  .delivery-collaboration > span {
+    color: var(--color-orange-dark);
+  }
+  .delivery-collaboration strong {
+    color: var(--color-navy);
+    font-weight: 650;
+  }
+
+  .services-experience {
+    padding-block: clamp(3.5rem, 6vw, 5rem);
+    background: var(--color-paper);
+  }
+  .experience-panel {
+    display: grid;
+    grid-template-columns: minmax(120px, 0.4fr) minmax(0, 1.25fr) minmax(
+        220px,
+        0.8fr
+      );
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 4rem);
+    padding: clamp(2rem, 4vw, 3.5rem);
+    border: 1px solid rgb(255 255 255 / 12%);
+    border-radius: var(--radius-large);
+    background:
+      radial-gradient(
+        ellipse at 12% 80%,
+        rgb(84 123 157 / 16%),
+        transparent 34%
+      ),
+      linear-gradient(130deg, #17253a, var(--color-navy) 70%, #18263a);
+    box-shadow: 0 22px 50px rgb(16 27 45 / 14%);
+    color: #fff;
+  }
+  .experience-number {
+    display: grid;
+    justify-items: start;
+  }
+  .experience-number > span {
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: clamp(4.5rem, 7vw, 6.8rem);
+    font-weight: 600;
+    letter-spacing: -0.1em;
+    line-height: 0.95;
+  }
+  .experience-number small {
+    margin-top: 0.6rem;
+    color: #e7a17f;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    line-height: 1.55;
+  }
+  .experience-number i {
+    width: 3.5rem;
+    height: 1px;
+    margin-top: 1.1rem;
+    background: #dd8a61;
+  }
+  .experience-message .eyebrow {
+    margin-bottom: 0.7rem;
+  }
+  .experience-message h2 {
+    margin-bottom: 0.85rem;
+    color: #fff;
+    font-size: clamp(1.9rem, 3vw, 2.9rem);
+    font-weight: 550;
+    letter-spacing: -0.06em;
+    line-height: 1.1;
+  }
+  .services-page .experience-message h2 span {
+    color: #e9a17e;
+  }
+  .experience-message > p:not(.eyebrow) {
+    max-width: 620px;
+    margin-bottom: 1rem;
+    color: rgb(255 255 255 / 72%);
+    font-size: 0.83rem;
+    line-height: 1.65;
+  }
+  .experience-message .text-link {
+    font-size: 0.76rem;
+  }
+  .experience-principles {
+    display: grid;
+    gap: 0.35rem;
+    padding-left: 1.2rem;
+    border-left: 1px solid rgb(255 255 255 / 16%);
+  }
+  .experience-principles > div {
+    display: grid;
+    grid-template-columns: 1.8rem minmax(0, 1fr);
+    gap: 0.15rem 0.5rem;
+    padding-block: 0.7rem;
+    border-bottom: 1px solid rgb(255 255 255 / 10%);
+  }
+  .experience-principles > div:last-child {
+    border-bottom: 0;
+  }
+  .experience-principles > div > span {
+    grid-row: span 2;
+    color: #e8a080;
+    font-size: 0.56rem;
+    font-weight: 700;
+  }
+  .experience-principles b {
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 0.72rem;
+    font-weight: 650;
+  }
+  .experience-principles small {
+    color: rgb(255 255 255 / 58%);
+    font-size: 0.61rem;
+    line-height: 1.45;
+  }
+
+  .services-final-cta {
+    padding-block: clamp(3rem, 5vw, 4.5rem);
+    background:
+      radial-gradient(
+        ellipse at 75% 50%,
+        rgb(84 123 157 / 15%),
+        transparent 35%
+      ),
+      var(--color-navy);
+  }
+  .services-final-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .services-final-inner > div {
+    max-width: 770px;
+  }
+  .services-final-inner .eyebrow {
+    margin-bottom: 0.7rem;
+  }
+  .services-final-inner h2 {
+    margin-bottom: 0.8rem;
+    color: #fff;
+    font-size: clamp(2rem, 3.5vw, 3.25rem);
+    font-weight: 550;
+    letter-spacing: -0.06em;
+    line-height: 1.1;
+  }
+  .services-page .services-final-inner h2 span {
+    color: #e9a17e;
+  }
+  .services-final-inner p:not(.eyebrow) {
+    max-width: 620px;
+    margin: 0;
+    color: rgb(255 255 255 / 70%);
+    font-size: 0.87rem;
+  }
+  .services-final-inner .button {
+    flex: 0 0 auto;
+  }
+
+  @keyframes service-flow {
+    to {
+      stroke-dashoffset: -68;
+    }
+  }
+  @keyframes service-packet {
+    0% {
+      opacity: 0;
+      transform: translateX(-5px);
+    }
+    20%,
+    80% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(34px);
+    }
+  }
+  @media (max-width: 1050px) {
+    .services-hero-grid {
+      grid-template-columns: minmax(0, 0.9fr) minmax(390px, 1.1fr);
+      gap: 2.3rem;
+    }
+    .services-hero-copy h1 {
+      font-size: clamp(2.55rem, 4.25vw, 3.5rem);
+    }
+    .delivery-steps {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      row-gap: 1.2rem;
+    }
+    .delivery-step p {
+      min-height: 3.2rem;
+    }
+    .experience-panel {
+      grid-template-columns: 105px minmax(0, 1fr);
+    }
+    .experience-principles {
+      grid-column: 2;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.5rem;
+      padding: 1rem 0 0;
+      border-top: 1px solid rgb(255 255 255 / 16%);
+      border-left: 0;
+    }
+    .experience-principles > div {
+      grid-template-columns: 1fr;
+    }
+    .experience-principles > div > span {
+      grid-row: auto;
+    }
+  }
+  @media (max-width: 900px) {
+    .services-hero-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 2.5rem;
+    }
+    .services-hero-copy {
+      max-width: 700px;
+    }
+    .services-hero-visual {
+      width: min(100%, 700px);
+      justify-self: center;
+    }
+    .services-overview-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .service-detail {
+      gap: 2rem;
+    }
+    .service-detail-visual {
+      min-height: 340px;
+    }
+  }
+  @media (max-width: 700px) {
+    .services-hero {
+      min-height: 0;
+      padding-block: 55px;
+    }
+    .services-hero-grid {
+      gap: 2rem;
+    }
+    .services-hero-copy h1 {
+      font-size: clamp(2.45rem, 9.2vw, 3.3rem);
+    }
+    .services-hero-lead {
+      font-size: 0.98rem;
+      line-height: 1.62;
+    }
+    .services-hero-actions {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+    .services-hero-actions .button {
+      width: 100%;
+      justify-content: space-between;
+    }
+    .services-hero-visual {
+      min-height: 390px;
+      aspect-ratio: auto;
+      border-radius: 16px;
+    }
+    .services-section-heading {
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+    .services-section-heading > p:last-child {
+      margin-left: 0;
+    }
+    .services-section-heading h2 {
+      font-size: clamp(1.9rem, 7.5vw, 2.45rem);
+    }
+    .services-overview-grid {
+      gap: 0.7rem;
+    }
+    .service-overview-card {
+      min-height: 220px;
+      padding: 1.05rem;
+    }
+    .overview-card-copy {
+      font-size: 0.75rem;
+    }
+    .service-detail {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.25rem;
+      padding-block: 1.5rem 2rem;
+    }
+    .service-detail-copy,
+    .service-detail-reverse .service-detail-copy,
+    .service-detail-visual,
+    .service-detail-reverse .service-detail-visual {
+      order: initial;
+    }
+    .service-detail-visual {
+      min-height: 330px;
+    }
+    .delivery-steps {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.7rem;
+    }
+    .delivery-step {
+      padding-inline: 0.5rem;
+    }
+    .delivery-step p {
+      min-height: 4.5rem;
+    }
+    .delivery-collaboration {
+      flex-wrap: wrap;
+      gap: 0.35rem 0.5rem;
+      font-size: 0.7rem;
+    }
+    .experience-panel {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.5rem;
+      padding: 1.6rem;
+    }
+    .experience-number {
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: end;
+      gap: 0 0.8rem;
+    }
+    .experience-number > span {
+      grid-row: span 2;
+      font-size: 4.2rem;
+    }
+    .experience-number small {
+      margin: 0 0 0.25rem;
+    }
+    .experience-number i {
+      grid-column: 2;
+      width: 2.4rem;
+      margin-top: 0.15rem;
+    }
+    .experience-message h2 {
+      font-size: clamp(1.85rem, 7vw, 2.5rem);
+    }
+    .experience-principles {
+      grid-column: auto;
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .experience-principles > div {
+      grid-template-columns: 1.8rem minmax(0, 1fr);
+    }
+    .experience-principles > div > span {
+      grid-row: span 2;
+    }
+    .services-final-inner {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .services-final-inner .button {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+  @media (max-width: 430px) {
+    .services-overview-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .service-overview-card {
+      min-height: 0;
+    }
+    .service-detail-scope ul {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .service-detail-deliverable {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .detail-visual-head {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .service-detail-visual {
+      min-height: 340px;
+      padding-inline: 0.8rem;
+    }
+    .enterprise-node {
+      min-width: 111px;
+      padding: 0.45rem;
+    }
+    .enterprise-node b {
+      font-size: 0.59rem;
+    }
+    .enterprise-hub {
+      width: 88px;
+      height: 88px;
+    }
+    .enterprise-map-caption {
+      bottom: -0.4rem;
+      font-size: 0.49rem;
+    }
+    .cloud-pipeline-nodes {
+      grid-template-columns: minmax(0, 1fr) 12px minmax(0, 1fr) 12px minmax(
+          0,
+          1fr
+        );
+      gap: 0.12rem;
+    }
+    .cloud-pipeline-nodes > div {
+      min-height: 92px;
+      padding: 0.4rem;
+    }
+    .cloud-pipeline-nodes > div > b {
+      font-size: 0.56rem;
+    }
+    .cloud-pipeline-nodes > div > small {
+      font-size: 0.43rem;
+    }
+    .delivery-steps {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .delivery-step p {
+      min-height: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .services-page *,
+    .services-page *::before,
+    .services-page *::after {
+      scroll-behavior: auto !important;
+      animation: none !important;
+      transition: none !important;
+    }
+    .service-overview-card,
+    .service-overview-card:hover,
+    .service-overview-card:focus-visible,
+    .delivery-step:hover,
+    .service-detail:hover .service-detail-visual,
+    .service-detail:hover .service-detail-image {
+      transform: none;
+    }
+  }
+</style>

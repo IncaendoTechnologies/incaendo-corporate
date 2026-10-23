@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import InsightsPage from '../components/InsightsPage.astro'
+import { pages } from '../data/site-content.js'
+---
+
+<BaseLayout
+  title={pages.insights.title}
+  description={pages.insights.description}
+>
+  <main id="main-content">
+    <InsightsPage />
+  </main>
+</BaseLayout>

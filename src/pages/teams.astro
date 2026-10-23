@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import TeamsPage from '../components/TeamsPage.astro'
+import { pages } from '../data/site-content.js'
+---
+
+<BaseLayout title={pages.teams.title} description={pages.teams.description}>
+  <main id="main-content">
+    <TeamsPage />
+  </main>
+</BaseLayout>
