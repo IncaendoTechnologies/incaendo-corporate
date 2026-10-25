@@ -1,0 +1,240 @@
+---
+import { Image } from 'astro:assets'
+import InsightArtwork from './InsightArtwork.astro'
+import { latestArticle as article } from '../data/articles.js'
+
+const href = `/insights/${article.slug}/`
+---
+
+<div class="insights-hero-latest reveal" data-reveal-stagger>
+  <a
+    class="insights-latest-preview"
+    href={href}
+    aria-labelledby="insights-latest-title"
+    data-reveal-item
+  >
+    <span class="insights-latest-media">
+      {article.image ? (
+        <Image
+          src={article.image.src}
+          alt=""
+          widths={[640, 960, 1280]}
+          sizes="(max-width: 800px) 100vw, 620px"
+          loading="eager"
+          fetchpriority="high"
+        />
+      ) : (
+        <InsightArtwork
+          variant={article.variant}
+          title={`Illustration for ${article.title}`}
+          prefix={`hero-${article.slug}`}
+        />
+      )}
+      <span class="insights-latest-badge">
+        <span aria-hidden="true"></span> Latest insight
+      </span>
+    </span>
+    <span class="insights-latest-body">
+      <span class="insights-latest-kicker">
+        <span>{article.category}</span>
+        <span>{article.readMinutes} min read</span>
+      </span>
+      <h2 id="insights-latest-title">{article.title}</h2>
+      <span class="insights-latest-excerpt">{article.excerpt}</span>
+      <span class="insights-latest-link">
+        Read the article <span aria-hidden="true">↗</span>
+      </span>
+    </span>
+  </a>
+</div>
+
+<style>
+  .insights-hero-latest {
+    position: relative;
+    min-width: 0;
+    padding: 1.2rem 1.1rem 1.1rem;
+  }
+
+  .insights-hero-latest::before {
+    position: absolute;
+    inset: 8% -2% -3% 10%;
+    transform: rotate(3deg);
+    border: 1px solid rgb(84 123 157 / 15%);
+    border-radius: var(--radius-large);
+    background: rgb(255 255 255 / 42%);
+    content: '';
+  }
+
+  .insights-latest-preview {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgb(16 27 45 / 9%);
+    border-radius: var(--radius-large);
+    background: linear-gradient(145deg, #fff 0%, #f7f6f2 100%);
+    box-shadow: 0 24px 60px rgb(16 27 45 / 10%);
+    color: inherit;
+    transition:
+      transform 280ms var(--ease-out),
+      border-color 280ms ease,
+      box-shadow 280ms ease;
+  }
+
+  .insights-latest-preview:hover {
+    transform: translateY(-4px);
+    border-color: rgb(168 65 33 / 32%);
+    box-shadow: 0 28px 64px rgb(16 27 45 / 14%);
+  }
+
+  .insights-latest-preview:focus-visible {
+    outline: 3px solid rgb(84 123 157 / 40%);
+    outline-offset: 4px;
+  }
+
+  .insights-latest-media {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background: #edf1f2;
+  }
+
+  .insights-latest-media > :global(img),
+  .insights-latest-media > :global(.insight-art) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 450ms var(--ease-out);
+  }
+
+  .insights-latest-preview:hover .insights-latest-media > :global(img),
+  .insights-latest-preview:hover
+    .insights-latest-media
+    > :global(.insight-art) {
+    transform: scale(1.025);
+  }
+
+  .insights-latest-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.42rem 0.65rem;
+    border-radius: 999px;
+    background: rgb(16 27 45 / 86%);
+    color: #fff;
+    font-size: 0.57rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .insights-latest-badge span {
+    width: 0.38rem;
+    height: 0.38rem;
+    border-radius: 50%;
+    background: var(--color-orange);
+    box-shadow: 0 0 0 3px rgb(201 84 43 / 28%);
+  }
+
+  .insights-latest-body {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.1rem, 2.2vw, 1.5rem);
+  }
+
+  .insights-latest-kicker {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.4rem 0.75rem;
+    color: var(--color-orange-dark);
+    font-size: 0.61rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  .insights-latest-kicker span + span {
+    color: #8a929d;
+  }
+
+  .insights-latest-body h2 {
+    margin: 0.7rem 0 0.55rem;
+    color: var(--color-ink);
+    font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+    font-weight: 620;
+    letter-spacing: -0.045em;
+    line-height: 1.25;
+    transition: color 180ms ease;
+  }
+
+  .insights-latest-preview:hover h2 {
+    color: var(--color-orange-dark);
+  }
+
+  .insights-latest-excerpt {
+    display: -webkit-box;
+    overflow: hidden;
+    color: var(--color-body);
+    font-size: 0.82rem;
+    line-height: 1.6;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .insights-latest-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 1rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid #ece9e4;
+    color: var(--color-ink);
+    font-size: 0.72rem;
+    font-weight: 650;
+  }
+
+  .insights-latest-link span {
+    color: var(--color-orange-dark);
+    transition: transform 180ms var(--ease-out);
+  }
+
+  .insights-latest-preview:hover .insights-latest-link span {
+    transform: translate(2px, -2px);
+  }
+
+  @media (max-width: 600px) {
+    .insights-hero-latest {
+      padding: 0.6rem 0.25rem 0.8rem;
+    }
+
+    .insights-latest-badge {
+      top: 0.75rem;
+      left: 0.75rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .insights-latest-preview,
+    .insights-latest-media > :global(img),
+    .insights-latest-media > :global(.insight-art),
+    .insights-latest-link span {
+      transition: none;
+    }
+
+    .insights-latest-preview:hover,
+    .insights-latest-preview:hover .insights-latest-media > :global(img),
+    .insights-latest-preview:hover
+      .insights-latest-media
+      > :global(.insight-art),
+    .insights-latest-preview:hover .insights-latest-link span {
+      transform: none;
+    }
+  }
+</style>

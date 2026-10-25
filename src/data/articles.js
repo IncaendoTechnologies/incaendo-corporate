@@ -9,6 +9,8 @@ export const insightCategories = [
 
 // These are sample editorial drafts for layout and routing development.
 // Publication dates and authors stay unset until approved content is supplied.
+// Keep the list newest first; an optional ISO `publishedAt` date takes
+// precedence once dates are approved.
 export const articles = [
   {
     slug: 'from-ai-experiments-to-production',
@@ -360,3 +362,9 @@ export const featuredArticles = articles.filter(
   (article) => article.feature === 'featured',
 )
 export const latestArticles = articles.filter((article) => !article.feature)
+export const latestArticle = articles.reduce((latest, article) =>
+  article.publishedAt &&
+  (!latest.publishedAt || article.publishedAt > latest.publishedAt)
+    ? article
+    : latest,
+)

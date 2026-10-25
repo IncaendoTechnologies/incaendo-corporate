@@ -92,7 +92,7 @@ const capabilities = [
     </div>
 
     <a class="text-link ai-section-link" href="/ai-technology">
-      Explore AI technology <span aria-hidden="true">↗</span>
+      Explore AI <span aria-hidden="true">↗</span>
     </a>
     <p class="content-review-note">
       These are general considerations, not a description of confirmed Incaendo
@@ -113,145 +113,166 @@ const capabilities = [
         id="ai-capability-visual"
         aria-hidden="true"
       >
+        <svg class="ai-diagram-defs" width="0" height="0" focusable="false">
+          <defs>
+            <filter
+              id="ai-card-shadow"
+              x="-20%"
+              y="-20%"
+              width="140%"
+              height="150%"
+            >
+              <feDropShadow
+                dx="0"
+                dy="5"
+                stdDeviation="7"
+                flood-color="#101b2d"
+                flood-opacity="0.08"
+              />
+            </filter>
+          </defs>
+        </svg>
+
         <svg
           class="ai-diagram is-active"
           data-ai-visual="problem"
-          viewBox="0 0 520 360"
+          viewBox="0 0 480 320"
           fill="none"
           aria-hidden="true"
         >
-          <path class="diagram-line" d="M132 180h74" />
+          <path class="diagram-line" d="M148 160h28" />
           <circle
             class="diagram-flow-dot diagram-flow-dot-a"
-            cx="132"
-            cy="180"
-            r="3.5"
+            cx="148"
+            cy="160"
+            r="4"
           />
-          <path class="diagram-line" d="M346 180h20v-46h40" />
-          <path class="diagram-line" d="M346 180h20v46h40" />
+          <path class="diagram-line" d="M316 160h18v-76h18" />
+          <path class="diagram-line" d="M316 160h18v40h18" />
           <circle
             class="diagram-flow-dot diagram-flow-dot-b"
-            cx="366"
-            cy="180"
-            r="3"
+            cx="334"
+            cy="160"
+            r="3.5"
           />
 
           <rect
             class="diagram-node-card"
-            x="24"
-            y="152"
-            width="108"
-            height="56"
-            rx="10"
+            x="16"
+            y="128"
+            width="132"
+            height="64"
+            rx="12"
           />
-          <circle class="diagram-node" cx="44" cy="180" r="3" />
-          <text class="diagram-text" x="56" y="175">
+          <circle class="diagram-node" cx="32" cy="160" r="4" />
+          <text class="diagram-text" x="46" y="155">
             REQUEST
           </text>
-          <text class="diagram-text-muted" x="56" y="193">
+          <text class="diagram-text-muted" x="46" y="175">
             Business input
           </text>
 
           <rect
             class="diagram-node-card diagram-node-card-active"
-            x="206"
-            y="118"
+            x="176"
+            y="96"
             width="140"
-            height="120"
+            height="128"
             rx="14"
           />
-          <circle class="diagram-spin-ring" cx="241" cy="168" r="18" />
-          <circle class="diagram-accent-fill" cx="241" cy="168" r="5" />
-          <text class="diagram-text" x="268" y="153">
+          <circle class="diagram-node-soft" cx="246" cy="134" r="20" />
+          <circle class="diagram-spin-ring" cx="246" cy="134" r="20" />
+          <circle class="diagram-accent-fill" cx="246" cy="134" r="6" />
+          <text class="diagram-text diagram-text-center" x="246" y="180">
             ANALYSIS
           </text>
-          <text class="diagram-text-muted" x="268" y="171">
+          <text class="diagram-text-muted diagram-text-center" x="246" y="199">
             Framing the
           </text>
-          <text class="diagram-text-muted" x="268" y="184">
+          <text class="diagram-text-muted diagram-text-center" x="246" y="214">
             business need
           </text>
 
           <rect
             class="diagram-node-card"
-            x="406"
-            y="90"
-            width="98"
-            height="52"
-            rx="10"
+            x="352"
+            y="52"
+            width="116"
+            height="64"
+            rx="12"
           />
-          <text class="diagram-text" x="420" y="112">
+          <text class="diagram-text" x="366" y="79">
             GOAL
           </text>
-          <text class="diagram-text-muted" x="420" y="130">
+          <text class="diagram-text-muted" x="366" y="99">
             Target outcome
           </text>
           <circle
             class="diagram-check-badge diagram-check-1"
-            cx="490"
-            cy="100"
-            r="8"
+            cx="450"
+            cy="72"
+            r="9"
           />
           <path
             class="diagram-check-mark diagram-check-1"
-            d="M486.5 100l2.5 2.6 5-5.6"
+            d="M446 72l2.8 3 5.2-6"
           />
 
           <rect
             class="diagram-node-card"
-            x="406"
-            y="166"
-            width="98"
-            height="104"
+            x="352"
+            y="136"
+            width="116"
+            height="128"
             rx="12"
           />
-          <text class="diagram-text" x="420" y="186">
+          <text class="diagram-text" x="366" y="163">
             CRITERIA
           </text>
           <circle
             class="diagram-check-badge diagram-check-2"
-            cx="419"
-            cy="206"
-            r="4.5"
+            cx="372"
+            cy="188"
+            r="6"
           />
           <path
             class="diagram-check-mark diagram-check-2"
-            d="M416.5 206l1.6 1.8 3.4-4"
+            d="M369 188l2 2.2 4-4.6"
           />
-          <path class="diagram-line" d="M430 206h58" />
+          <path class="diagram-line diagram-line-placeholder" d="M386 188h64" />
           <circle
             class="diagram-check-badge diagram-check-3"
-            cx="419"
-            cy="226"
-            r="4.5"
+            cx="372"
+            cy="212"
+            r="6"
           />
           <path
             class="diagram-check-mark diagram-check-3"
-            d="M416.5 226l1.6 1.8 3.4-4"
+            d="M369 212l2 2.2 4-4.6"
           />
-          <path class="diagram-line" d="M430 226h50" />
+          <path class="diagram-line diagram-line-placeholder" d="M386 212h54" />
           <circle
             class="diagram-check-badge diagram-check-4"
-            cx="419"
-            cy="246"
-            r="4.5"
+            cx="372"
+            cy="236"
+            r="6"
           />
           <path
             class="diagram-check-mark diagram-check-4"
-            d="M416.5 246l1.6 1.8 3.4-4"
+            d="M369 236l2 2.2 4-4.6"
           />
-          <path class="diagram-line" d="M430 246h44" />
+          <path class="diagram-line diagram-line-placeholder" d="M386 236h46" />
 
-          <text class="diagram-text-muted" x="24" y="240">
+          <text class="diagram-text-muted" x="16" y="234">
             Success criteria defined
           </text>
-          <text class="diagram-counter" data-ai-counter="3" x="24" y="266">
+          <text class="diagram-counter" data-ai-counter="3" x="16" y="270">
             0
           </text>
           <text
             class="diagram-text-muted diagram-counter-suffix"
-            x="48"
-            y="266"
+            x="40"
+            y="270"
           >
             / 3
           </text>
@@ -260,158 +281,171 @@ const capabilities = [
         <svg
           class="ai-diagram"
           data-ai-visual="data"
-          viewBox="0 0 520 360"
+          viewBox="0 0 480 320"
           fill="none"
           aria-hidden="true"
         >
-          <path class="diagram-line" d="M112 180h48" />
-          <path class="diagram-line" d="M346 180h40" />
+          <path class="diagram-line" d="M108 168h28" />
+          <path class="diagram-line" d="M348 168h20" />
 
           <g class="diagram-data-row diagram-data-row-1">
-            <rect x="18" y="96" width="92" height="14" rx="4" />
+            <rect x="16" y="120" width="92" height="16" rx="5" />
           </g>
           <g class="diagram-data-row diagram-data-row-2">
-            <rect x="18" y="122" width="92" height="14" rx="4" />
+            <rect x="16" y="146" width="92" height="16" rx="5" />
           </g>
           <g class="diagram-data-row diagram-data-row-3">
-            <rect x="18" y="148" width="92" height="14" rx="4" />
+            <rect x="16" y="172" width="92" height="16" rx="5" />
           </g>
           <g class="diagram-data-row diagram-data-row-4">
-            <rect x="18" y="174" width="92" height="14" rx="4" />
+            <rect x="16" y="198" width="92" height="16" rx="5" />
           </g>
-          <text class="diagram-text-muted" x="18" y="210">
+          <text class="diagram-text-muted" x="16" y="238">
             Raw files
           </text>
 
           <rect
             class="diagram-node-card diagram-node-card-active"
-            x="168"
-            y="86"
-            width="178"
-            height="208"
+            x="136"
+            y="60"
+            width="212"
+            height="216"
             rx="14"
           />
-          <text class="diagram-text" x="184" y="108">
+          <text class="diagram-text" x="154" y="88">
             PREPARE
           </text>
 
           <circle
             class="diagram-check-badge diagram-step-1"
-            cx="187"
-            cy="134"
-            r="5"
+            cx="160"
+            cy="116"
+            r="6"
           />
           <path
             class="diagram-check-mark diagram-step-1"
-            d="M184 134l2 2.2 4-4.6"
+            d="M157 116l2 2.2 4-4.6"
           />
-          <text class="diagram-text-muted" x="200" y="138">
+          <text class="diagram-text-muted" x="174" y="120">
             Remove duplicates
           </text>
           <rect
             class="diagram-progress-track"
-            x="200"
-            y="144"
-            width="130"
-            height="5"
-            rx="2.5"
+            x="174"
+            y="128"
+            width="156"
+            height="6"
+            rx="3"
           />
           <rect
             class="diagram-progress-fill diagram-progress-1"
-            x="200"
-            y="144"
-            width="130"
-            height="5"
-            rx="2.5"
+            x="174"
+            y="128"
+            width="156"
+            height="6"
+            rx="3"
           />
 
           <circle
             class="diagram-check-badge diagram-step-2"
-            cx="187"
-            cy="172"
-            r="5"
+            cx="160"
+            cy="156"
+            r="6"
           />
           <path
             class="diagram-check-mark diagram-step-2"
-            d="M184 172l2 2.2 4-4.6"
+            d="M157 156l2 2.2 4-4.6"
           />
-          <text class="diagram-text-muted" x="200" y="176">
+          <text class="diagram-text-muted" x="174" y="160">
             Handle missing values
           </text>
           <rect
             class="diagram-progress-track"
-            x="200"
-            y="182"
-            width="130"
-            height="5"
-            rx="2.5"
+            x="174"
+            y="168"
+            width="156"
+            height="6"
+            rx="3"
           />
           <rect
             class="diagram-progress-fill diagram-progress-2"
-            x="200"
-            y="182"
-            width="130"
-            height="5"
-            rx="2.5"
+            x="174"
+            y="168"
+            width="156"
+            height="6"
+            rx="3"
           />
 
           <circle
             class="diagram-check-badge diagram-step-3"
-            cx="187"
-            cy="210"
-            r="5"
+            cx="160"
+            cy="196"
+            r="6"
           />
           <path
             class="diagram-check-mark diagram-step-3"
-            d="M184 210l2 2.2 4-4.6"
+            d="M157 196l2 2.2 4-4.6"
           />
-          <text class="diagram-text-muted" x="200" y="214">
+          <text class="diagram-text-muted" x="174" y="200">
             Validate &amp; quality-check
           </text>
           <rect
             class="diagram-progress-track"
-            x="200"
-            y="220"
-            width="130"
-            height="5"
-            rx="2.5"
+            x="174"
+            y="208"
+            width="156"
+            height="6"
+            rx="3"
           />
           <rect
             class="diagram-progress-fill diagram-progress-3"
-            x="200"
-            y="220"
-            width="130"
-            height="5"
-            rx="2.5"
+            x="174"
+            y="208"
+            width="156"
+            height="6"
+            rx="3"
           />
 
-          <text class="diagram-text-muted" x="184" y="264">
+          <path class="diagram-gridline" d="M154 230h176" />
+          <text class="diagram-text-muted" x="154" y="256">
             Rows processed
           </text>
-          <text class="diagram-counter" data-ai-counter="128" x="184" y="286">
+          <text
+            class="diagram-counter diagram-counter-end"
+            data-ai-counter="128"
+            x="330"
+            y="260"
+          >
             0
           </text>
 
           <rect
             class="diagram-node-card"
-            x="384"
-            y="104"
-            width="118"
-            height="152"
+            x="368"
+            y="80"
+            width="104"
+            height="176"
             rx="12"
           />
-          <path
-            class="diagram-gridline"
-            d="M404 134h78m-78 24h78m-78 24h78m-78 24h78"
-          />
-          <path class="diagram-gridline" d="M424 134v96m24-96v96m24-96v96" />
-          <text class="diagram-text" x="400" y="118">
+          <text
+            class="diagram-text diagram-text-center diagram-text-compact"
+            x="420"
+            y="102"
+          >
             STRUCTURED
           </text>
+          <path
+            class="diagram-gridline diagram-gridline-strong"
+            d="M384 116h72m-72 22h72m-72 22h72m-72 22h72"
+          />
+          <path
+            class="diagram-gridline diagram-gridline-strong"
+            d="M408 116v66m24-66v66"
+          />
           <g class="diagram-ready-badge">
-            <rect x="400" y="220" width="86" height="24" rx="12" />
-            <circle cx="412" cy="232" r="3" />
-            <text x="422" y="236">
+            <rect x="382" y="208" width="76" height="28" rx="14" />
+            <circle cx="398" cy="222" r="3.5" />
+            <text x="408" y="226.5">
               READY
             </text>
           </g>
@@ -420,206 +454,202 @@ const capabilities = [
         <svg
           class="ai-diagram"
           data-ai-visual="model"
-          viewBox="0 0 520 360"
+          viewBox="0 0 480 320"
           fill="none"
           aria-hidden="true"
         >
           <path
             class="diagram-line diagram-model-connector"
-            d="M118 179h30m104 0h26m100 0h30"
+            d="M112 172h16m104 0h16m104 0h16"
           />
           <circle
             class="diagram-model-flow-dot diagram-model-flow-one"
-            cx="118"
-            cy="179"
-            r="3.5"
+            cx="112"
+            cy="172"
+            r="4"
           />
           <circle
             class="diagram-model-flow-dot diagram-model-flow-two"
-            cx="252"
-            cy="179"
-            r="3.5"
+            cx="232"
+            cy="172"
+            r="4"
           />
           <circle
             class="diagram-model-flow-dot diagram-model-flow-three"
-            cx="378"
-            cy="179"
-            r="3.5"
+            cx="352"
+            cy="172"
+            r="4"
           />
 
-          <rect
-            class="diagram-node-card"
-            x="18"
-            y="116"
-            width="100"
-            height="126"
-            rx="12"
-          />
-          <text class="diagram-text diagram-model-heading" x="30" y="106">
+          <text class="diagram-text diagram-text-center" x="60" y="78">
             INPUT DATA
           </text>
-          <text
-            class="diagram-text-muted diagram-model-small diagram-model-input-label"
-            x="30"
-            y="137"
-          >
-            APPROVED SOURCES
-          </text>
-          <g class="diagram-model-input-row diagram-model-input-row-one">
-            <circle class="diagram-node" cx="33" cy="155" r="3" />
-            <rect x="42" y="152" width="58" height="6" rx="3" />
-          </g>
-          <g class="diagram-model-input-row diagram-model-input-row-two">
-            <circle class="diagram-node" cx="33" cy="177" r="3" />
-            <rect x="42" y="174" width="50" height="6" rx="3" />
-          </g>
-          <g class="diagram-model-input-row diagram-model-input-row-three">
-            <circle class="diagram-node" cx="33" cy="199" r="3" />
-            <rect x="42" y="196" width="55" height="6" rx="3" />
-          </g>
-          <path class="diagram-gridline" d="M30 218h76" />
-          <text
-            class="diagram-text-muted diagram-model-small diagram-model-input-label"
-            x="30"
-            y="233"
-          >
-            RECORDS · EVENTS
-          </text>
-
           <rect
-            class="diagram-node-card diagram-node-card-active"
-            x="148"
-            y="104"
+            class="diagram-node-card"
+            x="8"
+            y="92"
             width="104"
-            height="138"
+            height="160"
             rx="12"
           />
-          <text class="diagram-text diagram-model-heading" x="160" y="94">
+          <text class="diagram-model-small" x="22" y="118">
+            SOURCES
+          </text>
+          <g class="diagram-model-input-row diagram-model-input-row-one">
+            <circle class="diagram-node" cx="25" cy="146" r="3.5" />
+            <rect x="36" y="142.5" width="60" height="7" rx="3.5" />
+          </g>
+          <g class="diagram-model-input-row diagram-model-input-row-two">
+            <circle class="diagram-node" cx="25" cy="170" r="3.5" />
+            <rect x="36" y="166.5" width="50" height="7" rx="3.5" />
+          </g>
+          <g class="diagram-model-input-row diagram-model-input-row-three">
+            <circle class="diagram-node" cx="25" cy="194" r="3.5" />
+            <rect x="36" y="190.5" width="56" height="7" rx="3.5" />
+          </g>
+          <path class="diagram-gridline" d="M22 214h76" />
+          <text class="diagram-model-small" x="22" y="236">
+            RECORDS
+          </text>
+
+          <text class="diagram-text diagram-text-center" x="180" y="78">
             TRAIN MODEL
           </text>
-          <circle class="diagram-node-soft" cx="200" cy="143" r="17" />
+          <rect
+            class="diagram-node-card diagram-node-card-active"
+            x="128"
+            y="92"
+            width="104"
+            height="160"
+            rx="12"
+          />
+          <circle class="diagram-node-soft" cx="180" cy="128" r="19" />
           <circle
             class="diagram-node diagram-model-core"
-            cx="200"
-            cy="143"
+            cx="180"
+            cy="128"
             r="7"
           />
           <path
             class="diagram-accent-line"
-            d="M184 143h8m16 0h8m-16-16v8m0 16v8"
+            d="M163 128h8m18 0h8m-17-17v8m0 18v8"
           />
-          <text class="diagram-text-muted diagram-model-small" x="160" y="177">
+          <text class="diagram-model-small diagram-text-center" x="180" y="168">
             TRAINING RUN
           </text>
-          <text class="diagram-text-muted diagram-model-small" x="160" y="195">
+          <text class="diagram-model-small" x="140" y="190">
             EPOCH
           </text>
           <text
             class="diagram-epoch-value diagram-model-epoch"
             data-ai-counter="4"
-            x="204"
-            y="195"
+            x="186"
+            y="191"
           >
             0
           </text>
-          <text class="diagram-text-muted diagram-model-small" x="221" y="195">
+          <text class="diagram-model-small" x="200" y="190">
             / 6
           </text>
           <rect
             class="diagram-progress-track"
-            x="160"
-            y="207"
+            x="140"
+            y="200"
             width="80"
-            height="5"
-            rx="2.5"
+            height="6"
+            rx="3"
           />
           <rect
             class="diagram-model-progress-fill"
-            x="160"
-            y="207"
-            width="58"
-            height="5"
-            rx="2.5"
+            x="140"
+            y="200"
+            width="56"
+            height="6"
+            rx="3"
           />
-          <text class="diagram-text-muted diagram-model-small" x="160" y="230">
-            WEIGHTS UPDATED
+          <text class="diagram-model-small diagram-text-center" x="180" y="226">
+            WEIGHTS
+          </text>
+          <text class="diagram-model-small diagram-text-center" x="180" y="240">
+            UPDATED
           </text>
 
-          <rect
-            class="diagram-node-card"
-            x="278"
-            y="116"
-            width="100"
-            height="126"
-            rx="12"
-          />
-          <text class="diagram-text diagram-model-heading" x="290" y="106">
+          <text class="diagram-text diagram-text-center" x="300" y="78">
             EVALUATION
           </text>
-          <text class="diagram-text-muted diagram-model-small" x="290" y="137">
-            SAMPLE METRICS
-          </text>
-          <text class="diagram-text-muted diagram-model-small" x="290" y="158">
+          <rect
+            class="diagram-node-card"
+            x="248"
+            y="92"
+            width="104"
+            height="160"
+            rx="12"
+          />
+          <text class="diagram-model-small" x="262" y="118">
             ACCURACY
           </text>
           <text
             class="diagram-counter diagram-counter-pct diagram-model-metric"
             data-ai-counter="94"
-            x="290"
-            y="181"
+            x="262"
+            y="148"
           >
             0
           </text>
-          <path class="diagram-gridline" d="M290 190h76" />
-          <text class="diagram-text-muted diagram-model-small" x="290" y="210">
+          <path class="diagram-gridline" d="M262 162h76" />
+          <text class="diagram-model-small" x="262" y="186">
             LOSS
           </text>
-          <text class="diagram-epoch-value diagram-model-loss" x="340" y="211">
+          <text
+            class="diagram-epoch-value diagram-model-loss diagram-counter-end"
+            x="338"
+            y="187"
+          >
             0.08
           </text>
           <g class="diagram-ready-badge diagram-model-eval-ready">
-            <rect x="290" y="220" width="58" height="15" rx="7.5" />
-            <circle cx="299" cy="227.5" r="2" />
-            <text x="305" y="230">
+            <rect x="262" y="210" width="76" height="24" rx="12" />
+            <circle cx="276" cy="222" r="3" />
+            <text x="285" y="226">
               REVIEW
             </text>
           </g>
 
-          <rect
-            class="diagram-node-card"
-            x="408"
-            y="116"
-            width="100"
-            height="126"
-            rx="12"
-          />
-          <text class="diagram-text diagram-model-heading" x="436" y="106">
+          <text class="diagram-text diagram-text-center" x="420" y="78">
             REFINE
           </text>
+          <rect
+            class="diagram-node-card"
+            x="368"
+            y="92"
+            width="104"
+            height="160"
+            rx="12"
+          />
           <path
             class="diagram-model-cycle"
-            d="M439 157a17 17 0 0 1 30-10m-1 0-1 8 8-3m-1 16a17 17 0 0 1-30 10m1 0 1-8-8 3"
+            d="M405 129a17 17 0 0 1 30-10m-1 0-1 8 8-3m-1 16a17 17 0 0 1-30 10m1 0 1-8-8 3"
           />
-          <text class="diagram-text-muted diagram-model-small" x="425" y="198">
+          <text class="diagram-model-small diagram-text-center" x="420" y="182">
             ADJUST
           </text>
-          <text class="diagram-text-muted diagram-model-small" x="425" y="212">
+          <text class="diagram-model-small diagram-text-center" x="420" y="198">
             &amp; RE-TEST
           </text>
-          <path class="diagram-gridline" d="M425 222h66" />
-          <text class="diagram-text-muted diagram-model-small" x="425" y="235">
+          <path class="diagram-gridline" d="M384 212h72" />
+          <text class="diagram-model-small diagram-text-center" x="420" y="236">
             ITERATE
           </text>
 
-          <path class="diagram-model-loop" d="M458 243v22H200v-13" />
+          <path class="diagram-model-loop" d="M420 252v26H180v-18" />
           <path
             class="diagram-accent-line diagram-model-loop-arrow"
-            d="m194 257 6-6 6 6"
+            d="m174 266 6-6 6 6"
           />
           <text
-            class="diagram-text-muted diagram-model-loop-label"
-            x="275"
-            y="287"
+            class="diagram-text-muted diagram-model-loop-label diagram-text-center"
+            x="300"
+            y="302"
           >
             REFINE → RETRAIN
           </text>
@@ -628,167 +658,184 @@ const capabilities = [
         <svg
           class="ai-diagram"
           data-ai-visual="deploy"
-          viewBox="0 0 520 360"
+          viewBox="0 0 480 320"
           fill="none"
           aria-hidden="true"
         >
           <path
             class="diagram-line diagram-deploy-connector"
-            d="M121 180h18M249 180h18M377 180h18"
+            d="M112 166h16M232 166h16M352 166h16"
           />
           <circle
             class="diagram-deploy-particle diagram-deploy-particle-one"
-            cx="121"
-            cy="180"
-            r="3.5"
+            cx="112"
+            cy="166"
+            r="4"
           />
           <circle
             class="diagram-deploy-particle diagram-deploy-particle-two"
-            cx="249"
-            cy="180"
-            r="3.5"
+            cx="232"
+            cy="166"
+            r="4"
           />
           <circle
             class="diagram-deploy-particle diagram-deploy-particle-three"
-            cx="377"
-            cy="180"
-            r="3.5"
+            cx="352"
+            cy="166"
+            r="4"
           />
 
-          <text class="diagram-text diagram-deploy-heading" x="66" y="105">
-            BUSINESS TOOLS
+          <text class="diagram-text diagram-text-center" x="60" y="62">
+            BUSINESS
+          </text>
+          <text class="diagram-text diagram-text-center" x="60" y="79">
+            TOOLS
           </text>
           <rect
             class="diagram-node-card"
-            x="20"
-            y="118"
-            width="92"
-            height="124"
+            x="8"
+            y="92"
+            width="104"
+            height="148"
             rx="12"
           />
           <rect
             class="diagram-node-card-active"
-            x="31"
-            y="135"
-            width="70"
-            height="25"
-            rx="6"
+            x="18"
+            y="106"
+            width="84"
+            height="26"
+            rx="7"
           />
-          <circle class="diagram-node" cx="41" cy="147.5" r="3" />
-          <path class="diagram-line" d="M51 147h39" />
-          <circle class="diagram-node" cx="36" cy="177" r="3" />
+          <circle class="diagram-node" cx="31" cy="119" r="3.5" />
+          <path class="diagram-line diagram-line-placeholder" d="M42 119h48" />
+          <circle class="diagram-node" cx="24" cy="152" r="3.5" />
           <path
-            class="diagram-line"
-            d="M46 177h48m-58 17h8m10 0h40m-58 17h8m10 0h28"
+            class="diagram-line diagram-line-placeholder"
+            d="M34 152h62m-72 18h8m10 0h54m-72 18h8m10 0h36"
           />
-          <text class="diagram-text-muted diagram-deploy-small" x="31" y="232">
+          <text class="diagram-deploy-small diagram-text-center" x="60" y="222">
             ORDERS · CRM
           </text>
 
-          <text class="diagram-text diagram-deploy-heading" x="194" y="105">
-            API / INTEGRATION
+          <text class="diagram-text diagram-text-center" x="180" y="62">
+            API /
+          </text>
+          <text class="diagram-text diagram-text-center" x="180" y="79">
+            INTEGRATION
           </text>
           <rect
             class="diagram-node-card"
-            x="148"
-            y="118"
-            width="92"
-            height="124"
+            x="128"
+            y="92"
+            width="104"
+            height="148"
             rx="12"
           />
-          <circle class="diagram-node-soft" cx="194" cy="177" r="25" />
+          <circle class="diagram-node-soft" cx="180" cy="158" r="28" />
           <circle
             class="diagram-node diagram-deploy-api-node"
-            cx="194"
-            cy="177"
+            cx="180"
+            cy="158"
             r="8"
           />
           <path
             class="diagram-accent-line"
-            d="M194 151v17m0 18v17m-26-26h17m18 0h17"
+            d="M180 130v19m0 18v19m-28-28h19m18 0h19"
           />
-          <circle class="diagram-node" cx="194" cy="151" r="3" />
-          <circle class="diagram-node" cx="194" cy="203" r="3" />
-          <circle class="diagram-node" cx="168" cy="177" r="3" />
-          <circle class="diagram-node" cx="220" cy="177" r="3" />
-          <text class="diagram-text-muted diagram-deploy-small" x="161" y="224">
+          <circle class="diagram-node" cx="180" cy="130" r="3.5" />
+          <circle class="diagram-node" cx="180" cy="186" r="3.5" />
+          <circle class="diagram-node" cx="152" cy="158" r="3.5" />
+          <circle class="diagram-node" cx="208" cy="158" r="3.5" />
+          <text
+            class="diagram-deploy-small diagram-text-center"
+            x="180"
+            y="222"
+          >
             AUTH · ROUTING
           </text>
 
-          <text class="diagram-text diagram-deploy-heading" x="322" y="105">
-            MODEL SERVICE
+          <text class="diagram-text diagram-text-center" x="300" y="62">
+            MODEL
+          </text>
+          <text class="diagram-text diagram-text-center" x="300" y="79">
+            SERVICE
           </text>
           <rect
             class="diagram-node-card diagram-node-card-active"
-            x="276"
-            y="118"
-            width="92"
-            height="124"
+            x="248"
+            y="92"
+            width="104"
+            height="148"
             rx="12"
           />
-          <circle class="diagram-node-soft" cx="322" cy="160" r="18" />
-          <path class="diagram-accent-line" d="M313 160h18m-9-9v18" />
+          <circle class="diagram-node-soft" cx="300" cy="136" r="20" />
+          <path class="diagram-accent-line" d="M290 136h20m-10-10v20" />
           <text
-            class="diagram-text-muted diagram-deploy-service-label"
-            x="322"
-            y="195"
+            class="diagram-deploy-small diagram-text-center"
+            x="300"
+            y="180"
           >
             INFERENCE API
           </text>
-          <path class="diagram-gridline" d="M288 207h68" />
+          <path class="diagram-gridline" d="M262 194h76" />
           <circle
             class="diagram-accent-fill diagram-deploy-status-dot"
-            cx="292"
-            cy="224"
-            r="3"
+            cx="270"
+            cy="216"
+            r="3.5"
           />
-          <text class="diagram-text-muted diagram-deploy-small" x="300" y="228">
+          <text class="diagram-deploy-small" x="280" y="220">
             HEALTHY
           </text>
 
-          <text class="diagram-text diagram-deploy-heading" x="452" y="105">
-            APP / WORKFLOW
+          <text class="diagram-text diagram-text-center" x="420" y="62">
+            APP /
+          </text>
+          <text class="diagram-text diagram-text-center" x="420" y="79">
+            WORKFLOW
           </text>
           <rect
             class="diagram-node-card"
-            x="404"
-            y="118"
-            width="96"
-            height="124"
+            x="368"
+            y="92"
+            width="104"
+            height="148"
             rx="12"
           />
           <rect
             class="diagram-node-card-active"
-            x="414"
-            y="134"
-            width="76"
-            height="24"
-            rx="5"
+            x="378"
+            y="106"
+            width="84"
+            height="26"
+            rx="7"
           />
-          <circle class="diagram-accent-fill" cx="426" cy="146" r="3" />
+          <circle class="diagram-accent-fill" cx="391" cy="119" r="3.5" />
+          <path class="diagram-line diagram-line-placeholder" d="M402 119h48" />
           <path
-            class="diagram-line"
-            d="M436 146h44m-66 30h66m-66 13h52m-52 17h66m-66 13h34"
+            class="diagram-line diagram-line-placeholder"
+            d="M382 152h76m-76 16h58m-58 18h76m-76 16h40"
           />
           <circle
             class="diagram-node diagram-deploy-check"
-            cx="482"
-            cy="217"
-            r="5"
+            cx="452"
+            cy="218"
+            r="7"
           />
           <path
             class="diagram-check-mark diagram-deploy-check-mark"
-            d="m480 217 1.5 1.5 3-3"
+            d="m448.5 218 2.5 2.5 4.5-5"
           />
 
           <g class="diagram-status-cycle">
-            <text class="diagram-status-item diagram-status-1" x="260" y="282">
+            <text class="diagram-status-item diagram-status-1" x="240" y="282">
               TESTING
             </text>
-            <text class="diagram-status-item diagram-status-2" x="260" y="282">
+            <text class="diagram-status-item diagram-status-2" x="240" y="282">
               DEPLOYING
             </text>
-            <text class="diagram-status-item diagram-status-3" x="260" y="282">
+            <text class="diagram-status-item diagram-status-3" x="240" y="282">
               LIVE
             </text>
           </g>
@@ -797,89 +844,89 @@ const capabilities = [
         <svg
           class="ai-diagram"
           data-ai-visual="monitor"
-          viewBox="0 0 520 360"
+          viewBox="0 0 480 320"
           fill="none"
           aria-hidden="true"
         >
           <rect
             class="diagram-node-card"
-            x="48"
-            y="54"
-            width="424"
-            height="246"
+            x="16"
+            y="20"
+            width="448"
+            height="280"
             rx="16"
           />
           <path
             class="diagram-gridline"
-            d="M82 243h348m-348-44h348m-348-44h348"
+            d="M44 204h392m-392-42h392m-392-42h392"
           />
-          <path class="diagram-line" d="M82 91v168m0 0h348" />
+          <path class="diagram-line" d="M44 82v164m0 0h392" />
           <path
             class="diagram-chart-line"
-            d="m103 215 66-26 64 12 64-58 64 9 64-39"
+            d="M66 222 134 196 202 208 270 150 338 160 406 118"
           />
           <circle
             class="diagram-node diagram-chart-point diagram-chart-point-1"
-            cx="103"
-            cy="215"
-            r="5"
+            cx="66"
+            cy="222"
+            r="5.5"
           />
           <circle
             class="diagram-node diagram-chart-point diagram-chart-point-2"
-            cx="169"
-            cy="189"
-            r="5"
+            cx="134"
+            cy="196"
+            r="5.5"
           />
           <circle
             class="diagram-node diagram-chart-point diagram-chart-point-3"
-            cx="233"
-            cy="201"
-            r="5"
+            cx="202"
+            cy="208"
+            r="5.5"
           />
           <circle
             class="diagram-node diagram-chart-point diagram-chart-point-4"
-            cx="297"
-            cy="143"
-            r="5"
+            cx="270"
+            cy="150"
+            r="5.5"
           />
           <circle
             class="diagram-node diagram-chart-point diagram-chart-point-5"
-            cx="361"
-            cy="152"
-            r="5"
+            cx="338"
+            cy="160"
+            r="5.5"
           />
           <circle
             class="diagram-accent-fill diagram-chart-point diagram-chart-point-6"
-            cx="425"
-            cy="113"
-            r="7"
+            cx="406"
+            cy="118"
+            r="8"
           />
-          <circle class="diagram-alert-dot" cx="233" cy="201" r="9" />
+          <circle class="diagram-alert-dot" cx="202" cy="208" r="10" />
           <rect
             class="diagram-node-card-active"
-            x="339"
-            y="70"
-            width="110"
-            height="25"
-            rx="12"
+            x="350"
+            y="36"
+            width="98"
+            height="28"
+            rx="14"
           />
-          <circle class="diagram-accent-fill" cx="354" cy="82.5" r="4" />
-          <text class="diagram-text" x="367" y="86">
+          <circle class="diagram-accent-fill" cx="366" cy="50" r="4" />
+          <text class="diagram-text diagram-text-compact" x="378" y="54.5">
             HEALTHY
           </text>
-          <text class="diagram-text" x="82" y="79">
+          <text class="diagram-text" x="44" y="56">
             QUALITY &amp; RELIABILITY
           </text>
-          <text class="diagram-text-muted" x="82" y="282">
+          <text class="diagram-text-muted" x="44" y="278">
             OUTCOMES OVER TIME
           </text>
-          <path class="diagram-feedback-line" d="M430 277c20-8 29-25 27-48" />
-          <path class="diagram-accent-line" d="m450 235 7-8 7 7" />
-          <circle class="diagram-feedback-dot" cx="430" cy="277" r="3" />
+          <path class="diagram-feedback-line" d="M412 270c20-8 29-25 27-48" />
+          <path class="diagram-accent-line" d="m432 230 7-8 7 7" />
+          <circle class="diagram-feedback-dot" cx="412" cy="270" r="3.5" />
           <text
-            class="diagram-text-muted diagram-feedback-label"
-            x="347"
-            y="286"
+            class="diagram-text-muted diagram-feedback-label diagram-counter-end"
+            x="400"
+            y="278"
           >
             Feedback loop
           </text>

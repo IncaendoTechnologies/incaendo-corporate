@@ -30,7 +30,7 @@ const serviceDetails = [
     image: serviceAIAutomationImage,
     imageAlt: 'Colleagues reviewing an AI-assisted business workflow together',
     link: '/ai-technology',
-    linkLabel: 'Explore AI technology',
+    linkLabel: 'Explore AI',
   },
   {
     id: 'custom-software-development',
@@ -433,30 +433,6 @@ const deliverySteps = [
           </article>
         ))}
       </div>
-      <p class="delivery-collaboration">
-        <span aria-hidden="true">↗</span>
-        <strong>Continuous collaboration</strong> Feedback, communication, and
-        quality checks throughout the journey.
-      </p>
-    </div>
-  </section>
-
-  <section class="services-final-cta" aria-labelledby="services-final-title">
-    <div class="site-container services-final-inner reveal">
-      <div>
-        <p class="eyebrow eyebrow-light">YOUR NEXT DIGITAL STEP</p>
-        <h2 id="services-final-title">
-          Bring the challenge.{' '}
-          <span>We’ll work through the right solution.</span>
-        </h2>
-        <p>
-          Tell us what your team is trying to improve, connect, or build. We’ll
-          start with the context and explore a practical way forward.
-        </p>
-      </div>
-      <a class="button button-primary" href="/contact">
-        Discuss your project <span aria-hidden="true">↗</span>
-      </a>
     </div>
   </section>
 </div>
@@ -1829,23 +1805,6 @@ const deliverySteps = [
     font-size: 0.48rem;
     letter-spacing: 0.1em;
   }
-  .delivery-collaboration {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.55rem;
-    margin: 1.9rem 0 0;
-    color: var(--color-muted);
-    font-size: 0.76rem;
-    text-align: center;
-  }
-  .delivery-collaboration > span {
-    color: var(--color-orange-dark);
-  }
-  .delivery-collaboration strong {
-    color: var(--color-navy);
-    font-weight: 650;
-  }
 
   .services-experience {
     padding-block: clamp(3.5rem, 6vw, 5rem);
@@ -1954,49 +1913,6 @@ const deliverySteps = [
     color: rgb(255 255 255 / 58%);
     font-size: 0.61rem;
     line-height: 1.45;
-  }
-
-  .services-final-cta {
-    padding-block: clamp(3rem, 5vw, 4.5rem);
-    background:
-      radial-gradient(
-        ellipse at 75% 50%,
-        rgb(84 123 157 / 15%),
-        transparent 35%
-      ),
-      var(--color-navy);
-  }
-  .services-final-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-  }
-  .services-final-inner > div {
-    max-width: 770px;
-  }
-  .services-final-inner .eyebrow {
-    margin-bottom: 0.7rem;
-  }
-  .services-final-inner h2 {
-    margin-bottom: 0.8rem;
-    color: #fff;
-    font-size: clamp(2rem, 3.5vw, 3.25rem);
-    font-weight: 550;
-    letter-spacing: -0.06em;
-    line-height: 1.1;
-  }
-  .services-page .services-final-inner h2 span {
-    color: #e9a17e;
-  }
-  .services-final-inner p:not(.eyebrow) {
-    max-width: 620px;
-    margin: 0;
-    color: rgb(255 255 255 / 70%);
-    font-size: 0.87rem;
-  }
-  .services-final-inner .button {
-    flex: 0 0 auto;
   }
 
   @keyframes service-flow {
@@ -2146,11 +2062,6 @@ const deliverySteps = [
     .delivery-step p {
       min-height: 4.5rem;
     }
-    .delivery-collaboration {
-      flex-wrap: wrap;
-      gap: 0.35rem 0.5rem;
-      font-size: 0.7rem;
-    }
     .experience-panel {
       grid-template-columns: minmax(0, 1fr);
       gap: 1.5rem;
@@ -2185,15 +2096,6 @@ const deliverySteps = [
     }
     .experience-principles > div > span {
       grid-row: span 2;
-    }
-    .services-final-inner {
-      align-items: flex-start;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-    .services-final-inner .button {
-      width: 100%;
-      justify-content: space-between;
     }
   }
   @media (max-width: 430px) {

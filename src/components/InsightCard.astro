@@ -3,9 +3,7 @@ import InsightArtwork from './InsightArtwork.astro'
 import { Image } from 'astro:assets'
 
 const { article, variant = 'standard', thumbnail } = Astro.props
-const searchText = [article.title, article.excerpt, ...article.tags]
-  .join(' ')
-  .toLocaleLowerCase()
+const image = thumbnail ?? article.image?.src
 const categoryKey = article.category
   .toLocaleLowerCase()
   .replace(/[^a-z0-9]+/g, '-')
@@ -16,7 +14,6 @@ const categoryKey = article.category
   class:list={['insight-card', `insight-card-${variant}`]}
   data-insight-card
   data-insight-category={categoryKey}
-  data-insight-search={searchText}
   data-reveal-item={variant !== 'hero' ? '' : undefined}
 >
   <a
@@ -24,11 +21,17 @@ const categoryKey = article.category
     href={`/insights/${article.slug}/`}
     aria-label={`Read article: ${article.title}`}
   >
-    {thumbnail ? (
+    {image ? (
       <Image
         class="insight-photo"
-        src={thumbnail}
+        src={image}
         alt=""
+        widths={[480, 800, 1200]}
+        sizes={
+          variant === 'lead'
+            ? '(max-width: 700px) 100vw, 640px'
+            : '(max-width: 600px) 100vw, (max-width: 1050px) 50vw, 400px'
+        }
         loading="lazy"
         decoding="async"
       />
@@ -232,7 +235,13 @@ const categoryKey = article.category
 
   .insight-card-lead .insight-card-art-link {
     height: 100%;
+    min-height: 340px;
     aspect-ratio: auto;
+  }
+
+  .insight-card-lead .insight-card-art-link > :global(img) {
+    position: absolute;
+    inset: 0;
   }
 
   .insight-card-lead .insight-card-art-link :global(.insight-art) {
@@ -264,6 +273,7 @@ const categoryKey = article.category
 
     .insight-card-lead .insight-card-art-link {
       height: auto;
+      min-height: 0;
       aspect-ratio: 18 / 11;
     }
 

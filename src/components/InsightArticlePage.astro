@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets'
 import InsightArtwork from './InsightArtwork.astro'
 import InsightCard from './InsightCard.astro'
 import { articles } from '../data/articles.js'
@@ -44,11 +45,22 @@ const relatedArticles = articles
   <main class="article-main">
     <div class="site-container">
       <figure class="article-cover reveal">
-        <InsightArtwork
-          variant={article.variant}
-          title={`Illustration for ${article.title}`}
-          prefix={article.slug}
-        />
+        {article.image ? (
+          <Image
+            src={article.image.src}
+            alt={article.image.alt}
+            widths={[720, 1080, 1600, 2160]}
+            sizes="(max-width: 1160px) 100vw, 1080px"
+            loading="eager"
+            fetchpriority="high"
+          />
+        ) : (
+          <InsightArtwork
+            variant={article.variant}
+            title={`Illustration for ${article.title}`}
+            prefix={article.slug}
+          />
+        )}
       </figure>
       <p class="article-draft-warning">
         Sample editorial content for page development. Replace with approved
@@ -209,8 +221,13 @@ const relatedArticles = articles
     box-shadow: 0 20px 55px rgb(16 27 45 / 8%);
   }
 
-  .article-cover :global(.insight-art) {
+  .article-cover :global(.insight-art),
+  .article-cover > :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
     aspect-ratio: 18 / 9;
+    object-fit: cover;
   }
 
   .article-draft-warning {
@@ -411,7 +428,8 @@ const relatedArticles = articles
     .article-cover {
       border-radius: var(--radius-medium);
     }
-    .article-cover :global(.insight-art) {
+    .article-cover :global(.insight-art),
+    .article-cover > :global(img) {
       aspect-ratio: 16 / 10;
     }
     .article-draft-warning {

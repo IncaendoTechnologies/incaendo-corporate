@@ -1,8 +1,5 @@
 ---
 import InsightCard from './InsightCard.astro'
-import aiDashboard from '../assets/AI-Powered Impact Dashboard.png'
-import aiNetwork from '../assets/hero-orbittt.png'
-import engineeringDesk from '../assets/hero-orbit.png'
 import {
   featuredArticles,
   heroArticle,
@@ -14,8 +11,6 @@ const homeArticles = [
   featuredArticles[0],
   latestArticles[0],
 ].filter(Boolean)
-
-const articleThumbnails = [aiDashboard, aiNetwork, engineeringDesk]
 ---
 
 <section class="home-insights-section" aria-labelledby="home-insights-heading">
@@ -38,12 +33,8 @@ const articleThumbnails = [aiDashboard, aiNetwork, engineeringDesk]
     </div>
 
     <div class="home-insights-grid reveal" data-reveal-stagger>
-      {homeArticles.map((article, index) => (
-        <InsightCard
-          article={article}
-          variant="standard"
-          thumbnail={articleThumbnails[index]}
-        />
+      {homeArticles.map((article) => (
+        <InsightCard article={article} variant="standard" />
       ))}
     </div>
   </div>

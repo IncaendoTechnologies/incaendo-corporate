@@ -1,6 +1,6 @@
 ---
 import InsightCard from './InsightCard.astro'
-import InsightsHeroVisual from './InsightsHeroVisual.astro'
+import InsightsHeroLatest from './InsightsHeroLatest.astro'
 import {
   articles,
   featuredArticles,
@@ -43,7 +43,7 @@ const categoryKey = (category) =>
           Field notes on building and operating digital systems.
         </p>
       </div>
-      <InsightsHeroVisual />
+      <InsightsHeroLatest />
     </div>
   </section>
 
@@ -89,10 +89,6 @@ const categoryKey = (category) =>
             Browse the <span>latest thinking.</span>
           </h2>
         </div>
-        <p>
-          Search sample articles by title, summary or topic. Use a category to
-          narrow the collection.
-        </p>
       </header>
 
       <p class="insights-draft-note">
@@ -102,34 +98,6 @@ const categoryKey = (category) =>
       </p>
 
       <div class="insights-toolbar" data-insights-toolbar>
-        <label class="insights-search-label" for="insights-search">
-          Search articles
-        </label>
-        <div class="insights-search-row">
-          <div class="insights-search-box">
-            <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
-              <circle cx="10.8" cy="10.8" r="6.3"></circle>
-              <path d="m15.5 15.5 4.1 4.1"></path>
-            </svg>
-            <input
-              id="insights-search"
-              type="search"
-              placeholder="Title, summary or topic"
-              autocomplete="off"
-              data-insights-search
-            />
-          </div>
-          <button class="insights-reset" type="button" data-insights-reset>
-            Clear filters
-          </button>
-          <p
-            class="insights-result-count"
-            data-insights-count
-            aria-live="polite"
-          >
-            {articles.length} sample articles
-          </p>
-        </div>
         <div
           class="insights-filters"
           role="group"
@@ -160,6 +128,18 @@ const categoryKey = (category) =>
             </button>
           ))}
         </div>
+        <div class="insights-toolbar-meta">
+          <p
+            class="insights-result-count"
+            data-insights-count
+            aria-live="polite"
+          >
+            {articles.length} sample articles
+          </p>
+          <button class="insights-reset" type="button" data-insights-reset>
+            Clear filters
+          </button>
+        </div>
       </div>
 
       <div class="insights-latest-layout">
@@ -180,12 +160,8 @@ const categoryKey = (category) =>
           Matching sample articles are featured above.
         </p>
         <p class="insights-empty-state" data-insights-empty hidden>
-          No sample articles match that search. Clear the filters or try another
+          No sample articles match that filter. Clear the filters or try another
           topic.
-        </p>
-        <p class="insights-total-note" data-insights-total>
-          Publication dates and bylines are intentionally omitted until approved
-          content is available.
         </p>
       </div>
     </div>
@@ -198,7 +174,6 @@ const categoryKey = (category) =>
     if (!page || page.dataset.insightsReady === 'true') return
     page.dataset.insightsReady = 'true'
 
-    const search = page.querySelector('[data-insights-search]')
     const reset = page.querySelector('[data-insights-reset]')
     const filters = [...page.querySelectorAll('[data-insights-filter]')]
     const cards = [...page.querySelectorAll('[data-insight-card]')]
@@ -210,16 +185,14 @@ const categoryKey = (category) =>
     let activeCategory = 'all'
 
     const update = () => {
-      const query = search.value.trim().toLocaleLowerCase()
       let matching = 0
       let archiveMatches = 0
 
       cards.forEach((card) => {
-        const matchesQuery = card.dataset.insightSearch.includes(query)
-        const matchesCategory =
+        card.hidden = !(
           activeCategory === 'all' ||
           card.dataset.insightCategory === activeCategory
-        card.hidden = !(matchesQuery && matchesCategory)
+        )
         if (!card.hidden) {
           matching += 1
           if (card.closest('[data-insights-latest]')) archiveMatches += 1
@@ -234,10 +207,9 @@ const categoryKey = (category) =>
       count.textContent = `${matching} ${matching === 1 ? 'article' : 'articles'} found`
       empty.hidden = matching !== 0
       matchNote.hidden = matching === 0 || archiveMatches !== 0
-      reset.disabled = !query && activeCategory === 'all'
+      reset.disabled = activeCategory === 'all'
     }
 
-    search.addEventListener('input', update)
     filters.forEach((filter) => {
       filter.addEventListener('keydown', (event) => {
         if (event.key !== 'Enter' && event.key !== ' ') return
@@ -255,15 +227,14 @@ const categoryKey = (category) =>
       })
     })
     reset.addEventListener('click', () => {
-      search.value = ''
       activeCategory = 'all'
       filters.forEach((button) => {
         const selected = button.dataset.insightsFilter === 'all'
         button.classList.toggle('is-active', selected)
         button.setAttribute('aria-pressed', String(selected))
+        if (selected) button.focus()
       })
       update()
-      search.focus()
     })
     update()
   }
@@ -439,81 +410,47 @@ const categoryKey = (category) =>
   }
 
   .insights-toolbar {
-    margin-bottom: 1.65rem;
-    padding: 1.15rem 1.2rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 0.6rem 0.6rem 0.6rem 0.75rem;
     border: 1px solid var(--color-line);
-    border-radius: var(--radius-medium);
-    background: rgb(255 255 255 / 84%);
-    box-shadow: 0 8px 24px rgb(16 27 45 / 3%);
+    border-radius: var(--radius-large);
+    background: rgb(255 255 255 / 88%);
+    box-shadow: 0 14px 36px rgb(16 27 45 / 5%);
   }
 
-  .insights-search-label {
-    display: block;
-    margin-bottom: 0.48rem;
-    color: var(--color-ink);
-    font-size: 0.72rem;
-    font-weight: 650;
-  }
-
-  .insights-search-row {
+  .insights-toolbar-meta {
     display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .insights-search-box {
-    display: flex;
-    width: min(100%, 480px);
-    min-height: 44px;
-    align-items: center;
-    gap: 0.55rem;
-    padding-inline: 0.8rem;
-    border: 1px solid #d5d9dc;
-    border-radius: var(--radius-small);
-    background: white;
-    transition:
-      border-color 180ms ease,
-      box-shadow 180ms ease;
-  }
-
-  .insights-search-box:focus-within {
-    border-color: var(--color-orange-dark);
-    box-shadow: 0 0 0 3px rgb(168 65 33 / 10%);
-  }
-
-  .insights-search-box svg {
-    width: 1.05rem;
     flex: 0 0 auto;
-    fill: none;
-    stroke: #768393;
-    stroke-linecap: round;
-    stroke-width: 1.7;
+    align-items: center;
+    gap: 0.35rem;
+    margin-left: auto;
   }
 
-  .insights-search-box input {
-    width: 100%;
-    min-width: 0;
-    border: 0;
-    outline: 0;
-    background: transparent;
-    color: var(--color-ink);
-    font-size: 0.78rem;
-  }
-
-  .insights-search-box input::placeholder {
-    color: #8992a0;
+  .insights-result-count {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
   }
 
   .insights-reset {
-    min-height: 40px;
-    padding: 0.55rem 0.65rem;
+    min-height: 36px;
+    padding: 0.45rem 0.85rem;
     border: 1px solid transparent;
-    border-radius: var(--radius-small);
+    border-radius: 999px;
     background: transparent;
     color: var(--color-orange-dark);
     cursor: pointer;
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     font-weight: 650;
+    white-space: nowrap;
+    transition:
+      background 180ms ease,
+      border-color 180ms ease;
   }
 
   .insights-reset:hover:not(:disabled) {
@@ -528,59 +465,73 @@ const categoryKey = (category) =>
   }
 
   .insights-reset:disabled {
-    color: #9ba2ab;
-    cursor: not-allowed;
-  }
-
-  .insights-result-count {
-    margin: 0 0 0 auto;
-    color: var(--color-muted);
-    font-size: 0.68rem;
-    font-weight: 600;
-    white-space: nowrap;
+    visibility: hidden;
   }
 
   .insights-filters {
     display: flex;
+    flex: 1 1 auto;
     flex-wrap: wrap;
-    gap: 0.45rem;
-    margin-top: 0.78rem;
+    gap: 0.5rem;
+    min-width: 0;
   }
 
   .insights-filter {
     display: inline-flex;
-    min-height: 34px;
+    min-height: 38px;
     align-items: center;
-    gap: 0.45rem;
-    padding: 0.4rem 0.7rem;
-    border: 1px solid #dfe3e5;
+    gap: 0.5rem;
+    padding: 0.4rem 0.45rem 0.4rem 0.95rem;
+    border: 1px solid #e0e3e5;
     border-radius: 999px;
-    background: transparent;
-    color: #596678;
+    background: var(--color-white);
+    color: var(--color-body);
     cursor: pointer;
-    font-size: 0.65rem;
+    font-size: 0.72rem;
     font-weight: 600;
     transition:
       color 180ms ease,
       background 180ms ease,
-      border-color 180ms ease;
+      border-color 180ms ease,
+      box-shadow 180ms ease;
   }
 
   .insights-filter span {
-    color: #949ba5;
-    font-size: 0.59rem;
+    display: inline-grid;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    place-items: center;
+    padding-inline: 0.35rem;
+    border-radius: 999px;
+    background: #f1efeb;
+    color: var(--color-muted);
+    font-size: 0.62rem;
     font-weight: 700;
+    transition:
+      color 180ms ease,
+      background 180ms ease;
   }
 
-  .insights-filter:hover,
+  .insights-filter:hover {
+    border-color: rgb(168 65 33 / 45%);
+    color: var(--color-orange-dark);
+  }
+
+  .insights-filter:hover span {
+    background: #fbe9e0;
+    color: var(--color-orange-dark);
+  }
+
   .insights-filter.is-active {
     border-color: var(--color-orange-dark);
-    background: #fff7f3;
-    color: var(--color-orange-dark);
+    background: var(--color-orange-dark);
+    box-shadow: 0 6px 16px rgb(168 65 33 / 22%);
+    color: var(--color-white);
   }
 
   .insights-filter.is-active span {
-    color: var(--color-orange-dark);
+    background: rgb(255 255 255 / 20%);
+    color: var(--color-white);
   }
 
   .insights-latest-grid {
@@ -614,12 +565,6 @@ const categoryKey = (category) =>
     text-align: center;
   }
 
-  .insights-total-note {
-    margin: 1rem 0 0;
-    color: #87909b;
-    font-size: 0.65rem;
-  }
-
   @media (max-width: 1050px) {
     .insights-hero-inner {
       grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
@@ -637,7 +582,7 @@ const categoryKey = (category) =>
     .insights-hero-copy {
       max-width: 760px;
     }
-    .insights-hero-inner > :global(.insights-hero-visual) {
+    .insights-hero-inner > :global(.insights-hero-latest) {
       width: min(100%, 680px);
       margin-inline: auto;
     }
@@ -671,24 +616,25 @@ const categoryKey = (category) =>
     .insights-latest-grid > :global(.insight-card) {
       flex-basis: 100%;
     }
-    .insights-search-row {
-      flex-wrap: wrap;
+    .insights-toolbar {
+      align-items: stretch;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 0.6rem;
+      border-radius: var(--radius-medium);
     }
-    .insights-search-box {
-      width: 100%;
-    }
-    .insights-result-count {
+    .insights-toolbar-meta {
+      justify-content: space-between;
       margin-left: 0;
+      padding: 0.5rem 0 0 0.35rem;
+      border-top: 1px solid #ece9e4;
     }
     .insights-filters {
-      gap: 0.38rem;
+      gap: 0.4rem;
     }
     .insights-filter {
       flex: 1 1 auto;
       justify-content: center;
-    }
-    .insights-search-row {
-      gap: 0.45rem;
     }
   }
 </style>

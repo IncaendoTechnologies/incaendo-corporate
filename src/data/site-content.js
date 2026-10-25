@@ -10,7 +10,7 @@ import {
 
 export const navigation = [
   { href: '/', label: 'Home' },
-  { href: '/ai-technology', label: 'AI Technology' },
+  { href: '/ai-technology', label: 'AI' },
   { href: '/services', label: 'Services' },
   { href: '/projects', label: 'Projects' },
   { href: '/teams', label: 'Our team' },

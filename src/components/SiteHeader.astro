@@ -1,13 +1,20 @@
 ---
 import { navigation } from '../data/site-content.js'
+import logo from '../assets/incaendo-logo.png'
 
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
 ---
 
 <header class="site-header">
   <div class="site-container header-inner">
-    <a class="wordmark" href="/" aria-label="Incaendo home">
-      incaendo<span aria-hidden="true">.</span>
+    <a class="site-logo site-logo-header" href="/" aria-label="Incaendo home">
+      <img
+        src={logo.src}
+        width={logo.width}
+        height={logo.height}
+        alt="Incaendo Technologies"
+        decoding="async"
+      />
     </a>
     <button
       class="menu-toggle"
