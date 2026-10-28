@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets'
 import { projects, projectCategories } from '../data/projects.js'
+import IndustryChips from './IndustryChips.astro'
 
 const tomo = projects.find((project) => project.name === 'Tomo')
 const dominos = projects.find((project) => project.name === "Domino's")
@@ -26,7 +27,10 @@ const zeeMedia = projects.find((project) => project.name === 'Zee Media')
           Discuss your project <span aria-hidden="true">↗</span>
         </a>
         <a class="text-link" href="#project-portfolio">
-          Explore the portfolio <span aria-hidden="true">↓</span>
+          Explore the portfolio{' '}
+          <span class="link-arrow link-arrow-down" aria-hidden="true">
+            ↓
+          </span>
         </a>
       </div>
       <div class="projects-hero-meta" aria-label="Portfolio coverage">
@@ -94,9 +98,8 @@ const zeeMedia = projects.find((project) => project.name === 'Zee Media')
       </div>
       <p>
         Browse a selection across digital products, media, commerce, financial
-        services, operations, and learning. Expand a project to see the
-        documented approach and technical evidence. Details not present in the
-        source material are called out for confirmation.
+        services, operations, and learning. Each project shows its documented
+        overview and scope, without claims beyond the source material.
       </p>
     </div>
 
@@ -113,73 +116,34 @@ const zeeMedia = projects.find((project) => project.name === 'Zee Media')
           </button>
         ))}
       </div>
-      <p class="portfolio-count" data-project-count aria-live="polite">
-        12 project entries
-      </p>
     </div>
 
-    <div class="case-study-list reveal" data-reveal-stagger>
+    <div class="project-list reveal" data-reveal-stagger>
       {projects.map((project, index) => (
         <article
-          class:list={['case-study', index % 2 === 1 && 'case-study-reversed']}
+          class="project-row"
+          aria-labelledby={`project-${index + 1}-heading`}
           data-portfolio-card
           data-category={project.category}
           data-reveal-item
         >
-          <figure class="case-study-image">
+          <figure class="project-row-media">
             <Image
               src={project.image}
               alt={project.alt}
               width={980}
-              sizes="(max-width: 760px) 92vw, (max-width: 1100px) 45vw, 42vw"
+              sizes="(max-width: 760px) 92vw, (max-width: 1100px) 44vw, 540px"
               quality={90}
               loading={index < 3 ? 'eager' : 'lazy'}
             />
           </figure>
-          <div class="case-study-copy">
-            <div class="case-study-kicker">
-              <span>{project.category}</span>
-              <span>Project {String(index + 1).padStart(2, '0')}</span>
-            </div>
+          <div class="project-row-copy">
             <h3 id={`project-${index + 1}-heading`}>{project.name}</h3>
-            <section
-              class="project-overview"
-              aria-labelledby={`project-${index + 1}-overview`}
-            >
-              <h4 id={`project-${index + 1}-overview`}>Project overview</h4>
-              <p>{project.overview}</p>
-            </section>
-            <dl class="project-scope">
-              <div>
-                <dt>Industry</dt>
-                <dd>{project.industry}</dd>
-              </div>
-              <div>
-                <dt>Documented scope</dt>
-                <dd>{project.documentedScope}</dd>
-              </div>
-            </dl>
-            <details class="project-details">
-              <summary>
-                <span class="details-closed">Explore technical details</span>
-                <span class="details-open">Hide technical details</span>
-                <span class="details-evidence">Project evidence</span>
-              </summary>
-              <div class="project-details-content">
-                <div class="project-detail-grid">
-                  {project.sections.map((section) => (
-                    <section>
-                      <h4>{section.title}</h4>
-                      <p>{section.text}</p>
-                    </section>
-                  ))}
-                </div>
-                <p class="project-confirmation">
-                  <strong>Details to confirm</strong>
-                  {project.confirm}
-                </p>
-              </div>
-            </details>
+            <IndustryChips
+              industries={project.industries}
+              class="project-row-chips"
+            />
+            <p class="project-row-overview">{project.description}</p>
           </div>
         </article>
       ))}
@@ -196,7 +160,6 @@ const zeeMedia = projects.find((project) => project.name === 'Zee Media')
   if (portfolio instanceof HTMLElement) {
     const filters = portfolio.querySelectorAll('[data-project-filter]')
     const cards = portfolio.querySelectorAll('[data-portfolio-card]')
-    const count = portfolio.querySelector('[data-project-count]')
     const emptyState = portfolio.querySelector('[data-project-empty]')
 
     filters.forEach((filter) => {
@@ -218,9 +181,6 @@ const zeeMedia = projects.find((project) => project.name === 'Zee Media')
           if (matches) visibleCount += 1
         })
 
-        if (count) {
-          count.textContent = `${visibleCount} project ${visibleCount === 1 ? 'entry' : 'entries'}`
-        }
         if (emptyState) emptyState.hidden = visibleCount !== 0
       })
     })
@@ -445,6 +405,7 @@ const zeeMedia = projects.find((project) => project.name === 'Zee Media')
   }
 
   .portfolio-section {
+    padding-block: 70px;
     background:
       radial-gradient(ellipse at 10% 4%, rgb(84 123 157 / 7%), transparent 30%),
       linear-gradient(180deg, #fbfaf8 0%, #f7f5f1 100%);
@@ -525,307 +486,88 @@ const zeeMedia = projects.find((project) => project.name === 'Zee Media')
     color: var(--color-orange-dark);
   }
 
-  .portfolio-count {
-    flex: 0 0 auto;
-    margin: 0;
-    color: #8a929d;
-    font-size: 0.67rem;
-    font-weight: 600;
+  /* Project showcase: image-led cards raised from the page background */
+  .project-list {
+    display: grid;
+    gap: clamp(1.25rem, 2.4vw, 1.75rem);
   }
 
-  .case-study-list {
+  .project-row {
     display: grid;
-    gap: clamp(1rem, 2.3vw, 1.8rem);
-  }
-
-  .case-study {
-    display: grid;
-    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    grid-template-columns: minmax(0, 44fr) minmax(0, 56fr);
     align-items: center;
-    gap: clamp(1.5rem, 3vw, 2.5rem);
-    padding: clamp(1.2rem, 2.6vw, 2rem);
+    gap: clamp(1.75rem, 4vw, 3.5rem);
+    padding: clamp(1.25rem, 2.6vw, 2rem);
     border: 1px solid rgb(16 27 45 / 8%);
     border-radius: var(--radius-large);
     background: linear-gradient(135deg, #fff 0%, #fbf9f6 100%);
-    box-shadow: 0 12px 34px rgb(16 27 45 / 4%);
-    transition:
-      border-color 260ms var(--ease-out),
-      box-shadow 260ms var(--ease-out),
-      background-color 260ms var(--ease-out);
+    box-shadow:
+      0 1px 2px rgb(16 27 45 / 4%),
+      0 16px 36px -18px rgb(16 27 45 / 14%);
   }
 
-  .case-study:nth-child(even) {
-    border-color: rgb(84 123 157 / 14%);
-    background: linear-gradient(135deg, #f4f7f9 0%, #fff 100%);
-  }
-
-  .case-study:hover,
-  .case-study:focus-within {
-    border-color: rgb(201 84 43 / 28%);
-    box-shadow: 0 18px 40px rgb(16 27 45 / 8%);
-  }
-
-  .case-study[hidden] {
+  .project-row[hidden] {
     display: none;
   }
 
-  .case-study-reversed .case-study-image {
-    order: 2;
-  }
-
-  .case-study-image {
+  /* All project screenshots share a 1.72:1 ratio, so the frame matches it
+     and images show in full without letterboxing or cropping */
+  .project-row-media {
     position: relative;
-    align-self: start;
     overflow: hidden;
-    aspect-ratio: 1.72;
     margin: 0;
+    aspect-ratio: 1.72;
     border: 1px solid rgb(16 27 45 / 9%);
-    border-radius: var(--radius-large);
+    border-radius: var(--radius-medium);
     background: var(--color-paper);
-    box-shadow: 0 12px 30px rgb(16 27 45 / 7%);
+    box-shadow: 0 10px 24px -16px rgb(16 27 45 / 30%);
     transition:
-      border-color 260ms var(--ease-out),
-      box-shadow 260ms var(--ease-out);
+      transform 420ms var(--ease-out),
+      box-shadow 420ms var(--ease-out),
+      border-color 420ms var(--ease-out);
   }
 
-  .case-study-image img {
+  .project-row-media img {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    transition: transform 450ms var(--ease-out);
+    object-fit: cover;
+    transition: transform 700ms var(--ease-out);
   }
 
-  .case-study:hover .case-study-image,
-  .case-study:focus-within .case-study-image {
-    border-color: rgb(201 84 43 / 30%);
-    box-shadow: 0 18px 42px rgb(16 27 45 / 12%);
+  .project-row:hover .project-row-media {
+    border-color: rgb(201 84 43 / 26%);
+    box-shadow: 0 16px 32px -18px rgb(16 27 45 / 34%);
+    transform: translateY(-3px);
   }
 
-  .case-study:hover .case-study-image img,
-  .case-study:focus-within .case-study-image img {
-    transform: scale(1.018);
+  .project-row:hover .project-row-media img {
+    transform: scale(1.03);
   }
 
-  .case-study-copy {
+  .project-row-copy {
     min-width: 0;
-    padding-top: 0.15rem;
   }
 
-  .case-study-kicker {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.7rem;
-    margin-bottom: 0.7rem;
-    color: var(--color-orange-dark);
-    font-size: 0.63rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    line-height: 1.4;
-    text-transform: uppercase;
-  }
-
-  .case-study-kicker span:last-child {
-    color: #929aa4;
-    font-size: 0.58rem;
-    letter-spacing: 0.09em;
-  }
-
-  .case-study h3 {
-    margin: 0 0 1.1rem;
+  .project-row h3 {
+    margin: 0 0 0.8rem;
     color: var(--color-navy);
-    font-size: clamp(1.8rem, 2.65vw, 2.5rem);
+    font-size: clamp(1.8rem, 2.7vw, 2.55rem);
     font-weight: var(--type-heading-weight);
     letter-spacing: var(--type-section-letter-spacing);
-    line-height: 1.08;
+    line-height: 1.12;
   }
 
-  .project-overview {
-    margin-bottom: 1rem;
+  .project-row :global(.project-row-chips) {
+    margin-bottom: 0.9rem;
   }
 
-  .project-overview h4,
-  .project-detail-grid h4 {
-    margin: 0 0 0.4rem;
-    color: #7c5948;
-    font-family: var(--font-body);
-    font-size: 0.64rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    line-height: 1.4;
-    text-transform: uppercase;
-  }
-
-  .project-overview p {
-    max-width: 650px;
+  .project-row-overview {
+    max-width: 620px;
     margin: 0;
     color: var(--color-body);
-    font-family: var(--font-heading);
-    font-size: clamp(0.95rem, 1.18vw, 1.08rem);
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    line-height: 1.62;
-  }
-
-  .project-scope {
-    display: grid;
-    grid-template-columns: minmax(125px, 0.42fr) minmax(0, 1fr);
-    gap: 0.65rem 1rem;
-    margin: 1.1rem 0 1.25rem;
-    padding: 1rem 0;
-    border-block: 1px solid #e8e4de;
-  }
-
-  .project-scope div {
-    display: grid;
-    gap: 0.15rem;
-  }
-
-  .project-scope dt {
-    color: #939ba5;
-    font-size: 0.58rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    line-height: 1.4;
-    text-transform: uppercase;
-  }
-
-  .project-scope dd {
-    margin: 0;
-    color: #4b596b;
-    font-size: 0.7rem;
-    line-height: 1.55;
-  }
-
-  .project-details {
-    border-top: 1px solid #e8e4de;
-  }
-
-  .project-details summary {
-    display: flex;
-    min-height: 52px;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.7rem;
-    color: var(--color-navy);
-    cursor: pointer;
-    font-size: 0.74rem;
-    font-weight: 700;
-    list-style: none;
-  }
-
-  .project-details summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .project-details summary::after {
-    display: grid;
-    width: 25px;
-    height: 25px;
-    flex: 0 0 25px;
-    place-items: center;
-    border: 1px solid #e2d5cc;
-    border-radius: 50%;
-    color: var(--color-orange-dark);
-    content: '+';
-    font-size: 1rem;
-    font-weight: 500;
-    transition:
-      color var(--duration-fast) ease,
-      background var(--duration-fast) ease,
-      transform var(--duration-standard) var(--ease-out);
-  }
-
-  .project-details summary:hover {
-    color: var(--color-orange-dark);
-  }
-
-  .project-details summary:hover::after {
-    background: #f8eee8;
-  }
-
-  .project-details[open] summary::after {
-    background: #f8eee8;
-    transform: rotate(45deg);
-  }
-
-  .details-open {
-    display: none;
-  }
-
-  .project-details[open] .details-closed {
-    display: none;
-  }
-
-  .project-details[open] .details-open {
-    display: inline;
-  }
-
-  .details-evidence {
-    margin-left: auto;
-    color: #929aa4;
-    font-size: 0.61rem;
-    font-weight: 500;
-  }
-
-  .project-details-content {
-    padding: 0.3rem 0 1.1rem;
-    animation: details-enter 220ms var(--ease-out) both;
-  }
-
-  .project-detail-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.1rem 1.25rem;
-  }
-
-  .project-detail-grid section {
-    min-width: 0;
-  }
-
-  .project-detail-grid p {
-    margin: 0;
-    color: #657182;
-    font-size: 0.72rem;
-    line-height: 1.65;
-  }
-
-  .project-confirmation {
-    margin: 1.2rem 0 0;
-    padding: 0.8rem 0.9rem;
-    border-left: 2px solid #cb7955;
-    background: #f7f1ec;
-    color: #71665e;
-    font-size: 0.68rem;
-    line-height: 1.62;
-  }
-
-  .project-confirmation strong {
-    display: block;
-    margin-bottom: 0.15rem;
-    color: #745340;
-    font-size: 0.62rem;
-  }
-
-  @keyframes details-enter {
-    from {
-      opacity: 0;
-      transform: translateY(7px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .portfolio-empty {
-    padding: 2rem;
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-medium);
-    background: white;
-    color: var(--color-body);
-    text-align: center;
+    font-size: 0.94rem;
+    line-height: 1.7;
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -864,13 +606,9 @@ const zeeMedia = projects.find((project) => project.name === 'Zee Media')
       min-height: 420px;
     }
 
-    .case-study {
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    .project-row {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 2rem;
-    }
-
-    .case-study-image {
-      aspect-ratio: 1.72;
     }
   }
 
@@ -937,8 +675,9 @@ const zeeMedia = projects.find((project) => project.name === 'Zee Media')
       flex-direction: column;
     }
 
-    .portfolio-count {
-      padding-left: 0.7rem;
+    .project-row {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.25rem;
     }
   }
 
@@ -973,29 +712,8 @@ const zeeMedia = projects.find((project) => project.name === 'Zee Media')
       display: none;
     }
 
-    .case-study {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 1.25rem;
-      padding-block: 2.2rem;
-    }
-
-    .case-study-reversed .case-study-image {
-      order: 0;
-    }
-
-    .case-study-image {
-      aspect-ratio: 1.72;
+    .project-row-media {
       border-radius: var(--radius-medium);
-    }
-
-    .project-scope {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 0.65rem;
-    }
-
-    .project-detail-grid {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 0.95rem;
     }
 
     .project-filters {
@@ -1010,17 +728,15 @@ const zeeMedia = projects.find((project) => project.name === 'Zee Media')
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .case-study,
-    .case-study-image,
-    .case-study-image img,
-    .project-details-content,
+    .project-row-media,
+    .project-row-media img,
     .project-filter {
       transition: none;
       animation: none;
     }
 
-    .case-study:hover .case-study-image img,
-    .case-study:focus-within .case-study-image img {
+    .project-row:hover .project-row-media,
+    .project-row:hover .project-row-media img {
       transform: none;
     }
   }

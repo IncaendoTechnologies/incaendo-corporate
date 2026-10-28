@@ -2,8 +2,7 @@
 import TeamProfile from './TeamProfile.astro'
 import { Image } from 'astro:assets'
 import { teamMembers } from '../data/team.js'
-import teamHeroImage from '../assets/services-hero-team.png'
-import teamProductImage from '../assets/service-custom-software.webp'
+import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
 ---
 
 <section class="team-hero page-intro" aria-labelledby="team-page-heading">
@@ -26,31 +25,24 @@ import teamProductImage from '../assets/service-custom-software.webp'
         </a>
       </div>
       <a class="team-hero-work-link" href="/projects">
-        Explore our work <span aria-hidden="true">↗</span>
+        Explore our work{' '}
+        <span class="link-arrow" aria-hidden="true">
+          →
+        </span>
       </a>
     </div>
 
     <div class="team-hero-visual reveal">
-      <figure class="team-hero-photo team-hero-photo-main">
+      <figure class="team-hero-photo team-hero-photo-single">
         <Image
           src={teamHeroImage}
-          alt="Software teammates collaborating around product and engineering screens"
+          alt="A software team collaborating around a monitor showing code and a system diagram"
           width={1600}
-          sizes="(max-width: 700px) 92vw, (max-width: 1100px) 44vw, 48vw"
+          sizes="(max-width: 600px) 92vw, (max-width: 899px) 44vw, 48vw"
           quality={88}
           loading="eager"
         />
         <figcaption>People behind digital products</figcaption>
-      </figure>
-      <figure class="team-hero-photo team-hero-photo-detail">
-        <Image
-          src={teamProductImage}
-          alt="Product team discussing a custom software interface"
-          width={900}
-          sizes="(max-width: 700px) 42vw, 20vw"
-          quality={88}
-          loading="eager"
-        />
       </figure>
       <span class="team-hero-photo-index" aria-hidden="true">
         INCAENDO / PEOPLE &amp; PRODUCT
@@ -193,7 +185,10 @@ import teamProductImage from '../assets/service-custom-software.webp'
       </li>
     </ol>
     <a class="team-text-link" href="/services#how-we-work">
-      Explore how we work <span aria-hidden="true">↗</span>
+      Explore how we work{' '}
+      <span class="link-arrow" aria-hidden="true">
+        →
+      </span>
     </a>
   </div>
 </section>
@@ -260,15 +255,6 @@ import teamProductImage from '../assets/service-custom-software.webp'
     margin-top: 1.25rem;
   }
 
-  .team-hero-work-link span,
-  .team-text-link span {
-    transition: transform 200ms var(--ease-out);
-  }
-
-  .team-hero-work-link:hover span,
-  .team-text-link:hover span {
-    transform: translate(2px, -2px);
-  }
 
   .team-hero-visual {
     position: relative;
@@ -286,17 +272,8 @@ import teamProductImage from '../assets/service-custom-software.webp'
     box-shadow: 0 24px 60px rgb(16 27 45 / 11%);
   }
 
-  .team-hero-photo-main {
-    inset: 0 0 2.4rem 2rem;
-  }
-
-  .team-hero-photo-detail {
-    bottom: 0;
-    left: 0;
-    width: 39%;
-    aspect-ratio: 1.48;
-    border: 4px solid #fbfaf8;
-    border-radius: var(--radius-medium);
+  .team-hero-photo-single {
+    inset: 0 0 2.4rem;
   }
 
   .team-hero-photo img {
@@ -304,6 +281,7 @@ import teamProductImage from '../assets/service-custom-software.webp'
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 35%;
     transition: transform 500ms var(--ease-out);
   }
 
@@ -311,7 +289,7 @@ import teamProductImage from '../assets/service-custom-software.webp'
     transform: scale(1.025);
   }
 
-  .team-hero-photo-main figcaption {
+  .team-hero-photo-single figcaption {
     position: absolute;
     top: 1rem;
     left: 1rem;
@@ -601,13 +579,10 @@ import teamProductImage from '../assets/service-custom-software.webp'
     .team-hero-visual {
       min-height: 320px;
     }
-    .team-hero-photo-main {
-      inset: 0 0 1.7rem 1rem;
+    .team-hero-photo-single {
+      inset: 0 0 1.7rem;
     }
-    .team-hero-photo-detail {
-      width: 42%;
-    }
-    .team-hero-photo-main figcaption {
+    .team-hero-photo-single figcaption {
       top: 0.7rem;
       left: 0.7rem;
       font-size: 0.62rem;

@@ -11,10 +11,18 @@ import IndustriesPower from '../components/IndustriesPower.astro'
 import DeliveryProcess from '../components/DeliveryProcess.astro'
 import HomeInsights from '../components/HomeInsights.astro'
 import HomeProjects from '../components/HomeProjects.astro'
+import HomeHeroGlobe from '../components/HomeHeroGlobe.astro'
+import HomeAiExperience from '../components/HomeAiExperience.astro'
+import AIBusinessApplications from '../components/AIBusinessApplications.astro'
+import HomeAiClosingCta from '../components/HomeAiClosingCta.astro'
 import { pages } from '../data/site-content.js'
 import award01 from '../assets/award 01.png'
 import award02 from '../assets/award 02.png'
 import award03 from '../assets/award 03.png'
+
+// Keep the original AI showcase available for quick restoration while the
+// business-focused homepage experience is active.
+const SHOW_LEGACY_AI_SECTION = false
 ---
 
 <BaseLayout title={pages.home.title} description={pages.home.description}>
@@ -58,6 +66,7 @@ import award03 from '../assets/award 03.png'
             </a>
           </div>
         </div>
+        <HomeHeroGlobe />
       </div>
     </section>
     <ClientLogoMarquee />
@@ -82,15 +91,23 @@ import award03 from '../assets/award 03.png'
       </div>
     </section>
 
-    <section
-      class="section section-intro-block"
-      id="ai-highlight"
-      aria-labelledby="ai-heading"
-    >
-      <div class="site-container">
-        <AICapabilityShowcase />
-      </div>
-    </section>
+    {SHOW_LEGACY_AI_SECTION ? (
+      <section
+        class="section section-intro-block"
+        id="ai-highlight"
+        aria-labelledby="ai-heading"
+      >
+        <div class="site-container">
+          <AICapabilityShowcase />
+        </div>
+      </section>
+    ) : (
+      <HomeAiExperience />
+    )}
+
+    <AIBusinessApplications />
+
+    <HomeAiClosingCta />
 
     <ReviewMarquee />
 
@@ -259,7 +276,10 @@ import award03 from '../assets/award 03.png'
             asked questions.
           </h2>
           <a class="text-link" href="/contact">
-            Have another question? <span aria-hidden="true">↗</span>
+            Have another question?{' '}
+            <span class="link-arrow" aria-hidden="true">
+              →
+            </span>
           </a>
         </div>
         <FAQList />

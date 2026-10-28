@@ -1,0 +1,154 @@
+<section
+  class="ai-closing"
+  aria-labelledby="ai-closing-title"
+  data-ai-experience
+>
+  <div class="site-container">
+    <aside class="ai-closing-cta ai-reveal">
+      <div class="ai-closing-accent" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="ai-closing-copy">
+        <p class="eyebrow">START WITH THE BUSINESS NEED</p>
+        <h3 id="ai-closing-title">
+          Your Business Challenge.
+          <br />
+          <span>A Practical AI Solution.</span>
+        </h3>
+        <p>
+          Every business is different. Let’s explore where AI and automation
+          could make a meaningful difference to yours.
+        </p>
+      </div>
+      <a class="button button-primary ai-closing-button" href="/contact">
+        Let’s Talk About AI{' '}
+        <span class="link-arrow" aria-hidden="true">
+          →
+        </span>
+      </a>
+    </aside>
+  </div>
+</section>
+
+<script>
+  import '../scripts/home-ai-experience.js'
+</script>
+
+<style>
+  .ai-closing {
+    /* Same rhythm as the homepage AI section it was split from */
+    --ai-space: clamp(4.5rem, 7vw, 6.5rem);
+    padding-block: var(--ai-space);
+    background: var(--color-paper);
+  }
+  .ai-closing-copy h3 span {
+    color: var(--color-orange-dark);
+  }
+
+  /* Closing CTA */
+  .ai-closing-cta {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    overflow: hidden;
+    padding: clamp(1.6rem, 4vw, 3rem);
+    border: 1px solid rgb(201 84 43 / 22%);
+    border-radius: var(--radius-large);
+    background: linear-gradient(110deg, #fffdfa 0%, #fff 48%, #f8eee8 100%);
+    box-shadow: 0 24px 60px -42px rgb(168 65 33 / 36%);
+  }
+  .ai-closing-copy {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+  }
+  .ai-closing-copy .eyebrow {
+    margin-bottom: 0.6rem;
+  }
+  .ai-closing-copy h3 {
+    margin: 0 0 0.6rem;
+    color: var(--color-ink);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 650;
+    letter-spacing: -0.065em;
+    line-height: 1.08;
+  }
+  .ai-closing-copy > p:last-child {
+    max-width: 620px;
+    margin: 0;
+    color: var(--color-body);
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+  .ai-closing-button {
+    position: relative;
+    z-index: 1;
+    min-width: max-content;
+    min-height: 52px;
+    gap: 0.75rem;
+  }
+  .ai-closing-accent {
+    position: absolute;
+    top: -40px;
+    right: 12%;
+    display: flex;
+    gap: 0.5rem;
+    transform: rotate(28deg);
+    opacity: 0.55;
+  }
+  .ai-closing-accent span {
+    width: 44px;
+    height: 180px;
+    border: 1px solid rgb(201 84 43 / 16%);
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgb(201 84 43 / 8%), transparent);
+  }
+
+  .ai-reveal {
+    opacity: 1;
+    transform: none;
+  }
+  [data-ai-experience][data-motion-ready] .ai-reveal {
+    transition:
+      opacity 550ms var(--ease-out),
+      transform 550ms var(--ease-out);
+  }
+  [data-ai-experience][data-motion-ready] .ai-reveal:not(.is-visible) {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  @media (max-width: 767px) {
+    .ai-closing {
+      --ai-space: 3.75rem;
+    }
+    .ai-closing-cta {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ai-closing-copy h3 {
+      font-size: 1.85rem;
+    }
+    .ai-closing-button {
+      min-width: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ai-closing *,
+    .ai-closing *::before,
+    .ai-closing *::after {
+      scroll-behavior: auto !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

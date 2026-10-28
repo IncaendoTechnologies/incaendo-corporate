@@ -63,7 +63,10 @@ const categoryKey = article.category
         {article.readMinutes} min read
       </p>
       <a class="insight-read-link" href={`/insights/${article.slug}/`}>
-        Read article <span aria-hidden="true">↗</span>
+        Read article{' '}
+        <span class="link-arrow" aria-hidden="true">
+          →
+        </span>
       </a>
     </div>
   </div>
@@ -216,11 +219,6 @@ const categoryKey = article.category
 
   .insight-read-link span {
     color: var(--color-orange-dark);
-    transition: transform 180ms var(--ease-out);
-  }
-
-  .insight-read-link:hover span {
-    transform: translate(2px, -2px);
   }
 
   .insight-card-lead {
@@ -303,15 +301,13 @@ const categoryKey = article.category
   @media (prefers-reduced-motion: reduce) {
     .insight-card,
     .insight-card-art-link :global(.insight-art),
-    .insight-card-art-link > :global(img),
-    .insight-read-link span {
+    .insight-card-art-link > :global(img) {
       transition: none;
     }
 
     .insight-card:hover,
     .insight-card:hover .insight-card-art-link :global(.insight-art),
-    .insight-card:hover .insight-card-art-link > :global(img),
-    .insight-read-link:hover span {
+    .insight-card:hover .insight-card-art-link > :global(img) {
       transform: none;
     }
   }

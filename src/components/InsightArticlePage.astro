@@ -81,7 +81,10 @@ const relatedArticles = articles
             ))}
           </ol>
           <a class="article-back-link" href="/insights/">
-            ← All insights
+            <span class="link-arrow link-arrow-back" aria-hidden="true">
+              ←
+            </span>
+            All insights
           </a>
         </aside>
 
@@ -127,7 +130,10 @@ const relatedArticles = articles
           <h2 id="related-insights-heading">More ideas to consider.</h2>
         </div>
         <a class="article-back-link" href="/insights/">
-          Browse all insights <span aria-hidden="true">↗</span>
+          Browse all insights{' '}
+          <span class="link-arrow" aria-hidden="true">
+            →
+          </span>
         </a>
       </div>
       <div class="article-related-grid">

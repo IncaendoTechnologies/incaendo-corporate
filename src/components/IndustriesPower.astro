@@ -1,73 +1,58 @@
 ---
-// NASA/Goddard Space Flight Center Scientific Visualization Studio, Blue Marble.
-import { getImage } from 'astro:assets'
-import earthTextureSource from '../assets/earth-blue-marble.png'
-
-const earthTexture = await getImage({
-  src: earthTextureSource,
-  width: 1024,
-  format: 'webp',
-  quality: 84,
-})
-
+// Each industry's glow tints the light flash behind its icon on hover.
 const industries = [
   {
     name: 'Retail & E-commerce',
     description: 'Digital commerce platforms and customer experiences.',
     icon: 'retail',
-    tone: 'blue',
-    position: 'industry-retail',
+    glow: '242 182 50',
   },
   {
     name: 'Healthcare',
     description: 'Connected care solutions and secure systems.',
     icon: 'healthcare',
-    tone: 'orange',
-    position: 'industry-healthcare',
+    glow: '30 200 200',
   },
   {
     name: 'FinTech',
     description: 'Reliable financial platforms and payment solutions.',
     icon: 'fintech',
-    tone: 'orange',
-    position: 'industry-fintech',
+    glow: '242 182 50',
   },
   {
     name: 'Education',
     description: 'Learning platforms and student management systems.',
     icon: 'education',
-    tone: 'blue',
-    position: 'industry-education',
+    glow: '22 169 196',
   },
   {
     name: 'Food & Hospitality',
     description: 'Booking, ordering and customer experience solutions.',
     icon: 'hospitality',
-    tone: 'blue',
-    position: 'industry-hospitality',
+    glow: '84 123 157',
   },
   {
     name: 'Media & Entertainment',
     description: 'Content platforms and audience engagement.',
     icon: 'media',
-    tone: 'orange',
-    position: 'industry-media',
+    glow: '201 84 43',
   },
   {
     name: 'Logistics & Transport',
     description: 'Operational visibility and process optimization.',
     icon: 'logistics',
-    tone: 'orange',
-    position: 'industry-logistics',
+    glow: '20 163 168',
   },
   {
     name: 'Startups & Enterprises',
     description: 'Scalable products and enterprise modernisation.',
     icon: 'enterprise',
-    tone: 'blue',
-    position: 'industry-enterprise',
+    glow: '108 191 74',
   },
 ]
+
+// A non-breaking hyphen keeps "E-commerce" together when the label wraps.
+const displayName = (name) => name.replace('-', '‑')
 ---
 
 <section
@@ -87,471 +72,430 @@ const industries = [
       </p>
     </header>
 
-    <div class="industry-stage reveal" data-reveal-stagger>
-      <div class="industry-globe">
-        <span class="industry-orbit industry-orbit-one" aria-hidden="true"></span>
-        <span class="industry-orbit industry-orbit-two" aria-hidden="true"></span>
-        <span class="industry-orbit industry-orbit-three" aria-hidden="true"></span>
-        <span class="industry-particle industry-particle-one" aria-hidden="true"></span>
-        <span class="industry-particle industry-particle-two" aria-hidden="true"></span>
-        <span class="industry-particle industry-particle-three" aria-hidden="true"></span>
-        <span class="industry-particle industry-particle-four" aria-hidden="true"></span>
-        <div
-          class="industry-earth"
-          data-earth-globe
-          role="img"
-          aria-label="Rotating, satellite-textured Earth with cloud detail and blue atmospheric lighting"
+    <ul class="industry-row reveal" data-reveal-stagger>
+      {industries.map((industry) => (
+        <li
+          class:list={['industry-item', `industry-${industry.icon}`]}
+          style={`--industry-glow: ${industry.glow}`}
+          data-reveal-item
         >
-          <img class="industry-earth-fallback" src={earthTexture.src} alt="" />
-          <canvas class="industry-earth-canvas" aria-hidden="true"></canvas>
-        </div>
-      </div>
+          <span class="industry-icon" aria-hidden="true">
+            <svg viewBox="0 0 72 72" fill="none" focusable="false">
+              {industry.icon === 'retail' && (
+                <>
+                  <rect
+                    x="20"
+                    y="5"
+                    width="32"
+                    height="62"
+                    rx="6"
+                    fill="#101b2d"
+                  />
+                  <rect
+                    x="23"
+                    y="12"
+                    width="26"
+                    height="45"
+                    rx="2"
+                    fill="#eef4fa"
+                  />
+                  <rect
+                    x="31"
+                    y="7.6"
+                    width="10"
+                    height="1.8"
+                    rx="0.9"
+                    fill="#5b6b80"
+                  />
+                  <circle cx="36" cy="62" r="2" fill="#5b6b80" />
+                  <rect
+                    x="27"
+                    y="20"
+                    width="18"
+                    height="18"
+                    rx="3"
+                    fill="#f2b632"
+                  />
+                  <path
+                    d="M30 25h2.2l2 7.4h7.4l1.6-5.2H33"
+                    stroke="#101b2d"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <circle cx="35" cy="35" r="1.2" fill="#101b2d" />
+                  <circle cx="41" cy="35" r="1.2" fill="#101b2d" />
+                  <rect
+                    x="27"
+                    y="43"
+                    width="18"
+                    height="2.4"
+                    rx="1.2"
+                    fill="#c9d8e6"
+                  />
+                  <rect
+                    x="27"
+                    y="48.5"
+                    width="11"
+                    height="2.4"
+                    rx="1.2"
+                    fill="#c9d8e6"
+                  />
+                  <circle
+                    class="retail-badge"
+                    cx="50"
+                    cy="9"
+                    r="5"
+                    fill="#c9542b"
+                    stroke="#fff"
+                    stroke-width="2"
+                  />
+                </>
+              )}
+              {industry.icon === 'healthcare' && (
+                <>
+                  <defs>
+                    <linearGradient id="ind-heart" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0" stop-color="#22cbc4" />
+                      <stop offset="0.5" stop-color="#14b0c8" />
+                      <stop offset="1" stop-color="#2f6fd6" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    d="M36 63C20 51 6 41 6 24.5 6 14.5 13.8 7 23 7c5.8 0 10 3 13 8 3-5 7.2-8 13-8 9.2 0 17 7.5 17 17.5C66 41 52 51 36 63Z"
+                    fill="url(#ind-heart)"
+                  />
+                  <path
+                    d="M15 15.5c2.2-2.6 5.4-3.8 8.6-3.4"
+                    stroke="#fff"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    opacity="0.45"
+                  />
+                  <path
+                    class="heart-pulse"
+                    d="M9 34h13l4.5-8 6 17 5.5-22 5 13h20"
+                    pathLength="100"
+                    stroke="#fff"
+                    stroke-width="3.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </>
+              )}
+              {industry.icon === 'fintech' && (
+                <>
+                  <circle cx="36" cy="36" r="32" fill="#f2b632" />
+                  <rect
+                    x="22"
+                    y="13"
+                    width="25"
+                    height="42"
+                    rx="4.5"
+                    fill="#101b2d"
+                  />
+                  <rect
+                    x="25"
+                    y="18"
+                    width="19"
+                    height="30"
+                    rx="1.5"
+                    fill="#e8f6f7"
+                  />
+                  <circle cx="34.5" cy="51.5" r="1.4" fill="#5b6b80" />
+                  <path
+                    d="M34.5 22.5 42 25.3v5.5c0 4.8-3.1 8.3-7.5 10-4.4-1.7-7.5-5.2-7.5-10v-5.5Z"
+                    fill="#14a3a8"
+                  />
+                  <path
+                    class="fintech-check"
+                    d="m31 31.6 2.6 2.6 4.6-4.9"
+                    pathLength="1"
+                    stroke="#fff"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <g class="fintech-coin">
+                    <circle
+                      cx="48"
+                      cy="46"
+                      r="9.5"
+                      fill="#c9542b"
+                      stroke="#fff"
+                      stroke-width="2.5"
+                    />
+                    <path
+                      d="M50.6 43.2c-.6-.8-1.6-1.2-2.7-1.2-1.5 0-2.5.8-2.5 1.9 0 2.7 5.4 1.4 5.4 4.2 0 1.1-1.1 1.9-2.6 1.9-1.2 0-2.2-.4-2.8-1.2M48 40.4v1.6m0 8v1.6"
+                      stroke="#fff"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                    />
+                  </g>
+                </>
+              )}
+              {industry.icon === 'education' && (
+                <>
+                  <circle cx="36" cy="36" r="32" fill="#16a9c4" />
+                  <path
+                    d="m24 50-4 11m28-11 4 11"
+                    stroke="#0b6e84"
+                    stroke-width="2.6"
+                    stroke-linecap="round"
+                  />
+                  <rect
+                    x="13"
+                    y="21"
+                    width="46"
+                    height="29"
+                    rx="2.5"
+                    fill="#f2b632"
+                  />
+                  <rect
+                    x="16"
+                    y="24"
+                    width="40"
+                    height="23"
+                    rx="1"
+                    fill="#173a46"
+                  />
+                  <path
+                    class="edu-chalk"
+                    d="M20 30c1.6-2 3.2 2 4.8 0s3.2 2 4.8 0M20 35.5h11M36 29l3.4 3.4m0-3.4L36 32.4M43 30.7h7M20 41h17M41 38.5h9m-9 3h6"
+                    pathLength="1"
+                    stroke="#fff"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                  <rect
+                    x="20"
+                    y="48"
+                    width="32"
+                    height="3"
+                    rx="1.5"
+                    fill="#e09b16"
+                  />
+                  <path d="M40 18.5v4c3.4 2.2 9.6 2.2 13 0v-4" fill="#101b2d" />
+                  <path d="m46.5 11 11 4.5-11 4.5-11-4.5Z" fill="#101b2d" />
+                  <path
+                    d="M57.5 15.5v7"
+                    stroke="#c9542b"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  />
+                  <circle cx="57.5" cy="23.6" r="1.6" fill="#c9542b" />
+                </>
+              )}
+              {industry.icon === 'hospitality' && (
+                <>
+                  <defs>
+                    <linearGradient id="ind-cloche" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0" stop-color="#f4f7fb" />
+                      <stop offset="1" stop-color="#b9c9d9" />
+                    </linearGradient>
+                  </defs>
+                  <g class="food-lid">
+                    <path
+                      d="M13 43a23 23 0 0 1 46 0Z"
+                      fill="url(#ind-cloche)"
+                      stroke="#547b9d"
+                      stroke-width="1.8"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M21 37.5a16 16 0 0 1 8.4-11.3"
+                      stroke="#fff"
+                      stroke-width="2.6"
+                      stroke-linecap="round"
+                    />
+                    <rect x="34.5" y="17" width="3" height="4" fill="#547b9d" />
+                    <circle cx="36" cy="16" r="3.2" fill="#547b9d" />
+                  </g>
+                  <rect
+                    x="9"
+                    y="43"
+                    width="54"
+                    height="4.5"
+                    rx="2.25"
+                    fill="#547b9d"
+                  />
+                  <path
+                    d="M20 50h20.5a3.2 3.2 0 0 1 0 6.4h-9l-4.6 4.4H20Z"
+                    fill="#f4a98d"
+                  />
+                  <rect
+                    x="11"
+                    y="48.5"
+                    width="9"
+                    height="13.5"
+                    rx="2"
+                    fill="#14a3a8"
+                  />
+                  <circle
+                    class="food-glint"
+                    cx="52"
+                    cy="25"
+                    r="2.2"
+                    fill="#f2b632"
+                  />
+                </>
+              )}
+              {industry.icon === 'media' && (
+                <>
+                  <defs>
+                    <linearGradient id="ind-screen" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0" stop-color="#ee7347" />
+                      <stop offset="1" stop-color="#c9542b" />
+                    </linearGradient>
+                    <clipPath id="ind-screen-clip">
+                      <rect x="11" y="15" width="50" height="34" rx="2" />
+                    </clipPath>
+                  </defs>
+                  <rect x="31" y="54" width="10" height="6" fill="#101b2d" />
+                  <path
+                    d="M24 61h24"
+                    stroke="#101b2d"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                  />
+                  <rect
+                    x="6"
+                    y="10"
+                    width="60"
+                    height="45"
+                    rx="5"
+                    fill="#101b2d"
+                  />
+                  <rect
+                    x="11"
+                    y="15"
+                    width="50"
+                    height="34"
+                    rx="2"
+                    fill="url(#ind-screen)"
+                  />
+                  <g clip-path="url(#ind-screen-clip)">
+                    <path
+                      class="media-sheen"
+                      d="M2 15h9L2 49h-9Z"
+                      fill="#fff"
+                      opacity="0.35"
+                    />
+                  </g>
+                  <path
+                    class="media-play"
+                    d="M31 24.5 44.5 32 31 39.5Z"
+                    fill="#fff"
+                  />
+                  <circle cx="61.5" cy="52" r="1.3" fill="#3fd0c9" />
+                </>
+              )}
+              {industry.icon === 'logistics' && (
+                <>
+                  <path
+                    class="truck-lines"
+                    d="M3 28h10M1 36h12M5 44h8"
+                    stroke="#14a3a8"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                  />
+                  <g class="truck-body">
+                    <rect
+                      x="16"
+                      y="20"
+                      width="32"
+                      height="26"
+                      rx="2.5"
+                      fill="#f2b632"
+                      stroke="#101b2d"
+                      stroke-width="2.4"
+                    />
+                    <rect x="28.5" y="20" width="7" height="9" fill="#c9542b" />
+                    <path
+                      d="M48 29h9.5l7 8.5V46H48Z"
+                      fill="#fff"
+                      stroke="#101b2d"
+                      stroke-width="2.4"
+                      stroke-linejoin="round"
+                    />
+                    <path d="M51.5 32.5h4.8l4.2 5h-9Z" fill="#8fc9e8" />
+                    <path
+                      d="M14 46h52"
+                      stroke="#101b2d"
+                      stroke-width="2.4"
+                      stroke-linecap="round"
+                    />
+                    <circle cx="26" cy="49" r="5.2" fill="#101b2d" />
+                    <circle cx="26" cy="49" r="2" fill="#fff" />
+                    <circle cx="55" cy="49" r="5.2" fill="#101b2d" />
+                    <circle cx="55" cy="49" r="2" fill="#fff" />
+                  </g>
+                </>
+              )}
+              {industry.icon === 'enterprise' && (
+                <>
+                  <defs>
+                    <linearGradient id="ind-power" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0" stop-color="#a6d63c" />
+                      <stop offset="1" stop-color="#3fae78" />
+                    </linearGradient>
+                  </defs>
+                  <circle cx="36" cy="36" r="32" fill="url(#ind-power)" />
+                  <g class="enterprise-orbit">
+                    <circle
+                      cx="36"
+                      cy="36"
+                      r="25"
+                      stroke="#fff"
+                      stroke-width="1.4"
+                      opacity="0.4"
+                    />
+                    <circle cx="36" cy="11" r="2.6" fill="#fff" />
+                    <circle cx="57.6" cy="48.5" r="2.6" fill="#fff" />
+                    <circle cx="14.4" cy="48.5" r="2.6" fill="#f2b632" />
+                  </g>
+                  <path
+                    d="M27 26.5a14 14 0 1 0 18 0"
+                    stroke="#fff"
+                    stroke-width="4.6"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M36 20v15"
+                    stroke="#fff"
+                    stroke-width="4.6"
+                    stroke-linecap="round"
+                  />
+                </>
+              )}
+            </svg>
+          </span>
+          <h3 class="industry-name">{displayName(industry.name)}</h3>
+          <p class="visually-hidden">{industry.description}</p>
+        </li>
+      ))}
+    </ul>
 
-      {
-        industries.map((industry) => (
-          <article
-            class:list={[
-              'industry-card',
-              industry.position,
-              `industry-card-${industry.tone}`,
-            ]}
-            data-reveal-item
-            tabindex="0"
-          >
-            <span class="industry-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" focusable="false">
-                {industry.icon === 'retail' && (
-                  <>
-                    <path d="M4 9h16l-1.2 11H5.2L4 9Z" />
-                    <path d="m7 9 1-5h8l1 5M9 13v3m6-3v3" />
-                  </>
-                )}
-                {industry.icon === 'healthcare' && (
-                  <>
-                    <path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.7A4 4 0 0 1 19 11c0 5.6-7 10-7 10Z" />
-                    <path d="M12 10v6m-3-3h6" />
-                  </>
-                )}
-                {industry.icon === 'fintech' && (
-                  <>
-                    <rect x="3" y="5" width="18" height="14" rx="2" />
-                    <path d="M3 10h18m-13 5h3m4 0h2" />
-                  </>
-                )}
-                {industry.icon === 'education' && (
-                  <>
-                    <path d="m3 8 9-5 9 5-9 5-9-5Z" />
-                    <path d="M6 10v5c3.8 3.2 8.2 3.2 12 0v-5m3-2v6" />
-                  </>
-                )}
-                {industry.icon === 'hospitality' && (
-                  <>
-                    <path d="M4 13h16l-1.5 6h-13L4 13Z" />
-                    <path d="M6 11a6 6 0 0 1 12 0M8 4l-1-2m9 2 1-2M12 2v2" />
-                  </>
-                )}
-                {industry.icon === 'media' && (
-                  <>
-                    <rect x="3" y="4" width="18" height="16" rx="3" />
-                    <path d="m10 8 6 4-6 4V8Z" />
-                  </>
-                )}
-                {industry.icon === 'logistics' && (
-                  <>
-                    <path d="M3 6h11v11H3zM14 10h4l3 3v4h-7z" />
-                    <circle cx="7" cy="18" r="2" />
-                    <circle cx="18" cy="18" r="2" />
-                  </>
-                )}
-                {industry.icon === 'enterprise' && (
-                  <>
-                    <rect x="4" y="3" width="16" height="18" rx="2" />
-                    <path d="M8 7h2m4 0h2M8 11h2m4 0h2M8 15h2m4 0h2m-5 6v-3h2v3" />
-                  </>
-                )}
-              </svg>
-            </span>
-            <span class="industry-card-copy">
-              <strong>{industry.name}</strong>
-              <span>{industry.description}</span>
-            </span>
-          </article>
-        ))
-      }
-    </div>
+    <p class="industries-cta">
+      <a class="text-link" href="/projects">
+        Explore Our Work{' '}
+        <span class="link-arrow" aria-hidden="true">
+          →
+        </span>
+      </a>
+    </p>
   </div>
 </section>
 
-<script>
-  const earthVertexShader = `
-    attribute vec3 aPosition;
-    attribute vec2 aUv;
-    uniform float uAngle;
-    uniform float uAspect;
-    varying vec2 vUv;
-    varying vec3 vNormal;
-    varying vec3 vCloudPosition;
-
-    void main() {
-      float c = cos(uAngle);
-      float s = sin(uAngle);
-      vec3 p = vec3(c * aPosition.x + s * aPosition.z, aPosition.y, -s * aPosition.x + c * aPosition.z);
-      vUv = aUv;
-      vNormal = p;
-      vCloudPosition = p;
-
-      float cameraDistance = 3.2;
-      float nearPlane = 0.1;
-      float farPlane = 10.0;
-      float z = p.z - cameraDistance;
-      float zClip = ((farPlane + nearPlane) / (nearPlane - farPlane)) * z + ((2.0 * farPlane * nearPlane) / (nearPlane - farPlane));
-      gl_Position = vec4(p.x * 2.75 / uAspect, p.y * 2.75, zClip, -z);
-    }
-  `
-
-  const earthFragmentShader = `
-    precision mediump float;
-    uniform sampler2D uEarth;
-    uniform vec3 uLightDirection;
-    varying vec2 vUv;
-    varying vec3 vNormal;
-    varying vec3 vCloudPosition;
-
-    float hash(vec3 p) {
-      p = fract(p * 0.3183099 + vec3(0.1, 0.2, 0.3));
-      p *= 17.0;
-      return fract(p.x * p.y * p.z * (p.x + p.y + p.z));
-    }
-
-    float noise(vec3 p) {
-      vec3 i = floor(p);
-      vec3 f = fract(p);
-      f = f * f * (3.0 - 2.0 * f);
-      return mix(
-        mix(mix(hash(i), hash(i + vec3(1.0, 0.0, 0.0)), f.x), mix(hash(i + vec3(0.0, 1.0, 0.0)), hash(i + vec3(1.0, 1.0, 0.0)), f.x), f.y),
-        mix(mix(hash(i + vec3(0.0, 0.0, 1.0)), hash(i + vec3(1.0, 0.0, 1.0)), f.x), mix(hash(i + vec3(0.0, 1.0, 1.0)), hash(i + vec3(1.0, 1.0, 1.0)), f.x), f.y),
-        f.z
-      );
-    }
-
-    float cloudNoise(vec3 p) {
-      return noise(p * 3.0) * 0.58 + noise(p * 6.0) * 0.28 + noise(p * 12.0) * 0.14;
-    }
-
-    void main() {
-      vec3 normal = normalize(vNormal);
-      vec3 colorMap = texture2D(uEarth, vUv).rgb;
-      float diffuse = max(dot(normal, normalize(uLightDirection)), 0.0);
-      float ocean = smoothstep(0.035, 0.22, colorMap.b - max(colorMap.r, colorMap.g) * 0.65);
-      vec3 viewDirection = vec3(0.0, 0.0, 1.0);
-      vec3 reflectedLight = reflect(-normalize(uLightDirection), normal);
-      float specular = pow(max(dot(reflectedLight, viewDirection), 0.0), 38.0) * ocean * 0.22;
-
-      float clouds = smoothstep(0.51, 0.67, cloudNoise(vCloudPosition * 1.7 + vec3(2.0, 0.4, 1.2)));
-      float cloudDetail = smoothstep(0.54, 0.72, cloudNoise(vCloudPosition * 2.8 + vec3(0.7, 1.6, 2.3)));
-      float cloudCover = max(clouds * 0.74, cloudDetail * 0.34);
-
-      vec3 surface = colorMap * (0.3 + diffuse * 0.88);
-      surface += vec3(0.45, 0.64, 0.86) * specular;
-      surface = mix(surface, vec3(0.77, 0.88, 0.98), cloudCover * (0.34 + diffuse * 0.42));
-
-      float fresnel = pow(1.0 - max(dot(normal, viewDirection), 0.0), 2.7);
-      vec3 atmosphere = vec3(0.12, 0.48, 0.88) * fresnel * 0.66;
-      gl_FragColor = vec4(surface + atmosphere, 1.0);
-    }
-  `
-
-  function compileShader(gl, type, source) {
-    const shader = gl.createShader(type)
-    if (!shader) throw new Error('Unable to create Earth shader')
-    gl.shaderSource(shader, source)
-    gl.compileShader(shader)
-    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-      const error = gl.getShaderInfoLog(shader)
-      gl.deleteShader(shader)
-      throw new Error(error || 'Unable to compile Earth shader')
-    }
-    return shader
-  }
-
-  function createSphereMesh(latitudeBands = 48, longitudeBands = 96) {
-    const positions = []
-    const uvs = []
-    const indices = []
-
-    for (let latitude = 0; latitude <= latitudeBands; latitude += 1) {
-      const v = latitude / latitudeBands
-      const phi = v * Math.PI
-      const ringRadius = Math.sin(phi)
-      const y = Math.cos(phi)
-
-      for (let longitude = 0; longitude <= longitudeBands; longitude += 1) {
-        const u = longitude / longitudeBands
-        const theta = u * Math.PI * 2
-        positions.push(ringRadius * Math.cos(theta), y, ringRadius * Math.sin(theta))
-        uvs.push(u, v)
-      }
-    }
-
-    for (let latitude = 0; latitude < latitudeBands; latitude += 1) {
-      for (let longitude = 0; longitude < longitudeBands; longitude += 1) {
-        const first = latitude * (longitudeBands + 1) + longitude
-        const next = first + longitudeBands + 1
-        indices.push(first, next, first + 1, next, next + 1, first + 1)
-      }
-    }
-
-    return {
-      positions: new Float32Array(positions),
-      uvs: new Float32Array(uvs),
-      indices: new Uint16Array(indices),
-    }
-  }
-
-  function setupEarthGlobes() {
-    document.querySelectorAll('[data-earth-globe]').forEach((globe) => {
-      if (globe.dataset.webglInitialized === 'true') return
-      globe.dataset.webglInitialized = 'true'
-
-      const canvas = globe.querySelector('.industry-earth-canvas')
-      const textureImage = globe.querySelector('.industry-earth-fallback')
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
-      const gl = canvas?.getContext('webgl', {
-        alpha: true,
-        antialias: true,
-        powerPreference: 'low-power',
-      })
-
-      if (!gl || !textureImage) return
-
-      let animationFrame = 0
-      let isVisible = false
-      let rotation = 0
-      let lastTime = 0
-      let disposed = false
-      let program
-      let texture
-      let resizeObserver
-      let intersectionObserver
-
-      try {
-        const vertexShader = compileShader(gl, gl.VERTEX_SHADER, earthVertexShader)
-        const fragmentShader = compileShader(gl, gl.FRAGMENT_SHADER, earthFragmentShader)
-        program = gl.createProgram()
-        if (!program) throw new Error('Unable to create Earth program')
-        gl.attachShader(program, vertexShader)
-        gl.attachShader(program, fragmentShader)
-        gl.linkProgram(program)
-        gl.deleteShader(vertexShader)
-        gl.deleteShader(fragmentShader)
-
-        if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-          throw new Error(gl.getProgramInfoLog(program) || 'Unable to link Earth program')
-        }
-
-        const mesh = createSphereMesh()
-        const positionBuffer = gl.createBuffer()
-        const uvBuffer = gl.createBuffer()
-        const indexBuffer = gl.createBuffer()
-        texture = gl.createTexture()
-        if (!positionBuffer || !uvBuffer || !indexBuffer || !texture) {
-          throw new Error('Unable to create Earth buffers')
-        }
-
-        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer)
-        gl.bufferData(gl.ARRAY_BUFFER, mesh.positions, gl.STATIC_DRAW)
-        gl.bindBuffer(gl.ARRAY_BUFFER, uvBuffer)
-        gl.bufferData(gl.ARRAY_BUFFER, mesh.uvs, gl.STATIC_DRAW)
-        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer)
-        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, mesh.indices, gl.STATIC_DRAW)
-
-        const positionLocation = gl.getAttribLocation(program, 'aPosition')
-        const uvLocation = gl.getAttribLocation(program, 'aUv')
-        const angleLocation = gl.getUniformLocation(program, 'uAngle')
-        const aspectLocation = gl.getUniformLocation(program, 'uAspect')
-        const earthLocation = gl.getUniformLocation(program, 'uEarth')
-        const lightLocation = gl.getUniformLocation(program, 'uLightDirection')
-
-        gl.useProgram(program)
-        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer)
-        gl.enableVertexAttribArray(positionLocation)
-        gl.vertexAttribPointer(positionLocation, 3, gl.FLOAT, false, 0, 0)
-        gl.bindBuffer(gl.ARRAY_BUFFER, uvBuffer)
-        gl.enableVertexAttribArray(uvLocation)
-        gl.vertexAttribPointer(uvLocation, 2, gl.FLOAT, false, 0, 0)
-        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer)
-        gl.uniform3f(lightLocation, -0.48, 0.35, 0.82)
-        gl.uniform1i(earthLocation, 0)
-        gl.enable(gl.DEPTH_TEST)
-        gl.depthFunc(gl.LEQUAL)
-        gl.clearColor(0, 0, 0, 0)
-
-        textureImage.addEventListener('load', uploadTexture, { once: true })
-        textureImage.addEventListener('error', showFallback, { once: true })
-
-        function uploadTexture() {
-          if (disposed || !textureImage.naturalWidth) return showFallback()
-          gl.bindTexture(gl.TEXTURE_2D, texture)
-          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, textureImage)
-          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT)
-          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
-          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR)
-          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR)
-          gl.generateMipmap(gl.TEXTURE_2D)
-          gl.activeTexture(gl.TEXTURE0)
-          resizeCanvas()
-          globe.classList.add('is-webgl-ready')
-          draw(lastTime)
-          if (!reducedMotion.matches && isVisible) {
-            animationFrame = requestAnimationFrame(animate)
-          }
-        }
-
-        function resizeCanvas() {
-          if (!canvas) return
-          const rect = canvas.getBoundingClientRect()
-          if (!rect.width || !rect.height) return
-          const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5)
-          const width = Math.max(1, Math.round(rect.width * pixelRatio))
-          const height = Math.max(1, Math.round(rect.height * pixelRatio))
-          if (canvas.width === width && canvas.height === height) return
-          canvas.width = width
-          canvas.height = height
-          gl.viewport(0, 0, width, height)
-          if (textureImage.complete && textureImage.naturalWidth) draw(lastTime)
-        }
-
-        function draw(time) {
-          if (disposed || !textureImage.naturalWidth) return
-          gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
-          gl.useProgram(program)
-          gl.uniform1f(angleLocation, rotation)
-          gl.uniform1f(aspectLocation, canvas.width / Math.max(canvas.height, 1))
-          gl.activeTexture(gl.TEXTURE0)
-          gl.bindTexture(gl.TEXTURE_2D, texture)
-          gl.drawElements(gl.TRIANGLES, mesh.indices.length, gl.UNSIGNED_SHORT, 0)
-          lastTime = time
-        }
-
-        function animate(time) {
-          if (disposed || !isVisible || reducedMotion.matches) return
-          const elapsed = lastTime ? Math.min((time - lastTime) / 1000, 0.1) : 0
-          rotation += elapsed * 0.045
-          draw(time)
-          animationFrame = requestAnimationFrame(animate)
-        }
-
-        function showFallback() {
-          globe.classList.remove('is-webgl-ready')
-        }
-
-        function handleContextLoss(event) {
-          event.preventDefault()
-          cancelAnimationFrame(animationFrame)
-          showFallback()
-        }
-
-        function updateMotionPreference() {
-          cancelAnimationFrame(animationFrame)
-          if (reducedMotion.matches) {
-            draw(lastTime)
-          } else if (isVisible && textureImage.complete && textureImage.naturalWidth) {
-            animationFrame = requestAnimationFrame(animate)
-          }
-        }
-
-        resizeObserver = new ResizeObserver(resizeCanvas)
-        resizeObserver.observe(globe)
-        canvas.addEventListener('webglcontextlost', handleContextLoss, {
-          once: true,
-        })
-        intersectionObserver = new IntersectionObserver(([entry]) => {
-          isVisible = entry.isIntersecting
-          cancelAnimationFrame(animationFrame)
-          if (isVisible && textureImage.complete && textureImage.naturalWidth && !reducedMotion.matches) {
-            animationFrame = requestAnimationFrame(animate)
-          }
-        })
-        intersectionObserver.observe(globe)
-        reducedMotion.addEventListener('change', updateMotionPreference)
-
-        if (textureImage.complete && textureImage.naturalWidth) uploadTexture()
-
-        globe._cleanupEarth = () => {
-          disposed = true
-          cancelAnimationFrame(animationFrame)
-          resizeObserver?.disconnect()
-          intersectionObserver?.disconnect()
-          reducedMotion.removeEventListener('change', updateMotionPreference)
-          canvas.removeEventListener('webglcontextlost', handleContextLoss)
-          gl.deleteTexture(texture)
-          gl.deleteProgram(program)
-          gl.getExtension('WEBGL_lose_context')?.loseContext()
-          globe.classList.remove('is-webgl-ready')
-          delete globe.dataset.webglInitialized
-          delete globe._cleanupEarth
-        }
-      } catch {
-        globe.classList.remove('is-webgl-ready')
-        gl.getExtension('WEBGL_lose_context')?.loseContext()
-      }
-    })
-  }
-
-  function cleanupEarthGlobes() {
-    document.querySelectorAll('[data-earth-globe]').forEach((globe) => {
-      globe._cleanupEarth?.()
-    })
-  }
-
-  setupEarthGlobes()
-  document.addEventListener('astro:page-load', setupEarthGlobes)
-  document.addEventListener('astro:before-swap', cleanupEarthGlobes)
-</script>
-
 <style>
   .industries-section {
-    position: relative;
-    overflow: hidden;
     padding-block: clamp(4.5rem, 7.5vw, 7rem);
-    background:
-      radial-gradient(ellipse at 50% 47%, rgb(244 233 223 / 63%), transparent 43%),
-      linear-gradient(180deg, #faf8f5 0%, var(--color-paper) 100%);
-    isolation: isolate;
-  }
-
-  .industries-section::before,
-  .industries-section::after {
-    position: absolute;
-    z-index: -1;
-    width: min(78vw, 980px);
-    aspect-ratio: 1;
-    border: 1px solid rgb(168 65 33 / 6%);
-    border-radius: 50%;
-    content: '';
-    pointer-events: none;
-  }
-
-  .industries-section::before {
-    top: 16%;
-    left: -39%;
-  }
-
-  .industries-section::after {
-    right: -42%;
-    bottom: -55%;
-    width: min(95vw, 1180px);
-    border-color: rgb(84 123 157 / 7%);
-  }
-
-  .industries-content {
-    position: relative;
-    z-index: 1;
+    background: linear-gradient(180deg, #faf8f5 0%, var(--color-paper) 100%);
   }
 
   .industries-intro {
     max-width: 850px;
-    margin: 0 auto clamp(2.75rem, 5vw, 4.5rem);
+    margin: 0 auto clamp(2.75rem, 4.6vw, 4rem);
     text-align: center;
   }
 
@@ -581,427 +525,325 @@ const industries = [
     line-height: var(--type-body-line-height);
   }
 
-  .industry-stage {
+  .industry-row {
+    --icon-size: 68px;
+    --label-color: #1f6e98;
     display: grid;
-    min-height: 650px;
-    grid-template-columns: minmax(0, 1fr) minmax(380px, 1.55fr) minmax(0, 1fr);
-    grid-template-rows: repeat(4, minmax(128px, 1fr));
-    align-items: center;
-    gap: 0.85rem clamp(1rem, 2vw, 1.7rem);
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: 2.5rem clamp(0.75rem, 1.6vw, 1.5rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
-  .industry-globe {
-    position: relative;
-    display: grid;
-    width: min(100%, 490px);
-    aspect-ratio: 1;
-    grid-area: 1 / 2 / 5 / 3;
-    justify-self: center;
-    place-items: center;
+  .industries-cta {
+    margin: clamp(2rem, 3.5vw, 2.75rem) 0 0;
+    text-align: center;
   }
 
-  .industry-earth {
-    position: relative;
-    z-index: 1;
-    display: block;
-    width: 80%;
-    aspect-ratio: 1;
-    overflow: hidden;
-    border: 1px solid rgb(208 239 255 / 38%);
-    border-radius: 50%;
-    background: #071b37;
-    filter: drop-shadow(0 28px 30px rgb(16 27 45 / 18%));
-    box-shadow: inset 0 0 20px 2px rgb(101 190 238 / 23%);
-  }
-
-  .industry-earth::after {
-    position: absolute;
-    z-index: 2;
-    inset: 0;
-    border-radius: inherit;
-    background:
-      radial-gradient(circle at 34% 24%, transparent 34%, rgb(8 22 45 / 12%) 65%, rgb(4 17 37 / 53%) 100%),
-      linear-gradient(108deg, rgb(222 246 255 / 14%), transparent 34% 75%, rgb(5 17 36 / 20%));
-    box-shadow: inset 0 0 0 1px rgb(200 235 255 / 35%), inset -13px -8px 22px rgb(2 16 36 / 25%);
-    content: '';
-    pointer-events: none;
-  }
-
-  .industry-earth-fallback,
-  .industry-earth-canvas {
-    position: absolute;
-    inset: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-
-  .industry-earth-fallback {
-    left: 50%;
-    width: 200%;
-    max-width: none;
-    object-fit: fill;
-    transform: translateX(-50%);
-    transition: opacity 500ms var(--ease-out);
-  }
-
-  .industry-earth-canvas {
-    z-index: 1;
-    opacity: 0;
-    transition: opacity 500ms var(--ease-out);
-  }
-
-  .industry-earth.is-webgl-ready .industry-earth-fallback {
-    opacity: 0;
-  }
-
-  .industry-earth.is-webgl-ready .industry-earth-canvas {
-    opacity: 1;
-  }
-
-  .industry-orbit {
-    position: absolute;
-    z-index: 0;
-    top: 50%;
-    left: 50%;
-    width: 126%;
-    height: 38%;
-    border: 1px solid rgb(84 123 157 / 30%);
-    border-radius: 50%;
-    transform: translate(-50%, -50%) rotate(-28deg);
-    animation: industry-orbit-one-drift 32s ease-in-out infinite alternate;
-  }
-
-  .industry-orbit-two {
-    width: 120%;
-    height: 57%;
-    border-color: rgb(168 65 33 / 20%);
-    transform: translate(-50%, -50%) rotate(52deg);
-    animation-name: industry-orbit-two-drift;
-    animation-duration: 38s;
-  }
-
-  .industry-orbit-three {
-    width: 110%;
-    height: 76%;
-    border-color: rgb(84 123 157 / 15%);
-    transform: translate(-50%, -50%) rotate(-66deg);
-    animation-name: industry-orbit-three-drift;
-    animation-duration: 44s;
-  }
-
-  .industry-particle {
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    left: 0;
-    width: 7px;
-    height: 7px;
-    border: 1px solid rgb(255 255 255 / 85%);
-    border-radius: 50%;
-    background: var(--color-orange);
-    box-shadow: 0 0 14px rgb(201 84 43 / 50%);
-    offset-path: ellipse(61% 19% at 50% 50%);
-    animation: industry-orbit-travel 28s linear infinite;
-  }
-
-  .industry-particle-two {
-    width: 6px;
-    height: 6px;
-    background: var(--color-blue);
-    box-shadow: 0 0 13px rgb(84 123 157 / 50%);
-    offset-path: ellipse(57% 29% at 50% 50%);
-    animation-duration: 34s;
-    animation-delay: -14s;
-  }
-
-  .industry-particle-three {
-    width: 5px;
-    height: 5px;
-    background: var(--color-orange-dark);
-    offset-path: ellipse(53% 38% at 50% 50%);
-    animation-duration: 39s;
-    animation-delay: -22s;
-  }
-
-  .industry-particle-four {
-    width: 5px;
-    height: 5px;
-    background: var(--color-blue);
-    offset-path: ellipse(48% 43% at 50% 50%);
-    animation-duration: 44s;
-    animation-delay: -8s;
-  }
-
-  .industry-card {
-    position: relative;
-    z-index: 2;
+  .industry-item {
     display: flex;
     min-width: 0;
-    min-height: 116px;
+    flex-direction: column;
     align-items: center;
-    gap: 0.85rem;
-    padding: 1.05rem 1rem;
-    border: 1px solid rgb(16 27 45 / 9%);
-    border-radius: var(--radius-medium);
-    background: rgb(255 255 255 / 82%);
-    box-shadow: 0 12px 28px rgb(16 27 45 / 6%);
-    -webkit-backdrop-filter: blur(14px);
-    backdrop-filter: blur(14px);
-    transform: translateZ(0);
-    transition:
-      transform 300ms var(--ease-out),
-      border-color 300ms var(--ease-out),
-      box-shadow 300ms var(--ease-out),
-      background-color 300ms var(--ease-out);
-  }
-
-  .industry-card:focus-visible {
-    outline: 3px solid rgb(168 65 33 / 68%);
-    outline-offset: 4px;
-    border-color: var(--color-orange-dark);
-    box-shadow: 0 0 0 5px rgb(168 65 33 / 10%), 0 18px 38px rgb(16 27 45 / 12%);
-    transform: scale(1.025);
-  }
-
-  .industry-card-blue .industry-icon {
-    background: rgb(84 123 157 / 12%);
-    color: var(--color-blue);
-  }
-
-  .industry-card-orange .industry-icon {
-    background: rgb(201 84 43 / 11%);
-    color: var(--color-orange-dark);
+    gap: 1.35rem;
+    text-align: center;
   }
 
   .industry-icon {
+    position: relative;
     display: grid;
-    width: 43px;
-    height: 43px;
-    flex: 0 0 auto;
+    width: var(--icon-size);
+    height: var(--icon-size);
     place-items: center;
-    border-radius: 50%;
+    isolation: isolate;
     transition:
-      background-color 300ms var(--ease-out),
-      color 300ms var(--ease-out),
-      transform 300ms var(--ease-out);
+      transform 300ms var(--ease-out),
+      filter 300ms var(--ease-out);
+  }
+
+  /* Soft glow that stays while hovered, plus a one-off ring of light. */
+  .industry-icon::before,
+  .industry-icon::after {
+    position: absolute;
+    z-index: -1;
+    inset: -14px;
+    border-radius: 50%;
+    content: '';
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .industry-icon::before {
+    background: radial-gradient(
+      circle,
+      rgb(var(--industry-glow) / 32%) 0%,
+      rgb(var(--industry-glow) / 0%) 68%
+    );
+    transition: opacity 300ms var(--ease-out);
+  }
+
+  .industry-icon::after {
+    border: 2px solid rgb(var(--industry-glow) / 55%);
   }
 
   .industry-icon svg {
     display: block;
-    width: 21px;
-    height: 21px;
-    stroke: currentColor;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 1.65;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
   }
 
-  .industry-card-copy {
-    display: grid;
-    min-width: 0;
-    gap: 0.28rem;
-  }
-
-  .industry-card-copy strong {
-    color: var(--color-navy);
+  .industry-name {
+    position: relative;
+    max-width: 11ch;
+    margin: 0;
+    color: var(--label-color);
     font-family: var(--font-heading);
-    font-size: 0.91rem;
-    font-weight: 650;
-    letter-spacing: -0.03em;
-    line-height: 1.3;
+    font-size: clamp(1rem, 1.15vw, 1.12rem);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.4;
+    overflow-wrap: normal;
+    text-wrap: balance;
+    transition: color 250ms var(--ease-out);
+    hyphens: none;
   }
 
-  .industry-card-copy > span {
-    color: var(--color-body);
-    font-size: 0.76rem;
-    line-height: 1.48;
+  /* Accent rule under the label; absolutely placed so hover never shifts layout. */
+  .industry-name::after {
+    position: absolute;
+    bottom: -0.55rem;
+    left: 50%;
+    width: 1.75rem;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--color-orange);
+    content: '';
+    transform: translateX(-50%) scaleX(0);
+    transition: transform 300ms var(--ease-out);
   }
 
-  .industry-retail {
-    grid-area: 1 / 1;
+  /* Icon details that move on hover; transform-box keeps origins local. */
+  .retail-badge,
+  .media-play,
+  .enterprise-orbit,
+  .fintech-coin {
+    transform-box: fill-box;
+    transform-origin: center;
   }
 
-  .industry-healthcare {
-    grid-area: 1 / 3;
+  .heart-pulse {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 0;
   }
 
-  .industry-fintech {
-    grid-area: 2 / 1;
+  .fintech-check,
+  .edu-chalk {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
   }
 
-  .industry-hospitality {
-    grid-area: 2 / 3;
+  .food-lid,
+  .truck-body,
+  .truck-lines,
+  .food-glint {
+    transition:
+      transform 320ms var(--ease-out),
+      opacity 320ms var(--ease-out);
   }
 
-  .industry-logistics {
-    grid-area: 3 / 1;
-  }
-
-  .industry-media {
-    grid-area: 3 / 3;
-  }
-
-  .industry-education {
-    grid-area: 4 / 1;
-    transform: translateX(0.85rem);
-  }
-
-  .industry-enterprise {
-    grid-area: 4 / 3;
-    transform: translateX(-0.85rem);
+  .food-glint {
+    opacity: 0;
   }
 
   @media (hover: hover) and (pointer: fine) {
-    .industry-card:hover {
-      z-index: 3;
-      border-color: rgb(168 65 33 / 32%);
-      background: rgb(255 255 255 / 96%);
-      box-shadow: 0 18px 40px rgb(16 27 45 / 13%), 0 0 24px rgb(201 84 43 / 9%);
-      transform: scale(1.035);
+    .industry-item:hover .industry-icon {
+      filter: drop-shadow(0 8px 14px rgb(var(--industry-glow) / 30%));
+      transform: translateY(-3px) scale(1.08);
     }
 
-    .industry-card:hover .industry-icon {
-      transform: translateY(-2px) scale(1.05);
+    .industry-item:hover .industry-icon::before {
+      opacity: 1;
+    }
+
+    .industry-item:hover .industry-icon::after {
+      animation: industry-flash 700ms var(--ease-out);
+    }
+
+    .industry-item:hover .industry-name {
+      color: var(--color-navy);
+    }
+
+    .industry-item:hover .industry-name::after {
+      transform: translateX(-50%) scaleX(1);
+    }
+
+    .industry-item:hover .retail-badge {
+      animation: industry-pop 600ms var(--ease-out) 2;
+    }
+
+    .industry-item:hover .heart-pulse {
+      animation: industry-draw-pulse 900ms ease-in-out;
+    }
+
+    .industry-item:hover .fintech-check,
+    .industry-item:hover .edu-chalk {
+      animation: industry-draw 650ms var(--ease-out);
+    }
+
+    .industry-item:hover .fintech-coin {
+      animation: industry-pop 500ms var(--ease-out);
+    }
+
+    .industry-item:hover .food-lid {
+      transform: translateY(-4px);
+    }
+
+    .industry-item:hover .food-glint {
+      opacity: 1;
+    }
+
+    .industry-item:hover .media-sheen {
+      animation: industry-sweep 750ms ease-in-out;
+    }
+
+    .industry-item:hover .media-play {
+      animation: industry-pop 500ms var(--ease-out);
+    }
+
+    .industry-item:hover .truck-body {
+      transform: translateX(3px);
+    }
+
+    .industry-item:hover .truck-lines {
+      animation: industry-speed 600ms ease-in-out 2;
+    }
+
+    .industry-item:hover .enterprise-orbit {
+      animation: industry-orbit 900ms var(--ease-out);
     }
   }
 
-  @keyframes industry-orbit-travel {
-    to {
-      offset-distance: 100%;
+  @keyframes industry-flash {
+    0% {
+      opacity: 0.9;
+      transform: scale(0.7);
+    }
+
+    100% {
+      opacity: 0;
+      transform: scale(1.25);
     }
   }
 
-  @keyframes industry-orbit-one-drift {
-    to {
-      transform: translate(-50%, -50%) rotate(-24deg);
+  @keyframes industry-pop {
+    50% {
+      transform: scale(1.22);
     }
   }
 
-  @keyframes industry-orbit-two-drift {
-    to {
-      transform: translate(-50%, -50%) rotate(56deg);
+  @keyframes industry-draw-pulse {
+    0% {
+      stroke-dashoffset: 100;
+    }
+
+    100% {
+      stroke-dashoffset: 0;
     }
   }
 
-  @keyframes industry-orbit-three-drift {
-    to {
-      transform: translate(-50%, -50%) rotate(-62deg);
+  @keyframes industry-draw {
+    0% {
+      stroke-dashoffset: 1;
+    }
+
+    100% {
+      stroke-dashoffset: 0;
     }
   }
 
-  @media (max-width: 1100px) {
-    .industries-intro {
-      margin-bottom: 3rem;
+  @keyframes industry-sweep {
+    0% {
+      transform: translateX(0);
     }
 
-    .industry-stage {
-      min-height: 0;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      grid-template-rows: auto;
-      gap: 1rem;
-    }
-
-    .industry-globe {
-      width: min(68vw, 390px);
-      grid-area: auto / 1 / auto / -1;
-      margin: 0 auto 0.6rem;
-    }
-
-    .industry-card {
-      grid-area: auto;
-      min-height: 108px;
-      transform: none;
+    100% {
+      transform: translateX(72px);
     }
   }
 
+  @keyframes industry-speed {
+    50% {
+      opacity: 0.45;
+      transform: translateX(-4px);
+    }
+  }
+
+  @keyframes industry-orbit {
+    100% {
+      transform: rotate(120deg);
+    }
+  }
+
+  /* Tablet: two balanced rows of four. */
+  @media (max-width: 1099px) {
+    .industry-row {
+      --icon-size: 62px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 3rem 1.5rem;
+    }
+  }
+
+  /* Phone: two columns, icons kept prominent. */
   @media (max-width: 600px) {
     .industries-section {
       padding-block: 4rem;
     }
 
     .industries-intro {
-      margin-bottom: 2.25rem;
+      margin-bottom: 2.5rem;
     }
 
-    .industry-stage {
-      gap: 0.75rem;
+    .industry-row {
+      --icon-size: 56px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2.5rem 1rem;
     }
 
-    .industry-globe {
-      width: min(82vw, 340px);
-      margin-bottom: 0.4rem;
+    .industry-item {
+      gap: 1rem;
     }
 
-    .industry-card {
-      min-height: 106px;
-      gap: 0.7rem;
-      padding: 0.85rem 0.8rem;
-    }
-
-    .industry-icon {
-      width: 37px;
-      height: 37px;
-    }
-
-    .industry-icon svg {
-      width: 19px;
-      height: 19px;
-    }
-
-    .industry-card-copy strong {
-      font-size: 0.82rem;
-    }
-
-    .industry-card-copy > span {
-      font-size: 0.71rem;
-    }
-  }
-
-  @media (max-width: 430px) {
-    .industry-stage {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 0.7rem;
-    }
-
-    .industry-globe {
-      grid-column: 1;
-      width: min(86vw, 315px);
-    }
-
-    .industry-card {
-      min-height: 92px;
-      padding-inline: 1rem;
-    }
-
-    .industry-card-copy strong {
-      font-size: 0.9rem;
-    }
-
-    .industry-card-copy > span {
-      font-size: 0.77rem;
+    .industry-name {
+      font-size: 1rem;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .industry-orbit,
-    .industry-particle {
-      animation: none;
-    }
-
-    .industry-earth-fallback,
-    .industry-earth-canvas {
+    .industry-icon,
+    .industry-icon::before,
+    .industry-name,
+    .industry-name::after,
+    .food-lid,
+    .truck-body,
+    .truck-lines,
+    .food-glint {
       transition: none;
     }
 
-    .industry-card,
-    .industry-card:focus-visible,
-    .industry-card:hover {
+    .industry-item:hover .industry-icon {
       transform: none;
     }
 
-    .industry-icon {
-      transition: none;
+    .industry-item:hover .industry-icon::after,
+    .industry-item:hover .industry-icon * {
+      animation: none;
+    }
+
+    .industry-item:hover .food-lid,
+    .industry-item:hover .truck-body {
+      transform: none;
     }
   }
 </style>

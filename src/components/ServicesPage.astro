@@ -3,7 +3,7 @@ import { homepageServices } from '../data/site-content.js'
 import { Image } from 'astro:assets'
 import servicesHeroImage from '../assets/services-hero-team.png'
 import serviceAIAutomationImage from '../assets/service-ai-automation.webp'
-import serviceCustomSoftwareImage from '../assets/service-custom-software.webp'
+import serviceCustomSoftwareImage from '../assets/service-custom-software-visual.webp'
 import serviceWebApplicationsImage from '../assets/service-web-applications.webp'
 import serviceMobileApplicationsImage from '../assets/service-mobile-applications.webp'
 import serviceEnterpriseSolutionsImage from '../assets/service-enterprise-solutions.webp'
@@ -28,7 +28,8 @@ const serviceDetails = [
     deliverables:
       'A scoped workflow, connected application or assistant, and clear review and exception paths.',
     image: serviceAIAutomationImage,
-    imageAlt: 'Colleagues reviewing an AI-assisted business workflow together',
+    imageAlt:
+      'An AI assistant summarizing an attached invoice and offering to route it for approval, above a read, check, and route workflow',
     link: '/ai-technology',
     linkLabel: 'Explore AI',
   },
@@ -50,7 +51,8 @@ const serviceDetails = [
     deliverables:
       'A clear product scope, working software, integration points, and a maintainable foundation for future change.',
     image: serviceCustomSoftwareImage,
-    imageAlt: 'Product team planning a tailored business software application',
+    imageAlt:
+      'A code editor showing an order-creation function, above a diagram connecting a web app, an orders API, and a database',
     link: '/contact',
     linkLabel: 'Discuss custom software',
   },
@@ -73,7 +75,7 @@ const serviceDetails = [
       'A responsive application experience with the interfaces and connections needed for its intended users.',
     image: serviceWebApplicationsImage,
     imageAlt:
-      'Web application dashboard displayed in a bright product workspace',
+      'A browser-based orders dashboard with navigation, summary figures, and an order list, beside the same orders in a phone app',
     link: '/contact',
     linkLabel: 'Discuss a web application',
   },
@@ -95,7 +97,8 @@ const serviceDetails = [
     deliverables:
       'A mobile product scope, platform-aligned experience, and connections to the services and data it depends on.',
     image: serviceMobileApplicationsImage,
-    imageAlt: 'Business user reviewing a mobile application on a smartphone',
+    imageAlt:
+      'A smartphone app showing a delivery arriving today, with order-shipped and platform cards beside it',
     link: '/contact',
     linkLabel: 'Discuss a mobile app',
   },
@@ -117,7 +120,8 @@ const serviceDetails = [
     deliverables:
       'A mapped operating workflow, connected solution scope, and a practical integration and rollout plan.',
     image: serviceEnterpriseSolutionsImage,
-    imageAlt: 'Cross-functional team coordinating connected enterprise systems',
+    imageAlt:
+      'An operations dashboard with key figures, a purchase-approval process, a weekly volume chart, and connected ERP, CRM, and HR systems',
     link: '/contact',
     linkLabel: 'Discuss an enterprise solution',
   },
@@ -139,7 +143,8 @@ const serviceDetails = [
     deliverables:
       'An architecture and data-flow plan, deployment foundation, and operating considerations suited to the solution.',
     image: serviceCloudDataImage,
-    imageAlt: 'Engineer reviewing cloud data flows and reporting dashboards',
+    imageAlt:
+      'A cloud architecture linking an API, queue, and pipeline to databases and a reports chart',
     link: '/contact',
     linkLabel: 'Discuss cloud & data',
   },
@@ -211,7 +216,10 @@ const deliverySteps = [
             Explore our services <span aria-hidden="true">↘</span>
           </a>
           <a class="text-link" href="/contact">
-            Discuss your project <span aria-hidden="true">↗</span>
+            Discuss your project{' '}
+            <span class="link-arrow" aria-hidden="true">
+              →
+            </span>
           </a>
         </div>
         <div class="services-hero-proof">
@@ -333,7 +341,10 @@ const deliverySteps = [
                 <p>{service.deliverables}</p>
               </div>
               <a class="text-link service-detail-link" href={service.link}>
-                {service.linkLabel} <span aria-hidden="true">↗</span>
+                {service.linkLabel}{' '}
+                <span class="link-arrow" aria-hidden="true">
+                  →
+                </span>
               </a>
             </div>
 
@@ -378,7 +389,10 @@ const deliverySteps = [
           context helps shape software around the problem it needs to solve.
         </p>
         <a class="text-link text-link-light" href="/projects">
-          How we share project work <span aria-hidden="true">↗</span>
+          How we share project work{' '}
+          <span class="link-arrow" aria-hidden="true">
+            →
+          </span>
         </a>
       </div>
       <div class="experience-principles reveal">

@@ -1,0 +1,50 @@
+---
+// Small industry chips for a project. Labels come from the project data and
+// are editorial classifications, not official industry designations.
+// Props: industries (string[]), class (optional extra class for the list).
+const { industries = [], class: className } = Astro.props
+---
+
+{industries.length > 0 && (
+  <ul class:list={['industry-chips', className]} aria-label="Industries">
+    {industries.map((industry) => (
+      <li class="industry-chip">
+        <svg viewBox="0 0 8 8" width="6" height="6" aria-hidden="true">
+          <circle cx="4" cy="4" r="4" />
+        </svg>
+        {industry}
+      </li>
+    ))}
+  </ul>
+)}
+
+<style>
+  .industry-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .industry-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.28rem 0.7rem;
+    border: 1px solid rgb(16 27 45 / 10%);
+    border-radius: 999px;
+    background: var(--color-paper);
+    color: var(--color-body);
+    font-size: 0.74rem;
+    font-weight: 600;
+    line-height: 1.35;
+    white-space: nowrap;
+  }
+
+  .industry-chip svg {
+    flex: none;
+    fill: var(--color-orange);
+  }
+</style>

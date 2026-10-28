@@ -1,5 +1,8 @@
 ---
+import { roleDescriptions } from '../data/team.js'
+
 const { member, index = 0 } = Astro.props
+const description = member.description ?? roleDescriptions[member.designation]
 const initials = member.name
   .trim()
   .split(/\s+/)
@@ -42,6 +45,8 @@ try {
   >
     {member.image ? (
       <img src={member.image} alt="" loading="lazy" />
+    ) : member.avatar ? (
+      <img src={member.avatar} alt="" loading="lazy" width="240" height="160" />
     ) : (
       <span>{initials}</span>
     )}
@@ -69,6 +74,7 @@ try {
       </a>
     )}
   </div>
+  {description && <p class="team-profile-description">{description}</p>}
 </article>
 
 <style>
@@ -162,6 +168,13 @@ try {
     color: var(--color-muted);
     font-size: 0.76rem;
     line-height: 1.45;
+  }
+
+  .team-profile .team-profile-description {
+    margin: 0.55rem 0.25rem 0.2rem;
+    color: var(--color-body);
+    font-size: 0.8rem;
+    line-height: 1.55;
   }
 
   .team-profile-linkedin {

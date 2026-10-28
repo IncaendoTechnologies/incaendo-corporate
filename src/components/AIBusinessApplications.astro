@@ -1,0 +1,710 @@
+---
+import { Image } from 'astro:assets'
+import operationsImage from '../assets/ai-applications/operations.jpg'
+import customerSupportImage from '../assets/ai-applications/customer-support.jpg'
+import knowledgeImage from '../assets/ai-applications/enterprise-knowledge.jpg'
+import documentImage from '../assets/ai-applications/document-processing.jpg'
+import reportingImage from '../assets/ai-applications/reporting.jpg'
+import employeeImage from '../assets/ai-applications/employee-products.jpg'
+
+const applications = [
+  {
+    title: 'Customer Support AI Agent',
+    scenario:
+      'Answers common questions from your approved help content, sorts and summarizes incoming tickets, and drafts replies for your support team to check before sending.',
+    value:
+      'Agents spend less time on repeat questions and searching for answers, while a person still owns every reply.',
+    category: 'Customer support',
+    involves: [
+      'Resolve routine questions from approved help content',
+      'Tag, prioritize, and summarize each new ticket',
+      'Draft replies and hand complex cases to a person',
+    ],
+    image: customerSupportImage,
+    alt: 'A customer service representative wearing a headset at her workstation',
+  },
+  {
+    title: 'Finance & Invoice Processing Agent',
+    scenario:
+      'Reads invoices, receipts, and purchase documents, extracts the key fields, and matches them against purchase orders before anything is entered into your accounting system.',
+    value:
+      'Less manual data entry for finance teams, with mismatches and duplicates flagged before payment.',
+    category: 'Finance',
+    involves: [
+      'Extract supplier, amounts, dates, and tax details',
+      'Match invoices to purchase orders and receipts',
+      'Flag mismatches, duplicates, and unclear values for review',
+    ],
+    image: documentImage,
+    alt: 'A tall stack of receipts, invoices, and paper business records',
+  },
+  {
+    title: 'Workflow Automation Agent',
+    scenario:
+      'Takes incoming requests such as approvals, onboarding steps, or orders, routes them to the right team, and updates connected systems as each step is completed.',
+    value:
+      'Fewer manual handoffs and status-chasing emails, with approvals still made by the right people.',
+    category: 'Operations',
+    involves: [
+      'Classify incoming requests and route them to the right queue',
+      'Update CRM, ERP, or ticketing records between steps',
+      'Pause for human approval and log every action taken',
+    ],
+    image: operationsImage,
+    alt: 'A small team reviewing printed charts together in a planning space',
+  },
+  {
+    title: 'Data Analysis & Reporting Agent',
+    scenario:
+      'Lets managers ask plain-language questions of prepared business data and compiles recurring summaries, such as weekly sales or operations reports.',
+    value:
+      'Recurring reports take less time to assemble, and teams can see what changed without building every query by hand.',
+    category: 'Reporting',
+    involves: [
+      'Answer plain-language questions from prepared data',
+      'Draft weekly and monthly performance summaries',
+      'Highlight notable changes for analysts to check',
+    ],
+    image: reportingImage,
+    alt: 'Performance charts and metrics displayed on a laptop screen',
+  },
+  {
+    title: 'Knowledge Management Agent',
+    scenario:
+      'Searches your policies, manuals, contracts, and internal documents, then answers employee questions with links to the source passages.',
+    value:
+      'Staff find the right information faster and can verify every answer against the original document.',
+    category: 'Knowledge',
+    involves: [
+      'Search internal documents according to user permissions',
+      'Answer questions using only retrieved content',
+      'Cite the source document behind each answer',
+    ],
+    image: knowledgeImage,
+    alt: 'A person working at a desk at the end of a library aisle lined with reference books',
+  },
+  {
+    title: 'IT Support & Employee Helpdesk Agent',
+    scenario:
+      'Handles common employee requests such as password resets, access requests, software how-tos, and HR policy questions, and opens a ticket when a person needs to step in.',
+    value:
+      'IT and HR teams spend less time on repetitive requests, and employees get help without waiting in a queue.',
+    category: 'IT & HR',
+    involves: [
+      'Guide employees through common IT fixes step by step',
+      'Answer leave, benefits, and HR policy questions',
+      'Create a complete ticket when escalation is needed',
+    ],
+    image: employeeImage,
+    alt: 'Two colleagues working through an internal application together on a laptop',
+  },
+]
+---
+
+<section
+  class="ai-applications section-soft"
+  aria-labelledby="ai-applications-title"
+>
+  <div class="site-container">
+    <div class="ai-section-heading ai-applications-heading">
+      <div>
+        <p class="eyebrow">BUSINESS APPLICATIONS</p>
+        <h2 id="ai-applications-title">
+          AI agents for the work
+          <br />
+          <span>your teams do every day.</span>
+        </h2>
+      </div>
+      <p>
+        Examples of AI agents we can design and integrate into your existing
+        systems. Each one takes on repetitive steps in a specific workflow,
+        while people review the output and make the final decisions.
+      </p>
+    </div>
+  </div>
+  <div
+    class="application-track"
+    style={`--application-count: ${applications.length}`}
+    data-application-track
+  >
+    <div class="application-sticky">
+      <div class="site-container application-inner">
+        <div class="application-progress" aria-hidden="true">
+          <span class="application-counter">
+            <b data-application-current>01</b> / 0{applications.length}
+          </span>
+          <span class="application-progress-track">
+            <i data-application-progress></i>
+          </span>
+          <span class="application-hint">Scroll to explore</span>
+        </div>
+        <ol class="application-deck">
+          {applications.map((item, index) => (
+            <li
+              class:list={['application-slide', { 'is-active': index === 0 }]}
+              style={`--slide-index: ${index}`}
+              data-application-slide
+            >
+              <article
+                class="application-card"
+                aria-labelledby={`application-title-${index + 1}`}
+              >
+                <div class="application-copy">
+                  <p class="application-kicker">
+                    <span>0{index + 1}</span>
+                    {item.category}
+                  </p>
+                  <h3 id={`application-title-${index + 1}`}>{item.title}</h3>
+                  <p class="application-description">{item.scenario}</p>
+                  <div class="application-involves">
+                    <h4>What it can involve</h4>
+                    <ul>
+                      {item.involves.map((point) => (
+                        <li>{point}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div class="application-value">
+                    <span>WHY IT CAN HELP</span>
+                    <p>{item.value}</p>
+                  </div>
+                </div>
+                <figure class="application-media">
+                  <Image
+                    src={item.image}
+                    alt={item.alt}
+                    widths={[560, 840, 1200]}
+                    sizes="(max-width: 800px) calc(100vw - 2.5rem), 640px"
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                  />
+                </figure>
+              </article>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const applicationTrack = document.querySelector('[data-application-track]')
+
+  if (applicationTrack) {
+    const slides = [
+      ...applicationTrack.querySelectorAll('[data-application-slide]'),
+    ]
+    const deck = applicationTrack.querySelector('.application-deck')
+    const current = applicationTrack.querySelector('[data-application-current]')
+    const progress = applicationTrack.querySelector(
+      '[data-application-progress]',
+    )
+    const pinned = window.matchMedia(
+      '(min-width: 801px) and (min-height: 700px)',
+    )
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const clamp = (value, min, max) => Math.min(Math.max(value, min), max)
+    const smooth = (t) => t * t * (3 - 2 * t)
+    let activeIndex = -1
+    let frame = 0
+
+    function setActive(index) {
+      if (index === activeIndex) return
+      activeIndex = index
+      slides.forEach((slide, i) =>
+        slide.classList.toggle('is-active', i === index),
+      )
+      current.textContent = String(index + 1).padStart(2, '0')
+    }
+
+    function applyDepth(slide, { y = 0, scale = 1, dim = 0, lift = 0 }) {
+      slide.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0) scale(${scale.toFixed(4)})`
+      slide.style.setProperty('--dim', dim.toFixed(3))
+      slide.style.setProperty('--lift', lift.toFixed(3))
+    }
+
+    // Desktop: the section is pinned and scroll position drives each card's
+    // rise from below, while earlier cards shrink, dim, and peek out above.
+    function updatePinned() {
+      const viewport = window.innerHeight
+      const distance = applicationTrack.offsetHeight - viewport
+      const scrolled = clamp(
+        -applicationTrack.getBoundingClientRect().top,
+        0,
+        distance,
+      )
+      const lead = viewport * 0.08
+      const tail = viewport * 0.3
+      const units = clamp(
+        ((scrolled - lead) / Math.max(distance - lead - tail, 1)) *
+          (slides.length - 1),
+        0,
+        slides.length - 1,
+      )
+      const deckTop = deck.getBoundingClientRect().top
+      const startY = viewport - deckTop + 24
+      const rise = slides.map((_, i) => {
+        if (i === 0) return 1
+        const t = clamp(units - (i - 1), 0, 1)
+        return reducedMotion.matches ? Math.round(t) : smooth(t)
+      })
+
+      slides.forEach((slide, i) => {
+        let covered = 0
+        for (let j = i + 1; j < slides.length; j++) covered += rise[j]
+        const depth = Math.min(covered, 3)
+        const resting = rise[i] === 1
+        slide.style.visibility = rise[i] === 0 ? 'hidden' : 'visible'
+        slide.style.opacity = String(clamp(4 - covered, 0, 1))
+        applyDepth(slide, {
+          y: (1 - rise[i]) * startY - depth * 14,
+          scale: 1 - depth * 0.045,
+          dim: clamp(covered * 0.45, 0, 0.8),
+          lift: (resting ? 0.55 : 1) * (1 - Math.min(covered, 1)),
+        })
+      })
+
+      setActive(rise.filter((value) => value >= 0.5).length - 1)
+      progress.style.transform = `scaleX(${(units + 1) / slides.length})`
+    }
+
+    // Phones and tablets: cards stick in normal page flow; as the next card
+    // slides over one, ease it back slightly without changing the scroll.
+    function updateFlow() {
+      slides.forEach((slide, i) => {
+        const next = slides[i + 1]
+        if (!next) return applyDepth(slide, {})
+        const card = slide.getBoundingClientRect()
+        const cover = clamp(
+          (card.bottom - next.getBoundingClientRect().top) / card.height,
+          0,
+          1,
+        )
+        applyDepth(slide, {
+          scale: 1 - cover * 0.05,
+          dim: cover * 0.45,
+          lift: 0,
+        })
+      })
+    }
+
+    function update() {
+      frame = 0
+      if (pinned.matches) updatePinned()
+      else updateFlow()
+    }
+
+    function requestUpdate() {
+      if (!frame) frame = requestAnimationFrame(update)
+    }
+
+    function reset() {
+      slides.forEach((slide) => {
+        slide.removeAttribute('style')
+        slide.style.setProperty('--slide-index', slides.indexOf(slide))
+      })
+      requestUpdate()
+    }
+
+    applicationTrack.dataset.enhanced = ''
+    setActive(0)
+    update()
+    window.addEventListener('scroll', requestUpdate, { passive: true })
+    window.addEventListener('resize', requestUpdate)
+    pinned.addEventListener('change', reset)
+    reducedMotion.addEventListener('change', requestUpdate)
+  }
+</script>
+
+<style>
+  .ai-applications {
+    position: relative;
+  }
+  .ai-applications h2 {
+    margin-top: 0;
+    margin-bottom: 1.1rem;
+    font-size: var(--type-section-size);
+    font-weight: var(--type-heading-weight);
+    letter-spacing: var(--type-section-letter-spacing);
+    line-height: var(--type-section-line-height);
+  }
+  .ai-section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: clamp(2rem, 5vw, 4.8rem);
+    margin-bottom: 2.5rem;
+  }
+  .ai-section-heading > div {
+    max-width: 680px;
+  }
+  .ai-section-heading h2 {
+    margin-bottom: 0;
+  }
+  .ai-section-heading h2 span {
+    color: var(--color-orange-dark);
+  }
+  .ai-section-heading > p {
+    max-width: 440px;
+    margin-bottom: 0.15rem;
+    color: var(--color-body);
+    font-size: 0.94rem;
+    line-height: 1.7;
+  }
+
+  .ai-applications {
+    padding-block: clamp(4.4rem, 7.2vw, 6.8rem);
+    background: #f0ede8;
+  }
+  .application-progress {
+    display: none;
+  }
+  .application-deck {
+    display: grid;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* Depth layers driven by script: --dim fades a card back, --lift deepens its shadow */
+  .application-slide {
+    position: relative;
+    transform-origin: 50% 0;
+  }
+  .application-slide::before {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-large);
+    box-shadow:
+      0 34px 70px -26px rgb(16 27 45 / 34%),
+      0 14px 28px -14px rgb(16 27 45 / 16%);
+    content: '';
+    opacity: var(--lift, 0);
+    pointer-events: none;
+  }
+  .application-card {
+    position: relative;
+    display: grid;
+    gap: 1.1rem;
+    overflow: hidden;
+    padding: 0.85rem;
+    border: 1px solid rgb(16 27 45 / 9%);
+    border-radius: var(--radius-large);
+    background: linear-gradient(165deg, #fffdfb 0%, #fbf8f4 60%, #f8f3ed 100%);
+    box-shadow:
+      0 1px 2px rgb(16 27 45 / 4%),
+      0 18px 40px -20px rgb(16 27 45 / 22%);
+  }
+  .application-card::after {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    border-radius: inherit;
+    background: #ece6de;
+    content: '';
+    opacity: var(--dim, 0);
+    pointer-events: none;
+  }
+  .application-media {
+    position: relative;
+    order: -1;
+    margin: 0;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border: 1px solid rgb(16 27 45 / 8%);
+    border-radius: 16px;
+    background: #e8e2da;
+    box-shadow: 0 16px 36px -22px rgb(16 27 45 / 38%);
+  }
+  .application-media img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .application-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.2rem 0.45rem 0.45rem;
+  }
+  .application-kicker {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin: 0 0 0.9rem;
+    color: var(--color-orange-dark);
+    font-size: 0.68rem;
+    font-weight: 750;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .application-kicker span {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    flex: none;
+    place-items: center;
+    border: 1px solid rgb(201 84 43 / 28%);
+    border-radius: 50%;
+    background: #fff;
+    font-size: 0.66rem;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+  }
+  .application-copy h3 {
+    margin-bottom: 0.7rem;
+    font-size: clamp(1.4rem, 5.4vw, 1.75rem);
+    font-weight: 650;
+    line-height: 1.14;
+    letter-spacing: -0.05em;
+  }
+  .application-description {
+    max-width: 480px;
+    margin-bottom: 1.1rem;
+    color: var(--color-body);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+  .application-involves h4 {
+    margin: 0 0 0.5rem;
+    color: var(--color-ink);
+    font-size: 0.88rem;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+  }
+  .application-involves ul {
+    display: grid;
+    gap: 0.42rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .application-involves li {
+    position: relative;
+    padding-left: 1rem;
+    color: var(--color-body);
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+  .application-involves li::before {
+    position: absolute;
+    top: 0.56em;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-orange);
+    content: '';
+  }
+  .application-value {
+    margin-top: 1.15rem;
+    padding: 0.8rem 1rem;
+    border-left: 2px solid var(--color-orange);
+    background: #f3ece4;
+  }
+  .application-value span {
+    color: var(--color-orange-dark);
+    font-size: 0.64rem;
+    font-weight: 750;
+    letter-spacing: 0.12em;
+  }
+  .application-value p {
+    margin: 0.3rem 0 0;
+    color: var(--color-ink);
+    font-size: 0.9rem;
+    font-weight: 550;
+    line-height: 1.5;
+  }
+
+  /* Wider screens: text and a large inset image side by side */
+  @media (min-width: 801px) {
+    .application-card {
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      gap: clamp(2rem, 4.2vw, 4.25rem);
+      padding: clamp(1.6rem, 2.8vw, 2.5rem);
+    }
+    .application-media {
+      order: 0;
+      aspect-ratio: auto;
+      min-height: 400px;
+      border-radius: 18px;
+    }
+    .application-copy {
+      padding: 0;
+    }
+    .application-copy h3 {
+      margin-bottom: 0.85rem;
+      font-size: clamp(1.75rem, 2.6vw, 2.35rem);
+    }
+    .application-description {
+      margin-bottom: 1.3rem;
+      font-size: clamp(0.95rem, 1.1vw, 1.02rem);
+    }
+    .application-involves li {
+      font-size: 0.9rem;
+    }
+    .application-value {
+      margin-top: 1.3rem;
+      padding: 0.9rem 1.15rem;
+    }
+  }
+
+  /* Phones and tablets: cards stick and the next one slides over the last */
+  @media (max-width: 800px) and (min-height: 800px) {
+    .application-slide {
+      position: sticky;
+      top: calc(1rem + var(--slide-index) * 0.55rem);
+    }
+  }
+
+  /* Wider screens with room to pin: each card rises over the last */
+  @media (min-width: 801px) and (min-height: 700px) {
+    .ai-applications:has([data-enhanced]) {
+      padding-bottom: 0;
+    }
+    .application-track[data-enhanced] {
+      height: calc(100vh + (var(--application-count) - 1) * 80vh + 35vh);
+    }
+    [data-enhanced] .application-sticky {
+      position: sticky;
+      top: 0;
+      display: flex;
+      height: 100vh;
+      height: 100svh;
+      overflow: hidden;
+      align-items: center;
+    }
+    [data-enhanced] .application-inner {
+      padding-block: clamp(1.25rem, 3vh, 2rem);
+    }
+    [data-enhanced] .application-progress {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .application-counter {
+      color: var(--color-muted);
+      font-size: 0.74rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.08em;
+    }
+    .application-counter b {
+      color: var(--color-orange-dark);
+    }
+    .application-progress-track {
+      flex: 1;
+      height: 3px;
+      overflow: hidden;
+      border-radius: 3px;
+      background: rgb(16 27 45 / 10%);
+    }
+    .application-progress-track i {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(
+        90deg,
+        var(--color-orange),
+        var(--color-orange-dark)
+      );
+      transform: scaleX(calc(1 / var(--application-count)));
+      transform-origin: left;
+    }
+    .application-hint {
+      color: var(--color-muted);
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    /* Room above the deck for earlier cards to peek out */
+    [data-enhanced] .application-deck {
+      position: relative;
+      display: block;
+      height: clamp(500px, calc(100vh - 9rem), 620px);
+      margin-top: 44px;
+    }
+    [data-enhanced] .application-slide {
+      position: absolute;
+      inset: 0;
+      will-change: transform;
+    }
+    [data-enhanced] .application-card {
+      height: 100%;
+    }
+    [data-enhanced] .application-media {
+      min-height: 0;
+    }
+  }
+
+  @media (min-width: 801px) and (max-width: 1100px) {
+    .application-card {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+      gap: 1.75rem;
+    }
+    .application-copy h3 {
+      font-size: clamp(1.55rem, 2.6vw, 1.9rem);
+    }
+    .application-description,
+    .application-involves li,
+    .application-value p {
+      font-size: 0.88rem;
+    }
+  }
+  /* Tall tablets: image above the text so neither column gets cramped */
+  @media (min-width: 801px) and (max-width: 1100px) and (min-height: 1000px) {
+    .application-card {
+      grid-template-columns: minmax(0, 1fr);
+      align-content: start;
+      gap: 1.5rem;
+    }
+    .application-copy {
+      justify-content: flex-start;
+    }
+    .application-media {
+      order: -1;
+      aspect-ratio: 16 / 10;
+      min-height: 0;
+    }
+    [data-enhanced] .application-deck {
+      height: min(calc(100vh - 9rem), 870px);
+    }
+  }
+
+  @media (max-width: 800px) {
+    .ai-section-heading {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .ai-section-heading > p {
+      max-width: 650px;
+      margin: 0;
+    }
+  }
+  @media (max-width: 560px) {
+    .ai-section-heading {
+      margin-bottom: 1.7rem;
+    }
+    .ai-section-heading > p {
+      font-size: 0.86rem;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .application-slide,
+    .application-card,
+    .application-card > *,
+    .application-media img,
+    .application-progress-track i {
+      animation: none !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

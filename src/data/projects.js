@@ -14,10 +14,15 @@ import fliplearnImage from '../assets/projects/fliplearn.png'
 export const projects = [
   {
     name: 'Tomo',
+    // Suggested industry labels shown as chips; editorial, not official.
+    industries: ['Digital Health', 'AI', 'Mobile Apps'],
     category: 'Digital products',
     industry: 'Digital health & wellbeing',
     image: tomoImage,
     alt: 'Tomo mobile app screens for habit tracking and wellbeing check-ins',
+    // Full description from incaendo.com/projects, shown on the Projects page.
+    description:
+      'Introducing TOMO, the innovative iOS app designed to support individuals struggling with depression by assisting them in managing their daily habits for better mental health. With its user-friendly conversational interface, TOMO provides personalized habit suggestions and tracks progress, acting as a personal smart agent for users. This revolutionary app is now available on the UK App Store, aiming to make a positive impact on the lives of those in need.',
     overview:
       'An iOS application focused on daily habit management, using a conversational interface to offer suggestions and record progress.',
     documentedScope:
@@ -41,10 +46,14 @@ export const projects = [
   },
   {
     name: 'Zee Media',
+    industries: ['Media & Publishing', 'Broadcasting', 'Digital Platforms'],
     category: 'Media & publishing',
     industry: 'News & entertainment',
     image: zeeMediaImage,
     alt: 'Zee Media news and entertainment digital experience screens',
+    // Full description from incaendo.com/projects, shown on the Projects page.
+    description:
+      'Zee Media Corporation Limited, headquartered in Mumbai, India, is a prominent news broadcasting company. Specializing in the transmission of news, current affairs, and regional entertainment through satellite television channels, Zee Media has established itself as a key player in the industry. With a focus on providing up-to-date and reliable information, the company serves as a trusted source for viewers across the nation.',
     overview:
       'A portfolio entry associated with Zee Media, a broadcaster whose published business context includes news, current affairs, and regional entertainment.',
     documentedScope:
@@ -64,10 +73,14 @@ export const projects = [
   },
   {
     name: 'Activate Studio',
+    industries: ['Startups', 'Digital Products', 'Social Platforms'],
     category: 'Digital products',
     industry: 'Startup & social products',
     image: activateStudioImage,
     alt: 'Activate Studio startup product and curated social content platform',
+    // Full description from incaendo.com/projects, shown on the Projects page.
+    description:
+      'At Activate Studio, we offer hands-on support to startup founders with digital products. We help them refine their business strategies, clarify their value proposition, design their products, and raise the necessary capital for a successful launch.Framework is developed and used to develop dynamic social media website having custom requirement around curated content. Framework comprises of separate component taking to each other by means of REST based API.',
     overview:
       'Product work connected with startup-founder support and a separate curated-content social platform described in the project material.',
     documentedScope:
@@ -95,10 +108,14 @@ export const projects = [
   },
   {
     name: "Domino's",
+    industries: ['Food & Beverage', 'E-commerce', 'Enterprise Platforms'],
     category: 'Food & commerce',
     industry: 'Food service & digital commerce',
     image: dominosImage,
     alt: "Domino's ordering portal and digital menu screens",
+    // Full description from incaendo.com/projects, shown on the Projects page.
+    description:
+      "Developed a highly scalable and secure portal for Domino's Pizza in the Asia/Pacific region. This portal is hosted on three different data centers and can handle a high volume of transactions, with a successful track record of processing 50,000 transactions in a single day. The portal also has extensive support for REST API, allowing food aggregators to easily access and utilize its key features.",
     overview:
       'A Domino’s Pizza portal for the Asia-Pacific region, supporting digital ordering and access for food-aggregator services.',
     documentedScope:
@@ -126,10 +143,18 @@ export const projects = [
   },
   {
     name: 'Jubilant FoodWorks',
+    industries: [
+      'Food & Beverage',
+      'Restaurant Technology',
+      'Digital Platforms',
+    ],
     category: 'Food & commerce',
     industry: 'Food service',
     image: jubilantFoodworksImage,
     alt: 'Jubilant FoodWorks corporate website and brand portfolio',
+    // Full description from incaendo.com/projects, shown on the Projects page.
+    description:
+      "Designed a user-friendly and visually appealing website for Jubilant FOOD WORK Limited, a renowned part of the Jubilant Bhartia Group. This company is a major player in the food service industry, operating over 1200 outlets for Domino's Pizza, Dunkin' Donuts, and Hong's Kitchen. With a dedicated team of 30,000 brand ambassadors, their commitment is to provide exceptional value to their customers. The website showcases their extensive range of offerings and highlights their dedication to quality and customer satisfaction.",
     overview:
       'A corporate website for Jubilant FoodWorks, presenting the company and its food-service portfolio.',
     documentedScope:
@@ -157,10 +182,14 @@ export const projects = [
   },
   {
     name: 'Credit Convey',
+    industries: ['Fintech', 'Personal Finance', 'Financial Wellness'],
     category: 'Financial platforms',
     industry: 'Consumer finance',
     image: creditConveyImage,
     alt: 'Credit Convey financial wellbeing platform screens',
+    // Full description from incaendo.com/projects, shown on the Projects page.
+    description:
+      "Credit Convey is a platform that focuses on improving clients' financial well-being through a combination of education, motivation, and advanced technologies. They offer unlimited interest-free cash advances to help bridge any financial gaps. By utilizing Credit Convey, individuals can gain the knowledge and support needed to better manage their finances and ultimately achieve greater financial stability.",
     overview:
       'A consumer-finance platform combining financial education with cash-advance services to address short-term financial gaps.',
     documentedScope:
@@ -184,10 +213,14 @@ export const projects = [
   },
   {
     name: 'Good Morning Italia',
+    industries: ['Media & Publishing', 'News Platforms', 'Digital Content'],
     category: 'Media & publishing',
     industry: 'News & publishing',
     image: goodMorningItaliaImage,
     alt: 'Good Morning Italia news website and mobile reading experience',
+    // Full description from incaendo.com/projects, shown on the Projects page.
+    description:
+      'Good Morning Italia is a comprehensive platform that focuses on producing and sharing high-quality news content through various mediums. It has gained popularity among individuals and businesses alike due to its intelligent approach to news delivery. With a wide array of information available on the web, app, and email, it has become the go-to platform for users seeking reliable and insightful news. Whether you are an individual or a company, Good Morning Italia offers a dynamic and engaging experience for staying informed.',
     overview:
       'A news-publishing service that distributes briefings and editorial content through web, app, and email channels.',
     documentedScope:
@@ -211,10 +244,14 @@ export const projects = [
   },
   {
     name: 'Spritz',
+    industries: ['AI', 'AI Agents', 'Workflow Automation'],
     category: 'AI & automation',
     industry: 'AI software',
     image: spritzImage,
     alt: 'Spritz workspace for selecting and managing AI agents',
+    // Full description from incaendo.com/projects, shown on the Projects page.
+    description:
+      'Spritz is a cutting-edge platform that uses AI technology to facilitate smooth communication with various AI agents. It allows users to easily configure and choose AI agents based on specific tasks they need assistance with. The platform streamlines interaction, making it more accessible and user-friendly for individuals and businesses alike.',
     overview:
       'An AI platform concept for configuring and selecting agents to assist with different tasks through a shared interface.',
     documentedScope:
@@ -238,10 +275,14 @@ export const projects = [
   },
   {
     name: 'The Seam',
+    industries: ['Fashion', 'Circular Economy', 'Repair Services'],
     category: 'Operations',
     industry: 'Apparel care & repair',
     image: theSeamImage,
     alt: 'The Seam garment care and repair service website',
+    // Full description from incaendo.com/projects, shown on the Projects page.
+    description:
+      'Seam is a reliable and established brand that has earned the trust of major international companies. By partnering with The Seam, businesses can effortlessly provide garment care and repair services on a large scale. This helps in minimizing returns, prolonging the lifecycle of garments, and ensuring that your business model remains relevant and adaptable in the future.',
     overview:
       'A garment-care and repair service that connects brands and their customers with specialist repair providers.',
     documentedScope:
@@ -265,10 +306,14 @@ export const projects = [
   },
   {
     name: 'Spice Express',
+    industries: ['Logistics', 'Aviation', 'Cargo Services'],
     category: 'Operations',
     industry: 'Air cargo & logistics',
     image: spiceExpressImage,
     alt: 'Spice Express cargo booking and logistics website',
+    // Full description from incaendo.com/projects, shown on the Projects page.
+    description:
+      'Spice Express, the Cargo Division of SpiceJet, offers a seamless and customer-centric cargo delivery service. Backed by extensive experience in the airline industry, we prioritize customer satisfaction and aim to surpass expectations. Our professional approach ensures a hassle-free experience for our clients, making us the preferred choice for cargo transportation. Trust Spice Express for reliable and efficient cargo delivery.',
     overview:
       'A digital portfolio entry for Spice Express, the cargo division of SpiceJet, serving freight and logistics customers.',
     documentedScope:
@@ -292,10 +337,14 @@ export const projects = [
   },
   {
     name: 'Policy Bazaar',
+    industries: ['Insurtech', 'Insurance', 'Financial Platforms'],
     category: 'Financial platforms',
     industry: 'Insurance & financial services',
     image: policyBazaarImage,
     alt: 'Policy Bazaar insurance comparison and product selection screens',
+    // Full description from incaendo.com/projects, shown on the Projects page.
+    description:
+      'PolicyBazaar.com is a popular online insurance comparison platform in India. Incaendo has created a comprehensive platform for PolicyBazaar, enabling customers to easily purchase and compare various insurance plans on their website. With this platform, PolicyBazaar attracts a significant number of unique visitors, totaling 20 million annually.',
     overview:
       'An online insurance platform that lets customers compare plans and complete purchases across insurance categories.',
     documentedScope:
@@ -323,10 +372,14 @@ export const projects = [
   },
   {
     name: 'Fliplearn',
+    industries: ['EdTech', 'Online Learning', 'Education Platforms'],
     category: 'Learning',
     industry: 'Education technology',
     image: fliplearnImage,
     alt: 'Fliplearn online learning platform and mobile learning experience',
+    // Full description from incaendo.com/projects, shown on the Projects page.
+    description:
+      'In partnership with Incaendo, Fliplearn Education Pvt. Ltd. has developed an online platform that revolutionizes education in the 21st century. By identifying and addressing existing and future barriers to education, Fliplearn and Incaendo have created a highly customized marketplace for online and mobile applications. This platform aims to provide innovative solutions to improve access to education, making it more personalized and effective for students.',
     overview:
       'An online learning platform and marketplace for educational content and applications across web and mobile.',
     documentedScope:

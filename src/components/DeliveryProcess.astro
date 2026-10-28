@@ -3,102 +3,37 @@ const stages = [
   {
     number: '01',
     title: 'Discover',
-    navTitle: 'Discover',
-    label: 'Understand the challenge',
     description:
-      'We start by understanding your business objectives, users, existing systems, and constraints before deciding what the solution should be.',
-    activities: [
-      'Stakeholder discussions and discovery workshops',
-      'Requirements gathering and workflow mapping',
-      'Business objectives, constraints, and success metrics',
-    ],
-    deliverables: [
-      'Discovery brief',
-      'Prioritised requirements',
-      'Agreed project scope',
-    ],
-    visual: 'discover',
-    visualLabel: 'Business context map',
+      'Understand the business challenge, users, goals, and constraints.',
+    art: 'discover',
   },
   {
     number: '02',
     title: 'Define & Design',
-    navTitle: 'Define',
-    label: 'Plan the right solution',
     description:
-      'We turn requirements into clear user journeys, intuitive interfaces, and a practical technical architecture your team can review with confidence.',
-    activities: [
-      'User journeys, wireframes, and UI/UX design',
-      'Technical architecture and technology selection',
-      'Prototype reviews and design validation',
-    ],
-    deliverables: [
-      'Approved design direction',
-      'Technical architecture plan',
-      'Delivery roadmap',
-    ],
-    visual: 'design',
-    visualLabel: 'Solution blueprint',
+      'Turn requirements into a clear solution plan and user experience.',
+    art: 'design',
   },
   {
     number: '03',
     title: 'Build & Integrate',
-    navTitle: 'Build',
-    label: 'Engineer the solution',
     description:
-      'We develop in focused iterations, connect relevant systems, and share regular progress so the product takes shape with your feedback in view.',
-    activities: [
-      'Structured development sprints',
-      'API, platform, and third-party integrations',
-      'Code reviews, working demos, and progress feedback',
-    ],
-    deliverables: [
-      'Working product features',
-      'Integrated systems',
-      'Sprint updates and demonstrable progress',
-    ],
-    visual: 'build',
-    visualLabel: 'Engineering pipeline',
+      'Develop the solution and connect it with the necessary systems and workflows.',
+    art: 'build',
   },
   {
     number: '04',
     title: 'Validate & Refine',
-    navTitle: 'Validate',
-    label: 'Quality before release',
     description:
-      'We test the solution against its requirements and refine it with the intended users before it is released into the environments where it will be used.',
-    activities: [
-      'Functional and regression testing',
-      'Security, performance, and usability checks',
-      'User acceptance testing and issue resolution',
-    ],
-    deliverables: [
-      'Test results',
-      'Resolved defects',
-      'Release-readiness confirmation',
-    ],
-    visual: 'validate',
-    visualLabel: 'Quality checks',
+      'Test quality, address issues, and refine the solution before release.',
+    art: 'validate',
   },
   {
     number: '05',
     title: 'Launch & Evolve',
-    navTitle: 'Launch',
-    label: 'Deliver lasting value',
     description:
-      'We plan and support the production release, monitor how the product performs, and shape improvements around real feedback and business needs.',
-    activities: [
-      'Deployment planning and release checks',
-      'Production monitoring and issue resolution',
-      'Continuous improvements and future enhancements',
-    ],
-    deliverables: [
-      'Production release',
-      'Appropriate handover documentation',
-      'Improvement roadmap',
-    ],
-    visual: 'launch',
-    visualLabel: 'Release & monitoring',
+      'Deploy the solution, monitor outcomes, and identify opportunities for improvement.',
+    art: 'launch',
   },
 ]
 ---
@@ -107,10 +42,108 @@ const stages = [
   class="delivery-process"
   id="delivery-process"
   aria-labelledby="delivery-process-heading"
-  data-delivery-process
 >
-  <div class="site-container delivery-process-container">
-    <header class="delivery-intro">
+  <!-- Shared paint servers for the five stage illustrations -->
+  <svg
+    class="dp-defs"
+    width="0"
+    height="0"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <defs>
+      <linearGradient id="dp-orange" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#f08a5d" />
+        <stop offset=".55" stop-color="#c9542b" />
+        <stop offset="1" stop-color="#a84121" />
+      </linearGradient>
+      <linearGradient id="dp-navy" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#34496a" />
+        <stop offset="1" stop-color="#101b2d" />
+      </linearGradient>
+      <linearGradient id="dp-blue" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#a9c4dc" />
+        <stop offset="1" stop-color="#547b9d" />
+      </linearGradient>
+      <linearGradient id="dp-sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#f1f5f9" />
+        <stop offset="1" stop-color="#d6e3ee" />
+      </linearGradient>
+      <linearGradient id="dp-paper" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" />
+        <stop offset="1" stop-color="#f9f6f1" />
+      </linearGradient>
+      <linearGradient id="dp-peach" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#fbe4d7" />
+        <stop offset="1" stop-color="#fdf3ed" />
+      </linearGradient>
+      <linearGradient id="dp-bar-blue" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#bdd2e5" />
+        <stop offset="1" stop-color="#7fa1bf" />
+      </linearGradient>
+      <linearGradient id="dp-bar-orange" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#f29a70" />
+        <stop offset="1" stop-color="#c9542b" />
+      </linearGradient>
+      <linearGradient id="dp-flame" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffe4cc" />
+        <stop offset=".45" stop-color="#f29a70" />
+        <stop offset="1" stop-color="#c9542b" stop-opacity="0" />
+      </linearGradient>
+      <linearGradient id="dp-trend" x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0" stop-color="#c9542b" stop-opacity=".2" />
+        <stop offset="1" stop-color="#c9542b" />
+      </linearGradient>
+      <linearGradient id="dp-area" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#c9542b" stop-opacity=".16" />
+        <stop offset="1" stop-color="#c9542b" stop-opacity="0" />
+      </linearGradient>
+      <linearGradient id="dp-spark-area" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#547b9d" stop-opacity=".28" />
+        <stop offset="1" stop-color="#547b9d" stop-opacity="0" />
+      </linearGradient>
+      <linearGradient id="dp-scan" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#c9542b" stop-opacity="0" />
+        <stop offset=".5" stop-color="#c9542b" stop-opacity=".55" />
+        <stop offset="1" stop-color="#c9542b" stop-opacity="0" />
+      </linearGradient>
+      <linearGradient id="dp-sheen" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22" />
+        <stop offset="1" stop-color="#fff" stop-opacity="0" />
+      </linearGradient>
+      <radialGradient id="dp-glow-orange">
+        <stop offset="0" stop-color="#e8774a" stop-opacity=".34" />
+        <stop offset=".5" stop-color="#e8774a" stop-opacity=".1" />
+        <stop offset="1" stop-color="#e8774a" stop-opacity="0" />
+      </radialGradient>
+      <radialGradient id="dp-glow-blue">
+        <stop offset="0" stop-color="#6f97ba" stop-opacity=".32" />
+        <stop offset=".55" stop-color="#6f97ba" stop-opacity=".1" />
+        <stop offset="1" stop-color="#6f97ba" stop-opacity="0" />
+      </radialGradient>
+      <filter id="dp-shadow" x="-30%" y="-30%" width="160%" height="170%">
+        <feDropShadow
+          dx="0"
+          dy="3"
+          stdDeviation="3"
+          flood-color="#101b2d"
+          flood-opacity=".12"
+        />
+      </filter>
+      <filter id="dp-shadow-sm" x="-30%" y="-30%" width="160%" height="170%">
+        <feDropShadow
+          dx="0"
+          dy="1.5"
+          stdDeviation="1.5"
+          flood-color="#101b2d"
+          flood-opacity=".14"
+        />
+      </filter>
+    </defs>
+  </svg>
+
+  <div class="site-container">
+    <header class="delivery-intro reveal">
       <p class="eyebrow">Our delivery process</p>
       <h2 id="delivery-process-heading">
         From bold ideas to <span>real-world impact.</span>
@@ -121,3117 +154,1981 @@ const stages = [
       </p>
     </header>
 
-    <div class="delivery-layout">
-      <nav class="delivery-navigation" aria-label="Delivery stages">
-        <p class="delivery-navigation-label">A clear path forward</p>
-        <div
-          class="delivery-step-list"
-          role="tablist"
-          aria-label="Select a delivery stage"
-          aria-orientation="vertical"
-          data-delivery-tabs
-        >
-          {stages.map((stage, index) => (
-            <button
-              class="delivery-step"
-              id={`delivery-tab-${stage.number}`}
-              type="button"
-              role="tab"
-              aria-controls={`delivery-panel-${stage.number}`}
-              aria-selected={index === 0 ? 'true' : 'false'}
-              tabindex={index === 0 ? 0 : -1}
-              data-delivery-tab
-              data-stage-index={index}
-            >
-              <span class="delivery-step-number" aria-hidden="true">
-                {stage.number}
-              </span>
-              <span class="delivery-step-copy">
-                <strong>
-                  <span class="delivery-step-full">{stage.title}</span>
-                  <span class="delivery-step-short">{stage.navTitle}</span>
-                </strong>
-                <span>{stage.label}</span>
-              </span>
-              <span class="delivery-step-arrow" aria-hidden="true">
-                ↗
-              </span>
-            </button>
-          ))}
-        </div>
-      </nav>
+    <ol class="delivery-stages reveal">
+      {stages.map((stage) => (
+        <li class="delivery-stage">
+          <div class="delivery-stage-art" aria-hidden="true">
+            <div class="delivery-stage-canvas">
+              {stage.art === 'discover' && (
+                <svg viewBox="7 4.95 206 131.1" fill="none" focusable="false">
+                  <circle
+                    class="dp-halo"
+                    cx="110"
+                    cy="70"
+                    r="48"
+                    fill="url(#dp-glow-orange)"
+                  />
+                  <circle class="dp-dot" cx="86" cy="20" r="1.6" />
+                  <circle
+                    class="dp-dot dp-dot-warm"
+                    cx="134"
+                    cy="122"
+                    r="1.6"
+                  />
+                  <circle class="dp-dot" cx="94" cy="124" r="1.2" />
+                  <circle class="dp-dot dp-dot-warm" cx="132" cy="17" r="1.2" />
 
-      <div class="delivery-workspace">
-        <div
-          class="delivery-live-visual"
-          data-delivery-live-visual
-          aria-hidden="true"
-        >
-          <div class="delivery-visual-meta">
-            <span class="delivery-visual-label">
-              <span class="delivery-visual-pulse" />
-              <span data-delivery-visual-label>Discovery network</span>
-            </span>
-            <span class="delivery-visual-count" data-delivery-visual-count>
-              01 / 05
-            </span>
+                  <path
+                    class="dp-link"
+                    d="M64 34c16 2 22 14 30 24M64 108c16-2 22-14 30-24M156 34c-16 2-22 14-30 24M160 104c-18 0-26-12-34-22"
+                  />
+                  <path
+                    class="dp-link-flow"
+                    d="M64 34c16 2 22 14 30 24M64 108c16-2 22-14 30-24M156 34c-16 2-22 14-30 24M160 104c-18 0-26-12-34-22"
+                  />
+
+                  <g class="dp-orbit">
+                    <circle class="dp-orbit-ring" cx="110" cy="70" r="31" />
+                    <circle cx="141" cy="70" r="2.4" fill="#547b9d" />
+                    <circle cx="79" cy="70" r="1.8" fill="#c9542b" />
+                    <circle cx="110" cy="101" r="1.5" fill="#a9c4dc" />
+                  </g>
+
+                  <circle class="dp-ping" cx="110" cy="70" r="22" />
+                  <circle
+                    cx="110"
+                    cy="70"
+                    r="22"
+                    fill="#fff"
+                    filter="url(#dp-shadow)"
+                  />
+                  <circle
+                    class="dp-focal"
+                    cx="110"
+                    cy="70"
+                    r="17.5"
+                    fill="url(#dp-orange)"
+                  />
+                  <circle
+                    class="dp-glyph dp-glyph-soft"
+                    cx="110"
+                    cy="70"
+                    r="11"
+                  />
+                  <circle class="dp-glyph" cx="110" cy="70" r="5.5" />
+                  <circle cx="110" cy="70" r="2" fill="#fff" />
+                  <path
+                    class="dp-glyph dp-glyph-faint"
+                    d="M98.5 62a14 14 0 0 1 9-6"
+                  />
+
+                  <g class="dp-float">
+                    <rect
+                      class="dp-card"
+                      x="12"
+                      y="16"
+                      width="52"
+                      height="36"
+                      rx="9"
+                      fill="url(#dp-paper)"
+                      filter="url(#dp-shadow)"
+                    />
+                    <circle
+                      cx="26"
+                      cy="29"
+                      r="6.5"
+                      fill="url(#dp-blue)"
+                      stroke="#fff"
+                      stroke-width="1.5"
+                    />
+                    <circle cx="26" cy="27.2" r="2.3" fill="#fff" />
+                    <path d="M22.2 33.4a3.8 3.6 0 0 1 7.6 0z" fill="#fff" />
+                    <circle
+                      cx="36"
+                      cy="29"
+                      r="6.5"
+                      fill="url(#dp-navy)"
+                      stroke="#fff"
+                      stroke-width="1.5"
+                    />
+                    <circle cx="36" cy="27.2" r="2.3" fill="#fff" />
+                    <path d="M32.2 33.4a3.8 3.6 0 0 1 7.6 0z" fill="#fff" />
+                    <circle
+                      cx="46"
+                      cy="29"
+                      r="6.5"
+                      fill="url(#dp-orange)"
+                      stroke="#fff"
+                      stroke-width="1.5"
+                    />
+                    <circle cx="46" cy="27.2" r="2.3" fill="#fff" />
+                    <path d="M42.2 33.4a3.8 3.6 0 0 1 7.6 0z" fill="#fff" />
+                    <rect
+                      class="dp-bar"
+                      x="20"
+                      y="41"
+                      width="22"
+                      height="3.5"
+                      rx="1.75"
+                    />
+                    <rect
+                      class="dp-bar-warm"
+                      x="45"
+                      y="41"
+                      width="11"
+                      height="3.5"
+                      rx="1.75"
+                    />
+                  </g>
+
+                  <g class="dp-float dp-delay-2">
+                    <rect
+                      class="dp-card"
+                      x="12"
+                      y="88"
+                      width="52"
+                      height="36"
+                      rx="9"
+                      fill="url(#dp-paper)"
+                      filter="url(#dp-shadow)"
+                    />
+                    <rect
+                      x="19"
+                      y="94.5"
+                      width="5"
+                      height="5"
+                      rx="1.5"
+                      fill="url(#dp-orange)"
+                    />
+                    <path class="dp-tick" d="m20.3 97.1 1.3 1.3 2.3-2.6" />
+                    <rect
+                      x="19"
+                      y="103.5"
+                      width="5"
+                      height="5"
+                      rx="1.5"
+                      fill="url(#dp-orange)"
+                    />
+                    <path class="dp-tick" d="m20.3 106.1 1.3 1.3 2.3-2.6" />
+                    <rect
+                      class="dp-box"
+                      x="19"
+                      y="112.5"
+                      width="5"
+                      height="5"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="dp-bar-ink"
+                      x="28"
+                      y="95.5"
+                      width="28"
+                      height="3"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="dp-bar"
+                      x="28"
+                      y="104.5"
+                      width="22"
+                      height="3"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="dp-bar"
+                      x="28"
+                      y="113.5"
+                      width="26"
+                      height="3"
+                      rx="1.5"
+                    />
+                  </g>
+
+                  <g class="dp-float dp-delay-3">
+                    <rect
+                      class="dp-card"
+                      x="156"
+                      y="16"
+                      width="52"
+                      height="36"
+                      rx="9"
+                      fill="url(#dp-paper)"
+                      filter="url(#dp-shadow)"
+                    />
+                    <circle cx="165" cy="24" r="2.6" fill="url(#dp-blue)" />
+                    <rect
+                      class="dp-bar-ink"
+                      x="170"
+                      y="22.5"
+                      width="20"
+                      height="3"
+                      rx="1.5"
+                    />
+                    <path
+                      d="M163 46v-5l8-4 7 3 8-8 14-5v19z"
+                      fill="url(#dp-spark-area)"
+                    />
+                    <path class="dp-stroke-blue" d="m163 41 8-4 7 3 8-8 14-5" />
+                    <circle
+                      class="dp-ping dp-ping-sm"
+                      cx="200"
+                      cy="27"
+                      r="2.6"
+                    />
+                    <circle
+                      cx="200"
+                      cy="27"
+                      r="2.6"
+                      fill="#c9542b"
+                      stroke="#fff"
+                      stroke-width="1.2"
+                    />
+                  </g>
+
+                  <g class="dp-float dp-delay-4">
+                    <path
+                      d="M169 92h26a9 9 0 0 1 9 9v8a9 9 0 0 1-9 9h-21l-7 6v-6.6a9 9 0 0 1-7-8.4v-8a9 9 0 0 1 9-9z"
+                      fill="url(#dp-navy)"
+                      filter="url(#dp-shadow)"
+                    />
+                    <circle class="dp-typing" cx="172" cy="105" r="2.3" />
+                    <circle
+                      class="dp-typing dp-delay-t2"
+                      cx="182"
+                      cy="105"
+                      r="2.3"
+                    />
+                    <circle
+                      class="dp-typing dp-delay-t3"
+                      cx="192"
+                      cy="105"
+                      r="2.3"
+                    />
+                  </g>
+                </svg>
+              )}
+
+              {stage.art === 'design' && (
+                <svg viewBox="8 3.2 210 133.6" fill="none" focusable="false">
+                  <defs>
+                    <clipPath id="dp-hero-clip">
+                      <rect x="22" y="38" width="70" height="44" rx="6" />
+                    </clipPath>
+                  </defs>
+                  <circle
+                    cx="184"
+                    cy="70"
+                    r="44"
+                    fill="url(#dp-glow-orange)"
+                    opacity=".7"
+                  />
+                  <path class="dp-link" d="M152 39h8M152 94h8" />
+
+                  <rect
+                    x="12"
+                    y="14"
+                    width="140"
+                    height="112"
+                    rx="10"
+                    fill="#fff"
+                    filter="url(#dp-shadow)"
+                  />
+                  <path
+                    d="M22 14h120a10 10 0 0 1 10 10v6H12v-6a10 10 0 0 1 10-10z"
+                    fill="#f3efe9"
+                  />
+                  <rect
+                    class="dp-card"
+                    x="12"
+                    y="14"
+                    width="140"
+                    height="112"
+                    rx="10"
+                  />
+                  <path class="dp-rule" d="M12 30h140" />
+                  <circle cx="21" cy="22" r="2.2" fill="#c9542b" />
+                  <circle cx="28" cy="22" r="2.2" fill="#f0c3ab" />
+                  <circle cx="35" cy="22" r="2.2" fill="#c9d9e7" />
+                  <rect
+                    class="dp-card"
+                    x="44"
+                    y="18.5"
+                    width="72"
+                    height="7"
+                    rx="3.5"
+                    fill="#fff"
+                  />
+                  <circle cx="49" cy="22" r="1.5" fill="#547b9d" />
+                  <rect
+                    class="dp-bar"
+                    x="53"
+                    y="21"
+                    width="30"
+                    height="2"
+                    rx="1"
+                  />
+
+                  <rect
+                    x="22"
+                    y="38"
+                    width="70"
+                    height="44"
+                    rx="6"
+                    fill="url(#dp-sky)"
+                  />
+                  <g clip-path="url(#dp-hero-clip)">
+                    <circle
+                      cx="77"
+                      cy="50"
+                      r="10"
+                      fill="url(#dp-glow-orange)"
+                    />
+                    <circle cx="77" cy="50" r="5" fill="url(#dp-orange)" />
+                    <path
+                      d="M22 82V70l20-16 18 14 10-8 22 22z"
+                      fill="#bcd0e2"
+                    />
+                    <path
+                      d="M22 82v-6l16-10 14 9 12-7 28 14v0z"
+                      fill="url(#dp-blue)"
+                    />
+                  </g>
+
+                  <rect
+                    class="dp-bar-ink"
+                    x="100"
+                    y="40"
+                    width="34"
+                    height="5"
+                    rx="2.5"
+                  />
+                  <rect
+                    class="dp-bar"
+                    x="100"
+                    y="50"
+                    width="42"
+                    height="3.5"
+                    rx="1.75"
+                  />
+                  <rect
+                    class="dp-bar"
+                    x="100"
+                    y="57"
+                    width="34"
+                    height="3.5"
+                    rx="1.75"
+                  />
+                  <rect
+                    class="dp-cta dp-focal"
+                    x="100"
+                    y="68"
+                    width="30"
+                    height="11"
+                    rx="5.5"
+                    fill="url(#dp-orange)"
+                  />
+                  <rect
+                    x="106"
+                    y="72.3"
+                    width="18"
+                    height="2.4"
+                    rx="1.2"
+                    fill="#fff"
+                    fill-opacity=".85"
+                  />
+
+                  <rect
+                    class="dp-tile"
+                    x="22"
+                    y="90"
+                    width="37"
+                    height="28"
+                    rx="5"
+                  />
+                  <circle cx="31" cy="99" r="4.5" fill="url(#dp-blue)" />
+                  <rect
+                    class="dp-bar-ink"
+                    x="38"
+                    y="97.5"
+                    width="14"
+                    height="3"
+                    rx="1.5"
+                  />
+                  <rect
+                    class="dp-bar"
+                    x="29"
+                    y="108"
+                    width="22"
+                    height="3"
+                    rx="1.5"
+                  />
+
+                  <rect
+                    class="dp-tile"
+                    x="63.5"
+                    y="90"
+                    width="37"
+                    height="28"
+                    rx="5"
+                    fill="#fff6f1"
+                  />
+                  <circle cx="72.5" cy="99" r="4.5" fill="url(#dp-orange)" />
+                  <rect
+                    class="dp-bar-ink"
+                    x="79.5"
+                    y="97.5"
+                    width="14"
+                    height="3"
+                    rx="1.5"
+                  />
+                  <rect
+                    class="dp-bar-warm"
+                    x="70.5"
+                    y="108"
+                    width="22"
+                    height="3"
+                    rx="1.5"
+                  />
+
+                  <rect
+                    class="dp-tile"
+                    x="105"
+                    y="90"
+                    width="37"
+                    height="28"
+                    rx="5"
+                  />
+                  <circle cx="114" cy="99" r="4.5" fill="url(#dp-navy)" />
+                  <rect
+                    class="dp-bar-ink"
+                    x="121"
+                    y="97.5"
+                    width="14"
+                    height="3"
+                    rx="1.5"
+                  />
+                  <rect
+                    class="dp-bar"
+                    x="112"
+                    y="108"
+                    width="22"
+                    height="3"
+                    rx="1.5"
+                  />
+
+                  <rect
+                    class="dp-marquee"
+                    x="61.5"
+                    y="88"
+                    width="41"
+                    height="32"
+                    rx="6.5"
+                  />
+                  <path
+                    class="dp-handle"
+                    d="M60 86.5h3v3h-3zM101 86.5h3v3h-3zM60 118.5h3v3h-3zM101 118.5h3v3h-3z"
+                  />
+
+                  <g class="dp-float dp-delay-3">
+                    <path
+                      class="dp-pointer"
+                      d="M95 106v13l3.4-3.2 2.6 5.4 2.6-1.2-2.6-5.4h4.6z"
+                    />
+                  </g>
+
+                  <g class="dp-float">
+                    <rect
+                      class="dp-card"
+                      x="160"
+                      y="18"
+                      width="48"
+                      height="42"
+                      rx="8"
+                      fill="url(#dp-paper)"
+                      filter="url(#dp-shadow)"
+                    />
+                    <rect
+                      class="dp-bar-ink"
+                      x="167"
+                      y="25"
+                      width="20"
+                      height="3"
+                      rx="1.5"
+                    />
+                    <circle cx="171" cy="38" r="5" fill="url(#dp-navy)" />
+                    <circle class="dp-swatch-ring" cx="184" cy="38" r="7.5" />
+                    <circle cx="184" cy="38" r="5" fill="url(#dp-orange)" />
+                    <circle cx="197" cy="38" r="5" fill="url(#dp-blue)" />
+                    <path class="dp-track" d="M167 51h34" />
+                    <path class="dp-track dp-track-on" d="M167 51h19" />
+                    <circle
+                      cx="186"
+                      cy="51"
+                      r="2.8"
+                      fill="#fff"
+                      stroke="#c9542b"
+                      stroke-width="1.4"
+                    />
+                  </g>
+
+                  <g class="dp-float dp-delay-2">
+                    <rect
+                      class="dp-card"
+                      x="160"
+                      y="72"
+                      width="48"
+                      height="44"
+                      rx="8"
+                      fill="url(#dp-paper)"
+                      filter="url(#dp-shadow)"
+                    />
+                    <circle cx="171" cy="84" r="5.5" fill="url(#dp-blue)" />
+                    <circle cx="171" cy="82.6" r="2" fill="#fff" />
+                    <path d="M167.8 87.6a3.2 3 0 0 1 6.4 0z" fill="#fff" />
+                    <rect
+                      class="dp-bar-ink"
+                      x="180"
+                      y="80.5"
+                      width="20"
+                      height="3"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="dp-bar"
+                      x="180"
+                      y="86"
+                      width="14"
+                      height="3"
+                      rx="1.5"
+                    />
+                    <rect
+                      x="167"
+                      y="97"
+                      width="34"
+                      height="11"
+                      rx="5.5"
+                      fill="url(#dp-peach)"
+                      stroke="rgb(201 84 43 / 35%)"
+                    />
+                    <path class="dp-stroke-orange" d="m172 102.5 2 2 3.5-4" />
+                    <rect
+                      class="dp-bar-warm"
+                      x="181"
+                      y="101.2"
+                      width="14"
+                      height="2.6"
+                      rx="1.3"
+                    />
+                    <circle class="dp-ping" cx="206" cy="74" r="7" />
+                    <circle
+                      cx="206"
+                      cy="74"
+                      r="7"
+                      fill="url(#dp-orange)"
+                      stroke="#fff"
+                      stroke-width="1.8"
+                    />
+                    <path
+                      class="dp-tick dp-tick-lg"
+                      d="m202.8 74 2.2 2.2 4-4.4"
+                    />
+                  </g>
+                </svg>
+              )}
+
+              {stage.art === 'build' && (
+                <svg viewBox="7 4.45 206 131.1" fill="none" focusable="false">
+                  <circle
+                    class="dp-halo"
+                    cx="110"
+                    cy="70"
+                    r="50"
+                    fill="url(#dp-glow-blue)"
+                  />
+                  <circle cx="110" cy="70" r="30" fill="url(#dp-glow-orange)" />
+
+                  <path
+                    class="dp-trace"
+                    d="M60 31h12a6 6 0 0 1 6 6v21a4 4 0 0 0 4 4h6M60 109h12a6 6 0 0 0 6-6V82a4 4 0 0 1 4-4h6M160 31h-12a6 6 0 0 0-6 6v21a4 4 0 0 1-4 4h-6M160 109h-12a6 6 0 0 1-6-6V82a4 4 0 0 0-4-4h-6"
+                  />
+                  <path
+                    class="dp-trace-flow"
+                    d="M60 31h12a6 6 0 0 1 6 6v21a4 4 0 0 0 4 4h6M60 109h12a6 6 0 0 0 6-6V82a4 4 0 0 1 4-4h6M160 31h-12a6 6 0 0 0-6 6v21a4 4 0 0 1-4 4h-6M160 109h-12a6 6 0 0 1-6-6V82a4 4 0 0 0-4-4h-6"
+                  />
+                  <path
+                    class="dp-pins"
+                    d="M100 42v6M110 42v6M120 42v6M100 92v6M110 92v6M120 92v6M82 70h6M132 70h6"
+                  />
+
+                  <rect
+                    class="dp-focal"
+                    x="88"
+                    y="48"
+                    width="44"
+                    height="44"
+                    rx="11"
+                    fill="url(#dp-navy)"
+                    filter="url(#dp-shadow)"
+                  />
+                  <rect
+                    x="88"
+                    y="48"
+                    width="44"
+                    height="22"
+                    rx="11"
+                    fill="url(#dp-sheen)"
+                  />
+                  <rect
+                    class="dp-chip-inner"
+                    x="92"
+                    y="52"
+                    width="36"
+                    height="36"
+                    rx="8"
+                  />
+                  <path
+                    class="dp-glyph dp-glyph-bold"
+                    d="m103 63-6 7 6 7M117 63l6 7-6 7"
+                  />
+                  <path class="dp-code-slash" d="m112.5 61-5 18" />
+
+                  <g class="dp-float">
+                    <rect
+                      class="dp-card"
+                      x="12"
+                      y="14"
+                      width="48"
+                      height="34"
+                      rx="9"
+                      fill="url(#dp-paper)"
+                      filter="url(#dp-shadow)"
+                    />
+                    <path
+                      d="M18 24v12a6 2.4 0 0 0 12 0V24z"
+                      fill="url(#dp-blue)"
+                    />
+                    <path
+                      class="dp-glyph dp-glyph-thin"
+                      d="M18 30a6 2.4 0 0 0 12 0"
+                    />
+                    <ellipse cx="24" cy="24" rx="6" ry="2.4" fill="#d6e3ee" />
+                    <rect
+                      class="dp-bar-ink"
+                      x="34"
+                      y="24"
+                      width="20"
+                      height="3"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="dp-bar"
+                      x="34"
+                      y="30"
+                      width="16"
+                      height="3"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="dp-bar-warm"
+                      x="34"
+                      y="36"
+                      width="12"
+                      height="3"
+                      rx="1.5"
+                    />
+                  </g>
+
+                  <g class="dp-float dp-delay-2">
+                    <rect
+                      class="dp-card"
+                      x="160"
+                      y="14"
+                      width="48"
+                      height="34"
+                      rx="9"
+                      fill="url(#dp-paper)"
+                      filter="url(#dp-shadow)"
+                    />
+                    <path
+                      d="M168 36h12a4.5 4.5 0 0 0 .6-9 6 6 0 0 0-11.4-1.4A4.6 4.6 0 0 0 168 36z"
+                      fill="url(#dp-orange)"
+                    />
+                    <rect
+                      class="dp-bar-ink"
+                      x="186"
+                      y="24"
+                      width="16"
+                      height="3"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="dp-bar"
+                      x="186"
+                      y="30"
+                      width="12"
+                      height="3"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="dp-bar-blue"
+                      x="186"
+                      y="36"
+                      width="14"
+                      height="3"
+                      rx="1.5"
+                    />
+                  </g>
+
+                  <g class="dp-float dp-delay-3">
+                    <rect
+                      class="dp-card"
+                      x="12"
+                      y="92"
+                      width="48"
+                      height="34"
+                      rx="9"
+                      fill="url(#dp-paper)"
+                      filter="url(#dp-shadow)"
+                    />
+                    <rect
+                      x="18"
+                      y="100"
+                      width="14"
+                      height="18"
+                      rx="3"
+                      fill="url(#dp-navy)"
+                    />
+                    <rect
+                      x="20.5"
+                      y="103"
+                      width="4"
+                      height="4"
+                      rx="1"
+                      fill="#a9c4dc"
+                    />
+                    <rect
+                      x="25.5"
+                      y="103"
+                      width="4"
+                      height="4"
+                      rx="1"
+                      fill="#f29a70"
+                    />
+                    <rect
+                      x="20.5"
+                      y="108"
+                      width="4"
+                      height="4"
+                      rx="1"
+                      fill="#fff"
+                      fill-opacity=".7"
+                    />
+                    <rect
+                      x="25.5"
+                      y="108"
+                      width="4"
+                      height="4"
+                      rx="1"
+                      fill="#a9c4dc"
+                    />
+                    <rect
+                      class="dp-bar-ink"
+                      x="37"
+                      y="102"
+                      width="17"
+                      height="3"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="dp-bar"
+                      x="37"
+                      y="108"
+                      width="14"
+                      height="3"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="dp-bar-warm"
+                      x="37"
+                      y="114"
+                      width="16"
+                      height="3"
+                      rx="1.5"
+                    />
+                  </g>
+
+                  <g class="dp-float dp-delay-4">
+                    <rect
+                      class="dp-card"
+                      x="160"
+                      y="92"
+                      width="48"
+                      height="34"
+                      rx="9"
+                      fill="url(#dp-paper)"
+                      filter="url(#dp-shadow)"
+                    />
+                    <g class="dp-gear">
+                      <circle class="dp-gear-teeth" cx="174" cy="109" r="6.2" />
+                      <circle cx="174" cy="109" r="5" fill="url(#dp-navy)" />
+                      <circle cx="174" cy="109" r="1.8" fill="#fff" />
+                    </g>
+                    <rect
+                      class="dp-bar-ink"
+                      x="186"
+                      y="102"
+                      width="16"
+                      height="3"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="dp-bar"
+                      x="186"
+                      y="108"
+                      width="12"
+                      height="3"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="dp-bar-warm"
+                      x="186"
+                      y="114"
+                      width="14"
+                      height="3"
+                      rx="1.5"
+                    />
+                  </g>
+
+                  <circle class="dp-port" cx="60" cy="31" r="2.4" />
+                  <circle class="dp-port" cx="60" cy="109" r="2.4" />
+                  <circle class="dp-port" cx="160" cy="31" r="2.4" />
+                  <circle class="dp-port" cx="160" cy="109" r="2.4" />
+                </svg>
+              )}
+
+              {stage.art === 'validate' && (
+                <svg viewBox="9 3.95 206 131.1" fill="none" focusable="false">
+                  <circle
+                    class="dp-halo"
+                    cx="172"
+                    cy="66"
+                    r="44"
+                    fill="url(#dp-glow-orange)"
+                  />
+
+                  <rect
+                    class="dp-card"
+                    x="16"
+                    y="20"
+                    width="104"
+                    height="106"
+                    rx="10"
+                    fill="url(#dp-paper)"
+                    filter="url(#dp-shadow)"
+                  />
+                  <rect
+                    x="50"
+                    y="13"
+                    width="36"
+                    height="13"
+                    rx="5"
+                    fill="url(#dp-navy)"
+                    filter="url(#dp-shadow-sm)"
+                  />
+                  <circle
+                    cx="68"
+                    cy="17.5"
+                    r="1.8"
+                    fill="#fff"
+                    fill-opacity=".8"
+                  />
+
+                  <circle cx="32" cy="42" r="6.5" fill="url(#dp-blue)" />
+                  <path class="dp-tick dp-tick-lg" d="m29 42 2.2 2.2 4.2-4.6" />
+                  <rect
+                    class="dp-bar-ink"
+                    x="44"
+                    y="37.5"
+                    width="40"
+                    height="4"
+                    rx="2"
+                  />
+                  <rect
+                    class="dp-bar"
+                    x="44"
+                    y="44"
+                    width="26"
+                    height="2.6"
+                    rx="1.3"
+                  />
+                  <rect
+                    class="dp-bar-blue"
+                    x="92"
+                    y="39"
+                    width="18"
+                    height="6"
+                    rx="3"
+                  />
+
+                  <circle cx="32" cy="63" r="6.5" fill="url(#dp-blue)" />
+                  <path class="dp-tick dp-tick-lg" d="m29 63 2.2 2.2 4.2-4.6" />
+                  <rect
+                    class="dp-bar-ink"
+                    x="44"
+                    y="58.5"
+                    width="34"
+                    height="4"
+                    rx="2"
+                  />
+                  <rect
+                    class="dp-bar"
+                    x="44"
+                    y="65"
+                    width="30"
+                    height="2.6"
+                    rx="1.3"
+                  />
+                  <rect
+                    class="dp-bar-blue"
+                    x="92"
+                    y="60"
+                    width="18"
+                    height="6"
+                    rx="3"
+                  />
+
+                  <rect
+                    x="22"
+                    y="74.5"
+                    width="92"
+                    height="19"
+                    rx="6"
+                    fill="url(#dp-peach)"
+                  />
+                  <circle
+                    class="dp-check-active"
+                    cx="32"
+                    cy="84"
+                    r="6.5"
+                    fill="url(#dp-orange)"
+                  />
+                  <path class="dp-tick dp-tick-lg" d="m29 84 2.2 2.2 4.2-4.6" />
+                  <rect
+                    class="dp-bar-ink"
+                    x="44"
+                    y="79.5"
+                    width="42"
+                    height="4"
+                    rx="2"
+                  />
+                  <rect
+                    class="dp-bar-warm"
+                    x="44"
+                    y="86"
+                    width="24"
+                    height="2.6"
+                    rx="1.3"
+                  />
+                  <rect
+                    x="92"
+                    y="81"
+                    width="18"
+                    height="6"
+                    rx="3"
+                    fill="url(#dp-orange)"
+                    fill-opacity=".85"
+                  />
+
+                  <circle class="dp-box dp-box-dashed" cx="32" cy="105" r="6" />
+                  <rect
+                    class="dp-bar"
+                    x="44"
+                    y="100.5"
+                    width="30"
+                    height="4"
+                    rx="2"
+                  />
+                  <rect
+                    class="dp-bar"
+                    x="44"
+                    y="107"
+                    width="20"
+                    height="2.6"
+                    rx="1.3"
+                  />
+                  <rect
+                    class="dp-bar"
+                    x="92"
+                    y="102"
+                    width="18"
+                    height="6"
+                    rx="3"
+                  />
+
+                  <rect
+                    class="dp-scan"
+                    x="20"
+                    y="32"
+                    width="96"
+                    height="1.6"
+                    fill="url(#dp-scan)"
+                  />
+
+                  <g class="dp-float">
+                    <path
+                      class="dp-focal"
+                      d="m172 34 23 8.5V62c0 16.5-10 28-23 33.5-13-5.5-23-17-23-33.5V42.5z"
+                      fill="url(#dp-navy)"
+                      filter="url(#dp-shadow)"
+                    />
+                    <path
+                      d="M172 34v61.5c-13-5.5-23-17-23-33.5V42.5z"
+                      fill="#fff"
+                      fill-opacity=".07"
+                    />
+                    <path
+                      class="dp-shield-inner"
+                      d="m172 41.5 16.5 6V62c0 12-7 20.6-16.5 25-9.5-4.4-16.5-13-16.5-25V47.5z"
+                    />
+                    <path class="dp-check-draw" d="m162.5 64.5 6.5 6.5 13-14" />
+                  </g>
+
+                  <g class="dp-float dp-delay-3">
+                    <circle
+                      cx="200"
+                      cy="30"
+                      r="8"
+                      fill="url(#dp-paper)"
+                      filter="url(#dp-shadow-sm)"
+                    />
+                    <path
+                      class="dp-stroke-blue"
+                      d="M196.4 30a3.6 3.6 0 1 0 1.05-2.55M197.2 24.4v3.3h3.3"
+                    />
+                  </g>
+
+                  <rect
+                    class="dp-card"
+                    x="146"
+                    y="106"
+                    width="52"
+                    height="16"
+                    rx="8"
+                    fill="url(#dp-paper)"
+                    filter="url(#dp-shadow)"
+                  />
+                  <circle cx="155" cy="114" r="3" fill="url(#dp-blue)" />
+                  <rect
+                    class="dp-bar"
+                    x="162"
+                    y="112.5"
+                    width="28"
+                    height="3"
+                    rx="1.5"
+                  />
+                  <rect
+                    class="dp-progress"
+                    x="162"
+                    y="112.5"
+                    width="28"
+                    height="3"
+                    rx="1.5"
+                    fill="url(#dp-bar-orange)"
+                  />
+                </svg>
+              )}
+
+              {stage.art === 'launch' && (
+                <svg viewBox="9.5 0.7 206 131.1" fill="none" focusable="false">
+                  <defs>
+                    <clipPath id="dp-rocket-clip">
+                      <path d="M176 18c10 8 13.5 22 10.5 44h-21c-3-22 .5-36 10.5-44z" />
+                    </clipPath>
+                  </defs>
+                  <circle
+                    class="dp-halo"
+                    cx="176"
+                    cy="60"
+                    r="44"
+                    fill="url(#dp-glow-orange)"
+                  />
+
+                  <path class="dp-grid" d="M16 56h118M16 76h118M16 96h118" />
+                  <path
+                    d="M30 86c10-4 14-8 22-11s14-9 22-13 14-10 22-15 14-11 22-17v86H30z"
+                    fill="url(#dp-area)"
+                  />
+                  <rect
+                    class="dp-grow"
+                    x="22"
+                    y="98"
+                    width="16"
+                    height="18"
+                    rx="4"
+                    fill="url(#dp-bar-blue)"
+                  />
+                  <rect
+                    class="dp-grow dp-delay-2"
+                    x="44"
+                    y="88"
+                    width="16"
+                    height="28"
+                    rx="4"
+                    fill="url(#dp-bar-blue)"
+                  />
+                  <rect
+                    class="dp-grow dp-delay-3"
+                    x="66"
+                    y="76"
+                    width="16"
+                    height="40"
+                    rx="4"
+                    fill="url(#dp-bar-blue)"
+                  />
+                  <rect
+                    class="dp-grow dp-delay-4"
+                    x="88"
+                    y="62"
+                    width="16"
+                    height="54"
+                    rx="4"
+                    fill="url(#dp-bar-blue)"
+                  />
+                  <rect
+                    class="dp-grow"
+                    x="110"
+                    y="46"
+                    width="16"
+                    height="70"
+                    rx="4"
+                    fill="url(#dp-bar-orange)"
+                  />
+                  <path class="dp-rule" d="M16 116h118" />
+                  <path
+                    class="dp-trend"
+                    d="M30 86c10-4 14-8 22-11s14-9 22-13 14-10 22-15 14-11 22-17"
+                  />
+                  <circle class="dp-trend-dot" cx="52" cy="75" r="2.4" />
+                  <circle class="dp-trend-dot" cx="74" cy="62" r="2.4" />
+                  <circle class="dp-trend-dot" cx="96" cy="47" r="2.4" />
+                  <circle class="dp-ping" cx="118" cy="30" r="3.4" />
+                  <circle
+                    cx="118"
+                    cy="30"
+                    r="3.4"
+                    fill="#c9542b"
+                    stroke="#fff"
+                    stroke-width="1.4"
+                  />
+
+                  <rect
+                    class="dp-card"
+                    x="16"
+                    y="12"
+                    width="44"
+                    height="14"
+                    rx="7"
+                    fill="url(#dp-paper)"
+                    filter="url(#dp-shadow-sm)"
+                  />
+                  <circle class="dp-ping" cx="24" cy="19" r="2.6" />
+                  <circle cx="24" cy="19" r="2.6" fill="#c9542b" />
+                  <rect
+                    class="dp-bar-ink"
+                    x="30"
+                    y="17.5"
+                    width="22"
+                    height="3"
+                    rx="1.5"
+                  />
+
+                  <path
+                    class="dp-trail"
+                    d="M160 72v12M192 72v16M186 90v8M165 88v6"
+                  />
+
+                  <g class="dp-float dp-focal">
+                    <path
+                      d="M166 48c-6 3-9 8-9 14v5l9-5zM186 48c6 3 9 8 9 14v5l-9-5z"
+                      fill="url(#dp-navy)"
+                    />
+                    <path
+                      d="M176 18c10 8 13.5 22 10.5 44h-21c-3-22 .5-36 10.5-44z"
+                      fill="url(#dp-paper)"
+                    />
+                    <g clip-path="url(#dp-rocket-clip)">
+                      <rect
+                        x="160"
+                        y="16"
+                        width="32"
+                        height="14"
+                        fill="url(#dp-orange)"
+                      />
+                      <rect
+                        x="176"
+                        y="16"
+                        width="16"
+                        height="50"
+                        fill="#101b2d"
+                        fill-opacity=".05"
+                      />
+                    </g>
+                    <path
+                      class="dp-rocket"
+                      d="M176 18c10 8 13.5 22 10.5 44h-21c-3-22 .5-36 10.5-44z"
+                    />
+                    <circle
+                      cx="176"
+                      cy="42"
+                      r="5.5"
+                      fill="url(#dp-navy)"
+                      stroke="#fff"
+                      stroke-width="2"
+                    />
+                    <circle
+                      cx="176"
+                      cy="42"
+                      r="7.4"
+                      stroke="#101b2d"
+                      stroke-opacity=".18"
+                    />
+                    <circle
+                      cx="174.3"
+                      cy="40.3"
+                      r="1.5"
+                      fill="#fff"
+                      fill-opacity=".6"
+                    />
+                    <rect
+                      x="170"
+                      y="62"
+                      width="12"
+                      height="4.5"
+                      rx="1.5"
+                      fill="url(#dp-navy)"
+                    />
+                    <g class="dp-flame">
+                      <path
+                        d="M170.5 67c0 9 3 15 5.5 21 2.5-6 5.5-12 5.5-21z"
+                        fill="url(#dp-flame)"
+                      />
+                      <path
+                        d="M173.5 67c0 5 1.2 9 2.5 12 1.3-3 2.5-7 2.5-12z"
+                        fill="#fff8f0"
+                      />
+                    </g>
+                  </g>
+
+                  <path class="dp-ground" d="M146 120h60" />
+                  <g class="dp-cloud">
+                    <circle cx="154" cy="116" r="4.5" />
+                    <circle cx="198" cy="116" r="4.5" />
+                    <circle cx="164" cy="112" r="7" />
+                    <circle cx="188" cy="112" r="7" />
+                    <circle cx="176" cy="108" r="9" />
+                  </g>
+
+                  <path
+                    class="dp-twinkle"
+                    d="M150 22q0 4 4 4-4 0-4 4 0-4-4-4 4 0 4-4z"
+                    fill="#c9542b"
+                  />
+                  <path
+                    class="dp-twinkle dp-delay-2"
+                    d="M206 43q0 3 3 3-3 0-3 3 0-3-3-3 3 0 3-3z"
+                    fill="#547b9d"
+                  />
+                  <path
+                    class="dp-twinkle dp-delay-3"
+                    d="M203 14q0 2.5 2.5 2.5-2.5 0-2.5 2.5 0-2.5-2.5-2.5 2.5 0 2.5-2.5z"
+                    fill="#e8774a"
+                  />
+                </svg>
+              )}
+            </div>
           </div>
-          <div class="delivery-scene-stage" data-delivery-scene-stage />
-        </div>
-        {stages.map((stage, index) => (
-          <article
-            class="delivery-panel"
-            id={`delivery-panel-${stage.number}`}
-            role="tabpanel"
-            aria-labelledby={`delivery-tab-${stage.number}`}
-            tabindex="0"
-            data-delivery-panel
-            data-stage-index={index}
-            data-visual-label={stage.visualLabel}
-            hidden={index !== 0}
-          >
-            <div class="delivery-visual" aria-hidden="true">
-              <div class="delivery-visual-meta">
-                <span class="delivery-visual-label">
-                  <span class="delivery-visual-pulse" />
-                  {stage.visualLabel}
-                </span>
-                <span class="delivery-visual-count">{stage.number} / 05</span>
-              </div>
-
-              {stage.visual === 'discover' && (
-                <svg
-                  class="delivery-scene"
-                  viewBox="0 0 400 270"
-                  fill="none"
-                  focusable="false"
-                >
-                  <path class="dp-link" d="M146 74 172 98m-26 66 26-24m82-66-26 24m26 66-26-24" />
-                  <path class="dp-link-soft" d="M146 74 172 98m-26 66 26-24m82-66-26 24m26 66-26-24" />
-                  <circle class="dp-flow dp-flow-a" cx="146" cy="74" r="3.5" />
-                  <circle class="dp-flow dp-flow-b" cx="146" cy="164" r="3.5" />
-                  <circle class="dp-flow dp-flow-c" cx="254" cy="74" r="3.5" />
-                  <circle class="dp-flow dp-flow-d" cx="254" cy="164" r="3.5" />
-                  <g class="dp-goal-core dp-enter dp-enter-core">
-                    <circle class="dp-core-halo" cx="200" cy="119" r="52" />
-                    <circle class="dp-core-ring" cx="200" cy="119" r="43" />
-                    <rect class="dp-core-card" x="158" y="83" width="84" height="72" rx="16" />
-                    <path class="dp-goal-icon" transform="translate(-120 -52)" d="M320 144v25m-12-12h24m-19-10 7 5 7-5" />
-                    <text class="dp-core-title" x="200" y="133" text-anchor="middle">BUSINESS</text>
-                    <text class="dp-core-title" x="200" y="146" text-anchor="middle">GOALS</text>
-                  </g>
-                  <g class="dp-discovery-card dp-enter dp-enter-one">
-                    <rect class="dp-card" x="6" y="18" width="140" height="70" rx="12" />
-                    <circle class="dp-icon-disc" cx="26" cy="38" r="10" />
-                    <path class="dp-icon" transform="translate(-25 -52)" d="M47 91a4 4 0 1 1 8 0m-10 6c1-4 11-4 12 0m-6-15v2" />
-                    <circle class="dp-card-status" cx="130" cy="34" r="3" />
-                    <text class="dp-heading" x="18" y="64">STAKEHOLDERS</text>
-                    <text class="dp-copy" x="18" y="80">People · users · teams</text>
-                  </g>
-                  <g class="dp-discovery-card dp-enter dp-enter-two">
-                    <rect class="dp-card" x="6" y="150" width="140" height="70" rx="12" />
-                    <circle class="dp-icon-disc" cx="26" cy="170" r="10" />
-                    <path class="dp-icon" transform="translate(-25 -52)" d="M47 218h8m-8 4h8m-8 4h5" />
-                    <circle class="dp-card-status" cx="130" cy="166" r="3" />
-                    <text class="dp-heading" x="18" y="196">REQUIREMENTS</text>
-                    <text class="dp-copy" x="18" y="212">Needs · workflows</text>
-                  </g>
-                  <g class="dp-discovery-card dp-enter dp-enter-three">
-                    <rect class="dp-card" x="254" y="18" width="140" height="70" rx="12" />
-                    <circle class="dp-icon-disc dp-icon-disc-accent" cx="274" cy="38" r="10" />
-                    <path class="dp-icon dp-icon-accent" transform="translate(-213 -52)" d="M482 94v-5l5-4 5 4v5m-7 0v-4h4v4" />
-                    <circle class="dp-card-status dp-card-status-accent" cx="378" cy="34" r="3" />
-                    <text class="dp-heading" x="266" y="64">SUCCESS METRICS</text>
-                    <text class="dp-copy" x="266" y="80">Outcomes · measures</text>
-                  </g>
-                  <g class="dp-discovery-card dp-enter dp-enter-four">
-                    <rect class="dp-card" x="254" y="150" width="140" height="70" rx="12" />
-                    <circle class="dp-icon-disc" cx="274" cy="170" r="10" />
-                    <path class="dp-icon" transform="translate(-213 -52)" d="M483 218h8m-8 4h5m-5 4h8" />
-                    <circle class="dp-card-status" cx="378" cy="166" r="3" />
-                    <text class="dp-heading" x="266" y="196">CONSTRAINTS</text>
-                    <text class="dp-copy" x="266" y="212">Systems · time · risk</text>
-                  </g>
-                  <text class="dp-kicker" x="200" y="254" text-anchor="middle">ALIGN THE CONTEXT BEFORE DEFINING THE SOLUTION</text>
-                </svg>
-              )}
-
-              {stage.visual === 'design' && (
-                <svg
-                  class="delivery-scene"
-                  viewBox="0 0 400 270"
-                  fill="none"
-                  focusable="false"
-                >
-                  <path class="dp-link" d="M90 130h18m182 0h18" />
-                  <path class="dp-link-soft" d="M90 130h18m182 0h18" />
-                  <g class="dp-enter dp-enter-one">
-                    <rect class="dp-card dp-requirements" x="2" y="70" width="88" height="120" rx="12" />
-                    <text class="dp-heading" x="13" y="92">BUSINESS</text>
-                    <text class="dp-heading" x="13" y="105">INPUT</text>
-                    <circle class="dp-check" cx="16" cy="124" r="3" /><text class="dp-copy" x="24" y="127.5">User needs</text>
-                    <circle class="dp-check" cx="16" cy="144" r="3" /><text class="dp-copy" x="24" y="147.5">Workflows</text>
-                    <circle class="dp-check" cx="16" cy="164" r="3" /><text class="dp-copy" x="24" y="167.5">Constraints</text>
-                    <rect class="dp-progress-track" x="13" y="177" width="66" height="4" rx="2" />
-                    <rect class="dp-progress-fill dp-progress-requirements" x="13" y="177" width="66" height="4" rx="2" />
-                  </g>
-                  <g class="dp-enter dp-enter-two">
-                    <rect class="dp-architecture" x="108" y="14" width="182" height="230" rx="14" />
-                    <text class="dp-heading dp-heading-lg" x="122" y="37">SOLUTION BLUEPRINT</text>
-                    <text class="dp-copy" x="122" y="51">Reviewed system layers</text>
-                    <rect class="dp-layer" x="120" y="62" width="158" height="32" rx="8" />
-                    <rect class="dp-layer dp-layer-accent" x="120" y="100" width="158" height="32" rx="8" />
-                    <rect class="dp-layer" x="120" y="138" width="158" height="32" rx="8" />
-                    <rect class="dp-layer" x="120" y="176" width="158" height="32" rx="8" />
-                    <path class="dp-layer-icon" transform="translate(-105 -55.5)" d="M232 123h18v21h-18zm4 4h10m-10 5h10" />
-                    <path class="dp-layer-icon dp-layer-icon-accent" transform="translate(-207 -12.5)" d="M335 121h16v15h-16zm3 4h10m-10 4h7" />
-                    <ellipse class="dp-layer-icon" transform="translate(-105 -38)" cx="241" cy="185" rx="9" ry="4" /><path class="dp-layer-icon" transform="translate(-105 -38)" d="M232 185v13c0 5 18 5 18 0v-13m-18 6c0 5 18 5 18 0" />
-                    <path class="dp-layer-icon" transform="translate(-208 5)" d="M335 187h18m-9-8v16m0-8 9-8m-9 8 9 8" />
-                    <text class="dp-layer-title" x="152" y="76">UI / UX</text>
-                    <text class="dp-layer-copy" x="152" y="88">User journeys</text>
-                    <text class="dp-layer-title" x="152" y="114">API / SERVICES</text>
-                    <text class="dp-layer-copy" x="152" y="126">API contracts</text>
-                    <text class="dp-layer-title" x="152" y="152">DATA</text>
-                    <text class="dp-layer-copy" x="152" y="164">Data models</text>
-                    <text class="dp-layer-title" x="152" y="190">INTEGRATIONS</text>
-                    <text class="dp-layer-copy" x="152" y="202">Connected tools</text>
-                    <rect class="dp-blueprint-foot" x="120" y="214" width="158" height="20" rx="10" />
-                    <circle class="dp-card-status" cx="133" cy="224" r="3" />
-                    <text class="dp-foot-label" x="142" y="227">READY FOR REVIEW</text>
-                  </g>
-                  <g class="dp-enter dp-enter-three">
-                    <rect class="dp-card dp-output" x="308" y="70" width="88" height="120" rx="12" />
-                    <circle class="dp-output-halo" cx="352" cy="99" r="16" />
-                    <path class="dp-output-icon" transform="translate(-195 -32)" d="M536 131h22m-22 7h22m-18-14h14" />
-                    <text class="dp-heading" x="352" y="138" text-anchor="middle">PROPOSED</text>
-                    <text class="dp-heading" x="352" y="151" text-anchor="middle">SOLUTION</text>
-                    <text class="dp-copy" x="352" y="172" text-anchor="middle">Plan → prototype</text>
-                  </g>
-                  <circle class="dp-flow dp-flow-e" cx="90" cy="130" r="3.5" />
-                  <circle class="dp-flow dp-flow-f" cx="290" cy="130" r="3.5" />
-                  <text class="dp-kicker" x="200" y="262" text-anchor="middle">REQUIREMENTS BECOME A REVIEWABLE SYSTEM PLAN</text>
-                </svg>
-              )}
-
-              {stage.visual === 'build' && (
-                <svg
-                  class="delivery-scene"
-                  viewBox="0 0 400 270"
-                  fill="none"
-                  focusable="false"
-                >
-                  <path class="dp-link" d="M95 104h14m84 0h14m84 0h14" />
-                  <path class="dp-link-soft" d="M95 104h14m84 0h14m84 0h14" />
-                  <g class="dp-pipeline-card dp-enter dp-enter-one">
-                    <rect class="dp-card" x="11" y="40" width="84" height="128" rx="12" />
-                    <text class="dp-heading dp-heading-lg" x="22" y="62">CODE</text>
-                    <text class="dp-copy" x="22" y="76">Components</text>
-                    <rect class="dp-code-screen" x="22" y="86" width="62" height="40" rx="6" />
-                    <path class="dp-code-glyph" transform="translate(-18 -60)" d="m53 159-5 4 5 4m10-8 5 4-5 4m11 0 6-9" />
-                    <path class="dp-code-line" d="M30 114h28m-28 5h40" />
-                    <circle class="dp-card-status" cx="82" cy="54" r="3" />
-                    <text class="dp-micro" x="22" y="156">BUILDING</text>
-                  </g>
-                  <g class="dp-pipeline-card dp-enter dp-enter-two">
-                    <rect class="dp-card" x="109" y="40" width="84" height="128" rx="12" />
-                    <text class="dp-heading dp-heading-lg" x="120" y="62">API</text>
-                    <text class="dp-copy" x="120" y="76">Services</text>
-                    <rect class="dp-service-node" x="120" y="92" width="30" height="20" rx="6" />
-                    <rect class="dp-service-node dp-service-node-accent" x="156" y="92" width="28" height="20" rx="6" />
-                    <text class="dp-micro dp-node-label" x="135" y="105" text-anchor="middle">CORE</text>
-                    <text class="dp-micro dp-node-label" x="170" y="105" text-anchor="middle">API</text>
-                    <path class="dp-mini-link" d="M150 102h6" />
-                    <path class="dp-code-line" d="M120 126h50" />
-                    <circle class="dp-card-status" cx="180" cy="126" r="3" />
-                    <text class="dp-micro" x="120" y="156">CONNECTED</text>
-                  </g>
-                  <g class="dp-pipeline-card dp-enter dp-enter-three">
-                    <rect class="dp-card" x="207" y="40" width="84" height="128" rx="12" />
-                    <text class="dp-heading dp-heading-lg" x="218" y="62">DATA</text>
-                    <text class="dp-copy" x="218" y="76">Integrations</text>
-                    <ellipse class="dp-db" cx="240" cy="96" rx="20" ry="6" />
-                    <path class="dp-db" d="M220 96v22c0 8 40 8 40 0v-22" />
-                    <path class="dp-db-line" d="M220 107c0 8 40 8 40 0" />
-                    <path class="dp-mini-link" d="M260 96h10" />
-                    <circle class="dp-integration-dot" cx="275" cy="96" r="4.5" />
-                    <text class="dp-micro" x="218" y="156">SYNCED</text>
-                  </g>
-                  <g class="dp-pipeline-card dp-enter dp-enter-four">
-                    <rect class="dp-product-card" x="305" y="40" width="84" height="128" rx="12" />
-                    <text class="dp-heading dp-heading-lg" x="316" y="62">PRODUCT</text>
-                    <text class="dp-copy" x="316" y="76">Application</text>
-                    <rect class="dp-app-window" x="316" y="86" width="62" height="44" rx="6" />
-                    <path class="dp-app-top" d="M316 96h62" />
-                    <circle class="dp-app-dot" cx="323" cy="91" r="2" /><circle class="dp-app-dot dp-app-dot-accent" cx="330" cy="91" r="2" />
-                    <rect class="dp-app-module" x="322" y="102" width="20" height="22" rx="3" />
-                    <rect class="dp-app-module dp-app-module-accent" x="347" y="102" width="25" height="8" rx="3" />
-                    <path class="dp-app-line" d="M347 115h24m-24 6h16" />
-                    <text class="dp-micro dp-micro-ready" x="316" y="156">WORKING</text>
-                  </g>
-                  <path class="dp-arrow-head" d="m104 100 5 4-5 4m98-8 5 4-5 4m98-8 5 4-5 4" />
-                  <circle class="dp-pipeline-flow dp-pipeline-flow-one" cx="95" cy="104" r="3.5" />
-                  <circle class="dp-pipeline-flow dp-pipeline-flow-two" cx="193" cy="104" r="3.5" />
-                  <circle class="dp-pipeline-flow dp-pipeline-flow-three" cx="291" cy="104" r="3.5" />
-                  <rect class="dp-sprint-track" x="11" y="190" width="378" height="34" rx="12" />
-                  <text class="dp-heading" x="24" y="211">SPRINT 04</text>
-                  <rect class="dp-progress-track" x="104" y="204" width="150" height="6" rx="3" />
-                  <rect class="dp-progress-fill dp-sprint-progress" x="104" y="204" width="150" height="6" rx="3" />
-                  <text class="dp-foot-label" x="268" y="210">INTEGRATING</text>
-                  <circle class="dp-card-status" cx="374" cy="207" r="3" />
-                </svg>
-              )}
-
-              {stage.visual === 'validate' && (
-                <svg
-                  class="delivery-scene"
-                  viewBox="0 0 400 270"
-                  fill="none"
-                  focusable="false"
-                >
-                  <rect class="dp-qa-dashboard" x="6" y="14" width="388" height="238" rx="16" />
-                  <text class="dp-heading dp-heading-lg" x="22" y="40">QUALITY GATES</text>
-                  <text class="dp-copy" x="22" y="55">Illustrative test run · sample data</text>
-                  <rect class="dp-run-badge" x="266" y="26" width="116" height="22" rx="11" />
-                  <circle class="dp-card-status" cx="279" cy="37" r="3" />
-                  <text class="dp-foot-label" x="287" y="40">RELEASE REVIEW</text>
-                  <g class="dp-qa-card dp-enter dp-enter-one">
-                    <rect class="dp-card" x="22" y="68" width="118" height="64" rx="10" />
-                    <circle class="dp-qa-check" cx="38" cy="86" r="7" />
-                    <path class="dp-qa-mark" d="m34.5 86 2.5 2.5 4.5-5" />
-                    <text class="dp-heading" x="50" y="90">FUNCTIONAL</text>
-                    <text class="dp-copy" x="32" y="110">User flows</text>
-                    <text class="dp-qa-status" x="130" y="110" text-anchor="end">PASS</text>
-                    <rect class="dp-qa-track" x="32" y="119" width="98" height="5" rx="2.5" />
-                    <rect class="dp-qa-progress dp-qa-progress-one" x="32" y="119" width="98" height="5" rx="2.5" />
-                  </g>
-                  <g class="dp-qa-card dp-enter dp-enter-two">
-                    <rect class="dp-card" x="148" y="68" width="118" height="64" rx="10" />
-                    <circle class="dp-qa-check" cx="164" cy="86" r="7" />
-                    <path class="dp-qa-mark" d="m160.5 86 2.5 2.5 4.5-5" />
-                    <text class="dp-heading" x="176" y="90">INTEGRATION</text>
-                    <text class="dp-copy" x="158" y="110">API contracts</text>
-                    <text class="dp-qa-status" x="256" y="110" text-anchor="end">PASS</text>
-                    <rect class="dp-qa-track" x="158" y="119" width="98" height="5" rx="2.5" />
-                    <rect class="dp-qa-progress dp-qa-progress-two" x="158" y="119" width="98" height="5" rx="2.5" />
-                  </g>
-                  <g class="dp-qa-card dp-enter dp-enter-three">
-                    <rect class="dp-card" x="22" y="140" width="118" height="64" rx="10" />
-                    <circle class="dp-qa-review" cx="38" cy="158" r="7" />
-                    <path class="dp-qa-mark-review" d="M38 154.5v4m0 2.5v.5" />
-                    <text class="dp-heading" x="50" y="162">PERFORMANCE</text>
-                    <text class="dp-copy" x="32" y="182">Load profile</text>
-                    <text class="dp-qa-status dp-qa-status-review" x="130" y="182" text-anchor="end">REVIEW</text>
-                    <rect class="dp-qa-track" x="32" y="191" width="98" height="5" rx="2.5" />
-                    <rect class="dp-qa-progress dp-qa-progress-three" x="32" y="191" width="98" height="5" rx="2.5" />
-                  </g>
-                  <g class="dp-qa-card dp-enter dp-enter-four">
-                    <rect class="dp-card" x="148" y="140" width="118" height="64" rx="10" />
-                    <circle class="dp-qa-check" cx="164" cy="158" r="7" />
-                    <path class="dp-qa-mark" d="m160.5 158 2.5 2.5 4.5-5" />
-                    <text class="dp-heading" x="176" y="162">SECURITY</text>
-                    <text class="dp-copy" x="158" y="182">Access + data</text>
-                    <text class="dp-qa-status" x="256" y="182" text-anchor="end">PASS</text>
-                    <rect class="dp-qa-track" x="158" y="191" width="98" height="5" rx="2.5" />
-                    <rect class="dp-qa-progress dp-qa-progress-four" x="158" y="191" width="98" height="5" rx="2.5" />
-                  </g>
-                  <g class="dp-quality-score dp-enter dp-enter-score">
-                    <rect class="dp-score-panel" x="274" y="68" width="108" height="136" rx="10" />
-                    <text class="dp-score-caption" x="328" y="88" text-anchor="middle">OVERALL QUALITY</text>
-                    <circle class="dp-score-track" cx="328" cy="128" r="24" />
-                    <circle class="dp-score-ring" cx="328" cy="128" r="24" />
-                    <text class="dp-score-number" x="328" y="133" text-anchor="middle">92%</text>
-                    <text class="dp-score-caption" x="328" y="172" text-anchor="middle">SAMPLE SCORE</text>
-                    <text class="dp-score-status" x="328" y="188" text-anchor="middle">3 PASS · 1 REVIEW</text>
-                  </g>
-                  <text class="dp-kicker" x="200" y="232" text-anchor="middle">EXAMPLE STATUS ONLY · FINAL READINESS FOLLOWS REVIEW</text>
-                </svg>
-              )}
-
-              {stage.visual === 'launch' && (
-                <svg
-                  class="delivery-scene"
-                  viewBox="0 0 400 270"
-                  fill="none"
-                  focusable="false"
-                >
-                  <path class="dp-deploy-link" d="M92 132h8m80 0h7m80 0h5" />
-                  <path class="dp-deploy-feedback" d="M334 210v14H44v-38" />
-                  <circle class="dp-deploy-flow dp-deploy-flow-a" cx="92" cy="132" r="3.5" />
-                  <circle class="dp-deploy-flow dp-deploy-flow-b" cx="180" cy="132" r="3.5" />
-                  <circle class="dp-deploy-flow dp-deploy-flow-c" cx="267" cy="132" r="3.5" />
-                  <g class="dp-enter dp-enter-one">
-                    <rect class="dp-card" x="2" y="80" width="90" height="104" rx="12" />
-                    <text class="dp-heading" x="12" y="101">BUILD</text>
-                    <text class="dp-copy" x="12" y="115">Release bundle</text>
-                    <rect class="dp-build-bar" x="12" y="125" width="66" height="6" rx="3" />
-                    <rect class="dp-build-fill" x="12" y="125" width="50" height="6" rx="3" />
-                    <path class="dp-build-lines" d="M12 144h64m-64 9h44" />
-                    <circle class="dp-card-status" cx="80" cy="97" r="3" />
-                    <text class="dp-micro" x="12" y="173">READY</text>
-                  </g>
-                  <g class="dp-enter dp-enter-two">
-                    <rect class="dp-card" x="100" y="92" width="80" height="80" rx="12" />
-                    <circle class="dp-env-halo" cx="139" cy="116" r="13" />
-                    <path class="dp-env-icon" transform="translate(-81 -24)" d="M212 140h16m-13 5h10m-7-10v10" />
-                    <text class="dp-heading" x="139" y="147" text-anchor="middle">STAGING</text>
-                    <text class="dp-copy" x="139" y="161" text-anchor="middle">Smoke checks</text>
-                  </g>
-                  <g class="dp-enter dp-enter-three">
-                    <rect class="dp-production-card" x="187" y="92" width="80" height="80" rx="12" />
-                    <circle class="dp-prod-halo" cx="227" cy="116" r="14" />
-                    <path class="dp-prod-icon" transform="translate(-123 -24)" d="M339 140h22m-22 7h22m-17-14h12" />
-                    <circle class="dp-card-status dp-card-status-accent" cx="255" cy="104" r="3" />
-                    <text class="dp-heading dp-heading-compact" x="227" y="147" text-anchor="middle">PRODUCTION</text>
-                    <text class="dp-copy" x="227" y="161" text-anchor="middle">Live release</text>
-                  </g>
-                  <g class="dp-enter dp-enter-four">
-                    <rect class="dp-monitor-panel" x="272" y="26" width="124" height="150" rx="12" />
-                    <text class="dp-heading" x="282" y="47">MONITORING</text>
-                    <text class="dp-micro" x="282" y="60">LIVE · ILLUSTRATIVE</text>
-                    <path class="dp-spark-grid" d="M282 82h104m-104 18h104m-104 18h104" />
-                    <path class="dp-spark-line" d="m282 96 16-7 13 3 12-1 12-13 13 11 12-4 13 4 12-9" />
-                    <circle class="dp-spark-dot" cx="386" cy="80" r="3" />
-                    <path class="dp-signal-rule" d="M282 134h104" />
-                    <circle class="dp-signal-dot" cx="286" cy="148" r="3" /><text class="dp-signal-label" x="293" y="151">UPTIME</text><text class="dp-signal-value" x="386" y="151" text-anchor="end">99.9%</text>
-                    <circle class="dp-signal-dot" cx="286" cy="164" r="3" /><text class="dp-signal-label" x="293" y="167">LATENCY</text><text class="dp-signal-value" x="386" y="167" text-anchor="end">124ms</text>
-                  </g>
-                  <g class="dp-enter dp-enter-alert">
-                    <rect class="dp-alert-pill" x="272" y="186" width="124" height="24" rx="12" />
-                    <circle class="dp-alert-dot" cx="286" cy="198" r="3.5" />
-                    <text class="dp-signal-label" x="295" y="201">ALERTS · FEEDBACK</text>
-                  </g>
-                  <path class="dp-feedback-arrow" d="m39 193 5-7 5 7" />
-                  <text class="dp-feedback-label" x="200" y="244" text-anchor="middle">FEEDBACK RETURNS TO THE NEXT IMPROVEMENT CYCLE</text>
-                </svg>
-              )}
-            </div>
-
-            <div class="delivery-panel-content">
-              <div class="delivery-panel-heading">
-                <span class="delivery-stage-label">
-                  {stage.number} · Delivery stage
-                </span>
-                <h3>{stage.title}</h3>
-                <p>{stage.description}</p>
-              </div>
-              <div class="delivery-detail-grid">
-                <div>
-                  <h4>Key activities</h4>
-                  <ul>
-                    {stage.activities.map((activity) => (
-                      <li>{activity}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h4>Deliverables</h4>
-                  <ul class="delivery-deliverables">
-                    {stage.deliverables.map((deliverable) => (
-                      <li>{deliverable}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </article>
-        ))}
-
-        <div class="delivery-controls">
-          <button
-            class="delivery-control-button delivery-control-previous"
-            type="button"
-            data-delivery-previous
-            disabled
-          >
-            <span aria-hidden="true">←</span> Previous
-          </button>
-          <div class="delivery-progress-wrap">
-            <div class="delivery-progress-copy">
-              <span data-delivery-current aria-live="polite">
-                Stage 01 of 05
-              </span>
-              <span>Delivery progress</span>
-            </div>
-            <div
-              class="delivery-progress-track"
-              role="progressbar"
-              aria-label="Delivery process progress"
-              aria-valuemin="1"
-              aria-valuemax="5"
-              aria-valuenow="1"
-              data-delivery-progress
-            >
-              <span data-delivery-progress-fill />
-            </div>
+          <div class="delivery-stage-head">
+            <span class="delivery-stage-number">{stage.number}</span>
+            <h3>{stage.title}</h3>
           </div>
-          <button
-            class="delivery-control-button delivery-control-next"
-            type="button"
-            data-delivery-next
-          >
-            Next stage <span aria-hidden="true">→</span>
-          </button>
-        </div>
-      </div>
-
-      <aside
-        class="delivery-collaboration"
-        aria-label="Continuous collaboration"
-      >
-        <span class="delivery-collaboration-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" focusable="false">
-            <path d="M7 8.5 12 5l5 3.5M5.5 13v5h13v-5M8 13v5m8-5v5M12 5v5m-5 2 5-2 5 2" />
-            <circle cx="12" cy="10" r="2" />
-          </svg>
-        </span>
-        <span>
-          <strong>Continuous collaboration</strong>
-          <span>
-            Feedback, communication and quality checks throughout the entire
-            journey.
-          </span>
-        </span>
-        <span class="delivery-collaboration-rule" aria-hidden="true"></span>
-        <span class="delivery-collaboration-note">Shared at every stage</span>
-      </aside>
-    </div>
+          <p>{stage.description}</p>
+        </li>
+      ))}
+    </ol>
   </div>
 </section>
 
-<script>
-  function setupDeliveryProcess() {
-    document.querySelectorAll('[data-delivery-process]').forEach((root) => {
-      if (root.dataset.deliveryReady === 'true') return
-      root.dataset.deliveryReady = 'true'
-
-      const tabs = [...root.querySelectorAll('[data-delivery-tab]')]
-      const panels = [...root.querySelectorAll('[data-delivery-panel]')]
-      const currentLabel = root.querySelector('[data-delivery-current]')
-      const progress = root.querySelector('[data-delivery-progress]')
-      const progressFill = root.querySelector('[data-delivery-progress-fill]')
-      const previous = root.querySelector('[data-delivery-previous]')
-      const next = root.querySelector('[data-delivery-next]')
-      const tabList = root.querySelector('[data-delivery-tabs]')
-      const sceneStage = root.querySelector('[data-delivery-scene-stage]')
-      const visualLabel = root.querySelector('[data-delivery-visual-label]')
-      const visualCount = root.querySelector('[data-delivery-visual-count]')
-      const horizontalLayout = window.matchMedia('(max-width: 1023px)')
-      const controller = new AbortController()
-      let activeIndex = 0
-
-      const scenes = panels.map((panel, index) => {
-        const source = panel.querySelector('.delivery-visual')
-        const scene = source?.querySelector('svg')
-        if (!scene) return null
-
-        // Keep the SVG's viewBox proportions so diagrams remain legible at every panel size.
-        scene.setAttribute('preserveAspectRatio', 'xMidYMid meet')
-        scene.classList.add('delivery-live-scene')
-        scene.dataset.deliveryVisual = String(index)
-        scene.classList.toggle('is-active', index === activeIndex)
-        scene.setAttribute('aria-hidden', String(index !== activeIndex))
-        sceneStage.append(scene)
-        source.remove()
-        return scene
-      })
-
-      root.classList.add('is-ready')
-
-      function updateTabOrientation() {
-        tabList.setAttribute(
-          'aria-orientation',
-          horizontalLayout.matches ? 'horizontal' : 'vertical',
-        )
-      }
-
-      updateTabOrientation()
-      horizontalLayout.addEventListener('change', updateTabOrientation, {
-        signal: controller.signal,
-      })
-
-      function selectStage(index, focusTab = false) {
-        if (index < 0 || index >= tabs.length || index === activeIndex) return
-        activeIndex = index
-
-        tabs.forEach((tab, tabIndex) => {
-          const selected = tabIndex === activeIndex
-          tab.setAttribute('aria-selected', String(selected))
-          tab.tabIndex = selected ? 0 : -1
-          if (focusTab && selected) tab.focus()
-        })
-
-        panels.forEach((panel, panelIndex) => {
-          panel.hidden = panelIndex !== activeIndex
-          panel.classList.remove('is-entering')
-        })
-
-        const activePanel = panels[activeIndex]
-        void activePanel.offsetWidth
-        activePanel.classList.add('is-entering')
-
-        scenes.forEach((scene, sceneIndex) => {
-          if (!scene) return
-          const selected = sceneIndex === activeIndex
-          scene.classList.toggle('is-active', selected)
-          scene.setAttribute('aria-hidden', String(!selected))
-        })
-
-        const stageNumber = String(activeIndex + 1).padStart(2, '0')
-        const activeVisual = panels[activeIndex].dataset.visualLabel
-        currentLabel.textContent = `Stage ${stageNumber} of 05`
-        visualCount.textContent = `${stageNumber} / 05`
-        visualLabel.textContent = activeVisual || 'Delivery stage'
-        progress.setAttribute('aria-valuenow', String(activeIndex + 1))
-        progress.setAttribute(
-          'aria-valuetext',
-          `Stage ${activeIndex + 1} of ${tabs.length}`,
-        )
-        progressFill.style.transform = `scaleX(${(activeIndex + 1) / tabs.length})`
-        previous.disabled = activeIndex === 0
-        next.disabled = activeIndex === tabs.length - 1
-      }
-
-      tabs.forEach((tab, index) => {
-        tab.addEventListener('click', () => selectStage(index), {
-          signal: controller.signal,
-        })
-      })
-
-      tabList.addEventListener(
-        'keydown',
-        (event) => {
-          const currentIndex = tabs.indexOf(document.activeElement)
-          let nextIndex = currentIndex
-
-          if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
-            nextIndex = (currentIndex + 1) % tabs.length
-          } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
-            nextIndex = (currentIndex - 1 + tabs.length) % tabs.length
-          } else if (event.key === 'Home') {
-            nextIndex = 0
-          } else if (event.key === 'End') {
-            nextIndex = tabs.length - 1
-          } else {
-            return
-          }
-
-          event.preventDefault()
-          selectStage(nextIndex, true)
-        },
-        { signal: controller.signal },
-      )
-
-      previous.addEventListener('click', () => selectStage(activeIndex - 1), {
-        signal: controller.signal,
-      })
-      next.addEventListener('click', () => selectStage(activeIndex + 1), {
-        signal: controller.signal,
-      })
-
-      root._cleanupDeliveryProcess = () => {
-        controller.abort()
-        delete root.dataset.deliveryReady
-        delete root._cleanupDeliveryProcess
-      }
-    })
-  }
-
-  function cleanupDeliveryProcess() {
-    document.querySelectorAll('[data-delivery-process]').forEach((root) => {
-      root._cleanupDeliveryProcess?.()
-    })
-  }
-
-  setupDeliveryProcess()
-  document.addEventListener('astro:page-load', setupDeliveryProcess)
-  document.addEventListener('astro:before-swap', cleanupDeliveryProcess)
-</script>
-
 <style>
   .delivery-process {
-    --delivery-line: rgb(16 27 45 / 10%);
+    --stage-gap: clamp(0.85rem, 1.5vw, 1.25rem);
     position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    padding-block: clamp(2.75rem, 4vw, 3.5rem);
+    padding-block: clamp(4rem, 6.5vw, 6rem);
     background:
       radial-gradient(
-        ellipse at 5% 12%,
-        rgb(201 84 43 / 7%),
-        transparent 30rem
+        ellipse at 6% 10%,
+        rgb(201 84 43 / 6%),
+        transparent 28rem
       ),
       radial-gradient(
-        ellipse at 97% 76%,
-        rgb(84 123 157 / 8%),
-        transparent 32rem
+        ellipse at 96% 90%,
+        rgb(84 123 157 / 7%),
+        transparent 30rem
       ),
-      linear-gradient(180deg, #fbfaf8 0%, var(--color-paper) 100%);
+      var(--color-paper);
   }
 
-  .delivery-process::before,
-  .delivery-process::after {
+  /* Holds shared gradients/filters; display:none would break them */
+  .dp-defs {
     position: absolute;
-    z-index: -1;
-    width: 34rem;
-    height: 34rem;
-    border: 1px solid rgb(168 65 33 / 6%);
-    border-radius: 50%;
-    content: '';
-    pointer-events: none;
-  }
-
-  .delivery-process::before {
-    top: 7rem;
-    left: -25rem;
-    box-shadow:
-      0 0 0 3.5rem rgb(168 65 33 / 2%),
-      0 0 0 7rem rgb(84 123 157 / 2%);
-  }
-
-  .delivery-process::after {
-    right: -26rem;
-    bottom: 4rem;
-    border-color: rgb(84 123 157 / 8%);
-    box-shadow: 0 0 0 4rem rgb(84 123 157 / 2%);
+    width: 0;
+    height: 0;
+    overflow: hidden;
   }
 
   .delivery-intro {
-    max-width: 790px;
-    margin: 0 auto clamp(1.5rem, 2.6vw, 2.2rem);
+    max-width: 780px;
+    margin: 0 auto clamp(2rem, 3.5vw, 2.75rem);
     text-align: center;
   }
-
   .delivery-intro .eyebrow {
-    margin-bottom: 0.9rem;
+    margin-bottom: 0.8rem;
   }
-
   .delivery-intro h2 {
-    margin-bottom: 1rem;
+    margin: 0 0 0.8rem;
     color: var(--color-ink);
     font-size: var(--type-section-size);
     font-weight: var(--type-heading-weight);
     letter-spacing: var(--type-section-letter-spacing);
     line-height: var(--type-section-line-height);
   }
-
   .delivery-intro h2 span {
     color: var(--color-orange-dark);
   }
-
   .delivery-intro-copy {
-    max-width: 690px;
     margin: 0 auto;
     color: var(--color-body);
     font-size: var(--type-body-size);
     line-height: var(--type-body-line-height);
   }
 
-  .delivery-layout {
+  /* Five stage cards */
+  .delivery-stages {
     display: grid;
-    grid-template-columns: minmax(250px, 0.62fr) minmax(0, 1.8fr);
-    align-items: start;
-    gap: clamp(1.25rem, 3vw, 2.5rem);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-auto-rows: 1fr;
+    gap: var(--stage-gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
-
-  .delivery-navigation {
+  .delivery-stage {
+    display: flex;
     min-width: 0;
-  }
-
-  .delivery-navigation-label {
-    margin: 0 0 0.9rem 0.85rem;
-    color: var(--color-muted);
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  .delivery-step-list {
-    position: relative;
-    display: grid;
-    gap: 0.42rem;
-  }
-
-  .delivery-step-list::before {
-    position: absolute;
-    top: 2rem;
-    bottom: 2rem;
-    left: 1.8rem;
-    width: 1px;
-    background: linear-gradient(
-      180deg,
-      rgb(168 65 33 / 35%),
-      rgb(84 123 157 / 16%)
-    );
-    content: '';
-    pointer-events: none;
-  }
-
-  .delivery-step {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    width: 100%;
-    min-width: 0;
-    grid-template-columns: 2.45rem minmax(0, 1fr) 1rem;
-    align-items: center;
-    gap: 0.85rem;
-    padding: 0.82rem 0.8rem;
-    border: 1px solid transparent;
-    border-radius: 15px;
-    background: transparent;
-    color: var(--color-navy);
-    cursor: pointer;
-    text-align: left;
-    transition:
-      transform 260ms var(--ease-out),
-      border-color 260ms var(--ease-out),
-      background-color 260ms var(--ease-out),
-      box-shadow 260ms var(--ease-out);
-  }
-
-  .delivery-step:hover {
-    z-index: 2;
-    transform: translateX(3px) scale(1.01);
-    border-color: rgb(168 65 33 / 20%);
-    background: rgb(255 255 255 / 78%);
-    box-shadow: 0 10px 24px rgb(16 27 45 / 7%);
-  }
-
-  .delivery-step[aria-selected='true'] {
-    border-color: rgb(168 65 33 / 26%);
-    background: #fff;
-    box-shadow: 0 12px 28px rgb(16 27 45 / 8%);
-  }
-
-  .delivery-step:focus-visible {
-    outline: 3px solid #e1784f;
-    outline-offset: 3px;
-  }
-
-  .delivery-step-number {
-    position: relative;
-    display: grid;
-    width: 2.35rem;
-    height: 2.35rem;
-    flex: 0 0 auto;
-    place-items: center;
-    border: 1px solid rgb(84 123 157 / 25%);
-    border-radius: 50%;
-    background: #f9f8f6;
-    color: var(--color-blue);
-    font-size: 0.67rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    transition:
-      border-color 260ms var(--ease-out),
-      background-color 260ms var(--ease-out),
-      color 260ms var(--ease-out),
-      box-shadow 260ms var(--ease-out);
-  }
-
-  .delivery-step[aria-selected='true'] .delivery-step-number {
-    border-color: var(--color-orange-dark);
-    background: var(--color-orange-dark);
-    box-shadow: 0 0 0 5px rgb(168 65 33 / 10%);
-    color: #fff;
-  }
-
-  .delivery-step-copy {
-    display: grid;
-    min-width: 0;
-    gap: 0.22rem;
-  }
-
-  .delivery-step-copy strong {
-    color: var(--color-navy);
-    font-family: var(--font-heading);
-    font-size: 0.92rem;
-    font-weight: 650;
-    letter-spacing: -0.025em;
-    line-height: 1.25;
-  }
-
-  .delivery-step-copy > span {
-    color: var(--color-muted);
-    font-size: 0.7rem;
-    line-height: 1.35;
-  }
-
-  .delivery-step-short {
-    display: none;
-  }
-
-  .delivery-step-arrow {
-    color: var(--color-orange-dark);
-    font-size: 0.9rem;
-    opacity: 0;
-    transform: translate(-3px, 3px);
-    transition:
-      opacity 220ms var(--ease-out),
-      transform 220ms var(--ease-out);
-  }
-
-  .delivery-step:hover .delivery-step-arrow,
-  .delivery-step[aria-selected='true'] .delivery-step-arrow {
-    opacity: 1;
-    transform: translate(0, 0);
-  }
-
-  .delivery-workspace {
-    min-width: 0;
-    overflow: hidden;
+    flex-direction: column;
+    padding: 0.45rem 0.45rem 1.25rem;
     border: 1px solid rgb(16 27 45 / 9%);
-    border-radius: 22px;
-    background: rgb(255 255 255 / 90%);
+    border-radius: 20px;
+    background: linear-gradient(165deg, #fff 0%, #fffdfa 100%);
     box-shadow:
-      0 24px 64px rgb(16 27 45 / 8%),
-      0 4px 18px rgb(168 65 33 / 4%);
-  }
-
-  .delivery-live-visual {
-    display: none;
-  }
-
-  .delivery-process.is-ready .delivery-workspace {
-    display: grid;
-    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-    align-items: stretch;
-    gap: 1rem;
-    padding: 1rem;
-  }
-
-  .delivery-process.is-ready .delivery-live-visual {
-    position: relative;
-    display: grid;
-    min-width: 0;
-    min-height: 330px;
-    place-items: center;
-    overflow: hidden;
-    border: 1px solid rgb(16 27 45 / 9%);
-    border-radius: 16px;
-    background:
-      radial-gradient(ellipse at 92% 0%, rgb(201 84 43 / 8%), transparent 42%),
-      radial-gradient(ellipse at 0% 100%, rgb(84 123 157 / 9%), transparent 46%),
-      linear-gradient(165deg, #fffdfa 0%, #faf6f0 55%, #f6f0e8 100%);
-    box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 90%),
-      0 1px 2px rgb(16 27 45 / 4%),
-      0 12px 28px -12px rgb(16 27 45 / 14%);
+      0 18px 40px -32px rgb(16 27 45 / 38%),
+      0 2px 6px rgb(16 27 45 / 3%);
     transition:
+      transform var(--duration-standard) var(--ease-out),
       border-color var(--duration-standard) ease,
-      box-shadow var(--duration-standard) var(--ease-out);
+      box-shadow var(--duration-standard) ease;
   }
 
-  .delivery-process.is-ready .delivery-live-visual:hover {
-    border-color: rgb(201 84 43 / 18%);
-    box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 90%),
-      0 1px 2px rgb(16 27 45 / 4%),
-      0 16px 34px -12px rgb(16 27 45 / 18%);
-  }
-
-  .delivery-process.is-ready .delivery-live-visual::before {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgb(16 27 45 / 4%) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(16 27 45 / 4%) 1px, transparent 1px);
-    background-size: 28px 28px;
-    content: '';
-    mask-image: radial-gradient(ellipse at center, black 12%, transparent 78%);
-    pointer-events: none;
-  }
-
-  .delivery-process.is-ready .delivery-visual-meta {
-    color: var(--color-body);
-    font-size: 0.66rem;
-  }
-
-  .delivery-process.is-ready .delivery-visual-label {
-    min-width: 0;
-  }
-
-  .delivery-process.is-ready .delivery-visual-label > span:last-child {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .delivery-process.is-ready .delivery-visual-pulse {
-    flex: 0 0 auto;
-  }
-
-  @media (min-width: 1024px) and (max-width: 1199px) {
-    .delivery-process.is-ready .delivery-visual-meta {
-      font-size: 0.6rem;
-      letter-spacing: 0.06em;
-    }
-  }
-
-  .delivery-process.is-ready .delivery-visual-count {
-    flex: 0 0 auto;
-    white-space: nowrap;
-    padding: 0.22rem 0.55rem;
-    border: 1px solid rgb(201 84 43 / 18%);
-    border-radius: 999px;
-    background: rgb(255 255 255 / 78%);
-    box-shadow: 0 2px 8px rgb(16 27 45 / 5%);
-    color: var(--color-orange-dark);
-  }
-
-  .delivery-scene-stage {
+  /* Illustration frame; the chevron between cards hangs off its right edge */
+  .delivery-stage-art {
     position: relative;
-    width: 100%;
-    height: 100%;
-    min-height: inherit;
+  }
+  .delivery-stage-canvas {
+    aspect-ratio: 220 / 140;
     overflow: hidden;
-  }
-
-  .delivery-process.is-ready .delivery-live-scene {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    padding: 2.75rem 0.75rem 0.75rem;
-    opacity: 0;
-    transform: translateY(8px) scale(0.985);
-    transition:
-      opacity 360ms var(--ease-out),
-      transform 420ms var(--ease-out),
-      visibility 360ms;
-    visibility: hidden;
-  }
-
-  .delivery-process.is-ready .delivery-live-scene.is-active {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    visibility: visible;
-  }
-
-  .delivery-process.is-ready .delivery-live-scene:not(.is-active) * {
-    animation-play-state: paused !important;
-  }
-
-  .delivery-process.is-ready .delivery-panel {
-    grid-column: 2;
-    grid-row: 1;
-    min-width: 0;
-    align-self: center;
-  }
-
-  .delivery-process.is-ready .delivery-panel-content {
-    padding: 0.25rem 0.3rem;
-  }
-
-  .delivery-process.is-ready .delivery-panel-heading {
-    max-width: none;
-  }
-
-  .delivery-process.is-ready .delivery-panel-heading p {
-    margin-bottom: 0.9rem;
-    font-size: 0.84rem;
-    line-height: 1.52;
-  }
-
-  .delivery-process.is-ready .delivery-stage-label {
-    margin-bottom: 0.35rem;
-    font-size: 0.61rem;
-  }
-
-  .delivery-process.is-ready .delivery-panel-heading h3 {
-    margin-bottom: 0.45rem;
-    font-size: clamp(1.35rem, 1.65vw, 1.65rem);
-  }
-
-  .delivery-process.is-ready .delivery-detail-grid {
-    gap: 0.9rem;
-    padding-top: 0.8rem;
-  }
-
-  .delivery-process.is-ready .delivery-detail-grid h4 {
-    margin-bottom: 0.48rem;
-    font-size: 0.63rem;
-  }
-
-  .delivery-process.is-ready .delivery-detail-grid ul {
-    gap: 0.34rem;
-  }
-
-  .delivery-process.is-ready .delivery-detail-grid li {
-    padding-left: 0.78rem;
-    font-size: 0.74rem;
-    line-height: 1.4;
-  }
-
-  .delivery-process.is-ready .delivery-detail-grid li::before {
-    width: 0.31rem;
-    height: 0.31rem;
-  }
-
-  .delivery-panel[hidden] {
-    display: none !important;
-  }
-
-  .delivery-panel.is-entering {
-    animation: delivery-panel-enter 360ms var(--ease-out) both;
-  }
-
-  @keyframes delivery-panel-enter {
-    from {
-      opacity: 0.45;
-      transform: translateY(7px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .delivery-visual {
-    position: relative;
-    display: grid;
-    min-height: 250px;
-    aspect-ratio: 640 / 330;
-    place-items: center;
-    overflow: hidden;
-    border-bottom: 1px solid rgb(16 27 45 / 8%);
+    border-radius: 14px;
     background:
+      radial-gradient(ellipse at 30% 20%, rgb(201 84 43 / 7%), transparent 60%),
       radial-gradient(
-        ellipse at 50% 56%,
-        rgb(84 123 157 / 12%),
-        transparent 50%
+        ellipse at 80% 90%,
+        rgb(84 123 157 / 9%),
+        transparent 60%
       ),
-      linear-gradient(135deg, #f6f4f0 0%, #f9f8f6 54%, #f3f5f6 100%);
+      #faf7f2;
+    transition: background-color var(--duration-standard) ease;
   }
-
-  .delivery-visual::before {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgb(16 27 45 / 3%) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(16 27 45 / 3%) 1px, transparent 1px);
-    background-size: 28px 28px;
-    content: '';
-    mask-image: radial-gradient(ellipse at center, black 12%, transparent 80%);
-    pointer-events: none;
+  .delivery-stage-canvas svg {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
-
-  .delivery-visual-meta {
+  .delivery-stage:not(:last-child) .delivery-stage-art::after {
     position: absolute;
     z-index: 2;
-    top: 1rem;
-    right: 1.2rem;
-    left: 1.2rem;
+    top: 50%;
+    right: calc(-0.45rem - 1px - var(--stage-gap) / 2);
+    display: grid;
+    width: 22px;
+    height: 22px;
+    place-items: center;
+    border: 1px solid rgb(201 84 43 / 22%);
+    border-radius: 50%;
+    background: var(--color-paper);
+    color: var(--color-orange-dark);
+    content: '›';
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1;
+    transform: translate(50%, -50%);
+  }
+
+  .delivery-stage-head {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-    color: var(--color-muted);
-    font-size: 0.61rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    gap: 0.55rem;
+    margin: 1.25rem 0.6rem 0.45rem;
   }
-
-  .delivery-visual-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .delivery-visual-pulse {
-    width: 0.43rem;
-    height: 0.43rem;
-    border-radius: 50%;
-    background: var(--color-orange-dark);
-    box-shadow: 0 0 0 4px rgb(168 65 33 / 10%);
-    animation: delivery-status-pulse 2.8s ease-in-out infinite;
-  }
-
-  .delivery-visual-count {
-    color: var(--color-navy-soft);
+  .delivery-stage-number {
+    flex: none;
+    padding: 0.18rem 0.5rem;
+    border-radius: 999px;
+    background: #f8eee8;
+    color: var(--color-orange-dark);
+    font-size: 0.7rem;
+    font-weight: 750;
     font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+    transition:
+      background-color var(--duration-standard) ease,
+      color var(--duration-standard) ease;
+  }
+  .delivery-stage h3 {
+    margin: 0;
+    color: var(--color-navy);
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 650;
+    letter-spacing: -0.03em;
+    line-height: 1.25;
+  }
+  .delivery-stage p {
+    margin: 0 0.6rem;
+    color: var(--color-body);
+    font-size: 0.87rem;
+    line-height: 1.55;
   }
 
-  @keyframes delivery-status-pulse {
-    0%,
-    100% {
-      box-shadow: 0 0 0 4px rgb(168 65 33 / 9%);
+  @media (hover: hover) {
+    .delivery-stage:hover {
+      transform: translateY(-4px);
+      border-color: rgb(201 84 43 / 26%);
+      box-shadow:
+        0 24px 44px -28px rgb(168 65 33 / 40%),
+        0 0 0 4px rgb(201 84 43 / 5%);
     }
-    50% {
-      box-shadow: 0 0 0 7px rgb(168 65 33 / 3%);
+    .delivery-stage:hover .delivery-stage-canvas {
+      background-color: #fdf4ee;
     }
-  }
-
-  .delivery-scene {
-    position: relative;
-    z-index: 1;
-    display: block;
-    width: min(100%, 640px);
-    height: 100%;
-    overflow: visible;
-    padding: 2.2rem 0.55rem 0.45rem;
-  }
-
-  .delivery-route,
-  .delivery-orbit-ring,
-  .delivery-screen-top,
-  .delivery-blueprint-line,
-  .delivery-blueprint-link,
-  .delivery-api-link,
-  .delivery-product-top,
-  .delivery-qa-progress,
-  .delivery-check-mark,
-  .delivery-release-line,
-  .delivery-monitor-line,
-  .delivery-feedback-loop,
-  .delivery-feedback-arrow,
-  .delivery-core-icon {
-    vector-effect: non-scaling-stroke;
-  }
-
-  .delivery-route {
-    stroke: rgb(84 123 157 / 38%);
-    stroke-width: 1.5;
-  }
-
-  .delivery-route-soft {
-    stroke: rgb(84 123 157 / 17%);
-    stroke-width: 1;
-  }
-
-  .delivery-route-dash {
-    stroke-dasharray: 5 8;
-    animation: delivery-route-flow 14s linear infinite;
-  }
-
-  @keyframes delivery-route-flow {
-    to {
-      stroke-dashoffset: -104;
+    .delivery-stage:hover .delivery-stage-number {
+      background: var(--color-orange-dark);
+      color: #fff;
+    }
+    .delivery-stage:hover .dp-focal {
+      filter: drop-shadow(0 0 6px rgb(201 84 43 / 45%));
     }
   }
 
-  .delivery-orbit-ring {
-    stroke: rgb(84 123 157 / 13%);
-    stroke-dasharray: 2 8;
-    stroke-width: 1;
-    transform-origin: center;
-    animation: delivery-orbit 45s linear infinite;
-  }
-
-  @keyframes delivery-orbit {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  .delivery-node-card,
-  .delivery-screen,
-  .delivery-blueprint-panel,
-  .delivery-code-panel,
-  .delivery-api-card,
-  .delivery-product-panel,
-  .delivery-qa-panel,
-  .delivery-release-card,
-  .delivery-monitor-card,
-  .delivery-feedback-card {
-    fill: rgb(255 255 255 / 90%);
+  /* Illustration palette (shared by all five) */
+  .dp-card {
     stroke: rgb(16 27 45 / 10%);
     stroke-width: 1;
   }
-
-  .delivery-node-card,
-  .delivery-screen,
-  .delivery-code-panel,
-  .delivery-api-card,
-  .delivery-release-card,
-  .delivery-monitor-card,
-  .delivery-feedback-card {
-    filter: drop-shadow(0 5px 9px rgb(16 27 45 / 6%));
+  .dp-tile {
+    fill: #f8f5f0;
+    stroke: rgb(16 27 45 / 8%);
+    stroke-width: 1;
   }
-
-  .delivery-node-line,
-  .delivery-blueprint-line,
-  .delivery-release-line {
-    stroke: rgb(84 123 157 / 33%);
+  .dp-rule {
+    stroke: rgb(16 27 45 / 12%);
+    stroke-width: 1.2;
+  }
+  .dp-grid {
+    stroke: rgb(16 27 45 / 7%);
+    stroke-dasharray: 2 4;
+    stroke-width: 1;
+  }
+  .dp-bar {
+    fill: rgb(16 27 45 / 9%);
+  }
+  .dp-bar-ink {
+    fill: rgb(16 27 45 / 55%);
+  }
+  .dp-bar-warm {
+    fill: rgb(201 84 43 / 32%);
+  }
+  .dp-bar-blue {
+    fill: rgb(84 123 157 / 32%);
+  }
+  .dp-dot {
+    fill: rgb(84 123 157 / 50%);
+  }
+  .dp-dot-warm {
+    fill: rgb(201 84 43 / 45%);
+  }
+  .dp-link {
+    stroke: rgb(84 123 157 / 45%);
+    stroke-dasharray: 2.5 3.5;
     stroke-linecap: round;
-    stroke-width: 3;
+    stroke-width: 1.2;
   }
-
-  .delivery-node-dot,
-  .delivery-screen-dot,
-  .delivery-window-dot {
-    fill: var(--color-blue);
+  .dp-link-flow,
+  .dp-trace-flow {
+    stroke: var(--color-orange);
+    stroke-linecap: round;
+    stroke-width: 1.6;
+    stroke-dasharray: 4 61;
   }
-
-  .delivery-dot-blue {
-    fill: var(--color-blue);
+  .dp-trace {
+    stroke: rgb(84 123 157 / 42%);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.4;
   }
-
-  .delivery-dot-orange,
-  .delivery-window-dot-orange {
-    fill: var(--color-orange-dark);
+  .dp-pins {
+    stroke: rgb(16 27 45 / 30%);
+    stroke-linecap: round;
+    stroke-width: 1.6;
   }
-
-  .delivery-svg-label {
-    fill: #8793a0;
-    font-family: var(--font-body);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1px;
+  .dp-port {
+    fill: #fff;
+    stroke: var(--color-blue);
+    stroke-width: 1.3;
   }
-
-  .delivery-core-halo,
-  .delivery-production-halo {
-    fill: rgb(84 123 157 / 6%);
-    stroke: rgb(84 123 157 / 16%);
+  .dp-orbit-ring {
+    stroke: rgb(201 84 43 / 30%);
+    stroke-dasharray: 1.5 4.5;
+    stroke-linecap: round;
+    stroke-width: 1.2;
+  }
+  .dp-glyph,
+  .dp-tick,
+  .dp-stroke-blue,
+  .dp-stroke-orange {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .dp-glyph {
+    stroke: #fff;
+    stroke-width: 1.6;
+  }
+  .dp-glyph-soft {
+    stroke-opacity: 0.85;
+  }
+  .dp-glyph-faint {
+    stroke-opacity: 0.45;
+  }
+  .dp-glyph-thin {
+    stroke-opacity: 0.7;
+    stroke-width: 1;
+  }
+  .dp-glyph-bold {
+    stroke-width: 2.2;
+  }
+  .dp-code-slash {
+    stroke: #f08a5d;
+    stroke-linecap: round;
+    stroke-width: 2.2;
+  }
+  .dp-chip-inner {
+    stroke: rgb(255 255 255 / 14%);
+    stroke-width: 1;
+  }
+  .dp-tick {
+    stroke: #fff;
+    stroke-width: 1.1;
+  }
+  .dp-tick-lg {
+    stroke-width: 1.7;
+  }
+  .dp-stroke-blue {
+    stroke: var(--color-blue);
+    stroke-width: 1.5;
+  }
+  .dp-stroke-orange {
+    stroke: var(--color-orange);
+    stroke-width: 1.5;
+  }
+  .dp-box {
+    fill: #fff;
+    stroke: rgb(16 27 45 / 22%);
+    stroke-width: 1;
+  }
+  .dp-box-dashed {
+    stroke-dasharray: 2 2;
+  }
+  .dp-typing {
+    fill: #fff;
+  }
+  .dp-marquee {
+    stroke: var(--color-orange);
+    stroke-dasharray: 3 2.5;
+    stroke-width: 1.2;
+  }
+  .dp-handle {
+    fill: #fff;
+    stroke: var(--color-orange);
+    stroke-width: 1;
+  }
+  .dp-pointer {
+    fill: var(--color-navy);
+    stroke: #fff;
+    stroke-linejoin: round;
+    stroke-width: 1.2;
+  }
+  .dp-swatch-ring {
+    stroke: rgb(201 84 43 / 45%);
+    stroke-width: 1.2;
+  }
+  .dp-track {
+    stroke: rgb(16 27 45 / 10%);
+    stroke-linecap: round;
+    stroke-width: 2.6;
+  }
+  .dp-track-on {
+    stroke: var(--color-orange);
+  }
+  .dp-shield-inner {
+    stroke: rgb(255 255 255 / 18%);
+    stroke-width: 1.2;
+  }
+  .dp-check-draw {
+    stroke: #f08a5d;
+    stroke-dasharray: 30;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 4.2;
+  }
+  .dp-check-active {
+    filter: drop-shadow(0 0 4px rgb(201 84 43 / 45%));
+  }
+  .dp-scan {
+    opacity: 0;
+  }
+  .dp-trend {
+    stroke: url(#dp-trend);
+    stroke-linecap: round;
+    stroke-width: 2.2;
+  }
+  .dp-trend-dot {
+    fill: #fff;
+    stroke: var(--color-orange);
+    stroke-width: 1.4;
+  }
+  .dp-rocket {
+    stroke: var(--color-navy);
+    stroke-linejoin: round;
+    stroke-width: 1.4;
+  }
+  .dp-trail {
+    stroke: rgb(84 123 157 / 40%);
+    stroke-dasharray: 4 5;
+    stroke-linecap: round;
+    stroke-width: 1.4;
+  }
+  .dp-ground {
+    stroke: rgb(16 27 45 / 10%);
+    stroke-linecap: round;
+    stroke-width: 1.2;
+  }
+  .dp-cloud {
+    fill: #fff;
+    stroke: rgb(16 27 45 / 9%);
+    stroke-width: 1;
+  }
+  .dp-ping {
+    stroke: var(--color-orange);
+    stroke-width: 1.2;
+    opacity: 0;
+  }
+  .dp-ping-sm {
     stroke-width: 1;
   }
 
-  .delivery-core-halo {
+  /* Restrained motion */
+  .dp-float,
+  .dp-halo,
+  .dp-ping,
+  .dp-grow,
+  .dp-flame,
+  .dp-gear,
+  .dp-twinkle {
     transform-box: fill-box;
     transform-origin: center;
-    animation: delivery-core-pulse 4.8s ease-in-out infinite;
+  }
+  .dp-float {
+    animation: dp-float 5.2s ease-in-out infinite;
+  }
+  .dp-halo {
+    animation: dp-halo 4.8s ease-in-out infinite;
+  }
+  .dp-ping {
+    animation: dp-ping 3s ease-out infinite;
+  }
+  .dp-orbit {
+    transform-box: view-box;
+    transform-origin: 110px 70px;
+    animation: dp-spin 36s linear infinite;
+  }
+  .dp-link-flow,
+  .dp-trace-flow {
+    animation: dp-flow 3.2s linear infinite;
+  }
+  .dp-typing {
+    animation: dp-blink 1.6s ease-in-out infinite;
+  }
+  .dp-delay-t2 {
+    animation-delay: 0.2s;
+  }
+  .dp-delay-t3 {
+    animation-delay: 0.4s;
+  }
+  .dp-marquee {
+    animation: dp-march 1.6s linear infinite;
+  }
+  .dp-cta {
+    animation: dp-glow 3.6s ease-in-out infinite;
+  }
+  .dp-gear {
+    animation: dp-spin 14s linear infinite;
+  }
+  .dp-gear-teeth {
+    stroke: var(--color-navy);
+    stroke-dasharray: 2.6 2.27;
+    stroke-width: 3.4;
+  }
+  .dp-check-draw {
+    animation: dp-draw 5s ease-in-out infinite;
+  }
+  .dp-scan {
+    animation: dp-scan 5s ease-in-out infinite;
+  }
+  .dp-grow {
+    transform-origin: bottom;
+    animation: dp-grow 4s ease-in-out infinite alternate;
+  }
+  .dp-flame {
+    transform-origin: top;
+    animation: dp-flame 0.9s ease-in-out infinite alternate;
+  }
+  .dp-trail {
+    animation: dp-trail 1.2s linear infinite;
+  }
+  .dp-twinkle {
+    animation: dp-twinkle 3.4s ease-in-out infinite;
+  }
+  .dp-delay-2 {
+    animation-delay: -1.3s;
+  }
+  .dp-delay-3 {
+    animation-delay: -2.6s;
+  }
+  .dp-delay-4 {
+    animation-delay: -3.9s;
   }
 
-  @keyframes delivery-core-pulse {
+  @keyframes dp-float {
     0%,
     100% {
-      opacity: 0.65;
-      transform: scale(0.96);
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-3px);
+    }
+  }
+  @keyframes dp-halo {
+    0%,
+    100% {
+      opacity: 0.75;
+      transform: scale(0.94);
     }
     50% {
       opacity: 1;
       transform: scale(1.04);
     }
   }
-
-  .delivery-core-ring,
-  .delivery-production-ring {
-    fill: rgb(255 255 255 / 75%);
-    stroke: rgb(84 123 157 / 28%);
-    stroke-width: 1.5;
-  }
-
-  .delivery-core-dot {
-    fill: var(--color-navy);
-    stroke: rgb(168 65 33 / 60%);
-    stroke-width: 2;
-  }
-
-  .delivery-core-icon {
-    fill: none;
-    stroke: #fff;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 2;
-  }
-
-  .delivery-core-label,
-  .delivery-check-label {
-    fill: var(--color-navy-soft);
-    font-family: var(--font-body);
-    font-size: 8px;
-    font-weight: 700;
-    letter-spacing: 1px;
-  }
-
-  .delivery-particle {
-    fill: var(--color-orange-dark);
-    filter: drop-shadow(0 0 4px rgb(168 65 33 / 35%));
-    animation: delivery-particle-pulse 3.1s ease-in-out infinite;
-    transform-box: fill-box;
-    transform-origin: center;
-  }
-
-  .delivery-particle-two {
-    fill: var(--color-blue);
-    animation-delay: 1.2s;
-  }
-
-  @keyframes delivery-particle-pulse {
-    0%,
-    100% {
-      opacity: 0.5;
-      transform: scale(0.78);
-    }
-    50% {
-      opacity: 1;
-      transform: scale(1.2);
-    }
-  }
-
-  .delivery-float {
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: delivery-float 5s ease-in-out infinite;
-  }
-
-  .delivery-float-two {
-    animation-delay: -1.6s;
-  }
-
-  .delivery-float-three {
-    animation-delay: -2.8s;
-  }
-
-  .delivery-float-four {
-    animation-delay: -0.9s;
-  }
-
-  @keyframes delivery-float {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-4px);
-    }
-  }
-
-  .delivery-screen-top {
-    stroke: rgb(16 27 45 / 10%);
-  }
-
-  .delivery-wire-block {
-    fill: rgb(84 123 157 / 12%);
-    stroke: rgb(84 123 157 / 18%);
-  }
-
-  .delivery-wire-accent {
-    fill: rgb(168 65 33 / 78%);
-  }
-
-  .delivery-blueprint-panel {
-    fill: rgb(246 248 249 / 95%);
-    stroke: rgb(84 123 157 / 24%);
-  }
-
-  .delivery-blueprint-line {
-    stroke: rgb(84 123 157 / 30%);
-    stroke-linecap: round;
-    stroke-width: 3;
-  }
-
-  .delivery-blueprint-node {
-    fill: #fff;
-    stroke: var(--color-blue);
-    stroke-width: 2;
-  }
-
-  .delivery-blueprint-node-accent {
-    fill: var(--color-orange-dark);
-    stroke: #fff;
-  }
-
-  .delivery-blueprint-link {
-    stroke: rgb(84 123 157 / 45%);
-    stroke-width: 2;
-  }
-
-  .delivery-blueprint-component {
-    fill: var(--color-navy-soft);
-    font-family: var(--font-body);
-    font-size: 6px;
-    font-weight: 700;
-    letter-spacing: 0.35px;
-  }
-
-  .delivery-code-line {
-    fill: none;
-    stroke: var(--color-orange-dark);
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 2;
-  }
-
-  .delivery-api-node {
-    fill: #fff;
-    stroke: var(--color-blue);
-    stroke-width: 2;
-  }
-
-  .delivery-api-link {
-    stroke: rgb(84 123 157 / 45%);
-    stroke-dasharray: 4 5;
-    stroke-width: 1.5;
-    animation: delivery-route-flow 12s linear infinite;
-  }
-
-  .delivery-product-panel {
-    fill: #fff;
-    stroke: rgb(84 123 157 / 35%);
-  }
-
-  .delivery-product-top {
-    stroke: rgb(16 27 45 / 10%);
-  }
-
-  .delivery-product-module {
-    fill: rgb(84 123 157 / 13%);
-    stroke: rgb(84 123 157 / 25%);
-  }
-
-  .delivery-product-module-accent {
-    fill: rgb(168 65 33 / 14%);
-    stroke: rgb(168 65 33 / 38%);
-  }
-
-  .delivery-qa-panel {
-    fill: rgb(255 255 255 / 91%);
-    stroke: rgb(16 27 45 / 11%);
-    filter: drop-shadow(0 12px 20px rgb(16 27 45 / 6%));
-  }
-
-  .delivery-qa-progress {
-    stroke: rgb(84 123 157 / 28%);
-    stroke-linecap: round;
-    stroke-width: 3;
-  }
-
-  .delivery-check-halo {
-    fill: rgb(84 123 157 / 8%);
-    animation: delivery-check-halo 3.4s ease-in-out infinite;
-    transform-box: fill-box;
-    transform-origin: center;
-  }
-
-  .delivery-check-two .delivery-check-halo {
-    animation-delay: 0.7s;
-  }
-
-  .delivery-check-three .delivery-check-halo {
-    animation-delay: 1.4s;
-  }
-
-  .delivery-check-four .delivery-check-halo {
-    animation-delay: 2.1s;
-  }
-
-  @keyframes delivery-check-halo {
-    0%,
-    100% {
+  @keyframes dp-ping {
+    0% {
       opacity: 0.55;
-      transform: scale(0.92);
+      transform: scale(1);
     }
-    50% {
-      opacity: 1;
-      transform: scale(1.08);
-    }
-  }
-
-  .delivery-check-ring {
-    fill: #fff;
-    stroke: var(--color-blue);
-    stroke-width: 1.5;
-  }
-
-  .delivery-check-ring-accent {
-    stroke: var(--color-orange-dark);
-  }
-
-  .delivery-check-mark {
-    fill: none;
-    stroke: var(--color-blue);
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 2;
-  }
-
-  .delivery-check-three .delivery-check-mark {
-    stroke: var(--color-orange-dark);
-  }
-
-  .delivery-check-label {
-    font-size: 8.5px;
-  }
-
-  .delivery-check-warning {
-    fill: var(--color-orange-dark);
-    font-family: var(--font-body);
-    font-size: 17px;
-    font-weight: 700;
-  }
-
-  .delivery-result-chip {
-    fill: rgb(84 123 157 / 9%);
-    stroke: rgb(84 123 157 / 24%);
-  }
-
-  .delivery-result-dot {
-    fill: var(--color-orange-dark);
-  }
-
-  .delivery-result-label {
-    fill: var(--color-navy-soft);
-    font-family: var(--font-body);
-    font-size: 8px;
-    font-weight: 700;
-    letter-spacing: 0.8px;
-  }
-
-  .delivery-production-node {
-    fill: var(--color-navy);
-    stroke: rgb(84 123 157 / 55%);
-    stroke-width: 1;
-  }
-
-  .delivery-production-node-two {
-    fill: #1b2a40;
-  }
-
-  .delivery-production-status {
-    fill: #72bd91;
-    filter: drop-shadow(0 0 4px rgb(114 189 145 / 60%));
-  }
-
-  .delivery-monitor-grid {
-    stroke: rgb(84 123 157 / 22%);
-    stroke-dasharray: 2 4;
-  }
-
-  .delivery-monitor-line {
-    fill: none;
-    stroke: var(--color-orange-dark);
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 2;
-    stroke-dasharray: 180;
-    animation: delivery-draw-line 4.8s ease-in-out infinite alternate;
-  }
-
-  .delivery-staging-card {
-    fill: rgb(255 255 255 / 96%);
-    stroke: rgb(84 123 157 / 32%);
-    stroke-width: 1;
-    filter: drop-shadow(0 5px 9px rgb(16 27 45 / 7%));
-  }
-
-  .delivery-staging-status {
-    fill: var(--color-blue);
-    filter: drop-shadow(0 0 3px rgb(84 123 157 / 45%));
-  }
-
-  .delivery-staging-label,
-  .delivery-monitor-metric,
-  .delivery-feedback-caption {
-    fill: var(--color-navy-soft);
-    font-family: var(--font-body);
-    font-size: 7px;
-    font-weight: 700;
-    letter-spacing: 0.45px;
-  }
-
-  .delivery-staging-line {
-    stroke: rgb(84 123 157 / 38%);
-    stroke-linecap: round;
-    stroke-width: 2;
-  }
-
-  .delivery-monitor-metric {
-    fill: var(--color-blue);
-    font-size: 5.5px;
-    letter-spacing: 0.2px;
-  }
-
-  .delivery-feedback-caption {
-    fill: #8793a0;
-    font-size: 5px;
-    letter-spacing: 0.35px;
-  }
-
-  @keyframes delivery-draw-line {
-    from {
-      stroke-dashoffset: 180;
-    }
-    to {
-      stroke-dashoffset: 0;
-    }
-  }
-
-  .delivery-feedback-loop,
-  .delivery-feedback-arrow {
-    fill: none;
-    stroke: var(--color-blue);
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 1.8;
-  }
-
-  .delivery-feedback-arrow {
-    stroke: var(--color-orange-dark);
-    stroke-width: 1.6;
-  }
-
-  .delivery-panel-content {
-    padding: clamp(1.35rem, 2.6vw, 2rem) clamp(1.25rem, 3.2vw, 2.5rem) 1.5rem;
-  }
-
-  .delivery-panel-heading {
-    max-width: 710px;
-  }
-
-  .delivery-stage-label {
-    display: inline-block;
-    margin-bottom: 0.55rem;
-    color: var(--color-orange-dark);
-    font-size: 0.66rem;
-    font-weight: 700;
-    letter-spacing: 0.11em;
-    text-transform: uppercase;
-  }
-
-  .delivery-panel-heading h3 {
-    margin-bottom: 0.55rem;
-    color: var(--color-navy);
-    font-size: clamp(1.45rem, 2vw, 1.9rem);
-    font-weight: var(--type-heading-weight);
-    letter-spacing: -0.05em;
-    line-height: 1.16;
-  }
-
-  .delivery-panel-heading p {
-    max-width: 670px;
-    margin-bottom: 1.4rem;
-    color: var(--color-body);
-    font-size: 0.91rem;
-    line-height: 1.65;
-  }
-
-  .delivery-detail-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
-    gap: 1.4rem;
-    padding-top: 1.1rem;
-    border-top: 1px solid var(--delivery-line);
-  }
-
-  .delivery-detail-grid h4 {
-    margin-bottom: 0.7rem;
-    color: var(--color-navy-soft);
-    font-family: var(--font-body);
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-  }
-
-  .delivery-detail-grid ul {
-    display: grid;
-    gap: 0.52rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .delivery-detail-grid li {
-    position: relative;
-    padding-left: 1rem;
-    color: var(--color-body);
-    font-size: 0.77rem;
-    line-height: 1.45;
-  }
-
-  .delivery-detail-grid li::before {
-    position: absolute;
-    top: 0.48em;
-    left: 0;
-    width: 0.38rem;
-    height: 0.38rem;
-    border: 1px solid rgb(84 123 157 / 60%);
-    border-radius: 50%;
-    background: rgb(84 123 157 / 12%);
-    content: '';
-  }
-
-  .delivery-deliverables li::before {
-    border-color: rgb(168 65 33 / 65%);
-    background: rgb(168 65 33 / 12%);
-  }
-
-  .delivery-controls {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: minmax(100px, 1fr) minmax(130px, 1.3fr) minmax(
-        100px,
-        1fr
-      );
-    align-items: center;
-    gap: 1rem;
-    padding: 0.2rem 0 0.1rem;
-  }
-
-  .delivery-control-button {
-    display: inline-flex;
-    min-height: 40px;
-    align-items: center;
-    justify-content: center;
-    gap: 0.45rem;
-    padding: 0.55rem 0.7rem;
-    border: 1px solid rgb(16 27 45 / 11%);
-    border-radius: 10px;
-    background: #fff;
-    color: var(--color-navy);
-    cursor: pointer;
-    font-size: 0.74rem;
-    font-weight: 650;
-    transition:
-      transform 220ms var(--ease-out),
-      border-color 220ms var(--ease-out),
-      background-color 220ms var(--ease-out),
-      color 220ms var(--ease-out),
-      box-shadow 220ms var(--ease-out);
-  }
-
-  .delivery-control-button:not(:disabled):hover {
-    transform: translateY(-2px);
-    border-color: rgb(168 65 33 / 40%);
-    box-shadow: 0 7px 17px rgb(16 27 45 / 8%);
-    color: var(--color-orange-dark);
-  }
-
-  .delivery-control-button:focus-visible {
-    outline: 3px solid #e1784f;
-    outline-offset: 3px;
-  }
-
-  .delivery-control-button:disabled {
-    background: #f7f6f3;
-    color: #a2a8ad;
-    cursor: not-allowed;
-    opacity: 0.75;
-  }
-
-  .delivery-control-next {
-    border-color: var(--color-navy);
-    background: var(--color-navy);
-    color: #fff;
-  }
-
-  .delivery-control-next:not(:disabled):hover {
-    border-color: var(--color-orange-dark);
-    background: var(--color-orange-dark);
-    color: #fff;
-  }
-
-  .delivery-progress-wrap {
-    min-width: 0;
-  }
-
-  .delivery-progress-copy {
-    display: flex;
-    justify-content: space-between;
-    gap: 0.5rem;
-    margin-bottom: 0.45rem;
-    color: var(--color-muted);
-    font-size: 0.59rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-  }
-
-  .delivery-progress-copy span:first-child {
-    color: var(--color-navy-soft);
-    font-variant-numeric: tabular-nums;
-  }
-
-  .delivery-progress-track {
-    height: 4px;
-    overflow: hidden;
-    border-radius: 99px;
-    background: rgb(84 123 157 / 14%);
-  }
-
-  .delivery-progress-track > span {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border-radius: inherit;
-    background: linear-gradient(
-      90deg,
-      var(--color-blue),
-      var(--color-orange-dark)
-    );
-    transform: scaleX(0.2);
-    transform-origin: left center;
-    transition: transform 400ms var(--ease-out);
-  }
-
-  .delivery-collaboration {
-    display: flex;
-    grid-column: 2;
-    align-items: center;
-    gap: 0.85rem;
-    margin-top: -0.15rem;
-    padding: 0.72rem 0.9rem;
-    border: 1px solid rgb(84 123 157 / 15%);
-    border-radius: 14px;
-    background: rgb(255 255 255 / 55%);
-  }
-
-  .delivery-collaboration-icon {
-    display: grid;
-    width: 2.25rem;
-    height: 2.25rem;
-    flex: 0 0 auto;
-    place-items: center;
-    border: 1px solid rgb(84 123 157 / 18%);
-    border-radius: 50%;
-    background: rgb(84 123 157 / 8%);
-    color: var(--color-blue);
-  }
-
-  .delivery-collaboration-icon svg {
-    width: 1.05rem;
-    height: 1.05rem;
-    stroke: currentColor;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 1.5;
-  }
-
-  .delivery-collaboration > span:nth-child(2) {
-    display: grid;
-    min-width: 0;
-    gap: 0.1rem;
-  }
-
-  .delivery-collaboration strong {
-    color: var(--color-navy);
-    font-family: var(--font-heading);
-    font-size: 0.78rem;
-    font-weight: 650;
-  }
-
-  .delivery-collaboration > span:nth-child(2) > span {
-    color: var(--color-body);
-    font-size: 0.7rem;
-    line-height: 1.4;
-  }
-
-  .delivery-collaboration-rule {
-    width: 1px;
-    height: 1.75rem;
-    flex: 0 0 auto;
-    margin-left: auto;
-    background: var(--delivery-line);
-  }
-
-  .delivery-collaboration-note {
-    flex: 0 0 auto;
-    color: var(--color-muted);
-    font-size: 0.62rem;
-    font-weight: 650;
-    letter-spacing: 0.04em;
-  }
-
-  /* Delivery stage diagrams */
-  .dp-card,
-  .dp-architecture,
-  .dp-qa-dashboard,
-  .dp-score-panel,
-  .dp-monitor-panel,
-  .dp-production-card,
-  .dp-product-card,
-  .dp-core-card {
-    fill: var(--color-white);
-    stroke: rgb(16 27 45 / 13%);
-    stroke-width: 1;
-    filter: drop-shadow(0 4px 9px rgb(16 27 45 / 7%));
-  }
-
-  .dp-card,
-  .dp-layer,
-  .dp-score-panel,
-  .dp-production-card,
-  .dp-product-card {
-    transition:
-      stroke var(--duration-fast) var(--ease-out),
-      filter var(--duration-fast) var(--ease-out);
-  }
-
-  .dp-card:hover,
-  .dp-layer:hover,
-  .dp-score-panel:hover,
-  .dp-production-card:hover,
-  .dp-product-card:hover {
-    stroke: rgb(201 84 43 / 55%);
-    filter: drop-shadow(0 6px 14px rgb(201 84 43 / 12%));
-  }
-
-  .dp-link,
-  .dp-link-soft,
-  .dp-mini-link,
-  .dp-deploy-link,
-  .dp-deploy-feedback {
-    fill: none;
-    stroke: rgb(16 27 45 / 26%);
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    vector-effect: non-scaling-stroke;
-  }
-
-  .dp-link {
-    stroke-width: 1.5;
-  }
-
-  .dp-link-soft {
-    stroke: rgb(84 123 157 / 24%);
-    stroke-dasharray: 4 8;
-    stroke-width: 3.5;
-  }
-
-  .dp-flow,
-  .dp-pipeline-flow,
-  .dp-deploy-flow {
-    fill: var(--color-blue);
-    transform-box: fill-box;
-    transform-origin: center;
-  }
-
-  .dp-flow-b,
-  .dp-flow-d,
-  .dp-flow-f,
-  .dp-deploy-flow {
-    fill: var(--color-orange);
-  }
-
-  .dp-card-status,
-  .dp-signal-dot {
-    fill: var(--color-blue);
-  }
-
-  .dp-card-status-accent {
-    fill: var(--color-orange);
-  }
-
-  .dp-heading,
-  .dp-layer-title,
-  .dp-core-title {
-    fill: var(--color-ink);
-    font-family: var(--font-heading);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.03em;
-  }
-
-  .dp-heading-lg {
-    font-size: 12px;
-  }
-
-  .dp-heading-compact {
-    font-size: 10px;
-  }
-
-  .dp-layer-title {
-    font-size: 9.5px;
-  }
-
-  .dp-core-title {
-    font-size: 10.5px;
-    letter-spacing: 0.06em;
-  }
-
-  .dp-copy,
-  .dp-layer-copy {
-    fill: #566173;
-    font-family: var(--font-body);
-    font-size: 10px;
-    font-weight: 500;
-  }
-
-  .dp-layer-copy {
-    font-size: 9.5px;
-  }
-
-  .dp-kicker,
-  .dp-micro,
-  .dp-foot-label,
-  .dp-qa-status,
-  .dp-score-caption,
-  .dp-score-status,
-  .dp-signal-label,
-  .dp-signal-value,
-  .dp-feedback-label {
-    fill: #5f6a7b;
-    font-family: var(--font-body);
-    font-size: 8.5px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-  }
-
-  .dp-kicker,
-  .dp-feedback-label {
-    fill: var(--color-muted);
-    letter-spacing: 0.06em;
-  }
-
-  .dp-node-label {
-    font-size: 8px;
-  }
-
-  .dp-icon-disc {
-    fill: rgb(84 123 157 / 10%);
-    stroke: rgb(84 123 157 / 30%);
-  }
-
-  .dp-icon-disc-accent {
-    fill: rgb(201 84 43 / 10%);
-    stroke: rgb(201 84 43 / 34%);
-  }
-
-  .dp-icon,
-  .dp-goal-icon,
-  .dp-layer-icon,
-  .dp-output-icon,
-  .dp-env-icon,
-  .dp-prod-icon {
-    fill: none;
-    stroke: var(--color-blue);
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 1.5;
-    vector-effect: non-scaling-stroke;
-  }
-
-  .dp-icon-accent,
-  .dp-layer-icon-accent,
-  .dp-goal-icon,
-  .dp-prod-icon {
-    stroke: var(--color-orange);
-  }
-
-  .dp-goal-icon {
-    stroke-width: 1.8;
-  }
-
-  .dp-goal-core {
-    transform-box: fill-box;
-    transform-origin: center;
-  }
-
-  .dp-core-halo {
-    fill: rgb(201 84 43 / 5%);
-    stroke: rgb(201 84 43 / 14%);
-    stroke-width: 1;
-  }
-
-  .dp-core-ring {
-    fill: none;
-    stroke: rgb(201 84 43 / 32%);
-    stroke-dasharray: 3 5;
-    stroke-width: 1.2;
-  }
-
-  .dp-core-card {
-    fill: #fdf1e9;
-    stroke: rgb(201 84 43 / 50%);
-    stroke-width: 1.3;
-    filter: drop-shadow(0 6px 14px rgb(201 84 43 / 14%));
-  }
-
-  .dp-check {
-    fill: var(--color-blue);
-  }
-
-  .dp-architecture {
-    fill: #fbf9f6;
-  }
-
-  .dp-layer {
-    fill: var(--color-white);
-    stroke: rgb(16 27 45 / 12%);
-  }
-
-  .dp-layer-accent {
-    fill: #fdf1e9;
-    stroke: rgb(201 84 43 / 45%);
-  }
-
-  .dp-mini-link {
-    stroke: rgb(84 123 157 / 55%);
-    stroke-dasharray: 3 3;
-    stroke-width: 1.4;
-  }
-
-  .dp-blueprint-foot,
-  .dp-run-badge {
-    fill: rgb(84 123 157 / 8%);
-    stroke: rgb(84 123 157 / 26%);
-  }
-
-  .dp-output-halo,
-  .dp-env-halo {
-    fill: rgb(84 123 157 / 10%);
-    stroke: rgb(84 123 157 / 28%);
-  }
-
-  .dp-code-screen,
-  .dp-service-node,
-  .dp-app-window {
-    fill: #f4f6f8;
-    stroke: rgb(84 123 157 / 30%);
-  }
-
-  .dp-code-glyph,
-  .dp-code-line,
-  .dp-app-line,
-  .dp-build-lines {
-    fill: none;
-    stroke: rgb(16 27 45 / 18%);
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 1.8;
-  }
-
-  .dp-code-glyph {
-    stroke: var(--color-orange);
-  }
-
-  .dp-service-node-accent,
-  .dp-app-module-accent {
-    fill: #fdf1e9;
-    stroke: rgb(201 84 43 / 45%);
-  }
-
-  .dp-micro-ready {
-    fill: var(--color-orange-dark);
-  }
-
-  .dp-db {
-    fill: rgb(84 123 157 / 12%);
-    stroke: var(--color-blue);
-    stroke-width: 1.3;
-  }
-
-  .dp-db-line {
-    fill: none;
-    stroke: rgb(84 123 157 / 45%);
-    stroke-width: 1;
-  }
-
-  .dp-integration-dot,
-  .dp-layer-node {
-    fill: var(--color-orange);
-    stroke: var(--color-white);
-    stroke-width: 1.5;
-  }
-
-  .dp-product-card {
-    fill: #fdf1e9;
-    stroke: rgb(201 84 43 / 45%);
-  }
-
-  .dp-app-top {
-    stroke: rgb(84 123 157 / 26%);
-  }
-
-  .dp-app-dot {
-    fill: var(--color-blue);
-  }
-
-  .dp-app-dot-accent {
-    fill: var(--color-orange);
-  }
-
-  .dp-app-module {
-    fill: rgb(84 123 157 / 12%);
-    stroke: rgb(84 123 157 / 28%);
-  }
-
-  .dp-arrow-head {
-    fill: none;
-    stroke: rgb(16 27 45 / 34%);
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 1.5;
-  }
-
-  .dp-sprint-track {
-    fill: var(--color-white);
-    stroke: rgb(16 27 45 / 12%);
-    filter: drop-shadow(0 3px 8px rgb(16 27 45 / 6%));
-  }
-
-  .dp-progress-track {
-    fill: rgb(16 27 45 / 8%);
-  }
-
-  .dp-progress-fill {
-    fill: var(--color-orange);
-    transform-box: fill-box;
-    transform-origin: left center;
-  }
-
-  .dp-sprint-progress {
-    transform: scaleX(0.66);
-  }
-
-  .dp-qa-dashboard {
-    fill: #fbf9f6;
-  }
-
-  .dp-qa-card {
-    transform-box: fill-box;
-    transform-origin: center;
-  }
-
-  .dp-qa-card .dp-heading {
-    font-size: 10.5px;
-  }
-
-  .dp-qa-check {
-    fill: rgb(46 133 88 / 12%);
-    stroke: rgb(46 133 88 / 55%);
-  }
-
-  .dp-qa-review {
-    fill: rgb(201 84 43 / 12%);
-    stroke: rgb(201 84 43 / 50%);
-  }
-
-  .dp-qa-mark,
-  .dp-qa-mark-review {
-    fill: none;
-    stroke: #2e8558;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 1.6;
-  }
-
-  .dp-qa-mark-review {
-    stroke: var(--color-orange-dark);
-  }
-
-  .dp-qa-track {
-    fill: rgb(16 27 45 / 8%);
-  }
-
-  .dp-qa-progress {
-    fill: var(--color-blue);
-    transform-box: fill-box;
-    transform-origin: left center;
-  }
-
-  .dp-qa-progress-one,
-  .dp-qa-progress-four {
-    transform: scaleX(0.96);
-  }
-
-  .dp-qa-progress-two {
-    transform: scaleX(0.91);
-  }
-
-  .dp-qa-progress-three {
-    fill: var(--color-orange);
-    transform: scaleX(0.78);
-  }
-
-  .dp-qa-status {
-    fill: #24704a;
-  }
-
-  .dp-qa-status-review,
-  .dp-score-status {
-    fill: var(--color-orange-dark);
-  }
-
-  .dp-score-panel {
-    fill: var(--color-white);
-  }
-
-  .dp-score-caption {
-    font-size: 8px;
-  }
-
-  .dp-score-status {
-    font-size: 8px;
-    letter-spacing: 0.02em;
-  }
-
-  .dp-score-track,
-  .dp-score-ring {
-    fill: none;
-    stroke-width: 6;
-  }
-
-  .dp-score-track {
-    stroke: rgb(16 27 45 / 8%);
-  }
-
-  .dp-score-ring {
-    stroke: var(--color-blue);
-    stroke-linecap: round;
-    stroke-dasharray: 151;
-    stroke-dashoffset: 12;
-    transform: rotate(-90deg);
-    transform-box: fill-box;
-    transform-origin: center;
-  }
-
-  .dp-score-number {
-    fill: var(--color-ink);
-    font-family: var(--font-heading);
-    font-size: 15px;
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .dp-deploy-link {
-    stroke: rgb(84 123 157 / 50%);
-    stroke-dasharray: 4 5;
-    stroke-width: 1.5;
-  }
-
-  .dp-deploy-feedback {
-    stroke: rgb(201 84 43 / 45%);
-    stroke-dasharray: 4 6;
-    stroke-width: 1.4;
-  }
-
-  .dp-build-bar {
-    fill: rgb(16 27 45 / 8%);
-  }
-
-  .dp-build-fill {
-    fill: var(--color-blue);
-    transform-box: fill-box;
-    transform-origin: left center;
-  }
-
-  .dp-production-card {
-    fill: #fdf1e9;
-    stroke: rgb(201 84 43 / 45%);
-  }
-
-  .dp-prod-halo {
-    fill: var(--color-white);
-    stroke: rgb(201 84 43 / 30%);
-  }
-
-  .dp-monitor-panel {
-    fill: var(--color-white);
-  }
-
-  .dp-spark-grid,
-  .dp-signal-rule {
-    fill: none;
-    stroke: rgb(16 27 45 / 10%);
-    stroke-width: 1;
-  }
-
-  .dp-spark-grid {
-    stroke-dasharray: 2 4;
-  }
-
-  .dp-spark-line {
-    fill: none;
-    stroke: var(--color-blue);
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 2;
-    stroke-dasharray: 180;
-    stroke-dashoffset: 0;
-  }
-
-  .dp-spark-dot {
-    fill: var(--color-orange);
-    transform-box: fill-box;
-    transform-origin: center;
-  }
-
-  .dp-signal-value {
-    fill: var(--color-orange-dark);
-    font-variant-numeric: tabular-nums;
-  }
-
-  .dp-alert-pill {
-    fill: #fdf1e9;
-    stroke: rgb(201 84 43 / 40%);
-  }
-
-  .dp-alert-dot {
-    fill: var(--color-orange);
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: dp-alert 4s ease-in-out infinite;
-  }
-
-  .dp-feedback-arrow {
-    fill: none;
-    stroke: var(--color-orange);
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 1.5;
-  }
-
-  .dp-enter {
-    opacity: 1;
-    transform-box: fill-box;
-    transform-origin: center;
-  }
-
-  .delivery-live-scene.is-active .dp-enter {
-    animation: dp-enter 560ms var(--ease-out) both;
-  }
-
-  .delivery-live-scene.is-active .dp-enter-two {
-    animation-delay: 90ms;
-  }
-
-  .delivery-live-scene.is-active .dp-enter-three {
-    animation-delay: 180ms;
-  }
-
-  .delivery-live-scene.is-active .dp-enter-four {
-    animation-delay: 270ms;
-  }
-
-  .delivery-live-scene.is-active .dp-enter-core,
-  .delivery-live-scene.is-active .dp-enter-score {
-    animation-delay: 360ms;
-  }
-
-  .delivery-live-scene.is-active .dp-enter-alert {
-    animation-delay: 420ms;
-  }
-
-  @keyframes dp-enter {
-    from {
+    70%,
+    100% {
       opacity: 0;
-      transform: translateY(8px) scale(0.985);
+      transform: scale(1.7);
     }
+  }
+  @keyframes dp-spin {
     to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: rotate(360deg);
     }
   }
-
-  .delivery-live-scene.is-active .dp-link-soft {
-    animation: dp-dash 7s linear infinite;
-  }
-
-  @keyframes dp-dash {
+  @keyframes dp-flow {
     to {
-      stroke-dashoffset: -72;
+      stroke-dashoffset: -65;
     }
   }
-
-  .delivery-live-scene.is-active .dp-flow-a,
-  .delivery-live-scene.is-active .dp-flow-c {
-    animation: dp-flow-forward 2.8s ease-in-out infinite;
-  }
-
-  .delivery-live-scene.is-active .dp-flow-b,
-  .delivery-live-scene.is-active .dp-flow-d {
-    animation: dp-flow-forward-alt 3.2s ease-in-out infinite;
-  }
-
-  .delivery-live-scene.is-active .dp-flow-c {
-    animation: dp-flow-reverse 2.8s ease-in-out infinite;
-  }
-
-  .delivery-live-scene.is-active .dp-flow-d {
-    animation: dp-flow-reverse-alt 3.2s ease-in-out infinite;
-  }
-
-  .delivery-live-scene.is-active .dp-flow-e,
-  .delivery-live-scene.is-active .dp-flow-f {
-    animation: dp-flow-short 2.5s ease-in-out infinite;
-  }
-
-  @keyframes dp-flow-forward {
-    0%,
-    100% {
-      opacity: 0.45;
-      transform: translate(0, 0) scale(0.8);
-    }
-    50% {
-      opacity: 1;
-      transform: translate(26px, 24px) scale(1.15);
-    }
-  }
-
-  @keyframes dp-flow-forward-alt {
-    0%,
-    100% {
-      opacity: 0.4;
-      transform: translate(0, 0) scale(0.8);
-    }
-    50% {
-      opacity: 1;
-      transform: translate(26px, -24px) scale(1.15);
-    }
-  }
-
-  @keyframes dp-flow-reverse {
-    0%,
-    100% {
-      opacity: 0.4;
-      transform: translate(0, 0) scale(0.8);
-    }
-    50% {
-      opacity: 1;
-      transform: translate(-26px, 24px) scale(1.15);
-    }
-  }
-
-  @keyframes dp-flow-reverse-alt {
-    0%,
-    100% {
-      opacity: 0.4;
-      transform: translate(0, 0) scale(0.8);
-    }
-    50% {
-      opacity: 1;
-      transform: translate(-26px, -24px) scale(1.15);
-    }
-  }
-
-  @keyframes dp-flow-short {
-    0%,
-    100% {
-      opacity: 0.4;
-      transform: translate(0, 0) scale(0.8);
-    }
-    50% {
-      opacity: 1;
-      transform: translate(18px, 0) scale(1.1);
-    }
-  }
-
-  .delivery-live-scene.is-active .dp-core-halo {
-    animation: dp-core-pulse 4.2s ease-in-out infinite;
-    transform-box: fill-box;
-    transform-origin: center;
-  }
-
-  @keyframes dp-core-pulse {
-    50% {
-      opacity: 0.55;
-      transform: scale(1.08);
-    }
-  }
-
-  .delivery-live-scene.is-active .dp-goal-core {
-    animation: dp-core-lift 4.8s ease-in-out infinite;
-    transform-box: fill-box;
-    transform-origin: center;
-  }
-
-  @keyframes dp-core-lift {
-    50% {
-      transform: translateY(-2px);
-    }
-  }
-
-  .delivery-live-scene.is-active .dp-pipeline-flow,
-  .delivery-live-scene.is-active .dp-deploy-flow {
-    animation: dp-particle-travel 1.8s ease-in-out infinite;
-  }
-
-  .dp-pipeline-flow {
-    --dp-travel: 14px;
-  }
-
-  .dp-deploy-flow {
-    --dp-travel: 7px;
-  }
-
-  .delivery-live-scene.is-active .dp-pipeline-flow-two,
-  .delivery-live-scene.is-active .dp-deploy-flow-b {
-    animation-delay: 0.35s;
-  }
-
-  .delivery-live-scene.is-active .dp-pipeline-flow-three,
-  .delivery-live-scene.is-active .dp-deploy-flow-c {
-    animation-delay: 0.7s;
-  }
-
-  @keyframes dp-particle-travel {
+  @keyframes dp-blink {
     0%,
     100% {
       opacity: 0.35;
-      transform: translateX(0) scale(0.8);
+    }
+    40% {
+      opacity: 1;
+    }
+  }
+  @keyframes dp-march {
+    to {
+      stroke-dashoffset: -11;
+    }
+  }
+  @keyframes dp-glow {
+    0%,
+    100% {
+      filter: drop-shadow(0 0 0 rgb(201 84 43 / 0%));
     }
     50% {
-      opacity: 1;
-      transform: translateX(var(--dp-travel, 18px)) scale(1.12);
+      filter: drop-shadow(0 0 5px rgb(201 84 43 / 55%));
     }
   }
-
-  .delivery-live-scene.is-active .dp-qa-progress {
-    animation: dp-progress-in 700ms var(--ease-out) both;
-  }
-
-  .delivery-live-scene.is-active .dp-qa-progress-two {
-    animation-delay: 120ms;
-  }
-
-  .delivery-live-scene.is-active .dp-qa-progress-three {
-    animation-delay: 240ms;
-  }
-
-  .delivery-live-scene.is-active .dp-qa-progress-four {
-    animation-delay: 360ms;
-  }
-
-  @keyframes dp-progress-in {
-    from {
-      transform: scaleX(0.03);
+  @keyframes dp-draw {
+    0% {
+      stroke-dashoffset: 30;
     }
-  }
-
-  .delivery-live-scene.is-active .dp-score-ring {
-    animation: dp-score-draw 900ms var(--ease-out) both;
-    animation-delay: 450ms;
-  }
-
-  @keyframes dp-score-draw {
-    from {
-      stroke-dashoffset: 151;
-    }
-    to {
-      stroke-dashoffset: 12;
-    }
-  }
-
-  .delivery-live-scene.is-active .dp-spark-line {
-    animation: dp-spark-draw 1.4s var(--ease-out) both;
-    animation-delay: 420ms;
-  }
-
-  @keyframes dp-spark-draw {
-    from {
-      stroke-dashoffset: 180;
-    }
-    to {
+    25%,
+    100% {
       stroke-dashoffset: 0;
     }
   }
-
-  .delivery-live-scene.is-active .dp-spark-dot {
-    animation: dp-spark-pulse 2.8s ease-in-out infinite;
-    animation-delay: 1.8s;
-  }
-
-  @keyframes dp-spark-pulse {
-    50% {
-      opacity: 0.4;
-      transform: scale(0.75);
+  @keyframes dp-scan {
+    0% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+    15% {
+      opacity: 1;
+    }
+    60% {
+      opacity: 1;
+      transform: translateY(80px);
+    }
+    70%,
+    100% {
+      opacity: 0;
+      transform: translateY(80px);
     }
   }
-
-  @keyframes dp-alert {
+  @keyframes dp-grow {
+    from {
+      transform: scaleY(0.9);
+    }
+    to {
+      transform: scaleY(1);
+    }
+  }
+  @keyframes dp-flame {
+    from {
+      transform: scaleY(0.75);
+    }
+    to {
+      transform: scaleY(1.08);
+    }
+  }
+  @keyframes dp-trail {
+    to {
+      stroke-dashoffset: -9;
+    }
+  }
+  @keyframes dp-twinkle {
     0%,
-    82%,
     100% {
-      opacity: 0.65;
+      opacity: 0.35;
+      transform: scale(0.8);
+    }
+    50% {
+      opacity: 1;
       transform: scale(1);
     }
-    90% {
-      opacity: 1;
-      transform: scale(1.35);
+  }
+
+  /* Tablet: 3 + 2, centred */
+  @media (max-width: 1199px) {
+    .delivery-stages {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+    .delivery-stage {
+      grid-column: span 2;
+    }
+    .delivery-stage:nth-child(4) {
+      grid-column: 2 / span 2;
+    }
+    .delivery-stage:not(:last-child) .delivery-stage-art::after {
+      display: none;
     }
   }
 
-  .delivery-live-scene.is-active .dp-deploy-feedback {
-    animation: dp-feedback-flow 6s linear infinite;
-  }
-
-  @keyframes dp-feedback-flow {
-    to {
-      stroke-dashoffset: 80;
+  /* Small tablet: 2 + 2 + 1, centred */
+  @media (max-width: 767px) {
+    .delivery-stages {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .delivery-stage:nth-child(4) {
+      grid-column: span 2;
+    }
+    .delivery-stage:nth-child(5) {
+      grid-column: 2 / span 2;
     }
   }
 
-  .delivery-live-scene.is-active .dp-feedback-arrow {
-    animation: dp-feedback-pulse 3s ease-in-out infinite;
-    transform-box: fill-box;
-    transform-origin: center;
-  }
-
-  @keyframes dp-feedback-pulse {
-    50% {
-      opacity: 0.45;
-    }
-  }
-
-  @media (max-width: 1023px) {
-    .delivery-layout {
+  /* Phones: compact rows, illustration beside the text */
+  @media (max-width: 520px) {
+    .delivery-stages {
       grid-template-columns: minmax(0, 1fr);
-      gap: 1rem;
     }
-
-    .delivery-navigation-label {
-      margin: 0 0 0.6rem 0.15rem;
+    .delivery-stage,
+    .delivery-stage:nth-child(4),
+    .delivery-stage:nth-child(5) {
+      display: grid;
+      grid-column: auto;
+      grid-template-areas:
+        'art head'
+        'art text';
+      grid-template-columns: 128px minmax(0, 1fr);
+      align-items: center;
+      column-gap: 0.9rem;
+      padding: 0.6rem 0.9rem 0.6rem 0.6rem;
     }
-
-    .delivery-step-list {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 0.35rem;
+    .delivery-stage-art {
+      grid-area: art;
     }
-
-    .delivery-step-list::before {
-      top: 1.2rem;
-      right: 8%;
-      bottom: auto;
-      left: 8%;
-      width: auto;
-      height: 1px;
-      background: linear-gradient(
-        90deg,
-        rgb(168 65 33 / 35%),
-        rgb(84 123 157 / 16%)
-      );
+    .delivery-stage-head {
+      grid-area: head;
+      align-self: end;
+      margin: 0 0 0.3rem;
     }
-
-    .delivery-step {
-      display: flex;
-      min-height: 4.8rem;
-      flex-direction: column;
-      justify-content: flex-start;
-      gap: 0.42rem;
-      padding: 0.35rem 0.25rem 0.45rem;
-      border-radius: 12px;
-      text-align: center;
-    }
-
-    .delivery-step-copy {
-      display: block;
-      width: 100%;
-    }
-
-    .delivery-step-copy strong {
-      display: block;
-      font-size: 0.7rem;
-    }
-
-    .delivery-step-copy > span {
-      display: none;
-    }
-
-    .delivery-step-full {
-      display: none;
-    }
-
-    .delivery-step-short {
-      display: inline;
-    }
-
-    .delivery-step-arrow {
-      display: none;
-    }
-
-    .delivery-step-number {
-      z-index: 1;
-      width: 2rem;
-      height: 2rem;
-    }
-
-    .delivery-step-list::before {
-      left: 8%;
-    }
-
-    .delivery-collaboration-note,
-    .delivery-collaboration-rule {
-      display: none;
-    }
-
-    .delivery-collaboration {
-      grid-column: 1;
-    }
-
-    .delivery-process.is-ready .delivery-live-visual {
-      min-height: 320px;
-    }
-
-    .delivery-detail-grid {
-      gap: 1rem;
-    }
-
-    .delivery-controls {
-      grid-template-columns: minmax(92px, 0.9fr) minmax(100px, 1.2fr) minmax(
-          92px,
-          0.9fr
-        );
-      gap: 0.6rem;
-      padding-inline: 1rem;
-    }
-
-    .delivery-process.is-ready .delivery-controls {
-      padding-inline: 0;
-    }
-  }
-
-  @media (max-width: 700px) {
-    .delivery-process {
-      padding-block: 2.5rem;
-    }
-
-    .delivery-intro {
-      margin-bottom: 1.4rem;
-    }
-
-    .delivery-layout {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 1rem;
-    }
-
-    .delivery-navigation-label {
-      margin-left: 0.15rem;
-      margin-bottom: 0.6rem;
-    }
-
-    .delivery-step-list {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 0.28rem;
-    }
-
-    .delivery-step-list::before {
-      top: 1.2rem;
-      right: 8%;
-      bottom: auto;
-      left: 8%;
-      width: auto;
-      height: 1px;
-      background: linear-gradient(
-        90deg,
-        rgb(168 65 33 / 35%),
-        rgb(84 123 157 / 16%)
-      );
-    }
-
-    .delivery-step {
-      display: flex;
-      min-height: 4.8rem;
-      flex-direction: column;
-      justify-content: flex-start;
-      gap: 0.42rem;
-      padding: 0.35rem 0.12rem 0.45rem;
-      border-radius: 12px;
-      text-align: center;
-    }
-
-    .delivery-step:hover {
-      transform: translateY(-2px) scale(1.015);
-    }
-
-    .delivery-step-number {
-      z-index: 1;
-      width: 2rem;
-      height: 2rem;
-      background: #faf9f7;
-      font-size: 0.6rem;
-    }
-
-    .delivery-step-copy {
-      display: block;
-      width: 100%;
-    }
-
-    .delivery-step-copy strong {
-      display: block;
-      font-size: 0.61rem;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-    }
-
-    .delivery-step-copy > span {
-      display: none;
-    }
-
-    .delivery-step-full {
-      display: none;
-    }
-
-    .delivery-step-short {
-      display: inline;
-    }
-
-    .delivery-workspace {
-      border-radius: 18px;
-    }
-
-    .delivery-process.is-ready .delivery-workspace {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 0.8rem;
-      padding: 0.7rem;
-    }
-
-    .delivery-process.is-ready .delivery-live-visual {
-      min-height: 260px;
-      aspect-ratio: 1.22;
-    }
-
-    .delivery-process.is-ready .delivery-live-scene {
-      padding: 2.4rem 0.35rem 0.4rem;
-    }
-
-    .delivery-process.is-ready .delivery-panel {
-      grid-column: 1;
-      grid-row: 2;
-      align-self: auto;
-    }
-
-    .delivery-process.is-ready .delivery-controls {
-      grid-column: 1;
-      padding: 0.25rem 0 0.1rem;
-    }
-
-    .delivery-process.is-ready .delivery-panel-content {
-      padding: 0.45rem 0.35rem 0.2rem;
-    }
-
-    .delivery-process.is-ready .delivery-panel-heading p {
-      margin-bottom: 0.75rem;
+    .delivery-stage p {
+      grid-area: text;
+      align-self: start;
+      margin: 0;
       font-size: 0.84rem;
-    }
-
-    .delivery-process.is-ready .delivery-detail-grid {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 0.9rem;
-      padding-top: 0.75rem;
-    }
-
-    .delivery-visual {
-      min-height: 188px;
-      aspect-ratio: 1.45;
-    }
-
-    .delivery-visual-meta {
-      top: 0.75rem;
-      right: 0.8rem;
-      left: 0.8rem;
-      font-size: 0.52rem;
-    }
-
-    .delivery-scene {
-      padding: 2rem 0.1rem 0.25rem;
-    }
-
-    .delivery-panel-content {
-      padding: 1.2rem 1rem 1.15rem;
-    }
-
-    .delivery-panel-heading p {
-      margin-bottom: 1rem;
-      font-size: 0.85rem;
-    }
-
-    .delivery-detail-grid {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 1.1rem;
-      padding-top: 1rem;
-    }
-
-    .delivery-detail-grid ul {
-      gap: 0.42rem;
-    }
-
-    .delivery-controls {
-      grid-template-columns: auto minmax(86px, 1fr) auto;
-      gap: 0.45rem;
-      padding: 0 0.75rem 1rem;
-    }
-
-    .delivery-control-button {
-      min-height: 38px;
-      gap: 0.25rem;
-      padding-inline: 0.45rem;
-      font-size: 0.65rem;
-      white-space: nowrap;
-    }
-
-    .delivery-progress-copy {
-      font-size: 0.51rem;
-    }
-
-    .delivery-collaboration {
-      grid-column: 1;
-      gap: 0.65rem;
-      margin-top: 0.1rem;
-      padding: 0.8rem 0.85rem;
-    }
-
-    .delivery-collaboration-icon {
-      width: 2rem;
-      height: 2rem;
-    }
-
-    .delivery-collaboration strong {
-      font-size: 0.71rem;
-    }
-
-    .delivery-collaboration > span:nth-child(2) > span {
-      font-size: 0.64rem;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .delivery-step,
-    .delivery-step-number,
-    .delivery-step-arrow,
-    .delivery-control-button,
-    .delivery-progress-track > span {
-      transition: none;
-    }
-
-    .delivery-step:hover {
-      transform: none;
-    }
-
-    .delivery-step-arrow {
-      transform: none;
-    }
-
-    .delivery-panel.is-entering,
-    .delivery-process.is-ready .delivery-live-scene,
-    .delivery-visual-pulse,
-    .delivery-route-dash,
-    .delivery-orbit-ring,
-    .delivery-particle,
-    .delivery-float,
-    .delivery-check-halo,
-    .delivery-core-halo,
-    .delivery-monitor-line {
-      animation: none;
-    }
-
-    .delivery-process.is-ready .delivery-live-scene,
-    .delivery-process.is-ready .delivery-live-scene * {
+    .delivery-process *,
+    .delivery-process *::after {
       animation: none !important;
       transition: none !important;
-      transform: none;
     }
-
-    .delivery-process.is-ready .delivery-live-scene .dp-score-ring {
-      transform: rotate(-90deg) !important;
-    }
-
-    .delivery-process.is-ready .delivery-live-scene .dp-score-ring {
-      transform: rotate(-90deg) !important;
-    }
-
-    .delivery-process.is-ready .delivery-live-scene .dp-sprint-progress {
-      transform: scaleX(0.66) !important;
-    }
-
-    .delivery-process.is-ready .delivery-live-scene .dp-qa-progress-one,
-    .delivery-process.is-ready .delivery-live-scene .dp-qa-progress-four {
-      transform: scaleX(0.96) !important;
-    }
-
-    .delivery-process.is-ready .delivery-live-scene .dp-qa-progress-two {
-      transform: scaleX(0.91) !important;
-    }
-
-    .delivery-process.is-ready .delivery-live-scene .dp-qa-progress-three {
-      transform: scaleX(0.78) !important;
-    }
-
-    .delivery-control-button:not(:disabled):hover {
+    .delivery-stage:hover {
       transform: none;
     }
   }

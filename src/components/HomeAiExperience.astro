@@ -1,0 +1,548 @@
+---
+import { aiUseCases } from '../data/ai-use-cases.js'
+
+const appIcons = {
+  support:
+    '<path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 3.5V16A2.5 2.5 0 0 1 4 13.5z"/><path d="M8.5 9h7M8.5 12h4.5"/>',
+  recruitment:
+    '<circle cx="10" cy="8" r="3.5"/><path d="M3.5 19.5c.8-3.4 3.3-5.5 6.5-5.5 1.4 0 2.7.4 3.7 1.1"/><path d="m15 17.5 2 2 3.5-4"/>',
+  sales: '<path d="M4 17.5 9.3 12l3.6 3.4L20 7.5"/><path d="M15.5 7.5H20V12"/>',
+  marketing:
+    '<path d="M4 10v4a1 1 0 0 0 1 1h2l6 4V5L7 9H5a1 1 0 0 0-1 1z"/><path d="M16.5 9.5a3.5 3.5 0 0 1 0 5"/><path d="M19 7a7 7 0 0 1 0 10"/>',
+  recommendations:
+    '<path d="m12 3.5 1.9 4.6 4.6 1.9-4.6 1.9-1.9 4.6-1.9-4.6L5.5 10l4.6-1.9z"/><path d="m18 15.5.8 1.7 1.7.8-1.7.8-.8 1.7-.8-1.7-1.7-.8 1.7-.8z"/>',
+  operations:
+    '<rect x="3.5" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="14" y="13.5" width="6.5" height="6.5" rx="1.6"/><path d="M6.75 10.5v3.25a3 3 0 0 0 3 3H14"/><path d="M14 7.25h3.25a3 3 0 0 1 3 3V12"/>',
+}
+
+// Staggered layout. Positions share one 640 × 476 space, so the
+// arrangement keeps its proportions as the column scales.
+const NET_W = 640
+const NET_H = 476
+
+const appLayout = [
+  { id: 'support', x: 0, y: 0, accent: 'orange' },
+  { id: 'sales', x: 344, y: 36, accent: 'blue' },
+  { id: 'marketing', x: 34, y: 172, accent: 'blue' },
+  { id: 'recruitment', x: 352, y: 204, accent: 'orange' },
+  { id: 'recommendations', x: 0, y: 344, accent: 'orange' },
+  { id: 'operations', x: 336, y: 374, accent: 'blue' },
+]
+const appCards = appLayout.map((layout) => ({
+  ...layout,
+  ...aiUseCases.find((useCase) => useCase.id === layout.id),
+}))
+
+const pct = (value, total) => `${((value / total) * 100).toFixed(3)}%`
+---
+
+<section
+  class="ai-experience"
+  id="ai-highlight"
+  aria-labelledby="ai-experience-title"
+  data-ai-experience
+>
+  <div class="site-container">
+    <header class="ai-experience-intro ai-reveal">
+      <div class="ai-intro-copy">
+        <div class="ai-intro-title">
+          <p class="eyebrow">AI THAT WORKS FOR BUSINESS</p>
+          <h2 id="ai-experience-title">
+            AI Is Powerful.
+            <br />
+            <span>We Make It Work for Your Business.</span>
+          </h2>
+        </div>
+        <p class="ai-intro-description">
+          From intelligent automation to custom AI agents, we help businesses
+          simplify operations, improve customer experiences, and unlock new
+          opportunities for growth.
+        </p>
+        <div class="ai-apps-head">
+          <span class="ai-apps-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="6.5" />
+              <circle cx="12" cy="12" r="2" />
+              <path d="M12 2.5v4M12 17.5v4M2.5 12h4M17.5 12h4" />
+            </svg>
+          </span>
+          <div>
+            <h3 id="ai-apps-title">
+              AI applications across business functions
+            </h3>
+            <p>
+              We explore AI in such cases
+              <span class="link-arrow ai-apps-head-arrow" aria-hidden="true">
+                →
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <a
+          class="text-link ai-intro-cta"
+          href="/ai-technology#ai-practical-path"
+        >
+          Understand AI for Your Business{' '}
+          <span class="link-arrow" aria-hidden="true">
+            ↗
+          </span>
+        </a>
+      </div>
+
+      <section class="ai-apps-panel" aria-labelledby="ai-apps-title">
+        <div class="ai-apps-stage">
+          <ul class="ai-apps-grid">
+            {appCards.map((card, index) => (
+              <li
+                class={`ai-app is-${card.accent}`}
+                style={`--x: ${pct(card.x, NET_W)}; --y: ${pct(card.y, NET_H)}; --i: ${index}`}
+              >
+                <span class="ai-app-icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    set:html={appIcons[card.id]}
+                  />
+                </span>
+                <span class="ai-app-copy">
+                  <strong>{card.area}</strong>
+                  <span>{card.summary}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    </header>
+  </div>
+</section>
+
+<script>
+  import '../scripts/home-ai-experience.js'
+</script>
+
+<style>
+  .ai-experience {
+    /* One rhythm for the section edges and the gaps between its blocks */
+    --ai-space: clamp(4.5rem, 7vw, 6.5rem);
+    padding-block: var(--ai-space);
+    border-top: 1px solid var(--color-line);
+    background:
+      radial-gradient(
+        ellipse at 93% 12%,
+        rgb(225 237 249 / 35%),
+        transparent 27rem
+      ),
+      var(--color-paper);
+  }
+
+  /* Left: copy, applications heading and CTA. Right: the cards */
+  .ai-experience-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+    align-items: center;
+    gap: clamp(2.5rem, 4vw, 4rem);
+  }
+
+  .ai-intro-copy {
+    display: grid;
+    max-width: 640px;
+    justify-items: start;
+    gap: clamp(1.25rem, 2vw, 1.6rem);
+  }
+  .ai-intro-copy .ai-apps-head {
+    margin: 0.35rem 0 0;
+  }
+
+  .ai-experience h2 {
+    max-width: 700px;
+    margin: 0;
+    color: var(--color-ink);
+    font-size: clamp(2.7rem, 5vw, 4.5rem);
+    font-weight: 650;
+    letter-spacing: -0.075em;
+    line-height: 1.02;
+  }
+
+  .ai-experience h2 span {
+    color: var(--color-orange-dark);
+  }
+
+  .ai-intro-description {
+    max-width: 520px;
+    margin: 0 0 0.4rem;
+    color: var(--color-body);
+    font-size: clamp(1rem, 1.25vw, 1.12rem);
+    line-height: 1.72;
+  }
+
+  /* Global .text-link (as in the FAQ), sized up slightly for the hero */
+  .ai-intro-cta {
+    font-size: 1.05rem;
+    transition: color var(--duration-fast) ease;
+  }
+  .ai-intro-cta:hover {
+    color: var(--color-orange);
+  }
+  .ai-intro-cta:hover .link-arrow,
+  .ai-intro-cta:focus-visible .link-arrow {
+    transform: translate(2px, 2px);
+  }
+  .ai-intro-cta:focus-visible {
+    border-radius: var(--radius-small);
+    outline: 3px solid #e1784f;
+    outline-offset: 4px;
+  }
+
+  /* AI applications network */
+  .ai-apps-panel {
+    --apps-orange: #e05a2f;
+    --apps-blue: #3f80c4;
+    position: relative;
+    width: 100%;
+    min-width: 0;
+  }
+  .ai-apps-head {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: clamp(1rem, 1.8vw, 1.35rem);
+  }
+  .ai-apps-mark {
+    display: grid;
+    width: 52px;
+    height: 52px;
+    flex: none;
+    place-items: center;
+    border-radius: 14px;
+    background: var(--color-navy);
+    color: #fff;
+    box-shadow: 0 12px 24px -14px rgb(16 27 45 / 60%);
+  }
+  .ai-apps-mark svg,
+  .ai-app-icon svg {
+    width: 24px;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.7;
+  }
+  .ai-apps-head div {
+    display: grid;
+    gap: 0.3rem;
+    min-width: 0;
+  }
+  .ai-apps-head h3 {
+    margin: 0;
+    color: var(--color-navy);
+    font-family: var(--font-heading);
+    font-size: clamp(1.1rem, 1.25vw, 1.2rem);
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    text-wrap: balance;
+  }
+  .ai-apps-head p {
+    margin: 0;
+    color: #6a7b92;
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+  .ai-apps-head-arrow {
+    margin-left: 0.2rem;
+    color: var(--color-navy);
+  }
+
+  .ai-apps-stage {
+    position: relative;
+    /* Room for the cards' float so they stay inside the column */
+    padding-block: 0.5rem;
+    /* Icon pulses are staggered against this loop */
+    --ai-net-cycle: 10s;
+  }
+  /* Soft orange and blue glow behind the cards */
+  .ai-apps-stage::before {
+    position: absolute;
+    inset: -12% -3%;
+    background:
+      radial-gradient(
+        ellipse 30% 46% at 22% 34%,
+        rgb(224 90 47 / 9%),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 32% 50% at 76% 68%,
+        rgb(63 128 196 / 9%),
+        transparent
+      );
+    content: '';
+    pointer-events: none;
+  }
+
+  .ai-apps-grid {
+    position: relative;
+    z-index: 1;
+    aspect-ratio: 640 / 476;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .ai-app {
+    --tone: var(--apps-orange);
+    --tone-rgb: 224 90 47;
+    position: absolute;
+    top: var(--y);
+    left: var(--x);
+    display: grid;
+    width: 45%;
+    min-width: 0;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    gap: 0.85rem;
+    padding: 1rem 1.05rem;
+    border: 1px solid rgb(16 27 45 / 7%);
+    border-radius: 18px;
+    background: linear-gradient(160deg, #fff 0%, #fffcf9 100%);
+    box-shadow:
+      0 18px 38px -24px rgb(var(--tone-rgb) / 45%),
+      0 2px 6px rgb(16 27 45 / 4%);
+    animation: ai-app-float var(--float-duration, 7s) ease-in-out
+      var(--float-delay, 0s) infinite alternate;
+    transition:
+      border-color 220ms ease,
+      box-shadow 220ms ease,
+      transform 220ms ease;
+  }
+  .ai-app.is-blue {
+    --tone: var(--apps-blue);
+    --tone-rgb: 63 128 196;
+  }
+  /* Out-of-sync drift; small enough that neighbours never touch */
+  .ai-app:nth-child(1) {
+    --float-x: 0px;
+    --float-y: -5px;
+    --float-duration: 7s;
+    --float-delay: -1s;
+    --pulse-delay: 0.4s;
+  }
+  .ai-app:nth-child(2) {
+    --float-x: -2px;
+    --float-y: -4px;
+    --float-duration: 8.4s;
+    --float-delay: -3s;
+    --pulse-delay: 7.1s;
+  }
+  .ai-app:nth-child(3) {
+    --float-x: 2px;
+    --float-y: -4px;
+    --float-duration: 7.8s;
+    --float-delay: -5s;
+    --pulse-delay: 3.25s;
+  }
+  .ai-app:nth-child(4) {
+    --float-x: 0px;
+    --float-y: -5px;
+    --float-duration: 6.6s;
+    --float-delay: -2s;
+    --pulse-delay: 6.25s;
+  }
+  .ai-app:nth-child(5) {
+    --float-x: 2px;
+    --float-y: -4px;
+    --float-duration: 9s;
+    --float-delay: -4s;
+    --pulse-delay: 2.1s;
+  }
+  .ai-app:nth-child(6) {
+    --float-x: -2px;
+    --float-y: -5px;
+    --float-duration: 7.3s;
+    --float-delay: -6s;
+    --pulse-delay: 5.4s;
+  }
+  .ai-app-icon {
+    position: relative;
+    display: grid;
+    width: 44px;
+    aspect-ratio: 1;
+    place-items: center;
+    border-radius: 13px;
+    background: rgb(var(--tone-rgb) / 11%);
+    color: var(--tone);
+    transition:
+      background 220ms ease,
+      color 220ms ease;
+  }
+  .ai-app-icon svg {
+    width: 52%;
+  }
+  .ai-app-icon::after {
+    position: absolute;
+    inset: -1px;
+    border: 1.5px solid currentColor;
+    border-radius: inherit;
+    animation: ai-icon-pulse var(--ai-net-cycle) ease-out var(--pulse-delay)
+      infinite;
+    content: '';
+    opacity: 0;
+    pointer-events: none;
+  }
+  .ai-app-copy {
+    display: grid;
+    gap: 0.25rem;
+    min-width: 0;
+  }
+  .ai-app-copy strong {
+    color: var(--color-navy);
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+  .ai-app-copy span {
+    color: var(--color-body);
+    font-size: 0.87rem;
+    line-height: 1.45;
+  }
+  @media (hover: hover) {
+    .ai-app:hover {
+      border-color: rgb(var(--tone-rgb) / 30%);
+      box-shadow:
+        0 22px 40px -22px rgb(var(--tone-rgb) / 55%),
+        0 0 0 4px rgb(var(--tone-rgb) / 7%);
+      transform: translateY(-3px);
+    }
+    .ai-app:hover .ai-app-icon {
+      background: var(--tone);
+      color: #fff;
+    }
+  }
+  [data-ai-experience][data-motion-ready] .ai-reveal.is-visible .ai-app {
+    /* backwards fill releases transform after the reveal so hover lift works */
+    animation:
+      ai-app-in 520ms var(--ease-out) calc(160ms + var(--i) * 80ms) backwards,
+      ai-app-float var(--float-duration, 7s) ease-in-out var(--float-delay, 0s)
+        infinite alternate;
+  }
+
+  /* Pause looping diagram motion while the section is off screen */
+  [data-ai-experience][data-ai-paused='true'] .ai-apps-panel *,
+  [data-ai-experience][data-ai-paused='true'] .ai-apps-panel *::before,
+  [data-ai-experience][data-ai-paused='true'] .ai-apps-panel *::after {
+    animation-play-state: paused;
+  }
+
+  .ai-reveal {
+    opacity: 1;
+    transform: none;
+  }
+  [data-ai-experience][data-motion-ready] .ai-reveal {
+    transition:
+      opacity 550ms var(--ease-out),
+      transform 550ms var(--ease-out);
+  }
+  [data-ai-experience][data-motion-ready] .ai-reveal:not(.is-visible) {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  @keyframes ai-app-float {
+    from {
+      translate: 0 0;
+    }
+    to {
+      translate: var(--float-x) var(--float-y);
+    }
+  }
+  @keyframes ai-icon-pulse {
+    0% {
+      opacity: 0.55;
+      transform: scale(1);
+    }
+    9%,
+    100% {
+      opacity: 0;
+      transform: scale(1.45);
+    }
+  }
+  @keyframes ai-app-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Below 1280px the staggered cards no longer fit beside the copy */
+  @media (max-width: 1279px) {
+    .ai-experience-intro {
+      grid-template-columns: 1fr;
+    }
+    /* Stacked: cards fall back to an even grid */
+    .ai-apps-grid {
+      display: grid;
+      aspect-ratio: auto;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-rows: 1fr;
+      gap: 0.85rem;
+    }
+    .ai-app {
+      position: relative;
+      top: auto;
+      left: auto;
+      width: auto;
+    }
+    /* Vertical drift only, so cards never leave the column edge */
+    .ai-apps-grid .ai-app:nth-child(n) {
+      --float-x: 0px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .ai-experience {
+      --ai-space: 3.75rem;
+    }
+    .ai-experience h2 {
+      font-size: clamp(2.55rem, 9vw, 3.75rem);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .ai-apps-grid {
+      grid-template-columns: 1fr;
+    }
+    .ai-apps-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ai-experience h2 {
+      font-size: clamp(2.35rem, 10vw, 3rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ai-intro-cta:hover .link-arrow,
+    .ai-intro-cta:focus-visible .link-arrow {
+      transform: none;
+    }
+    .ai-experience *,
+    .ai-experience *::before,
+    .ai-experience *::after {
+      scroll-behavior: auto !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

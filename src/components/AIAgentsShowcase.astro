@@ -1,0 +1,481 @@
+---
+import { aiAgents, agentWorkflowClaim } from '../data/ai-agents.js'
+
+const total = String(aiAgents.length).padStart(2, '0')
+---
+
+<section class="ai-agents" aria-labelledby="ai-agents-title">
+  <div class="site-container">
+    <div class="ai-agents-heading">
+      <div>
+        <p class="eyebrow">AI AGENTS IN ACTION</p>
+        <h2 id="ai-agents-title">
+          From intelligent agents
+          <br />
+          <span>to real business workflows.</span>
+        </h2>
+      </div>
+      <div class="ai-agents-intro">
+        <p>
+          Explore how purpose-built AI agents can help teams understand
+          information, automate repetitive work, support decisions, and deliver
+          more useful digital experiences.
+        </p>
+        {agentWorkflowClaim.confirmed && (
+          <p class="ai-agents-claim">{agentWorkflowClaim.text}</p>
+        )}
+        <p class="ai-agents-note">
+          Each agent is a representative concept that can be integrated into a
+          relevant product, not a named client deployment.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="ai-agents-track"
+    style={`--stack-count: ${aiAgents.length}`}
+    data-stack
+    data-stack-pin="(min-width: 801px) and (min-height: 700px)"
+  >
+    <div class="ai-agents-sticky">
+      <div class="site-container">
+        <div class="ai-agents-progress" aria-hidden="true">
+          <span class="ai-agents-counter">
+            <b data-stack-current>01</b> / {total}
+          </span>
+          <span class="ai-agents-progress-track">
+            <i data-stack-progress></i>
+          </span>
+          <span class="ai-agents-hint">Scroll to explore</span>
+        </div>
+        <ol class="ai-agents-deck" data-stack-deck>
+          {aiAgents.map((agent, index) => (
+            <li
+              class:list={['ai-agent', { 'is-active': index === 0 }]}
+              data-stack-card
+            >
+              <article
+                class="ai-agent-card"
+                aria-labelledby={`ai-agent-${agent.id}`}
+              >
+                <figure class="ai-agent-media">
+                  <img
+                    src={agent.image.src}
+                    width={agent.image.width}
+                    height={agent.image.height}
+                    alt={agent.alt}
+                    loading={index < 2 ? 'eager' : 'lazy'}
+                    decoding="async"
+                  />
+                </figure>
+                <div class="ai-agent-copy">
+                  <p class="ai-agent-kicker">
+                    <span>
+                      {String(index + 1).padStart(2, '0')} / {total}
+                    </span>
+                    {agent.capability}
+                  </p>
+                  <h3 id={`ai-agent-${agent.id}`}>{agent.name}</h3>
+                  <p class="ai-agent-description">{agent.description}</p>
+                  <div class="ai-agent-context">
+                    <span>WHERE IT FITS</span>
+                    <p>{agent.context}</p>
+                  </div>
+                  {agent.related && (
+                    <p class="ai-agent-related">
+                      <span>RELATED PROJECT</span>
+                      <a href="/projects">
+                        {agent.related.project}{' '}
+                        <span class="link-arrow" aria-hidden="true">
+                          →
+                        </span>
+                      </a>
+                      <small>{agent.related.note}</small>
+                    </p>
+                  )}
+                </div>
+              </article>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '../scripts/stacked-cards.js'
+</script>
+
+<style>
+  .ai-agents {
+    padding-top: clamp(4.4rem, 7.2vw, 6.8rem);
+    border-top: 1px solid var(--color-line);
+    background: var(--color-paper);
+  }
+  .ai-agents-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: clamp(2rem, 5vw, 4.8rem);
+    margin-bottom: 2.5rem;
+  }
+  .ai-agents-heading > div:first-child {
+    max-width: 680px;
+  }
+  .ai-agents h2 {
+    margin: 0;
+    font-size: var(--type-section-size);
+    font-weight: var(--type-heading-weight);
+    letter-spacing: var(--type-section-letter-spacing);
+    line-height: var(--type-section-line-height);
+  }
+  .ai-agents h2 span {
+    color: var(--color-orange-dark);
+  }
+  .ai-agents-intro {
+    max-width: 460px;
+  }
+  .ai-agents-intro p {
+    margin: 0;
+    color: var(--color-body);
+    font-size: 0.94rem;
+    line-height: 1.7;
+  }
+  .ai-agents-intro .ai-agents-claim {
+    margin-top: 0.7rem;
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+  .ai-agents-intro .ai-agents-note {
+    margin-top: 0.7rem;
+    color: var(--color-muted);
+    font-size: 0.8rem;
+    line-height: 1.55;
+  }
+
+  /* Cards in normal flow (phones, small tablets, short screens) */
+  .ai-agents-track {
+    padding-bottom: clamp(4.4rem, 7.2vw, 6.8rem);
+  }
+  .ai-agents-progress {
+    display: none;
+  }
+  .ai-agents-deck {
+    display: grid;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .ai-agent {
+    position: relative;
+    transform-origin: 50% 0;
+  }
+  .ai-agent::before {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-large);
+    box-shadow:
+      0 34px 70px -26px rgb(16 27 45 / 34%),
+      0 14px 28px -14px rgb(16 27 45 / 16%);
+    content: '';
+    opacity: var(--lift, 0);
+    pointer-events: none;
+  }
+  .ai-agent-card {
+    position: relative;
+    display: grid;
+    gap: 1.1rem;
+    overflow: hidden;
+    padding: 0.85rem;
+    border: 1px solid rgb(16 27 45 / 9%);
+    border-radius: var(--radius-large);
+    background: linear-gradient(165deg, #fffdfb 0%, #fbf8f4 60%, #f8f3ed 100%);
+    box-shadow:
+      0 1px 2px rgb(16 27 45 / 4%),
+      0 18px 40px -20px rgb(16 27 45 / 22%);
+  }
+  /* Fades a card back as later cards cover it */
+  .ai-agent-card::after {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    border-radius: inherit;
+    background: #ece6de;
+    content: '';
+    opacity: var(--dim, 0);
+    pointer-events: none;
+  }
+  .ai-agent-media {
+    position: relative;
+    margin: 0;
+    aspect-ratio: 5 / 4;
+    overflow: hidden;
+    border: 1px solid rgb(16 27 45 / 8%);
+    border-radius: 16px;
+    background: #f1ebe3;
+  }
+  .ai-agent-media img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.08);
+  }
+  .ai-agent-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.2rem 0.45rem 0.45rem;
+  }
+  .ai-agent-kicker {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.8rem;
+    margin: 0 0 0.85rem;
+    color: var(--color-orange-dark);
+    font-size: 0.68rem;
+    font-weight: 750;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .ai-agent-kicker span {
+    padding: 0.28rem 0.6rem;
+    border: 1px solid rgb(201 84 43 / 26%);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--color-muted);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.06em;
+  }
+  .ai-agent-copy h3 {
+    margin: 0 0 0.7rem;
+    font-size: clamp(1.4rem, 5.4vw, 1.75rem);
+    font-weight: 650;
+    line-height: 1.14;
+    letter-spacing: -0.05em;
+  }
+  .ai-agent-description {
+    max-width: 480px;
+    margin: 0 0 1.1rem;
+    color: var(--color-body);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+  .ai-agent-context {
+    padding: 0.8rem 1rem;
+    border-left: 2px solid var(--color-orange);
+    background: #f3ece4;
+  }
+  .ai-agent-context span,
+  .ai-agent-related > span {
+    display: block;
+    color: var(--color-orange-dark);
+    font-size: 0.64rem;
+    font-weight: 750;
+    letter-spacing: 0.12em;
+  }
+  .ai-agent-context p {
+    margin: 0.3rem 0 0;
+    color: var(--color-ink);
+    font-size: 0.9rem;
+    font-weight: 550;
+    line-height: 1.5;
+  }
+  .ai-agent-related {
+    display: grid;
+    gap: 0.2rem;
+    margin: 0.9rem 0 0;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--color-line);
+  }
+  .ai-agent-related a {
+    justify-self: start;
+    color: var(--color-ink);
+    font-size: 0.92rem;
+    font-weight: 650;
+    text-decoration-color: rgb(201 84 43 / 45%);
+    text-underline-offset: 3px;
+  }
+  .ai-agent-related a:hover {
+    color: var(--color-orange-dark);
+  }
+  .ai-agent-related a:focus-visible {
+    outline: 2px solid var(--color-orange);
+    outline-offset: 3px;
+  }
+  .ai-agent-related small {
+    color: var(--color-muted);
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  /* Wider screens: a large image beside the text */
+  @media (min-width: 801px) {
+    .ai-agent-card {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      gap: clamp(2rem, 4.2vw, 4rem);
+      padding: clamp(1.25rem, 2.2vw, 1.75rem);
+      padding-right: clamp(1.6rem, 3vw, 2.75rem);
+    }
+    .ai-agent-media {
+      aspect-ratio: auto;
+      min-height: 380px;
+      border-radius: 18px;
+    }
+    .ai-agent-copy {
+      padding: 0;
+    }
+    .ai-agent-copy h3 {
+      font-size: clamp(1.7rem, 2.5vw, 2.25rem);
+    }
+    .ai-agent-description {
+      font-size: clamp(0.95rem, 1.1vw, 1.02rem);
+    }
+  }
+
+  /* Pinned stack where there is room to read each card in turn */
+  @media (min-width: 801px) and (min-height: 700px) {
+    .ai-agents-track[data-enhanced] {
+      height: calc(100vh + (var(--stack-count) - 1) * 72vh + 36vh);
+      padding-bottom: 0;
+    }
+    [data-enhanced] .ai-agents-sticky {
+      position: sticky;
+      top: 0;
+      display: flex;
+      height: 100vh;
+      height: 100svh;
+      overflow: hidden;
+      align-items: center;
+    }
+    [data-enhanced] .ai-agents-sticky > .site-container {
+      padding-block: clamp(1.25rem, 3vh, 2rem);
+    }
+    [data-enhanced] .ai-agents-progress {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .ai-agents-counter {
+      color: var(--color-muted);
+      font-size: 0.74rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.08em;
+    }
+    .ai-agents-counter b {
+      color: var(--color-orange-dark);
+    }
+    .ai-agents-progress-track {
+      flex: 1;
+      height: 3px;
+      overflow: hidden;
+      border-radius: 3px;
+      background: rgb(16 27 45 / 10%);
+    }
+    .ai-agents-progress-track i {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(
+        90deg,
+        var(--color-orange),
+        var(--color-orange-dark)
+      );
+      transform: scaleX(calc(1 / var(--stack-count)));
+      transform-origin: left;
+    }
+    .ai-agents-hint {
+      color: var(--color-muted);
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    /* Room above the deck for earlier cards to peek out */
+    [data-enhanced] .ai-agents-deck {
+      position: relative;
+      display: block;
+      height: clamp(500px, calc(100vh - 9rem), 640px);
+      margin-top: 50px;
+    }
+    [data-enhanced] .ai-agent {
+      position: absolute;
+      inset: 0;
+      will-change: transform;
+    }
+    [data-enhanced] .ai-agent-card {
+      height: 100%;
+    }
+    [data-enhanced] .ai-agent-media {
+      min-height: 0;
+    }
+  }
+
+  @media (min-width: 801px) and (max-width: 1100px) {
+    .ai-agent-card {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 1.75rem;
+    }
+    .ai-agent-copy h3 {
+      font-size: clamp(1.5rem, 2.6vw, 1.85rem);
+    }
+    .ai-agent-description,
+    .ai-agent-context p {
+      font-size: 0.88rem;
+    }
+  }
+
+  /* Tall tablets: image above the text so neither column gets cramped */
+  @media (min-width: 801px) and (max-width: 1100px) and (min-height: 1000px) {
+    .ai-agent-card {
+      grid-template-columns: minmax(0, 1fr);
+      align-content: start;
+      gap: 1.4rem;
+    }
+    .ai-agent-media {
+      aspect-ratio: 5 / 4;
+    }
+    .ai-agent-copy {
+      justify-content: flex-start;
+    }
+    [data-enhanced] .ai-agents-deck {
+      height: min(calc(100vh - 9rem), 900px);
+    }
+  }
+
+  @media (max-width: 800px) {
+    .ai-agents-heading {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .ai-agent-media img {
+      transform: scale(1.14);
+    }
+  }
+  @media (max-width: 560px) {
+    .ai-agents h2 {
+      font-size: clamp(1.9rem, 8vw, 2.45rem);
+    }
+    .ai-agent-copy {
+      padding: 0.1rem 0.25rem 0.3rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ai-agent,
+    .ai-agent-card,
+    .ai-agents-progress-track i {
+      transition: none !important;
+    }
+  }
+</style>

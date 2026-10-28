@@ -1,0 +1,1892 @@
+---
+const workflowSteps = [
+  {
+    id: 'understand',
+    number: '01',
+    title: 'Understand the business',
+    detail: 'Start with the challenge and the outcome that matters.',
+  },
+  {
+    id: 'prepare',
+    number: '02',
+    title: 'Prepare the inputs',
+    detail: 'Bring relevant information together and check its quality.',
+  },
+  {
+    id: 'design',
+    number: '03',
+    title: 'Design the AI solution',
+    detail: 'Choose an agent, model, or automation approach for the need.',
+  },
+  {
+    id: 'connect',
+    number: '04',
+    title: 'Connect the workflow',
+    detail: 'Fit the solution into the tools and decisions people already use.',
+  },
+  {
+    id: 'improve',
+    number: '05',
+    title: 'Measure and improve',
+    detail: 'Review quality and outcomes, then decide what to refine.',
+  },
+]
+---
+
+<section
+  class="ai-path"
+  aria-labelledby="ai-practical-path-title"
+  data-ai-experience
+>
+  <div class="ai-workflow ai-reveal" id="ai-practical-path">
+    <div class="site-container">
+      <div class="ai-workflow-heading">
+        <div>
+          <p class="eyebrow">A PRACTICAL PATH FROM NEED TO IMPACT</p>
+          <h2 id="ai-practical-path-title">
+            From Business Need to an AI-Powered Outcome.
+          </h2>
+        </div>
+        <p>
+          Understand the business, choose the right AI approach, connect it to
+          your workflow, and keep improving it.
+        </p>
+      </div>
+
+      <div class="ai-workflow-layout" data-active-step="understand">
+        <fieldset class="ai-workflow-steps">
+          <legend class="ai-workflow-legend">
+            Explore the workflow stages
+          </legend>
+          {workflowSteps.map((step, index) => (
+            <label class="ai-workflow-step" for={`workflow-${step.id}`}>
+              <input
+                id={`workflow-${step.id}`}
+                type="radio"
+                name="ai-workflow-step"
+                value={step.id}
+                aria-describedby={`workflow-description-${step.id}`}
+                checked={index === 0}
+              />
+              <span class="ai-step-number">{step.number}</span>
+              <span class="ai-step-copy">
+                <strong>{step.title}</strong>
+                <small id={`workflow-description-${step.id}`}>
+                  {step.detail}
+                </small>
+              </span>
+              <span class="ai-step-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </label>
+          ))}
+        </fieldset>
+
+        <div class="ai-workflow-demo" data-workflow-demo>
+          <div class="ai-demo-topline">
+            <span class="ai-demo-label">
+              <i aria-hidden="true"></i> ILLUSTRATIVE ARCHITECTURE
+            </span>
+            <span class="ai-demo-count" aria-live="polite" data-step-count>
+              01 <b>/</b> 05
+            </span>
+          </div>
+          <div class="ai-demo-progress" aria-hidden="true">
+            <span data-step-progress></span>
+          </div>
+
+          <div class="ai-state-stage" aria-live="polite" aria-atomic="true">
+            <article
+              class="ai-state-card is-active"
+              data-flow-state="understand"
+            >
+              <header class="ai-state-head">
+                <span class="ai-state-kicker">
+                  01 · UNDERSTAND THE BUSINESS
+                </span>
+                <h4>Interpret the request, then define what success means.</h4>
+                <p>
+                  LLM-based analysis connects business requests with goals,
+                  context, and constraints, helping teams identify the right
+                  solution and focus on meaningful outcomes.
+                </p>
+              </header>
+              <div class="dg dg-flow dg-understand">
+                <div class="dg-node" style="--i: 0">
+                  <span class="dg-tag">USER INPUT</span>
+                  <b class="dg-title">Business request</b>
+                  <p class="dg-quote">
+                    “Customers keep asking if they can change a delivery
+                    address. Can AI help our support team?”
+                  </p>
+                </div>
+                <span class="dg-link" style="--d: 0s" aria-hidden="true">
+                  <i></i>
+                </span>
+                <div class="dg-node dg-node--core" style="--i: 1">
+                  <span class="dg-tag">LLM-BASED ANALYSIS</span>
+                  <b class="dg-title">Interpret the need</b>
+                  <ul class="dg-chips dg-chips--scan">
+                    <li>User intent</li>
+                    <li>Context extraction</li>
+                    <li>Constraint check</li>
+                  </ul>
+                </div>
+                <span class="dg-link" style="--d: 1.1s" aria-hidden="true">
+                  <i></i>
+                </span>
+                <div class="dg-node dg-node--active" style="--i: 2">
+                  <span class="dg-tag">SOLUTION REQUIREMENTS</span>
+                  <dl class="dg-spec">
+                    <div>
+                      <dt>Goal</dt>
+                      <dd>Faster, consistent answers</dd>
+                    </div>
+                    <div>
+                      <dt>Context</dt>
+                      <dd>Order status, delivery policy</dd>
+                    </div>
+                    <div>
+                      <dt>Limits</dt>
+                      <dd>Approved sources only</dd>
+                    </div>
+                    <div>
+                      <dt>Outcome</dt>
+                      <dd>Exceptions go to a person</dd>
+                    </div>
+                  </dl>
+                </div>
+              </div>
+            </article>
+
+            <article class="ai-state-card" data-flow-state="prepare">
+              <header class="ai-state-head">
+                <span class="ai-state-kicker">02 · PREPARE THE INPUTS</span>
+                <h4>
+                  Turn raw business information into searchable knowledge.
+                </h4>
+                <p>
+                  Data processing and retrieval organize relevant business
+                  information, helping AI deliver more useful responses and
+                  reducing time spent searching across scattered sources.
+                </p>
+              </header>
+              <div class="dg dg-flow dg-prepare">
+                <div class="dg-node" style="--i: 0">
+                  <span class="dg-tag">RAW SOURCES</span>
+                  <ul class="dg-files">
+                    <li>
+                      <i>PDF</i> Delivery policy
+                    </li>
+                    <li>
+                      <i class="is-blue">DOC</i> Help articles
+                    </li>
+                    <li>
+                      <i class="is-sand">CSV</i> Support tickets
+                    </li>
+                  </ul>
+                </div>
+                <span class="dg-link" style="--d: 0s" aria-hidden="true">
+                  <i></i>
+                </span>
+                <div class="dg-node dg-node--active" style="--i: 1">
+                  <span class="dg-tag">DATA PREPROCESSING</span>
+                  <ol class="dg-stages">
+                    <li>Clean &amp; de-duplicate</li>
+                    <li>Validate, remove sensitive data</li>
+                    <li>Chunk into passages</li>
+                  </ol>
+                  <span class="dg-chunks" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </span>
+                </div>
+                <span class="dg-link" style="--d: 0.7s" aria-hidden="true">
+                  <i></i>
+                </span>
+                <div class="dg-node dg-node--tech" style="--i: 2">
+                  <span class="dg-tag">EMBEDDINGS</span>
+                  <b class="dg-title">Text → vectors</b>
+                  <span class="dg-vectors" aria-hidden="true">
+                    <code>[0.12, −0.48, …]</code>
+                    <code>[0.67, 0.05, …]</code>
+                    <code>[−0.21, 0.74, …]</code>
+                  </span>
+                  <p class="dg-text">Captures meaning, not just keywords.</p>
+                </div>
+                <span class="dg-link" style="--d: 1.4s" aria-hidden="true">
+                  <i></i>
+                </span>
+                <div class="dg-node dg-node--tech" style="--i: 3">
+                  <span class="dg-tag">VECTOR DATABASE</span>
+                  <svg class="dg-db" viewBox="0 0 40 40" aria-hidden="true">
+                    <ellipse cx="20" cy="9" rx="13" ry="4.5" />
+                    <path d="M7 9v22c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5V9M7 16.5c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5M7 24c0 2.5 5.8 4.5 13 4.5s13-2 13-4.5" />
+                  </svg>
+                  <p class="dg-text">Indexed passages, ready for retrieval.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ai-state-card" data-flow-state="design">
+              <header class="ai-state-head">
+                <span class="ai-state-kicker">03 · DESIGN THE AI SOLUTION</span>
+                <h4>Retrieve the right context, generate, then check it.</h4>
+                <p>
+                  LLMs and RAG can deliver more relevant, context-aware
+                  responses, helping businesses improve customer decisions and
+                  uncover opportunities for sales growth.
+                </p>
+              </header>
+              <div class="dg dg-flow dg-design">
+                <div class="dg-node dg-a-query" style="--i: 0">
+                  <span class="dg-tag">USER QUERY</span>
+                  <p class="dg-quote">“Can I change my delivery address?”</p>
+                </div>
+                <span
+                  class="dg-link dg-a-l1"
+                  style="--d: 0s"
+                  aria-hidden="true"
+                >
+                  <i></i>
+                </span>
+                <div class="dg-node dg-node--tech dg-a-retrieve" style="--i: 1">
+                  <span class="dg-tag">RETRIEVAL · RAG</span>
+                  <b class="dg-title">Search approved knowledge</b>
+                  <p class="dg-text">Finds passages related to the query.</p>
+                </div>
+                <span
+                  class="dg-link dg-a-l2"
+                  style="--d: 0.5s"
+                  aria-hidden="true"
+                >
+                  <i></i>
+                </span>
+                <div class="dg-node dg-node--tech dg-a-vector" style="--i: 2">
+                  <span class="dg-tag">VECTOR DATABASE</span>
+                  <ul class="dg-matches">
+                    <li>
+                      <span>Delivery policy §2</span>
+                      <i style="--w: 92%"></i>
+                    </li>
+                    <li>
+                      <span>Address change FAQ</span>
+                      <i style="--w: 74%"></i>
+                    </li>
+                    <li>
+                      <span>Shipping times</span>
+                      <i style="--w: 38%"></i>
+                    </li>
+                  </ul>
+                </div>
+                <span
+                  class="dg-link is-down dg-a-l3"
+                  style="--d: 1s"
+                  aria-hidden="true"
+                >
+                  <i></i>
+                </span>
+                <div class="dg-node dg-a-prompt" style="--i: 3">
+                  <span class="dg-tag">PROMPT + CONTEXT</span>
+                  <ul class="dg-chips dg-chips--blocks">
+                    <li>Instructions</li>
+                    <li>User query</li>
+                    <li class="is-accent">Retrieved passages</li>
+                  </ul>
+                </div>
+                <span
+                  class="dg-link is-left dg-a-l4"
+                  style="--d: 1.5s"
+                  aria-hidden="true"
+                >
+                  <i></i>
+                </span>
+                <div class="dg-node dg-node--core dg-a-llm" style="--i: 4">
+                  <span class="dg-tag">LLM</span>
+                  <b class="dg-title">Generate a grounded response</b>
+                  <p class="dg-text">
+                    Drafts an answer that cites the policy
+                    <span class="dg-typing" aria-hidden="true">
+                      <i></i>
+                      <i></i>
+                      <i></i>
+                    </span>
+                  </p>
+                </div>
+                <span
+                  class="dg-link is-left dg-a-l5"
+                  style="--d: 2s"
+                  aria-hidden="true"
+                >
+                  <i></i>
+                </span>
+                <div class="dg-node dg-node--active dg-a-eval" style="--i: 5">
+                  <span class="dg-tag">EVALUATION</span>
+                  <ul class="dg-checks">
+                    <li>Grounded in sources</li>
+                    <li>Follows policy</li>
+                    <li class="is-flag">Unsure? Route to a person</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="ai-state-card" data-flow-state="connect">
+              <header class="ai-state-head">
+                <span class="ai-state-kicker">04 · CONNECT THE WORKFLOW</span>
+                <h4>Plug AI into the systems your team already uses.</h4>
+                <p>
+                  APIs and AI agents automate connected workflows, helping teams
+                  reduce repetitive effort, manage operating costs, and use
+                  resources more efficiently.
+                </p>
+              </header>
+              <div class="dg dg-flow dg-connect">
+                <div class="dg-node" style="--i: 0">
+                  <span class="dg-tag">BUSINESS APP · CRM</span>
+                  <b class="dg-title">Support ticket</b>
+                  <p class="dg-text">New request arrives.</p>
+                  <span class="dg-result">✓ Reply &amp; case note saved</span>
+                </div>
+                <span class="dg-duplex" aria-hidden="true">
+                  <span class="dg-link" style="--d: 0s">
+                    <i></i>
+                    <em>request</em>
+                  </span>
+                  <span class="dg-link is-left" style="--d: 2.2s">
+                    <i></i>
+                    <em>update</em>
+                  </span>
+                </span>
+                <div class="dg-node dg-node--tech" style="--i: 1">
+                  <span class="dg-tag">API + ORCHESTRATION</span>
+                  <b class="dg-title">Integration layer</b>
+                  <p class="dg-text">
+                    Permissions, routing, and each workflow step.
+                  </p>
+                  <span class="dg-approval">Human approval</span>
+                </div>
+                <span class="dg-duplex" aria-hidden="true">
+                  <span class="dg-link" style="--d: 0.55s">
+                    <i></i>
+                    <em>task</em>
+                  </span>
+                  <span class="dg-link is-left" style="--d: 1.65s">
+                    <i></i>
+                    <em>draft</em>
+                  </span>
+                </span>
+                <div class="dg-node dg-node--core" style="--i: 2">
+                  <span class="dg-tag">AI AGENT · LLM SERVICE</span>
+                  <b class="dg-title">Plans the next action</b>
+                  <p class="dg-text">Chooses which tools to call.</p>
+                </div>
+                <span class="dg-duplex" aria-hidden="true">
+                  <span class="dg-link" style="--d: 1.1s">
+                    <i></i>
+                    <em>call</em>
+                  </span>
+                  <span class="dg-link is-left" style="--d: 1.35s">
+                    <i></i>
+                    <em>data</em>
+                  </span>
+                </span>
+                <div class="dg-node" style="--i: 3">
+                  <span class="dg-tag">TOOLS</span>
+                  <ul class="dg-files dg-tools">
+                    <li>
+                      <i class="is-blue">⌗</i> Order system
+                    </li>
+                    <li>
+                      <i class="is-blue">?</i> Knowledge base
+                    </li>
+                    <li>
+                      <i class="is-blue">@</i> Email
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="ai-state-card" data-flow-state="improve">
+              <header class="ai-state-head">
+                <span class="ai-state-kicker">05 · MEASURE &amp; IMPROVE</span>
+                <h4>Check quality, watch the signals, and keep refining.</h4>
+                <p>
+                  Monitoring business outcomes helps identify efficiency gains,
+                  cost-saving opportunities, and ways to improve profitability
+                  and sustainable revenue growth.
+                </p>
+              </header>
+              <div class="dg dg-improve">
+                <div class="dg-loop">
+                  <div class="dg-node dg-node--active dg-a-eval" style="--i: 0">
+                    <span class="dg-tag">EVALUATION</span>
+                    <b class="dg-title">Quality checks</b>
+                    <p class="dg-text">
+                      Review sampled responses against sources.
+                    </p>
+                  </div>
+                  <span
+                    class="dg-link dg-a-l1"
+                    style="--d: 0s"
+                    aria-hidden="true"
+                  >
+                    <i></i>
+                  </span>
+                  <div
+                    class="dg-node dg-node--tech dg-a-monitor"
+                    style="--i: 1"
+                  >
+                    <span class="dg-tag">MONITORING</span>
+                    <b class="dg-title">Reliability signals</b>
+                    <p class="dg-text">Errors, escalations, response times.</p>
+                  </div>
+                  <span
+                    class="dg-link is-down dg-a-l2"
+                    style="--d: 0.55s"
+                    aria-hidden="true"
+                  >
+                    <i></i>
+                  </span>
+                  <span class="dg-loop-hub" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M19.5 12a7.5 7.5 0 0 1-12.8 5.3M4.5 12a7.5 7.5 0 0 1 12.8-5.3" />
+                      <path d="M17.5 3.5v3.3h-3.3M6.5 20.5v-3.3h3.3" />
+                    </svg>
+                  </span>
+                  <div class="dg-node dg-a-feedback" style="--i: 2">
+                    <span class="dg-tag">FEEDBACK</span>
+                    <b class="dg-title">People’s input</b>
+                    <p class="dg-text">Team ratings and user corrections.</p>
+                  </div>
+                  <span
+                    class="dg-link is-left dg-a-l3"
+                    style="--d: 1.1s"
+                    aria-hidden="true"
+                  >
+                    <i></i>
+                  </span>
+                  <div
+                    class="dg-node dg-node--core dg-a-iterate"
+                    style="--i: 3"
+                  >
+                    <span class="dg-tag">ITERATE</span>
+                    <b class="dg-title">Refine &amp; redeploy</b>
+                    <p class="dg-text">Update prompts, data, or workflow.</p>
+                  </div>
+                  <span
+                    class="dg-link is-up dg-a-l4"
+                    style="--d: 1.65s"
+                    aria-hidden="true"
+                  >
+                    <i></i>
+                  </span>
+                </div>
+                <div class="dg-node dg-signals" style="--i: 4">
+                  <div class="dg-signals-head">
+                    <span class="dg-tag">SIGNALS TO REVIEW</span>
+                    <small>Illustrative</small>
+                  </div>
+                  <ul>
+                    <li>
+                      <span>Response quality</span>
+                      <em class="is-good">On track</em>
+                    </li>
+                    <li>
+                      <span>Source grounding</span>
+                      <em class="is-check">Check samples</em>
+                    </li>
+                    <li>
+                      <span>Escalation themes</span>
+                      <em class="is-watch">New pattern</em>
+                    </li>
+                    <li>
+                      <span>Team feedback</span>
+                      <em class="is-good">Collected</em>
+                    </li>
+                  </ul>
+                  <p class="dg-text">Qualitative indicators, not live data.</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '../scripts/home-ai-experience.js'
+</script>
+
+<style>
+  .ai-path {
+    /* One rhythm for the section edges and the gaps between its blocks */
+    --ai-space: clamp(4.5rem, 7vw, 6.5rem);
+    padding-block: var(--ai-space);
+    border-block: 1px solid var(--color-line);
+    background:
+      radial-gradient(
+        ellipse at 93% 12%,
+        rgb(225 237 249 / 35%),
+        transparent 27rem
+      ),
+      var(--color-paper);
+  }
+
+  /* Workflow */
+  .ai-workflow {
+    /* The site header is not sticky; trim the global 6rem scroll-padding so
+       the heading, steps and visual land together in the viewport */
+    scroll-margin-top: calc(1.5rem - 6rem);
+  }
+  .ai-workflow-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: clamp(1.6rem, 2.4vw, 2.25rem);
+  }
+  .ai-workflow-heading h2 {
+    margin: 0;
+    font-size: clamp(1.75rem, 2.6vw, 2.4rem);
+    font-weight: 650;
+    letter-spacing: -0.06em;
+    line-height: 1.1;
+  }
+  .ai-workflow-heading .eyebrow {
+    margin-bottom: 0.5rem;
+  }
+  .ai-workflow-heading > p {
+    max-width: 380px;
+    margin: 0 0 0.1rem;
+    color: var(--color-body);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .ai-workflow-layout {
+    display: grid;
+    grid-template-columns: minmax(270px, 0.66fr) minmax(0, 1.7fr);
+    align-items: stretch;
+    gap: 1rem;
+  }
+  .ai-workflow-steps {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  .ai-workflow-legend {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .ai-workflow-step {
+    position: relative;
+    display: grid;
+    min-height: 64px;
+    flex: 1;
+    grid-template-columns: 36px minmax(0, 1fr) 20px;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid transparent;
+    border-radius: 16px;
+    background: transparent;
+    cursor: pointer;
+    transition:
+      background 200ms ease,
+      border-color 200ms ease,
+      box-shadow 200ms ease;
+  }
+  .ai-workflow-step:hover {
+    background: rgb(255 255 255 / 55%);
+  }
+  .ai-workflow-step input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+  .ai-step-number {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    border: 1px solid rgb(16 27 45 / 12%);
+    border-radius: 12px;
+    background: #fff;
+    color: var(--color-body);
+    font-size: 0.78rem;
+    font-weight: 750;
+    font-variant-numeric: tabular-nums;
+    transition:
+      color 200ms ease,
+      background 200ms ease,
+      border-color 200ms ease;
+  }
+  .ai-step-copy {
+    display: grid;
+    gap: 0.2rem;
+    min-width: 0;
+  }
+  .ai-step-copy strong {
+    color: var(--color-ink);
+    font-size: 1.02rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .ai-step-copy small {
+    color: var(--color-body);
+    font-size: 0.87rem;
+    line-height: 1.45;
+  }
+  .ai-step-arrow {
+    align-self: start;
+    margin-top: 0.2rem;
+    color: #a8afb7;
+    font-size: 0.9rem;
+    transition:
+      color 200ms ease,
+      transform 200ms ease;
+  }
+  .ai-workflow-step:has(input:checked) {
+    border-color: rgb(201 84 43 / 24%);
+    background: #fff;
+    box-shadow: 0 10px 28px -20px rgb(16 27 45 / 30%);
+  }
+  .ai-workflow-step:has(input:checked)::before {
+    position: absolute;
+    top: 0.8rem;
+    bottom: 0.8rem;
+    left: -1px;
+    width: 3px;
+    border-radius: 999px;
+    background: var(--color-orange);
+    content: '';
+  }
+  .ai-workflow-step:has(input:checked) .ai-step-number {
+    border-color: transparent;
+    background: var(--color-orange);
+    color: #fff;
+  }
+  .ai-workflow-step:has(input:checked) .ai-step-arrow {
+    color: var(--color-orange);
+    transform: translate(1px, -1px);
+  }
+  .ai-workflow-step:has(input:focus-visible) {
+    outline: 3px solid #e1784f;
+    outline-offset: 3px;
+  }
+
+  .ai-workflow-demo {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    overflow: hidden;
+    padding: clamp(1.1rem, 1.8vw, 1.4rem) clamp(1rem, 2vw, 1.5rem);
+    border: 1px solid rgb(16 27 45 / 9%);
+    border-radius: var(--radius-large);
+    background: linear-gradient(145deg, #fff 0%, #fdfbf8 65%, #f7f2ec 100%);
+    box-shadow:
+      0 20px 50px -34px rgb(16 27 45 / 30%),
+      0 2px 8px rgb(16 27 45 / 4%);
+    container: ai-demo / inline-size;
+  }
+  .ai-demo-topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .ai-demo-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.48rem;
+    color: var(--color-muted);
+    font-size: 0.68rem;
+    font-weight: 750;
+    letter-spacing: 0.12em;
+  }
+  .ai-demo-label i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-green);
+    box-shadow: 0 0 0 4px rgb(90 128 108 / 10%);
+  }
+  .ai-demo-count {
+    color: var(--color-ink);
+    font-size: 0.8rem;
+    font-weight: 750;
+    font-variant-numeric: tabular-nums;
+  }
+  .ai-demo-count b {
+    color: #a0a8b1;
+    font-weight: 500;
+  }
+  .ai-demo-progress {
+    height: 2px;
+    margin-top: 0.55rem;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #ece9e4;
+  }
+  .ai-demo-progress span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--color-orange), var(--color-blue));
+    transform: scaleX(0.2);
+    transform-origin: left;
+    transition: transform 360ms var(--ease-out);
+  }
+
+  .ai-state-stage {
+    display: grid;
+    flex: 1;
+    margin-top: 1rem;
+  }
+  .ai-state-card {
+    display: grid;
+    grid-area: 1 / 1;
+    grid-template-rows: auto 1fr;
+    gap: 1.2rem;
+    min-width: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition:
+      opacity 280ms ease,
+      transform 280ms var(--ease-out),
+      visibility 280ms;
+  }
+  .ai-state-card.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .ai-state-kicker {
+    display: block;
+    color: var(--color-orange-dark);
+    font-size: 0.7rem;
+    font-weight: 750;
+    letter-spacing: 0.11em;
+  }
+  .ai-state-head h4 {
+    margin: 0.5rem 0 0.7rem;
+    color: var(--color-ink);
+    font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+    font-weight: 700;
+    letter-spacing: -0.045em;
+    line-height: 1.2;
+  }
+  .ai-state-head p {
+    max-width: 720px;
+    margin: 0;
+    color: var(--color-body);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  /* Diagram primitives */
+  .dg {
+    display: grid;
+    align-items: center;
+    align-self: center;
+    min-width: 0;
+  }
+  .dg-node {
+    display: grid;
+    align-content: start;
+    gap: 0.4rem;
+    min-width: 0;
+    padding: 0.75rem 0.85rem;
+    border: 1px solid rgb(16 27 45 / 11%);
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 10px 26px -22px rgb(16 27 45 / 40%);
+  }
+  .dg-node--tech {
+    border-color: rgb(84 123 157 / 24%);
+    background: #f3f7fa;
+  }
+  .dg-node--active {
+    border-color: rgb(201 84 43 / 34%);
+    background: #fffaf6;
+    box-shadow:
+      0 0 0 4px rgb(201 84 43 / 6%),
+      0 10px 26px -22px rgb(168 65 33 / 45%);
+  }
+  .dg-node--core {
+    border-color: transparent;
+    background: linear-gradient(
+      150deg,
+      var(--color-navy-soft),
+      var(--color-navy)
+    );
+    box-shadow: 0 16px 32px -20px rgb(16 27 45 / 60%);
+    color: #fff;
+  }
+  .ai-state-card.is-active .dg-node {
+    animation: dg-node-in 420ms var(--ease-out) both;
+    animation-delay: calc(var(--i, 0) * 70ms);
+  }
+  .dg-tag {
+    color: var(--color-blue);
+    font-size: 0.68rem;
+    font-weight: 750;
+    letter-spacing: 0.1em;
+    line-height: 1.3;
+  }
+  .dg-node--active .dg-tag {
+    color: var(--color-orange-dark);
+  }
+  .dg-node--core .dg-tag {
+    color: #f2b79f;
+  }
+  .dg-title {
+    color: var(--color-ink);
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .dg-node--core .dg-title {
+    color: #fff;
+  }
+  .dg-text {
+    margin: 0;
+    color: var(--color-body);
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+  .dg-node--core .dg-text {
+    color: rgb(255 255 255 / 78%);
+  }
+  .dg-quote {
+    margin: 0;
+    padding: 0.6rem 0.7rem;
+    border-radius: 10px 10px 10px 3px;
+    background: #f6f3ee;
+    color: var(--color-ink);
+    font-size: 0.82rem;
+    font-weight: 550;
+    line-height: 1.45;
+  }
+
+  .dg-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: 0.15rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .dg-chips li {
+    padding: 0.32rem 0.6rem;
+    border: 1px solid rgb(16 27 45 / 10%);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--color-ink);
+    font-size: 0.76rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .dg-chips--blocks li {
+    border-radius: 8px;
+  }
+  .dg-chips li.is-accent {
+    border-color: rgb(84 123 157 / 30%);
+    background: #eaf0f5;
+    color: #2f5677;
+  }
+  .dg-node--core .dg-chips li {
+    border-color: rgb(255 255 255 / 16%);
+    background: rgb(255 255 255 / 7%);
+    color: #fff;
+  }
+  .dg-chips--scan li {
+    animation: dg-chip-scan 3.6s ease-in-out infinite;
+  }
+  .dg-chips--scan li:nth-child(2) {
+    animation-delay: 1.2s;
+  }
+  .dg-chips--scan li:nth-child(3) {
+    animation-delay: 2.4s;
+  }
+
+  .dg-spec {
+    display: grid;
+    gap: 0.4rem;
+    margin: 0.1rem 0 0;
+  }
+  .dg-spec div {
+    display: grid;
+    grid-template-columns: 4.6rem minmax(0, 1fr);
+    align-items: baseline;
+    gap: 0.4rem;
+    padding-top: 0.4rem;
+    border-top: 1px solid rgb(201 84 43 / 12%);
+  }
+  .dg-spec div:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+  .dg-spec dt {
+    color: var(--color-orange-dark);
+    font-size: 0.68rem;
+    font-weight: 750;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .dg-spec dd {
+    margin: 0;
+    color: var(--color-ink);
+    font-size: 0.8rem;
+    font-weight: 550;
+    line-height: 1.4;
+  }
+
+  .dg-files {
+    display: grid;
+    gap: 0.4rem;
+    margin: 0.1rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .dg-files li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.38rem 0.45rem;
+    border: 1px solid #eeece8;
+    border-radius: 9px;
+    background: #fff;
+    color: var(--color-ink);
+    font-size: 0.8rem;
+    font-weight: 550;
+  }
+  .dg-files i {
+    display: grid;
+    min-width: 30px;
+    height: 22px;
+    flex: none;
+    place-items: center;
+    border-radius: 6px;
+    background: #f8eee8;
+    color: var(--color-orange-dark);
+    font-size: 0.66rem;
+    font-style: normal;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+  }
+  .dg-files i.is-blue {
+    background: #eaf0f5;
+    color: var(--color-blue);
+  }
+  .dg-files i.is-sand {
+    background: #f5f0e4;
+    color: #806a3f;
+  }
+  .dg-tools i {
+    min-width: 22px;
+    font-size: 0.78rem;
+  }
+
+  .dg-stages {
+    display: grid;
+    gap: 0.4rem;
+    margin: 0.1rem 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: stage;
+  }
+  .dg-stages li {
+    display: grid;
+    grid-template-columns: 20px minmax(0, 1fr);
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--color-ink);
+    font-size: 0.8rem;
+    font-weight: 550;
+    line-height: 1.35;
+    counter-increment: stage;
+  }
+  .dg-stages li::before {
+    display: grid;
+    width: 20px;
+    height: 20px;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--color-orange);
+    color: #fff;
+    content: '✓';
+    font-size: 0.65rem;
+    font-weight: 800;
+  }
+  .ai-state-card.is-active .dg-stages li::before {
+    animation: dg-check-in 360ms var(--ease-out) both;
+  }
+  .ai-state-card.is-active .dg-stages li:nth-child(1)::before {
+    animation-delay: 380ms;
+  }
+  .ai-state-card.is-active .dg-stages li:nth-child(2)::before {
+    animation-delay: 620ms;
+  }
+  .ai-state-card.is-active .dg-stages li:nth-child(3)::before {
+    animation-delay: 860ms;
+  }
+  .dg-chunks {
+    display: flex;
+    gap: 4px;
+    margin-top: 0.2rem;
+  }
+  .dg-chunks span {
+    height: 8px;
+    flex: 1;
+    border-radius: 3px;
+    background: rgb(201 84 43 / 22%);
+  }
+  .dg-chunks span:nth-child(2) {
+    flex: 1.6;
+    background: rgb(201 84 43 / 38%);
+  }
+  .dg-chunks span:nth-child(3) {
+    flex: 0.8;
+  }
+  .dg-chunks span:nth-child(4) {
+    flex: 1.3;
+    background: rgb(84 123 157 / 30%);
+  }
+
+  .dg-vectors {
+    display: grid;
+    gap: 0.25rem;
+  }
+  .dg-vectors code {
+    overflow: hidden;
+    padding: 0.22rem 0.4rem;
+    border-radius: 6px;
+    background: #fff;
+    color: #2f5677;
+    font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    font-size: 0.7rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .dg-db {
+    width: 42px;
+    height: 42px;
+    fill: #fff;
+    stroke: var(--color-blue);
+    stroke-linecap: round;
+    stroke-width: 1.6;
+  }
+  .ai-state-card.is-active .dg-db {
+    animation: dg-db-glow 2.4s ease-in-out 1.6s infinite;
+  }
+
+  .dg-matches {
+    display: grid;
+    gap: 0.45rem;
+    margin: 0.1rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .dg-matches li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 30%;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-ink);
+    font-size: 0.78rem;
+    font-weight: 550;
+  }
+  .dg-matches i {
+    display: block;
+    width: var(--w);
+    height: 4px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--color-blue), #8fb0cb);
+    transform-origin: left;
+  }
+  .ai-state-card.is-active .dg-matches i {
+    animation: dg-bar-in 600ms var(--ease-out) 500ms both;
+  }
+
+  .dg-typing {
+    display: inline-flex;
+    gap: 3px;
+    margin-left: 0.2rem;
+    vertical-align: middle;
+  }
+  .dg-typing i {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #f2b79f;
+    animation: dg-typing 1.2s ease-in-out infinite;
+  }
+  .dg-typing i:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .dg-typing i:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  .dg-checks {
+    display: grid;
+    gap: 0.38rem;
+    margin: 0.1rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .dg-checks li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    color: var(--color-ink);
+    font-size: 0.8rem;
+    font-weight: 550;
+    line-height: 1.35;
+  }
+  .dg-checks li::before {
+    color: var(--color-green);
+    content: '✓';
+    font-weight: 800;
+  }
+  .dg-checks li.is-flag::before {
+    color: var(--color-orange);
+    content: '→';
+  }
+
+  .dg-result,
+  .dg-approval {
+    justify-self: start;
+    padding: 0.3rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .dg-result {
+    background: #eef4ef;
+    color: #315d45;
+  }
+  .dg-approval {
+    position: relative;
+    border: 1px solid rgb(201 84 43 / 35%);
+    background: #fff;
+    color: var(--color-orange-dark);
+  }
+  .dg-approval::before {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-right: 0.4rem;
+    border-radius: 50%;
+    background: var(--color-orange);
+    animation: dg-pulse 2s ease-in-out infinite;
+    content: '';
+    vertical-align: 1px;
+  }
+
+  /* Connectors: horizontal by default; is-left, is-down and is-up change direction */
+  .dg-link {
+    position: relative;
+    height: 2px;
+    align-self: center;
+    margin-inline: 6px;
+    background: rgb(201 84 43 / 38%);
+    color: var(--color-orange);
+  }
+  .dg-link::after {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    bottom: auto;
+    left: auto;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    content: '';
+    transform: translate(0, -50%) rotate(45deg);
+  }
+  .dg-link i {
+    position: absolute;
+    inset: 0;
+    animation: dg-travel-right 2.2s ease-in-out infinite;
+    animation-delay: var(--d, 0s);
+  }
+  .dg-link i::before {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 9px;
+    height: 9px;
+    margin: -4.5px 0 0 -4.5px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    background: #fff8f4;
+    box-shadow: 0 0 0 4px rgb(201 84 43 / 12%);
+    content: '';
+  }
+  .dg-link.is-left::after {
+    right: auto;
+    left: 0;
+    transform: translate(0, -50%) rotate(-135deg);
+  }
+  .dg-link.is-left i {
+    animation-name: dg-travel-left;
+  }
+  .dg-link.is-left i::before {
+    left: 100%;
+  }
+  .dg-link.is-down,
+  .dg-link.is-up {
+    width: 2px;
+    height: auto;
+    min-height: 24px;
+    align-self: stretch;
+    justify-self: center;
+    margin: 6px 0;
+  }
+  .dg-link.is-down::after {
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0) rotate(135deg);
+  }
+  .dg-link.is-down i {
+    animation-name: dg-travel-down;
+  }
+  .dg-link.is-down i::before {
+    top: 0;
+    left: 50%;
+  }
+  .dg-link.is-up::after {
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 50%;
+    transform: translate(-50%, 0) rotate(-45deg);
+  }
+  .dg-link.is-up i {
+    animation-name: dg-travel-up;
+  }
+  .dg-link.is-up i::before {
+    top: 100%;
+    left: 50%;
+  }
+  .dg-link em {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    color: var(--color-muted);
+    font-size: 0.68rem;
+    font-style: normal;
+    font-weight: 650;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+  .dg-duplex {
+    display: grid;
+    align-self: center;
+    gap: 30px;
+    padding-block: 18px;
+  }
+  .dg-duplex .dg-link {
+    margin-inline: 4px;
+  }
+  .dg-duplex .dg-link.is-left {
+    background: rgb(84 123 157 / 40%);
+    color: var(--color-blue);
+  }
+  .dg-duplex .dg-link.is-left i::before {
+    background: #f3f7fa;
+    box-shadow: 0 0 0 4px rgb(84 123 157 / 12%);
+  }
+  .dg-duplex .dg-link.is-left em {
+    top: 8px;
+    bottom: auto;
+  }
+
+  /* Step layouts */
+  .dg-understand {
+    grid-template-columns: minmax(0, 1fr) 48px minmax(0, 1fr) 48px minmax(
+        0,
+        1.1fr
+      );
+  }
+  .dg-prepare {
+    grid-template-columns:
+      minmax(0, 1.05fr) 36px minmax(0, 1.2fr) 36px minmax(0, 0.95fr)
+      36px minmax(0, 0.95fr);
+  }
+  .dg-design {
+    grid-template-areas:
+      'query l1 retrieve l2 vector'
+      '. . . . l3'
+      'eval l5 llm l4 prompt';
+    grid-template-columns: minmax(0, 1fr) 46px minmax(0, 1fr) 46px minmax(
+        0,
+        1fr
+      );
+    align-items: stretch;
+  }
+  .dg-design > .dg-link:not(.is-down) {
+    align-self: center;
+  }
+  .dg-a-query {
+    grid-area: query;
+  }
+  .dg-a-retrieve {
+    grid-area: retrieve;
+  }
+  .dg-a-vector {
+    grid-area: vector;
+  }
+  .dg-a-prompt {
+    grid-area: prompt;
+  }
+  .dg-a-llm {
+    grid-area: llm;
+  }
+  .dg-design .dg-a-eval {
+    grid-area: eval;
+  }
+  .dg-design .dg-a-l1 {
+    grid-area: l1;
+  }
+  .dg-design .dg-a-l2 {
+    grid-area: l2;
+  }
+  .dg-design .dg-a-l3 {
+    grid-area: l3;
+  }
+  .dg-design .dg-a-l4 {
+    grid-area: l4;
+  }
+  .dg-design .dg-a-l5 {
+    grid-area: l5;
+  }
+  .dg-connect {
+    grid-template-columns:
+      minmax(0, 1fr) 62px minmax(0, 1.05fr) 56px minmax(0, 1fr)
+      50px minmax(0, 0.95fr);
+    align-items: stretch;
+  }
+  .dg-improve {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.85fr);
+    gap: 1rem;
+    align-items: stretch;
+  }
+  .dg-loop {
+    position: relative;
+    display: grid;
+    grid-template-areas:
+      'eval l1 monitor'
+      'l4 hub l2'
+      'iterate l3 feedback';
+    grid-template-columns: minmax(0, 1fr) 54px minmax(0, 1fr);
+    grid-template-rows: auto 52px auto;
+    align-items: stretch;
+  }
+  .dg-loop .dg-a-eval {
+    grid-area: eval;
+  }
+  .dg-a-monitor {
+    grid-area: monitor;
+  }
+  .dg-a-feedback {
+    grid-area: feedback;
+  }
+  .dg-a-iterate {
+    grid-area: iterate;
+  }
+  .dg-loop .dg-a-l1 {
+    grid-area: l1;
+  }
+  .dg-loop .dg-a-l2 {
+    grid-area: l2;
+  }
+  .dg-loop .dg-a-l3 {
+    grid-area: l3;
+  }
+  .dg-loop .dg-a-l4 {
+    grid-area: l4;
+  }
+  .dg-loop-hub {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    grid-area: hub;
+    place-self: center;
+    place-items: center;
+    border: 1px solid rgb(201 84 43 / 25%);
+    border-radius: 50%;
+    background: #fff;
+    color: var(--color-orange);
+  }
+  .dg-loop-hub svg {
+    width: 22px;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+    animation: dg-spin 9s linear infinite;
+  }
+  .dg-signals ul {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .dg-signals-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .dg-signals-head small {
+    padding: 0.15rem 0.45rem;
+    border-radius: 999px;
+    background: #f1efeb;
+    color: var(--color-muted);
+    font-size: 0.66rem;
+    font-weight: 700;
+  }
+  .dg-signals li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.3rem 0.5rem;
+    padding-block: 0.5rem;
+    border-bottom: 1px solid #f0eeeb;
+    color: var(--color-ink);
+    font-size: 0.8rem;
+    font-weight: 550;
+  }
+  .dg-signals em {
+    padding: 0.18rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-style: normal;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .dg-signals em.is-good {
+    background: #eef4ef;
+    color: #315d45;
+  }
+  .dg-signals em.is-check {
+    background: #eaf0f5;
+    color: #2f5677;
+  }
+  .dg-signals em.is-watch {
+    background: #f8eee8;
+    color: var(--color-orange-dark);
+  }
+  .dg-signals > .dg-text {
+    color: var(--color-muted);
+    font-size: 0.74rem;
+  }
+
+  /* Active step fallback without JavaScript */
+  .ai-workflow-layout:has(#workflow-understand:checked)
+    [data-flow-state='understand'],
+  .ai-workflow-layout:has(#workflow-prepare:checked)
+    [data-flow-state='prepare'],
+  .ai-workflow-layout:has(#workflow-design:checked) [data-flow-state='design'],
+  .ai-workflow-layout:has(#workflow-connect:checked)
+    [data-flow-state='connect'],
+  .ai-workflow-layout:has(#workflow-improve:checked)
+    [data-flow-state='improve'] {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .ai-workflow-layout:has(#workflow-understand:checked)
+    [data-flow-state]:not([data-flow-state='understand']),
+  .ai-workflow-layout:has(#workflow-prepare:checked)
+    [data-flow-state]:not([data-flow-state='prepare']),
+  .ai-workflow-layout:has(#workflow-design:checked)
+    [data-flow-state]:not([data-flow-state='design']),
+  .ai-workflow-layout:has(#workflow-connect:checked)
+    [data-flow-state]:not([data-flow-state='connect']),
+  .ai-workflow-layout:has(#workflow-improve:checked)
+    [data-flow-state]:not([data-flow-state='improve']) {
+    opacity: 0;
+    visibility: hidden;
+  }
+  .ai-workflow-layout:has(#workflow-prepare:checked) .ai-demo-progress span {
+    transform: scaleX(0.4);
+  }
+  .ai-workflow-layout:has(#workflow-design:checked) .ai-demo-progress span {
+    transform: scaleX(0.6);
+  }
+  .ai-workflow-layout:has(#workflow-connect:checked) .ai-demo-progress span {
+    transform: scaleX(0.8);
+  }
+  .ai-workflow-layout:has(#workflow-improve:checked) .ai-demo-progress span {
+    transform: scaleX(1);
+  }
+
+  /* Pause looping diagram motion while the section is off screen */
+  [data-ai-experience][data-ai-paused='true'] .ai-workflow-demo *,
+  [data-ai-experience][data-ai-paused='true'] .ai-workflow-demo *::before {
+    animation-play-state: paused;
+  }
+
+  /* Mid-width panel: slimmer connectors keep step 4's seven columns inside */
+  @container ai-demo (max-width: 800px) {
+    .dg-connect {
+      grid-template-columns:
+        minmax(0, 1fr) 50px minmax(0, 1.05fr) 42px minmax(0, 1fr)
+        40px minmax(0, 0.95fr);
+    }
+  }
+
+  /* Narrow diagram panel: flows stack vertically */
+  @container ai-demo (max-width: 640px) {
+    .dg {
+      align-self: start;
+    }
+    .dg-flow {
+      grid-template-areas: none;
+      grid-template-columns: minmax(0, 1fr);
+      align-items: stretch;
+    }
+    .dg-flow > .dg-node,
+    .dg-flow > .dg-link {
+      grid-area: auto;
+    }
+    .dg-flow > .dg-link,
+    .dg-duplex > .dg-link {
+      width: 2px;
+      height: auto;
+      min-height: 26px;
+      align-self: stretch;
+      justify-self: center;
+      margin: 5px 0;
+    }
+    .dg-flow > .dg-link::after,
+    .dg-duplex > .dg-link:first-child::after {
+      top: auto;
+      right: auto;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 0) rotate(135deg);
+    }
+    .dg-flow > .dg-link i,
+    .dg-duplex > .dg-link:first-child i {
+      animation-name: dg-travel-down;
+    }
+    .dg-flow > .dg-link i::before,
+    .dg-duplex > .dg-link:first-child i::before {
+      top: 0;
+      left: 50%;
+    }
+    .dg-duplex {
+      display: flex;
+      justify-content: center;
+      gap: 6.5rem;
+      padding: 0;
+    }
+    .dg-duplex > .dg-link {
+      min-height: 34px;
+    }
+    .dg-duplex > .dg-link:last-child::after {
+      top: 0;
+      bottom: auto;
+      left: 50%;
+      transform: translate(-50%, 0) rotate(-45deg);
+    }
+    .dg-duplex > .dg-link:last-child i {
+      animation-name: dg-travel-up;
+    }
+    .dg-duplex > .dg-link:last-child i::before {
+      top: 100%;
+      left: 50%;
+    }
+    .dg-duplex .dg-link em,
+    .dg-duplex .dg-link.is-left em {
+      top: 50%;
+      bottom: auto;
+      left: 12px;
+      transform: translateY(-50%);
+    }
+    .dg-node {
+      padding: 0.7rem 0.8rem;
+    }
+    .dg-improve {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .dg-loop {
+      grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr);
+      grid-template-rows: auto 46px auto;
+    }
+    .dg-loop .dg-node {
+      padding: 0.65rem;
+    }
+    .dg-vectors code:nth-child(3) {
+      display: none;
+    }
+  }
+
+  .ai-reveal {
+    opacity: 1;
+    transform: none;
+  }
+  [data-ai-experience][data-motion-ready] .ai-reveal {
+    transition:
+      opacity 550ms var(--ease-out),
+      transform 550ms var(--ease-out);
+  }
+  [data-ai-experience][data-motion-ready] .ai-reveal:not(.is-visible) {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  @keyframes dg-node-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes dg-travel-right {
+    0% {
+      opacity: 0;
+      transform: translateX(0);
+    }
+    15%,
+    80% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+  }
+  @keyframes dg-travel-left {
+    0% {
+      opacity: 0;
+      transform: translateX(0);
+    }
+    15%,
+    80% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+  }
+  @keyframes dg-travel-down {
+    0% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+    15%,
+    80% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+  }
+  @keyframes dg-travel-up {
+    0% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+    15%,
+    80% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+  }
+  @keyframes dg-chip-scan {
+    0%,
+    40%,
+    100% {
+      border-color: rgb(255 255 255 / 16%);
+      background: rgb(255 255 255 / 7%);
+    }
+    15%,
+    28% {
+      border-color: rgb(242 183 159 / 70%);
+      background: rgb(201 84 43 / 45%);
+    }
+  }
+  @keyframes dg-check-in {
+    from {
+      opacity: 0;
+      transform: scale(0.4);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @keyframes dg-bar-in {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  @keyframes dg-db-glow {
+    0%,
+    100% {
+      filter: none;
+    }
+    50% {
+      filter: drop-shadow(0 0 6px rgb(84 123 157 / 45%));
+    }
+  }
+  @keyframes dg-typing {
+    0%,
+    100% {
+      opacity: 0.3;
+      transform: translateY(0);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+  }
+  @keyframes dg-pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgb(201 84 43 / 40%);
+    }
+    50% {
+      box-shadow: 0 0 0 5px rgb(201 84 43 / 0%);
+    }
+  }
+  @keyframes dg-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (max-width: 1199px) {
+    .ai-workflow-layout {
+      grid-template-columns: minmax(250px, 0.7fr) minmax(0, 1.75fr);
+    }
+  }
+
+  @media (max-width: 991px) {
+    .ai-workflow-layout {
+      grid-template-columns: 1fr;
+    }
+    .ai-workflow-steps {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .ai-workflow-step {
+      min-height: 0;
+    }
+    .ai-workflow-step:last-child {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .ai-path {
+      --ai-space: 3.75rem;
+    }
+    .ai-workflow-heading {
+      display: block;
+    }
+    .ai-workflow-heading > p {
+      margin-top: 0.75rem;
+    }
+    .ai-workflow-step {
+      grid-template-columns: 34px minmax(0, 1fr);
+      gap: 0.65rem;
+      padding: 0.85rem 0.75rem;
+    }
+    .ai-step-number {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+    }
+    .ai-step-copy strong {
+      font-size: 0.95rem;
+    }
+    .ai-step-copy small {
+      font-size: 0.82rem;
+    }
+    .ai-step-arrow {
+      display: none;
+    }
+    .ai-workflow-demo {
+      padding: 1rem;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .ai-workflow-steps {
+      grid-template-columns: 1fr;
+    }
+    .ai-workflow-step {
+      grid-template-columns: 34px minmax(0, 1fr) 16px;
+      align-items: center;
+    }
+    .ai-workflow-step:last-child {
+      grid-column: auto;
+    }
+    .ai-step-arrow {
+      display: block;
+      margin-top: 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ai-workflow-demo {
+      padding: 0.85rem;
+      border-radius: 18px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dg-link i {
+      display: none;
+    }
+    .ai-path *,
+    .ai-path *::before,
+    .ai-path *::after {
+      scroll-behavior: auto !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

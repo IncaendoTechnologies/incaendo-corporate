@@ -1,7 +1,9 @@
 ---
+import { Image } from 'astro:assets'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import ContactForm from '../components/ContactForm.astro'
 import { pages } from '../data/site-content.js'
+import contactHeroImage from '../assets/contact-hero-project-planning.webp'
 
 const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? ''
 ---
@@ -30,40 +32,17 @@ const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? ''
             </a>
           </div>
         </div>
-        <div class="contact-hero-visual reveal" aria-hidden="true">
-          <div class="contact-orbit contact-orbit-one"></div>
-          <div class="contact-orbit contact-orbit-two"></div>
-          <svg
-            class="contact-connection-lines"
-            viewBox="0 0 520 360"
-            fill="none"
-          >
-            <path d="M90 188C148 97 216 94 263 180C310 266 379 263 432 170" />
-            <path d="M90 188C170 244 207 251 263 180C319 109 368 111 432 170" />
-            <circle cx="90" cy="188" r="8" />
-            <circle cx="263" cy="180" r="12" />
-            <circle cx="432" cy="170" r="8" />
-            <circle class="contact-pulse" cx="263" cy="180" r="28" />
-          </svg>
-          <div class="contact-visual-center">
-            <span>INCAENDO</span>
-            <strong>
-              Ideas into
-              <br />
-              what’s next.
-            </strong>
-          </div>
-          <div class="contact-visual-label contact-visual-label-one">
-            <i></i>Business goals
-          </div>
-          <div class="contact-visual-label contact-visual-label-two">
-            <i></i>Technology
-          </div>
-          <div class="contact-visual-label contact-visual-label-three">
-            <i></i>Real-world value
-          </div>
-          <span class="contact-visual-index">A clearer way forward</span>
-        </div>
+        <figure class="contact-hero-visual reveal">
+          <Image
+            src={contactHeroImage}
+            alt="Project workspace showing a client brief, delivery roadmap, solution scope and the next planning workshop"
+            widths={[560, 840, 1120, 1600]}
+            sizes="(max-width: 760px) calc(100vw - 2rem), (max-width: 899px) 45vw, 560px"
+            quality={86}
+            loading="eager"
+            fetchpriority="high"
+          />
+        </figure>
       </div>
     </section>
 

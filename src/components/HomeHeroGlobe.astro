@@ -1,0 +1,821 @@
+---
+// Right-hand composition of the Home hero: an SVG globe of connected delivery
+// regions with the five key points pinned to it as callouts.
+//
+// Everything is laid out on a 456 x 470 design box. The globe and leader lines
+// are SVG in those units, and the callouts are positioned in percentages of
+// the same box, so the composition scales without drifting apart. Final stat
+// values are rendered in the markup; hero-stats.js counts them up.
+//
+// hero-earth.js renders the realistic Earth into a canvas between the two SVG
+// layers, using the same projection (TILT, CENTER_LON) so every network node
+// sits on its real location, and animates data particles along the arcs. The
+// dotted SVG globe below is the fallback when WebGL is unavailable.
+//
+// Earth texture: NASA/Goddard Space Flight Center SVS, Blue Marble.
+import { getImage } from 'astro:assets'
+import earthTextureSource from '../assets/earth-blue-marble.png'
+
+const earthTexture = await getImage({
+  src: earthTextureSource,
+  width: 2048,
+  format: 'webp',
+  quality: 82,
+})
+
+const BOX = { w: 456, h: 470 }
+const GLOBE = { x: 228, y: 212, r: 136 }
+const TILT = (22 * Math.PI) / 180
+const CENTER_LON = 48
+
+const rad = (deg) => (deg * Math.PI) / 180
+const round = (n) => Math.round(n * 10) / 10
+
+// Unit vector for a lat/lon, rotated so the view sits above CENTER_LON and
+// tilted 22° north toward the viewer.
+function toView(lat, lon) {
+  const p = rad(lat)
+  const l = rad(lon - CENTER_LON)
+  const x = Math.cos(p) * Math.sin(l)
+  const y = Math.sin(p)
+  const z = Math.cos(p) * Math.cos(l)
+  return {
+    x,
+    y: y * Math.cos(TILT) - z * Math.sin(TILT),
+    z: y * Math.sin(TILT) + z * Math.cos(TILT),
+  }
+}
+
+const toScreen = (v, alt = 1) => ({
+  x: round(GLOBE.x + GLOBE.r * alt * v.x),
+  y: round(GLOBE.y - GLOBE.r * alt * v.y),
+})
+
+// Surface dots, evenly spaced, front hemisphere only; depth drives size and
+// opacity to give the sphere volume.
+const dots = []
+for (let lat = -84; lat <= 84; lat += 7) {
+  const count = Math.max(1, Math.round((360 * Math.cos(rad(lat))) / 7))
+  for (let i = 0; i < count; i++) {
+    const v = toView(lat, (360 / count) * i + (lat % 14 === 0 ? 0 : 3.5))
+    if (v.z < 0.08) continue
+    dots.push({
+      ...toScreen(v),
+      r: round(0.6 + 1 * v.z),
+      o: round(0.18 + 0.62 * v.z),
+    })
+  }
+}
+
+// Graticule lines, split wherever they pass behind the sphere.
+function visiblePath(points) {
+  let d = ''
+  let drawing = false
+  for (const v of points) {
+    if (v.z > 0) {
+      const s = toScreen(v)
+      d += `${drawing ? 'L' : 'M'}${s.x} ${s.y}`
+      drawing = true
+    } else {
+      drawing = false
+    }
+  }
+  return d
+}
+const graticule = [
+  ...[-60, -30, 0, 30, 60].map((lat) =>
+    visiblePath(Array.from({ length: 73 }, (_, i) => toView(lat, i * 5))),
+  ),
+  ...[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((lon) =>
+    visiblePath(Array.from({ length: 37 }, (_, i) => toView(-90 + i * 5, lon))),
+  ),
+].filter(Boolean)
+
+// Delivery network: Incaendo's Noida base linked to client regions.
+const hub = { lat: 28.5, lon: 77.3 }
+const regions = {
+  london: { lat: 51.5, lon: -0.1 },
+  moscow: { lat: 55.7, lon: 37.6 },
+  dubai: { lat: 25.2, lon: 55.3 },
+  nairobi: { lat: -1.3, lon: 36.8 },
+  singapore: { lat: 1.3, lon: 103.8 },
+  capetown: { lat: -33.9, lon: 18.4 },
+}
+
+// Great-circle arc from the hub, lifted off the surface toward its middle.
+function arcPath(from, to) {
+  const a = toView(from.lat, from.lon)
+  const b = toView(to.lat, to.lon)
+  const angle = Math.acos(a.x * b.x + a.y * b.y + a.z * b.z)
+  const points = Array.from({ length: 25 }, (_, i) => {
+    const t = i / 24
+    const s1 = Math.sin((1 - t) * angle) / Math.sin(angle)
+    const s2 = Math.sin(t * angle) / Math.sin(angle)
+    const v = {
+      x: a.x * s1 + b.x * s2,
+      y: a.y * s1 + b.y * s2,
+      z: a.z * s1 + b.z * s2,
+    }
+    return toScreen(
+      v,
+      1 + 0.16 * Math.sin(Math.PI * t) * Math.min(angle / 0.9, 1),
+    )
+  })
+  return points.map((p, i) => `${i ? 'L' : 'M'}${p.x} ${p.y}`).join('')
+}
+
+const hubPoint = toScreen(toView(hub.lat, hub.lon))
+const arcs = Object.entries(regions).map(([name, region]) => ({
+  name,
+  d: arcPath(hub, region),
+}))
+const nodes = Object.fromEntries(
+  Object.entries(regions).map(([name, r]) => [
+    name,
+    toScreen(toView(r.lat, r.lon)),
+  ]),
+)
+
+// Callouts: position on the design box, and the globe node each one pins to.
+const pct = (n, total) => `${round((n / total) * 100)}%`
+const stats = [
+  {
+    value: 100,
+    label: 'Projects Delivered',
+    icon: 'projects',
+    tone: 'orange',
+    box: { x: 0, y: 40 },
+    anchor: { x: 178, y: 73 },
+    node: nodes.moscow,
+  },
+  {
+    value: 15,
+    label: 'Years of Experience',
+    icon: 'years',
+    tone: 'blue',
+    box: { x: 278, y: 92 },
+    anchor: { x: 300, y: 158 },
+    node: hubPoint,
+  },
+  {
+    value: 80,
+    label: 'Technology Experts',
+    icon: 'experts',
+    tone: 'blue',
+    box: { x: 0, y: 236 },
+    anchor: { x: 178, y: 269 },
+    node: nodes.nairobi,
+  },
+  {
+    value: 10,
+    label: 'Industries Worked With',
+    icon: 'industries',
+    tone: 'orange',
+    box: { x: 278, y: 288 },
+    anchor: { x: 330, y: 288 },
+    node: nodes.singapore,
+  },
+]
+const aiBox = { x: 114, y: 384 }
+const aiAnchor = { x: 228, y: 384 }
+const globeBase = { x: GLOBE.x, y: GLOBE.y + GLOBE.r }
+---
+
+<div class="hero-globe" data-hero-stats>
+  <div class="hero-globe-stage reveal" data-reveal-stagger>
+    <div class="hero-globe-art" data-reveal-item>
+      <svg
+        class="hero-globe-layer"
+        viewBox={`0 0 ${BOX.w} ${BOX.h}`}
+        aria-hidden="true"
+      >
+        <defs>
+          <radialGradient id="hg-sphere" cx="38%" cy="30%" r="78%">
+            <stop offset="0" stop-color="#ffffff"></stop>
+            <stop offset="0.45" stop-color="#f4f7fa"></stop>
+            <stop offset="0.8" stop-color="#dde7f0"></stop>
+            <stop offset="1" stop-color="#c4d4e3"></stop>
+          </radialGradient>
+          <radialGradient id="hg-atmosphere" cx="50%" cy="50%" r="50%">
+            <stop offset="0.86" stop-color="#547b9d" stop-opacity="0"></stop>
+            <stop offset="0.93" stop-color="#547b9d" stop-opacity="0.1"></stop>
+            <stop offset="1" stop-color="#547b9d" stop-opacity="0"></stop>
+          </radialGradient>
+          <radialGradient id="hg-ground" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="#101b2d" stop-opacity="0.16"></stop>
+            <stop offset="1" stop-color="#101b2d" stop-opacity="0"></stop>
+          </radialGradient>
+          <radialGradient id="hg-shine" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="#ffffff" stop-opacity="0.85"></stop>
+            <stop offset="1" stop-color="#ffffff" stop-opacity="0"></stop>
+          </radialGradient>
+        </defs>
+        <ellipse
+          cx={GLOBE.x}
+          cy={GLOBE.y + GLOBE.r + 16}
+          rx={GLOBE.r * 0.82}
+          ry="11"
+          fill="url(#hg-ground)"
+        ></ellipse>
+        <circle
+          cx={GLOBE.x}
+          cy={GLOBE.y}
+          r={GLOBE.r + 14}
+          fill="url(#hg-atmosphere)"
+        ></circle>
+        <circle
+          class="hero-globe-sphere"
+          cx={GLOBE.x}
+          cy={GLOBE.y}
+          r={GLOBE.r}
+          fill="url(#hg-sphere)"
+        ></circle>
+
+        <g class="hero-globe-graticule">
+          {graticule.map((d) => (
+            <path d={d} />
+          ))}
+        </g>
+        <g class="hero-globe-dots">
+          {dots.map((d) => (
+            <circle cx={d.x} cy={d.y} r={d.r} opacity={d.o} />
+          ))}
+        </g>
+        <ellipse
+          class="hero-globe-shine"
+          cx={GLOBE.x - GLOBE.r * 0.36}
+          cy={GLOBE.y - GLOBE.r * 0.42}
+          rx={GLOBE.r * 0.42}
+          ry={GLOBE.r * 0.26}
+          fill="url(#hg-shine)"
+        ></ellipse>
+      </svg>
+
+      <canvas
+        class="hero-globe-earth"
+        style={`left: ${pct(GLOBE.x - GLOBE.r, BOX.w)}; top: ${pct(GLOBE.y - GLOBE.r, BOX.h)}; width: ${pct(GLOBE.r * 2, BOX.w)}`}
+        data-earth-texture={earthTexture.src}
+        data-earth-tilt="22"
+        data-earth-center-lon={CENTER_LON}
+        aria-hidden="true"
+      ></canvas>
+
+      <svg
+        class="hero-globe-layer"
+        viewBox={`0 0 ${BOX.w} ${BOX.h}`}
+        aria-hidden="true"
+        data-globe-network
+      >
+        <g class="hero-globe-arcs-halo">
+          {arcs.map((arc) => (
+            <path d={arc.d} />
+          ))}
+        </g>
+        <g class="hero-globe-arcs">
+          {arcs.map((arc) => (
+            <path d={arc.d} data-arc-to={arc.name} />
+          ))}
+        </g>
+        <g class="hero-globe-particles" data-globe-particles></g>
+
+        <g class="hero-globe-leaders">
+          {stats.map((s) => (
+            <path d={`M${s.anchor.x} ${s.anchor.y}L${s.node.x} ${s.node.y}`} />
+          ))}
+          <path
+            d={`M${globeBase.x} ${globeBase.y}L${aiAnchor.x} ${aiAnchor.y}`}
+          />
+        </g>
+
+        <g class="hero-globe-nodes">
+          {Object.entries(nodes).map(([name, n]) => (
+            <g data-node={name}>
+              <circle class="hero-globe-node-pulse" cx={n.x} cy={n.y} r="2.6" />
+              <circle class="hero-globe-node" cx={n.x} cy={n.y} r="2.6" />
+            </g>
+          ))}
+          <circle
+            class="hero-globe-node-base"
+            cx={globeBase.x}
+            cy={globeBase.y}
+            r="3"
+          ></circle>
+          <g data-node="hub">
+            <circle
+              class="hero-globe-node-pulse hero-globe-hub-pulse"
+              cx={hubPoint.x}
+              cy={hubPoint.y}
+              r="7"
+            ></circle>
+            <circle
+              class="hero-globe-hub-ring"
+              cx={hubPoint.x}
+              cy={hubPoint.y}
+              r="7"
+            ></circle>
+            <circle
+              class="hero-globe-hub"
+              cx={hubPoint.x}
+              cy={hubPoint.y}
+              r="3.8"
+            ></circle>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <ul class="hero-globe-callouts">
+      {stats.map((stat) => (
+        <li
+          class={`hero-callout hero-callout-${stat.tone}`}
+          style={`left: ${pct(stat.box.x, BOX.w)}; top: ${pct(stat.box.y, BOX.h)}`}
+          data-reveal-item
+        >
+          <span class="hero-callout-icon" aria-hidden="true">
+            {stat.icon === 'projects' && (
+              <svg viewBox="0 0 24 24">
+                <rect x="3.5" y="6.5" width="17" height="13" rx="2.5" />
+                <path d="M8.5 6.5V5a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 5v1.5" />
+                <path d="m9 13 2 2 4-4" />
+              </svg>
+            )}
+            {stat.icon === 'years' && (
+              <svg viewBox="0 0 24 24">
+                <rect x="3.5" y="5" width="17" height="15" rx="2.5" />
+                <path d="M3.5 9.5h17M8 3v4M16 3v4" />
+                <path d="M8 14h3M8 16.5h6" />
+              </svg>
+            )}
+            {stat.icon === 'experts' && (
+              <svg viewBox="0 0 24 24">
+                <circle cx="9" cy="8.5" r="3.25" />
+                <path d="M3.5 19a5.5 5.5 0 0 1 11 0" />
+                <path d="M15.5 5.6a3.25 3.25 0 0 1 0 5.8M17.5 14.2a5.5 5.5 0 0 1 3 4.8" />
+              </svg>
+            )}
+            {stat.icon === 'industries' && (
+              <svg viewBox="0 0 24 24">
+                <path d="M3.5 20.5h17" />
+                <path d="M5.5 20.5V8.5l5-3v15" />
+                <path d="M10.5 20.5V10l8 3.5v7" />
+                <path d="M13.5 15.5h2M13.5 18h2M7.5 11h1M7.5 14h1M7.5 17h1" />
+              </svg>
+            )}
+          </span>
+          <span class="hero-callout-copy">
+            <span class="hero-callout-value" aria-hidden="true">
+              <span class="hero-stat-number">
+                <span class="hero-stat-number-final">{stat.value}</span>
+                <span class="hero-stat-number-live" data-count-to={stat.value}>
+                  {stat.value}
+                </span>
+              </span>
+              <span class="hero-callout-suffix">+</span>
+            </span>
+            <span class="hero-callout-label">
+              <span class="hero-globe-sr">{stat.value}+ </span>
+              {stat.label}
+            </span>
+          </span>
+        </li>
+      ))}
+      <li
+        class="hero-callout hero-callout-ai"
+        style={`left: ${pct(aiBox.x, BOX.w)}; top: ${pct(aiBox.y, BOX.h)}`}
+        data-reveal-item
+      >
+        <span class="hero-callout-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <rect x="6.5" y="6.5" width="11" height="11" rx="2.5" />
+            <path d="M9.5 3v3.5M14.5 3v3.5M9.5 17.5V21M14.5 17.5V21M3 9.5h3.5M3 14.5h3.5M17.5 9.5H21M17.5 14.5H21" />
+            <path d="m12 9.4.7 1.9 1.9.7-1.9.7-.7 1.9-.7-1.9-1.9-.7 1.9-.7z" />
+          </svg>
+        </span>
+        <span class="hero-callout-copy">
+          <span class="hero-callout-title">AI Automation</span>
+          <span class="hero-callout-label">Integration</span>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- Runs during parsing so the final values never flash before the count-up.
+     Falls back to the final values if the count-up script does not load. -->
+<script is:inline>
+  ;(() => {
+    const panel = document.currentScript.previousElementSibling
+    if ('WebGLRenderingContext' in window) {
+      panel.setAttribute('data-earth-pending', '')
+      setTimeout(() => {
+        if (!panel.dataset.earthStarted)
+          panel.removeAttribute('data-earth-pending')
+      }, 5000)
+    }
+    if (
+      matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      !('IntersectionObserver' in window)
+    )
+      return
+    panel.setAttribute('data-stats-pending', '')
+    setTimeout(() => {
+      if (!panel.dataset.statsReady) panel.removeAttribute('data-stats-pending')
+    }, 3000)
+  })()
+</script>
+
+<script>
+  import '../scripts/hero-stats.js'
+  import '../scripts/hero-earth.js'
+</script>
+
+<style>
+  .hero-globe {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    container-type: inline-size;
+  }
+
+  .hero-globe-stage {
+    position: relative;
+    aspect-ratio: 456 / 470;
+  }
+
+  /* Soft light pooled behind the globe so it sits in the hero, not on it */
+  .hero-globe-stage::before {
+    position: absolute;
+    inset: 4% 8% 10%;
+    z-index: -1;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle at 50% 45%,
+      rgb(225 237 249 / 75%),
+      rgb(248 221 209 / 22%) 52%,
+      transparent 70%
+    );
+    content: '';
+  }
+
+  .hero-globe-art {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero-globe-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  /* Realistic Earth, drawn by hero-earth.js exactly over the SVG sphere */
+  .hero-globe-earth {
+    position: absolute;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.7s ease;
+  }
+
+  .hero-globe.is-earth-ready .hero-globe-earth {
+    opacity: 1;
+  }
+
+  /* While the Earth loads, show a plain sphere instead of the dotted
+     fallback, so the dots never flash before the realistic globe. */
+  .hero-globe[data-earth-pending] .hero-globe-dots,
+  .hero-globe[data-earth-pending] .hero-globe-graticule,
+  .hero-globe.is-earth-ready .hero-globe-dots,
+  .hero-globe.is-earth-ready .hero-globe-graticule,
+  .hero-globe.is-earth-ready .hero-globe-shine {
+    display: none;
+  }
+
+  .hero-globe-sphere {
+    stroke: rgb(84 123 157 / 22%);
+    stroke-width: 1;
+  }
+
+  .hero-globe-graticule path {
+    fill: none;
+    stroke: rgb(84 123 157 / 20%);
+    stroke-width: 0.7;
+  }
+
+  .hero-globe-dots circle {
+    fill: var(--color-blue);
+  }
+
+  .hero-globe-arcs path {
+    fill: none;
+    stroke: var(--color-orange);
+    stroke-linecap: round;
+    stroke-opacity: 0.7;
+    stroke-width: 1.2;
+  }
+
+  /* Light underlay keeps the arcs legible over the textured Earth */
+  .hero-globe-arcs-halo path {
+    fill: none;
+    stroke: rgb(255 255 255 / 45%);
+    stroke-linecap: round;
+    stroke-width: 3;
+  }
+
+  .hero-globe-leaders path {
+    fill: none;
+    stroke: rgb(16 27 45 / 42%);
+    stroke-dasharray: 2 3;
+    stroke-width: 1;
+  }
+
+  .hero-globe-node,
+  .hero-globe-node-base {
+    fill: var(--color-white);
+    stroke: var(--color-blue);
+    stroke-width: 1.4;
+  }
+
+  .hero-globe-hub {
+    fill: var(--color-orange);
+  }
+
+  .hero-globe-hub-ring {
+    fill: rgb(201 84 43 / 14%);
+    stroke: rgb(201 84 43 / 45%);
+    stroke-width: 1;
+  }
+
+  /* Arrival pulse, played by hero-earth.js when a particle reaches a node */
+  .hero-globe-node-pulse {
+    fill: none;
+    opacity: 0;
+    stroke: rgb(201 84 43 / 70%);
+    stroke-width: 1.2;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .hero-globe-hub-pulse {
+    stroke: rgb(201 84 43 / 55%);
+  }
+
+  /* Data particles (created by hero-earth.js, hence :global): a trail that
+     brightens toward a small glowing head */
+  .hero-globe-particles :global(path) {
+    fill: none;
+    stroke: var(--color-orange);
+    stroke-linecap: round;
+    stroke-opacity: 0.8;
+    stroke-width: 1.8;
+  }
+
+  .hero-globe-particles :global(path.is-long) {
+    stroke-opacity: 0.24;
+    stroke-width: 1.5;
+  }
+
+  .hero-globe-particles :global(.hero-globe-particle-glow) {
+    fill: rgb(201 84 43 / 22%);
+  }
+
+  .hero-globe-particles :global(.hero-globe-particle-head) {
+    fill: #fff4ee;
+    stroke: var(--color-orange);
+    stroke-width: 1.2;
+  }
+
+  .hero-globe-callouts {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .hero-callout {
+    position: absolute;
+    display: flex;
+    width: 39%;
+    height: 14%;
+    box-sizing: border-box;
+    align-items: center;
+    gap: clamp(0.5rem, 2.4cqi, 0.75rem);
+    padding-inline: clamp(0.6rem, 3cqi, 0.9rem);
+    border: 1px solid rgb(16 27 45 / 9%);
+    border-radius: 14px;
+    background: rgb(255 255 255 / 92%);
+    box-shadow:
+      0 1px 0 rgb(255 255 255 / 90%) inset,
+      0 14px 34px rgb(16 27 45 / 9%),
+      0 2px 6px rgb(16 27 45 / 4%);
+    backdrop-filter: blur(6px);
+  }
+
+  .hero-callout-icon {
+    display: grid;
+    width: clamp(28px, 7.4cqi, 36px);
+    flex: none;
+    aspect-ratio: 1;
+    place-items: center;
+    border-radius: 10px;
+  }
+
+  .hero-callout-icon svg {
+    width: 54%;
+    height: 54%;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.6;
+  }
+
+  .hero-callout-orange .hero-callout-icon {
+    background: #f8eee8;
+    color: var(--color-orange-dark);
+  }
+
+  .hero-callout-blue .hero-callout-icon {
+    background: #eaf0f5;
+    color: var(--color-blue);
+  }
+
+  .hero-callout-copy {
+    display: grid;
+    min-width: 0;
+    gap: 0.2rem;
+  }
+
+  /* Stat callouts: number and icon on top, label across the full width */
+  .hero-callout:not(.hero-callout-ai) {
+    display: grid;
+    grid-template-areas:
+      'value icon'
+      'label label';
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-content: center;
+    gap: clamp(0.25rem, 1.2cqi, 0.4rem) 0.5rem;
+  }
+
+  .hero-callout:not(.hero-callout-ai) .hero-callout-copy {
+    display: contents;
+  }
+
+  .hero-callout:not(.hero-callout-ai) .hero-callout-icon {
+    width: clamp(24px, 6.4cqi, 30px);
+    grid-area: icon;
+    border-radius: 8px;
+  }
+
+  .hero-callout:not(.hero-callout-ai) .hero-callout-value {
+    grid-area: value;
+    align-self: center;
+  }
+
+  .hero-callout:not(.hero-callout-ai) .hero-callout-label {
+    grid-area: label;
+  }
+
+  .hero-callout-value {
+    display: flex;
+    align-items: baseline;
+    color: var(--color-navy);
+    font-family: var(--font-heading);
+    font-size: clamp(1.15rem, 5.5cqi, 1.65rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  .hero-callout-suffix {
+    margin-left: 0.04em;
+    color: var(--color-orange-dark);
+  }
+
+  /* An invisible copy of the final value reserves the width, so counting
+     never shifts the suffix or resizes the callout. */
+  .hero-stat-number {
+    display: inline-grid;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hero-stat-number > span {
+    grid-area: 1 / 1;
+  }
+
+  .hero-stat-number-final {
+    visibility: hidden;
+  }
+
+  .hero-stat-number-live {
+    justify-self: end;
+  }
+
+  .hero-globe[data-stats-pending] .hero-stat-number-live {
+    visibility: hidden;
+  }
+
+  .hero-callout-label {
+    overflow: hidden;
+    color: var(--color-body);
+    font-size: clamp(0.66rem, 2.5cqi, 0.78rem);
+    font-weight: 600;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .hero-callout-ai {
+    width: 50%;
+    height: 14.5%;
+    border-color: rgb(201 84 43 / 28%);
+    background: linear-gradient(135deg, #fff 0%, #fdf3ed 100%);
+    box-shadow:
+      0 1px 0 rgb(255 255 255 / 90%) inset,
+      0 16px 36px rgb(168 65 33 / 12%),
+      0 2px 6px rgb(16 27 45 / 4%);
+  }
+
+  .hero-callout-ai .hero-callout-icon {
+    background: linear-gradient(
+      135deg,
+      var(--color-orange),
+      var(--color-orange-dark)
+    );
+    color: var(--color-white);
+  }
+
+  .hero-callout-title {
+    color: var(--color-navy);
+    font-family: var(--font-heading);
+    font-size: clamp(0.98rem, 4.2cqi, 1.25rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+
+  .hero-callout-ai .hero-callout-label {
+    color: var(--color-orange-dark);
+  }
+
+  .hero-globe-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Narrow phones: callouts would be too small to read around the globe, so
+     they move into a compact grid inside the same composition. */
+  @container (max-width: 400px) {
+    .hero-globe-stage {
+      display: grid;
+      aspect-ratio: auto;
+      gap: 0.6rem;
+    }
+
+    .hero-globe-stage::before {
+      display: none;
+    }
+
+    /* Same artwork, with the empty bands above and below the globe (where
+       the callouts sit on wider layouts) trimmed away. */
+    .hero-globe-art {
+      position: relative;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 456 / 470;
+      margin-block: -12% -19%;
+    }
+
+    .hero-globe-leaders {
+      display: none;
+    }
+
+    .hero-globe-callouts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.6rem;
+    }
+
+    .hero-callout {
+      position: static;
+      width: auto;
+      height: auto;
+      min-height: 62px;
+      padding-block: 0.7rem;
+    }
+
+    .hero-callout-label {
+      white-space: normal;
+    }
+
+    .hero-callout-ai {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

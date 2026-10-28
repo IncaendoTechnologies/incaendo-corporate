@@ -48,7 +48,9 @@ const serviceItems = isHomepage ? homepageServices : services
             aria-label={`Explore ${service.title}`}
           >
             <span>Explore</span>
-            <span aria-hidden="true">↗</span>
+            <span class="link-arrow" aria-hidden="true">
+              →
+            </span>
           </a>
         ) : (
           <div class="service-card-bottom">

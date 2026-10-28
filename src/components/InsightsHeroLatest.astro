@@ -42,7 +42,10 @@ const href = `/insights/${article.slug}/`
       <h2 id="insights-latest-title">{article.title}</h2>
       <span class="insights-latest-excerpt">{article.excerpt}</span>
       <span class="insights-latest-link">
-        Read the article <span aria-hidden="true">↗</span>
+        Read the article{' '}
+        <span class="link-arrow" aria-hidden="true">
+          →
+        </span>
       </span>
     </span>
   </a>
@@ -202,11 +205,6 @@ const href = `/insights/${article.slug}/`
 
   .insights-latest-link span {
     color: var(--color-orange-dark);
-    transition: transform 180ms var(--ease-out);
-  }
-
-  .insights-latest-preview:hover .insights-latest-link span {
-    transform: translate(2px, -2px);
   }
 
   @media (max-width: 600px) {
