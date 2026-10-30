@@ -24,7 +24,7 @@ export const projects = [
     description:
       'Introducing TOMO, the innovative iOS app designed to support individuals struggling with depression by assisting them in managing their daily habits for better mental health. With its user-friendly conversational interface, TOMO provides personalized habit suggestions and tracks progress, acting as a personal smart agent for users. This revolutionary app is now available on the UK App Store, aiming to make a positive impact on the lives of those in need.',
     overview:
-      'An iOS application focused on daily habit management, using a conversational interface to offer suggestions and record progress.',
+      'An iOS app that helps people build healthier daily habits in support of their mental wellbeing. Its conversational interface acts as a personal smart agent, offering personalized habit suggestions and tracking progress over time. The app is available on the UK App Store.',
     documentedScope:
       'iOS app, conversational personal-agent experience, habit suggestions, and activity tracking.',
     sections: [
@@ -117,7 +117,7 @@ export const projects = [
     description:
       "Developed a highly scalable and secure portal for Domino's Pizza in the Asia/Pacific region. This portal is hosted on three different data centers and can handle a high volume of transactions, with a successful track record of processing 50,000 transactions in a single day. The portal also has extensive support for REST API, allowing food aggregators to easily access and utilize its key features.",
     overview:
-      'A Domino’s Pizza portal for the Asia-Pacific region, supporting digital ordering and access for food-aggregator services.',
+      'A scalable, secure ordering portal for Domino’s Pizza in the Asia-Pacific region, hosted across three data centers. Built for high transaction volumes, it has processed 50,000 transactions in a single day, and its REST APIs give food aggregators access to key ordering features.',
     documentedScope:
       'Portal deployment across three data centres, REST API support for aggregators, and a published reference of 50,000 transactions in one day.',
     sections: [
@@ -191,7 +191,7 @@ export const projects = [
     description:
       "Credit Convey is a platform that focuses on improving clients' financial well-being through a combination of education, motivation, and advanced technologies. They offer unlimited interest-free cash advances to help bridge any financial gaps. By utilizing Credit Convey, individuals can gain the knowledge and support needed to better manage their finances and ultimately achieve greater financial stability.",
     overview:
-      'A consumer-finance platform combining financial education with cash-advance services to address short-term financial gaps.',
+      'A financial wellbeing platform that combines education, motivation, and technology to help people manage their money with more confidence. Alongside its learning resources, it offers interest-free cash advances that help bridge short-term financial gaps.',
     documentedScope:
       'The published project description identifies financial-wellbeing content and cash-advance functionality.',
     sections: [
@@ -222,7 +222,7 @@ export const projects = [
     description:
       'Good Morning Italia is a comprehensive platform that focuses on producing and sharing high-quality news content through various mediums. It has gained popularity among individuals and businesses alike due to its intelligent approach to news delivery. With a wide array of information available on the web, app, and email, it has become the go-to platform for users seeking reliable and insightful news. Whether you are an individual or a company, Good Morning Italia offers a dynamic and engaging experience for staying informed.',
     overview:
-      'A news-publishing service that distributes briefings and editorial content through web, app, and email channels.',
+      'A news platform that produces and shares high-quality news content across the web, a mobile app, and email. It gives individual readers and businesses a reliable, consistent way to stay informed through the channel they prefer.',
     documentedScope:
       'The available project description confirms the three publishing channels, but not the underlying publishing systems.',
     sections: [
@@ -253,7 +253,7 @@ export const projects = [
     description:
       'Spritz is a cutting-edge platform that uses AI technology to facilitate smooth communication with various AI agents. It allows users to easily configure and choose AI agents based on specific tasks they need assistance with. The platform streamlines interaction, making it more accessible and user-friendly for individuals and businesses alike.',
     overview:
-      'An AI platform concept for configuring and selecting agents to assist with different tasks through a shared interface.',
+      'An AI platform that brings different AI agents together in one place. Users can configure and choose the agent best suited to each task, making AI assistance simpler and more accessible for individuals and businesses.',
     documentedScope:
       'Agent discovery and selection, configuration, and task-oriented interaction are the capabilities described in the source.',
     sections: [
@@ -381,7 +381,7 @@ export const projects = [
     description:
       'In partnership with Incaendo, Fliplearn Education Pvt. Ltd. has developed an online platform that revolutionizes education in the 21st century. By identifying and addressing existing and future barriers to education, Fliplearn and Incaendo have created a highly customized marketplace for online and mobile applications. This platform aims to provide innovative solutions to improve access to education, making it more personalized and effective for students.',
     overview:
-      'An online learning platform and marketplace for educational content and applications across web and mobile.',
+      'An online learning platform and marketplace that brings educational content and interactive learning applications together across web and mobile. It helps learners explore learning resources and access their educational experience through a unified platform.',
     documentedScope:
       'The source describes a customized marketplace spanning online and mobile applications, developed in partnership with Incaendo.',
     sections: [

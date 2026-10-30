@@ -3,7 +3,7 @@ import { Image } from 'astro:assets'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import ContactForm from '../components/ContactForm.astro'
 import { pages } from '../data/site-content.js'
-import contactHeroImage from '../assets/contact-hero-project-planning.webp'
+import contactHeroImage from '../assets/contact-hero-team-consultation.png'
 
 const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? ''
 ---
@@ -25,7 +25,7 @@ const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? ''
           </p>
           <div class="contact-hero-actions">
             <a class="button button-primary" href="#project-inquiry">
-              Tell us about your project <span aria-hidden="true">↗</span>
+              Tell us about your project <span aria-hidden="true">↘</span>
             </a>
             <a class="contact-hero-email" href="mailto:info@incaendo.com">
               Or email us directly <span aria-hidden="true">↗</span>
@@ -35,9 +35,9 @@ const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? ''
         <figure class="contact-hero-visual reveal">
           <Image
             src={contactHeroImage}
-            alt="Project workspace showing a client brief, delivery roadmap, solution scope and the next planning workshop"
+            alt="A project workspace from a live client review: booking-flow prototype, delivery plan, agreed decisions and the mobile app in progress"
             widths={[560, 840, 1120, 1600]}
-            sizes="(max-width: 760px) calc(100vw - 2rem), (max-width: 899px) 45vw, 560px"
+            sizes="(max-width: 760px) calc(100vw - 2rem), (max-width: 899px) 45vw, 700px"
             quality={86}
             loading="eager"
             fetchpriority="high"
@@ -46,35 +46,26 @@ const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? ''
       </div>
     </section>
 
-    <section
-      class="contact-workspace"
-      id="project-inquiry"
-      aria-labelledby="contact-form-heading"
-    >
+    <section class="contact-workspace" aria-labelledby="contact-form-heading">
+      <div
+        class="site-container contact-workspace-heading reveal"
+        id="project-inquiry"
+      >
+        <p class="eyebrow">PROJECT INQUIRY</p>
+        <h2 id="contact-form-heading">
+          Let’s make the first conversation useful.
+        </h2>
+        <p>
+          A little context is enough to get started. We’ll take it from there.
+        </p>
+      </div>
       <div class="site-container contact-workspace-grid">
-        <div class="contact-form-card reveal">
-          <div class="contact-form-heading">
-            <p class="eyebrow">
-              PROJECT INQUIRY <span>01 / 02</span>
-            </p>
-            <h2 id="contact-form-heading">
-              Let’s make the first conversation useful.
-            </h2>
-            <p>
-              A little context is enough to get started. We’ll take it from
-              there.
-            </p>
-          </div>
-          <ContactForm endpoint={contactEndpoint} />
-        </div>
         <aside
           class="contact-direct-panel reveal"
           aria-labelledby="contact-direct-heading"
         >
           <div class="contact-direct-heading">
-            <p class="eyebrow eyebrow-light">
-              DIRECT CONTACT <span>02 / 02</span>
-            </p>
+            <p class="eyebrow eyebrow-light">DIRECT CONTACT</p>
             <h2 id="contact-direct-heading">Prefer to talk directly?</h2>
             <p>Reach the Incaendo team or find our office in Noida.</p>
           </div>
@@ -130,6 +121,9 @@ const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? ''
             </a>
           </div>
         </aside>
+        <div class="contact-form-card reveal">
+          <ContactForm endpoint={contactEndpoint} />
+        </div>
       </div>
     </section>
 

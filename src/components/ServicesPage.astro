@@ -1,13 +1,14 @@
 ---
 import { homepageServices } from '../data/site-content.js'
 import { Image } from 'astro:assets'
-import servicesHeroImage from '../assets/services-hero-team.png'
+import servicesHeroImage from '../assets/Modern Cloud Developer Workspace.png'
 import serviceAIAutomationImage from '../assets/service-ai-automation.webp'
 import serviceCustomSoftwareImage from '../assets/service-custom-software-visual.webp'
 import serviceWebApplicationsImage from '../assets/service-web-applications.webp'
 import serviceMobileApplicationsImage from '../assets/service-mobile-applications.webp'
 import serviceEnterpriseSolutionsImage from '../assets/service-enterprise-solutions.webp'
 import serviceCloudDataImage from '../assets/service-cloud-data.webp'
+import SaaSProducts from './SaaSProducts.astro'
 
 const serviceDetails = [
   {
@@ -29,7 +30,7 @@ const serviceDetails = [
       'A scoped workflow, connected application or assistant, and clear review and exception paths.',
     image: serviceAIAutomationImage,
     imageAlt:
-      'An AI assistant summarizing an attached invoice and offering to route it for approval, above a read, check, and route workflow',
+      'An AI assistant showing supplier, total and due date extracted and validated from an invoice, flagging it for manager review, above an extract, validate, review and done workflow',
     link: '/ai-technology',
     linkLabel: 'Explore AI',
   },
@@ -52,7 +53,7 @@ const serviceDetails = [
       'A clear product scope, working software, integration points, and a maintainable foundation for future change.',
     image: serviceCustomSoftwareImage,
     imageAlt:
-      'A code editor showing an order-creation function, above a diagram connecting a web app, an orders API, and a database',
+      'A code editor showing a POST /orders API route with passing tests, above a diagram connecting a customer portal, an orders API and a database',
     link: '/contact',
     linkLabel: 'Discuss custom software',
   },
@@ -75,7 +76,7 @@ const serviceDetails = [
       'A responsive application experience with the interfaces and connections needed for its intended users.',
     image: serviceWebApplicationsImage,
     imageAlt:
-      'A browser-based orders dashboard with navigation, summary figures, and an order list, beside the same orders in a phone app',
+      'A customer portal showing active, delivered and due figures and a list of orders with their status, beside the same orders in a phone app',
     link: '/contact',
     linkLabel: 'Discuss a web application',
   },
@@ -98,7 +99,7 @@ const serviceDetails = [
       'A mobile product scope, platform-aligned experience, and connections to the services and data it depends on.',
     image: serviceMobileApplicationsImage,
     imageAlt:
-      'A smartphone app showing a delivery arriving today, with order-shipped and platform cards beside it',
+      'A delivery app showing an order arriving today with options to track the driver, read messages and reorder, beside a shipped notification and an iOS and Android card',
     link: '/contact',
     linkLabel: 'Discuss a mobile app',
   },
@@ -121,7 +122,7 @@ const serviceDetails = [
       'A mapped operating workflow, connected solution scope, and a practical integration and rollout plan.',
     image: serviceEnterpriseSolutionsImage,
     imageAlt:
-      'An operations dashboard with key figures, a purchase-approval process, a weekly volume chart, and connected ERP, CRM, and HR systems',
+      'An operations dashboard with order and approval figures, a purchase order waiting at the finance approval stage, daily orders processed this week, and synced ERP, CRM and HR systems',
     link: '/contact',
     linkLabel: 'Discuss an enterprise solution',
   },
@@ -144,7 +145,7 @@ const serviceDetails = [
       'An architecture and data-flow plan, deployment foundation, and operating considerations suited to the solution.',
     image: serviceCloudDataImage,
     imageAlt:
-      'A cloud architecture linking an API, queue, and pipeline to databases and a reports chart',
+      'A cloud platform linking an orders API, a payments queue and an hourly data pipeline to an orders database, a data warehouse and a six-month revenue chart',
     link: '/contact',
     linkLabel: 'Discuss cloud & data',
   },
@@ -236,7 +237,7 @@ const deliverySteps = [
       <div class="services-hero-visual reveal">
         <Image
           src={servicesHeroImage}
-          alt="Software developers collaborating on code, app interfaces, and cloud architecture"
+          alt="A developer workspace with a code editor, a cloud architecture diagram, and a business dashboard on a laptop"
           width={1200}
           sizes="(max-width: 900px) 92vw, 52vw"
           loading="eager"
@@ -414,6 +415,8 @@ const deliverySteps = [
       </div>
     </div>
   </section>
+
+  <SaaSProducts />
 
   <section
     class="delivery-section section section-soft"
@@ -918,6 +921,10 @@ const deliverySteps = [
   }
   .service-detail:hover .service-detail-image {
     transform: scale(1.045);
+  }
+  /* Gentler zoom keeps the monitor clear of the container edges. */
+  .service-detail#web-application-development:hover .service-detail-image {
+    transform: scale(1.02);
   }
   .detail-visual-head,
   .detail-visual-foot {
@@ -1949,6 +1956,12 @@ const deliverySteps = [
     }
   }
   @media (max-width: 1050px) {
+    /* Show the whole scene in the narrower container; bands match the scene. */
+    #web-application-development .service-detail-image,
+    #cloud-data .service-detail-image {
+      object-fit: contain;
+      background: linear-gradient(180deg, #f8f3ee 50%, #ddc4a7 50%);
+    }
     .services-hero-grid {
       grid-template-columns: minmax(0, 0.9fr) minmax(390px, 1.1fr);
       gap: 2.3rem;
@@ -2186,7 +2199,8 @@ const deliverySteps = [
     .service-overview-card:focus-visible,
     .delivery-step:hover,
     .service-detail:hover .service-detail-visual,
-    .service-detail:hover .service-detail-image {
+    .service-detail:hover .service-detail-image,
+    .service-detail#web-application-development:hover .service-detail-image {
       transform: none;
     }
   }

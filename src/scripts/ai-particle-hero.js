@@ -5,13 +5,24 @@
 // from the heading font, turned into a rounded relief (a distance field gives
 // each point a height and surface normal) and lit, so the letters read as
 // volumetric forms that sway gently in 3D inside the cloud.
-// Open: clicking AI fades the particles out completely and stops the
-// animation; the statistics then fade in around the circle (CSS handles the
-// sequencing via [data-state]). Clicking AI again reverses this.
+// Open: clicking AI keeps the same particles but morphs them: the cloud
+// gathers into a dense, slowly turning 3D sphere (joined by an extra set of
+// particles that only show in this view) and the letters settle a little
+// smaller at its centre. The figures and ambient light fade in around it
+// (CSS sequences those via [data-state]). Clicking AI again, or Escape,
+// morphs back to the idle field.
 
 const TAU = Math.PI * 2
-// Must cover the canvas fade-out in the CSS before the animation is paused.
-const FADE_MS = 450
+// Letter size in the open view, relative to idle.
+const OPEN_SCALE = 0.64
+// Open-view sphere radius as a share of the field, and how many extra
+// particles join it, relative to the idle cloud.
+const SPHERE_R = 0.335
+const SPHERE_EXTRA = 1.5
+// Length of the idle/open morph, and how long closing waits for the cards to
+// start fading before the letters grow back.
+const MORPH_S = 0.8
+const CLOSE_DELAY_S = 0.12
 // Fallback if the heading font never reports as loaded.
 const FONT_TIMEOUT_MS = 1500
 
@@ -25,6 +36,8 @@ const FIELD_COLORS = [
   rgb(232, 133, 64),
 ]
 const FIELD_WEIGHTS = [0.56, 0.2, 0.14, 0.1]
+// The sphere's extra particles lean a little warmer to balance the letters.
+const SPHERE_WEIGHTS = [0.44, 0.22, 0.2, 0.14]
 
 // Letter materials, from deep shadow to lit face, plus a specular tint.
 // A is warm orange, I is dark navy; each carries speckles of the other.
@@ -248,27 +261,40 @@ function setupParticleHero(root) {
   let cy = 0
   let span = 0
   let count = 0
-  // Index ranges: soft shadow, then the field, then the letters (drawn last).
+  // Index ranges: soft shadow, then the field (the idle cloud, then the
+  // sphere-only extras from extraStart), then the letters (drawn last).
   let shadowEnd = 0
+  let extraStart = 0
   let fieldEnd = 0
   let px, py, vx, vy, angle, homeR, spin, size, alpha, color, phase, stiff
   let soft
   // Letter particles: relief position, normal and material, in glyph pixels.
   let lx, ly, lz, nx, ny, nz, mat, speck, dither
+  // Field particles: home in the open-view sphere (unit ball), its depth and
+  // lighting this frame, and the opacity extras take on once open.
+  let sx, sy, sz, depth, light, openAlpha
+  // Per-frame size and opacity handed to the renderer during and after the
+  // morph (the base arrays are used as-is while fully idle).
+  let drawSize, drawAlpha
   let glyph = null
   let glyphScale = 1
   let assembled = false
   let open = false
+  // Morph progress: 0 = idle field, 1 = open view (eased), animated in time.
+  let mix = 0
+  let mixFrom = 0
+  let mixStart = 0
   let time = 0
   let lastFrame = 0
   let frame = 0
-  let pauseTimer = 0
   let visible = true
   let pointer = null
   let disposed = false
 
   // Slow 3D sway of the letters; shared by every letter particle per frame.
   const pose = { cosY: 1, sinY: 0, cosX: 1, sinX: 0, persp: 0 }
+  // Turn and tilt of the open-view sphere.
+  const orbit = { cosY: 1, sinY: 0, cosX: 1, sinX: 0 }
 
   function allocate() {
     // Density scales with area; fewer particles on small or low-power devices.
@@ -286,9 +312,11 @@ function setupParticleHero(root) {
       Math.min(Math.max(letterArea * 0.62, 3600), 17000) * budget,
     )
     const shadowCount = Math.round(letterCount * 0.07)
+    const extraCount = Math.round(fieldCount * SPHERE_EXTRA)
 
     shadowEnd = shadowCount
-    fieldEnd = shadowCount + fieldCount
+    extraStart = shadowCount + fieldCount
+    fieldEnd = extraStart + extraCount
     count = fieldEnd + letterCount
 
     px = new Float32Array(count)
@@ -313,6 +341,14 @@ function setupParticleHero(root) {
     mat = new Uint8Array(count)
     speck = new Uint8Array(count)
     dither = new Float32Array(count)
+    sx = new Float32Array(count)
+    sy = new Float32Array(count)
+    sz = new Float32Array(count)
+    depth = new Float32Array(count)
+    light = new Float32Array(count)
+    openAlpha = new Float32Array(count)
+    drawSize = new Float32Array(count)
+    drawAlpha = new Float32Array(count)
 
     // Particles scale with the field so small screens keep the same texture.
     const scale = Math.min(Math.max(span / 600, 0.75), 1.15)
@@ -377,6 +413,45 @@ function setupParticleHero(root) {
       setColor(i, FIELD_COLORS[tone])
       phase[i] = Math.random() * TAU
       stiff[i] = 4.5 + Math.random() * 6.5
+    }
+
+    // Sphere-only extras: they share the cloud's orbit maths so they can
+    // morph with it, but stay invisible (and unsimulated) while idle.
+    for (let i = extraStart; i < fieldEnd; i++) {
+      const t = Math.sqrt(Math.random())
+      homeR[i] = inner + (outer - inner) * t
+      angle[i] = Math.random() * TAU
+      const near = Math.random()
+      size[i] = (0.9 + near * near * 2.6) * scale
+      openAlpha[i] = 0.42 + near * 0.53
+      spin[i] = 0.05 + near * 0.05
+      let hue = Math.random()
+      let tone = 0
+      while (tone < SPHERE_WEIGHTS.length - 1 && hue > SPHERE_WEIGHTS[tone]) {
+        hue -= SPHERE_WEIGHTS[tone]
+        tone++
+      }
+      setColor(i, FIELD_COLORS[tone])
+      phase[i] = Math.random() * TAU
+      stiff[i] = 4.5 + Math.random() * 6.5
+    }
+
+    // Every field particle's home in the sphere: mostly filling the volume,
+    // with a denser shell that defines the rim and a faint outer haze.
+    for (let i = shadowEnd; i < fieldEnd; i++) {
+      const z = Math.random() * 2 - 1
+      const a = Math.random() * TAU
+      const ring = Math.sqrt(1 - z * z)
+      const pick = Math.random()
+      const r =
+        pick < 0.34
+          ? 0.92 + Math.random() * 0.08
+          : pick < 0.96
+            ? Math.cbrt(Math.random())
+            : 1 + Math.random() * 0.12
+      sx[i] = ring * Math.cos(a) * r
+      sy[i] = ring * Math.sin(a) * r
+      sz[i] = z * r
     }
 
     // The letters: mostly even coverage, with extra particles tracing the
@@ -462,6 +537,13 @@ function setupParticleHero(root) {
     pose.cosX = Math.cos(pitch)
     pose.sinX = Math.sin(pitch)
     pose.persp = 1 / (glyph.capH * 3.2)
+    // The sphere turns slowly about a gently nodding, tilted axis.
+    const turn = time * 0.11
+    const tilt = 0.3 + 0.05 * Math.sin(time * 0.17)
+    orbit.cosY = Math.cos(turn)
+    orbit.sinY = Math.sin(turn)
+    orbit.cosX = Math.cos(tilt)
+    orbit.sinX = Math.sin(tilt)
   }
 
   // Where particle i wants to be now.
@@ -472,16 +554,38 @@ function setupParticleHero(root) {
       const z1 = -lx[i] * pose.sinY + lz[i] * pose.cosY
       const y2 = ly[i] * pose.cosX - z1 * pose.sinX
       const z2 = ly[i] * pose.sinX + z1 * pose.cosX
-      const k = glyphScale / (1 - z2 * pose.persp)
+      const k =
+        (glyphScale * (1 + (OPEN_SCALE - 1) * mix)) / (1 - z2 * pose.persp)
       const wobble = i < shadowEnd ? 1.5 : 0.55
       out.x = cx + x1 * k + Math.sin(time * 0.9 + phase[i]) * wobble
       out.y = cy + y2 * k + Math.cos(time * 0.8 + phase[i] * 2) * wobble
       return
     }
     const r = homeR[i] + Math.sin(time * 0.8 + phase[i]) * 4
-    out.x =
+    let x =
       cx + Math.cos(angle[i]) * r + Math.sin(time * 0.6 + phase[i] * 2) * 1.8
-    out.y = cy + Math.sin(angle[i]) * r + Math.cos(time * 0.7 + phase[i]) * 1.8
+    let y = cy + Math.sin(angle[i]) * r + Math.cos(time * 0.7 + phase[i]) * 1.8
+    if (mix) {
+      // Open: blend towards the particle's place in the turning sphere,
+      // projected with mild perspective. depth runs from -1 (back) to 1.
+      const x1 = sx[i] * orbit.cosY + sz[i] * orbit.sinY
+      const z1 = -sx[i] * orbit.sinY + sz[i] * orbit.cosY
+      const y2 = sy[i] * orbit.cosX - z1 * orbit.sinX
+      const z2 = sy[i] * orbit.sinX + z1 * orbit.cosX
+      const k = (span * SPHERE_R) / (1 - z2 * 0.28)
+      const drift = Math.sin(time * 0.5 + phase[i]) * 1.4
+      x += (cx + x1 * k + drift - x) * mix
+      y += (cy + y2 * k + Math.cos(time * 0.45 + phase[i]) * 1.4 - y) * mix
+      depth[i] = z2
+      // Key light from the upper left, as on the letters.
+      const len = Math.hypot(x1, y2, z2) || 1
+      light[i] = Math.max(
+        (x1 * LIGHT[0] + y2 * LIGHT[1] + z2 * LIGHT[2]) / len,
+        0,
+      )
+    }
+    out.x = x
+    out.y = y
   }
 
   // Lights each letter particle from its rotated normal. Colours blend
@@ -521,15 +625,29 @@ function setupParticleHero(root) {
 
   const scratch = { x: 0, y: 0 }
 
+  // Eased morph position for the current time.
+  function updateMix() {
+    const p = Math.min(Math.max((time - mixStart) / MORPH_S, 0), 1)
+    const goal = open ? 1 : 0
+    // Land exactly on the end value, which draw() and step() test for.
+    if (p === 1) mix = goal
+    else mix = mixFrom + (goal - mixFrom) * p * p * p * (p * (p * 6 - 15) + 10)
+  }
+
   function step(dt) {
     time += dt
+    updateMix()
     updatePose()
     shadeLetters()
     const damping = Math.exp(-dt * 5.4)
+    // Fully idle, the sphere-only extras are invisible: skip them
+    // (setOpen places them before they start to show).
+    const idle = mix === 0
 
     for (let i = 0; i < count; i++) {
       const field = i >= shadowEnd && i < fieldEnd
       if (field) angle[i] += dt * spin[i]
+      if (idle && i >= extraStart && i < fieldEnd) continue
       target(i, scratch)
       let ax = (scratch.x - px[i]) * stiff[i]
       let ay = (scratch.y - py[i]) * stiff[i]
@@ -557,6 +675,7 @@ function setupParticleHero(root) {
 
   // Reduced motion: place every particle at its target in one pass.
   function settle() {
+    mix = open ? 1 : 0
     updatePose()
     shadeLetters()
     for (let i = 0; i < count; i++) {
@@ -569,7 +688,48 @@ function setupParticleHero(root) {
   }
 
   function draw() {
-    renderer.draw({ count, px, py, size, color, shade: alpha, soft })
+    if (!mix) {
+      // Idle: the extras' base opacity is zero, so the arrays draw as-is.
+      renderer.draw({ count, px, py, size, color, shade: alpha, soft })
+      return
+    }
+    // Open: depth and light give the sphere its volume (near and lit
+    // particles larger and stronger, far and shadowed ones small and soft),
+    // and the letter grain, especially the specks, gets finer as the letters
+    // shrink.
+    const grain = 1 - mix * 0.2
+    const speckGrain = 1 - mix * 0.4
+    for (let i = 0; i < count; i++) {
+      let a = alpha[i]
+      let s = size[i]
+      if (i < shadowEnd) a *= 1 - mix * 0.2
+      else if (i < fieldEnd) {
+        const near = Math.min(Math.max((depth[i] + 1) / 2, 0), 1)
+        const shade = Math.min(
+          (0.45 + 0.55 * near) * (0.72 + 0.48 * light[i]),
+          1,
+        )
+        if (i >= extraStart) a = openAlpha[i] * shade * mix
+        else a *= 1 + (shade - 1) * mix
+        s *= 1 + ((0.6 + 0.5 * near) * (0.9 + 0.25 * light[i]) - 1) * mix
+      } else s *= speck[i] ? speckGrain : grain
+      drawAlpha[i] = a
+      drawSize[i] = s
+    }
+    renderer.draw({
+      count,
+      px,
+      py,
+      size: drawSize,
+      color,
+      shade: drawAlpha,
+      soft,
+    })
+  }
+
+  // Off-screen or in a background tab, CSS animations hold too.
+  function syncPaused() {
+    root.toggleAttribute('data-paused', !visible || document.hidden)
   }
 
   function loop(now) {
@@ -581,16 +741,9 @@ function setupParticleHero(root) {
     schedule()
   }
 
-  // The loop only runs while the cloud is showing (or fading out).
+  // The loop runs in both views while the field is on screen.
   function schedule() {
-    if (
-      frame ||
-      !count ||
-      reducedMotion.matches ||
-      !visible ||
-      document.hidden ||
-      (open && !pauseTimer)
-    )
+    if (frame || !count || reducedMotion.matches || !visible || document.hidden)
       return
     frame = requestAnimationFrame(loop)
   }
@@ -610,6 +763,17 @@ function setupParticleHero(root) {
   // --- Interaction ---------------------------------------------------------
 
   function setOpen(next) {
+    // Fully idle, the extras stopped following their targets (see step);
+    // put them in place while they are still invisible.
+    if (next && !open && mix === 0) {
+      for (let i = extraStart; i < fieldEnd; i++) {
+        target(i, scratch)
+        px[i] = scratch.x
+        py[i] = scratch.y
+        vx[i] = 0
+        vy[i] = 0
+      }
+    }
     open = next
     root.dataset.state = open ? 'open' : 'idle'
     core.setAttribute('aria-expanded', String(open))
@@ -618,27 +782,38 @@ function setupParticleHero(root) {
       open ? 'AI: show the particle view' : 'AI: show key figures',
     )
     stats.inert = !open
-    clearTimeout(pauseTimer)
-    pauseTimer = 0
-    if (open) {
-      // Keep animating while the canvas fades out, then pause entirely.
-      pauseTimer = setTimeout(() => {
-        pauseTimer = 0
-        stop()
-      }, FADE_MS)
-    }
+    // Morph from wherever the previous one got to; closing waits a moment
+    // so the cards start fading before the letters grow under them.
+    mixFrom = mix
+    mixStart = time + (open ? 0 : CLOSE_DELAY_S)
+    syncPaused()
     renderStill()
     schedule()
   }
 
-  function onCoreClick() {
+  function onCoreClick(event) {
+    event.stopPropagation()
     setOpen(!open)
   }
 
   function onKeydown(event) {
     if (event.key !== 'Escape' || !open) return
+    event.preventDefault()
     setOpen(false)
     core.focus()
+  }
+
+  // After a click, any key press (scrolling with arrows, Escape, Shift)
+  // makes the browser treat the focus as keyboard focus and ring the whole
+  // core. Keep it ring-free until focus really moves elsewhere; Tabbing back
+  // in still shows the ring.
+  function onCorePointerDown() {
+    core.dataset.pointerFocus = ''
+  }
+
+  function onCoreBlur() {
+    // Switching tab or window also blurs; focus comes back to the core then.
+    if (document.hasFocus()) delete core.dataset.pointerFocus
   }
 
   function onPointerMove(event) {
@@ -652,12 +827,14 @@ function setupParticleHero(root) {
   }
 
   function onVisibility() {
+    syncPaused()
     if (document.hidden) stop()
     else schedule()
   }
 
   function onMotionChange() {
     stop()
+    syncPaused()
     if (reducedMotion.matches) renderStill()
     else schedule()
   }
@@ -669,6 +846,7 @@ function setupParticleHero(root) {
   })
   const intersectionObserver = new IntersectionObserver(([entry]) => {
     visible = entry.isIntersecting
+    syncPaused()
     if (visible) schedule()
     else stop()
   })
@@ -688,6 +866,8 @@ function setupParticleHero(root) {
   canvas.addEventListener('webglcontextlost', onContextLost)
   canvas.addEventListener('webglcontextrestored', onContextRestored)
   core.addEventListener('click', onCoreClick)
+  core.addEventListener('pointerdown', onCorePointerDown)
+  core.addEventListener('blur', onCoreBlur)
   root.addEventListener('keydown', onKeydown)
   stage.addEventListener('pointermove', onPointerMove)
   stage.addEventListener('pointerleave', onPointerLeave)
@@ -721,19 +901,22 @@ function setupParticleHero(root) {
   root._cleanupParticles = () => {
     disposed = true
     stop()
-    clearTimeout(pauseTimer)
     renderer.dispose()
     resizeObserver.disconnect()
     intersectionObserver.disconnect()
     canvas.removeEventListener('webglcontextlost', onContextLost)
     canvas.removeEventListener('webglcontextrestored', onContextRestored)
     core.removeEventListener('click', onCoreClick)
+    core.removeEventListener('pointerdown', onCorePointerDown)
+    core.removeEventListener('blur', onCoreBlur)
+    delete core.dataset.pointerFocus
     root.removeEventListener('keydown', onKeydown)
     stage.removeEventListener('pointermove', onPointerMove)
     stage.removeEventListener('pointerleave', onPointerLeave)
     document.removeEventListener('visibilitychange', onVisibility)
     reducedMotion.removeEventListener('change', onMotionChange)
     root.classList.remove('is-ready')
+    root.removeAttribute('data-paused')
     delete root.dataset.particlesReady
     delete root._cleanupParticles
   }

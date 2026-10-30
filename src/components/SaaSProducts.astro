@@ -1,0 +1,348 @@
+---
+import {
+  Users,
+  ChartColumn,
+  SquareCheckBig,
+  ReceiptText,
+  Package,
+  ChevronRight,
+} from 'lucide-react'
+
+// No product pages exist yet, so every product routes to the enquiry form.
+// Swap `href` for the product page once one is published.
+const products = [
+  {
+    name: 'HRM Software',
+    description:
+      'Manage people, leave, attendance, and performance in one place.',
+    icon: Users,
+    tone: 'orange',
+    href: '/contact',
+  },
+  {
+    name: 'CRM Software',
+    description:
+      'Track leads, manage customer relationships, and organise sales activities.',
+    icon: ChartColumn,
+    tone: 'blue',
+    href: '/contact',
+  },
+  {
+    name: 'Project Management',
+    description: 'Plan, track, and deliver projects with greater clarity.',
+    icon: SquareCheckBig,
+    tone: 'green',
+    href: '/contact',
+  },
+  {
+    name: 'Finance Software',
+    description: 'Support invoicing, expenses, and financial operations.',
+    icon: ReceiptText,
+    tone: 'orange',
+    href: '/contact',
+  },
+  {
+    name: 'Asset Management',
+    description: 'Track assets, assignments, and their lifecycle.',
+    icon: Package,
+    tone: 'navy',
+    href: '/contact',
+  },
+]
+---
+
+<section
+  class="saas-section"
+  id="saas-products"
+  aria-labelledby="saas-products-title"
+>
+  <div class="site-container">
+    <div class="saas-intro reveal">
+      <p class="eyebrow">
+        <span class="eyebrow-dot"></span>Software as a Service{' '}
+        <span class="saas-eyebrow-case">(SaaS)</span>
+      </p>
+      <h2 id="saas-products-title">
+        <span>Grow your business</span> with software built for the way you
+        work.
+      </h2>
+      <p class="saas-lead">
+        From managing people and customer relationships to tracking projects,
+        finances, and assets, Incaendo's business software helps bring essential
+        operations into one place. Choose the products you need, simplify
+        everyday work, and scale as your business grows.
+      </p>
+      <div class="saas-actions">
+        <a class="text-link saas-text-link" href="/contact">
+          Talk to our team{' '}
+          <span class="link-arrow" aria-hidden="true">
+            →
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <ul
+      class="saas-products reveal"
+      id="saas-product-list"
+      aria-label="SaaS products"
+      data-reveal-stagger
+    >
+      {products.map((product) => {
+        const Icon = product.icon
+        return (
+          <li data-reveal-item>
+            <a class="saas-product" href={product.href}>
+              <span class="saas-product-head">
+                <span class={`saas-icon is-${product.tone}`} aria-hidden="true">
+                  <Icon size={20} strokeWidth={1.8} />
+                </span>
+                <h3>{product.name}</h3>
+              </span>
+              <span class="saas-product-copy">{product.description}</span>
+              <span class="saas-product-foot">
+                <span class="saas-product-link">
+                  Learn more
+                  <span class="visually-hidden"> about {product.name}</span>
+                  <span class="link-arrow" aria-hidden="true">
+                    →
+                  </span>
+                </span>
+                <span class="saas-product-go" aria-hidden="true">
+                  <ChevronRight size={17} strokeWidth={2} />
+                </span>
+              </span>
+            </a>
+          </li>
+        )
+      })}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .saas-section {
+    position: relative;
+    padding-block: clamp(1rem, 2vw, 1.75rem) clamp(3.5rem, 5vw, 4.5rem);
+    background: var(--color-paper);
+  }
+  .saas-section h2,
+  .saas-section h3,
+  .saas-section p {
+    margin-top: 0;
+  }
+
+  /* --- Intro ------------------------------------------------------------- */
+
+  .saas-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto clamp(2rem, 3.5vw, 2.75rem);
+    text-align: center;
+  }
+  .saas-intro h2 {
+    max-width: 820px;
+    margin-bottom: 1rem;
+    color: var(--color-navy);
+    font-size: var(--type-section-size);
+    font-weight: var(--type-heading-weight);
+    letter-spacing: var(--type-section-letter-spacing);
+    line-height: var(--type-section-line-height);
+    text-wrap: balance;
+  }
+  .saas-intro h2 span {
+    color: var(--color-orange-dark);
+  }
+  .saas-eyebrow-case {
+    letter-spacing: 0.06em;
+    text-transform: none;
+  }
+  .saas-lead {
+    max-width: 680px;
+    margin-bottom: 1.5rem;
+    color: var(--color-body);
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-line-height);
+    text-wrap: pretty;
+  }
+  .saas-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem 1.35rem;
+  }
+  .saas-text-link {
+    color: var(--color-orange-dark);
+  }
+  .saas-text-link:hover {
+    color: var(--color-orange);
+  }
+
+  /* Icon tiles, toned from the existing palette */
+  .saas-icon {
+    display: grid;
+    width: 32px;
+    height: 32px;
+    place-items: center;
+    border-radius: 9px;
+    transition:
+      background var(--duration-fast) ease,
+      color var(--duration-fast) ease;
+  }
+  .saas-icon.is-orange {
+    background: rgb(201 84 43 / 11%);
+    color: var(--color-orange-dark);
+  }
+  .saas-icon.is-blue {
+    background: rgb(84 123 157 / 13%);
+    color: #3f6588;
+  }
+  .saas-icon.is-green {
+    background: rgb(90 128 108 / 13%);
+    color: #3f6b55;
+  }
+  .saas-icon.is-navy {
+    background: rgb(16 27 45 / 8%);
+    color: var(--color-navy);
+  }
+
+  /* --- Product cards ----------------------------------------------------- */
+
+  .saas-products {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .saas-products > li {
+    display: flex;
+    min-width: 0;
+  }
+  .saas-product {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 0.65rem;
+    padding: 1.1rem 1.15rem 1rem;
+    border: 1px solid #ebe6df;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 12px 30px -26px rgb(16 27 45 / 40%);
+    color: inherit;
+    text-decoration: none;
+    transition:
+      transform var(--duration-standard) var(--ease-out),
+      box-shadow var(--duration-standard) ease,
+      border-color var(--duration-fast) ease;
+  }
+  .saas-product:hover,
+  .saas-product:focus-visible {
+    border-color: rgb(201 84 43 / 30%);
+    box-shadow: 0 22px 40px -26px rgb(16 27 45 / 42%);
+    transform: translateY(-4px);
+  }
+  .saas-product:focus-visible {
+    outline: 3px solid var(--color-orange);
+    outline-offset: 3px;
+  }
+  .saas-product-head {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .saas-product .saas-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 11px;
+  }
+  .saas-product:hover .saas-icon,
+  .saas-product:focus-visible .saas-icon {
+    background: var(--color-orange);
+    color: #fff;
+  }
+  .saas-product h3 {
+    margin: 0;
+    color: var(--color-navy);
+    font-family: var(--font-heading);
+    font-size: var(--type-card-heading-size);
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+  }
+  .saas-product-copy {
+    flex-grow: 1;
+    color: var(--color-body);
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+  .saas-product-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+  .saas-product-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-orange-dark);
+    font-size: 0.85rem;
+    font-weight: 650;
+  }
+  .saas-product-go {
+    display: grid;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    place-items: center;
+    border: 1px solid rgb(201 84 43 / 35%);
+    border-radius: 50%;
+    color: var(--color-orange-dark);
+    transition:
+      background var(--duration-fast) ease,
+      border-color var(--duration-fast) ease,
+      color var(--duration-fast) ease;
+  }
+  .saas-product:hover .saas-product-go,
+  .saas-product:focus-visible .saas-product-go {
+    border-color: var(--color-orange);
+    background: var(--color-orange);
+    color: #fff;
+  }
+
+  /* --- Responsive -------------------------------------------------------- */
+
+  @media (max-width: 1180px) {
+    .saas-products {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 760px) {
+    .saas-products {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 520px) {
+    .saas-products {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .saas-section *,
+    .saas-section *::before,
+    .saas-section *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+    .saas-product:hover,
+    .saas-product:focus-visible {
+      transform: none;
+    }
+  }
+</style>

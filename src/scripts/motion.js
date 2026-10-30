@@ -553,7 +553,7 @@ function setupMotion() {
           const isServiceGrid = entry.target.matches('.service-grid-home')
           const isAwardsGrid = entry.target.matches('.awards-grid')
           const isServicePageGrid = entry.target.matches(
-            '.services-overview-grid, .delivery-steps',
+            '.services-overview-grid, .delivery-steps, .saas-products',
           )
           const usesCardReveal =
             isServiceGrid || isAwardsGrid || isServicePageGrid

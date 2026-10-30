@@ -3,6 +3,7 @@ import '../styles/global.css'
 import SiteHeader from '../components/SiteHeader.astro'
 import SiteFooter from '../components/SiteFooter.astro'
 import heroVisual from '../assets/hero-orbit.png'
+import introLogo from '../assets/Modern Blue and Orange iN Logo.png'
 
 const {
   title = 'Incaendo | Software Development & Technology',
@@ -23,6 +24,20 @@ const socialImage = siteUrl ? new URL(heroVisual.src, siteUrl).href : undefined
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#f8f7f4" />
+    <script is:inline>
+      try {
+        const introSeen = sessionStorage.getItem('incaendo-brand-intro-seen')
+        const reducedMotion = window.matchMedia(
+          '(prefers-reduced-motion: reduce)',
+        ).matches
+        if (!introSeen && !reducedMotion) {
+          sessionStorage.setItem('incaendo-brand-intro-seen', 'true')
+          document.documentElement.dataset.brandIntro = 'playing'
+        }
+      } catch {
+        // If storage or scripting is unavailable, keep the site unobstructed.
+      }
+    </script>
     <title>{title}</title>
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
     <meta property="og:type" content={openGraphType} />
@@ -47,6 +62,47 @@ const socialImage = siteUrl ? new URL(heroVisual.src, siteUrl).href : undefined
     />
   </head>
   <body>
+    <div class="site-intro" data-site-intro aria-hidden="true" inert>
+      <div class="site-intro-content">
+        <div class="site-intro-visual">
+          <span
+            class="site-intro-particle is-orange"
+            style="--x: -132px; --y: -58px; --delay: 690ms"
+          ></span>
+          <span
+            class="site-intro-particle is-blue"
+            style="--x: 130px; --y: -72px; --delay: 760ms"
+          ></span>
+          <span
+            class="site-intro-particle is-orange"
+            style="--x: -154px; --y: 16px; --delay: 820ms"
+          ></span>
+          <span
+            class="site-intro-particle is-blue"
+            style="--x: 151px; --y: 20px; --delay: 880ms"
+          ></span>
+          <span
+            class="site-intro-particle is-blue"
+            style="--x: -112px; --y: 78px; --delay: 740ms"
+          ></span>
+          <span
+            class="site-intro-particle is-orange"
+            style="--x: 115px; --y: 82px; --delay: 800ms"
+          ></span>
+          <img
+            class="site-intro-logo"
+            src={introLogo.src}
+            width={introLogo.width}
+            height={introLogo.height}
+            alt=""
+            decoding="async"
+          />
+        </div>
+        <p class="site-intro-tagline">
+          <span aria-hidden="true"></span>Ideas into digital solutions.
+        </p>
+      </div>
+    </div>
     <a class="skip-link" href="#main-content">
       Skip to content
     </a>
@@ -56,6 +112,7 @@ const socialImage = siteUrl ? new URL(heroVisual.src, siteUrl).href : undefined
     <script>
       import '../scripts/motion.js'
       import '../scripts/ai-showcase.js'
+      import '../scripts/site-intro.js'
     </script>
   </body>
 </html>

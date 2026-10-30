@@ -3,12 +3,12 @@
 // The markup already holds the final values, so nothing changes without
 // JavaScript or under reduced motion. Otherwise each [data-count-to] number
 // counts up from 0 once, staggered, the first time the panel enters the
-// viewport. Until then an inline script in HomeHeroStats.astro keeps the
+// viewport. Until then an inline script in the hero component keeps the
 // numbers hidden via [data-stats-pending], so no value is shown early.
 
-const DURATION = 1300
-const STAGGER = 140
-const START_DELAY = 120
+const DURATION = 1050
+const STAGGER = 100
+const START_DELAY = 100
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 const easeOutCubic = (t) => 1 - (1 - t) ** 3

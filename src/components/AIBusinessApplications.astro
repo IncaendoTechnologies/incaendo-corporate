@@ -1,11 +1,11 @@
 ---
 import { Image } from 'astro:assets'
-import operationsImage from '../assets/ai-applications/operations.jpg'
-import customerSupportImage from '../assets/ai-applications/customer-support.jpg'
-import knowledgeImage from '../assets/ai-applications/enterprise-knowledge.jpg'
-import documentImage from '../assets/ai-applications/document-processing.jpg'
+import operationsImage from '../assets/ai-applications/agent-workflow-automation.jpg'
+import customerSupportImage from '../assets/ai-applications/agent-customer-support.jpg'
+import knowledgeImage from '../assets/ai-applications/agent-knowledge-management.jpg'
+import documentImage from '../assets/ai-applications/agent-finance-invoice.jpg'
 import reportingImage from '../assets/ai-applications/reporting.jpg'
-import employeeImage from '../assets/ai-applications/employee-products.jpg'
+import employeeImage from '../assets/ai-applications/agent-it-helpdesk.jpg'
 
 const applications = [
   {
@@ -21,7 +21,7 @@ const applications = [
       'Draft replies and hand complex cases to a person',
     ],
     image: customerSupportImage,
-    alt: 'A customer service representative wearing a headset at her workstation',
+    alt: 'A support inbox where an AI agent has summarized a ticket and drafted a reply for an agent to approve',
   },
   {
     title: 'Finance & Invoice Processing Agent',
@@ -36,7 +36,7 @@ const applications = [
       'Flag mismatches, duplicates, and unclear values for review',
     ],
     image: documentImage,
-    alt: 'A tall stack of receipts, invoices, and paper business records',
+    alt: 'An invoice being scanned, with extracted fields matched to a purchase order and a possible duplicate flagged',
   },
   {
     title: 'Workflow Automation Agent',
@@ -51,7 +51,7 @@ const applications = [
       'Pause for human approval and log every action taken',
     ],
     image: operationsImage,
-    alt: 'A small team reviewing printed charts together in a planning space',
+    alt: 'An onboarding workflow routing requests to connected systems and pausing for a manager approval',
   },
   {
     title: 'Data Analysis & Reporting Agent',
@@ -81,7 +81,7 @@ const applications = [
       'Cite the source document behind each answer',
     ],
     image: knowledgeImage,
-    alt: 'A person working at a desk at the end of a library aisle lined with reference books',
+    alt: 'An internal knowledge search answering a policy question with citations to the source documents',
   },
   {
     title: 'IT Support & Employee Helpdesk Agent',
@@ -96,7 +96,7 @@ const applications = [
       'Create a complete ticket when escalation is needed',
     ],
     image: employeeImage,
-    alt: 'Two colleagues working through an internal application together on a laptop',
+    alt: 'An employee helpdesk chat guiding a sign-in fix step by step, with a ticket drafted for escalation',
   },
 ]
 ---
@@ -552,6 +552,13 @@ const applications = [
       margin-top: 1.3rem;
       padding: 0.9rem 1.15rem;
     }
+    /* Alternate sides: every second card puts the image on the left */
+    .application-slide:nth-child(even) .application-card {
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    }
+    .application-slide:nth-child(even) .application-media {
+      order: -1;
+    }
   }
 
   /* Phones and tablets: cards stick and the next one slides over the last */
@@ -649,6 +656,9 @@ const applications = [
       grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
       gap: 1.75rem;
     }
+    .application-slide:nth-child(even) .application-card {
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
+    }
     .application-copy h3 {
       font-size: clamp(1.55rem, 2.6vw, 1.9rem);
     }
@@ -660,7 +670,8 @@ const applications = [
   }
   /* Tall tablets: image above the text so neither column gets cramped */
   @media (min-width: 801px) and (max-width: 1100px) and (min-height: 1000px) {
-    .application-card {
+    .application-card,
+    .application-slide:nth-child(even) .application-card {
       grid-template-columns: minmax(0, 1fr);
       align-content: start;
       gap: 1.5rem;
