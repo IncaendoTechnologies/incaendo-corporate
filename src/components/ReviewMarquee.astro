@@ -19,7 +19,7 @@ import { reviews } from '../data/reviews.js'
     <div
       class="review-marquee reveal"
       role="region"
-      aria-label="Client and sample reviews"
+      aria-label="Client reviews"
     >
       <div class="review-marquee-window">
         <div class="review-marquee-track">
@@ -37,20 +37,21 @@ import { reviews } from '../data/reviews.js'
                 >
                   <div class="review-card-logo" aria-hidden="true">
                     {review.logo ? (
-                      <img
-                        class="review-card-logo-mark"
-                        src={review.logo.src}
-                        width={review.logo.width}
-                        height={review.logo.height}
-                        alt=""
-                        loading="eager"
-                        decoding="async"
-                        style={
-                          review.logoScale
-                            ? `--logo-scale: ${review.logoScale}`
-                            : undefined
-                        }
-                      />
+                      <span
+                        class="review-card-logo-frame"
+                        style={`--logo-w: ${review.logoWidth ?? '7rem'}`}
+                      >
+                        <img
+                          class="review-card-logo-mark"
+                          src={review.logo.src}
+                          width={review.logo.width}
+                          height={review.logo.height}
+                          alt=""
+                          loading="eager"
+                          decoding="async"
+                          style={`width: ${review.logoWidth ?? '7rem'}; height: ${review.logoHeight ?? '1.8rem'}`}
+                        />
+                      </span>
                     ) : (
                       <span class="review-card-logo-empty"></span>
                     )}
@@ -58,7 +59,6 @@ import { reviews } from '../data/reviews.js'
                   <blockquote class="review-quote">“{review.quote}”</blockquote>
                   <div class="review-attribution">
                     <strong>{review.name}</strong>
-                    <span class="review-status">{review.role}</span>
                   </div>
                 </article>
               ))}

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 500" width="100%" height="100%">
+  <!-- Clean Solid Dark Blue Background -->
+  <rect width="720" height="500" fill="#1C1F63" />
+
+  <g fill="#FFFFFF">
+    <!-- Letter 'V' -->
+    <polygon points="60,178 108,178 141,273 174,178 210,178 161,314 121,314" />
+
+    <!-- Letter 'M' -->
+    <polygon points="236,178 278,178 318,264 358,178 400,178 400,314 362,314 362,236 333,298 303,298 274,236 274,314 236,314" />
+
+    <!-- Letter 'C' (Authentic Original Logo Shape: Smooth Arc & Angled Terminal Cuts) -->
+    <path d="M 556,194
+             A 74 68 0 1 0 556,298
+             L 528,270
+             A 36 32 0 1 1 528,222
+             Z" />
+  </g>
+
+  <!-- Yellow Accent Line (Aligned from V's left edge to C's right edge) -->
+  <rect x="60" y="346" width="496" height="18" fill="#FBB017" />
+</svg>

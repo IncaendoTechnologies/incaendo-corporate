@@ -36,7 +36,7 @@ try {
   data-team-role={member.designation.toLowerCase()}
 >
   <div
-    class={`team-avatar team-avatar-${tone}`}
+    class={`team-avatar team-avatar-${tone} ${member.image ? 'has-photo' : ''}`}
     aria-hidden={member.image ? undefined : 'true'}
     role={member.image ? 'img' : undefined}
     aria-label={
@@ -44,9 +44,15 @@ try {
     }
   >
     {member.image ? (
-      <img src={member.image} alt="" loading="lazy" />
+      <img
+        src={member.image}
+        alt={member.name}
+        loading="lazy"
+        width="800"
+        height="1000"
+      />
     ) : member.avatar ? (
-      <img src={member.avatar} alt="" loading="lazy" width="240" height="160" />
+      <img src={member.avatar} alt="" loading="lazy" width="400" height="500" />
     ) : (
       <span>{initials}</span>
     )}
@@ -101,7 +107,7 @@ try {
   .team-avatar {
     display: grid;
     width: 100%;
-    aspect-ratio: 1.5;
+    aspect-ratio: 4 / 5;
     flex: 0 0 auto;
     place-items: center;
     overflow: hidden;
@@ -111,6 +117,7 @@ try {
     font-size: clamp(1.6rem, 3vw, 2.25rem);
     font-weight: 700;
     letter-spacing: -0.04em;
+    word-spacing: 0.04em;
   }
 
   .team-avatar-clay {
@@ -133,10 +140,16 @@ try {
     color: #42624f;
   }
 
+  .team-avatar.has-photo {
+    background: #ffffff;
+  }
+
   .team-avatar img {
+    display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center center;
   }
 
   .team-profile-copy {
@@ -160,6 +173,7 @@ try {
     font-size: 0.97rem;
     font-weight: 650;
     letter-spacing: -0.035em;
+    word-spacing: 0.035em;
     line-height: 1.35;
   }
 

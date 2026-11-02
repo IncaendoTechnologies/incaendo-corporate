@@ -17,7 +17,7 @@ const href = `/insights/${article.slug}/`
       {article.image ? (
         <Image
           src={article.image.src}
-          alt=""
+          alt={article.image.alt ?? ''}
           widths={[640, 960, 1280]}
           sizes="(max-width: 800px) 100vw, 620px"
           loading="eager"
@@ -173,6 +173,7 @@ const href = `/insights/${article.slug}/`
     font-size: clamp(1.15rem, 1.6vw, 1.45rem);
     font-weight: 620;
     letter-spacing: -0.045em;
+    word-spacing: 0.045em;
     line-height: 1.25;
     transition: color 180ms ease;
   }

@@ -6,6 +6,8 @@ const stats = [
     icon: 'projects',
     tone: 'orange',
     slot: 'top-left',
+    cardDelay: '350ms',
+    floatDelay: '0s',
   },
   {
     value: 15,
@@ -13,6 +15,8 @@ const stats = [
     icon: 'years',
     tone: 'blue',
     slot: 'top-right',
+    cardDelay: '480ms',
+    floatDelay: '-1.8s',
   },
   {
     value: 79,
@@ -20,6 +24,8 @@ const stats = [
     icon: 'experts',
     tone: 'blue',
     slot: 'bottom-left',
+    cardDelay: '610ms',
+    floatDelay: '-3.2s',
   },
   {
     value: 10,
@@ -27,6 +33,8 @@ const stats = [
     icon: 'industries',
     tone: 'orange',
     slot: 'bottom-right',
+    cardDelay: '870ms',
+    floatDelay: '-4.6s',
   },
 ]
 ---
@@ -34,153 +42,280 @@ const stats = [
 <div class="hero-visual home-tech-visual" data-hero-stats>
   <div class="home-visual-stage">
     <div class="home-visual-scene">
+      <!-- Ambient Orbit Effect -->
       <svg
         class="home-visual-orbits"
-        viewBox="0 0 600 500"
-        preserveAspectRatio="none"
+        viewBox="0 0 640 500"
+        preserveAspectRatio="xMidYMid meet"
         aria-hidden="true"
       >
+        <defs>
+          <filter id="node-glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur
+              in="SourceGraphic"
+              stdDeviation="2.5"
+              result="blur"
+            />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        <!-- Elegant primary orbital ring -->
         <path
-          class="home-orbit-orange"
-          d="M61 253 C67 124 160 49 294 57 C433 65 535 138 535 250 C535 350 448 426 305 431 C168 436 67 359 61 253"
+          class="home-orbit-main"
+          d="M 50,250 C 50,115 170,55 330,55 C 490,55 590,115 590,250 C 590,385 490,445 330,445 C 170,445 50,385 50,250 Z"
         />
-        <path class="home-orbit-blue" d="M72 218 C80 147 133 106 207 101" />
-        <path class="home-orbit-orange" d="M400 110 C492 144 525 225 499 304" />
-        <path class="home-orbit-blue" d="M103 342 C146 384 198 391 248 370" />
-        <g class="home-visual-dots">
-          <circle cx="24" cy="205" r="1.5" />
-          <circle cx="36" cy="205" r="1.5" />
-          <circle cx="48" cy="205" r="1.5" />
-          <circle cx="24" cy="217" r="1.5" />
-          <circle cx="36" cy="217" r="1.5" />
-          <circle cx="48" cy="217" r="1.5" />
-          <circle cx="552" cy="360" r="1.5" />
-          <circle cx="564" cy="360" r="1.5" />
-          <circle cx="576" cy="360" r="1.5" />
-          <circle cx="552" cy="372" r="1.5" />
-          <circle cx="564" cy="372" r="1.5" />
-          <circle cx="576" cy="372" r="1.5" />
-        </g>
-        <g class="home-visual-badge home-badge-cloud">
-          <rect x="278" y="63" width="48" height="48" rx="13" />
-          <path d="M291 91a6 6 0 0 1 1.2-11.9 8 8 0 0 1 15.1 2.2A5.1 5.1 0 1 1 308 91z" />
-        </g>
-        <g class="home-visual-badge home-badge-chart">
-          <rect x="34" y="252" width="44" height="44" rx="12" />
-          <path d="M46 284v-7m8 7v-15m8 15v-21m8 21v-11" />
-        </g>
-        <g class="home-visual-badge home-badge-code">
-          <rect x="537" y="98" width="40" height="40" rx="12" />
-          <path d="m551 109-6 9 6 9m7-18 6 9-6 9" />
-        </g>
-        <circle class="home-orbit-node is-orange" r="3">
+
+        <!-- Secondary subtle arc -->
+        <path
+          class="home-orbit-secondary"
+          d="M 110,115 C 210,75 420,75 530,125"
+        />
+
+        <!-- Subtle fixed orbit dots -->
+        <circle cx="210" cy="74" r="2.5" class="home-orbit-dot" />
+        <circle cx="470" cy="85" r="2.5" class="home-orbit-dot" />
+        <circle cx="582" cy="190" r="2.5" class="home-orbit-dot" />
+        <circle cx="68" cy="310" r="2.5" class="home-orbit-dot" />
+        <circle cx="485" cy="420" r="2.5" class="home-orbit-dot" />
+
+        <!-- Traveling glowing orbit nodes -->
+        <circle
+          class="home-orbit-node is-orange"
+          r="3.5"
+          filter="url(#node-glow)"
+        >
           <animateMotion
-            dur="18s"
-            begin="-2s"
+            dur="22s"
             repeatCount="indefinite"
-            path="M61 253 C67 124 160 49 294 57 C433 65 535 138 535 250 C535 350 448 426 305 431 C168 436 67 359 61 253"
+            path="M 50,250 C 50,115 170,55 330,55 C 490,55 590,115 590,250 C 590,385 490,445 330,445 C 170,445 50,385 50,250 Z"
           />
         </circle>
-        <circle class="home-orbit-node is-blue" r="2.6">
+        <circle
+          class="home-orbit-node is-orange node-secondary"
+          r="2.5"
+          filter="url(#node-glow)"
+        >
           <animateMotion
-            dur="21s"
-            begin="-5s"
+            dur="22s"
+            begin="-11s"
             repeatCount="indefinite"
-            path="M61 253 C67 124 160 49 294 57 C433 65 535 138 535 250 C535 350 448 426 305 431 C168 436 67 359 61 253"
-          />
-        </circle>
-        <circle class="home-orbit-node is-orange" r="2.4">
-          <animateMotion
-            dur="16s"
-            begin="-3.4s"
-            repeatCount="indefinite"
-            path="M103 342 C146 384 198 391 248 370"
+            path="M 50,250 C 50,115 170,55 330,55 C 490,55 590,115 590,250 C 590,385 490,445 330,445 C 170,445 50,385 50,250 Z"
           />
         </circle>
       </svg>
 
+      <!-- Laptop Mockup -->
       <figure class="home-laptop">
         <div class="home-laptop-screen">
+          <div class="home-laptop-camera"></div>
           <div class="home-dashboard" aria-hidden="true">
+            <!-- Sidebar -->
             <aside class="home-dashboard-sidebar">
               <span class="home-dashboard-brand">
-                <i></i> INCAENDO
+                <span class="brand-mark">
+                  <svg viewBox="0 0 16 16" fill="currentColor">
+                    <circle cx="5" cy="5" r="3" fill="#ff5722" />
+                    <circle cx="11" cy="5" r="3" fill="#3b82f6" />
+                    <rect
+                      x="3"
+                      y="9"
+                      width="10"
+                      height="4"
+                      rx="2"
+                      fill="#1e293b"
+                    />
+                  </svg>
+                </span>
+                <b>INCAENDO</b>
               </span>
               <span class="home-dashboard-nav is-current">
-                <i></i> Overview
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                >
+                  <rect x="2" y="2" width="4.5" height="4.5" rx="1" />
+                  <rect x="7.5" y="2" width="4.5" height="4.5" rx="1" />
+                  <rect x="2" y="7.5" width="4.5" height="4.5" rx="1" />
+                  <rect x="7.5" y="7.5" width="4.5" height="4.5" rx="1" />
+                </svg>
+                Overview
               </span>
               <span class="home-dashboard-nav">
-                <i></i> Projects
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                >
+                  <path d="M2.5 3.5h9v7h-9z" />
+                  <path d="M5 3.5v-1h4v1" />
+                </svg>
+                Projects
               </span>
               <span class="home-dashboard-nav">
-                <i></i> Services
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                >
+                  <circle cx="7" cy="7" r="4.5" />
+                  <path d="M7 4.5v5M4.5 7h5" />
+                </svg>
+                Services
               </span>
               <span class="home-dashboard-nav">
-                <i></i> Insights
-              </span>
-              <span class="home-dashboard-profile">
-                <i>IN</i> Workspace
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                >
+                  <path d="M2.5 11.5l3-3.5 2.5 2 3.5-5" />
+                </svg>
+                Insights
               </span>
             </aside>
+
+            <!-- Main Content -->
             <div class="home-dashboard-main">
               <div class="home-dashboard-topbar">
                 <span>YOUR WORKSPACE</span>
-                <span class="home-dashboard-avatar">I</span>
+                <span class="home-dashboard-info" title="Workspace Info">
+                  ⓘ
+                </span>
               </div>
               <div class="home-dashboard-heading">
-                <span>Technology overview</span>
-                <b>Solutions for what’s next.</b>
+                <span class="dashboard-kicker">Technology overview</span>
+                <h3 class="dashboard-title">Solutions for what’s next.</h3>
               </div>
+
+              <!-- 5 Services in 2 Columns -->
               <div class="home-dashboard-services">
-                <span class="home-dashboard-service">
-                  <i class="service-web"></i>Web Applications
-                </span>
-                <span class="home-dashboard-service">
-                  <i class="service-mobile"></i>Mobile Apps
-                </span>
-                <span class="home-dashboard-service">
-                  <i class="service-ai"></i>AI Solutions
-                </span>
-                <span class="home-dashboard-service">
-                  <i class="service-cloud"></i>Cloud Platforms
-                </span>
-                <span class="home-dashboard-service">
-                  <i class="service-integrations"></i>Integrations
-                </span>
+                <div class="home-dashboard-service">
+                  <span class="service-icon-box tone-orange">
+                    <svg
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                    >
+                      <rect x="2.5" y="2.5" width="11" height="11" rx="2.5" />
+                      <line x1="2.5" y1="6.5" x2="13.5" y2="6.5" />
+                    </svg>
+                  </span>
+                  <span>Web Applications</span>
+                </div>
+                <div class="home-dashboard-service">
+                  <span class="service-icon-box tone-blue">
+                    <svg
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                    >
+                      <rect x="4" y="2" width="8" height="12" rx="2" />
+                      <circle cx="8" cy="11.5" r="0.75" fill="currentColor" />
+                    </svg>
+                  </span>
+                  <span>Mobile Apps</span>
+                </div>
+                <div class="home-dashboard-service">
+                  <span class="service-icon-box tone-orange">
+                    <svg
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                    >
+                      <rect x="4.5" y="4.5" width="7" height="7" rx="1.5" />
+                      <path d="M6 2v2.5M10 2v2.5M6 11.5V14M10 11.5V14M2 6h2.5M2 10h2.5M11.5 6H14M11.5 10H14" />
+                    </svg>
+                  </span>
+                  <span>AI Solutions</span>
+                </div>
+                <div class="home-dashboard-service">
+                  <span class="service-icon-box tone-blue">
+                    <svg
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                    >
+                      <path d="M4 11.5a3 3 0 0 1-.2-5.99A4 4 0 0 1 11.5 5.5a3 3 0 0 1 1 5.8 2 2 0 0 1-1.5.2H4Z" />
+                    </svg>
+                  </span>
+                  <span>Cloud Platforms</span>
+                </div>
+                <div class="home-dashboard-service service-span-two">
+                  <span class="service-icon-box tone-orange">
+                    <svg
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                    >
+                      <circle cx="4.5" cy="8" r="2.5" />
+                      <circle cx="11.5" cy="8" r="2.5" />
+                      <path d="M7 8h2" />
+                    </svg>
+                  </span>
+                  <span>Integrations</span>
+                </div>
               </div>
+
+              <!-- Bottom Panels: Chart + Connected Services -->
               <div class="home-dashboard-bottom">
                 <div class="home-dashboard-chart">
                   <span>Delivery activity</span>
-                  <svg viewBox="0 0 180 52" preserveAspectRatio="none">
+                  <svg viewBox="0 0 180 50" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient
+                        id="chart-wave-grad"
+                        x1="0"
+                        y1="0"
+                        x2="0"
+                        y2="1"
+                      >
+                        <stop
+                          offset="0%"
+                          stop-color="#3b82f6"
+                          stop-opacity="0.28"
+                        />
+                        <stop
+                          offset="100%"
+                          stop-color="#3b82f6"
+                          stop-opacity="0.02"
+                        />
+                      </linearGradient>
+                    </defs>
                     <path
                       class="chart-area"
-                      d="M0 43 C20 39 21 26 41 31 S65 34 82 21 108 30 126 17 151 21 180 5 V52 H0Z"
+                      fill="url(#chart-wave-grad)"
+                      d="M0 36 C25 34 35 22 55 26 S80 33 100 17 S135 25 155 11 S170 13 180 5 V50 H0 Z"
                     />
                     <path
                       class="chart-line"
-                      d="M0 43 C20 39 21 26 41 31 S65 34 82 21 108 30 126 17 151 21 180 5"
+                      d="M0 36 C25 34 35 22 55 26 S80 33 100 17 S135 25 155 11 S170 13 180 5"
                     />
                   </svg>
-                  <div>
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                  </div>
                 </div>
                 <div class="home-dashboard-status">
                   <span>CONNECTED SERVICES</span>
                   <b>
-                    <i></i> Web applications
+                    <i class="status-indicator"></i> Web applications
                   </b>
                   <b>
-                    <i></i> AI solutions
+                    <i class="status-indicator"></i> AI solutions
                   </b>
                   <b>
-                    <i></i> Cloud platforms
+                    <i class="status-indicator"></i> Cloud platforms
                   </b>
                 </div>
               </div>
@@ -188,7 +323,7 @@ const stats = [
           </div>
         </div>
         <div class="home-laptop-base">
-          <span></span>
+          <span class="laptop-notch"></span>
         </div>
         <figcaption class="visually-hidden">
           Laptop dashboard illustrating Incaendo’s web, mobile, AI, cloud, and
@@ -196,52 +331,77 @@ const stats = [
         </figcaption>
       </figure>
 
+      <!-- Smartphone Mockup -->
       <figure class="home-phone">
         <div class="home-phone-screen" aria-hidden="true">
-          <div class="home-phone-camera"></div>
+          <div class="home-phone-notch"></div>
           <div class="home-phone-topbar">
             <span>9:41</span>
-            <i></i>
+            <span class="phone-signals">
+              <svg
+                viewBox="0 0 18 10"
+                width="16"
+                height="8"
+                fill="currentColor"
+              >
+                <rect x="0" y="5" width="2.5" height="5" rx="0.5" />
+                <rect x="3.5" y="3" width="2.5" height="7" rx="0.5" />
+                <rect x="7" y="1" width="2.5" height="9" rx="0.5" />
+                <rect
+                  x="11"
+                  y="2"
+                  width="6"
+                  height="7"
+                  rx="1.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1"
+                />
+                <rect x="12" y="3.5" width="4" height="4" rx="0.5" />
+              </svg>
+            </span>
           </div>
           <div class="home-phone-greeting">
-            <span>YOUR WORKSPACE</span>
-            <b>
-              Built around
+            <span class="phone-kicker">YOUR WORKSPACE</span>
+            <h4 class="phone-headline">
+              Build around
               <br />
               your business.
-            </b>
+            </h4>
           </div>
           <div class="home-phone-card">
             <span class="home-phone-card-icon">iN</span>
-            <span>
-              <b>Digital services</b>
-              <small>Explore your toolkit</small>
-            </span>
-            <i class="phone-chevron"></i>
+            <div class="phone-card-copy">
+              <b>Digital services.</b>
+              <small>Explore your options</small>
+            </div>
           </div>
           <div class="home-phone-section">
-            Your solutions <span>View all</span>
+            <span>Your solutions</span>
+            <span class="phone-view-all">View all</span>
           </div>
-          <div class="home-phone-row">
-            <i class="phone-web"></i>
-            <span>Web applications</span>
-            <b>›</b>
-          </div>
-          <div class="home-phone-row">
-            <i class="phone-ai"></i>
-            <span>AI solutions</span>
-            <b>›</b>
-          </div>
-          <div class="home-phone-row">
-            <i class="phone-cloud"></i>
-            <span>Cloud platforms</span>
-            <b>›</b>
+          <div class="home-phone-list">
+            <div class="home-phone-row">
+              <span class="phone-dot tone-orange"></span>
+              <span>Web applications</span>
+              <b>›</b>
+            </div>
+            <div class="home-phone-row">
+              <span class="phone-dot tone-blue"></span>
+              <span>AI solutions</span>
+              <b>›</b>
+            </div>
+            <div class="home-phone-row">
+              <span class="phone-dot tone-orange"></span>
+              <span>Cloud platforms</span>
+              <b>›</b>
+            </div>
           </div>
           <div class="home-phone-tabs">
-            <i class="is-active"></i>
-            <i></i>
-            <i></i>
-            <i></i>
+            <span class="tab-indicator is-active"></span>
+            <span class="tab-indicator"></span>
+            <span class="tab-indicator"></span>
+            <span class="tab-indicator"></span>
           </div>
         </div>
         <figcaption class="visually-hidden">
@@ -250,36 +410,73 @@ const stats = [
       </figure>
     </div>
 
+    <!-- 5 Floating Metric Cards -->
     <ul class="home-stat-cards" aria-label="Incaendo company statistics">
       {stats.map((stat) => (
         <li
           class={
             'home-stat-card hero-callout-' + stat.tone + ' slot-' + stat.slot
           }
+          style={`--card-delay: ${stat.cardDelay}; --float-delay: ${stat.floatDelay};`}
         >
           <span class="home-stat-icon" aria-hidden="true">
             {stat.icon === 'projects' && (
-              <svg viewBox="0 0 24 24">
-                <rect x="3.5" y="6.5" width="17" height="13" rx="2.5" />
-                <path d="M8.5 6.5V5A1.5 1.5 0 0 1 10 3.5h4A1.5 1.5 0 0 1 15.5 5v1.5" />
-                <path d="m9 13 2 2 4-4" />
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m12 2 9 4.9-9 4.9-9-4.9L12 2z" />
+                <path d="m3 11.8 9 4.9 9-4.9" />
+                <path d="m3 16.7 9 4.9 9-4.9" />
               </svg>
             )}
             {stat.icon === 'years' && (
-              <svg viewBox="0 0 24 24">
-                <rect x="3.5" y="5" width="17" height="15" rx="2.5" />
-                <path d="M3.5 9.5h17M8 3v4M16 3v4M8 14h3M8 16.5h6" />
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="4" width="18" height="18" rx="3" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+                <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01" />
               </svg>
             )}
             {stat.icon === 'experts' && (
-              <svg viewBox="0 0 24 24">
-                <circle cx="9" cy="8.5" r="3.25" />
-                <path d="M3.5 19a5.5 5.5 0 0 1 11 0M15.5 5.6a3.25 3.25 0 0 1 0 5.8M17.5 14.2a5.5 5.5 0 0 1 3 4.8" />
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
               </svg>
             )}
             {stat.icon === 'industries' && (
-              <svg viewBox="0 0 24 24">
-                <path d="M3.5 20.5h17M5.5 20.5V8.5l5-3v15M10.5 20.5V10l8 3.5v7M13.5 15.5h2M13.5 18h2M7.5 11h1M7.5 14h1M7.5 17h1" />
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="7" width="8" height="14" rx="1.5" />
+                <path d="M11 3h7a2 2 0 0 1 2 2v16h-9" />
+                <path d="M6 10h2M6 14h2M6 18h2M15 7h1M15 11h1M15 15h1" />
               </svg>
             )}
           </span>
@@ -300,12 +497,23 @@ const stats = [
           </span>
         </li>
       ))}
-      <li class="home-stat-card home-stat-card-ai slot-bottom-center">
+
+      <!-- 5th Card: AI Automation Integration -->
+      <li
+        class="home-stat-card home-stat-card-ai slot-bottom-center"
+        style="--card-delay: 740ms; --float-delay: -5.4s;"
+      >
         <span class="home-stat-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <rect x="6.5" y="6.5" width="11" height="11" rx="2.5" />
-            <path d="M9.5 3v3.5M14.5 3v3.5M9.5 17.5V21M14.5 17.5V21M3 9.5h3.5M3 14.5h3.5M17.5 9.5H21M17.5 14.5H21" />
-            <path d="m12 9.4.7 1.9 1.9.7-1.9.7-.7 1.9-.7-1.9-1.9-.7 1.9-.7z" />
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1Z" />
           </svg>
         </span>
         <span class="home-stat-copy">
@@ -348,184 +556,145 @@ const stats = [
   .home-visual-stage {
     position: relative;
     width: 100%;
-    aspect-ratio: 600 / 500;
+    aspect-ratio: 620 / 480;
     isolation: isolate;
   }
 
+  /* Soft warm ambient lighting behind devices matching reference */
   .home-visual-stage::before {
     position: absolute;
-    inset: 7% 5% 6%;
+    inset: 4% 3% 6%;
     z-index: -1;
-    border-radius: 42%;
+    border-radius: 46%;
     background:
       radial-gradient(
-        ellipse at 53% 45%,
-        rgb(255 255 255 / 75%),
+        circle at 74% 36%,
+        rgb(248 221 209 / 36%),
         transparent 48%
       ),
       radial-gradient(
-        ellipse at 67% 50%,
-        rgb(201 84 43 / 14%),
-        transparent 58%
+        circle at 32% 64%,
+        rgb(225 237 249 / 24%),
+        transparent 52%
       ),
       radial-gradient(
-        ellipse at 34% 57%,
-        rgb(84 123 157 / 13%),
+        circle at 50% 50%,
+        rgb(255 255 255 / 85%),
         transparent 60%
       );
     content: '';
     pointer-events: none;
+    filter: blur(24px);
   }
 
   .home-visual-scene {
     position: absolute;
     inset: 0;
-    overflow: hidden;
+    overflow: visible;
   }
 
+  /* Orbit Rings and Glowing Nodes */
   .home-visual-orbits {
     position: absolute;
     z-index: 0;
     inset: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow: visible;
     fill: none;
     pointer-events: none;
   }
 
-  .home-visual-orbits path {
-    stroke: var(--color-blue);
-    stroke-opacity: 0.34;
-    stroke-width: 1.2;
+  .home-orbit-main {
+    stroke: rgb(201 84 43 / 26%);
+    stroke-width: 1.25;
     stroke-linecap: round;
   }
 
-  .home-visual-orbits .home-orbit-orange {
-    stroke: var(--color-orange);
-    stroke-opacity: 0.25;
+  .home-orbit-secondary {
+    stroke: rgb(84 123 157 / 20%);
+    stroke-width: 1;
+    stroke-dasharray: 4 6;
   }
 
-  .home-visual-orbits path:not(.home-orbit-orange) {
-    stroke-opacity: 0.23;
-  }
-
-  .home-visual-dots {
-    fill: var(--color-blue);
-    opacity: 0.4;
-  }
-
-  .home-visual-badge > rect {
-    fill: #fff;
-    filter: drop-shadow(0 5px 12px rgb(16 27 45 / 10%));
-  }
-
-  .home-visual-badge > path {
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 2.5;
-  }
-
-  .home-badge-cloud > rect {
-    fill: #4d91f5;
-  }
-
-  .home-badge-cloud > path {
-    fill: #fff;
-    stroke: none;
-  }
-
-  .home-badge-chart > rect {
-    fill: var(--color-orange);
-  }
-
-  .home-badge-chart > path {
-    stroke: #fff;
-  }
-
-  .home-badge-code > rect {
-    fill: #4d91f5;
-  }
-
-  .home-badge-code > path {
-    stroke: #fff;
+  .home-orbit-dot {
+    fill: rgb(201 84 43 / 38%);
   }
 
   .home-orbit-node {
-    fill: var(--color-orange);
-    filter: drop-shadow(0 0 3px rgb(201 84 43 / 38%));
+    fill: #ff7a3d;
+    filter: drop-shadow(0 0 4px rgb(201 84 43 / 60%));
     animation: home-node-pulse 3.8s ease-in-out infinite;
   }
 
-  .home-orbit-node.is-blue {
-    fill: var(--color-blue);
-    filter: drop-shadow(0 0 3px rgb(84 123 157 / 35%));
+  .home-orbit-node.node-secondary {
+    fill: #ff9d66;
+    opacity: 0.85;
   }
 
+  /* Laptop Styling */
   .home-laptop {
     position: absolute;
     z-index: 2;
-    top: 18.5%;
-    left: 14%;
-    width: 72%;
+    top: 17%;
+    left: 12%;
+    width: 71%;
     margin: 0;
-    filter: drop-shadow(0 20px 22px rgb(16 27 45 / 16%));
+    filter: drop-shadow(0 24px 34px rgb(16 27 45 / 13%));
     animation:
-      home-device-arrive 700ms var(--ease-out) both,
-      home-laptop-float 10s ease-in-out 700ms infinite;
+      home-device-arrive 760ms cubic-bezier(0.16, 1, 0.3, 1) 200ms both,
+      home-laptop-float 10s ease-in-out 960ms infinite;
   }
 
   .home-laptop-screen {
     position: relative;
     aspect-ratio: 1.62;
     overflow: hidden;
-    padding: 1.55%;
-    border: 1px solid rgb(255 255 255 / 70%);
-    border-radius: 13px 13px 5px 5px;
-    background: linear-gradient(145deg, #34445a, #101b2d 76%);
+    padding: 1.6%;
+    border: 1px solid rgb(255 255 255 / 75%);
+    border-radius: 12px 12px 4px 4px;
+    background: linear-gradient(145deg, #303e52, #0f1826 78%);
     box-shadow:
       0 0 0 1px rgb(16 27 45 / 18%),
-      inset 0 1px 0 rgb(255 255 255 / 35%),
-      0 3px 8px rgb(16 27 45 / 18%);
+      inset 0 1px 0 rgb(255 255 255 / 40%),
+      0 4px 10px rgb(16 27 45 / 16%);
   }
 
-  .home-laptop-screen::after {
+  .home-laptop-camera {
     position: absolute;
-    z-index: 1;
-    inset: 0;
-    border-radius: inherit;
-    background: linear-gradient(
-      118deg,
-      rgb(255 255 255 / 12%),
-      transparent 18%,
-      transparent 76%,
-      rgb(255 255 255 / 6%)
-    );
-    content: '';
-    pointer-events: none;
+    top: 4px;
+    left: 50%;
+    z-index: 3;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #182230;
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 15%);
+    transform: translateX(-50%);
   }
 
   .home-dashboard {
     display: grid;
     width: 100%;
     height: 100%;
-    grid-template-columns: 19% minmax(0, 1fr);
+    grid-template-columns: 20% minmax(0, 1fr);
     overflow: hidden;
-    border-radius: 7px;
-    background: #fbfcfd;
+    border-radius: 6px;
+    background: #ffffff;
   }
 
+  /* Dashboard Sidebar */
   .home-dashboard-sidebar {
     position: relative;
     display: flex;
     min-width: 0;
     flex-direction: column;
-    gap: 5.5%;
-    padding: 5% 4%;
-    background: #f1f4f7;
-    color: #647286;
-    font-size: clamp(5px, 1.32cqi, 8px);
+    gap: 6%;
+    padding: 6% 5%;
+    border-right: 1px solid #f0f3f6;
+    background: #f8fafc;
+    color: #64748b;
+    font-size: clamp(5px, 1.25cqi, 7.5px);
     line-height: 1;
   }
 
@@ -533,77 +702,59 @@ const stats = [
     display: flex;
     align-items: center;
     gap: 4px;
-    margin-bottom: 9%;
-    color: var(--color-ink);
-    font-size: 0.92em;
+    margin-bottom: 10%;
+    color: var(--color-navy);
+    font-size: 0.95em;
     font-weight: 800;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
     white-space: nowrap;
   }
 
-  .home-dashboard-brand i {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--color-orange);
-    box-shadow: 4px 0 0 -1px var(--color-blue);
+  .brand-mark {
+    width: 9px;
+    height: 9px;
+    flex: none;
+  }
+
+  .brand-mark svg {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 
   .home-dashboard-nav {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 4.5px;
+    padding: 3px 4px;
+    border-radius: 4px;
+    font-weight: 600;
     white-space: nowrap;
   }
 
-  .home-dashboard-nav > i {
-    width: 5px;
-    height: 5px;
-    border: 1px solid #90a0b3;
-    border-radius: 2px;
+  .home-dashboard-nav svg {
+    width: 7.5px;
+    height: 7.5px;
+    flex: none;
   }
 
   .home-dashboard-nav.is-current {
-    color: var(--color-orange-dark);
-    font-weight: 700;
-  }
-
-  .home-dashboard-nav.is-current > i {
-    border-color: var(--color-orange);
     background: var(--color-orange);
+    color: #ffffff;
+    font-weight: 700;
+    box-shadow: 0 2px 6px rgb(201 84 43 / 28%);
   }
 
-  .home-dashboard-profile {
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    margin-top: auto;
-    padding-top: 7px;
-    border-top: 1px solid var(--color-line);
-    font-size: 0.88em;
-    white-space: nowrap;
+  .home-dashboard-nav.is-current svg {
+    stroke: #ffffff;
   }
 
-  .home-dashboard-profile i,
-  .home-dashboard-avatar {
-    display: grid;
-    width: 13px;
-    flex: none;
-    aspect-ratio: 1;
-    place-items: center;
-    border-radius: 50%;
-    background: #e2ebf2;
-    color: var(--color-blue);
-    font-size: 0.75em;
-    font-style: normal;
-    font-weight: 800;
-  }
-
+  /* Dashboard Main Body */
   .home-dashboard-main {
     display: flex;
     min-width: 0;
     flex-direction: column;
-    padding: 3.2% 3.5%;
+    padding: 3.5% 4%;
     color: var(--color-ink);
   }
 
@@ -611,34 +762,46 @@ const stats = [
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: var(--color-muted);
+    color: #8b99aa;
     font-size: clamp(5px, 1.05cqi, 6.5px);
-    font-weight: 700;
+    font-weight: 750;
     letter-spacing: 0.12em;
   }
 
-  .home-dashboard-avatar {
-    width: 14px;
-    font-size: 8px;
+  .home-dashboard-info {
+    display: grid;
+    width: 11px;
+    height: 11px;
+    place-items: center;
+    border-radius: 50%;
+    background: #e1ebf5;
+    color: var(--color-blue);
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 700;
   }
 
   .home-dashboard-heading {
     display: grid;
     gap: 2px;
-    margin-block: 3% 3.5%;
+    margin-block: 2.5% 3%;
   }
 
-  .home-dashboard-heading > span {
-    color: var(--color-muted);
-    font-size: clamp(5px, 1.16cqi, 7px);
+  .dashboard-kicker {
+    color: #8b99aa;
+    font-size: clamp(4.5px, 1cqi, 6px);
+    font-weight: 600;
   }
 
-  .home-dashboard-heading > b {
-    color: var(--color-ink);
+  .dashboard-title {
+    margin: 0;
+    color: var(--color-navy);
     font-family: var(--font-heading);
-    font-size: clamp(9px, 2cqi, 12px);
-    font-weight: 700;
-    letter-spacing: -0.025em;
+    font-size: clamp(8px, 1.95cqi, 11.5px);
+    font-weight: 750;
+    letter-spacing: -0.02em;
+    word-spacing: 0.02em;
+    line-height: 1.15;
   }
 
   .home-dashboard-services {
@@ -652,42 +815,44 @@ const stats = [
     min-width: 0;
     min-height: 22px;
     align-items: center;
-    gap: 4px;
-    padding: 3px 4px;
-    border: 1px solid #edf0f3;
+    gap: 5px;
+    padding: 3px 5px;
+    border: 1px solid #edf1f5;
     border-radius: 5px;
-    background: #fff;
-    color: #405064;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgb(16 27 45 / 3%);
+    color: #334155;
     font-size: clamp(5px, 1.2cqi, 7px);
     font-weight: 600;
-    line-height: 1.05;
+    line-height: 1.1;
   }
 
-  .home-dashboard-service > i {
-    width: 9px;
-    height: 9px;
+  .home-dashboard-service.service-span-two {
+    grid-column: 1 / 2;
+  }
+
+  .service-icon-box {
+    display: grid;
+    width: 11px;
+    height: 11px;
     flex: none;
+    place-items: center;
     border-radius: 3px;
-    background: #e7edf2;
   }
 
-  .home-dashboard-service .service-web,
-  .home-phone-row .phone-web {
-    background: #f3dfd4;
+  .service-icon-box.tone-orange {
+    background: #fbeee7;
+    color: var(--color-orange-dark);
   }
-  .home-dashboard-service .service-mobile {
-    background: #e1eaf2;
+
+  .service-icon-box.tone-blue {
+    background: #e7eff7;
+    color: var(--color-blue);
   }
-  .home-dashboard-service .service-ai,
-  .home-phone-row .phone-ai {
-    background: #f3e2d9;
-  }
-  .home-dashboard-service .service-cloud,
-  .home-phone-row .phone-cloud {
-    background: #e2eaf1;
-  }
-  .home-dashboard-service .service-integrations {
-    background: linear-gradient(135deg, #f1ddd2 50%, #e0eaf2 50%);
+
+  .service-icon-box svg {
+    width: 7.5px;
+    height: 7.5px;
   }
 
   .home-dashboard-bottom {
@@ -707,100 +872,94 @@ const stats = [
     flex-direction: column;
     gap: 4px;
     overflow: hidden;
-    padding: 5px;
-    border: 1px solid #edf0f3;
+    padding: 5px 6px;
+    border: 1px solid #edf1f5;
     border-radius: 5px;
-    background: #fff;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgb(16 27 45 / 3%);
   }
 
   .home-dashboard-chart > span,
   .home-dashboard-status > span {
-    color: #647286;
-    font-size: clamp(5px, 1.05cqi, 6.5px);
+    color: #64748b;
+    font-size: clamp(4.5px, 1cqi, 6px);
     font-weight: 700;
+    letter-spacing: 0.04em;
   }
 
   .home-dashboard-chart > svg {
     width: 100%;
     flex: 1;
-    min-height: 10px;
+    min-height: 12px;
     overflow: visible;
   }
-  .home-dashboard-chart .chart-area {
-    fill: rgb(84 123 157 / 10%);
-  }
+
   .home-dashboard-chart .chart-line {
     fill: none;
-    stroke: var(--color-blue);
+    stroke: #3b82f6;
     stroke-width: 2;
     vector-effect: non-scaling-stroke;
   }
-  .home-dashboard-chart > div {
-    display: flex;
-    justify-content: space-between;
-    height: 2px;
-  }
-  .home-dashboard-chart > div i {
-    width: 8%;
-    height: 1px;
-    background: #d7dee6;
-  }
+
   .home-dashboard-status b {
     display: flex;
     align-items: center;
-    gap: 3px;
-    color: #526176;
+    gap: 4px;
+    color: #475569;
     font-size: clamp(4.5px, 0.95cqi, 6px);
-    font-weight: 500;
+    font-weight: 550;
     white-space: nowrap;
   }
-  .home-dashboard-status b i {
+
+  .status-indicator {
     width: 4px;
     height: 4px;
     border-radius: 50%;
-    background: #73957d;
+    background: #22c55e;
+    box-shadow: 0 0 0 1px rgb(34 197 94 / 30%);
   }
 
   .home-laptop-base {
     position: relative;
-    height: clamp(12px, 3.5cqi, 21px);
+    height: clamp(12px, 3.4cqi, 19px);
     margin-inline: -3.5%;
-    clip-path: polygon(4% 0, 96% 0, 100% 78%, 90% 100%, 10% 100%, 0 78%);
-    border-radius: 0 0 8px 8px;
-    background: linear-gradient(180deg, #dce2e8, #aeb8c2 68%, #eef1f4);
+    clip-path: polygon(3.5% 0, 96.5% 0, 100% 78%, 91% 100%, 9% 100%, 0 78%);
+    border-radius: 0 0 7px 7px;
+    background: linear-gradient(180deg, #d8dee4, #b4bdc7 65%, #e6ebf0);
     box-shadow:
       inset 0 1px 0 rgb(255 255 255 / 90%),
-      0 3px 4px rgb(16 27 45 / 12%);
+      0 4px 8px rgb(16 27 45 / 12%);
   }
 
-  .home-laptop-base > span {
+  .laptop-notch {
     position: absolute;
     top: 0;
     left: 42%;
     width: 16%;
-    height: 42%;
-    border-radius: 0 0 5px 5px;
-    background: linear-gradient(180deg, #aeb8c2, #c7ced5);
+    height: 40%;
+    border-radius: 0 0 4px 4px;
+    background: linear-gradient(180deg, #a6b0ba, #c4cbd3);
   }
 
+  /* Smartphone Mockup */
   .home-phone {
     position: absolute;
     z-index: 4;
-    top: 31%;
+    top: 27%;
     right: 3.5%;
-    width: 17%;
-    height: 48%;
+    width: 18.5%;
+    height: 54%;
     margin: 0;
-    padding: 3px;
-    border: 1px solid #536176;
-    border-radius: 18px;
-    background: linear-gradient(145deg, #35445a, #101b2d);
+    padding: 3.5px;
+    border: 1px solid #475569;
+    border-radius: 20px;
+    background: linear-gradient(145deg, #303e52, #0f1826);
     box-shadow:
       inset 0 1px 0 rgb(255 255 255 / 45%),
-      0 12px 22px rgb(16 27 45 / 24%);
+      0 16px 30px rgb(16 27 45 / 20%);
     animation:
-      home-device-arrive 760ms var(--ease-out) 100ms both,
-      home-phone-float 8.5s ease-in-out 850ms infinite;
+      home-device-arrive 800ms cubic-bezier(0.16, 1, 0.3, 1) 320ms both,
+      home-phone-float 9s ease-in-out 1120ms infinite;
   }
 
   .home-phone-screen {
@@ -809,21 +968,23 @@ const stats = [
     height: 100%;
     flex-direction: column;
     overflow: hidden;
-    padding: 9px 6px 6px;
-    border-radius: 14px;
-    background: #fbfcfd;
+    padding: 9px 7px 7px;
+    border-radius: 16px;
+    background: #ffffff;
     color: var(--color-ink);
   }
-  .home-phone-camera {
+
+  .home-phone-notch {
     position: absolute;
-    top: 3px;
+    top: 3.5px;
     left: 50%;
-    width: 18px;
-    height: 3px;
+    width: 20px;
+    height: 3.5px;
     border-radius: 3px;
-    background: #27354a;
+    background: #1e293b;
     transform: translateX(-50%);
   }
+
   .home-phone-topbar {
     display: flex;
     align-items: center;
@@ -831,127 +992,155 @@ const stats = [
     font-size: 5.5px;
     font-weight: 700;
     line-height: 1;
+    color: #1e293b;
   }
-  .home-phone-topbar > i {
-    width: 13px;
-    height: 5px;
-    border: 1px solid #536176;
-    border-radius: 5px;
+
+  .phone-signals {
+    display: flex;
+    align-items: center;
+    color: #334155;
   }
+
   .home-phone-greeting {
     display: grid;
-    gap: 4px;
-    margin-block: 10px 7px;
+    gap: 2.5px;
+    margin-block: 8px 6px;
   }
-  .home-phone-greeting > span {
+
+  .phone-kicker {
     color: var(--color-orange-dark);
     font-size: 5px;
     font-weight: 800;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
   }
-  .home-phone-greeting > b {
+
+  .phone-headline {
+    margin: 0;
     font-family: var(--font-heading);
-    font-size: clamp(8px, 1.9cqi, 11px);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.12;
+    font-size: clamp(7.5px, 1.85cqi, 10.5px);
+    font-weight: 750;
+    letter-spacing: -0.025em;
+    word-spacing: 0.025em;
+    line-height: 1.15;
+    color: var(--color-navy);
   }
+
   .home-phone-card {
     display: flex;
     align-items: center;
     gap: 5px;
-    padding: 5px 4px;
-    border: 1px solid #edf0f3;
-    border-radius: 7px;
-    background: #fff;
+    padding: 4px 5px;
+    border: 1px solid #edf1f5;
+    border-radius: 6px;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgb(16 27 45 / 4%);
   }
+
   .home-phone-card-icon {
     display: grid;
-    width: 19px;
+    width: 17px;
+    height: 17px;
     flex: none;
-    aspect-ratio: 1;
     place-items: center;
-    border-radius: 5px;
-    background: #f5e6dc;
-    color: var(--color-orange-dark);
+    border-radius: 4px;
+    background: #ff5722;
+    color: #ffffff;
     font-size: 6px;
     font-weight: 800;
   }
-  .home-phone-card > span:nth-child(2) {
+
+  .phone-card-copy {
     display: grid;
     min-width: 0;
-    gap: 2px;
+    gap: 1px;
   }
-  .home-phone-card b {
-    overflow: hidden;
+
+  .phone-card-copy b {
     font-size: 5.8px;
-    text-overflow: ellipsis;
+    font-weight: 700;
+    color: var(--color-navy);
     white-space: nowrap;
   }
-  .home-phone-card small {
-    color: var(--color-muted);
+
+  .phone-card-copy small {
+    color: #64748b;
     font-size: 4.8px;
     line-height: 1;
     white-space: nowrap;
   }
-  .phone-chevron {
-    width: 5px;
-    height: 5px;
-    flex: none;
-    margin-left: auto;
-    border-top: 1px solid var(--color-muted);
-    border-right: 1px solid var(--color-muted);
-    transform: rotate(45deg);
-  }
+
   .home-phone-section {
     display: flex;
     justify-content: space-between;
-    margin-block: 8px 4px;
-    font-size: 6px;
+    align-items: center;
+    margin-block: 6px 3px;
+    font-size: 5.8px;
     font-weight: 700;
+    color: var(--color-navy);
   }
-  .home-phone-section > span {
+
+  .phone-view-all {
     color: var(--color-orange-dark);
     font-size: 5px;
   }
+
+  .home-phone-list {
+    display: grid;
+    gap: 2px;
+  }
+
   .home-phone-row {
     display: flex;
-    min-height: 22px;
+    min-height: 18px;
     align-items: center;
     gap: 4px;
-    border-bottom: 1px solid #edf0f3;
-    font-size: 5.5px;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 5.4px;
     font-weight: 600;
+    color: #334155;
   }
-  .home-phone-row > i {
-    width: 9px;
-    height: 9px;
+
+  .phone-dot {
+    width: 5px;
+    height: 5px;
     flex: none;
-    border-radius: 3px;
-    background: #e9eef2;
+    border-radius: 2px;
   }
+
+  .phone-dot.tone-orange {
+    background: #ff5722;
+  }
+
+  .phone-dot.tone-blue {
+    background: #3b82f6;
+  }
+
   .home-phone-row > b {
     margin-left: auto;
-    color: var(--color-muted);
-    font-size: 9px;
+    color: #94a3b8;
+    font-size: 8px;
     font-weight: 400;
   }
+
   .home-phone-tabs {
     display: flex;
     justify-content: space-around;
     margin-top: auto;
-    padding-top: 5px;
+    padding-top: 4px;
   }
-  .home-phone-tabs i {
-    width: 7px;
-    height: 7px;
+
+  .tab-indicator {
+    width: 6px;
+    height: 6px;
     border-radius: 2px;
-    background: #d7dee6;
+    background: #e2e8f0;
   }
-  .home-phone-tabs i.is-active {
+
+  .tab-indicator.is-active {
     background: var(--color-orange);
   }
 
+  /* 5 Floating Metric Cards */
   .home-stat-cards {
     position: absolute;
     z-index: 5;
@@ -965,166 +1154,208 @@ const stats = [
   .home-stat-card {
     position: absolute;
     display: flex;
-    width: 31%;
-    height: 16.5%;
+    width: 30%;
+    height: 16%;
     align-items: center;
-    gap: clamp(5px, 1.7cqi, 10px);
-    padding: clamp(7px, 1.6cqi, 10px);
-    border: 1px solid rgb(16 27 45 / 8%);
-    border-radius: var(--radius-medium);
-    background: rgb(255 255 255 / 94%);
+    gap: clamp(6px, 1.8cqi, 11px);
+    padding: clamp(8px, 1.7cqi, 11px);
+    border: 1px solid rgb(16 27 45 / 7%);
+    border-radius: clamp(12px, 1.8cqi, 16px);
+    background: #ffffff;
     box-shadow:
-      0 1px 0 rgb(255 255 255 / 92%) inset,
-      0 12px 28px rgb(16 27 45 / 9%),
-      0 2px 6px rgb(16 27 45 / 4%);
+      0 1px 0 rgb(255 255 255 / 95%) inset,
+      0 14px 30px rgb(16 27 45 / 8%),
+      0 2px 6px rgb(16 27 45 / 3%);
     pointer-events: auto;
-    translate: 0 0;
-    animation: home-stat-float 7.4s ease-in-out infinite;
+    animation:
+      home-card-arrive 650ms cubic-bezier(0.16, 1, 0.3, 1)
+        var(--card-delay, 400ms) both,
+      home-stat-float 7.4s ease-in-out
+        calc(var(--card-delay, 400ms) + 650ms + var(--float-delay, 0s)) infinite;
     transition:
-      transform var(--duration-standard) var(--ease-out),
-      border-color var(--duration-standard) ease,
-      box-shadow var(--duration-standard) ease;
+      transform 300ms var(--ease-out),
+      border-color 300ms ease,
+      box-shadow 300ms ease;
   }
 
   .home-stat-card.slot-top-left {
-    top: 1%;
-    left: 1%;
+    top: 2%;
+    left: 1.5%;
   }
+
   .home-stat-card.slot-top-right {
-    top: 1%;
-    right: 1%;
-    animation-delay: -1.8s;
+    top: 2%;
+    right: 1.5%;
   }
+
   .home-stat-card.slot-bottom-left {
-    bottom: 1%;
-    left: 1%;
-    animation-delay: -3.1s;
+    bottom: 2%;
+    left: 1.5%;
   }
+
   .home-stat-card.slot-bottom-right {
-    right: 1%;
-    bottom: 1%;
-    animation-delay: -5.2s;
+    right: 1.5%;
+    bottom: 2%;
   }
-  .home-stat-card-ai {
+
+  .home-stat-card-ai.slot-bottom-center {
     left: 34.5%;
-    bottom: 1%;
+    bottom: 0.5%;
     width: 31%;
-    height: 14.5%;
-    border-color: rgb(201 84 43 / 25%);
-    background: linear-gradient(135deg, #fff, #fdf6f1);
-    animation-delay: -4.2s;
+    height: 15%;
+    border-color: rgb(201 84 43 / 22%);
+    background: linear-gradient(135deg, #ffffff, #fff9f5);
   }
 
   .home-stat-icon {
     display: grid;
-    width: clamp(25px, 5.5cqi, 34px);
+    width: clamp(26px, 5.8cqi, 36px);
     flex: none;
     aspect-ratio: 1;
     place-items: center;
     border-radius: 9px;
-    background: #f4e8e0;
+    background: #fbeee7;
     color: var(--color-orange-dark);
   }
+
   .hero-callout-blue .home-stat-icon {
-    background: #e8eef3;
+    background: #e8f1f8;
     color: var(--color-blue);
   }
+
   .home-stat-icon svg {
-    width: 58%;
-    height: 58%;
-    fill: none;
-    stroke: currentColor;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 1.6;
+    width: 60%;
+    height: 60%;
   }
+
   .home-stat-copy {
     display: grid;
     min-width: 0;
-    gap: 4px;
+    gap: 3px;
   }
+
   .home-stat-value {
     display: flex;
     align-items: baseline;
     color: var(--color-navy);
     font-family: var(--font-heading);
-    font-size: clamp(1.1rem, 4.5cqi, 1.55rem);
-    font-weight: 750;
-    letter-spacing: -0.05em;
+    font-size: clamp(1.15rem, 4.6cqi, 1.6rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    word-spacing: 0.04em;
     line-height: 1;
   }
+
   .home-stat-number {
     display: inline-grid;
     font-variant-numeric: tabular-nums;
   }
+
   .home-stat-number > span {
     grid-area: 1 / 1;
   }
+
   .home-stat-number-final {
     visibility: hidden;
   }
+
   .home-stat-number-live {
     justify-self: end;
   }
+
   .home-tech-visual[data-stats-pending] .home-stat-number-live {
     visibility: hidden;
   }
+
   .home-stat-suffix {
-    margin-left: 0.02em;
+    margin-left: 0.04em;
     color: var(--color-orange-dark);
+    font-weight: 800;
   }
+
   .home-stat-label {
     display: block;
     color: var(--color-body);
-    font-size: clamp(0.59rem, 1.8cqi, 0.68rem);
+    font-size: clamp(0.58rem, 1.75cqi, 0.68rem);
     font-weight: 600;
     line-height: 1.2;
+    white-space: nowrap;
   }
+
   .home-stat-card-ai .home-stat-copy {
-    gap: 3px;
+    gap: 2.5px;
   }
+
   .home-stat-card-title {
     color: var(--color-navy);
     font-family: var(--font-heading);
-    font-size: clamp(0.82rem, 3.2cqi, 1.12rem);
-    font-weight: 700;
+    font-size: clamp(0.85rem, 3.1cqi, 1.15rem);
+    font-weight: 750;
     letter-spacing: -0.025em;
+    word-spacing: 0.025em;
     line-height: 1.1;
     white-space: nowrap;
   }
+
   .home-stat-card-ai .home-stat-label {
     color: var(--color-orange-dark);
+    font-weight: 700;
   }
 
+  /* Hover Elevation */
+  @media (hover: hover) {
+    .home-stat-card:hover {
+      z-index: 10;
+      border-color: rgb(201 84 43 / 28%);
+      box-shadow:
+        0 1px 0 #fff inset,
+        0 18px 36px rgb(16 27 45 / 12%),
+        0 4px 10px rgb(16 27 45 / 5%);
+      transform: translateY(-4px) scale(1.02);
+    }
+  }
+
+  /* Keyframe Animations */
   @keyframes home-device-arrive {
     from {
       opacity: 0;
-      translate: 0 8px;
+      transform: perspective(1400px) translateY(18px) scale(0.94);
     }
     to {
       opacity: 1;
-      translate: 0 0;
+      transform: perspective(1400px) translateY(0) scale(1);
+    }
+  }
+
+  @keyframes home-card-arrive {
+    from {
+      opacity: 0;
+      transform: translateY(14px) scale(0.93);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
   }
 
   @keyframes home-stat-float {
     0%,
     100% {
-      translate: 0 0;
+      transform: translateY(0);
     }
     50% {
-      translate: 0 -4px;
+      transform: translateY(-4px);
     }
   }
 
   @keyframes home-laptop-float {
     0%,
     100% {
-      transform: perspective(1400px) rotateY(-2.2deg) rotateX(0.6deg);
+      transform: perspective(1400px) rotateY(-2deg) rotateX(0.5deg);
     }
     50% {
-      transform: perspective(1400px) rotateY(-2.2deg) rotateX(0.6deg)
-        translateY(-3px);
+      transform: perspective(1400px) rotateY(-2deg) rotateX(0.5deg)
+        translateY(-3.5px);
     }
   }
 
@@ -1134,31 +1365,23 @@ const stats = [
       transform: rotate(1deg);
     }
     50% {
-      transform: rotate(1deg) translateY(-2.5px);
+      transform: rotate(1deg) translateY(-3px);
     }
   }
 
   @keyframes home-node-pulse {
     0%,
     100% {
-      opacity: 0.75;
+      opacity: 0.8;
+      transform: scale(1);
     }
     50% {
       opacity: 1;
+      transform: scale(1.25);
     }
   }
 
-  @media (hover: hover) {
-    .home-stat-card:hover {
-      z-index: 6;
-      border-color: color-mix(in srgb, var(--color-orange) 30%, transparent);
-      box-shadow:
-        0 1px 0 #fff inset,
-        0 17px 34px rgb(16 27 45 / 12%);
-      transform: translateY(-2px);
-    }
-  }
-
+  /* Responsive Rules: Mobile & Container Queries */
   @media (max-width: 560px) {
     .home-tech-visual {
       width: 100%;
@@ -1167,76 +1390,90 @@ const stats = [
     }
   }
 
-  @container (max-width: 400px) {
+  @container (max-width: 440px) {
     .home-visual-stage {
       display: flex;
       aspect-ratio: auto;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 0.85rem;
     }
+
     .home-visual-stage::before {
-      inset: 0 5% 29%;
-      border-radius: 44%;
+      inset: 0 4% 30%;
+      border-radius: 40%;
     }
+
     .home-visual-scene {
       position: relative;
       width: 100%;
-      aspect-ratio: 600 / 405;
+      aspect-ratio: 600 / 390;
     }
+
     .home-laptop {
-      top: 12%;
+      top: 10%;
+      left: 10%;
+      width: 74%;
     }
+
     .home-phone {
-      top: 23%;
-      right: 3%;
-      height: 55%;
+      top: 22%;
+      right: 2.5%;
+      width: 20%;
+      height: 58%;
     }
+
     .home-stat-cards {
       position: relative;
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.6rem;
+      gap: 0.65rem;
     }
+
     .home-stat-card,
-    .home-stat-card-ai {
+    .home-stat-card-ai.slot-bottom-center {
       position: relative;
       inset: auto;
       width: auto;
       height: auto;
       min-width: 0;
-      min-height: 66px;
+      min-height: 64px;
     }
-    .home-stat-card-ai {
+
+    .home-stat-card-ai.slot-bottom-center {
       grid-column: 1 / -1;
-      min-height: 58px;
+      min-height: 56px;
     }
+
     .home-stat-icon {
-      width: 30px;
+      width: 32px;
     }
+
     .home-stat-label {
       font-size: clamp(0.68rem, 2.5cqi, 0.82rem);
       white-space: normal;
     }
+
     .home-stat-value {
-      font-size: clamp(1.12rem, 4.5cqi, 1.5rem);
+      font-size: clamp(1.15rem, 4.5cqi, 1.55rem);
     }
   }
 
+  /* Accessibility: Prefers Reduced Motion */
   @media (prefers-reduced-motion: reduce) {
     .home-visual-orbits .home-orbit-node {
       display: none;
     }
+
     .home-laptop,
     .home-phone,
     .home-stat-card {
-      animation: none;
-      translate: none;
-      transform: none;
+      animation: none !important;
+      transform: none !important;
+      transition: none !important;
     }
-    .home-stat-card,
+
     .home-stat-card:hover {
-      transform: none;
-      transition: none;
+      transform: none !important;
     }
   }
 </style>

@@ -1,62 +1,735 @@
 ---
-import { navigation } from '../data/site-content.js'
 import logo from '../assets/incaendo-logo.png'
+
+const currentYear = new Date().getFullYear()
 ---
 
 <footer class="site-footer">
-  <div class="site-container footer-main">
-    <div class="footer-brand">
-      <a class="site-logo site-logo-footer" href="/" aria-label="Incaendo home">
-        <img
-          src={logo.src}
-          width={logo.width}
-          height={logo.height}
-          alt="Incaendo Technologies"
-          loading="lazy"
-          decoding="async"
-        />
-      </a>
-      <p>Software development and technology, shaped around what matters.</p>
-    </div>
-    <div class="footer-links-group">
-      <span class="footer-label">Explore</span>
-      <ul class="footer-links">
-        {navigation.slice(1).map((item) => (
-          <li>
-            <a href={item.href}>{item.label}</a>
-          </li>
-        ))}
-      </ul>
-    </div>
-    <div class="footer-links-group">
-      <span class="footer-label">Company</span>
-      <ul class="footer-links">
-        <li>
-          <a href="/careers">Careers</a>
-        </li>
-        <li>
-          <a href="/contact">Contact</a>
-        </li>
-        <li>
-          <a href="/privacy">Privacy</a>
-        </li>
-      </ul>
-    </div>
-    <div class="footer-cta-block reveal">
-      <div class="footer-contact-preview">
-        <h2>Have a project in mind?</h2>
-        <p class="footer-preview-copy">
-          Let’s turn your ideas into meaningful digital solutions. Tell us what
-          you’re looking to build, and let’s explore how we can make it happen.
+  <!-- Section A: Light warm ivory contact banner -->
+  <section class="footer-contact-banner" aria-label="Quick contact and actions">
+    <div class="site-container banner-inner">
+      <div class="banner-brand-col">
+        <a class="banner-logo" href="/" aria-label="Incaendo home">
+          <img
+            src={logo.src}
+            width={logo.width}
+            height={logo.height}
+            alt="Incaendo Technologies"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+        <div class="banner-divider" aria-hidden="true"></div>
+        <p class="banner-tagline">
+          Software development and technology, shaped around what matters.
         </p>
-        <a class="footer-preview-link" href="/contact#project-inquiry">
-          Discuss Your Project <span aria-hidden="true">↗</span>
+      </div>
+
+      <div class="banner-actions">
+        <a href="/contact" class="action-card">
+          <span class="action-icon-box">
+            <svg
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#f26522"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+          </span>
+          <span class="action-text">
+            <span class="action-title">Get in Touch</span>
+            <span class="action-subtitle">Have a project in mind?</span>
+          </span>
+          <span class="action-arrow" aria-hidden="true">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </span>
+        </a>
+
+        <div class="action-separator" aria-hidden="true"></div>
+
+        <a href="/careers" class="action-card">
+          <span class="action-icon-box">
+            <svg
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#f26522"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <rect width="20" height="14" x="2" y="7" rx="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+          </span>
+          <span class="action-text">
+            <span class="action-title">Join Our Team</span>
+            <span class="action-subtitle">Explore career opportunities</span>
+          </span>
+          <span class="action-arrow" aria-hidden="true">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </span>
+        </a>
+
+        <div class="action-separator" aria-hidden="true"></div>
+
+        <a href="/contact" class="action-card">
+          <span class="action-icon-box">
+            <svg
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#f26522"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
+            </svg>
+          </span>
+          <span class="action-text">
+            <span class="action-title">Request a Consultation</span>
+            <span class="action-subtitle">Discuss your requirements</span>
+          </span>
+          <span class="action-arrow" aria-hidden="true">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </span>
         </a>
       </div>
     </div>
-  </div>
-  <div class="site-container footer-bottom">
-    <span>© {new Date().getFullYear()} Incaendo</span>
-    <span>15 years of industry experience</span>
-  </div>
+
+    <!-- Soft decorative waves at bottom-right -->
+    <div class="banner-waves-decor" aria-hidden="true">
+      <svg
+        class="banner-waves-svg"
+        viewBox="0 0 380 120"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M0,120 C110,85 190,40 380,70 L380,120 Z"
+          fill="rgba(242, 101, 34, 0.05)"
+        ></path>
+        <path
+          d="M80,120 C180,95 240,55 380,95 L380,120 Z"
+          fill="rgba(242, 101, 34, 0.08)"
+        ></path>
+        <path
+          d="M170,120 C250,105 300,75 380,112 L380,120 Z"
+          fill="rgba(242, 101, 34, 0.12)"
+        ></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Section B: Dark navy footer -->
+  <section class="footer-navy-main">
+    <div class="site-container footer-navy-inner">
+      <div class="footer-nav-columns">
+        <div class="footer-nav-group explore-group">
+          <span class="footer-column-label">EXPLORE</span>
+          <ul class="footer-nav-links">
+            <li><a href="/ai-technology">AI</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/projects">Projects</a></li>
+            <li><a href="/teams">Teams</a></li>
+            <li><a href="/insights">Insights</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column-divider" aria-hidden="true"></div>
+
+        <div class="footer-nav-group company-group">
+          <span class="footer-column-label">COMPANY</span>
+          <ul class="footer-nav-links">
+            <li><a href="/careers">Careers</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/terms-and-conditions">Terms & Conditions</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Column 3: Project CTA card -->
+      <div class="footer-cta-card">
+        <div class="cta-card-icon-box" aria-hidden="true">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#f26522"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"
+            ></path>
+            <path
+              d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"
+            ></path>
+            <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
+            <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+          </svg>
+        </div>
+        <div class="cta-card-body">
+          <h3 class="cta-card-heading">Have a project in mind?</h3>
+          <p class="cta-card-text">
+            Let’s turn your ideas into meaningful digital solutions.
+          </p>
+          <a href="/contact#project-inquiry" class="cta-card-button">
+            Discuss Your Project <span class="btn-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom copyright row -->
+    <div class="site-container footer-bottom-row">
+      <span class="copyright-left">© {currentYear} Incaendo Pvt Ltd</span>
+      <span class="copyright-right">Since 2011</span>
+    </div>
+  </section>
 </footer>
+
+<style>
+  .site-footer {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+  }
+
+  /* ==========================================================================
+     SECTION A: Light warm ivory contact banner
+     ========================================================================== */
+  .footer-contact-banner {
+    position: relative;
+    width: 100%;
+    background: linear-gradient(180deg, #fdf5ef 0%, #faeee6 100%);
+    border-top-left-radius: 28px;
+    border-top-right-radius: 28px;
+    padding: 1.5rem 0;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(242, 101, 34, 0.08);
+  }
+
+  .banner-inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+  }
+
+  .banner-brand-col {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  /* The logo's own sized area: symmetric inline padding gives it equal,
+     comfortable breathing room on both sides (content boundary on the left,
+     divider on the right) from a single declaration, so it's inherently
+     centered rather than relying on separate offsets on other elements. */
+  .banner-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+    padding-inline: 0.75rem;
+  }
+
+  .banner-logo:hover {
+    opacity: 0.9;
+  }
+
+  /* Matches .site-logo-header img in global.css, including its breakpoints
+     (see the two media queries below), so the footer logo is never smaller
+     than the header logo at any viewport width. */
+  .banner-logo img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  @media (max-width: 1050px) {
+    .banner-logo img {
+      height: 36px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .banner-logo img {
+      height: 30px;
+    }
+  }
+
+  .banner-divider {
+    width: 1px;
+    height: 32px;
+    background: rgba(14, 23, 38, 0.4);
+    flex-shrink: 0;
+    /* Keeps the tagline's position unchanged: the logo area above grew by
+       0.75rem combined over its original 0 + 1.15rem split, so this gap
+       shrinks from 1.15rem to 0.8rem to absorb that difference. */
+    margin-right: 0.8rem;
+  }
+
+  .banner-tagline {
+    margin: 0;
+    font-size: 0.84rem;
+    line-height: 1.35;
+    color: #1a2434;
+    font-weight: 500;
+    max-width: 220px;
+    letter-spacing: -0.01em;
+  }
+
+  .banner-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-shrink: 0;
+  }
+
+  .action-card {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.4rem 0.55rem;
+    border-radius: 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .action-card:hover {
+    background: rgba(255, 255, 255, 0.65);
+  }
+
+  .action-icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: #fff5ee;
+    border: 1px solid rgba(242, 101, 34, 0.22);
+    flex-shrink: 0;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .action-card:hover .action-icon-box {
+    transform: scale(1.05);
+    border-color: rgba(242, 101, 34, 0.4);
+  }
+
+  .action-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .action-title {
+    font-size: 0.85rem;
+    font-weight: 650;
+    color: #0e1726;
+    line-height: 1.25;
+    white-space: nowrap;
+    letter-spacing: -0.01em;
+  }
+
+  .action-subtitle {
+    font-size: 0.72rem;
+    color: #6a7382;
+    line-height: 1.25;
+    white-space: nowrap;
+  }
+
+  .action-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0e1726;
+    margin-left: 0.2rem;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .action-card:hover .action-arrow {
+    transform: translateX(4px);
+    color: #f26522;
+  }
+
+  .action-separator {
+    width: 1px;
+    height: 30px;
+    background: rgba(14, 23, 38, 0.1);
+    flex-shrink: 0;
+  }
+
+  .banner-waves-decor {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 380px;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .banner-waves-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* ==========================================================================
+     SECTION B: Dark navy footer
+     ========================================================================== */
+  .footer-navy-main {
+    position: relative;
+    width: 100%;
+    background: #0b1524;
+    color: #ffffff;
+    padding: 3.5rem 0 1.85rem;
+  }
+
+  .footer-navy-inner {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2.5rem;
+  }
+
+  .footer-nav-columns {
+    display: flex;
+    align-items: stretch;
+    gap: 3.5rem;
+  }
+
+  .explore-group {
+    width: 165px;
+    flex-shrink: 0;
+  }
+
+  .company-group {
+    width: 185px;
+    flex-shrink: 0;
+  }
+
+  .footer-column-label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #f26522;
+    text-transform: uppercase;
+    margin-bottom: 0.85rem;
+  }
+
+  .footer-nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .footer-nav-links li {
+    margin: 0;
+    padding: 0;
+    line-height: 1.3;
+  }
+
+  .footer-nav-links a {
+    color: rgba(255, 255, 255, 0.72);
+    text-decoration: none;
+    font-size: 0.86rem;
+    line-height: 1.35;
+    display: inline-block;
+    transition: color 0.18s ease;
+  }
+
+  .footer-nav-links a:hover {
+    color: #ffffff;
+  }
+
+  .footer-column-divider {
+    width: 1px;
+    align-self: stretch;
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  /* Column 3: Project CTA card */
+  .footer-cta-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem 1.4rem;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: radial-gradient(
+        circle at 100% 100%,
+        rgba(242, 101, 34, 0.22) 0%,
+        rgba(255, 255, 255, 0.03) 60%
+      ),
+      rgba(255, 255, 255, 0.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    max-width: 420px;
+    width: 100%;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .footer-cta-card:hover {
+    border-color: rgba(242, 101, 34, 0.38);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+  }
+
+  .cta-card-icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: rgba(242, 101, 34, 0.14);
+    border: 1px solid rgba(242, 101, 34, 0.28);
+    flex-shrink: 0;
+  }
+
+  .cta-card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cta-card-heading {
+    margin: 0 0 0.25rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+  }
+
+  .cta-card-text {
+    margin: 0 0 0.85rem;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .cta-card-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.5rem 1.05rem;
+    border-radius: 6px;
+    background: #f26522;
+    color: #ffffff;
+    font-size: 0.82rem;
+    font-weight: 650;
+    line-height: 1.35;
+    text-decoration: none;
+    transition: background-color 0.18s ease, transform 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+
+  .cta-card-button:hover {
+    background: #e45715;
+    box-shadow: 0 6px 18px rgba(242, 101, 34, 0.38);
+    transform: translateY(-1px);
+  }
+
+  .btn-arrow {
+    display: inline-block;
+    transition: transform 0.18s ease;
+  }
+
+  .cta-card-button:hover .btn-arrow {
+    transform: translateX(3px);
+  }
+
+  /* Bottom copyright row */
+  .footer-bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2.1rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.52);
+    font-size: 0.8rem;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE BREAKPOINTS
+     ========================================================================== */
+  @media (max-width: 980px) {
+    .banner-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.2rem;
+    }
+
+    .banner-actions {
+      width: 100%;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 0.6rem 0.8rem;
+    }
+
+    .footer-navy-inner {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 2.2rem;
+    }
+
+    .explore-group,
+    .company-group {
+      width: auto;
+    }
+
+    .footer-cta-card {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .footer-contact-banner {
+      padding: 1.3rem 0;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+
+    .banner-brand-col {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .banner-logo {
+      padding-inline: 0;
+    }
+
+    .banner-divider {
+      display: none;
+    }
+
+    .banner-tagline {
+      max-width: 100%;
+    }
+
+    .banner-actions {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.5rem;
+    }
+
+    .action-separator {
+      display: none;
+    }
+
+    .action-card {
+      padding: 0.65rem 0.85rem;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(242, 101, 34, 0.12);
+      border-radius: 10px;
+      justify-content: space-between;
+    }
+
+    .action-arrow {
+      margin-left: auto;
+    }
+
+    .footer-navy-main {
+      padding: 2.6rem 0 1.5rem;
+    }
+
+    .footer-nav-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .footer-column-divider {
+      display: none;
+    }
+
+    .footer-bottom-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.4rem;
+      margin-top: 1.85rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .action-card,
+    .action-icon-box,
+    .action-arrow,
+    .cta-card-button,
+    .btn-arrow {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+</style>

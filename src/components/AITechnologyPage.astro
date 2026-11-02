@@ -1,6 +1,7 @@
 ---
 import AIAgentsShowcase from './AIAgentsShowcase.astro'
 import AIPracticalPath from './AIPracticalPath.astro'
+import AIBusinessApplications from './AIBusinessApplications.astro'
 
 const capabilities = [
   {
@@ -53,7 +54,7 @@ const capabilities = [
   },
 ]
 
-// Key figures shown around the AI letters once they are clicked. These are
+// Key figures shown around the AI letters by default. These are
 // provisional: none is backed by approved material in this repository yet.
 // Set `confirmed: true` on each once verified; while any is unconfirmed, the
 // hero shows a short "provisional figures" note.
@@ -109,6 +110,20 @@ const heroStats = [
 ]
 const statsProvisional = heroStats.some((stat) => !stat.confirmed)
 
+// Each card enters along the same line it sits on relative to the sphere's
+// centre, so it settles in from its own side (top drops down, left slides
+// in from the left, and so on) instead of every card rising from below.
+const ENTRANCE_PX = 16
+const entranceOffset = (stat) => {
+  const dx = stat.x - 50
+  const dy = stat.y - 50
+  const length = Math.hypot(dx, dy) || 1
+  return {
+    x: (dx / length) * ENTRANCE_PX,
+    y: (dy / length) * ENTRANCE_PX,
+  }
+}
+
 // Line icons on a 24px grid, drawn with the card's accent colour.
 /** @type {Record<string, string>} */
 const statIcons = {
@@ -158,42 +173,33 @@ const statIcons = {
         <div class="ai-particles-stage" data-particles-stage>
           <div class="ai-particles-ambient" aria-hidden="true"></div>
           <canvas aria-hidden="true"></canvas>
-          <button
-            class="ai-particles-core"
-            type="button"
-            aria-expanded="false"
-            aria-controls="ai-particles-stats"
-            aria-label="AI: show key figures"
-            data-particles-core
-          >
+          <div class="ai-particles-core" aria-hidden="true" data-particles-core>
             <b aria-hidden="true">AI</b>
-          </button>
-          <div
-            class="ai-particles-stats"
-            id="ai-particles-stats"
-            data-particles-stats
-            inert
-          >
+          </div>
+          <div class="ai-particles-stats" data-particles-stats>
             <ul aria-label="Key figures">
-              {heroStats.map((stat, index) => (
-                <li
-                  class={`ai-particles-stat is-${stat.accent}`}
-                  style={`--x: ${stat.x}%; --y: ${stat.y}%; --order: ${index}`}
-                >
-                  <div class="ai-particles-stat-card">
-                    <svg
-                      class="ai-particles-stat-icon"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                      set:html={statIcons[stat.icon]}
-                    />
-                    <div>
-                      <b>{stat.value}</b>
-                      <span>{stat.label}</span>
+              {heroStats.map((stat, index) => {
+                const entrance = entranceOffset(stat)
+                return (
+                  <li
+                    class={`ai-particles-stat is-${stat.accent}`}
+                    style={`--x: ${stat.x}%; --y: ${stat.y}%; --order: ${index}; --ex: ${entrance.x.toFixed(1)}px; --ey: ${entrance.y.toFixed(1)}px`}
+                  >
+                    <div class="ai-particles-stat-card">
+                      <svg
+                        class="ai-particles-stat-icon"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        set:html={statIcons[stat.icon]}
+                      />
+                      <div>
+                        <b>{stat.value}</b>
+                        <span>{stat.label}</span>
+                      </div>
                     </div>
-                  </div>
-                </li>
-              ))}
+                  </li>
+                )
+              })}
             </ul>
             {statsProvisional && (
               <p class="ai-particles-provisional">
@@ -246,6 +252,8 @@ const statIcons = {
     </div>
   </section>
 
+  <AIBusinessApplications />
+
   <AIPracticalPath />
 
   <AIAgentsShowcase />
@@ -276,6 +284,7 @@ const statIcons = {
     font-size: var(--type-section-size);
     font-weight: var(--type-heading-weight);
     letter-spacing: var(--type-section-letter-spacing);
+    word-spacing: var(--type-section-word-spacing);
     line-height: var(--type-section-line-height);
   }
   .ai-tech-page h2 span,
@@ -312,6 +321,7 @@ const statIcons = {
     font-size: var(--type-page-hero-size);
     font-weight: var(--type-display-weight);
     letter-spacing: var(--type-display-letter-spacing);
+    word-spacing: var(--type-display-word-spacing);
     line-height: var(--type-page-hero-line-height);
   }
   .ai-tech-lead {
@@ -331,8 +341,9 @@ const statIcons = {
     gap: 0.75rem;
   }
 
-  /* Hero visual: a square particle field sized from its column; clicking
-     the AI letters morphs it into a view of five key figures */
+  /* Hero visual: a square particle field sized from its column, which loads
+     straight into its open view: the cloud gathers into a sphere around the
+     AI letters with the five key figures shown alongside it */
   .ai-particles {
     position: relative;
     display: grid;
@@ -427,7 +438,6 @@ const statIcons = {
     border: 0;
     border-radius: 50%;
     background: transparent;
-    cursor: pointer;
     transform: translate(-50%, -50%);
     transition:
       width 600ms var(--ease-out),
@@ -439,24 +449,15 @@ const statIcons = {
     aspect-ratio: 6 / 5;
     border-radius: 22%;
   }
-  .ai-particles-core:focus-visible {
-    outline: 3px solid var(--color-orange);
-    outline-offset: 2px;
-  }
-  /* Focused by a click, then Escape: not keyboard navigation, so no ring
-     (set and cleared in ai-particle-hero.js). */
-  .ai-particles-core[data-pointer-focus]:focus-visible {
-    outline: none;
-  }
   .ai-particles-core b {
     font-family: var(--font-heading);
     font-weight: 800;
     opacity: 0;
   }
 
-  /* Open view: the cards fade in as the cloud gathers into its sphere, and
-     fade out first on the way back. The layer sits above the core but lets
-     clicks through, so only the cards themselves take the pointer. */
+  /* The cards fade in on load as the cloud gathers into its sphere. The
+     layer sits above the core but lets clicks through, so only the cards
+     themselves take the pointer. */
   .ai-particles-stats {
     position: absolute;
     z-index: 4;
@@ -488,14 +489,15 @@ const statIcons = {
     top: var(--y);
     left: var(--x);
     opacity: 0;
-    transform: translate(-50%, calc(-50% + 10px)) scale(0.97);
+    transform: translate(calc(-50% + var(--ex)), calc(-50% + var(--ey)))
+      scale(0.94);
     transition:
       opacity 220ms ease,
       transform 400ms var(--ease-out);
   }
   [data-state='open'] .ai-particles-stat {
     opacity: 1;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(1);
     pointer-events: auto;
     transition:
       opacity 500ms ease calc(480ms + var(--order) * 90ms),
@@ -573,6 +575,7 @@ const statIcons = {
     font-size: clamp(1.2rem, 4.6cqmin, 1.45rem);
     font-weight: 750;
     letter-spacing: -0.035em;
+    word-spacing: 0.035em;
     line-height: 1.05;
   }
   .ai-particles-stat span {
@@ -732,6 +735,7 @@ const statIcons = {
     font-size: 1.14rem;
     font-weight: 650;
     letter-spacing: -0.04em;
+    word-spacing: 0.04em;
   }
   .ai-detail-card > p {
     margin-bottom: 1.1rem;

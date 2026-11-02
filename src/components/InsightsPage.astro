@@ -1,12 +1,13 @@
 ---
 import InsightCard from './InsightCard.astro'
 import InsightsHeroLatest from './InsightsHeroLatest.astro'
+import FilterBar from './FilterBar.astro'
+import Pagination from './Pagination.astro'
 import {
   articles,
   featuredArticles,
   heroArticle,
   insightCategories,
-  latestArticles,
 } from '../data/articles.js'
 
 const categoryKey = (category) =>
@@ -14,6 +15,14 @@ const categoryKey = (category) =>
     .toLocaleLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, '')
+
+const filterItems = [
+  { label: 'All', value: 'all' },
+  ...insightCategories.map((category) => ({
+    label: category,
+    value: categoryKey(category),
+  })),
+]
 ---
 
 <div class="insights-page">
@@ -94,56 +103,16 @@ const categoryKey = (category) =>
         </div>
       </header>
 
-      <p class="insights-draft-note">
-        <span aria-hidden="true">i</span>
-        Sample editorial drafts for page development. Publication dates and
-        authors have not been assigned.
-      </p>
-
-      <div class="insights-toolbar" data-insights-toolbar>
-        <div
-          class="insights-filters"
-          role="group"
-          aria-label="Filter articles by category"
-        >
-          <button
-            class="insights-filter is-active"
-            type="button"
-            data-insights-filter="all"
-            aria-pressed="true"
-          >
-            All <span>{articles.length}</span>
-          </button>
-          {insightCategories.map((category) => (
-            <button
-              class="insights-filter"
-              type="button"
-              data-insights-filter={categoryKey(category)}
-              aria-pressed="false"
-            >
-              {category}
-              <span>
-                {
-                  articles.filter((article) => article.category === category)
-                    .length
-                }
-              </span>
-            </button>
-          ))}
-        </div>
-        <div class="insights-toolbar-meta">
-          <p
-            class="insights-result-count"
-            data-insights-count
-            aria-live="polite"
-          >
-            {articles.length} sample articles
-          </p>
-          <button class="insights-reset" type="button" data-insights-reset>
-            Clear filters
-          </button>
-        </div>
-      </div>
+      <FilterBar
+        items={filterItems}
+        ariaLabel="Filter articles by category"
+        dataToolbar="data-insights-toolbar"
+        dataFilter="data-insights-filter"
+        dataReset="data-insights-reset"
+        chipClass="insights-filter"
+        resetClass="insights-reset"
+        showReset={true}
+      />
 
       <div class="insights-latest-layout">
         <div
@@ -151,27 +120,29 @@ const categoryKey = (category) =>
           data-reveal-stagger
           data-insights-latest
         >
-          {latestArticles.map((article) => (
+          {articles.map((article) => (
             <InsightCard article={article} variant="standard" />
           ))}
         </div>
-        <p
-          class="insights-feature-match-note"
-          data-insights-feature-match
-          hidden
-        >
-          Matching sample articles are featured above.
-        </p>
         <p class="insights-empty-state" data-insights-empty hidden>
           No sample articles match that filter. Clear the filters or try another
           topic.
         </p>
+        <Pagination
+          ariaLabel="Article pages"
+          dataPagination="data-insights-pagination"
+          dataPrev="data-insights-page-prev"
+          dataNext="data-insights-page-next"
+          dataNumbers="data-insights-page-numbers"
+        />
       </div>
     </div>
   </section>
 </div>
 
 <script>
+  const PAGE_SIZE = 6
+
   const setupInsights = () => {
     const page = document.querySelector('.insights-page')
     if (!page || page.dataset.insightsReady === 'true') return
@@ -179,38 +150,92 @@ const categoryKey = (category) =>
 
     const reset = page.querySelector('[data-insights-reset]')
     const filters = [...page.querySelectorAll('[data-insights-filter]')]
-    const cards = [...page.querySelectorAll('[data-insight-card]')]
-    const count = page.querySelector('[data-insights-count]')
     const empty = page.querySelector('[data-insights-empty]')
     const archive = page.querySelector('[data-insights-latest]')
+    const archiveCards = [...archive.querySelectorAll('[data-insight-card]')]
     const featureSection = page.querySelector('[data-insight-featured-section]')
-    const matchNote = page.querySelector('[data-insights-feature-match]')
+    const featureCards = [
+      ...featureSection.querySelectorAll('[data-insight-card]'),
+    ]
+    const pagination = page.querySelector('[data-insights-pagination]')
+    const pageNumbers = page.querySelector('[data-insights-page-numbers]')
+    const prevButton = page.querySelector('[data-insights-page-prev]')
+    const nextButton = page.querySelector('[data-insights-page-next]')
+    const reducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches
+
     let activeCategory = 'all'
+    let currentPage = 1
 
-    const update = () => {
-      let matching = 0
-      let archiveMatches = 0
-
-      cards.forEach((card) => {
+    const update = (scrollToGrid = false) => {
+      // Featured highlights: plain category filter, same as before pagination.
+      featureCards.forEach((card) => {
         card.hidden = !(
           activeCategory === 'all' ||
           card.dataset.insightCategory === activeCategory
         )
-        if (!card.hidden) {
-          matching += 1
-          if (card.closest('[data-insights-latest]')) archiveMatches += 1
-        }
+      })
+      featureSection.hidden = !featureCards.some((card) => !card.hidden)
+
+      // Archive: category filter, then slice to the current page.
+      const matches = archiveCards.filter(
+        (card) =>
+          activeCategory === 'all' ||
+          card.dataset.insightCategory === activeCategory,
+      )
+      const totalPages = Math.max(1, Math.ceil(matches.length / PAGE_SIZE))
+      currentPage = Math.min(Math.max(currentPage, 1), totalPages)
+      const start = (currentPage - 1) * PAGE_SIZE
+      const end = start + PAGE_SIZE
+
+      archiveCards.forEach((card) => {
+        const matchIndex = matches.indexOf(card)
+        card.hidden =
+          matchIndex === -1 || matchIndex < start || matchIndex >= end
       })
 
-      const visibleFeatures = [
-        ...featureSection.querySelectorAll('[data-insight-card]'),
-      ]
-      featureSection.hidden = !visibleFeatures.some((card) => !card.hidden)
-      archive.hidden = archiveMatches === 0
-      count.textContent = `${matching} ${matching === 1 ? 'article' : 'articles'} found`
-      empty.hidden = matching !== 0
-      matchNote.hidden = matching === 0 || archiveMatches !== 0
+      archive.hidden = matches.length === 0
+      empty.hidden = matches.length !== 0
       reset.disabled = activeCategory === 'all'
+
+      if (pagination instanceof HTMLElement) {
+        pagination.hidden = matches.length === 0 || totalPages <= 1
+      }
+      if (prevButton instanceof HTMLButtonElement) {
+        prevButton.disabled = currentPage === 1
+      }
+      if (nextButton instanceof HTMLButtonElement) {
+        nextButton.disabled = currentPage === totalPages
+      }
+
+      if (pageNumbers) {
+        pageNumbers.innerHTML = ''
+        for (let pageNum = 1; pageNum <= totalPages; pageNum += 1) {
+          const button = document.createElement('button')
+          button.type = 'button'
+          button.className = 'insights-pagination-number'
+          button.textContent = String(pageNum)
+          button.setAttribute('aria-label', `Go to page ${pageNum}`)
+          if (pageNum === currentPage) {
+            button.classList.add('is-active')
+            button.setAttribute('aria-current', 'page')
+          }
+          button.addEventListener('click', () => {
+            if (pageNum === currentPage) return
+            currentPage = pageNum
+            update(true)
+          })
+          pageNumbers.appendChild(button)
+        }
+      }
+
+      if (scrollToGrid) {
+        archive.scrollIntoView({
+          behavior: reducedMotion ? 'auto' : 'smooth',
+          block: 'start',
+        })
+      }
     }
 
     filters.forEach((filter) => {
@@ -226,6 +251,7 @@ const categoryKey = (category) =>
           button.classList.toggle('is-active', selected)
           button.setAttribute('aria-pressed', String(selected))
         })
+        currentPage = 1
         update()
       })
     })
@@ -237,9 +263,32 @@ const categoryKey = (category) =>
         button.setAttribute('aria-pressed', String(selected))
         if (selected) button.focus()
       })
+      currentPage = 1
       update()
     })
-    update()
+    prevButton?.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage -= 1
+        update(true)
+      }
+    })
+    nextButton?.addEventListener('click', () => {
+      currentPage += 1
+      update(true)
+    })
+
+    // The site-wide scroll-reveal (src/scripts/motion.js) fires once for
+    // this grid via IntersectionObserver and animates every
+    // [data-reveal-item] it finds at that moment. If cards beyond page 1
+    // are already hidden when that fires, GSAP sets their pre-animation
+    // (invisible) state and never revisits them, so they'd stay invisible
+    // forever even after a later page change unhides them. Waiting two
+    // animation frames lets that one-time reveal run first.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        update()
+      })
+    })
   }
 
   setupInsights()
@@ -305,6 +354,7 @@ const categoryKey = (category) =>
     font-size: var(--type-page-hero-size);
     font-weight: var(--type-display-weight);
     letter-spacing: var(--type-display-letter-spacing);
+    word-spacing: var(--type-display-word-spacing);
     line-height: var(--type-page-hero-line-height);
   }
 
@@ -352,6 +402,7 @@ const categoryKey = (category) =>
     font-size: var(--type-section-size);
     font-weight: var(--type-heading-weight);
     letter-spacing: var(--type-section-letter-spacing);
+    word-spacing: var(--type-section-word-spacing);
     line-height: var(--type-section-line-height);
   }
 
@@ -386,157 +437,6 @@ const categoryKey = (category) =>
       #f1efeb;
   }
 
-  .insights-draft-note {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.65rem;
-    margin: 0 0 1rem;
-    padding: 0.75rem 0.85rem;
-    border-left: 2px solid var(--color-orange-dark);
-    background: rgb(255 255 255 / 54%);
-    color: #687587;
-    font-size: 0.7rem;
-    line-height: 1.5;
-  }
-
-  .insights-draft-note span {
-    display: grid;
-    width: 1rem;
-    height: 1rem;
-    flex: 0 0 auto;
-    place-items: center;
-    border-radius: 50%;
-    background: #f1e2d9;
-    color: var(--color-orange-dark);
-    font-size: 0.62rem;
-    font-weight: 750;
-  }
-
-  .insights-toolbar {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    padding: 0.6rem 0.6rem 0.6rem 0.75rem;
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-large);
-    background: rgb(255 255 255 / 88%);
-    box-shadow: 0 14px 36px rgb(16 27 45 / 5%);
-  }
-
-  .insights-toolbar-meta {
-    display: flex;
-    flex: 0 0 auto;
-    align-items: center;
-    gap: 0.35rem;
-    margin-left: auto;
-  }
-
-  .insights-result-count {
-    margin: 0;
-    color: var(--color-muted);
-    font-size: 0.72rem;
-    font-weight: 600;
-    white-space: nowrap;
-  }
-
-  .insights-reset {
-    min-height: 36px;
-    padding: 0.45rem 0.85rem;
-    border: 1px solid transparent;
-    border-radius: 999px;
-    background: transparent;
-    color: var(--color-orange-dark);
-    cursor: pointer;
-    font-size: 0.72rem;
-    font-weight: 650;
-    white-space: nowrap;
-    transition:
-      background 180ms ease,
-      border-color 180ms ease;
-  }
-
-  .insights-reset:hover:not(:disabled) {
-    border-color: rgb(168 65 33 / 20%);
-    background: #fff7f3;
-  }
-
-  .insights-reset:focus-visible,
-  .insights-filter:focus-visible {
-    outline: 3px solid rgb(84 123 157 / 32%);
-    outline-offset: 2px;
-  }
-
-  .insights-reset:disabled {
-    visibility: hidden;
-  }
-
-  .insights-filters {
-    display: flex;
-    flex: 1 1 auto;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    min-width: 0;
-  }
-
-  .insights-filter {
-    display: inline-flex;
-    min-height: 38px;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.4rem 0.45rem 0.4rem 0.95rem;
-    border: 1px solid #e0e3e5;
-    border-radius: 999px;
-    background: var(--color-white);
-    color: var(--color-body);
-    cursor: pointer;
-    font-size: 0.72rem;
-    font-weight: 600;
-    transition:
-      color 180ms ease,
-      background 180ms ease,
-      border-color 180ms ease,
-      box-shadow 180ms ease;
-  }
-
-  .insights-filter span {
-    display: inline-grid;
-    min-width: 1.5rem;
-    height: 1.5rem;
-    place-items: center;
-    padding-inline: 0.35rem;
-    border-radius: 999px;
-    background: #f1efeb;
-    color: var(--color-muted);
-    font-size: 0.62rem;
-    font-weight: 700;
-    transition:
-      color 180ms ease,
-      background 180ms ease;
-  }
-
-  .insights-filter:hover {
-    border-color: rgb(168 65 33 / 45%);
-    color: var(--color-orange-dark);
-  }
-
-  .insights-filter:hover span {
-    background: #fbe9e0;
-    color: var(--color-orange-dark);
-  }
-
-  .insights-filter.is-active {
-    border-color: var(--color-orange-dark);
-    background: var(--color-orange-dark);
-    box-shadow: 0 6px 16px rgb(168 65 33 / 22%);
-    color: var(--color-white);
-  }
-
-  .insights-filter.is-active span {
-    background: rgb(255 255 255 / 20%);
-    color: var(--color-white);
-  }
-
   .insights-latest-grid {
     display: flex;
     flex-wrap: wrap;
@@ -552,12 +452,10 @@ const categoryKey = (category) =>
   .insights-latest-grid[hidden],
   .insights-featured-section[hidden],
   .insights-featured-section [hidden],
-  .insights-feature-match-note[hidden],
   .insights-empty-state[hidden] {
     display: none !important;
   }
 
-  .insights-feature-match-note,
   .insights-empty-state {
     margin: 0;
     padding: 1.5rem;
@@ -618,26 +516,6 @@ const categoryKey = (category) =>
     }
     .insights-latest-grid > :global(.insight-card) {
       flex-basis: 100%;
-    }
-    .insights-toolbar {
-      align-items: stretch;
-      flex-direction: column;
-      gap: 0.5rem;
-      padding: 0.6rem;
-      border-radius: var(--radius-medium);
-    }
-    .insights-toolbar-meta {
-      justify-content: space-between;
-      margin-left: 0;
-      padding: 0.5rem 0 0 0.35rem;
-      border-top: 1px solid #ece9e4;
-    }
-    .insights-filters {
-      gap: 0.4rem;
-    }
-    .insights-filter {
-      flex: 1 1 auto;
-      justify-content: center;
     }
   }
 </style>

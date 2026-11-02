@@ -25,7 +25,7 @@ const categoryKey = article.category
       <Image
         class="insight-photo"
         src={image}
-        alt=""
+        alt={article.image?.alt ?? ''}
         widths={[480, 800, 1200]}
         sizes={
           variant === 'lead'
@@ -42,8 +42,13 @@ const categoryKey = article.category
         prefix={article.slug}
       />
     )}
-    {variant === 'hero' && (
+    {variant === 'hero' && !article.author && !article.isPublishedBlog && (
       <span class="insight-featured-stamp">EDITORIAL DRAFT</span>
+    )}
+    {article.isCaseStudy && (
+      <span class="insight-featured-stamp insight-case-study-stamp">
+        CASE STUDY
+      </span>
     )}
   </a>
   <div class="insight-card-content">
@@ -59,8 +64,18 @@ const categoryKey = article.category
     <p class="insight-card-excerpt">{article.excerpt}</p>
     <div class="insight-card-footer">
       <p>
-        Draft · date to be confirmed <span aria-hidden="true">·</span> Estimated{' '}
-        {article.readMinutes} min read
+        {article.author ? (
+          <>
+            {article.author} <span aria-hidden="true">·</span>{' '}
+            {article.dateFormatted || article.publishedDate || 'Published'}{' '}
+            <span aria-hidden="true">·</span> {article.readMinutes} min read
+          </>
+        ) : (
+          <>
+            Draft · date to be confirmed <span aria-hidden="true">·</span>{' '}
+            Estimated {article.readMinutes} min read
+          </>
+        )}
       </p>
       <a class="insight-read-link" href={`/insights/${article.slug}/`}>
         Read article{' '}
@@ -140,6 +155,12 @@ const categoryKey = article.category
     letter-spacing: 0.13em;
   }
 
+  .insight-featured-stamp.insight-case-study-stamp {
+    background: var(--color-navy);
+    border-color: rgb(255 255 255 / 25%);
+    letter-spacing: 0.12em;
+  }
+
   .insight-card-content {
     display: flex;
     min-width: 0;
@@ -172,6 +193,7 @@ const categoryKey = article.category
     font-size: var(--type-card-heading-size);
     font-weight: 620;
     letter-spacing: -0.045em;
+    word-spacing: 0.045em;
     line-height: 1.28;
   }
 

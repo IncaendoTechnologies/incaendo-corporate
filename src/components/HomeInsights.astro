@@ -1,16 +1,8 @@
 ---
 import InsightCard from './InsightCard.astro'
-import {
-  featuredArticles,
-  heroArticle,
-  latestArticles,
-} from '../data/articles.js'
+import { publishedBlogArticles } from '../data/articles.js'
 
-const homeArticles = [
-  heroArticle,
-  featuredArticles[0],
-  latestArticles[0],
-].filter(Boolean)
+const homeArticles = publishedBlogArticles.slice(0, 3)
 ---
 
 <section class="home-insights-section" aria-labelledby="home-insights-heading">
@@ -73,6 +65,7 @@ const homeArticles = [
     font-size: var(--type-section-size);
     font-weight: var(--type-heading-weight);
     letter-spacing: var(--type-section-letter-spacing);
+    word-spacing: var(--type-section-word-spacing);
     line-height: var(--type-section-line-height);
   }
 

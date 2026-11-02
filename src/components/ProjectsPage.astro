@@ -1,11 +1,18 @@
 ---
 import { Image } from 'astro:assets'
 import { projects, projectCategories } from '../data/projects.js'
+import FilterBar from './FilterBar.astro'
 import IndustryChips from './IndustryChips.astro'
+import Pagination from './Pagination.astro'
 
 const tomo = projects.find((project) => project.name === 'Tomo')
 const dominos = projects.find((project) => project.name === "Domino's")
 const zeeMedia = projects.find((project) => project.name === 'Zee Media')
+
+const filterItems = projectCategories.map((category, index) => ({
+  label: category,
+  value: index === 0 ? 'all' : category,
+}))
 ---
 
 <section class="projects-hero" aria-labelledby="projects-page-heading">
@@ -103,20 +110,13 @@ const zeeMedia = projects.find((project) => project.name === 'Zee Media')
       </p>
     </div>
 
-    <div class="portfolio-toolbar">
-      <div class="project-filters" role="group" aria-label="Filter projects">
-        {projectCategories.map((category, index) => (
-          <button
-            type="button"
-            class:list={['project-filter', index === 0 && 'is-active']}
-            data-project-filter={index === 0 ? 'all' : category}
-            aria-pressed={index === 0 ? 'true' : 'false'}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
-    </div>
+    <FilterBar
+      items={filterItems}
+      ariaLabel="Filter projects by category"
+      dataToolbar="data-project-toolbar"
+      dataFilter="data-project-filter"
+      chipClass="project-filter"
+    />
 
     <div class="project-list reveal" data-reveal-stagger>
       {projects.map((project, index) => (
@@ -151,21 +151,100 @@ const zeeMedia = projects.find((project) => project.name === 'Zee Media')
     <p class="portfolio-empty" data-project-empty hidden>
       No projects in this category yet. Choose another area to explore.
     </p>
+    <Pagination
+      ariaLabel="Project pages"
+      dataPagination="data-project-pagination"
+      dataPrev="data-page-prev"
+      dataNext="data-page-next"
+      dataNumbers="data-page-numbers"
+    />
   </div>
 </section>
 
 <script>
+  const PAGE_SIZE = 10
   const portfolio = document.querySelector('.portfolio-section')
 
   if (portfolio instanceof HTMLElement) {
     const filters = portfolio.querySelectorAll('[data-project-filter]')
-    const cards = portfolio.querySelectorAll('[data-portfolio-card]')
+    const cards = Array.from(
+      portfolio.querySelectorAll('[data-portfolio-card]'),
+    )
     const emptyState = portfolio.querySelector('[data-project-empty]')
+    const pagination = portfolio.querySelector('[data-project-pagination]')
+    const pageNumbers = portfolio.querySelector('[data-page-numbers]')
+    const prevButton = portfolio.querySelector('[data-page-prev]')
+    const nextButton = portfolio.querySelector('[data-page-next]')
+    const reducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches
+
+    let activeCategory = 'all'
+    let currentPage = 1
+
+    const render = (scrollToGrid = false) => {
+      const matches = cards.filter(
+        (card) =>
+          activeCategory === 'all' ||
+          card.getAttribute('data-category') === activeCategory,
+      )
+      const totalPages = Math.max(1, Math.ceil(matches.length / PAGE_SIZE))
+      currentPage = Math.min(Math.max(currentPage, 1), totalPages)
+      const start = (currentPage - 1) * PAGE_SIZE
+      const end = start + PAGE_SIZE
+
+      cards.forEach((card) => {
+        const matchIndex = matches.indexOf(card)
+        card.hidden =
+          matchIndex === -1 || matchIndex < start || matchIndex >= end
+      })
+
+      if (emptyState) emptyState.hidden = matches.length !== 0
+
+      if (pagination instanceof HTMLElement) {
+        pagination.hidden = matches.length === 0 || totalPages <= 1
+      }
+
+      if (prevButton instanceof HTMLButtonElement) {
+        prevButton.disabled = currentPage === 1
+      }
+      if (nextButton instanceof HTMLButtonElement) {
+        nextButton.disabled = currentPage === totalPages
+      }
+
+      if (pageNumbers) {
+        pageNumbers.innerHTML = ''
+        for (let page = 1; page <= totalPages; page += 1) {
+          const button = document.createElement('button')
+          button.type = 'button'
+          button.className = 'pagination-number'
+          button.textContent = String(page)
+          button.setAttribute('aria-label', `Go to page ${page}`)
+          if (page === currentPage) {
+            button.classList.add('is-active')
+            button.setAttribute('aria-current', 'page')
+          }
+          button.addEventListener('click', () => {
+            if (page === currentPage) return
+            currentPage = page
+            render(true)
+          })
+          pageNumbers.appendChild(button)
+        }
+      }
+
+      if (scrollToGrid) {
+        const grid = portfolio.querySelector('.project-list')
+        grid?.scrollIntoView({
+          behavior: reducedMotion ? 'auto' : 'smooth',
+          block: 'start',
+        })
+      }
+    }
 
     filters.forEach((filter) => {
       filter.addEventListener('click', () => {
         const category = filter.getAttribute('data-project-filter')
-        let visibleCount = 0
 
         filters.forEach((button) => {
           const isActive = button === filter
@@ -173,15 +252,34 @@ const zeeMedia = projects.find((project) => project.name === 'Zee Media')
           button.setAttribute('aria-pressed', String(isActive))
         })
 
-        cards.forEach((card) => {
-          const matches =
-            category === 'all' ||
-            card.getAttribute('data-category') === category
-          card.hidden = !matches
-          if (matches) visibleCount += 1
-        })
+        activeCategory = category ?? 'all'
+        currentPage = 1
+        render()
+      })
+    })
 
-        if (emptyState) emptyState.hidden = visibleCount !== 0
+    prevButton?.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage -= 1
+        render(true)
+      }
+    })
+
+    nextButton?.addEventListener('click', () => {
+      currentPage += 1
+      render(true)
+    })
+
+    // The site-wide scroll-reveal (src/scripts/motion.js) fires once for
+    // this whole grid via IntersectionObserver and animates every
+    // [data-reveal-item] it finds at that moment. If cards beyond page 1
+    // are already hidden when that fires, GSAP sets their pre-animation
+    // (invisible) state and never revisits them, so they'd stay invisible
+    // forever even after a later page change unhides them. Waiting two
+    // animation frames lets that one-time reveal run first.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        render()
       })
     })
   }
@@ -251,6 +349,7 @@ const zeeMedia = projects.find((project) => project.name === 'Zee Media')
     font-size: var(--type-page-hero-size);
     font-weight: var(--type-display-weight);
     letter-spacing: var(--type-display-letter-spacing);
+    word-spacing: var(--type-display-word-spacing);
     line-height: var(--type-page-hero-line-height);
   }
 
@@ -429,6 +528,7 @@ const zeeMedia = projects.find((project) => project.name === 'Zee Media')
     font-size: var(--type-section-size);
     font-weight: var(--type-heading-weight);
     letter-spacing: var(--type-section-letter-spacing);
+    word-spacing: var(--type-section-word-spacing);
     line-height: var(--type-section-line-height);
   }
 
@@ -438,52 +538,6 @@ const zeeMedia = projects.find((project) => project.name === 'Zee Media')
     color: #657182;
     font-size: 0.88rem;
     line-height: 1.7;
-  }
-
-  .portfolio-toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem 1.5rem;
-    margin-bottom: 1.5rem;
-    padding-block: 0.8rem;
-    border-block: 1px solid var(--color-line);
-  }
-
-  .project-filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.45rem;
-  }
-
-  .project-filter {
-    min-height: 37px;
-    padding: 0.45rem 0.75rem;
-    border: 1px solid transparent;
-    border-radius: 999px;
-    background: transparent;
-    color: #677384;
-    cursor: pointer;
-    font-size: 0.69rem;
-    font-weight: 650;
-    line-height: 1.2;
-    transition:
-      color var(--duration-fast) ease,
-      background var(--duration-fast) ease,
-      border-color var(--duration-fast) ease,
-      transform var(--duration-fast) ease;
-  }
-
-  .project-filter:hover {
-    border-color: #dfd4cc;
-    color: var(--color-orange-dark);
-    transform: translateY(-1px);
-  }
-
-  .project-filter.is-active {
-    border-color: #ead1c4;
-    background: #f8eee8;
-    color: var(--color-orange-dark);
   }
 
   /* Project showcase: image-led cards raised from the page background */
@@ -555,6 +609,7 @@ const zeeMedia = projects.find((project) => project.name === 'Zee Media')
     font-size: clamp(1.8rem, 2.7vw, 2.55rem);
     font-weight: var(--type-heading-weight);
     letter-spacing: var(--type-section-letter-spacing);
+    word-spacing: var(--type-section-word-spacing);
     line-height: 1.12;
   }
 
@@ -715,22 +770,11 @@ const zeeMedia = projects.find((project) => project.name === 'Zee Media')
     .project-row-media {
       border-radius: var(--radius-medium);
     }
-
-    .project-filters {
-      gap: 0.25rem;
-    }
-
-    .project-filter {
-      min-height: 35px;
-      padding-inline: 0.6rem;
-      font-size: 0.65rem;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .project-row-media,
-    .project-row-media img,
-    .project-filter {
+    .project-row-media img {
       transition: none;
       animation: none;
     }

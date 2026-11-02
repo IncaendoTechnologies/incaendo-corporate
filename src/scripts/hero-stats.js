@@ -49,7 +49,7 @@ function setupHeroStats() {
         countUp(counter, startAt + index * STAGGER),
       )
     },
-    { threshold: 0.35 },
+    { threshold: 0.1 },
   )
 
   observer.observe(panel)

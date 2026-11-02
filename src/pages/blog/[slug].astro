@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import InsightArticlePage from '../../components/InsightArticlePage.astro'
+import { articles } from '../../data/articles.js'
+
+export function getStaticPaths() {
+  const paths = articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }))
+
+  const techStackArticle = articles.find(
+    (a) => a.slug === 'choosing-the-right-tech-stack-for-your-startup-in-2025',
+  )
+  if (techStackArticle) {
+    paths.push({
+      params: { slug: 'choosing-tech-stack-for-startup-2025' },
+      props: { article: techStackArticle },
+    })
+  }
+
+  const dominosArticle = articles.find(
+    (a) =>
+      a.slug ===
+      'case-study-how-we-helped-dominos-india-centralise-data-automate-settlements-and-refunds',
+  )
+  if (dominosArticle) {
+    paths.push({
+      params: {
+        slug: 'case-study-how-we-helped-domino-s-india-centralise-data-automate-settlements-and-refunds',
+      },
+      props: { article: dominosArticle },
+    })
+  }
+
+  return paths
+}
+
+const { article } = Astro.props
+---
+
+<BaseLayout
+  title={`${article.title} | Incaendo Insights`}
+  description={article.excerpt}
+  openGraphType="article"
+>
+  <main id="main-content">
+    <InsightArticlePage article={article} />
+  </main>
+</BaseLayout>

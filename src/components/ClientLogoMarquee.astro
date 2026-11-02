@@ -1,6 +1,7 @@
 ---
 import activate from '../assets/svg/activate.svg'
 import admott from '../assets/svg/admott.svg'
+import cardekho from '../assets/svg/cardekho.svg'
 import dominos from '../assets/svg/dominos.svg'
 import hereAndNow from '../assets/svg/Here_&_Now_(WBUR)_masthead.svg'
 import italia from '../assets/svg/italia.svg'
@@ -11,31 +12,162 @@ import schand from '../assets/svg/schand.svg'
 import spicejet from '../assets/svg/spicejet.svg'
 import theSeam from '../assets/svg/the seam.svg'
 import uflex from '../assets/svg/uflex.svg'
+import vmc from '../assets/svg/VMC.svg'
 import wagonex from '../assets/svg/wagonex.svg'
 import zeeMedia from '../assets/svg/ZeeMedia.svg'
 
-// Each source SVG's viewBox is cropped to its visible artwork bounds (see
-// src/assets/svg/*.svg), so every logo fills its card consistently via
-// .client-logo-mark's width/height/object-fit in global.css without needing
-// a per-logo transform hack.
-const logos = [
-  { src: activate, alt: 'Activate Studio' },
-  { src: dominos, alt: "Domino's" },
-  { src: jubilant, alt: 'Jubilant FoodWorks' },
-  { src: policybazaar, alt: 'Policybazaar' },
-  { src: schand, alt: 'S. Chand' },
-  { src: theSeam, alt: 'The Seam' },
-  { src: wagonex, alt: 'Wagonex' },
-  { src: admott, alt: 'Admott' },
-  { src: hereAndNow, alt: 'Here & Now (WBUR)' },
-  // This wordmark is a single text line with a much wider aspect ratio than
-  // the icon+wordmark logos around it, so it gets slightly tighter inline
-  // padding (same card size) to maximize its usable width.
-  { src: italia, alt: 'Good Morning Italia', narrowPadding: true },
-  { src: procterGamble, alt: 'Procter & Gamble' },
-  { src: spicejet, alt: 'SpiceJet' },
-  { src: uflex, alt: 'Uflex' },
-  { src: zeeMedia, alt: 'Zee Media' },
+// Complete collection of 16 client & partner logos distributed across 3 distinct rows:
+// - Row 1: First group of 5 logos
+// - Row 2: Second group of 5 logos
+// - Row 3: Remaining 6 logos
+// Each logo belongs strictly to one row without appearing in any other row.
+//
+// Visual sizing benchmarks: The Seam, Wagonex, and AdMott.
+// Individual max-heights, max-widths, and subtle scale offsets are calibrated
+// so compact/square logos (P&G, S. Chand, Jubilant, VMC, Activate) and wide
+// logos with internal whitespace (CarDekho) match the benchmark presence.
+const row1Logos = [
+  {
+    src: activate,
+    alt: 'Activate Studio',
+    maxHeight: '3.6rem',
+    scale: 1.05,
+  },
+  {
+    src: dominos,
+    alt: "Domino's",
+    maxHeight: '2.85rem',
+  },
+  {
+    src: jubilant,
+    alt: 'Jubilant FoodWorks',
+    maxHeight: '3.45rem',
+    scale: 1.1,
+  },
+  {
+    src: policybazaar,
+    alt: 'Policybazaar',
+    maxHeight: '2.85rem',
+  },
+  {
+    src: schand,
+    alt: 'S. Chand',
+    maxHeight: '3.65rem',
+    scale: 1.12,
+  },
+]
+
+const row2Logos = [
+  // Sizing reference benchmarks: The Seam, Wagonex, and AdMott
+  {
+    src: theSeam,
+    alt: 'The Seam',
+    maxHeight: '2.65rem',
+  },
+  {
+    src: wagonex,
+    alt: 'Wagonex',
+    maxHeight: '2.85rem',
+  },
+  {
+    src: admott,
+    alt: 'Admott',
+    maxHeight: '2.75rem',
+  },
+  {
+    src: hereAndNow,
+    alt: 'Here & Now (WBUR)',
+    maxHeight: '3.2rem',
+    scale: 1.1,
+  },
+  {
+    src: cardekho,
+    alt: 'CarDekho',
+    maxHeight: '3.15rem',
+    scale: 1.15,
+  },
+]
+
+const row3Logos = [
+  // Italia wordmark has a wide aspect ratio and gets tighter inline padding
+  {
+    src: italia,
+    alt: 'Good Morning Italia',
+    narrowPadding: true,
+    maxHeight: '2.25rem',
+  },
+  {
+    src: procterGamble,
+    alt: 'Procter & Gamble',
+    maxHeight: '3.65rem',
+    scale: 1.12,
+  },
+  {
+    src: spicejet,
+    alt: 'SpiceJet',
+    maxHeight: '2.85rem',
+  },
+  {
+    src: uflex,
+    alt: 'Uflex',
+    maxHeight: '2.95rem',
+    scale: 1.05,
+  },
+  {
+    src: zeeMedia,
+    alt: 'Zee Media',
+    maxHeight: '3.15rem',
+    scale: 1.08,
+  },
+  // VMC is a dark badge emblem mark
+  {
+    src: vmc,
+    alt: 'VMC',
+    roundedMark: true,
+    maxHeight: '3.35rem',
+    scale: 1.14,
+  },
+]
+
+// Dynamically repeat each row's items so each track has enough elements
+// (minimum 14 items) to span ultra-wide/4K monitors without any empty gaps.
+function buildMarqueeSequence(items, minCount = 14) {
+  let seq = []
+  while (seq.length < minCount) {
+    seq = seq.concat(items)
+  }
+  return seq
+}
+
+// Calibrated calm, premium marquee animation speeds:
+// Row 1: Right-to-left at 54s
+// Row 2: Left-to-right at 62s
+// Row 3: Right-to-left at 48s
+const marqueeRows = [
+  {
+    id: 'client-marquee-row-1',
+    direction: 'left',
+    duration: '54s',
+    delay: '0s',
+    logos: row1Logos,
+    sequence: buildMarqueeSequence(row1Logos),
+  },
+  {
+    id: 'client-marquee-row-2',
+    direction: 'right',
+    duration: '62s',
+    delay: '-10s',
+    logos: row2Logos,
+    sequence: buildMarqueeSequence(row2Logos),
+  },
+  {
+    id: 'client-marquee-row-3',
+    direction: 'left',
+    duration: '48s',
+    delay: '-20s',
+    logos: row3Logos,
+    sequence: buildMarqueeSequence(row3Logos),
+  },
 ]
 ---
 
@@ -43,7 +175,7 @@ const logos = [
   class="client-marquee-section"
   aria-labelledby="client-marquee-heading"
 >
-  <div class="site-container client-marquee-content">
+  <div class="site-container client-marquee-intro-wrap">
     <div class="client-marquee-intro reveal" data-client-intro>
       <p class="eyebrow">Client &amp; partner network</p>
       <h2 id="client-marquee-heading">
@@ -54,22 +186,71 @@ const logos = [
         digital experiences.
       </p>
     </div>
+  </div>
 
-    <ul class="client-logo-grid reveal" aria-label="Client and partner logos">
-      {logos.map((logo) => (
-        <li class:list={['client-logo-card', logo.narrowPadding && 'client-logo-card-narrow-padding']}>
-          <img
-            class="client-logo-mark"
-            src={logo.src.src}
-            width={logo.src.width}
-            height={logo.src.height}
-            alt={logo.alt}
-            loading="eager"
-            decoding="async"
-          />
-        </li>
-      ))}
-    </ul>
+  <div
+    class="client-marquee-container reveal"
+    role="region"
+    aria-label="Client and partner logos showcase"
+  >
+    {marqueeRows.map((row) => (
+      <div
+        class:list={[
+          'client-marquee-row',
+          `client-marquee-row-${row.direction}`,
+        ]}
+        data-direction={row.direction}
+        style={`--marquee-duration: ${row.duration}; --marquee-delay: ${row.delay};`}
+      >
+        <div class="client-marquee-track">
+          {[0, 1].map((copyIndex) => (
+            <div
+              class="client-marquee-group"
+              role="list"
+              aria-hidden={copyIndex === 1 ? 'true' : undefined}
+            >
+              {row.sequence.map((logo, itemIndex) => {
+                const isOriginal =
+                  copyIndex === 0 && itemIndex < row.logos.length
+                const cardStyles = [
+                  logo.maxHeight && `--logo-max-height: ${logo.maxHeight};`,
+                  logo.maxWidth && `--logo-max-width: ${logo.maxWidth};`,
+                  logo.scale && `--logo-scale: ${logo.scale};`,
+                  logo.cardPadding && `--card-padding: ${logo.cardPadding};`,
+                ]
+                  .filter(Boolean)
+                  .join(' ')
+                return (
+                  <div
+                    class:list={[
+                      'client-logo-card',
+                      logo.narrowPadding && 'client-logo-card-narrow-padding',
+                      logo.roundedMark && 'client-logo-card-rounded',
+                    ]}
+                    style={cardStyles || undefined}
+                    role={isOriginal ? 'listitem' : undefined}
+                    aria-hidden={!isOriginal ? 'true' : undefined}
+                  >
+                    <img
+                      class="client-logo-mark"
+                      src={logo.src.src}
+                      width={logo.src.width}
+                      height={logo.src.height}
+                      alt={isOriginal ? logo.alt : ''}
+                      loading="eager"
+                      decoding="async"
+                    />
+                  </div>
+                )
+              })}
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div class="site-container client-marquee-note-wrap">
     <p class="client-marquee-note">
       Logos shown represent current and past client and partner engagements.
     </p>

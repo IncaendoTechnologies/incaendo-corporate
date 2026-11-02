@@ -49,8 +49,15 @@ const projectHref = (project) =>
       <div class="home-projects-stage" aria-live="off" aria-atomic="false">
         {featuredProjects.map((project, index) => (
           <article
-            class:list={['home-project-slide', index === 0 && 'is-active']}
+            class:list={[
+              'home-project-slide',
+              index === 0 && 'is-active',
+              index === 1 && 'is-preview',
+            ]}
             data-project-slide
+            data-state={
+              index === 0 ? 'active' : index === 1 ? 'preview' : 'hidden'
+            }
             role="group"
             aria-roledescription="slide"
             aria-label={`${index + 1} of ${featuredProjects.length}: ${project.name}`}
@@ -68,7 +75,7 @@ const projectHref = (project) =>
                 alt={project.alt}
                 width={1100}
                 sizes="(max-width: 760px) 92vw, (max-width: 1100px) 48vw, 560px"
-                loading={index === 0 ? 'eager' : 'lazy'}
+                loading={index <= 1 ? 'eager' : 'lazy'}
               />
               <span class="home-project-image-index" aria-hidden="true">
                 {String(index + 1).padStart(2, '0')} /{' '}
@@ -120,7 +127,15 @@ const projectHref = (project) =>
             data-project-previous
             aria-label="Show previous project"
           >
-            <span aria-hidden="true">←</span>
+            <svg
+              class="home-project-arrow-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M19 12H5M12 19l-7-7 7-7"></path>
+            </svg>
           </button>
           <button
             class="home-project-arrow"
@@ -128,7 +143,15 @@ const projectHref = (project) =>
             data-project-next
             aria-label="Show next project"
           >
-            <span aria-hidden="true">→</span>
+            <svg
+              class="home-project-arrow-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
           </button>
         </div>
       </div>
@@ -140,18 +163,26 @@ const projectHref = (project) =>
   const carousel = document.querySelector('[data-project-carousel]')
 
   if (carousel instanceof HTMLElement) {
-    const slides = [...carousel.querySelectorAll('[data-project-slide]')]
-    const indicators = [
-      ...carousel.querySelectorAll('[data-project-indicator]'),
-    ]
+    /** @type {HTMLElement[]} */
+    const slides = Array.from(
+      carousel.querySelectorAll('[data-project-slide]'),
+    ).filter((el) => el instanceof HTMLElement)
+    /** @type {HTMLElement[]} */
+    const indicators = Array.from(
+      carousel.querySelectorAll('[data-project-indicator]'),
+    ).filter((el) => el instanceof HTMLElement)
     const previous = carousel.querySelector('[data-project-previous]')
     const next = carousel.querySelector('[data-project-next]')
+    /** @type {HTMLElement | null} */
     const stage = carousel.querySelector('.home-projects-stage')
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const rotationDelay = 3000
+    const rotationDelay = 4500
     let activeIndex = 0
+    let previousIndex = -1
+    /** @type {number | undefined} */
     let rotationTimer
     let pointerInside = false
+    /** @type {number | undefined} */
     let activePointerId
     let pointerStartX = 0
     let pointerStartY = 0
@@ -169,29 +200,98 @@ const projectHref = (project) =>
         reducedMotion.matches ||
         pointerInside ||
         isDragging ||
+        document.hidden ||
         slides[activeIndex]?.contains(document.activeElement)
       ) {
         return
       }
       rotationTimer = window.setTimeout(() => {
-        showSlide(activeIndex + 1, false)
+        showSlide(activeIndex + 1, false, 'next')
         scheduleRotation()
       }, rotationDelay)
     }
 
-    function showSlide(index, announce = true) {
-      activeIndex = (index + slides.length) % slides.length
+    function showSlide(index, announce = true, explicitDirection = null) {
+      const newIndex = (index + slides.length) % slides.length
+      if (newIndex === activeIndex && previousIndex !== -1) return
+
+      const direction =
+        explicitDirection ||
+        (newIndex > activeIndex ||
+        (activeIndex === slides.length - 1 && newIndex === 0)
+          ? 'next'
+          : 'prev')
+
+      const oldIndex = activeIndex
+      const oldPreviewIndex = (oldIndex + 1) % slides.length
+      previousIndex = oldIndex
+      activeIndex = newIndex
+
       stage?.setAttribute('aria-live', announce ? 'polite' : 'off')
 
+      const previewIndex = (activeIndex + 1) % slides.length
+
       slides.forEach((slide, slideIndex) => {
-        const active = slideIndex === activeIndex
-        slide.classList.toggle('is-active', active)
-        slide.setAttribute('aria-hidden', String(!active))
-        slide.toggleAttribute('inert', !active)
-        slide.querySelectorAll('a, button').forEach((control) => {
-          if (active) control.removeAttribute('tabindex')
-          else control.setAttribute('tabindex', '-1')
-        })
+        slide.classList.remove(
+          'is-active',
+          'is-preview',
+          'is-exiting-next',
+          'is-exiting-prev',
+        )
+
+        if (slideIndex === activeIndex) {
+          if (
+            direction === 'prev' &&
+            oldIndex !== -1 &&
+            !reducedMotion.matches
+          ) {
+            slide.style.transition = 'none'
+            slide.style.transform = 'translate3d(-102%, 0, 0) scale(0.96)'
+            slide.style.opacity = '0'
+            void slide.offsetHeight
+            slide.style.transition = ''
+            slide.style.transform = ''
+            slide.style.opacity = ''
+          }
+          slide.setAttribute('data-state', 'active')
+          slide.classList.add('is-active')
+          slide.setAttribute('aria-hidden', 'false')
+          slide.removeAttribute('inert')
+          slide
+            .querySelectorAll('a, button')
+            .forEach((c) => c.removeAttribute('tabindex'))
+        } else if (slideIndex === previewIndex) {
+          slide.setAttribute('data-state', 'preview')
+          slide.classList.add('is-preview')
+          slide.setAttribute('aria-hidden', 'true')
+          slide.setAttribute('inert', '')
+          slide
+            .querySelectorAll('a, button')
+            .forEach((c) => c.setAttribute('tabindex', '-1'))
+        } else if (direction === 'next' && slideIndex === oldIndex) {
+          slide.setAttribute('data-state', 'exiting-next')
+          slide.classList.add('is-exiting-next')
+          slide.setAttribute('aria-hidden', 'true')
+          slide.setAttribute('inert', '')
+          slide
+            .querySelectorAll('a, button')
+            .forEach((c) => c.setAttribute('tabindex', '-1'))
+        } else if (direction === 'prev' && slideIndex === oldPreviewIndex) {
+          slide.setAttribute('data-state', 'exiting-prev')
+          slide.classList.add('is-exiting-prev')
+          slide.setAttribute('aria-hidden', 'true')
+          slide.setAttribute('inert', '')
+          slide
+            .querySelectorAll('a, button')
+            .forEach((c) => c.setAttribute('tabindex', '-1'))
+        } else {
+          slide.setAttribute('data-state', 'hidden')
+          slide.setAttribute('aria-hidden', 'true')
+          slide.setAttribute('inert', '')
+          slide
+            .querySelectorAll('a, button')
+            .forEach((c) => c.setAttribute('tabindex', '-1'))
+        }
       })
 
       indicators.forEach((indicator, indicatorIndex) => {
@@ -203,20 +303,35 @@ const projectHref = (project) =>
       })
     }
 
+    // Clicking the preview card advances to it
+    slides.forEach((slide) => {
+      slide.addEventListener('click', (event) => {
+        if (slide.classList.contains('is-preview')) {
+          event.preventDefault()
+          showSlide(activeIndex + 1, true, 'next')
+          scheduleRotation()
+        }
+      })
+    })
+
     previous?.addEventListener('click', () => {
-      showSlide(activeIndex - 1)
+      showSlide(activeIndex - 1, true, 'prev')
       scheduleRotation()
     })
 
     next?.addEventListener('click', () => {
-      showSlide(activeIndex + 1)
+      showSlide(activeIndex + 1, true, 'next')
       scheduleRotation()
     })
 
     indicators.forEach((indicator, index) => {
       indicator.addEventListener('click', () => {
-        showSlide(index)
-        indicators[activeIndex]?.focus({ preventScroll: true })
+        const dir = index >= activeIndex ? 'next' : 'prev'
+        showSlide(index, true, dir)
+        const activeIndicator = indicators[activeIndex]
+        if (activeIndicator instanceof HTMLElement) {
+          activeIndicator.focus({ preventScroll: true })
+        }
         scheduleRotation()
       })
     })
@@ -225,12 +340,12 @@ const projectHref = (project) =>
       if (event.altKey || event.ctrlKey || event.metaKey) return
       if (event.key === 'ArrowLeft') {
         event.preventDefault()
-        showSlide(activeIndex - 1)
+        showSlide(activeIndex - 1, true, 'prev')
         carousel.focus({ preventScroll: true })
         scheduleRotation()
       } else if (event.key === 'ArrowRight') {
         event.preventDefault()
-        showSlide(activeIndex + 1)
+        showSlide(activeIndex + 1, true, 'next')
         carousel.focus({ preventScroll: true })
         scheduleRotation()
       }
@@ -259,13 +374,27 @@ const projectHref = (project) =>
       scheduleRotation()
     })
 
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopRotation()
+      else scheduleRotation()
+    })
+
     reducedMotion.addEventListener('change', () => {
       if (reducedMotion.matches) stopRotation()
       else scheduleRotation()
     })
 
+    /**
+     * @param {Event} event
+     * @param {boolean} [cancelled]
+     */
     const finishPointerGesture = (event, cancelled = false) => {
-      if (event.pointerId !== activePointerId) return
+      if (
+        !(event instanceof PointerEvent) ||
+        event.pointerId !== activePointerId
+      ) {
+        return
+      }
 
       const deltaX = event.clientX - pointerStartX
       const deltaY = event.clientY - pointerStartY
@@ -284,10 +413,11 @@ const projectHref = (project) =>
       window.removeEventListener('pointercancel', cancelPointer, true)
 
       if (completedSwipe) {
-        const restoreFocus = slides[activeIndex].contains(
+        const restoreFocus = slides[activeIndex]?.contains(
           document.activeElement,
         )
-        showSlide(activeIndex + (deltaX < 0 ? 1 : -1))
+        const dir = deltaX < 0 ? 'next' : 'prev'
+        showSlide(activeIndex + (deltaX < 0 ? 1 : -1), true, dir)
         if (restoreFocus) carousel.focus({ preventScroll: true })
         suppressClick = true
         window.setTimeout(() => {
@@ -298,8 +428,14 @@ const projectHref = (project) =>
       scheduleRotation()
     }
 
+    /** @param {Event} event */
     const movePointer = (event) => {
-      if (event.pointerId !== activePointerId) return
+      if (
+        !(event instanceof PointerEvent) ||
+        event.pointerId !== activePointerId
+      ) {
+        return
+      }
 
       const deltaX = event.clientX - pointerStartX
       const deltaY = event.clientY - pointerStartY
@@ -316,11 +452,14 @@ const projectHref = (project) =>
       if (isDragging) event.preventDefault()
     }
 
+    /** @param {Event} event */
     const finishPointer = (event) => finishPointerGesture(event)
+    /** @param {Event} event */
     const cancelPointer = (event) => finishPointerGesture(event, true)
 
     stage?.addEventListener('pointerdown', (event) => {
       if (
+        !(event instanceof PointerEvent) ||
         !event.isPrimary ||
         (event.pointerType === 'mouse' && event.button !== 0) ||
         (event.target instanceof Element && event.target.closest('button'))
@@ -390,6 +529,7 @@ const projectHref = (project) =>
     font-size: var(--type-section-size);
     font-weight: var(--type-heading-weight);
     letter-spacing: var(--type-section-letter-spacing);
+    word-spacing: var(--type-section-word-spacing);
     line-height: var(--type-section-line-height);
   }
 
@@ -437,44 +577,129 @@ const projectHref = (project) =>
   }
 
   .home-projects-stage {
+    --preview-peek: clamp(170px, 18vw, 225px);
+    --preview-overlap: clamp(18px, 2vw, 26px);
+    position: relative;
     display: grid;
     min-width: 0;
     grid-template-columns: minmax(0, 1fr);
     overflow: hidden;
     cursor: grab;
     touch-action: pan-y;
-    border: 1px solid rgb(16 27 45 / 8%);
+    padding: clamp(0.45rem, 0.8vw, 0.7rem);
     border-radius: var(--radius-medium);
-    background: var(--color-white);
-    box-shadow:
-      0 5px 16px rgb(16 27 45 / 5%),
-      inset 0 1px 0 rgb(255 255 255 / 90%);
   }
 
   .home-project-slide {
+    position: relative;
     display: grid;
     min-width: 0;
     grid-area: 1 / 1;
+    width: calc(100% - var(--preview-peek, 190px));
     grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
     align-items: stretch;
-    gap: clamp(1.5rem, 4vw, 4rem);
+    gap: clamp(1.5rem, 3.5vw, 3.5rem);
     padding: clamp(0.75rem, 1.4vw, 1rem);
+    border: 1.5px solid rgb(16 27 45 / 8%);
+    border-right: 2.5px solid rgb(16 27 45 / 8%);
+    border-radius: var(--radius-medium);
+    background: var(--color-white);
+    overflow: hidden;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
+    transform-origin: left center;
+    transform: translate3d(calc(100% + 60px), 0, 0) scale(0.95);
     transition:
-      opacity 350ms var(--ease-out),
-      visibility 350ms var(--ease-out),
-      transform 350ms var(--ease-out);
-    transform: translateX(12px);
+      transform 800ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 800ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 600ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 800ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 800ms cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 800ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform, opacity;
   }
 
   .home-project-slide.is-active {
-    z-index: 1;
+    z-index: 3;
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transform: translateX(0);
+    border-color: rgba(232, 93, 38, 0.38);
+    border-right-color: #e85d26;
+    transform: translate3d(0, 0, 0) scale(1);
+    box-shadow:
+      0 20px 48px -12px rgba(16, 27, 45, 0.2),
+      0 6px 18px -2px rgba(16, 27, 45, 0.1),
+      12px 0 28px -4px rgba(232, 93, 38, 0.3),
+      4px 0 12px -2px rgba(232, 93, 38, 0.34),
+      0 0 0 1px rgba(232, 93, 38, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  }
+
+  .home-project-slide.is-active .home-project-copy {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 500ms 150ms var(--ease-out);
+  }
+
+  .home-project-slide.is-preview {
+    z-index: 1;
+    opacity: 0.84;
+    visibility: visible;
+    pointer-events: auto;
+    cursor: pointer;
+    transform-origin: left center;
+    transform: translate3d(calc(100% - var(--preview-overlap, 22px)), 0, 0)
+      scale(0.975);
+    box-shadow:
+      0 8px 24px -8px rgba(16, 27, 45, 0.12),
+      0 2px 8px -2px rgba(16, 27, 45, 0.06);
+    filter: saturate(0.96);
+  }
+
+  .home-project-slide.is-preview .home-project-copy {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 250ms ease;
+  }
+
+  .home-project-slide.is-preview a {
+    pointer-events: none;
+  }
+
+  .home-project-slide.is-preview:hover {
+    opacity: 0.94;
+    filter: saturate(1);
+    box-shadow:
+      0 12px 30px -8px rgba(16, 27, 45, 0.18),
+      0 3px 8px -2px rgba(16, 27, 45, 0.08);
+  }
+
+  .home-project-slide.is-exiting-next {
+    z-index: 2;
+    opacity: 0;
+    visibility: visible;
+    pointer-events: none;
+    transform: translate3d(-102%, 0, 0) scale(0.96);
+    box-shadow: 0 4px 14px rgb(16 27 45 / 6%);
+  }
+
+  .home-project-slide.is-exiting-prev {
+    z-index: 2;
+    opacity: 0;
+    visibility: visible;
+    pointer-events: none;
+    transform: translate3d(calc(100% + 60px), 0, 0) scale(0.95);
+    box-shadow: 0 4px 14px rgb(16 27 45 / 6%);
+  }
+
+  .home-project-slide[data-state='hidden'] {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(calc(100% + 60px), 0, 0) scale(0.95);
+    transition: none !important;
   }
 
   .home-project-slide .home-project-image {
@@ -572,6 +797,7 @@ const projectHref = (project) =>
     font-size: clamp(1.3rem, 2vw, 1.8rem);
     font-weight: 620;
     letter-spacing: -0.045em;
+    word-spacing: 0.045em;
     line-height: 1.2;
   }
 
@@ -602,18 +828,14 @@ const projectHref = (project) =>
     text-decoration-color: currentColor;
   }
 
-  .home-projects-stage {
-    display: grid;
-    min-height: 0;
-  }
-
   .home-projects-controls {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
     padding: 0.8rem clamp(0.75rem, 2vw, 1.5rem) 0.35rem;
-    border-top: 1px solid var(--color-line);
+    border-top: 1px solid rgb(16 27 45 / 8%);
+    margin-top: 0.35rem;
   }
 
   .home-projects-pagination,
@@ -644,8 +866,8 @@ const projectHref = (project) =>
     border-radius: 99px;
     background: #b6bdc5;
     transition:
-      width 220ms var(--ease-out),
-      background-color 220ms ease;
+      width 400ms cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 300ms ease;
   }
 
   .home-project-indicator.is-active span {
@@ -654,35 +876,91 @@ const projectHref = (project) =>
   }
 
   .home-projects-arrows {
-    gap: 0.55rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   .home-project-arrow {
-    display: grid;
-    width: 42px;
-    height: 42px;
-    border: 1px solid var(--color-line);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: 1px solid rgb(16 27 45 / 11%);
     border-radius: 50%;
-    background: var(--color-white);
+    background: #faf8f5;
     color: var(--color-navy);
     cursor: pointer;
-    font-size: 1.05rem;
+    box-shadow:
+      0 1px 2px rgb(16 27 45 / 5%),
+      0 3px 8px -2px rgb(16 27 45 / 6%),
+      inset 0 1px 0 rgb(255 255 255 / 95%);
     transition:
-      color var(--duration-fast) ease,
-      border-color var(--duration-fast) ease,
-      background var(--duration-fast) ease,
-      transform var(--duration-fast) ease;
-    place-items: center;
+      background-color 220ms cubic-bezier(0.2, 0.75, 0.25, 1),
+      border-color 220ms cubic-bezier(0.2, 0.75, 0.25, 1),
+      color 220ms cubic-bezier(0.2, 0.75, 0.25, 1),
+      transform 220ms cubic-bezier(0.2, 0.75, 0.25, 1),
+      box-shadow 220ms cubic-bezier(0.2, 0.75, 0.25, 1);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .home-project-arrow-icon {
+    width: 17px;
+    height: 17px;
+    stroke-width: 2.1;
+    stroke: currentColor;
+    flex-shrink: 0;
+    transition: transform 220ms cubic-bezier(0.2, 0.75, 0.25, 1);
   }
 
   .home-project-arrow:hover {
-    transform: translateY(-2px);
+    background: var(--color-orange);
+    border-color: var(--color-orange);
+    color: var(--color-white);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow:
+      0 4px 14px -2px rgb(201 84 43 / 36%),
+      0 2px 6px -1px rgb(16 27 45 / 8%);
+  }
+
+  .home-project-arrow[data-project-previous]:hover .home-project-arrow-icon {
+    transform: translateX(-1.5px);
+  }
+
+  .home-project-arrow[data-project-next]:hover .home-project-arrow-icon {
+    transform: translateX(1.5px);
+  }
+
+  .home-project-arrow:active {
+    background: var(--color-orange-dark);
     border-color: var(--color-orange-dark);
-    background: #f8eee8;
-    color: var(--color-orange-dark);
+    color: var(--color-white);
+    transform: translateY(0) scale(0.96);
+    box-shadow: 0 1px 3px rgb(16 27 45 / 12%);
+    transition-duration: 80ms;
+  }
+
+  .home-project-arrow:focus-visible {
+    outline: 2px solid var(--color-orange);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 1024px) {
+    .home-projects-stage {
+      --preview-peek: clamp(120px, 15vw, 160px);
+      --preview-overlap: 18px;
+    }
   }
 
   @media (max-width: 900px) {
+    .home-projects-stage {
+      --preview-peek: clamp(90px, 14vw, 130px);
+      --preview-overlap: 14px;
+    }
+
     .home-projects-intro {
       align-items: flex-start;
       flex-direction: column;
@@ -700,6 +978,11 @@ const projectHref = (project) =>
   }
 
   @media (max-width: 600px) {
+    .home-projects-stage {
+      --preview-peek: clamp(42px, 12vw, 58px);
+      --preview-overlap: 10px;
+    }
+
     .home-projects-section {
       padding-block: 3.5rem;
     }
@@ -709,6 +992,10 @@ const projectHref = (project) =>
       align-content: start;
       gap: 1.15rem;
       padding: 0.6rem;
+    }
+
+    .home-project-slide.is-preview .home-project-copy {
+      display: none !important;
     }
 
     .home-project-slide .home-project-image {
@@ -737,8 +1024,13 @@ const projectHref = (project) =>
     }
 
     .home-project-arrow {
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
+    }
+
+    .home-project-arrow-icon {
+      width: 15px;
+      height: 15px;
     }
 
     .home-projects-pagination {
@@ -751,12 +1043,22 @@ const projectHref = (project) =>
     .home-project-image img,
     .home-project-image,
     .home-project-indicator span,
-    .home-project-arrow {
-      transition: none;
+    .home-project-arrow,
+    .home-project-arrow-icon {
+      transition: none !important;
+      transform: none !important;
     }
 
     .home-project-slide {
-      transform: none;
+      transform: none !important;
+      width: 100% !important;
+    }
+
+    .home-project-slide.is-preview,
+    .home-project-slide.is-exiting-next,
+    .home-project-slide.is-exiting-prev,
+    .home-project-slide[data-state='hidden'] {
+      display: none !important;
     }
   }
 </style>

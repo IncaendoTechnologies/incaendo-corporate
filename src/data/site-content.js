@@ -13,7 +13,7 @@ export const navigation = [
   { href: '/ai-technology', label: 'AI' },
   { href: '/services', label: 'Services' },
   { href: '/projects', label: 'Projects' },
-  { href: '/teams', label: 'Our team' },
+  { href: '/teams', label: 'Teams' },
   { href: '/insights', label: 'Insights' },
 ]
 
@@ -112,19 +112,45 @@ export const homepageServices = [
 
 export const faqs = [
   {
-    question: 'What does Incaendo do?',
+    question: 'What services does your company offer?',
     answer:
-      'Incaendo is a software development and technology company. The specific service portfolio and engagement details are being confirmed for publication.',
+      'We specialize in mobile app development, web application development, UI/UX design, cross-platform development, and app maintenance & support.',
   },
   {
-    question: 'How long has Incaendo worked in technology?',
+    question: 'Do you develop both Android and iOS applications?',
     answer:
-      'Incaendo brings 15 years of industry experience, as provided in the company brief.',
+      'Yes, we develop native and cross-platform applications for both Android and iOS using the latest technologies.',
   },
   {
-    question: 'How can I discuss a project?',
+    question: 'What technologies do you use for app development?',
     answer:
-      'Use the contact page to prepare an enquiry. Message delivery will be enabled once the company provides its contact endpoint.',
+      'We use technologies like Flutter, React Native, Swift, Kotlin, Node.js, React.js, and more, depending on the project requirements.',
+  },
+  {
+    question:
+      'Can you build custom applications tailored to our business needs?',
+    answer:
+      'Absolutely! We provide fully customized app solutions that align with your business goals and user expectations.',
+  },
+  {
+    question: 'Do you offer app maintenance and post-launch support?',
+    answer:
+      'Yes, we provide ongoing app maintenance, updates, bug fixes, and feature enhancements to ensure smooth performance.',
+  },
+  {
+    question: 'How much does app development cost?',
+    answer:
+      'The cost varies based on factors like app complexity, features, design, and platform. Contact us for a customized quote.',
+  },
+  {
+    question: 'Do you provide UI/UX design services?',
+    answer:
+      'Yes, our expert designers create intuitive, user-friendly, and visually appealing interfaces to enhance user experience.',
+  },
+  {
+    question: 'How do you ensure the security of our application?',
+    answer:
+      'We follow industry best practices, including data encryption, secure authentication, and regular security audits, to protect your app and user data.',
   },
 ]
 
@@ -169,9 +195,19 @@ export const pages = {
     description:
       'Learn about opportunities at Incaendo. Current openings are being confirmed.',
   },
-  privacy: {
-    title: 'Privacy Notice | Incaendo',
+  faq: {
+    title: 'FAQ | Incaendo',
     description:
-      'Privacy information for the Incaendo website. The company-specific notice is awaiting review.',
+      'Frequently asked questions about Incaendo mobile app development, web applications, UI/UX design, and technology solutions.',
+  },
+  privacy: {
+    title: 'Privacy Policy | Incaendo',
+    description:
+      "Read Incaendo's Privacy Policy to understand how we collect, use, protect, and manage your personal information while you use our website and services.",
+  },
+  terms: {
+    title: 'Terms & Conditions | Incaendo',
+    description:
+      "Read Incaendo's Terms & Conditions governing access to and use of our website, products, and technology services.",
   },
 }

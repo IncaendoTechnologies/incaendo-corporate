@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 320" width="100%" height="100%">
+  <!-- Icon Graphics -->
+  <g fill="#FF441A">
+    <!-- Left Slice -->
+    <path d="M 130 38
+             A 120 120 0 0 0 130 274
+             L 130 207.5
+             A 52 52 0 0 1 130 104.5
+             Z" />
+    <!-- Right Slice -->
+    <path d="M 160 38
+             L 160 104.5
+             A 52 52 0 0 1 160 207.5
+             L 160 274
+             A 120 120 0 0 0 160 38
+             Z" />
+  </g>
+
+  <!-- Typography: CarDekho -->
+  <text x="310" y="215" fill="#141824" font-family="Montserrat, Inter, &#39;Arial Black&#39;, -apple-system, BlinkMacSystemFont, sans-serif" font-weight="900" font-size="124" letter-spacing="-2.5">
+    Car<tspan font-weight="900" letter-spacing="-2">Dekho</tspan>
+  </text>
+
+  <!-- Tagline: RIGHT CAR, RIGHT NOW -->
+  <text x="532" y="266" fill="#141824" font-family="Montserrat, Inter, Arial, sans-serif" font-weight="900" font-size="26" letter-spacing="0.5">
+    RIGHT CAR, RIGHT NOW
+  </text>
+</svg>

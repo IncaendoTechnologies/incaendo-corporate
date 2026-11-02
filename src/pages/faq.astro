@@ -1,0 +1,354 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { faqs, pages } from '../data/site-content.js'
+---
+
+<BaseLayout title={pages.faq.title} description={pages.faq.description}>
+  <main id="main-content" class="faq-page">
+    <section class="faq-hero" aria-labelledby="faq-hero-heading">
+      <div class="site-container faq-hero-inner">
+        <div class="faq-hero-badge">
+          <span class="faq-hero-dot" aria-hidden="true"></span>
+          <span>Knowledge & Support</span>
+        </div>
+        <h1 id="faq-hero-heading" class="faq-hero-title">
+          Frequently Asked Questions.
+        </h1>
+        <p class="faq-hero-lead">
+          Find clear, direct answers about Incaendo’s services, technologies,
+          custom application development, and ongoing support.
+        </p>
+      </div>
+    </section>
+
+    <section class="faq-content-section" aria-labelledby="faq-section-heading">
+      <div class="site-container faq-layout">
+        <div class="faq-header-block">
+          <span class="faq-label">FAQ</span>
+          <h2 id="faq-section-heading" class="faq-section-title">
+            Common questions about how we work
+          </h2>
+          <p class="faq-section-desc">
+            Everything you need to know about our capabilities, platforms,
+            design process, security practices, and post-launch maintenance.
+          </p>
+          <div class="faq-sidebar-card">
+            <h3>Have a specific project requirement?</h3>
+            <p>
+              Our engineering team is ready to consult on architecture,
+              technology choices, and project feasibility.
+            </p>
+            <a class="button button-primary" href="/contact">
+              Talk to Our Team <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="faq-accordion-wrap">
+          <div class="faq-list">
+            {faqs.map((faq, index) => (
+              <details class="faq-item" open={index === 0}>
+                <summary>
+                  <span class="faq-question-text">{faq.question}</span>
+                  <span class="faq-mark" aria-hidden="true" />
+                </summary>
+                <div class="faq-answer">
+                  <p>{faq.answer}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-bottom-cta">
+      <div class="site-container">
+        <div class="faq-cta-card">
+          <div class="faq-cta-content">
+            <span class="faq-cta-badge">Still Have Questions?</span>
+            <h2>We’re here to help you make informed decisions.</h2>
+            <p>
+              Connect with our technology consultants to explore how Incaendo
+              can build and support solutions tailored to your business goals.
+            </p>
+          </div>
+          <div class="faq-cta-actions">
+            <a class="button button-primary" href="/contact">
+              Contact Us <span aria-hidden="true">→</span>
+            </a>
+            <a class="faq-cta-email" href="mailto:info@incaendo.com">
+              info@incaendo.com
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .faq-page {
+    background-color: var(--color-paper);
+    min-height: 100vh;
+  }
+
+  .faq-hero {
+    position: relative;
+    padding-top: calc(var(--site-header-height) + 3.5rem);
+    padding-bottom: clamp(3rem, 6vw, 4.5rem);
+    background:
+      radial-gradient(
+        circle at 85% 20%,
+        rgba(201, 84, 43, 0.12),
+        transparent 35%
+      ),
+      radial-gradient(
+        circle at 15% 85%,
+        rgba(84, 123, 157, 0.15),
+        transparent 40%
+      ),
+      linear-gradient(135deg, #07111e 0%, #101b2d 60%, #17263c 100%);
+    color: var(--color-white);
+    overflow: hidden;
+  }
+
+  .faq-hero-inner {
+    max-width: 860px;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .faq-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.9rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #ffd8cc;
+    margin-bottom: 1.5rem;
+  }
+
+  .faq-hero-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-orange);
+    box-shadow: 0 0 8px var(--color-orange);
+  }
+
+  .faq-hero-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    word-spacing: 0.04em;
+    margin-bottom: 1.25rem;
+    color: var(--color-white);
+  }
+
+  .faq-hero-lead {
+    font-size: clamp(1.05rem, 1.4vw, 1.22rem);
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 680px;
+    margin-inline: auto;
+  }
+
+  .faq-content-section {
+    padding-block: clamp(4rem, 7vw, 6.5rem);
+  }
+
+  .faq-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  @media (min-width: 992px) {
+    .faq-layout {
+      grid-template-columns: 360px 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .faq-header-block {
+      position: sticky;
+      top: calc(var(--site-header-height) + 2rem);
+    }
+  }
+
+  .faq-label {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-orange);
+    margin-bottom: 0.75rem;
+  }
+
+  .faq-section-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 2.8vw, 2.3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    word-spacing: 0.03em;
+    color: var(--color-ink);
+    margin-bottom: 1rem;
+  }
+
+  .faq-section-desc {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--color-body);
+    margin-bottom: 2rem;
+  }
+
+  .faq-sidebar-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-medium);
+    padding: 1.75rem;
+    box-shadow: 0 4px 20px rgba(16, 27, 45, 0.04);
+  }
+
+  .faq-sidebar-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .faq-sidebar-card p {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--color-muted);
+    margin-bottom: 1.25rem;
+  }
+
+  .faq-accordion-wrap {
+    background: var(--color-white);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-large);
+    padding: clamp(1.5rem, 3.5vw, 2.5rem);
+    box-shadow: 0 10px 40px rgba(16, 27, 45, 0.05);
+  }
+
+  .faq-accordion-wrap .faq-list {
+    border-top: none;
+  }
+
+  .faq-accordion-wrap .faq-item {
+    border-bottom: 1px solid var(--color-line);
+    padding-block: 0.4rem;
+  }
+
+  .faq-accordion-wrap .faq-item:last-child {
+    border-bottom: none;
+  }
+
+  .faq-accordion-wrap .faq-item summary {
+    font-size: 1.05rem;
+    padding-block: 0.8rem;
+  }
+
+  .faq-question-text {
+    padding-right: 1rem;
+    line-height: 1.45;
+  }
+
+  .faq-bottom-cta {
+    padding-bottom: clamp(4rem, 8vw, 6.5rem);
+  }
+
+  .faq-cta-card {
+    background: linear-gradient(
+      135deg,
+      var(--color-navy) 0%,
+      var(--color-navy-soft) 100%
+    );
+    border-radius: var(--radius-large);
+    padding: clamp(2.5rem, 5vw, 4rem);
+    color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    box-shadow: var(--shadow-soft);
+  }
+
+  @media (min-width: 768px) {
+    .faq-cta-card {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-cta-content {
+      max-width: 600px;
+    }
+  }
+
+  .faq-cta-badge {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #ffbca8;
+    margin-bottom: 0.75rem;
+  }
+
+  .faq-cta-content h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    word-spacing: 0.02em;
+    margin-bottom: 0.75rem;
+    color: var(--color-white);
+  }
+
+  .faq-cta-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+  }
+
+  .faq-cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  @media (min-width: 768px) {
+    .faq-cta-actions {
+      align-items: flex-end;
+      flex-shrink: 0;
+    }
+  }
+
+  .faq-cta-email {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.95rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+  }
+
+  .faq-cta-email:hover {
+    color: var(--color-white);
+  }
+</style>

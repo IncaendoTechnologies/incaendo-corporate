@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "astro-build.astro-vscode",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "eamodio.gitlens",
+    "anbuselvanrocky.bootstrap5-vscode",
+    "christian-kohler.npm-intellisense",
+    "pkief.material-icon-theme"
+  ]
+}

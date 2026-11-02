@@ -1,24 +1,22 @@
-// Interactive particle field for the AI page hero.
+// Particle field for the AI page hero.
 //
-// Idle: a dense cloud of particles drifts around the centre, and the "AI"
-// letters themselves are built from particles. The letter shapes are sampled
-// from the heading font, turned into a rounded relief (a distance field gives
-// each point a height and surface normal) and lit, so the letters read as
-// volumetric forms that sway gently in 3D inside the cloud.
-// Open: clicking AI keeps the same particles but morphs them: the cloud
-// gathers into a dense, slowly turning 3D sphere (joined by an extra set of
-// particles that only show in this view) and the letters settle a little
-// smaller at its centre. The figures and ambient light fade in around it
-// (CSS sequences those via [data-state]). Clicking AI again, or Escape,
-// morphs back to the idle field.
+// The field starts in its idle cloud and immediately morphs into the open
+// view on load: a dense cloud of particles gathers into a slowly turning 3D
+// sphere (joined by an extra set of particles that only show in this view)
+// while the "AI" letters — built from particles sampled from the heading
+// font into a lit, volumetric relief — settle a little smaller at its
+// centre. The figures and ambient light fade in around it (CSS sequences
+// those via [data-state]).
 
 const TAU = Math.PI * 2
 // Letter size in the open view, relative to idle.
 const OPEN_SCALE = 0.64
 // Open-view sphere radius as a share of the field, and how many extra
-// particles join it, relative to the idle cloud.
-const SPHERE_R = 0.335
-const SPHERE_EXTRA = 1.5
+// particles join it, relative to the idle cloud. Larger and denser than the
+// idle cloud so the open view reads as a rich, full sphere around the
+// letters rather than a thin shell.
+const SPHERE_R = 0.37
+const SPHERE_EXTRA = 2.1
 // Length of the idle/open morph, and how long closing waits for the cards to
 // start fading before the letters grow back.
 const MORPH_S = 0.8
@@ -251,7 +249,6 @@ function setupParticleHero(root) {
   const renderer = createRenderer(canvas)
   const core = root.querySelector('[data-particles-core]')
   const label = core.querySelector('b')
-  const stats = root.querySelector('[data-particles-stats]')
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
   let width = 0
@@ -301,7 +298,7 @@ function setupParticleHero(root) {
     const cores = navigator.hardwareConcurrency || 4
     const budget = cores <= 4 ? 0.65 : 1
     const fieldCount = Math.round(
-      Math.min(Math.max((width * height) / 22, 4200), 15000) * budget,
+      Math.min(Math.max((width * height) / 18, 4200), 17000) * budget,
     )
 
     // Letter cap height as a share of the field, matching the core's role
@@ -776,12 +773,6 @@ function setupParticleHero(root) {
     }
     open = next
     root.dataset.state = open ? 'open' : 'idle'
-    core.setAttribute('aria-expanded', String(open))
-    core.setAttribute(
-      'aria-label',
-      open ? 'AI: show the particle view' : 'AI: show key figures',
-    )
-    stats.inert = !open
     // Morph from wherever the previous one got to; closing waits a moment
     // so the cards start fading before the letters grow under them.
     mixFrom = mix
@@ -789,31 +780,6 @@ function setupParticleHero(root) {
     syncPaused()
     renderStill()
     schedule()
-  }
-
-  function onCoreClick(event) {
-    event.stopPropagation()
-    setOpen(!open)
-  }
-
-  function onKeydown(event) {
-    if (event.key !== 'Escape' || !open) return
-    event.preventDefault()
-    setOpen(false)
-    core.focus()
-  }
-
-  // After a click, any key press (scrolling with arrows, Escape, Shift)
-  // makes the browser treat the focus as keyboard focus and ring the whole
-  // core. Keep it ring-free until focus really moves elsewhere; Tabbing back
-  // in still shows the ring.
-  function onCorePointerDown() {
-    core.dataset.pointerFocus = ''
-  }
-
-  function onCoreBlur() {
-    // Switching tab or window also blurs; focus comes back to the core then.
-    if (document.hasFocus()) delete core.dataset.pointerFocus
   }
 
   function onPointerMove(event) {
@@ -865,10 +831,6 @@ function setupParticleHero(root) {
 
   canvas.addEventListener('webglcontextlost', onContextLost)
   canvas.addEventListener('webglcontextrestored', onContextRestored)
-  core.addEventListener('click', onCoreClick)
-  core.addEventListener('pointerdown', onCorePointerDown)
-  core.addEventListener('blur', onCoreBlur)
-  root.addEventListener('keydown', onKeydown)
   stage.addEventListener('pointermove', onPointerMove)
   stage.addEventListener('pointerleave', onPointerLeave)
   document.addEventListener('visibilitychange', onVisibility)
@@ -876,7 +838,11 @@ function setupParticleHero(root) {
   resizeObserver.observe(stage)
   intersectionObserver.observe(stage)
 
-  setOpen(false)
+  // Trigger the idle-to-open morph immediately on load (no click needed):
+  // the cloud gathers into the sphere, the letters settle at their open
+  // size, and the five figure cards fade in with their staggered delay —
+  // all via the existing [data-state] transition, just auto-started.
+  setOpen(true)
 
   // The letters are sampled from the heading face, so wait for it (briefly)
   // rather than tracing a fallback font and then morphing.
@@ -906,11 +872,6 @@ function setupParticleHero(root) {
     intersectionObserver.disconnect()
     canvas.removeEventListener('webglcontextlost', onContextLost)
     canvas.removeEventListener('webglcontextrestored', onContextRestored)
-    core.removeEventListener('click', onCoreClick)
-    core.removeEventListener('pointerdown', onCorePointerDown)
-    core.removeEventListener('blur', onCoreBlur)
-    delete core.dataset.pointerFocus
-    root.removeEventListener('keydown', onKeydown)
     stage.removeEventListener('pointermove', onPointerMove)
     stage.removeEventListener('pointerleave', onPointerLeave)
     document.removeEventListener('visibilitychange', onVisibility)

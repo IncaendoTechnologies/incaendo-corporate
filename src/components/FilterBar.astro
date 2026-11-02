@@ -1,0 +1,179 @@
+---
+const {
+  items = [],
+  ariaLabel = 'Filter items by category',
+  dataToolbar = 'data-filter-toolbar',
+  dataFilter = 'data-filter',
+  dataReset = 'data-filter-reset',
+  resetLabel = 'Clear filters',
+  showReset = false,
+  chipClass = '',
+  resetClass = '',
+  class: className,
+} = Astro.props
+
+const toolbarAttr = { [dataToolbar]: '' }
+const resetAttr = { [dataReset]: '' }
+---
+
+<div class:list={['ui-filter-toolbar', className]} {...toolbarAttr}>
+  <div class="ui-filter-chips" role="group" aria-label={ariaLabel}>
+    {items.map((item, index) => {
+      const filterAttr = { [dataFilter]: item.value }
+      return (
+        <button
+          type="button"
+          class:list={['ui-filter-chip', chipClass, index === 0 && 'is-active']}
+          {...filterAttr}
+          aria-pressed={index === 0 ? 'true' : 'false'}
+        >
+          {item.label}
+        </button>
+      )
+    })}
+  </div>
+  {showReset && (
+    <div class="ui-filter-meta">
+      <button
+        class:list={['ui-filter-reset', resetClass]}
+        type="button"
+        {...resetAttr}
+        disabled
+      >
+        {resetLabel}
+      </button>
+    </div>
+  )}
+</div>
+
+<style>
+  .ui-filter-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 0.6rem 0.6rem 0.6rem 0.75rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-large);
+    background: rgb(255 255 255 / 88%);
+    box-shadow: 0 14px 36px rgb(16 27 45 / 5%);
+  }
+
+  .ui-filter-chips {
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+
+  .ui-filter-chip {
+    display: inline-flex;
+    min-height: 38px;
+    align-items: center;
+    padding: 0.4rem 1rem;
+    border: 1px solid #e0e3e5;
+    border-radius: 999px;
+    background: var(--color-white);
+    color: var(--color-body);
+    cursor: pointer;
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1.2;
+    transition:
+      color 180ms ease,
+      background 180ms ease,
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+
+  .ui-filter-chip:hover {
+    border-color: rgb(168 65 33 / 45%);
+    color: var(--color-orange-dark);
+    transform: translateY(-1px);
+  }
+
+  .ui-filter-chip.is-active {
+    border-color: var(--color-orange-dark);
+    background: var(--color-orange-dark);
+    box-shadow: 0 6px 16px rgb(168 65 33 / 22%);
+    color: var(--color-white);
+    transform: none;
+  }
+
+  .ui-filter-chip:focus-visible,
+  .ui-filter-reset:focus-visible {
+    outline: 3px solid rgb(84 123 157 / 32%);
+    outline-offset: 2px;
+  }
+
+  .ui-filter-meta {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 0.35rem;
+    margin-left: auto;
+  }
+
+  .ui-filter-reset {
+    min-height: 36px;
+    padding: 0.45rem 0.85rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-orange-dark);
+    cursor: pointer;
+    font-size: 0.72rem;
+    font-weight: 650;
+    white-space: nowrap;
+    transition:
+      background 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .ui-filter-reset:hover:not(:disabled) {
+    border-color: rgb(168 65 33 / 20%);
+    background: #fff7f3;
+  }
+
+  .ui-filter-reset:disabled {
+    visibility: hidden;
+  }
+
+  @media (max-width: 800px) {
+    .ui-filter-toolbar {
+      flex-direction: column;
+      align-items: stretch;
+      padding: 0.6rem;
+      border-radius: var(--radius-medium);
+    }
+
+    .ui-filter-meta {
+      justify-content: flex-end;
+      margin-left: 0;
+      padding-top: 0.4rem;
+      border-top: 1px solid var(--color-line);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .ui-filter-chips {
+      gap: 0.35rem;
+    }
+
+    .ui-filter-chip {
+      min-height: 35px;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.68rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ui-filter-chip,
+    .ui-filter-reset {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>
