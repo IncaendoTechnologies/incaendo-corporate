@@ -10,20 +10,17 @@ const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? ''
 
 <BaseLayout title={pages.contact.title} description={pages.contact.description}>
   <main id="main-content" class="contact-page">
-    <section class="contact-hero" aria-labelledby="contact-hero-heading">
-      <div class="site-container contact-hero-grid">
-        <div class="contact-hero-copy reveal">
-          <p class="eyebrow">
-            <span class="eyebrow-dot"></span>CONTACT INCAENDO
-          </p>
-          <h1 id="contact-hero-heading">
-            The next good decision starts with <span>a conversation.</span>
+    <section class="contact-hero hero-system hero-system--split hero-system--feature" aria-labelledby="contact-hero-heading">
+      <div class="site-container contact-hero-grid hero-system__inner">
+        <div class="contact-hero-copy hero-system__copy reveal">
+          <h1 id="contact-hero-heading" class="hero-system__title">
+            The Next Good Decision Starts with <span class="hero-system__accent">a Conversation.</span>
           </h1>
-          <p class="contact-hero-description">
+          <p class="contact-hero-description hero-system__description">
             Bring us the challenge, the ambition, or the question your team is
             working through. We’ll help you find a useful place to start.
           </p>
-          <div class="contact-hero-actions">
+          <div class="contact-hero-actions hero-system__actions">
             <a class="button button-primary" href="#project-inquiry">
               Tell us about your project <span aria-hidden="true">↘</span>
             </a>
@@ -31,9 +28,30 @@ const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? ''
               Or email us directly <span aria-hidden="true">↗</span>
             </a>
           </div>
+          <div class="contact-hero-steps hero-system__support">
+            <span class="hero-system__support-label" id="contact-hero-steps-label">
+              What happens next
+            </span>
+            <ol aria-labelledby="contact-hero-steps-label">
+              <li><span aria-hidden="true">01</span>Share your requirements</li>
+              <li><span aria-hidden="true">02</span>We understand your goals and constraints</li>
+              <li><span aria-hidden="true">03</span>We discuss the right next steps</li>
+            </ol>
+          </div>
         </div>
-        <figure class="contact-hero-visual reveal">
+        <div class="contact-hero-feature hero-system__visual reveal">
+        <figure class="contact-hero-visual hero-system__motion">
           <div class="contact-hero-stage">
+            <Image
+              src={contactHeroImage}
+              alt=""
+              aria-hidden="true"
+              widths={[560, 840, 1024, 1600]}
+              sizes="(max-width: 760px) calc(100vw - 2rem), (max-width: 1100px) 48vw, 680px"
+              quality={92}
+              loading="eager"
+              class="contact-hero-backdrop"
+            />
             <Image
               src={contactHeroImage}
               alt="Incaendo project journey workspace with laptop showing project overview dashboard, branded mug, notebook, and collaboration milestones: Consult with experts, Discuss your idea, Get a tech plan, Build & launch together, and Ongoing support"
@@ -42,10 +60,30 @@ const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? ''
               quality={92}
               loading="eager"
               fetchpriority="high"
-              class="contact-hero-image"
+              class="contact-hero-image hero-system__image"
             />
           </div>
         </figure>
+          <a class="contact-hero-card contact-hero-card--email" href="mailto:info@incaendo.com">
+            <span class="contact-hero-card-icon" aria-hidden="true">@</span>
+            <span>
+              <small>Business enquiries</small>
+              <strong>info@incaendo.com</strong>
+            </span>
+          </a>
+          <div class="contact-hero-card contact-hero-card--office">
+            <span class="contact-hero-card-icon" aria-hidden="true">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </span>
+            <span>
+              <small>Our office</small>
+              <strong>Sector 2, Noida</strong>
+            </span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -56,7 +94,7 @@ const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? ''
       >
         <p class="eyebrow">PROJECT INQUIRY</p>
         <h2 id="contact-form-heading">
-          Let’s make the first conversation useful.
+          Let’s Make the First Conversation Useful.
         </h2>
         <p>
           A little context is enough to get started. We’ll take it from there.
@@ -69,7 +107,7 @@ const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? ''
         >
           <div class="contact-direct-heading">
             <p class="eyebrow eyebrow-light">DIRECT CONTACT</p>
-            <h2 id="contact-direct-heading">Prefer to talk directly?</h2>
+            <h2 id="contact-direct-heading">Prefer to Talk Directly?</h2>
             <p>Reach the Incaendo team or find our office in Noida.</p>
           </div>
           <a class="contact-direct-email" href="mailto:info@incaendo.com">
@@ -137,7 +175,7 @@ const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? ''
       <div class="site-container contact-followthrough-inner">
         <div class="contact-followthrough-intro reveal">
           <p class="eyebrow">WHAT HAPPENS NEXT</p>
-          <h2 id="contact-next-heading">A clear start, together.</h2>
+          <h2 id="contact-next-heading">A Clear Start, Together.</h2>
         </div>
         <ol class="contact-followthrough-grid reveal" data-reveal-stagger>
           <li class="contact-followthrough-step" data-reveal-item>

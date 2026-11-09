@@ -1,0 +1,420 @@
+/* Client, project, review sections */
+.client-section {
+  padding-block: 3.5rem;
+  border-block: 1px solid var(--color-line);
+  background: #fbfaf8;
+}
+.client-row {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  align-items: center;
+  gap: 3rem;
+}
+.client-intro .eyebrow {
+  margin-bottom: 0.7rem;
+}
+.client-intro h2 {
+  max-width: 360px;
+  margin: 0;
+  font-size: var(--type-section-size);
+  font-weight: var(--type-heading-weight);
+}
+.client-proof-card {
+  display: grid;
+  grid-template-columns: 43px 1fr 32px;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.4rem;
+  border: 1px solid var(--color-line);
+  background: var(--color-white);
+}
+.client-card-mark {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 50%;
+  background: #f3e8df;
+  color: var(--color-orange-dark);
+  font-size: 1.35rem;
+}
+.client-proof-card strong {
+  color: var(--color-ink);
+  font-size: 0.84rem;
+}
+.client-proof-card p {
+  margin: 0.25rem 0 0;
+  color: #788290;
+  font-size: 0.75rem;
+}
+.client-proof-card > a {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid var(--color-line);
+  border-radius: 50%;
+}
+.section-projects {
+  background: var(--color-paper);
+}
+.project-empty {
+  display: grid;
+  min-height: 390px;
+  grid-template-columns: 1.05fr 0.95fr;
+  border: 1px solid #dedbd5;
+  background: #f0eee9;
+}
+.project-empty-graphic {
+  position: relative;
+  min-height: 330px;
+  overflow: hidden;
+  background: linear-gradient(138deg, #1c2c42, #101a2b 74%);
+}
+.project-empty-graphic::before,
+.project-empty-graphic::after {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border: 1px solid rgb(244 182 139 / 40%);
+  border-radius: 50%;
+  content: '';
+}
+.project-empty-graphic::before {
+  top: -20%;
+  left: 13%;
+}
+.project-empty-graphic::after {
+  right: -7%;
+  bottom: -38%;
+  border-color: rgb(255 255 255 / 22%);
+}
+.project-line {
+  position: absolute;
+  z-index: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #edaa7c, transparent);
+  transform-origin: left;
+}
+.project-line-one {
+  top: 28%;
+  left: 9%;
+  width: 83%;
+  transform: rotate(25deg);
+}
+.project-line-two {
+  top: 72%;
+  left: 3%;
+  width: 93%;
+  transform: rotate(-18deg);
+}
+.project-line-three {
+  top: 45%;
+  left: 4%;
+  width: 86%;
+  transform: rotate(4deg);
+  opacity: 0.55;
+}
+.project-node {
+  position: absolute;
+  z-index: 2;
+  width: 9px;
+  height: 9px;
+  border: 2px solid #ffd1ad;
+  border-radius: 50%;
+  background: #e57943;
+  box-shadow: 0 0 17px #e57943;
+}
+.project-node-one {
+  top: 26%;
+  left: 33%;
+}
+.project-node-two {
+  top: 68%;
+  left: 67%;
+}
+.project-node-three {
+  top: 46%;
+  left: 80%;
+}
+.project-empty-copy {
+  align-self: center;
+  padding: clamp(2rem, 5vw, 4.25rem);
+}
+.project-index {
+  color: #97745f;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+.project-empty-copy h3 {
+  margin: 1rem 0 1rem;
+  font-size: var(--type-section-size);
+  font-weight: var(--type-heading-weight);
+  letter-spacing: var(--type-section-letter-spacing);
+  word-spacing: var(--type-section-word-spacing);
+  line-height: var(--type-section-line-height);
+}
+.project-empty-copy p {
+  max-width: 440px;
+  margin-bottom: 1.4rem;
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-line-height);
+}
+.review-section {
+  padding-block: var(--section-space-md);
+  background: var(--color-navy);
+}
+.review-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.75rem;
+}
+.review-intro {
+  max-width: 760px;
+  margin-inline: auto;
+  text-align: center;
+}
+.review-layout h2 {
+  margin: 0;
+  color: var(--color-white);
+  font-size: var(--type-section-size);
+  font-weight: var(--type-heading-weight);
+  letter-spacing: var(--type-section-letter-spacing);
+  word-spacing: var(--type-section-word-spacing);
+  line-height: var(--type-section-line-height);
+}
+.review-intro-copy {
+  max-width: 680px;
+  margin: 0.75rem auto 0;
+  color: rgb(255 255 255 / 78%);
+  font-size: var(--type-intro-size);
+  line-height: var(--type-intro-line-height);
+}
+.awards-section {
+  padding-block: var(--section-space-md);
+  background: linear-gradient(180deg, #efebe5 0%, var(--color-paper) 100%);
+}
+.awards-content {
+  display: grid;
+  gap: clamp(1.75rem, 3.5vw, 2.75rem);
+}
+.awards-intro {
+  max-width: 790px;
+  margin-inline: auto;
+  text-align: center;
+}
+.awards-intro .eyebrow {
+  margin-bottom: 0.75rem;
+}
+.awards-intro h2 {
+  margin-bottom: 0.85rem;
+  color: var(--color-ink);
+  font-family: var(--font-heading);
+  font-size: var(--type-section-size);
+  font-weight: var(--type-heading-weight);
+  letter-spacing: var(--type-section-letter-spacing);
+  word-spacing: var(--type-section-word-spacing);
+  line-height: var(--type-section-line-height);
+}
+.awards-intro-copy {
+  max-width: 700px;
+  margin: 0 auto;
+  color: var(--color-body);
+  font-size: var(--type-intro-size);
+  line-height: var(--type-intro-line-height);
+}
+.awards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: clamp(1rem, 1.8vw, 1.5rem);
+}
+.award-card {
+  --award-image-height: clamp(15rem, 25vw, 20rem);
+
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-medium);
+  background: var(--color-white);
+  box-shadow: 0 8px 24px rgb(16 27 45 / 5%);
+  transition:
+    transform 300ms var(--ease-out),
+    border-color 300ms var(--ease-out),
+    box-shadow 300ms var(--ease-out);
+}
+.award-image-frame {
+  display: grid;
+  height: var(--award-image-height);
+  place-items: center;
+  overflow: hidden;
+  padding: clamp(0.85rem, 2vw, 1.35rem);
+  background: #f3f0eb;
+}
+.award-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  transition: transform 300ms var(--ease-out);
+}
+.award-caption {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0;
+  padding: 1rem 1.2rem 1.15rem;
+  color: var(--color-navy);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+.award-caption strong {
+  font-family: var(--font-heading);
+  font-size: var(--type-card-title-size);
+  font-weight: var(--type-heading-weight);
+}
+.award-caption span {
+  color: var(--color-muted);
+  font-size: var(--type-meta-size);
+  letter-spacing: 0.025em;
+}
+.award-card:hover {
+  transform: translateY(-5px);
+  border-color: rgb(168 65 33 / 34%);
+  box-shadow: 0 16px 34px rgb(16 27 45 / 10%);
+}
+.award-card:hover .award-image {
+  transform: scale(1.018);
+}
+.award-card:focus-within {
+  border-color: var(--color-orange-dark);
+  box-shadow: 0 0 0 3px rgb(168 65 33 / 14%);
+}
+.review-marquee {
+  width: 100%;
+  min-width: 0;
+}
+.review-marquee-window {
+  min-width: 0;
+  margin-inline: -0.75rem;
+  padding-inline: 0.75rem;
+  overflow: hidden;
+}
+.review-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: client-marquee-left 85s linear infinite;
+  will-change: transform;
+}
+@keyframes client-marquee-left {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.review-marquee-window:hover .review-marquee-track,
+.review-marquee-window:focus-within .review-marquee-track {
+  animation-play-state: paused;
+}
+.review-marquee-group {
+  display: flex;
+  flex: 0 0 auto;
+  gap: clamp(0.85rem, 1.6vw, 1.35rem);
+  padding-right: clamp(0.85rem, 1.6vw, 1.35rem);
+}
+.review-card {
+  position: relative;
+  display: flex;
+  width: clamp(19rem, 30vw, 23rem);
+  flex: 0 0 auto;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 250px;
+  padding: clamp(1.1rem, 1.7vw, 1.5rem);
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 16%);
+  border-radius: var(--radius-medium);
+  background: rgb(255 255 255 / 4%);
+  box-shadow: 0 12px 30px rgb(0 0 0 / 10%);
+  transition:
+    transform 300ms var(--ease-out),
+    border-color 300ms var(--ease-out),
+    box-shadow 300ms var(--ease-out),
+    background-color 300ms var(--ease-out);
+}
+.review-card-logo {
+  display: flex;
+  align-items: center;
+  height: 3.3rem;
+  margin-bottom: 0.9rem;
+  flex: 0 0 auto;
+}
+/* Every logo sits on the same light-ivory chip: one fixed height, background,
+   and radius across every card, so the containers read as a consistent set
+   even though each logo's own width/height (set inline per review, in
+   reviews.js) differs. The chip centres whatever size mark it holds, which
+   is how CarDekho/Jubilant can render visibly larger than the others while
+   every chip still lines up at the same height. */
+.review-card-logo-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--logo-w, 7rem) + 1.3rem);
+  height: 2.85rem;
+  border-radius: 8px;
+  background: var(--color-paper);
+}
+.review-card-logo-mark {
+  display: block;
+  object-fit: contain;
+}
+.review-card-logo-empty {
+  display: block;
+  width: 6.5rem;
+  height: 1.7rem;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 5px;
+}
+.review-card::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--color-orange-dark);
+  content: '';
+  opacity: 0.85;
+  transition: opacity 300ms var(--ease-out);
+}
+.review-card:hover {
+  transform: translateY(-5px);
+  border-color: rgb(168 65 33 / 70%);
+  background: rgb(255 255 255 / 6%);
+  box-shadow: 0 20px 38px rgb(0 0 0 / 20%);
+}
+.review-card:hover::before {
+  opacity: 1;
+}
+.review-card:focus-visible {
+  outline: none;
+  border-color: var(--color-orange-dark);
+  box-shadow: 0 0 0 3px rgb(242 178 145 / 30%);
+}
+.review-quote {
+  flex: 1;
+  margin: 0 0 1.4rem;
+  color: rgb(255 255 255 / 86%);
+  font-size: var(--type-card-text-size);
+  line-height: 1.65;
+}
+.review-attribution {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgb(255 255 255 / 18%);
+}
+.review-attribution strong {
+  color: var(--color-white);
+  font-size: var(--type-ui-size);
+  font-weight: 600;
+}

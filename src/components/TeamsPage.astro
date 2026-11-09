@@ -3,22 +3,28 @@ import TeamProfile from './TeamProfile.astro'
 import { Image } from 'astro:assets'
 import { teamMembers } from '../data/team.js'
 import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
+
+const heroDisciplines = [
+  'Software Engineering',
+  'Architecture & Technical Leadership',
+  'Quality Assurance',
+  'Business Operations',
+]
 ---
 
-<section class="team-hero page-intro" aria-labelledby="team-page-heading">
-  <div class="site-container team-hero-inner">
-    <div class="team-hero-copy reveal">
-      <p class="eyebrow">People & expertise</p>
-      <h1 id="team-page-heading">
-        Good technology is a <span>team effort.</span>
+<section class="team-hero page-intro hero-system hero-system--split hero-system--feature" aria-labelledby="team-page-heading">
+  <div class="site-container team-hero-inner hero-system__inner">
+    <div class="team-hero-copy hero-system__copy reveal">
+      <h1 id="team-page-heading" class="hero-system__title">
+        Good Technology Is a <span class="hero-system__accent">Team Effort.</span>
       </h1>
-      <p class="page-intro-description">
+      <p class="page-intro-description hero-system__description">
         Meet the people and disciplines behind Incaendo—from leadership and
         software engineering to architecture, quality and business operations.
       </p>
-      <div class="team-hero-actions">
+      <div class="team-hero-actions hero-system__actions">
         <a class="button button-primary" href="#team-directory">
-          Meet the team <span aria-hidden="true">↘</span>
+          Meet the Team <span aria-hidden="true">↘</span>
         </a>
         <a class="button button-outline" href="#team-expertise">
           Explore our expertise <span aria-hidden="true">↘</span>
@@ -30,9 +36,22 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
           →
         </span>
       </a>
+      <div class="team-hero-disciplines-support hero-system__support">
+        <span class="hero-system__support-label">Four disciplines</span>
+        <ol class="team-hero-disciplines-list">
+          {heroDisciplines.map((discipline, index) => (
+            <li>
+              <span class="discipline-idx" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <span class="discipline-name">{discipline}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
     </div>
 
-    <div class="team-hero-visual reveal">
+    <div class="team-hero-visual hero-system__visual reveal">
       <figure class="team-hero-photo team-hero-photo-single">
         <Image
           src={teamHeroImage}
@@ -41,6 +60,7 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
           sizes="(max-width: 600px) 92vw, (max-width: 899px) 44vw, 48vw"
           quality={88}
           loading="eager"
+          class="hero-system__image"
         />
         <figcaption>People behind digital products</figcaption>
       </figure>
@@ -61,7 +81,7 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
       <div>
         <p class="eyebrow">The people behind the work</p>
         <h2 id="team-directory-heading">
-          Meet the <span>team.</span>
+          Meet the <span>Team.</span>
         </h2>
       </div>
       <p>
@@ -88,9 +108,9 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
       <div>
         <p class="eyebrow">Expertise across roles</p>
         <h2 id="team-expertise-heading">
-          Different perspectives.
+          Different Perspectives.
           <br />
-          <span>Shared delivery.</span>
+          <span>Shared Delivery.</span>
         </h2>
       </div>
       <p>
@@ -103,7 +123,7 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
     <div class="team-discipline-grid reveal" data-reveal-stagger>
       <article class="team-discipline" data-reveal-item>
         <span class="team-discipline-number">01</span>
-        <h3>Software engineering</h3>
+        <h3>Software Engineering</h3>
         <p>
           Software engineering and engineering management roles are represented
           in the team roster.
@@ -114,7 +134,7 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
       </article>
       <article class="team-discipline" data-reveal-item>
         <span class="team-discipline-number">02</span>
-        <h3>Architecture & technical leadership</h3>
+        <h3>Architecture & Technical Leadership</h3>
         <p>
           System architecture and technical lead designations bring technical
           direction into the organization.
@@ -125,7 +145,7 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
       </article>
       <article class="team-discipline" data-reveal-item>
         <span class="team-discipline-number">03</span>
-        <h3>Quality assurance</h3>
+        <h3>Quality Assurance</h3>
         <p>
           A Quality Analyst role is listed alongside the engineering and
           technical positions.
@@ -134,7 +154,7 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
       </article>
       <article class="team-discipline" data-reveal-item>
         <span class="team-discipline-number">04</span>
-        <h3>Business operations</h3>
+        <h3>Business Operations</h3>
         <p>
           Finance and HR designations represent business-support roles within
           the published team.
@@ -153,7 +173,7 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
     <header class="team-collaboration-intro reveal">
       <p class="eyebrow">A connected way of working</p>
       <h2 id="team-collaboration-heading">
-        Good decisions keep the work <span>moving.</span>
+        Good Decisions Keep the Work <span>Moving.</span>
       </h2>
       <p>
         Incaendo’s published delivery approach connects discovery, planning,
@@ -175,7 +195,7 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
       </li>
       <li data-reveal-item>
         <span>03</span>
-        <h3>Build & review</h3>
+        <h3>Build & Review</h3>
         <p>Develop in steps, share progress and validate the solution.</p>
       </li>
       <li data-reveal-item>
@@ -195,7 +215,6 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
 
 <style>
   .team-hero {
-    padding-block: clamp(4.5rem, 8vw, 6.5rem) clamp(3.8rem, 6vw, 5rem);
     background:
       radial-gradient(
         ellipse at 92% 12%,
@@ -206,39 +225,13 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
   }
 
   .team-hero::after {
-    top: -65%;
-    right: -8%;
-    width: min(52vw, 720px);
-    opacity: 0.76;
-  }
-
-  .team-hero-inner {
-    display: grid;
-    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-    align-items: center;
-    gap: clamp(2.5rem, 6vw, 6rem);
-  }
-
-  .team-hero-copy {
-    max-width: 700px;
-  }
-
-  .team-hero h1 {
-    max-width: 690px;
-    margin-bottom: 1.25rem;
+    content: none;
   }
 
   .team-hero h1 span,
   .team-section-heading h2 span,
   .team-collaboration-intro h2 span {
     color: var(--color-orange-dark);
-  }
-
-  .team-hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.7rem;
-    margin-top: 1.65rem;
   }
 
   .team-hero-work-link,
@@ -256,10 +249,13 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
   }
 
 
+  /* Same frame as the approved Services hero image (656 x 517 at desktop);
+     the photo fills it above the caption row. Mobile min-heights below
+     keep the photo tall enough on narrow screens. */
   .team-hero-visual {
     position: relative;
     min-width: 0;
-    min-height: 430px;
+    aspect-ratio: var(--hero-visual-ratio);
   }
 
   .team-hero-photo {
@@ -310,6 +306,72 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
     font-size: 0.58rem;
     font-weight: 700;
     letter-spacing: 0.12em;
+  }
+
+  /* Hero snapshot: real team photos and size, linking to the directory */
+  .team-hero-snapshot {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    width: fit-content;
+    color: inherit;
+  }
+
+  /* Four disciplines support block in hero copy */
+  .team-hero-disciplines-support {
+    margin-top: 1.75rem;
+    padding-top: 1.35rem;
+    border-top: 1px solid rgb(16 27 45 / 9%);
+  }
+
+  .team-hero-disciplines-support .hero-system__support-label {
+    display: block;
+    margin-bottom: 0.85rem;
+    color: var(--color-orange-dark);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .team-hero-disciplines-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem 1.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .team-hero-disciplines-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    color: var(--color-ink);
+    font-size: 0.88rem;
+    font-weight: 550;
+    line-height: 1.35;
+  }
+
+  .team-hero-disciplines-list li .discipline-idx {
+    flex: 0 0 auto;
+    color: var(--color-orange-dark);
+    font-family: var(--font-heading);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    opacity: 0.9;
+  }
+
+  .team-hero-disciplines-list li .discipline-name {
+    color: var(--color-navy);
+  }
+
+  @media (max-width: 580px) {
+    .team-hero-disciplines-list {
+      grid-template-columns: 1fr;
+      gap: 0.55rem;
+    }
   }
 
   .team-section-heading {
@@ -532,10 +594,6 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
   }
 
   @media (max-width: 899px) {
-    .team-hero-inner {
-      grid-template-columns: minmax(0, 1fr) minmax(260px, 0.8fr);
-      gap: 2rem;
-    }
     .team-hero-visual {
       min-height: 350px;
     }
@@ -560,23 +618,6 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
   }
 
   @media (max-width: 600px) {
-    .team-hero {
-      padding-block: 4rem 3.5rem;
-    }
-    .team-hero-inner {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 2rem;
-    }
-    .team-hero h1 {
-      font-size: clamp(2.65rem, 11vw, 3.5rem);
-    }
-    .team-hero-actions {
-      align-items: stretch;
-      flex-direction: column;
-    }
-    .team-hero-actions .button {
-      justify-content: space-between;
-    }
     .team-hero-visual {
       min-height: 320px;
     }
@@ -594,7 +635,7 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
       font-size: 0.49rem;
     }
     .team-section-heading h2 {
-      font-size: clamp(2rem, 9vw, 2.7rem);
+      font-size: var(--type-section-size);
     }
     .team-profile-grid > :global(.team-profile) {
       flex-basis: 100%;

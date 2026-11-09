@@ -53,8 +53,13 @@ export const homepageServices = [
     id: 'ai-automation',
     title: 'AI & Automation',
     description:
-      'Apply AI and workflow automation to reduce repetitive work and make useful information easier to act on.',
-    points: ['Workflow automation', 'AI assistants & integrations'],
+      "Use AI to handle repetitive tasks, save your team's time, and make everyday business work easier.",
+    points: [
+      'Automate repetitive office tasks',
+      'Get quick answers from your business data',
+      'Reduce manual data entry and errors',
+      'Let AI assist your team with everyday work',
+    ],
     href: '/ai-technology',
     icon: BrainCircuit,
   },
@@ -64,7 +69,12 @@ export const homepageServices = [
     title: 'Custom Software Development',
     description:
       'Build purpose-fit systems for business processes that off-the-shelf tools cannot support.',
-    points: ['Product engineering', 'APIs & integrations'],
+    points: [
+      'Product engineering',
+      'APIs & integrations',
+      'Scalable architecture design',
+      'Quality assurance & testing',
+    ],
     href: '/services#custom-software-development',
     icon: Code2,
   },
@@ -74,7 +84,12 @@ export const homepageServices = [
     title: 'Web Application Development',
     description:
       'Create secure, responsive web applications for customers, staff, and business partners.',
-    points: ['Web platforms & portals', 'Responsive product interfaces'],
+    points: [
+      'Web platforms & portals',
+      'Responsive product interfaces',
+      'Progressive web apps',
+      'Performance optimization',
+    ],
     href: '/services#web-application-development',
     icon: Globe,
   },
@@ -84,7 +99,12 @@ export const homepageServices = [
     title: 'Mobile App Development',
     description:
       'Bring essential digital experiences to mobile with fast, intuitive apps for iOS and Android.',
-    points: ['iOS & Android apps', 'Cross-platform experiences'],
+    points: [
+      'iOS & Android apps',
+      'Cross-platform experiences',
+      'App store deployment',
+      'Push notifications & analytics',
+    ],
     href: '/services#mobile-app-development',
     icon: Smartphone,
   },
@@ -94,7 +114,12 @@ export const homepageServices = [
     title: 'Enterprise Solutions',
     description:
       'Connect teams and operations with scalable platforms designed for complex business environments.',
-    points: ['Enterprise integrations', 'Modernization & workflows'],
+    points: [
+      'Enterprise integrations',
+      'Modernization & workflows',
+      'HRM & CRM systems',
+      'Role-based access control',
+    ],
     href: '/services#enterprise-solutions',
     icon: Building2,
   },
@@ -104,7 +129,12 @@ export const homepageServices = [
     title: 'Cloud & Data',
     description:
       'Build a reliable cloud foundation and turn well-governed data into clearer operational insight.',
-    points: ['Cloud architecture', 'Data pipelines & analytics'],
+    points: [
+      'Cloud architecture',
+      'Data pipelines & analytics',
+      'Cloud migration & DevOps',
+      'Data governance & security',
+    ],
     href: '/services#cloud-data',
     icon: Cloud,
   },

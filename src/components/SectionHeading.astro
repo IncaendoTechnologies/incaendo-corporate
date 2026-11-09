@@ -9,6 +9,8 @@ const {
   link,
   linkLabel = 'Explore more',
   tone = 'light',
+  target,
+  rel,
 } = Astro.props
 ---
 
@@ -24,7 +26,12 @@ const {
     {description && <p class="section-intro">{description}</p>}
   </div>
   {link && (
-    <a class="text-link" href={link}>
+    <a
+      class="text-link"
+      href={link}
+      target={target}
+      rel={target === '_blank' ? rel || 'noopener noreferrer' : rel}
+    >
       {linkLabel}{' '}
       <span class="link-arrow" aria-hidden="true">
         →

@@ -6,7 +6,7 @@ import { latestArticle as article } from '../data/articles.js'
 const href = `/insights/${article.slug}/`
 ---
 
-<div class="insights-hero-latest reveal" data-reveal-stagger>
+<div class="insights-hero-latest hero-system__visual reveal" data-reveal-stagger>
   <a
     class="insights-latest-preview"
     href={href}
@@ -52,15 +52,17 @@ const href = `/insights/${article.slug}/`
 </div>
 
 <style>
+  /* The card spans the shared hero visual column (same width and edges as
+     the approved hero images); the tilted sheet behind it sits just outside
+     the card instead of padding it in. */
   .insights-hero-latest {
     position: relative;
     min-width: 0;
-    padding: 1.2rem 1.1rem 1.1rem;
   }
 
   .insights-hero-latest::before {
     position: absolute;
-    inset: 8% -2% -3% 10%;
+    inset: 7% -1.5% -2.5% 9%;
     transform: rotate(3deg);
     border: 1px solid rgb(84 123 157 / 15%);
     border-radius: var(--radius-large);

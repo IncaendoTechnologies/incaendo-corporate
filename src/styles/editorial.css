@@ -1,0 +1,212 @@
+/* Inner page introduction and editorial content */
+.page-intro {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-subtle);
+}
+.page-intro::after {
+  position: absolute;
+  top: -75%;
+  right: -5%;
+  width: min(48vw, 650px);
+  aspect-ratio: 1;
+  border: 1px solid rgb(201 84 43 / 10%);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 45px rgb(201 84 43 / 2%),
+    0 0 0 100px rgb(201 84 43 / 2%);
+  content: '';
+  pointer-events: none;
+}
+.page-intro-inner {
+  position: relative;
+  z-index: 1;
+}
+.page-index {
+  flex: 0 0 auto;
+  padding-bottom: 0.4rem;
+  color: #918b85;
+  font-size: 0.67rem;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+}
+.page-intro-dark {
+  background: var(--color-navy);
+}
+.page-intro-dark h1,
+.page-intro-dark p {
+  color: var(--color-white);
+}
+.content-section {
+  background: #fbfaf8;
+}
+.content-two-column {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+  gap: clamp(3rem, 10vw, 9rem);
+}
+.content-sticky-copy h2 {
+  max-width: 520px;
+  font-size: var(--type-section-size);
+  font-weight: var(--type-heading-weight);
+  letter-spacing: var(--type-section-letter-spacing);
+  word-spacing: var(--type-section-word-spacing);
+  line-height: var(--type-section-line-height);
+}
+.content-sticky-copy h2 span {
+  color: var(--color-orange-dark);
+}
+.content-prose {
+  max-width: 660px;
+}
+.content-prose p {
+  margin-bottom: 1.3rem;
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-line-height);
+}
+.content-prose .prose-lead {
+  color: var(--color-ink);
+  font-family: var(--font-heading);
+  font-size: var(--type-lead-size);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  word-spacing: 0.03em;
+  line-height: var(--type-lead-line-height);
+}
+.review-notice {
+  display: flex;
+  gap: 0.85rem;
+  margin-top: 1.8rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid #ead9ca;
+  background: #fbf4ee;
+}
+.review-notice-indicator {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  margin-top: 0.45rem;
+  border-radius: 50%;
+  background: #bf744a;
+}
+.review-notice strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: #70513f;
+  font-size: 0.74rem;
+}
+.review-notice-copy {
+  color: #7f7168;
+  font-size: 0.74rem;
+  line-height: 1.6;
+}
+.narrow-section-heading {
+  max-width: 740px;
+  margin-bottom: 3rem;
+}
+.narrow-section-heading h2 {
+  margin-bottom: 0;
+}
+.question-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid #d8d4cd;
+}
+.question-card {
+  padding: 1.6rem 1.4rem 1rem 0;
+  border-right: 1px solid #d8d4cd;
+}
+.question-card + .question-card {
+  padding-left: 1.5rem;
+}
+.question-card:last-child {
+  border-right: 0;
+}
+.question-card > span {
+  color: var(--color-orange-dark);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+.question-card h3 {
+  margin: 1.25rem 0 0.7rem;
+  font-size: 1.1rem;
+  font-weight: 650;
+}
+.question-card p {
+  max-width: 320px;
+  margin-bottom: 0;
+  color: #6d7886;
+  font-size: 0.83rem;
+}
+.editorial-cta {
+  padding-block: clamp(4.75rem, 8vw, 7rem);
+  background: var(--color-navy);
+}
+.editorial-cta-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.editorial-cta h2 {
+  margin-bottom: 1.7rem;
+  color: white;
+  font-size: var(--type-feature-size);
+  font-weight: 550;
+}
+.service-page-section {
+  background: #fbfaf8;
+}
+.service-page-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 3rem;
+  margin-bottom: 2.8rem;
+}
+.service-page-header > div {
+  max-width: 680px;
+}
+.service-page-header > p {
+  max-width: 430px;
+  margin: 0 0 0.45rem;
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-line-height);
+}
+.service-approach {
+  display: grid;
+  justify-items: start;
+}
+.service-approach h2 {
+  max-width: 820px;
+  margin-bottom: 1rem;
+  font-size: var(--type-feature-size);
+  font-weight: 550;
+}
+.service-approach > p:not(.eyebrow) {
+  max-width: 680px;
+  margin-bottom: 1.7rem;
+  color: rgb(255 255 255 / 70%);
+}
+.team-story {
+  background: #fbfaf8;
+}
+.value-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 5rem;
+}
+.value-grid h2 {
+  margin: 0;
+  font-size: var(--type-feature-size);
+  font-weight: 600;
+}
+.value-copy {
+  max-width: 540px;
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: var(--type-lead-size);
+  line-height: 1.65;
+}
+

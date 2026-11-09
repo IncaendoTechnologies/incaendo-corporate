@@ -1,0 +1,130 @@
+/*
+ * Shared design tokens for every Incaendo page.
+ * Page and component styles may override a token locally for a deliberate
+ * visual treatment; shared values belong here so changes have one source.
+ */
+:root {
+  color-scheme: light;
+
+  /* Brand palette */
+  --color-ink: #172231;
+  --color-navy: #101b2d;
+  --color-navy-soft: #1b2a40;
+  --color-body: #405064;
+  --color-muted: #758194;
+  --color-line: #e5e2dd;
+  --color-paper: #f8f7f4;
+  --color-white: #fff;
+  --color-peach: #f4e9df;
+  --color-orange: #c9542b;
+  --color-orange-dark: #a84121;
+  --color-orange-gradient-start: #c64e27;
+  --color-orange-gradient-end: #d96d39;
+  --color-focus: #e1784f;
+  --color-button-outline: #d5d1cc;
+  --color-green: #5a806c;
+  --color-blue: #547b9d;
+
+  /* Semantic surfaces and text aliases used by shared page primitives */
+  --surface-page: var(--color-paper);
+  --surface-card: var(--color-white);
+  --surface-subtle: #f1efeb;
+  --surface-contrast: var(--color-navy);
+  --text-primary: var(--color-ink);
+  --text-secondary: var(--color-body);
+  --text-muted: var(--color-muted);
+  --text-intro: #697586;
+  --accent-primary: var(--color-orange);
+  --accent-hover: var(--color-orange-dark);
+
+  /* Typography */
+  --font-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  --type-hero-h1-size: 59.64px;
+  --type-hero-h1-weight: 700;
+  --type-hero-h1-line-height: 1.08;
+  --type-hero-h1-letter-spacing: -0.04em;
+  --type-hero-h1-word-spacing: 0.03em;
+  --type-hero-desc-size: 17.04px;
+  --type-hero-desc-weight: 400;
+  --type-hero-desc-line-height: 1.65;
+  --type-hero-title-measure: 16ch;
+  --type-hero-desc-measure: 46ch;
+
+  /* Shared hero geometry */
+  --hero-space-top: clamp(3rem, 5.4vw, 5rem);
+  --hero-space-bottom: clamp(3rem, 4.8vw, 4.5rem);
+  --hero-gap: clamp(2.5rem, 5vw, 5rem);
+  --hero-stage-height: clamp(24rem, 34vw, 32rem);
+  --hero-visual-max: 41rem;
+  --hero-visual-ratio: 1.27;
+
+  /* Type roles: pages and components use roles, not one-off scales. */
+  --type-display-size: var(--type-hero-h1-size);
+  --type-page-title-size: var(--type-hero-h1-size);
+  --type-page-hero-size: var(--type-hero-h1-size);
+  --type-section-size: 52px;
+  --type-feature-size: var(--type-section-size);
+  --type-compact-heading-size: clamp(1.6rem, 2.4vw, 2.2rem);
+  --type-card-heading-size: clamp(1.05rem, 1.15vw, 1.2rem);
+  --type-body-size: 15.04px;
+  --type-body-line-height: 1.72;
+  --type-lead-size: clamp(1.1rem, 1.6vw, 1.3rem);
+  --type-lead-line-height: 1.65;
+  --type-heading-weight: 600;
+  --type-display-weight: 700;
+  --type-display-line-height: 1.08;
+  --type-page-hero-line-height: 1.08;
+  --type-section-line-height: 1.1;
+  --type-display-letter-spacing: -0.04em;
+  --type-section-letter-spacing: -0.06em;
+  --type-display-word-spacing: 0.075em;
+  --type-section-word-spacing: 0.06em;
+  --type-statement-size: clamp(1.875rem, 4.2vw, 3.75rem);
+  --type-intro-size: 15.04px;
+  --type-intro-line-height: 1.65;
+  --type-card-title-size: 1.125rem;
+  --type-card-title-lg-size: clamp(1.375rem, 1.1rem + 0.8vw, 1.625rem);
+  --type-card-text-size: 0.9375rem;
+  --type-card-text-line-height: 1.6;
+  --type-ui-size: 0.875rem;
+  --type-link-size: 0.85rem;
+  --type-link-weight: 650;
+  --type-button-size: 0.84rem;
+  --type-button-weight: 650;
+  --type-meta-size: 0.8125rem;
+  --type-label-size: 0.75rem;
+  --type-eyebrow-size: 11.2px;
+
+  /* Spacing, layout, shape, and motion */
+  --section-space-sm: clamp(3rem, 4.5vw, 4rem);
+  --section-space-md: clamp(4rem, 6.7vw, 6rem);
+  --section-space-lg: clamp(5rem, 8.9vw, 8rem);
+  --site-header-height: 89px;
+  --site-header-row-height: 88px;
+  --nav-font-size: 0.9375rem;
+  --nav-gap: clamp(1.5rem, 2.5vw, 2.5rem);
+  --content-width: 1320px;
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --space-section: clamp(5rem, 9vw, 8.25rem);
+  --radius-small: 5px;
+  --radius-medium: 12px;
+  --radius-large: 24px;
+  --shadow-soft: 0 20px 70px rgb(16 27 45 / 9%);
+  --shadow-header:
+    0 2px 4px rgb(16 27 45 / 4%),
+    0 6px 16px rgb(16 27 45 / 6%),
+    0 16px 32px -2px rgb(201 84 43 / 7%);
+  --shadow-footer:
+    0 -2px 4px rgb(16 27 45 / 4%),
+    0 -6px 16px rgb(16 27 45 / 6%),
+    0 -16px 32px -2px rgb(201 84 43 / 7%);
+  --ease-out: cubic-bezier(0.2, 0.75, 0.25, 1);
+  --duration-fast: 180ms;
+  --duration-standard: 320ms;
+
+  font-family: var(--font-body);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}

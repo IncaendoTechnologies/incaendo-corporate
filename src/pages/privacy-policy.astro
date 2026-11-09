@@ -1,6 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { pages } from '../data/site-content.js'
+import LegalHero from '../components/LegalHero.astro'
+import {
+  Database,
+  LockKeyhole,
+  ShieldCheck,
+  SlidersHorizontal,
+  UserCheck,
+} from 'lucide-react'
 ---
 
 <BaseLayout title={pages.privacy.title} description={pages.privacy.description}>
@@ -8,109 +16,46 @@ import { pages } from '../data/site-content.js'
     <!-- =========================
          HERO
     ========================= -->
-    <section class="legal-hero" aria-labelledby="privacy-hero-heading">
-      <div class="legal-hero-glow" aria-hidden="true"></div>
-
-      <div class="site-container legal-hero-wrap">
-        <div class="legal-hero-left">
-          <div class="legal-hero-label">
-            <span aria-hidden="true"></span>
-            Your Privacy Matters
-          </div>
-
-          <h1 id="privacy-hero-heading">
-            Privacy &<br />
-            <em>Data Protection.</em>
-          </h1>
-
-          <p class="legal-hero-desc">
-            We believe your information should be handled responsibly. Learn how
-            Incaendo collects, uses and protects information when you use our
-            website and services.
-          </p>
-
-          <div class="legal-hero-points">
-            <div class="legal-hero-point">
-              <span class="point-bullet" aria-hidden="true"></span>
-              Clear Information
-            </div>
-            <div class="legal-hero-point">
-              <span class="point-bullet" aria-hidden="true"></span>
-              Responsible Data Use
-            </div>
-            <div class="legal-hero-point">
-              <span class="point-bullet" aria-hidden="true"></span>
-              Secure Practices
-            </div>
-          </div>
-
-          <div class="legal-hero-actions">
-            <a class="button button-primary" href="/contact">
-              Talk To Our Team
-            </a>
-            <a class="button button-secondary" href="/">
-              Back To Website
-            </a>
-          </div>
-        </div>
-
-        <div class="legal-hero-visual" aria-hidden="true">
-          <div class="legal-glass-frame">
-            <div class="legal-browser-top">
-              <span class="browser-dot"></span>
-              <span class="browser-dot"></span>
-              <span class="browser-dot"></span>
-            </div>
-
-            <div class="legal-mockup-card">
-              <div class="mockup-top">
-                <span class="mockup-mini-label">Incaendo Policy</span>
-                <span class="mockup-check">✓</span>
-              </div>
-
-              <h3>Privacy Policy</h3>
-              <p>
-                Understanding how your information is collected, used and
-                protected.
-              </p>
-
-              <div class="mockup-lines">
-                <span class="mockup-line"></span>
-                <span class="mockup-line"></span>
-                <span class="mockup-line"></span>
-                <span class="mockup-line"></span>
-                <span class="mockup-line"></span>
-              </div>
-
-              <div class="mockup-status">
-                <span>Information & Protection</span>
-                <strong>Protected</strong>
-              </div>
-            </div>
-          </div>
-
-          <div class="floating-badge badge-top">
-            <small>Our Commitment</small>
-            <strong>Privacy • Security • Trust</strong>
-          </div>
-
-          <div class="floating-badge badge-bottom">
-            <small>Policy Status</small>
-            <strong>Information Protected</strong>
-          </div>
-        </div>
-      </div>
-
-      <div class="site-container">
-        <div class="legal-hero-tags" aria-label="Key Topics">
-          <span class="hero-tag">Privacy</span>
-          <span class="hero-tag">Data Protection</span>
-          <span class="hero-tag">Security</span>
-          <span class="hero-tag">Transparency</span>
-          <span class="hero-tag">Responsible Data Use</span>
-        </div>
-      </div>
-    </section>
+    <LegalHero
+      headingId="privacy-hero-heading"
+      titleLead="Privacy &"
+      titleAccent="Data Protection."
+      description="We believe your information should be handled responsibly. Learn how Incaendo collects, uses and protects information when you use our website and services."
+      points={['Clear Information', 'Responsible Data Use', 'Secure Practices']}
+      tags={['Privacy', 'Data Protection', 'Security', 'Transparency', 'Responsible Data Use']}
+      doc={{
+        icon: ShieldCheck,
+        label: 'Incaendo Policy',
+        title: 'Privacy Policy',
+        summary: 'How your information is collected, used and protected.',
+        sections: 16,
+        updated: 'Updated September 2026',
+        highlights: [
+          'What we collect and why',
+          'Cookies, analytics and sharing',
+          'Your privacy choices',
+        ],
+        statusIcon: UserCheck,
+        status: 'We do not sell or rent your personal information',
+      }}
+      cards={[
+        {
+          icon: Database,
+          title: 'Data Collection',
+          text: 'Details you share with us, plus basic technical data from visits.',
+        },
+        {
+          icon: SlidersHorizontal,
+          title: 'Data Usage',
+          text: 'Used to respond, deliver services and improve our website.',
+        },
+        {
+          icon: LockKeyhole,
+          title: 'Data Protection',
+          text: 'Reasonable safeguards against unauthorised access or misuse.',
+        },
+      ]}
+    />
 
     <!-- =========================
          POLICY CONTENT
@@ -574,7 +519,7 @@ import { pages } from '../data/site-content.js'
           <!-- CONTACT CARD -->
           <div class="legal-contact-card">
             <span class="contact-badge">Privacy & Support</span>
-            <h2>Have a question about your privacy?</h2>
+            <h2>Have a Question about Your Privacy?</h2>
             <p>
               Our team is available to help you understand how your information
               is handled and to respond to privacy-related requests.
@@ -608,353 +553,6 @@ import { pages } from '../data/site-content.js'
   .legal-page {
     background-color: var(--color-paper);
     min-height: 100vh;
-  }
-
-  /* =========================
-     HERO
-  ========================= */
-  .legal-hero {
-    position: relative;
-    padding-top: calc(var(--site-header-height) + 3.5rem);
-    padding-bottom: clamp(3rem, 6vw, 4.5rem);
-    background:
-      radial-gradient(
-        circle at 78% 30%,
-        rgba(35, 132, 197, 0.22),
-        transparent 28%
-      ),
-      radial-gradient(
-        circle at 15% 80%,
-        rgba(201, 84, 43, 0.15),
-        transparent 28%
-      ),
-      linear-gradient(135deg, #030b12 0%, #071a2b 55%, #081f31 100%);
-    color: var(--color-white);
-    overflow: hidden;
-  }
-
-  .legal-hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-    background-size: 48px 48px;
-    mask-image: linear-gradient(to bottom, black, transparent 90%);
-    pointer-events: none;
-  }
-
-  .legal-hero-glow {
-    position: absolute;
-    width: 420px;
-    height: 420px;
-    border-radius: 50%;
-    background: rgba(35, 132, 197, 0.15);
-    filter: blur(90px);
-    right: -100px;
-    top: -120px;
-    pointer-events: none;
-  }
-
-  .legal-hero-wrap {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    align-items: center;
-    position: relative;
-    z-index: 2;
-  }
-
-  @media (min-width: 992px) {
-    .legal-hero-wrap {
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 4.5rem;
-    }
-  }
-
-  .legal-hero-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 1.25rem;
-    color: #69baf3;
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 1.8px;
-    text-transform: uppercase;
-  }
-
-  .legal-hero-label span {
-    width: 24px;
-    height: 2px;
-    background: #58b5f4;
-    display: block;
-  }
-
-  .legal-hero-left h1 {
-    font-family: var(--font-heading);
-    font-size: clamp(2.5rem, 5.2vw, 4.2rem);
-    line-height: 1.05;
-    letter-spacing: -0.04em;
-    word-spacing: 0.04em;
-    margin-bottom: 1.5rem;
-    color: var(--color-white);
-  }
-
-  .legal-hero-left h1 em {
-    font-style: normal;
-    color: #8ed0ff;
-  }
-
-  .legal-hero-desc {
-    font-size: clamp(1.05rem, 1.4vw, 1.22rem);
-    line-height: 1.65;
-    color: rgba(255, 255, 255, 0.82);
-    margin-bottom: 2rem;
-    max-width: 620px;
-  }
-
-  .legal-hero-points {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.25rem;
-    margin-bottom: 2.25rem;
-  }
-
-  .legal-hero-point {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.92rem;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  .point-bullet {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #58b5f4;
-    box-shadow: 0 0 10px rgba(88, 181, 244, 0.8);
-  }
-
-  .legal-hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-items: center;
-  }
-
-  .button-secondary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.75rem 1.6rem;
-    border-radius: 999px;
-    font-family: var(--font-heading);
-    font-size: 0.92rem;
-    font-weight: 600;
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--color-white);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    text-decoration: none;
-    transition:
-      background 0.2s ease,
-      border-color 0.2s ease,
-      transform 0.2s ease;
-  }
-
-  .button-secondary:hover {
-    background: rgba(255, 255, 255, 0.16);
-    border-color: rgba(255, 255, 255, 0.35);
-    color: var(--color-white);
-    transform: translateY(-1px);
-  }
-
-  /* Mockup illustration */
-  .legal-hero-visual {
-    position: relative;
-    display: none;
-  }
-
-  @media (min-width: 992px) {
-    .legal-hero-visual {
-      display: block;
-    }
-  }
-
-  .legal-glass-frame {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 18px;
-    padding: 1.25rem;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-    backdrop-filter: blur(10px);
-  }
-
-  .legal-browser-top {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 1rem;
-  }
-
-  .browser-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.25);
-  }
-
-  .legal-mockup-card {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 1.5rem;
-    color: var(--color-ink);
-  }
-
-  .mockup-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.75rem;
-  }
-
-  .mockup-mini-label {
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--color-orange);
-  }
-
-  .mockup-check {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: #eef8f1;
-    color: #2e8b57;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.75rem;
-    font-weight: 700;
-  }
-
-  .legal-mockup-card h3 {
-    font-family: var(--font-heading);
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 0.35rem;
-    color: var(--color-ink);
-  }
-
-  .legal-mockup-card p {
-    font-size: 0.85rem;
-    line-height: 1.45;
-    color: var(--color-muted);
-    margin-bottom: 1.25rem;
-  }
-
-  .mockup-lines {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    margin-bottom: 1.25rem;
-  }
-
-  .mockup-line {
-    height: 5px;
-    background: #edf1f5;
-    border-radius: 4px;
-    display: block;
-  }
-
-  .mockup-line:nth-child(1) {
-    width: 92%;
-  }
-  .mockup-line:nth-child(2) {
-    width: 85%;
-  }
-  .mockup-line:nth-child(3) {
-    width: 96%;
-  }
-  .mockup-line:nth-child(4) {
-    width: 70%;
-  }
-  .mockup-line:nth-child(5) {
-    width: 55%;
-  }
-
-  .mockup-status {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.8rem;
-    padding-top: 0.75rem;
-    border-top: 1px solid var(--color-line);
-  }
-
-  .mockup-status span {
-    color: var(--color-muted);
-  }
-
-  .mockup-status strong {
-    color: #2e8b57;
-  }
-
-  .floating-badge {
-    position: absolute;
-    background: rgba(16, 27, 45, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 10px;
-    padding: 0.6rem 1rem;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(8px);
-  }
-
-  .floating-badge small {
-    display: block;
-    font-size: 0.68rem;
-    color: #8ed0ff;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 2px;
-  }
-
-  .floating-badge strong {
-    font-size: 0.82rem;
-    color: #ffffff;
-    font-weight: 600;
-  }
-
-  .badge-top {
-    top: -15px;
-    left: -20px;
-  }
-
-  .badge-bottom {
-    bottom: -15px;
-    right: -15px;
-  }
-
-  .legal-hero-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    margin-top: 2.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .hero-tag {
-    padding: 0.35rem 0.85rem;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    font-size: 0.78rem;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.85);
   }
 
   /* =========================
@@ -995,7 +593,7 @@ import { pages } from '../data/site-content.js'
 
   .legal-intro h2 {
     font-family: var(--font-heading);
-    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    font-size: var(--type-section-size);
     font-weight: 700;
     line-height: 1.15;
     letter-spacing: -0.03em;

@@ -26,23 +26,19 @@ const SHOW_LEGACY_AI_SECTION = false
 
 <BaseLayout title={pages.home.title} description={pages.home.description}>
   <main id="main-content" class="home-page">
-    <section class="hero-section">
-      <div class="site-container hero-layout">
-        <div class="hero-copy">
-          <p class="eyebrow eyebrow-dark">
-            <span class="eyebrow-dot"></span> Software development &amp;
-            technology
-          </p>
-          <h1>
+    <section class="hero-section hero-system hero-system--split hero-system--feature">
+      <div class="site-container hero-layout hero-system__inner">
+        <div class="hero-copy hero-system__copy">
+          <h1 class="hero-system__title">
             <span class="hero-headline-line">
-              Engineering <span class="hero-headline-accent">digital</span>
+              Engineering <span class="hero-headline-accent hero-system__accent">Digital</span>
             </span>
             <span class="hero-headline-line">
-              <span class="hero-headline-accent">solutions</span> that move
+              <span class="hero-headline-accent hero-system__accent">Solutions</span> that Move
             </span>
-            <span class="hero-headline-line">businesses forward.</span>
+            <span class="hero-headline-line">Businesses Forward.</span>
           </h1>
-          <p class="hero-description">
+          <p class="hero-description hero-system__description">
             <span class="hero-description-line">
               With 15+ years of experience, we build reliable software, scalable
               cloud platforms,
@@ -56,11 +52,20 @@ const SHOW_LEGACY_AI_SECTION = false
               designed around real business needs.
             </span>
           </p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="/contact">
+          <div class="hero-actions hero-system__actions">
+            <a
+              class="button button-primary"
+              href="/contact#project-inquiry"
+              data-open-contact-modal
+            >
               Discuss your project <span aria-hidden="true">↗</span>
             </a>
-            <a class="button button-outline" href="/projects">
+            <a
+              class="button button-outline"
+              href="/projects"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Explore our work <span aria-hidden="true">→</span>
             </a>
           </div>
@@ -80,11 +85,13 @@ const SHOW_LEGACY_AI_SECTION = false
           headingId="services-heading"
           reveal={true}
           eyebrow="Services & solutions"
-          title="Technology services for the "
-          titleAccent="work ahead."
+          title="Technology Services for the "
+          titleAccent="Work Ahead."
           description="From applied AI and custom software to web, mobile, enterprise, and cloud data solutions, Incaendo helps teams turn complex needs into reliable digital products."
           link="/services"
           linkLabel="View all services"
+          target="_blank"
+          rel="noopener noreferrer"
         />
         <ServiceGrid variant="home" />
       </div>
@@ -113,8 +120,8 @@ const SHOW_LEGACY_AI_SECTION = false
         <div class="awards-intro reveal" data-awards-intro>
           <p class="eyebrow">Recognition &amp; partnerships</p>
           <h2 id="awards-heading">
-            Recognised for partnerships{' '}
-            <span class="hero-title-accent">that deliver lasting value.</span>
+            Recognised for Partnerships{' '}
+            <span class="hero-title-accent">that Deliver Lasting Value.</span>
           </h2>
           <p class="awards-intro-copy">
             Strong technology is built on trust, collaboration, and consistent
@@ -182,7 +189,7 @@ const SHOW_LEGACY_AI_SECTION = false
       <div class="site-container client-row">
         <div class="client-intro">
           <p class="eyebrow">Built on relationships</p>
-          <h2 id="clients-heading">Good work begins with trust.</h2>
+          <h2 id="clients-heading">Good Work Begins with Trust.</h2>
         </div>
         <div class="client-proof-card">
           <span class="client-card-mark" aria-hidden="true">
@@ -225,9 +232,9 @@ const SHOW_LEGACY_AI_SECTION = false
           <div class="project-empty-copy">
             <span class="project-index">CASE STUDIES · IN PREPARATION</span>
             <h3>
-              Real challenges.
+              Real Challenges.
               <br />
-              Thoughtful engineering.
+              Thoughtful Engineering.
             </h3>
             <p>
               Project names, visuals, and outcomes will be added after the
@@ -246,14 +253,18 @@ const SHOW_LEGACY_AI_SECTION = false
         <div>
           <p class="eyebrow">A good place to start</p>
           <h2 id="reachout-heading">
-            Tell us what you’re
+            Tell Us What You’re
             <br />
-            working toward.
+            Working Toward.
           </h2>
         </div>
         <div class="reachout-action">
           <p>Share the challenge. We’ll help shape the next conversation.</p>
-          <a class="button button-primary" href="/contact">
+          <a
+            class="button button-primary"
+            href="/contact#project-inquiry"
+            data-open-contact-modal
+          >
             Discuss your project <span aria-hidden="true">↗</span>
           </a>
           <span class="small-note">
@@ -270,7 +281,7 @@ const SHOW_LEGACY_AI_SECTION = false
           <h2 id="faq-heading">
             Frequently
             <br />
-            asked questions.
+            Asked Questions.
           </h2>
           <a class="text-link" href="/contact">
             Have another question?{' '}

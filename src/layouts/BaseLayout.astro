@@ -2,6 +2,7 @@
 import '../styles/global.css'
 import SiteHeader from '../components/SiteHeader.astro'
 import SiteFooter from '../components/SiteFooter.astro'
+import ContactModal from '../components/ContactModal.astro'
 import heroVisual from '../assets/hero-orbit.png'
 import introLogo from '../assets/Modern Blue and Orange iN Logo.png'
 
@@ -109,6 +110,7 @@ const socialImage = siteUrl ? new URL(heroVisual.src, siteUrl).href : undefined
     <SiteHeader />
     <slot />
     <SiteFooter />
+    <ContactModal />
     <script>
       import '../scripts/motion.js'
       import '../scripts/ai-showcase.js'

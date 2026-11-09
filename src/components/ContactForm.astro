@@ -1,5 +1,6 @@
 ---
-const { endpoint = '' } = Astro.props
+const { endpoint = '', idPrefix = 'contact' } = Astro.props
+const fieldId = (suffix) => `${idPrefix}-${suffix}`
 ---
 
 <form
@@ -10,56 +11,75 @@ const { endpoint = '' } = Astro.props
 >
   <div class="row gx-3 gy-3 form-grid">
     <div class="form-field col-md-6">
-      <label for="contact-name">
+      <label for={fieldId('name')}>
         Full name <span aria-hidden="true">*</span>
       </label>
       <input
-        id="contact-name"
+        id={fieldId('name')}
         name="name"
         autocomplete="name"
         required
         aria-invalid="false"
-        aria-describedby="contact-name-error"
+        aria-describedby={fieldId('name-error')}
       />
-      <span class="form-field-error" id="contact-name-error" hidden></span>
+      <span
+        class="form-field-error"
+        id={fieldId('name-error')}
+        data-error-for="name"
+        hidden
+      ></span>
     </div>
     <div class="form-field col-md-6">
-      <label for="contact-email">
+      <label for={fieldId('email')}>
         Work email <span aria-hidden="true">*</span>
       </label>
       <input
-        id="contact-email"
+        id={fieldId('email')}
         name="email"
         type="email"
         autocomplete="email"
         required
         aria-invalid="false"
-        aria-describedby="contact-email-error"
+        aria-describedby={fieldId('email-error')}
       />
-      <span class="form-field-error" id="contact-email-error" hidden></span>
+      <span
+        class="form-field-error"
+        id={fieldId('email-error')}
+        data-error-for="email"
+        hidden
+      ></span>
     </div>
     <div class="form-field col-md-6">
-      <label for="contact-company">
+      <label for={fieldId('company')}>
         Company name <span class="form-optional">(optional)</span>
       </label>
-      <input id="contact-company" name="company" autocomplete="organization" />
+      <input
+        id={fieldId('company')}
+        name="company"
+        autocomplete="organization"
+      />
     </div>
     <div class="form-field col-md-6">
-      <label for="contact-phone">
+      <label for={fieldId('phone')}>
         Phone number <span class="form-optional">(optional)</span>
       </label>
-      <input id="contact-phone" name="phone" type="tel" autocomplete="tel" />
+      <input
+        id={fieldId('phone')}
+        name="phone"
+        type="tel"
+        autocomplete="tel"
+      />
     </div>
     <div class="form-field col-md-6">
-      <label for="contact-topic">
+      <label for={fieldId('topic')}>
         Service <span aria-hidden="true">*</span>
       </label>
       <select
-        id="contact-topic"
+        id={fieldId('topic')}
         name="topic"
         required
         aria-invalid="false"
-        aria-describedby="contact-topic-error"
+        aria-describedby={fieldId('topic-error')}
       >
         <option value="" selected disabled>
           Select a service
@@ -72,13 +92,18 @@ const { endpoint = '' } = Astro.props
         <option>Cloud &amp; Data</option>
         <option>Other</option>
       </select>
-      <span class="form-field-error" id="contact-topic-error" hidden></span>
+      <span
+        class="form-field-error"
+        id={fieldId('topic-error')}
+        data-error-for="topic"
+        hidden
+      ></span>
     </div>
     <div class="form-field col-md-6">
-      <label for="contact-budget">
+      <label for={fieldId('budget')}>
         Project budget <span class="form-optional">(optional)</span>
       </label>
-      <select id="contact-budget" name="budget">
+      <select id={fieldId('budget')} name="budget">
         <option value="" selected>
           Select a range
         </option>
@@ -90,40 +115,46 @@ const { endpoint = '' } = Astro.props
       </select>
     </div>
     <div class="form-field col-12">
-      <label for="contact-message">
+      <label for={fieldId('message')}>
         Project details <span aria-hidden="true">*</span>
       </label>
       <textarea
-        id="contact-message"
+        id={fieldId('message')}
         name="message"
         rows="4"
         required
         placeholder="What are you planning, and what would a useful outcome look like?"
         aria-invalid="false"
-        aria-describedby="contact-message-error"
+        aria-describedby={fieldId('message-error')}
       ></textarea>
-      <span class="form-field-error" id="contact-message-error" hidden></span>
+      <span
+        class="form-field-error"
+        id={fieldId('message-error')}
+        data-error-for="message"
+        hidden
+      ></span>
     </div>
   </div>
 
   <div class="contact-consent">
-    <label class="contact-privacy-consent" for="contact-privacy">
+    <label class="contact-privacy-consent" for={fieldId('privacy')}>
       <input
-        id="contact-privacy"
+        id={fieldId('privacy')}
         name="privacyConsent"
         type="checkbox"
         required
         aria-invalid="false"
-        aria-describedby="contact-privacy-error"
+        aria-describedby={fieldId('privacy-error')}
       />
       <span>
-        I agree to the <a href="/privacy">Privacy Policy</a> and understand my
+        I agree to the <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and understand my
         details will be used to respond to this enquiry.
       </span>
     </label>
     <span
       class="form-field-error contact-consent-error"
-      id="contact-privacy-error"
+      id={fieldId('privacy-error')}
+      data-error-for="privacyConsent"
       hidden
     ></span>
   </div>
@@ -151,28 +182,30 @@ const { endpoint = '' } = Astro.props
 
 <script>
   function initializeContactForms() {
-    const forms = document.querySelectorAll('[data-contact-form]')
+    const forms = Array.from(
+      document.querySelectorAll('[data-contact-form]'),
+    ).filter((f) => f instanceof HTMLFormElement)
 
     forms.forEach((form) => {
+      if (!(form instanceof HTMLFormElement)) return
       if (form.dataset.initialized === 'true') return
       form.dataset.initialized = 'true'
 
       const status = form.querySelector('[data-form-status]')
       const submitLabel = form.querySelector('[data-submit-label]')
-      const submitButton = form.querySelector('button[type="submit"]')
-      const originalButtonText = submitLabel.textContent
+      const originalButtonText = submitLabel?.textContent ?? 'Send project inquiry'
 
       const setStatus = (message, isError = false) => {
-        status.textContent = message
-        status.setAttribute('role', isError ? 'alert' : 'status')
+        if (status instanceof HTMLElement) {
+          status.textContent = message
+          status.setAttribute('role', isError ? 'alert' : 'status')
+        }
       }
 
       const setFieldError = (name, message = '') => {
         const field = form.elements.namedItem(name)
-        const error = form.querySelector(
-          `#contact-${name === 'privacyConsent' ? 'privacy' : name}-error`,
-        )
-        if (!field || !error) return
+        const error = form.querySelector(`[data-error-for="${name}"]`)
+        if (!(field instanceof HTMLElement) || !(error instanceof HTMLElement)) return
 
         const hasError = Boolean(message)
         field.setAttribute('aria-invalid', String(hasError))
@@ -181,20 +214,34 @@ const { endpoint = '' } = Astro.props
       }
 
       const validate = () => {
+        const formEl = form.elements
+        const nameField = formEl.namedItem('name')
+        const emailField = formEl.namedItem('email')
+        const topicField = formEl.namedItem('topic')
+        const messageField = formEl.namedItem('message')
+        const privacyField = formEl.namedItem('privacyConsent')
+
+        const nameVal = nameField instanceof HTMLInputElement ? nameField.value.trim() : ''
+        const emailVal = emailField instanceof HTMLInputElement ? emailField.value.trim() : ''
+        const emailValid = emailField instanceof HTMLInputElement ? emailField.validity.valid : false
+        const topicVal = topicField instanceof HTMLSelectElement || topicField instanceof HTMLInputElement ? topicField.value : ''
+        const messageVal = messageField instanceof HTMLTextAreaElement || messageField instanceof HTMLInputElement ? messageField.value.trim() : ''
+        const privacyChecked = privacyField instanceof HTMLInputElement ? privacyField.checked : false
+
         const errors = {
-          name: form.elements.name.value.trim() ? '' : 'Enter your full name.',
-          email: !form.elements.email.value.trim()
+          name: nameVal ? '' : 'Enter your full name.',
+          email: !emailVal
             ? 'Enter your work email.'
-            : form.elements.email.validity.valid
+            : emailValid
               ? ''
               : 'Enter a valid email address.',
-          topic: form.elements.topic.value
+          topic: topicVal
             ? ''
             : 'Choose the service you need help with.',
-          message: form.elements.message.value.trim()
+          message: messageVal
             ? ''
             : 'Tell us a little about your project.',
-          privacyConsent: form.elements.privacyConsent.checked
+          privacyConsent: privacyChecked
             ? ''
             : 'Please confirm before continuing.',
         }
@@ -206,15 +253,19 @@ const { endpoint = '' } = Astro.props
       }
 
       form.addEventListener('input', (event) => {
-        const { name } = event.target
-        if (name && event.target.getAttribute('aria-invalid') === 'true') {
-          setFieldError(name)
+        if (event.target instanceof HTMLElement) {
+          const name = event.target.getAttribute('name')
+          if (name && event.target.getAttribute('aria-invalid') === 'true') {
+            setFieldError(name)
+          }
         }
       })
       form.addEventListener('change', (event) => {
-        const { name } = event.target
-        if (name && event.target.getAttribute('aria-invalid') === 'true') {
-          setFieldError(name)
+        if (event.target instanceof HTMLElement) {
+          const name = event.target.getAttribute('name')
+          if (name && event.target.getAttribute('aria-invalid') === 'true') {
+            setFieldError(name)
+          }
         }
       })
 
@@ -222,12 +273,12 @@ const { endpoint = '' } = Astro.props
         event.preventDefault()
         validate()
         const firstInvalid = form.querySelector('[aria-invalid="true"]')
-        if (firstInvalid) {
+        if (firstInvalid instanceof HTMLElement) {
           firstInvalid.focus()
           return
         }
 
-        const endpoint = form.dataset.endpoint.trim()
+        const endpoint = form.dataset.endpoint?.trim() ?? ''
         if (!endpoint) {
           setStatus(
             'Your message was not sent because form delivery is not configured. Please email info@incaendo.com to reach us.',
@@ -250,13 +301,13 @@ const { endpoint = '' } = Astro.props
         }
 
         const payload = Object.fromEntries(new FormData(form).entries())
-        const controls = [
-          ...form.querySelectorAll('input, select, textarea, button'),
-        ]
+        const controls = Array.from(
+          form.querySelectorAll('input, select, textarea, button'),
+        ).filter((c) => 'disabled' in c)
         controls.forEach((control) => {
           control.disabled = true
         })
-        submitLabel.textContent = 'Sending…'
+        if (submitLabel) submitLabel.textContent = 'Sending…'
         setStatus('')
 
         try {
@@ -272,8 +323,10 @@ const { endpoint = '' } = Astro.props
             field.setAttribute('aria-invalid', 'false')
           })
           form.querySelectorAll('.form-field-error').forEach((error) => {
-            error.textContent = ''
-            error.hidden = true
+            if (error instanceof HTMLElement) {
+              error.textContent = ''
+              error.hidden = true
+            }
           })
           setStatus('Thank you. Your enquiry has been sent.')
         } catch {
@@ -285,7 +338,7 @@ const { endpoint = '' } = Astro.props
           controls.forEach((control) => {
             control.disabled = false
           })
-          submitLabel.textContent = originalButtonText
+          if (submitLabel) submitLabel.textContent = originalButtonText
         }
       })
     })

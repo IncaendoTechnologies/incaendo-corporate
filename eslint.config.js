@@ -2,10 +2,19 @@ import astro from 'eslint-plugin-astro'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 import react from 'eslint-plugin-react'
 import globals from 'globals'
+import tsParser from '@typescript-eslint/parser'
 
 export default [
   { ignores: ['dist/**', 'node_modules/**', '.astro/**'] },
   ...astro.configs['flat/recommended'],
+  {
+    files: ['**/*.astro'],
+    languageOptions: {
+      parserOptions: {
+        parser: tsParser,
+      },
+    },
+  },
   {
     files: ['**/*.{js,jsx,mjs}'],
     languageOptions: {

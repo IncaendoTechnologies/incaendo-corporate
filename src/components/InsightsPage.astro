@@ -26,21 +26,18 @@ const filterItems = [
 ---
 
 <div class="insights-page">
-  <section class="insights-hero" aria-labelledby="insights-page-heading">
-    <div class="site-container insights-hero-inner">
-      <div class="insights-hero-copy reveal" data-reveal-stagger>
-        <p class="eyebrow" data-reveal-item>
-          <span class="insights-eyebrow-dot"></span> Insights & ideas
-        </p>
-        <h1 id="insights-page-heading" data-reveal-item>
-          Better technology starts with <span>better questions.</span>
+  <section class="insights-hero hero-system hero-system--split hero-system--feature" aria-labelledby="insights-page-heading">
+    <div class="site-container insights-hero-inner hero-system__inner">
+      <div class="insights-hero-copy hero-system__copy reveal" data-reveal-stagger>
+        <h1 id="insights-page-heading" class="hero-system__title" data-reveal-item>
+          Better Technology Starts with <span>Better Questions.</span>
         </h1>
-        <p class="insights-hero-description" data-reveal-item>
+        <p class="insights-hero-description hero-system__description" data-reveal-item>
           Practical perspectives on AI, software engineering and digital
           products—made to help teams understand the choices behind useful,
           maintainable technology.
         </p>
-        <div class="insights-hero-actions" data-reveal-item>
+        <div class="insights-hero-actions hero-system__actions" data-reveal-item>
           <a class="button button-primary" href="#article-archive">
             Explore insights <span aria-hidden="true">↘</span>
           </a>
@@ -51,6 +48,18 @@ const filterItems = [
             </span>
           </a>
         </div>
+        <nav class="insights-hero-topics hero-system__support" aria-label="Browse insights by topic" data-reveal-item>
+          <span class="hero-system__support-label">Explore by topic</span>
+          <ul>
+            {insightCategories.map((category) => (
+              <li>
+                <a href="#article-archive" data-insights-topic={categoryKey(category)}>
+                  {category}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
         <p class="insights-hero-footnote" data-reveal-item>
           Field notes on building and operating digital systems.
         </p>
@@ -69,7 +78,7 @@ const filterItems = [
         <div>
           <p class="eyebrow">Featured insights</p>
           <h2 id="featured-insights-heading">
-            Ideas to take <span>further.</span>
+            Ideas to Take <span>Further.</span>
           </h2>
         </div>
         <p>
@@ -98,7 +107,7 @@ const filterItems = [
         <div>
           <p class="eyebrow">The article archive</p>
           <h2 id="latest-insights-heading">
-            Browse the <span>latest thinking.</span>
+            Browse the <span>Latest Thinking.</span>
           </h2>
         </div>
       </header>
@@ -145,18 +154,26 @@ const filterItems = [
 
   const setupInsights = () => {
     const page = document.querySelector('.insights-page')
-    if (!page || page.dataset.insightsReady === 'true') return
+    if (!(page instanceof HTMLElement) || page.dataset.insightsReady === 'true') return
     page.dataset.insightsReady = 'true'
 
     const reset = page.querySelector('[data-insights-reset]')
-    const filters = [...page.querySelectorAll('[data-insights-filter]')]
+    const filters = Array.from(page.querySelectorAll('[data-insights-filter]')).filter(
+      (el) => el instanceof HTMLElement,
+    )
     const empty = page.querySelector('[data-insights-empty]')
     const archive = page.querySelector('[data-insights-latest]')
-    const archiveCards = [...archive.querySelectorAll('[data-insight-card]')]
+    const archiveCards = archive
+      ? Array.from(archive.querySelectorAll('[data-insight-card]')).filter(
+          (el) => el instanceof HTMLElement,
+        )
+      : []
     const featureSection = page.querySelector('[data-insight-featured-section]')
-    const featureCards = [
-      ...featureSection.querySelectorAll('[data-insight-card]'),
-    ]
+    const featureCards = featureSection
+      ? Array.from(featureSection.querySelectorAll('[data-insight-card]')).filter(
+          (el) => el instanceof HTMLElement,
+        )
+      : []
     const pagination = page.querySelector('[data-insights-pagination]')
     const pageNumbers = page.querySelector('[data-insights-page-numbers]')
     const prevButton = page.querySelector('[data-insights-page-prev]')
@@ -171,18 +188,25 @@ const filterItems = [
     const update = (scrollToGrid = false) => {
       // Featured highlights: plain category filter, same as before pagination.
       featureCards.forEach((card) => {
-        card.hidden = !(
-          activeCategory === 'all' ||
-          card.dataset.insightCategory === activeCategory
-        )
+        if (card instanceof HTMLElement) {
+          card.hidden = !(
+            activeCategory === 'all' ||
+            card.dataset.insightCategory === activeCategory
+          )
+        }
       })
-      featureSection.hidden = !featureCards.some((card) => !card.hidden)
+      if (featureSection instanceof HTMLElement) {
+        featureSection.hidden = !featureCards.some(
+          (card) => card instanceof HTMLElement && !card.hidden,
+        )
+      }
 
       // Archive: category filter, then slice to the current page.
       const matches = archiveCards.filter(
         (card) =>
-          activeCategory === 'all' ||
-          card.dataset.insightCategory === activeCategory,
+          card instanceof HTMLElement &&
+          (activeCategory === 'all' ||
+            card.dataset.insightCategory === activeCategory),
       )
       const totalPages = Math.max(1, Math.ceil(matches.length / PAGE_SIZE))
       currentPage = Math.min(Math.max(currentPage, 1), totalPages)
@@ -190,14 +214,16 @@ const filterItems = [
       const end = start + PAGE_SIZE
 
       archiveCards.forEach((card) => {
-        const matchIndex = matches.indexOf(card)
-        card.hidden =
-          matchIndex === -1 || matchIndex < start || matchIndex >= end
+        if (card instanceof HTMLElement) {
+          const matchIndex = matches.indexOf(card)
+          card.hidden =
+            matchIndex === -1 || matchIndex < start || matchIndex >= end
+        }
       })
 
-      archive.hidden = matches.length === 0
-      empty.hidden = matches.length !== 0
-      reset.disabled = activeCategory === 'all'
+      if (archive instanceof HTMLElement) archive.hidden = matches.length === 0
+      if (empty instanceof HTMLElement) empty.hidden = matches.length !== 0
+      if (reset instanceof HTMLButtonElement) reset.disabled = activeCategory === 'all'
 
       if (pagination instanceof HTMLElement) {
         pagination.hidden = matches.length === 0 || totalPages <= 1
@@ -209,7 +235,7 @@ const filterItems = [
         nextButton.disabled = currentPage === totalPages
       }
 
-      if (pageNumbers) {
+      if (pageNumbers instanceof HTMLElement) {
         pageNumbers.innerHTML = ''
         for (let pageNum = 1; pageNum <= totalPages; pageNum += 1) {
           const button = document.createElement('button')
@@ -230,7 +256,7 @@ const filterItems = [
         }
       }
 
-      if (scrollToGrid) {
+      if (scrollToGrid && archive instanceof HTMLElement) {
         archive.scrollIntoView({
           behavior: reducedMotion ? 'auto' : 'smooth',
           block: 'start',
@@ -239,33 +265,54 @@ const filterItems = [
     }
 
     filters.forEach((filter) => {
-      filter.addEventListener('keydown', (event) => {
-        if (event.key !== 'Enter' && event.key !== ' ') return
-        event.preventDefault()
-        filter.click()
+      if (filter instanceof HTMLElement) {
+        filter.addEventListener('keydown', (event) => {
+          if (event instanceof KeyboardEvent) {
+            if (event.key !== 'Enter' && event.key !== ' ') return
+            event.preventDefault()
+            filter.click()
+          }
+        })
+        filter.addEventListener('click', () => {
+          activeCategory = filter.dataset.insightsFilter || 'all'
+          filters.forEach((button) => {
+            if (button instanceof HTMLElement) {
+              const selected = button === filter
+              button.classList.toggle('is-active', selected)
+              button.setAttribute('aria-pressed', String(selected))
+            }
+          })
+          currentPage = 1
+          update()
+        })
+      }
+    })
+    // Hero topic links apply the matching archive filter; the link's own
+    // #article-archive href then scrolls to the filtered results.
+    page.querySelectorAll('[data-insights-topic]').forEach((link) => {
+      if (!(link instanceof HTMLElement)) return
+      link.addEventListener('click', () => {
+        const match = filters.find(
+          (button) => button.dataset.insightsFilter === link.dataset.insightsTopic,
+        )
+        if (match instanceof HTMLElement) match.click()
       })
-      filter.addEventListener('click', () => {
-        activeCategory = filter.dataset.insightsFilter
+    })
+    if (reset instanceof HTMLButtonElement) {
+      reset.addEventListener('click', () => {
+        activeCategory = 'all'
         filters.forEach((button) => {
-          const selected = button === filter
-          button.classList.toggle('is-active', selected)
-          button.setAttribute('aria-pressed', String(selected))
+          if (button instanceof HTMLElement) {
+            const selected = button.dataset.insightsFilter === 'all'
+            button.classList.toggle('is-active', selected)
+            button.setAttribute('aria-pressed', String(selected))
+            if (selected) button.focus()
+          }
         })
         currentPage = 1
         update()
       })
-    })
-    reset.addEventListener('click', () => {
-      activeCategory = 'all'
-      filters.forEach((button) => {
-        const selected = button.dataset.insightsFilter === 'all'
-        button.classList.toggle('is-active', selected)
-        button.setAttribute('aria-pressed', String(selected))
-        if (selected) button.focus()
-      })
-      currentPage = 1
-      update()
-    })
+    }
     prevButton?.addEventListener('click', () => {
       if (currentPage > 1) {
         currentPage -= 1
@@ -299,7 +346,6 @@ const filterItems = [
   .insights-hero {
     position: relative;
     overflow: hidden;
-    padding-block: clamp(4rem, 6vw, 5.5rem);
     background:
       radial-gradient(
         ellipse at 91% 11%,
@@ -309,53 +355,9 @@ const filterItems = [
       linear-gradient(125deg, #fbfaf8 0%, var(--color-paper) 53%, #f0ece6 100%);
   }
 
-  .insights-hero::after {
-    position: absolute;
-    top: -88%;
-    right: -8%;
-    width: min(50vw, 720px);
-    aspect-ratio: 1;
-    border: 1px solid rgb(201 84 43 / 10%);
-    border-radius: 50%;
-    box-shadow:
-      0 0 0 44px rgb(201 84 43 / 2%),
-      0 0 0 98px rgb(201 84 43 / 2%);
-    content: '';
-    pointer-events: none;
-  }
-
   .insights-hero-inner {
     position: relative;
     z-index: 1;
-    display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-    align-items: center;
-    gap: clamp(2rem, 5vw, 5rem);
-  }
-
-  .insights-hero-copy {
-    max-width: 600px;
-  }
-
-  .insights-eyebrow-dot {
-    display: inline-block;
-    width: 0.42rem;
-    height: 0.42rem;
-    margin-right: 0.4rem;
-    border-radius: 50%;
-    background: var(--color-orange-dark);
-    box-shadow: 0 0 0 4px rgb(168 65 33 / 10%);
-    vertical-align: 0.08rem;
-  }
-
-  .insights-hero h1 {
-    max-width: 650px;
-    margin: 0 0 1.1rem;
-    font-size: var(--type-page-hero-size);
-    font-weight: var(--type-display-weight);
-    letter-spacing: var(--type-display-letter-spacing);
-    word-spacing: var(--type-display-word-spacing);
-    line-height: var(--type-page-hero-line-height);
   }
 
   .insights-hero h1 span,
@@ -363,20 +365,37 @@ const filterItems = [
     color: var(--color-orange-dark);
   }
 
-  .insights-hero-description {
-    max-width: 520px;
-    margin: 0;
-    color: var(--color-body);
-    font-size: var(--type-body-size);
-    line-height: var(--type-body-line-height);
-  }
-
-  .insights-hero-actions {
+  /* Topic shortcuts under the hero actions (apply the archive filter) */
+  .insights-hero-topics ul {
     display: flex;
     flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .insights-hero-topics a {
+    display: inline-flex;
     align-items: center;
-    gap: 1rem 1.25rem;
-    margin-top: 1.65rem;
+    min-height: 2.1rem;
+    padding: 0.35rem 0.85rem;
+    border: 1px solid rgb(16 27 45 / 11%);
+    border-radius: 999px;
+    background: rgb(255 255 255 / 70%);
+    color: var(--color-ink);
+    font-size: 0.8rem;
+    font-weight: 550;
+    transition:
+      border-color var(--duration-fast) ease,
+      color var(--duration-fast) ease,
+      background var(--duration-fast) ease;
+  }
+
+  .insights-hero-topics a:hover {
+    border-color: rgb(168 65 33 / 36%);
+    background: #fff;
+    color: var(--color-orange-dark);
   }
 
   .insights-hero-footnote {
@@ -434,7 +453,7 @@ const filterItems = [
         rgb(244 233 223 / 42%),
         transparent 30%
       ),
-      #f1efeb;
+      var(--surface-subtle);
   }
 
   .insights-latest-grid {
@@ -461,32 +480,18 @@ const filterItems = [
     padding: 1.5rem;
     border: 1px dashed #d4d0ca;
     border-radius: var(--radius-medium);
-    color: #697586;
+    color: var(--text-intro);
     font-size: 0.82rem;
     text-align: center;
   }
 
   @media (max-width: 1050px) {
-    .insights-hero-inner {
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-      gap: 2rem;
-    }
     .insights-latest-grid > :global(.insight-card) {
       flex-basis: calc((100% - 1rem) / 2);
     }
   }
 
   @media (max-width: 800px) {
-    .insights-hero-inner {
-      grid-template-columns: minmax(0, 1fr);
-    }
-    .insights-hero-copy {
-      max-width: 760px;
-    }
-    .insights-hero-inner > :global(.insights-hero-latest) {
-      width: min(100%, 680px);
-      margin-inline: auto;
-    }
     .insights-section-heading {
       align-items: flex-start;
       flex-direction: column;
@@ -498,19 +503,6 @@ const filterItems = [
   }
 
   @media (max-width: 600px) {
-    .insights-hero {
-      padding-block: 3.8rem 3.25rem;
-    }
-    .insights-hero h1 {
-      font-size: clamp(2.35rem, 10vw, 3.15rem);
-    }
-    .insights-hero-actions {
-      align-items: stretch;
-      flex-direction: column;
-    }
-    .insights-hero-actions .button {
-      justify-content: space-between;
-    }
     .insights-featured-grid {
       grid-template-columns: minmax(0, 1fr);
     }

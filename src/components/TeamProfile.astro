@@ -75,12 +75,16 @@ try {
         }
       >
         <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M5.2 8.3H2.4V21h2.8V8.3ZM3.8 6.6a1.7 1.7 0 1 0 0-3.4 1.7 1.7 0 0 0 0 3.4ZM21.6 13.7c0-3.8-2-5.6-4.7-5.6a4.1 4.1 0 0 0-3.7 2V8.3h-2.8V21h2.8v-6.3c0-1.7.3-3.4 2.5-3.4s2.2 2 2.2 3.5V21h2.8l.9-7.3Z" />
+          <path
+            fill="#0A66C2"
+            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451c.979 0 1.778-.773 1.778-1.729V1.73C24 .774 23.205 0 22.225 0z"
+          />
         </svg>
       </a>
     )}
   </div>
-  {description && <p class="team-profile-description">{description}</p>}
+  {/* Description temporarily hidden as requested - kept commented for future use */}
+  {/* {description && <p class="team-profile-description">{description}</p>} */}
 </article>
 
 <style>
@@ -154,11 +158,11 @@ try {
 
   .team-profile-copy {
     display: flex;
-    min-height: 5rem;
+    min-height: 4.25rem;
     align-items: center;
     justify-content: space-between;
     gap: 0.65rem;
-    padding: 0.85rem 0.25rem 0.2rem;
+    padding: 0.85rem 0.35rem 0.35rem;
     min-width: 0;
   }
 
@@ -192,31 +196,33 @@ try {
   }
 
   .team-profile-linkedin {
-    display: grid;
-    width: 2rem;
-    height: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.1rem;
+    height: 2.1rem;
     flex: 0 0 auto;
-    place-items: center;
-    border: 1px solid var(--color-line);
-    border-radius: 50%;
-    color: var(--color-navy);
-    background: #fff;
+    border-radius: 6px;
+    background: transparent;
     transition:
-      color 180ms ease,
-      background-color 180ms ease,
-      border-color 180ms ease;
+      transform 200ms ease,
+      opacity 200ms ease;
   }
 
   .team-profile-linkedin svg {
-    width: 0.9rem;
-    height: 0.9rem;
-    fill: currentColor;
+    width: 1.65rem;
+    height: 1.65rem;
+    display: block;
+    border-radius: 4px;
+    transition: transform 180ms ease, filter 180ms ease;
   }
 
   .team-profile-linkedin:hover {
-    border-color: var(--color-orange-dark);
-    color: white;
-    background: var(--color-orange-dark);
+    transform: translateY(-2px);
+  }
+
+  .team-profile-linkedin:hover svg {
+    filter: drop-shadow(0 3px 6px rgba(10, 102, 194, 0.4));
   }
 
   @media (prefers-reduced-motion: reduce) {

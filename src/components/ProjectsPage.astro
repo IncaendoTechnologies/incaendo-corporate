@@ -5,9 +5,9 @@ import FilterBar from './FilterBar.astro'
 import IndustryChips from './IndustryChips.astro'
 import Pagination from './Pagination.astro'
 
-const tomo = projects.find((project) => project.name === 'Tomo')
-const dominos = projects.find((project) => project.name === "Domino's")
-const zeeMedia = projects.find((project) => project.name === 'Zee Media')
+const tomo = projects.find((project) => project.name === 'Tomo') ?? projects[0]
+const dominos = projects.find((project) => project.name === "Domino's") ?? projects[1]
+const zeeMedia = projects.find((project) => project.name === 'Zee Media') ?? projects[2]
 
 const filterItems = projectCategories.map((category, index) => ({
   label: category,
@@ -15,21 +15,18 @@ const filterItems = projectCategories.map((category, index) => ({
 }))
 ---
 
-<section class="projects-hero" aria-labelledby="projects-page-heading">
-  <div class="site-container projects-hero-layout">
-    <div class="projects-hero-copy">
-      <p class="eyebrow">
-        <span class="eyebrow-dot"></span> Selected work
-      </p>
-      <h1 id="projects-page-heading">
-        A portfolio of <span>digital work</span>, shaped around what matters.
+<section class="projects-hero hero-system hero-system--split hero-system--feature" aria-labelledby="projects-page-heading">
+  <div class="site-container projects-hero-layout hero-system__inner">
+    <div class="projects-hero-copy hero-system__copy">
+      <h1 id="projects-page-heading" class="hero-system__title">
+        A Portfolio of <span class="hero-system__accent">Digital Work</span>, Shaped around What Matters.
       </h1>
-      <p class="projects-hero-description">
+      <p class="projects-hero-description hero-system__description">
         Explore products, platforms, and digital experiences from across
         Incaendo’s project portfolio. Each reflects a different audience,
         challenge, and role for technology.
       </p>
-      <div class="projects-hero-actions">
+      <div class="projects-hero-actions hero-system__actions">
         <a class="button button-primary" href="/contact">
           Discuss your project <span aria-hidden="true">↗</span>
         </a>
@@ -47,8 +44,7 @@ const filterItems = projectCategories.map((category, index) => ({
       </div>
     </div>
 
-    <div class="projects-hero-visual" aria-hidden="true">
-      <div class="hero-visual-halo" aria-hidden="true"></div>
+    <div class="projects-hero-visual hero-system__visual" aria-hidden="true">
       <figure class="hero-screen hero-screen-main">
         <Image
           src={dominos.image}
@@ -83,9 +79,6 @@ const filterItems = projectCategories.map((category, index) => ({
         />
         <figcaption>{zeeMedia.name}</figcaption>
       </figure>
-      <span class="hero-visual-index" aria-hidden="true">
-        INCAENDO / PROJECTS
-      </span>
     </div>
   </div>
 </section>
@@ -100,7 +93,7 @@ const filterItems = projectCategories.map((category, index) => ({
       <div>
         <p class="eyebrow">Project portfolio</p>
         <h2 id="portfolio-heading">
-          Different challenges. <span>Thoughtful digital work.</span>
+          Different Challenges. <span>Thoughtful Digital Work.</span>
         </h2>
       </div>
       <p>
@@ -166,10 +159,12 @@ const filterItems = projectCategories.map((category, index) => ({
   const portfolio = document.querySelector('.portfolio-section')
 
   if (portfolio instanceof HTMLElement) {
-    const filters = portfolio.querySelectorAll('[data-project-filter]')
+    const filters = Array.from(
+      portfolio.querySelectorAll('[data-project-filter]'),
+    ).filter((el) => el instanceof HTMLElement)
     const cards = Array.from(
       portfolio.querySelectorAll('[data-portfolio-card]'),
-    )
+    ).filter((el) => el instanceof HTMLElement)
     const emptyState = portfolio.querySelector('[data-project-empty]')
     const pagination = portfolio.querySelector('[data-project-pagination]')
     const pageNumbers = portfolio.querySelector('[data-page-numbers]')
@@ -185,8 +180,9 @@ const filterItems = projectCategories.map((category, index) => ({
     const render = (scrollToGrid = false) => {
       const matches = cards.filter(
         (card) =>
-          activeCategory === 'all' ||
-          card.getAttribute('data-category') === activeCategory,
+          card instanceof HTMLElement &&
+          (activeCategory === 'all' ||
+            card.getAttribute('data-category') === activeCategory),
       )
       const totalPages = Math.max(1, Math.ceil(matches.length / PAGE_SIZE))
       currentPage = Math.min(Math.max(currentPage, 1), totalPages)
@@ -194,12 +190,16 @@ const filterItems = projectCategories.map((category, index) => ({
       const end = start + PAGE_SIZE
 
       cards.forEach((card) => {
-        const matchIndex = matches.indexOf(card)
-        card.hidden =
-          matchIndex === -1 || matchIndex < start || matchIndex >= end
+        if (card instanceof HTMLElement) {
+          const matchIndex = matches.indexOf(card)
+          card.hidden =
+            matchIndex === -1 || matchIndex < start || matchIndex >= end
+        }
       })
 
-      if (emptyState) emptyState.hidden = matches.length !== 0
+      if (emptyState instanceof HTMLElement) {
+        emptyState.hidden = matches.length !== 0
+      }
 
       if (pagination instanceof HTMLElement) {
         pagination.hidden = matches.length === 0 || totalPages <= 1
@@ -212,7 +212,7 @@ const filterItems = projectCategories.map((category, index) => ({
         nextButton.disabled = currentPage === totalPages
       }
 
-      if (pageNumbers) {
+      if (pageNumbers instanceof HTMLElement) {
         pageNumbers.innerHTML = ''
         for (let page = 1; page <= totalPages; page += 1) {
           const button = document.createElement('button')
@@ -289,88 +289,23 @@ const filterItems = projectCategories.map((category, index) => ({
   .projects-hero {
     position: relative;
     overflow: hidden;
-    padding-block: clamp(3.7rem, 6vw, 5.5rem) clamp(4.25rem, 7vw, 6.25rem);
     background:
       radial-gradient(
         ellipse at 78% 46%,
         rgb(244 233 223 / 76%),
         transparent 34%
       ),
-      #f1efeb;
-  }
-
-  .projects-hero::before,
-  .projects-hero::after {
-    position: absolute;
-    z-index: 0;
-    width: min(47vw, 620px);
-    aspect-ratio: 1;
-    border: 1px solid rgb(201 84 43 / 8%);
-    border-radius: 50%;
-    content: '';
-    pointer-events: none;
-  }
-
-  .projects-hero::before {
-    top: -65%;
-    right: -9%;
-    box-shadow: 0 0 0 40px rgb(201 84 43 / 2%);
-  }
-
-  .projects-hero::after {
-    right: 17%;
-    bottom: -84%;
-    width: min(33vw, 430px);
-    border-color: rgb(84 123 157 / 8%);
+      var(--surface-subtle);
   }
 
   .projects-hero-layout {
     position: relative;
     z-index: 1;
-    display: grid;
-    min-height: 510px;
-    grid-template-columns: minmax(0, 0.93fr) minmax(0, 1.07fr);
-    align-items: center;
-    gap: clamp(2rem, 5vw, 5rem);
-  }
-
-  .projects-hero-copy {
-    max-width: 620px;
-  }
-
-  .projects-hero-copy .eyebrow {
-    margin-bottom: 1.2rem;
-  }
-
-  .projects-hero h1 {
-    max-width: 650px;
-    margin-bottom: 1.35rem;
-    color: var(--color-navy);
-    font-size: var(--type-page-hero-size);
-    font-weight: var(--type-display-weight);
-    letter-spacing: var(--type-display-letter-spacing);
-    word-spacing: var(--type-display-word-spacing);
-    line-height: var(--type-page-hero-line-height);
   }
 
   .projects-hero h1 span,
   .portfolio-intro h2 span {
     color: var(--color-orange-dark);
-  }
-
-  .projects-hero-description {
-    max-width: 570px;
-    margin-bottom: 1.7rem;
-    color: #5c6878;
-    font-size: var(--type-body-size);
-    line-height: var(--type-body-line-height);
-  }
-
-  .projects-hero-actions {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1.2rem 1.7rem;
   }
 
   .projects-hero-actions .text-link {
@@ -402,24 +337,14 @@ const filterItems = projectCategories.map((category, index) => ({
     content: '';
   }
 
+  /* Collage frame at the shared hero visual ratio (same size as the other
+     feature heroes); the screens are placed in percentages of it. Smaller
+     breakpoints below set min-heights for narrow columns. */
   .projects-hero-visual {
     position: relative;
     min-width: 0;
-    min-height: 490px;
+    aspect-ratio: var(--hero-visual-ratio);
     isolation: isolate;
-  }
-
-  .hero-visual-halo {
-    position: absolute;
-    top: 16%;
-    left: 16%;
-    width: 72%;
-    aspect-ratio: 1;
-    border: 1px solid rgb(84 123 157 / 19%);
-    border-radius: 50%;
-    box-shadow:
-      0 0 0 28px rgb(84 123 157 / 3%),
-      0 0 0 68px rgb(201 84 43 / 3%);
   }
 
   .hero-screen {
@@ -493,10 +418,12 @@ const filterItems = projectCategories.map((category, index) => ({
     font-weight: 600;
   }
 
+  /* Top-right, above the main screen: at the bottom it sat under the
+     Zee Media screen. */
   .hero-visual-index {
     position: absolute;
+    top: 0.25rem;
     right: 0.2rem;
-    bottom: 0;
     color: #8e9298;
     font-size: 0.55rem;
     font-weight: 700;
@@ -647,16 +574,6 @@ const filterItems = projectCategories.map((category, index) => ({
   }
 
   @media (max-width: 1050px) {
-    .projects-hero-layout {
-      min-height: 455px;
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-      gap: 2rem;
-    }
-
-    .projects-hero h1 {
-      font-size: clamp(2.65rem, 5vw, 3.6rem);
-    }
-
     .projects-hero-visual {
       min-height: 420px;
     }
@@ -668,34 +585,12 @@ const filterItems = projectCategories.map((category, index) => ({
   }
 
   @media (max-width: 760px) {
-    .projects-hero {
-      padding-block: 3.5rem 4rem;
-    }
-
-    .projects-hero-layout {
-      min-height: 0;
-      grid-template-columns: 1fr;
-      gap: 0.7rem;
-    }
-
-    .projects-hero-copy {
-      max-width: 680px;
-    }
-
-    .projects-hero h1 {
-      max-width: 640px;
-      font-size: clamp(2.6rem, 8vw, 3.7rem);
-    }
-
     .projects-hero-meta {
       margin-top: 1.5rem;
     }
 
     .projects-hero-visual {
-      width: 100%;
-      max-width: 590px;
       min-height: clamp(320px, 69vw, 420px);
-      margin-inline: auto;
     }
 
     .hero-screen-main {
@@ -737,16 +632,6 @@ const filterItems = projectCategories.map((category, index) => ({
   }
 
   @media (max-width: 560px) {
-    .projects-hero h1 {
-      font-size: clamp(2.45rem, 10vw, 3.15rem);
-    }
-
-    .projects-hero-actions {
-      align-items: flex-start;
-      flex-direction: column;
-      gap: 0.95rem;
-    }
-
     .projects-hero-visual {
       min-height: 310px;
     }

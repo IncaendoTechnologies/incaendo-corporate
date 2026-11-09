@@ -64,7 +64,7 @@ const displayName = (name) => name.replace('-', '‑')
     <header class="industries-intro reveal">
       <p class="eyebrow">Industries we power</p>
       <h2 id="industries-heading">
-        Different industries. <span>One technology partner.</span>
+        Different Industries. <span>One Technology Partner.</span>
       </h2>
       <p>
         We turn complex industry challenges into connected, scalable digital
@@ -477,7 +477,12 @@ const displayName = (name) => name.replace('-', '‑')
     </ul>
 
     <p class="industries-cta">
-      <a class="text-link" href="/projects">
+      <a
+        class="text-link"
+        href="/projects"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         Explore Our Work{' '}
         <span class="link-arrow" aria-hidden="true">
           →
@@ -489,7 +494,7 @@ const displayName = (name) => name.replace('-', '‑')
 
 <style>
   .industries-section {
-    padding-block: clamp(4.5rem, 7.5vw, 7rem);
+    padding-block: var(--section-space-md);
     background: linear-gradient(180deg, #faf8f5 0%, var(--color-paper) 100%);
   }
 
@@ -522,8 +527,8 @@ const displayName = (name) => name.replace('-', '‑')
     max-width: 650px;
     margin: 0 auto;
     color: var(--color-body);
-    font-size: var(--type-body-size);
-    line-height: var(--type-body-line-height);
+    font-size: var(--type-intro-size);
+    line-height: var(--type-intro-line-height);
   }
 
   .industry-row {
@@ -601,7 +606,7 @@ const displayName = (name) => name.replace('-', '‑')
     margin: 0;
     color: var(--label-color);
     font-family: var(--font-heading);
-    font-size: clamp(1rem, 1.15vw, 1.12rem);
+    font-size: var(--type-card-title-size);
     font-weight: 600;
     letter-spacing: -0.015em;
     word-spacing: 0.015em;
@@ -799,9 +804,6 @@ const displayName = (name) => name.replace('-', '‑')
 
   /* Phone: two columns, icons kept prominent. */
   @media (max-width: 600px) {
-    .industries-section {
-      padding-block: 4rem;
-    }
 
     .industries-intro {
       margin-bottom: 2.5rem;
@@ -817,9 +819,6 @@ const displayName = (name) => name.replace('-', '‑')
       gap: 1rem;
     }
 
-    .industry-name {
-      font-size: 1rem;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
