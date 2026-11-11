@@ -1,0 +1,577 @@
+---
+/* Shared hero for the legal pages (Privacy Policy, Terms & Conditions).
+   Copy follows the shared hero system; the visual is a summary "document"
+   with three topic cards that explain what the page covers. Each page passes
+   its own wording and lucide icons, so both heroes stay in one place. */
+interface Card {
+  icon: any
+  title: string
+  text: string
+}
+
+interface Props {
+  headingId: string
+  titleLead: string
+  titleAccent: string
+  description: string
+  points: string[]
+  tags: string[]
+  doc: {
+    icon: any
+    label: string
+    title: string
+    summary: string
+    sections: number
+    updated: string
+    highlights: string[]
+    statusIcon: any
+    status: string
+  }
+  cards: [Card, Card, Card]
+}
+
+const { headingId, titleLead, titleAccent, description, points, tags, doc, cards } =
+  Astro.props
+const DocIcon = doc.icon
+const StatusIcon = doc.statusIcon
+---
+
+<section
+  class="legal-hero hero-system hero-system--split hero-system--feature"
+  aria-labelledby={headingId}
+>
+  <div class="legal-hero-ambient" aria-hidden="true"></div>
+
+  <div class="site-container legal-hero-wrap hero-system__inner">
+    <div class="legal-hero-copy hero-system__copy reveal">
+      <h1 id={headingId} class="hero-system__title">
+        {titleLead}<br />
+        <em class="hero-system__accent">{titleAccent}</em>
+      </h1>
+
+      <p class="hero-system__description">{description}</p>
+
+      <ul class="legal-hero-points">
+        {
+          points.map((point) => (
+            <li class="legal-hero-point">
+              <span class="point-bullet" aria-hidden="true" />
+              {point}
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="hero-system__actions">
+        <a class="button button-primary" href="/contact">Talk To Our Team</a>
+      </div>
+
+      <div class="hero-system__support">
+        <span class="hero-system__support-label" id={`${headingId}-topics`}
+          >Key Topics</span
+        >
+        <ul class="legal-hero-tags" aria-labelledby={`${headingId}-topics`}>
+          {tags.map((tag) => <li class="hero-tag">{tag}</li>)}
+        </ul>
+      </div>
+    </div>
+
+    <div
+      class="legal-visual hero-system__visual"
+      role="group"
+      aria-label={`${doc.title} at a glance`}
+    >
+      <div class="legal-visual-stage">
+        <div class="legal-doc-wrap">
+          <article class="legal-doc">
+            <header class="legal-doc-head">
+              <span class="legal-doc-icon" aria-hidden="true">
+                <DocIcon size={22} strokeWidth={1.8} />
+              </span>
+              <span class="legal-doc-label">{doc.label}</span>
+            </header>
+            <h2 class="legal-doc-title">{doc.title}</h2>
+            <p class="legal-doc-summary">{doc.summary}</p>
+            <p class="legal-doc-meta">
+              <span>{doc.sections} sections</span>
+              <span>{doc.updated}</span>
+            </p>
+            <ul class="legal-doc-list">
+              {doc.highlights.map((item) => <li>{item}</li>)}
+            </ul>
+            <p class="legal-doc-status">
+              <StatusIcon size={16} strokeWidth={2} aria-hidden="true" />
+              {doc.status}
+            </p>
+          </article>
+        </div>
+
+        {
+          cards.map((card, index) => {
+            const Icon = card.icon
+            return (
+              <div class={`legal-card legal-card--${index + 1}`} style={`--i: ${index}`}>
+                <span class="legal-card-icon" aria-hidden="true">
+                  <Icon size={18} strokeWidth={1.9} />
+                </span>
+                <span class="legal-card-body">
+                  <strong>{card.title}</strong>
+                  <span>{card.text}</span>
+                </span>
+              </div>
+            )
+          })
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ---------- Hero shell: warm paper with soft orange / blue light ---------- */
+  .legal-hero {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+      radial-gradient(
+        ellipse 60% 70% at 82% 38%,
+        color-mix(in srgb, var(--color-peach) 85%, transparent),
+        transparent 70%
+      ),
+      linear-gradient(180deg, var(--color-white) 0%, var(--color-paper) 100%);
+  }
+
+  .legal-hero-ambient {
+    position: absolute;
+    z-index: -1;
+    inset: -20% -10% auto auto;
+    width: min(60rem, 80vw);
+    aspect-ratio: 1;
+    background:
+      radial-gradient(
+        circle at 60% 40%,
+        color-mix(in srgb, var(--color-orange) 13%, transparent),
+        transparent 55%
+      ),
+      radial-gradient(
+        circle at 30% 70%,
+        color-mix(in srgb, var(--color-blue) 11%, transparent),
+        transparent 50%
+      );
+    filter: blur(20px);
+    animation: legal-ambient 18s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+
+  .legal-hero-wrap {
+    position: relative;
+  }
+
+  /* ---------- Copy ---------- */
+  .legal-hero-points {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.4rem;
+    margin: 0 0 clamp(1.5rem, 2.2vw, 2rem);
+    padding: 0;
+    list-style: none;
+  }
+
+  .legal-hero-point {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-ink);
+    font-size: 0.92rem;
+    font-weight: 550;
+  }
+
+  .point-bullet {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-orange);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-orange) 14%, transparent);
+  }
+
+  .legal-hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .hero-tag {
+    padding: 0.34rem 0.8rem;
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-white) 75%, transparent);
+    color: var(--color-body);
+    font-size: 0.76rem;
+    font-weight: 550;
+    transition:
+      border-color var(--duration-fast) ease,
+      color var(--duration-fast) ease,
+      background var(--duration-fast) ease;
+  }
+
+  .hero-tag:hover {
+    border-color: color-mix(in srgb, var(--color-orange) 40%, transparent);
+    background: var(--color-white);
+    color: var(--color-orange-dark);
+  }
+
+  /* ---------- Visual stage ----------
+     A two-column composition: the policy summary on the left, the three
+     topic cards stacked on the right, joined by animated dashed links. In a
+     narrow column (tablet split, mobile) it becomes one stacked list, so
+     nothing overlaps at any width. */
+  .legal-visual {
+    container-type: inline-size;
+  }
+
+  .legal-visual-stage {
+    --legal-gap: clamp(1.75rem, 3.6vw, 3rem);
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+    align-content: center;
+    align-items: center;
+    gap: 0.95rem var(--legal-gap);
+    aspect-ratio: var(--hero-visual-ratio);
+    padding: clamp(1.25rem, 3.2vw, 2.5rem);
+    border: 1px solid color-mix(in srgb, var(--color-navy) 7%, transparent);
+    border-radius: var(--radius-large);
+    background:
+      radial-gradient(
+        circle at 30% 50%,
+        color-mix(in srgb, var(--color-orange) 11%, transparent),
+        transparent 42%
+      ),
+      radial-gradient(
+          circle,
+          color-mix(in srgb, var(--color-navy) 9%, transparent) 1px,
+          transparent 1.5px
+        )
+        0 0 / 22px 22px,
+      linear-gradient(
+        150deg,
+        var(--color-white) 0%,
+        var(--color-paper) 55%,
+        var(--color-peach) 100%
+      );
+    box-shadow: var(--shadow-soft);
+  }
+
+  /* Central document */
+  .legal-doc-wrap {
+    grid-row: 1 / span 3;
+    position: relative;
+    z-index: 1;
+    animation: legal-rise 700ms var(--ease-out) 150ms both;
+  }
+
+  .legal-doc {
+    padding: clamp(1rem, 1.8vw, 1.45rem);
+    border: 1px solid var(--color-line);
+    border-radius: 18px;
+    background: var(--color-white);
+    box-shadow:
+      0 30px 60px -18px color-mix(in srgb, var(--color-navy) 22%, transparent),
+      0 0 0 6px color-mix(in srgb, var(--color-white) 55%, transparent);
+    animation: legal-float 7s ease-in-out 900ms infinite;
+  }
+
+  .legal-doc-head {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .legal-doc-icon {
+    display: grid;
+    width: 2.4rem;
+    height: 2.4rem;
+    flex: none;
+    place-items: center;
+    border-radius: 12px;
+    background: linear-gradient(140deg, var(--color-orange), var(--color-orange-dark));
+    box-shadow: 0 8px 18px -6px color-mix(in srgb, var(--color-orange) 60%, transparent);
+    color: var(--color-white);
+  }
+
+  .legal-doc-label {
+    color: var(--color-orange-dark);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .legal-doc-title {
+    margin: 0 0 0.35rem;
+    color: var(--color-navy);
+    font-family: var(--font-heading);
+    font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .legal-doc-summary {
+    margin: 0 0 0.6rem;
+    color: var(--color-body);
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .legal-doc-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem 0.9rem;
+    margin: 0 0 0.75rem;
+    color: var(--color-muted);
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  .legal-doc-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    white-space: nowrap;
+  }
+
+  .legal-doc-meta span + span::before {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--color-orange);
+    content: '';
+  }
+
+  .legal-doc-list {
+    display: grid;
+    gap: 0.4rem;
+    margin: 0 0 0.85rem;
+    padding: 0.75rem 0 0;
+    border-top: 1px solid var(--color-line);
+    list-style: none;
+  }
+
+  .legal-doc-list li {
+    position: relative;
+    padding-left: 1.05rem;
+    color: var(--color-ink);
+    font-size: 0.76rem;
+    font-weight: 550;
+    line-height: 1.35;
+  }
+
+  .legal-doc-list li::before {
+    position: absolute;
+    top: 0.42em;
+    left: 0;
+    width: 0.45rem;
+    height: 0.45rem;
+    border: 1.5px solid var(--color-orange);
+    border-radius: 50%;
+    content: '';
+  }
+
+  .legal-doc-status {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0.5rem 0.7rem;
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--color-green) 11%, transparent);
+    color: var(--color-green);
+    font-size: 0.72rem;
+    font-weight: 650;
+    line-height: 1.3;
+  }
+
+  .legal-doc-status :global(svg) {
+    flex: none;
+  }
+
+  /* Supporting topic cards */
+  .legal-card {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.85rem 0.95rem;
+    border: 1px solid var(--color-line);
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--color-white) 92%, transparent);
+    box-shadow: 0 16px 36px -14px
+      color-mix(in srgb, var(--color-navy) 22%, transparent);
+    animation: legal-rise 600ms var(--ease-out) calc(450ms + var(--i) * 140ms)
+      both;
+    transition:
+      translate 260ms var(--ease-out),
+      border-color 260ms ease,
+      box-shadow 260ms ease;
+  }
+
+  /* Dashed link from the document to each card */
+  .legal-card::before {
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    width: calc(var(--legal-gap) + var(--legal-card-offset, 0px));
+    height: 1.5px;
+    background: repeating-linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-orange) 45%, transparent) 0 5px,
+      transparent 5px 10px
+    );
+    animation: legal-dash 1.6s linear infinite;
+    content: '';
+    pointer-events: none;
+  }
+
+  .legal-card--2 {
+    --legal-card-offset: clamp(0.75rem, 2vw, 1.5rem);
+    margin-left: var(--legal-card-offset);
+  }
+
+  .legal-card:hover {
+    translate: 0 -4px;
+    border-color: color-mix(in srgb, var(--color-orange) 45%, transparent);
+    box-shadow: 0 22px 44px -16px
+      color-mix(in srgb, var(--color-orange) 38%, transparent);
+  }
+
+  .legal-card-icon {
+    display: grid;
+    width: 2.1rem;
+    height: 2.1rem;
+    flex: none;
+    place-items: center;
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--color-orange) 11%, transparent);
+    color: var(--color-orange-dark);
+    transition:
+      background 260ms ease,
+      color 260ms ease;
+  }
+
+  .legal-card--2 .legal-card-icon {
+    background: color-mix(in srgb, var(--color-blue) 13%, transparent);
+    color: var(--color-blue);
+  }
+
+  .legal-card:hover .legal-card-icon {
+    background: var(--color-orange);
+    color: var(--color-white);
+  }
+
+  .legal-card-body {
+    display: grid;
+    gap: 0.18rem;
+    min-width: 0;
+  }
+
+  .legal-card-body strong {
+    color: var(--color-navy);
+    font-family: var(--font-heading);
+    font-size: 0.84rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .legal-card-body span {
+    color: var(--color-body);
+    font-size: 0.72rem;
+    line-height: 1.45;
+  }
+
+  /* ---------- Motion ---------- */
+  @keyframes legal-rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes legal-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  @keyframes legal-dash {
+    to {
+      background-position: 10px 0;
+    }
+  }
+
+  @keyframes legal-ambient {
+    from {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 0.85;
+    }
+    to {
+      transform: translate3d(-4%, 6%, 0) scale(1.08);
+      opacity: 1;
+    }
+  }
+
+  /* ---------- Responsive ---------- */
+  @container (max-width: 34rem) {
+    .legal-visual-stage {
+      grid-template-columns: minmax(0, 1fr);
+      aspect-ratio: auto;
+      gap: 0.75rem;
+    }
+
+    .legal-doc-wrap {
+      grid-row: auto;
+      margin-bottom: 0.4rem;
+    }
+
+    .legal-card--2 {
+      margin-left: 0;
+    }
+
+    .legal-card::before {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .legal-hero-ambient,
+    .legal-card::before,
+    .legal-doc-wrap,
+    .legal-doc,
+    .legal-card {
+      animation: none;
+    }
+
+    .legal-card,
+    .legal-card-icon,
+    .hero-tag {
+      transition: none;
+    }
+
+    .legal-card:hover {
+      translate: none;
+    }
+  }
+</style>

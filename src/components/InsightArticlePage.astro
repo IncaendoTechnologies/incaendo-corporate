@@ -24,16 +24,15 @@ const relatedArticles = articles
 ---
 
 <div class="insight-article-page">
-  <header class="article-intro">
-    <div class="site-container article-intro-inner">
+  <header class="article-intro hero-system hero-system--article">
+    <div class="site-container article-intro-inner hero-system__inner">
       <nav class="article-breadcrumbs" aria-label="Breadcrumb">
         <a href="/insights/">Insights</a>
         <span aria-hidden="true">/</span>
         <span>{article.category}</span>
       </nav>
-      <p class="eyebrow">{article.category}</p>
-      <h1>{article.title}</h1>
-      <p class="article-deck">{article.excerpt}</p>
+      <h1 class="hero-system__title">{article.title}</h1>
+      <p class="article-deck hero-system__description">{article.excerpt}</p>
       <div class="article-meta" aria-label="Article details">
         {article.author ? (
           <>
@@ -52,7 +51,7 @@ const relatedArticles = articles
     </div>
   </header>
 
-  <main class="article-main">
+  <div class="article-main">
     <div class="site-container">
       <figure class="article-cover reveal">
         {article.image ? (
@@ -86,7 +85,7 @@ const relatedArticles = articles
             In this article
           </p>
           <ol>
-            {article.sections.map((section, index) => (
+            {article.sections.map((section) => (
               <li>
                 <a href={`#${slugify(section.heading)}`}>{section.heading}</a>
               </li>
@@ -232,17 +231,17 @@ const relatedArticles = articles
         </article>
       </div>
     </div>
-  </main>
+  </div>
 
   <section
     class="article-related section"
     aria-labelledby="related-insights-heading"
   >
     <div class="site-container">
-      <div class="article-related-heading">
+      <div class="article-related-heading reveal">
         <div>
           <p class="eyebrow">Keep exploring</p>
-          <h2 id="related-insights-heading">More ideas to consider.</h2>
+          <h2 id="related-insights-heading">More Ideas to Consider.</h2>
         </div>
         <a class="article-back-link" href="/insights/">
           Browse all insights{' '}
@@ -251,7 +250,7 @@ const relatedArticles = articles
           </span>
         </a>
       </div>
-      <div class="article-related-grid">
+      <div class="article-related-grid reveal" data-reveal-stagger>
         {relatedArticles.map((relatedArticle) => (
           <InsightCard article={relatedArticle} variant="related" />
         ))}
@@ -260,11 +259,11 @@ const relatedArticles = articles
   </section>
 
   <section class="article-closing" aria-labelledby="article-closing-heading">
-    <div class="site-container article-closing-inner">
+    <div class="site-container article-closing-inner reveal">
       <div>
         <p class="eyebrow eyebrow-light">Put an idea into context</p>
         <h2 id="article-closing-heading">
-          Have a challenge you’re working through?
+          Have a Challenge You’re Working Through?
         </h2>
       </div>
       <a class="button button-light" href="/contact">
@@ -276,8 +275,7 @@ const relatedArticles = articles
 
 <style>
   .article-intro {
-    padding-block: 3.3rem 2.5rem;
-    background: #f1efeb;
+    background: var(--surface-subtle);
   }
 
   .article-intro-inner {
@@ -288,7 +286,7 @@ const relatedArticles = articles
     display: flex;
     align-items: center;
     gap: 0.55rem;
-    margin-bottom: 2.6rem;
+    margin-bottom: 1rem;
     color: #828b97;
     font-size: 0.69rem;
   }
@@ -298,26 +296,25 @@ const relatedArticles = articles
     font-weight: 650;
   }
 
-  .article-intro .eyebrow {
-    margin-bottom: 0.75rem;
-  }
-
   .article-intro h1 {
     max-width: 880px;
-    margin: 0 0 1rem;
-    font-size: var(--type-page-title-size);
-    font-weight: var(--type-display-weight);
-    letter-spacing: var(--type-display-letter-spacing);
-    word-spacing: var(--type-display-word-spacing);
-    line-height: var(--type-display-line-height);
+    margin: 0 0 1.15rem;
+    font-family: var(--font-heading);
+    font-size: var(--type-hero-h1-size);
+    font-weight: var(--type-hero-h1-weight);
+    letter-spacing: var(--type-hero-h1-letter-spacing);
+    word-spacing: var(--type-hero-h1-word-spacing);
+    line-height: var(--type-hero-h1-line-height);
   }
 
   .article-deck {
     max-width: 760px;
     margin: 0;
-    color: #5d6878;
-    font-size: var(--type-lead-size);
-    line-height: 1.55;
+    font-family: var(--font-body);
+    color: var(--color-body);
+    font-size: var(--type-hero-desc-size);
+    font-weight: var(--type-hero-desc-weight);
+    line-height: var(--type-hero-desc-line-height);
   }
 
   .article-meta {
@@ -376,7 +373,7 @@ const relatedArticles = articles
 
   .article-toc .eyebrow {
     margin-bottom: 0.8rem;
-    font-size: 0.61rem;
+    font-size: var(--type-eyebrow-size);
   }
 
   .article-toc ol {
@@ -547,7 +544,7 @@ const relatedArticles = articles
   }
 
   .article-related {
-    background: #f1efeb;
+    background: var(--surface-subtle);
   }
 
   .article-related-heading {
@@ -618,13 +615,13 @@ const relatedArticles = articles
 
   @media (max-width: 600px) {
     .article-intro {
-      padding-block: 2.5rem 2rem;
+      padding-block: var(--hero-space-top) 2rem;
     }
     .article-breadcrumbs {
-      margin-bottom: 1.8rem;
+      margin-bottom: 1.25rem;
     }
     .article-intro h1 {
-      font-size: clamp(2.5rem, 10vw, 3.45rem);
+      font-size: clamp(2.15rem, 8.5vw, 2.75rem);
     }
     .article-cover {
       border-radius: var(--radius-medium);

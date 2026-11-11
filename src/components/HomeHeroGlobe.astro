@@ -53,7 +53,7 @@ const toScreen = (v, alt = 1) => ({
 
 // Surface dots, evenly spaced, front hemisphere only; depth drives size and
 // opacity to give the sphere volume.
-const dots = []
+const dots = Array.from({ length: 0 }, () => ({ x: 0, y: 0, r: 0, o: 0 }))
 for (let lat = -84; lat <= 84; lat += 7) {
   const count = Math.max(1, Math.round((360 * Math.cos(rad(lat))) / 7))
   for (let i = 0; i < count; i++) {

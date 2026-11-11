@@ -6,13 +6,13 @@ const total = String(aiAgents.length).padStart(2, '0')
 
 <section class="ai-agents" aria-labelledby="ai-agents-title">
   <div class="site-container">
-    <div class="ai-agents-heading">
+    <div class="ai-agents-heading reveal">
       <div>
         <p class="eyebrow">AI AGENTS IN ACTION</p>
         <h2 id="ai-agents-title">
-          From intelligent agents
+          Meet the <span>AI Agents</span>
           <br />
-          <span>to real business workflows.</span>
+          We’ve Built for <span>Real-World Business</span> Needs.
         </h2>
       </div>
       <div class="ai-agents-intro">
@@ -36,6 +36,7 @@ const total = String(aiAgents.length).padStart(2, '0')
     class="ai-agents-track"
     style={`--stack-count: ${aiAgents.length}`}
     data-stack
+    data-entrance-exclude
     data-stack-pin="(min-width: 801px) and (min-height: 700px)"
   >
     <div class="ai-agents-sticky">
@@ -466,7 +467,7 @@ const total = String(aiAgents.length).padStart(2, '0')
   }
   @media (max-width: 560px) {
     .ai-agents h2 {
-      font-size: clamp(1.9rem, 8vw, 2.45rem);
+      font-size: var(--type-section-size);
     }
     .ai-agent-copy {
       padding: 0.1rem 0.25rem 0.3rem;

@@ -1,0 +1,1713 @@
+---
+import StandaloneLayout from '../../layouts/StandaloneLayout.astro'
+import { Image } from 'astro:assets'
+import logo from '../../assets/incaendo-logo.png'
+import heroDashboard from '../../assets/Modern Tech Dashboard with Devices and Metrics.png'
+import {
+  Calendar,
+  Users,
+  UserCheck,
+  FileText,
+  Receipt,
+  BarChart3,
+  ShieldCheck,
+  Network,
+  Activity,
+  Building2,
+  CheckCircle2,
+  ArrowRight,
+  Sparkles,
+  Check,
+  ChevronRight,
+  HeartPulse,
+  Clock,
+  Layers,
+} from 'lucide-react'
+
+// 4 Healthcare Solutions (Clinics, Individual hospitals, Multi-hospital networks, Enterprise)
+const solutions = [
+  {
+    id: 'clinic-management',
+    badge: 'Clinics & Practices',
+    title: 'Clinic Management',
+    headline: 'Fast, paperless outpatient care and billing.',
+    description:
+      'Eliminate physical appointment diaries and long waiting times. NIRVAN provides rapid patient registration, intuitive doctor e-prescriptions, SMS appointment reminders, and automated end-of-day billing reconciliation.',
+    points: [
+      '1-minute patient check-in & digital token system',
+      'Doctor e-prescriptions with diagnosis quick-picks',
+      'Automated SMS & WhatsApp appointment notifications',
+      'Instant OPD invoice generation & daily revenue summary',
+    ],
+    icon: Activity,
+  },
+  {
+    id: 'hospital-management',
+    badge: 'Single Hospitals',
+    title: 'Hospital Management',
+    headline: 'Unified inpatient, OPD, ward, and lab workflows.',
+    description:
+      'Connect every department in your hospital—from admissions and nursing stations to pharmacy and diagnostic labs—ensuring uninterrupted clinical handover, accurate bed tracking, and zero lost patient data.',
+    points: [
+      'Real-time bed allocation, occupancy, and transfer tracking',
+      'Integrated pharmacy dispensing and digital requisition',
+      'Laboratory analyzer interface and rapid test reporting',
+      'Consolidated discharge summary & insurance / TPA billing',
+    ],
+    icon: Building2,
+  },
+  {
+    id: 'multi-hospital-management',
+    badge: 'Healthcare Networks',
+    title: 'Multi-Hospital Management',
+    headline: 'Centralized governance across all hospital branches.',
+    description:
+      'Standardize clinical guidelines, share specialist rosters across locations, consolidate pharmacy bulk procurement, and monitor network-wide occupancy metrics through an executive command center.',
+    points: [
+      'Universal Patient ID (UHID) synchronized across branches',
+      'Multi-branch doctor duty scheduling and telemedicine slots',
+      'Consolidated pharmaceutical inventory & supply chain',
+      'Cross-branch financial performance & KPI benchmarking',
+    ],
+    icon: Network,
+  },
+  {
+    id: 'enterprise-healthcare',
+    badge: 'Health Systems & Institutions',
+    title: 'Enterprise Healthcare Operations',
+    headline: 'Custom integrations, clinical compliance, and dedicated scale.',
+    description:
+      'Built for large hospital institutions requiring custom ERP links, HL7/FHIR EHR interoperability, PACS/DICOM radiology integration, enterprise-grade uptime SLAs, and tailored on-premise or private cloud infrastructure.',
+    points: [
+      'HL7 / FHIR compliant health data interoperability',
+      'PACS / DICOM medical imaging system connectivity',
+      'Custom ERP, HRMS, and clinical laboratory interfaces',
+      'Enterprise SLA, 24/7 technical support, and dedicated rollout',
+    ],
+    icon: Layers,
+  },
+]
+
+// 8 Core Features explicitly required
+const coreFeatures = [
+  {
+    icon: Users,
+    title: 'Patient Management',
+    description:
+      'Comprehensive demographic profiling, patient history lookup, unique UHID allocation, and seamless OPD/IPD intake workflows.',
+  },
+  {
+    icon: Calendar,
+    title: 'Appointment Scheduling',
+    description:
+      'Multi-channel appointment booking, doctor calendar synchronization, token queue management, and automated patient reminders.',
+  },
+  {
+    icon: UserCheck,
+    title: 'Doctor & Staff Management',
+    description:
+      'Consultation slot configuration, surgeon and clinician shift rosters, department assignments, and on-call availability tracking.',
+  },
+  {
+    icon: FileText,
+    title: 'Electronic Records / Patient History',
+    description:
+      'Secure longitudinal electronic medical records, diagnostic attachment storage, allergy warnings, and past prescription logs.',
+  },
+  {
+    icon: Receipt,
+    title: 'Billing & Payments',
+    description:
+      'Consolidated OPD and IPD invoicing, diagnostic fee tracking, automated TPA/insurance claims, and split payment reconciliations.',
+  },
+  {
+    icon: BarChart3,
+    title: 'Reports & Analytics',
+    description:
+      'Operational dashboards tracking bed occupancy, department revenue, clinician consultation volumes, and audit readiness.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Role-Based Access',
+    description:
+      'Granular permission tiers for doctors, nurses, receptionists, billing officers, and system administrators to maintain data privacy.',
+  },
+  {
+    icon: Building2,
+    title: 'Multi-Location Management',
+    description:
+      'Oversee multiple hospital branches, satellite clinics, and diagnostic labs from one central dashboard with shared patient records.',
+  },
+]
+
+// 4 Benefits explicitly required
+const benefits = [
+  {
+    icon: Activity,
+    title: 'Simplify Daily Healthcare Operations',
+    description:
+      'Bring front desk, doctors, nursing staff, pharmacy, and billing counters into one synchronized workflow. Eliminate handoff errors and communication gaps between clinical and administrative teams.',
+    metric: '35% faster',
+    metricLabel: 'patient check-in and intake cycle',
+  },
+  {
+    icon: Clock,
+    title: 'Reduce Manual Work',
+    description:
+      'Replace physical registers, paperwork, and separate spreadsheets with automated digital entries. Clinicians create digital prescriptions faster, and administrators generate instant billing statements.',
+    metric: '60% reduction',
+    metricLabel: 'in manual administrative paperwork',
+  },
+  {
+    icon: HeartPulse,
+    title: 'Improve Patient & Appointment Management',
+    description:
+      'Cut waiting hall overcrowding with organized token queues and SMS alerts. Provide patients with easy slot booking, timely follow-up reminders, and rapid digital access to their medical files.',
+    metric: '40% fewer',
+    metricLabel: 'missed appointments and no-shows',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Centralize Hospital Operations',
+    description:
+      'Gain real-time visibility into bed occupancy, pharmacy inventory levels, outpatient traffic, and daily revenue streams from a single executive dashboard across one or multiple branches.',
+    metric: '100% visibility',
+    metricLabel: 'across clinical and financial data',
+  },
+]
+
+// Pricing plans (Dummy pricing clearly labeled as provisional)
+const pricingPlans = [
+  {
+    name: 'Clinic Plan',
+    tier: 'Clinics & Poly-Clinics',
+    description:
+      'Essential outpatient appointment scheduling, electronic records, and billing for medical practices.',
+    monthlyPrice: '₹2,499',
+    unit: 'per clinic / month (provisional sample)',
+    highlights: [
+      'Up to 3 doctors & 5 staff users',
+      'Patient registration & UHID generation',
+      'Appointment calendar & SMS alerts',
+      'Digital e-prescriptions & OPD billing',
+      'Daily cash & revenue reports',
+      'Standard email & chat assistance',
+    ],
+    popular: false,
+    cta: 'Book a Demo',
+  },
+  {
+    name: 'Hospital Plan',
+    tier: 'Single & Specialty Hospitals',
+    description:
+      'Comprehensive inpatient, outpatient, bed allocation, pharmacy, and diagnostic lab management.',
+    monthlyPrice: '₹9,999',
+    unit: 'per hospital / month (provisional sample)',
+    highlights: [
+      'Up to 50 beds & 25 doctor accounts',
+      'All Clinic Plan features included',
+      'Ward, bed & nursing station coordination',
+      'Pharmacy stock & lab requisition workflows',
+      'Insurance & TPA claim processing',
+      'Dedicated onboarding & staff training',
+    ],
+    popular: true,
+    cta: 'Book a Demo',
+  },
+  {
+    name: 'Enterprise Plan',
+    tier: 'Hospital Networks & Health Systems',
+    description:
+      'Multi-branch oversight, custom hospital ERP/PACS integrations, and enterprise uptime guarantees.',
+    monthlyPrice: 'Custom',
+    unit: 'tailored to network scope (provisional sample)',
+    highlights: [
+      'Unlimited beds, doctors & hospital branches',
+      'All Hospital Plan features included',
+      'Centralized multi-location administration',
+      'Custom laboratory analyzer & PACS integrations',
+      'HL7/FHIR compliant data connectors',
+      'Dedicated 24/7 SLA & private cloud/on-premise deployment',
+    ],
+    popular: false,
+    cta: 'Talk to Our Team',
+  },
+]
+
+const pageDescription =
+  'Simplify healthcare operations with one connected platform for clinics, hospitals, and growing healthcare networks. Patient management, appointment scheduling, billing, and clinical workflows.'
+
+// Pricing shown on this page is marked provisional, so no `offers` are
+// published in structured data until final plans are approved.
+const softwareSchema = [
+  {
+    '@type': 'SoftwareApplication',
+    '@id': new URL('/products/nirvan/#software', Astro.site).href,
+    name: 'NIRVAN',
+    applicationCategory: 'BusinessApplication',
+    description: pageDescription,
+    url: new URL('/products/nirvan/', Astro.site).href,
+    featureList: coreFeatures.map((feature) => feature.title),
+    publisher: { $ref: 'organization' },
+    mainEntityOfPage: { $ref: 'webPage' },
+  },
+]
+---
+
+<StandaloneLayout
+  title="NIRVAN | Healthcare CRM & Hospital Management Platform"
+  description={pageDescription}
+  image={heroDashboard}
+  imageAlt="NIRVAN Healthcare CRM and Hospital Management Dashboard"
+  schema={softwareSchema}
+>
+  <!-- Dedicated Standalone Product Navigation (No Corporate Header) -->
+  <header class="nirvan-nav">
+    <div class="site-container nirvan-nav-inner">
+      <div class="nirvan-brand">
+        <a href="/" class="nirvan-logo-link" aria-label="Incaendo corporate home">
+          <img
+            src={logo.src}
+            alt="Incaendo Technologies"
+            width={logo.width}
+            height={logo.height}
+            class="nirvan-logo-img"
+          />
+        </a>
+        <span class="nirvan-brand-sep" aria-hidden="true"></span>
+        <a href="/products/nirvan" class="nirvan-product-badge">
+          <span class="nirvan-product-name">NIRVAN</span>
+          <span class="nirvan-product-pill">Healthcare SaaS</span>
+        </a>
+      </div>
+
+      <nav class="nirvan-menu" aria-label="NIRVAN sections">
+        <a href="#solutions" class="nirvan-menu-link">Solutions</a>
+        <a href="#features" class="nirvan-menu-link">Core Features</a>
+        <a href="#benefits" class="nirvan-menu-link">Benefits</a>
+        <a href="#pricing" class="nirvan-menu-link">Pricing</a>
+      </nav>
+
+      <div class="nirvan-nav-actions">
+        <a
+          href="/contact#project-inquiry"
+          class="button button-primary nirvan-nav-cta"
+          data-open-contact-modal
+        >
+          <span>Book a Demo</span>
+          <ArrowRight size={15} aria-hidden="true" />
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" class="nirvan-page">
+    <!-- 1. Hero Section -->
+    <section class="nirvan-hero hero-system hero-system--split" aria-labelledby="nirvan-hero-title">
+      <div class="site-container nirvan-hero-grid hero-system__inner">
+          <div class="nirvan-hero-copy hero-system__copy reveal">
+            <h1 id="nirvan-hero-title" class="hero-system__title">
+              Connected Healthcare. <span class="hero-system__accent">Smarter Operations.</span>
+            </h1>
+
+            <p class="nirvan-hero-lead hero-system__description">
+              NIRVAN brings patient records, doctor scheduling, ward workflows,
+              pharmacy orders, billing, and multi-location governance into one
+              connected platform. Purpose-built for clinics, single hospitals,
+              and expanding healthcare networks.
+            </p>
+
+            <div class="nirvan-hero-actions hero-system__actions">
+              <a
+                href="/contact#project-inquiry"
+                class="button button-primary nirvan-btn-hero"
+                data-open-contact-modal
+              >
+                <span>Book a Demo</span>
+                <ArrowRight size={16} aria-hidden="true" />
+              </a>
+              <a href="#features" class="button button-secondary nirvan-btn-secondary">
+                Explore Features
+              </a>
+            </div>
+
+            <div class="nirvan-hero-meta">
+              <div class="nirvan-meta-item">
+                <CheckCircle2 size={16} className="nirvan-meta-check" />
+                <span>Designed for Clinics & Hospital Networks</span>
+              </div>
+              <div class="nirvan-meta-item">
+                <CheckCircle2 size={16} className="nirvan-meta-check" />
+                <span>Role-Based Security & Compliance</span>
+              </div>
+              <div class="nirvan-meta-item">
+                <CheckCircle2 size={16} className="nirvan-meta-check" />
+                <span>Cloud or On-Premise Ready</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="nirvan-hero-visual hero-system__visual reveal">
+            <div class="nirvan-preview-wrapper">
+              <div class="nirvan-preview-frame">
+                <div class="nirvan-preview-chrome">
+                  <span class="nirvan-chrome-dot is-red"></span>
+                  <span class="nirvan-chrome-dot is-yellow"></span>
+                  <span class="nirvan-chrome-dot is-green"></span>
+                  <span class="nirvan-chrome-url">nirvan.incaendo.com/dashboard/operations</span>
+                </div>
+                <Image
+                  src={heroDashboard}
+                  alt="NIRVAN Healthcare CRM and Hospital Management Dashboard"
+                  class="nirvan-preview-image"
+                  widths={[480, 720, 1080]}
+                  sizes="(max-width: 991px) 100vw, 560px"
+                  loading="eager"
+                  decoding="async"
+                />
+              </div>
+
+              <!-- Live Metric Chips (Illustrative) -->
+              <div class="nirvan-float-chip chip-top">
+                <span class="chip-dot is-pulse"></span>
+                <div>
+                  <strong>Active Inpatients</strong>
+                  <span>84 / 96 Beds (88% Occupancy)</span>
+                </div>
+              </div>
+
+              <div class="nirvan-float-chip chip-bottom">
+                <div class="chip-icon-box">
+                  <Activity size={18} />
+                </div>
+                <div>
+                  <strong>Today's Consultations</strong>
+                  <span>342 OPD Visits &bull; 98.4% on schedule</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <!-- 2. Healthcare Solutions Section -->
+    <section class="nirvan-section nirvan-solutions-section" id="solutions" aria-labelledby="solutions-title">
+      <div class="site-container">
+        <div class="section-intro reveal">
+          <p class="section-eyebrow">Healthcare Solutions</p>
+          <h2 id="solutions-title">
+            Tailored for Every Stage of <span>Healthcare Delivery</span>
+          </h2>
+          <p class="section-lead">
+            Whether you operate a standalone private clinic, a multispecialty hospital,
+            or an expansive regional hospital group, NIRVAN scales cleanly with your clinical requirements.
+          </p>
+        </div>
+
+        <div class="nirvan-solutions-grid reveal" data-reveal-stagger>
+          {solutions.map((item) => {
+            const Icon = item.icon
+            return (
+              <article class="nirvan-solution-card">
+                <div class="solution-card-top">
+                  <div class="solution-icon-wrap" aria-hidden="true">
+                    <Icon size={24} />
+                  </div>
+                  <span class="solution-badge">{item.badge}</span>
+                </div>
+
+                <h3 class="solution-title">{item.title}</h3>
+                <p class="solution-headline">{item.headline}</p>
+                <p class="solution-desc">{item.description}</p>
+
+                <div class="solution-divider"></div>
+
+                <ul class="solution-points">
+                  {item.points.map((pt) => (
+                    <li>
+                      <Check size={15} className="point-check" aria-hidden="true" />
+                      <span>{pt}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div class="solution-card-foot">
+                  <a
+                    href="/contact#project-inquiry"
+                    class="solution-cta-link"
+                    data-open-contact-modal
+                  >
+                    Request demo for {item.title} <ChevronRight size={14} aria-hidden="true" />
+                  </a>
+                </div>
+              </article>
+            )
+          })}
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Core Features Section -->
+    <section class="nirvan-section nirvan-features-section" id="features" aria-labelledby="features-title">
+      <div class="site-container">
+        <div class="section-intro reveal">
+          <p class="section-eyebrow">Comprehensive Capabilities</p>
+          <h2 id="features-title">
+            8 Core Features Built for <span>Clinical Excellence</span>
+          </h2>
+          <p class="section-lead">
+            Everything your clinical, front-desk, pharmacy, and administrative teams need to operate in harmony.
+          </p>
+        </div>
+
+        <div class="nirvan-features-grid reveal" data-reveal-stagger>
+          {coreFeatures.map((feat, index) => {
+            const Icon = feat.icon
+            return (
+              <article class="nirvan-feature-card">
+                <div class="feature-card-header">
+                  <span class="feature-card-icon" aria-hidden="true">
+                    <Icon size={22} />
+                  </span>
+                  <span class="feature-index">0{index + 1}</span>
+                </div>
+                <h3 class="feature-title">{feat.title}</h3>
+                <p class="feature-desc">{feat.description}</p>
+              </article>
+            )
+          })}
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Benefits Section -->
+    <section class="nirvan-section nirvan-benefits-section" id="benefits" aria-labelledby="benefits-title">
+      <div class="site-container">
+        <div class="section-intro reveal">
+          <p class="section-eyebrow">Measurable Impact</p>
+          <h2 id="benefits-title">
+            Why Healthcare Organizations <span>Choose NIRVAN</span>
+          </h2>
+          <p class="section-lead">
+            Eliminate operational bottlenecks, minimize administrative fatigue, and deliver higher standards of patient care.
+          </p>
+        </div>
+
+        <div class="nirvan-benefits-grid reveal" data-reveal-stagger>
+          {benefits.map((benefit) => {
+            const Icon = benefit.icon
+            return (
+              <article class="nirvan-benefit-card">
+                <div class="benefit-card-top">
+                  <div class="benefit-icon" aria-hidden="true">
+                    <Icon size={22} />
+                  </div>
+                  <div class="benefit-stat-box">
+                    <span class="benefit-metric">{benefit.metric}</span>
+                    <span class="benefit-metric-label">{benefit.metricLabel}</span>
+                  </div>
+                </div>
+
+                <h3 class="benefit-title">{benefit.title}</h3>
+                <p class="benefit-desc">{benefit.description}</p>
+              </article>
+            )
+          })}
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Pricing Section (Dummy provisional plans with prominent disclaimer) -->
+    <section class="nirvan-section nirvan-pricing-section" id="pricing" aria-labelledby="pricing-title">
+      <div class="site-container">
+        <div class="section-intro reveal">
+          <p class="section-eyebrow">Provisional Pricing Plans</p>
+          <h2 id="pricing-title">
+            Simple, Transparent Plans for <span>Every Facility</span>
+          </h2>
+          <p class="section-lead">
+            Flexible deployment configurations engineered to support outpatient medical practices, standalone hospitals, and large health systems.
+          </p>
+        </div>
+
+        <!-- Sample Pricing Disclaimer Banner -->
+        <div class="nirvan-pricing-disclaimer reveal" role="note" aria-label="Provisional pricing notice">
+          <div class="disclaimer-icon" aria-hidden="true">
+            <Sparkles size={20} />
+          </div>
+          <div class="disclaimer-content">
+            <strong>Provisional Demonstration Pricing &bull; Subject to Final Confirmation</strong>
+            <p>
+              The figures below are illustrative sample tiers designed for feature evaluation and demonstration purposes.
+              Final subscription and rollout pricing is determined based on facility bed capacity, active doctor accounts, and specific hospital ERP or LIS integrations.
+            </p>
+          </div>
+        </div>
+
+        <div class="nirvan-pricing-grid reveal" data-reveal-stagger>
+          {pricingPlans.map((plan) => (
+            <article class={`nirvan-pricing-card ${plan.popular ? 'is-popular' : ''}`}>
+              {plan.popular && <span class="pricing-badge-popular">Recommended for Hospitals</span>}
+
+              <div class="pricing-card-header">
+                <span class="pricing-tier-tag">{plan.tier}</span>
+                <h3 class="pricing-plan-name">{plan.name}</h3>
+                <p class="pricing-plan-desc">{plan.description}</p>
+              </div>
+
+              <div class="pricing-rate-box">
+                <div class="pricing-rate-main">
+                  <span class="pricing-amount">{plan.monthlyPrice}</span>
+                </div>
+                <span class="pricing-unit">{plan.unit}</span>
+              </div>
+
+              <div class="pricing-divider"></div>
+
+              <ul class="pricing-features-list">
+                {plan.highlights.map((feat) => (
+                  <li>
+                    <Check size={16} className="pricing-check" aria-hidden="true" />
+                    <span>{feat}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div class="pricing-card-cta">
+                <a
+                  href="/contact#project-inquiry"
+                  class={`button ${plan.popular ? 'button-primary' : 'button-secondary'} pricing-cta-btn`}
+                  data-open-contact-modal
+                >
+                  {plan.cta}
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Final CTA Section -->
+    <section class="nirvan-final-cta" aria-labelledby="final-cta-title">
+      <div class="site-container">
+        <div class="final-cta-card reveal">
+          <div class="final-cta-badge">
+            <HeartPulse size={16} aria-hidden="true" />
+            <span>Modernise Healthcare Delivery</span>
+          </div>
+
+          <h2 id="final-cta-title">
+            Ready to Bring Your Healthcare Operations Together?
+          </h2>
+
+          <p class="final-cta-text">
+            See how NIRVAN centralizes clinic appointments, inpatient wards, lab workflows,
+            and billing operations into one unified system. Schedule a tailored consultation with our healthcare solutions team.
+          </p>
+
+          <div class="final-cta-actions">
+            <a
+              href="/contact#project-inquiry"
+              class="button button-primary final-cta-primary"
+              data-open-contact-modal
+            >
+              <span>Book a Demo</span>
+              <ArrowRight size={16} aria-hidden="true" />
+            </a>
+            <a
+              href="/contact#project-inquiry"
+              class="button button-secondary final-cta-secondary"
+              data-open-contact-modal
+            >
+              <span>Talk to Our Team</span>
+            </a>
+          </div>
+
+          <p class="final-cta-footnote">
+            No obligation &bull; Tailored to your facility scale &bull; Fast cloud or on-premise onboarding
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Dedicated Standalone Product Footer (No Corporate Footer) -->
+  <footer class="nirvan-footer" role="contentinfo">
+    <div class="site-container nirvan-footer-inner">
+      <div class="nirvan-footer-brand">
+        <a href="/" class="nirvan-footer-logo-link" aria-label="Incaendo corporate home">
+          <img
+            src={logo.src}
+            alt="Incaendo Technologies"
+            width={logo.width}
+            height={logo.height}
+            class="nirvan-footer-logo"
+          />
+        </a>
+        <p class="nirvan-footer-tagline">
+          NIRVAN &bull; Healthcare CRM & Hospital Management Platform by Incaendo Technologies.
+        </p>
+      </div>
+
+      <nav class="nirvan-footer-nav" aria-label="NIRVAN footer navigation">
+        <a href="#solutions">Solutions</a>
+        <a href="#features">Core Features</a>
+        <a href="#benefits">Benefits</a>
+        <a href="#pricing">Pricing</a>
+        <a href="/contact">Contact Sales</a>
+        <a href="/" class="nirvan-corporate-link">Incaendo Corporate &rarr;</a>
+      </nav>
+
+      <div class="nirvan-footer-bottom">
+        <p class="nirvan-copyright">
+          &copy; {new Date().getFullYear()} Incaendo Pvt Ltd. All rights reserved.
+        </p>
+        <p class="nirvan-footer-note">
+          NIRVAN is a proprietary healthcare software product. Illustrative metrics and provisional pricing shown for evaluation purposes.
+        </p>
+      </div>
+    </div>
+  </footer>
+</StandaloneLayout>
+
+<style>
+  /* =========================================================================
+     NIRVAN STANDALONE PRODUCT STYLES
+     Using existing brand tokens:
+     --color-paper: #f8f7f4
+     --color-navy: #0f172a
+     --color-orange: #c9542b
+     --color-orange-dark: #b4421b
+     --color-ink: #1e293b
+     ========================================================================= */
+
+  /* Dedicated Top Navigation */
+  .nirvan-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(248, 247, 244, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    transition: background var(--duration-fast) ease, border-color var(--duration-fast) ease;
+  }
+
+  .nirvan-nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 0.95rem;
+    gap: 1.5rem;
+  }
+
+  .nirvan-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .nirvan-logo-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .nirvan-logo-img {
+    height: 32px;
+    width: auto;
+    display: block;
+  }
+
+  .nirvan-brand-sep {
+    display: inline-block;
+    width: 1px;
+    height: 22px;
+    background: #d8d0c5;
+  }
+
+  .nirvan-product-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+  }
+
+  .nirvan-product-name {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--color-navy);
+  }
+
+  .nirvan-product-pill {
+    display: inline-block;
+    padding: 0.2rem 0.55rem;
+    background: rgba(201, 84, 43, 0.1);
+    color: var(--color-orange-dark);
+    font-size: 0.72rem;
+    font-weight: 700;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .nirvan-menu {
+    display: flex;
+    align-items: center;
+    gap: 1.85rem;
+  }
+
+  .nirvan-menu-link {
+    color: var(--color-navy);
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color var(--duration-fast) ease;
+  }
+
+  .nirvan-menu-link:hover {
+    color: var(--color-orange);
+  }
+
+  .nirvan-nav-actions {
+    display: flex;
+    align-items: center;
+  }
+
+  .nirvan-nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.15rem;
+    font-size: 0.88rem;
+    font-weight: 700;
+    border-radius: 999px;
+  }
+
+  /* Main Container */
+  .nirvan-page {
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Shared Section Intros */
+  .nirvan-section {
+    padding-block: clamp(3.5rem, 6vw, 6rem);
+  }
+
+  .section-intro {
+    max-width: 760px;
+    margin: 0 auto clamp(2.5rem, 4vw, 3.5rem);
+    text-align: center;
+  }
+
+  .section-eyebrow {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    color: var(--color-orange-dark);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .section-intro h2 {
+    margin: 0 0 1rem;
+    color: var(--color-navy);
+    font-family: var(--font-heading);
+    font-size: var(--type-section-size);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  .section-intro h2 span {
+    color: var(--color-orange);
+  }
+
+  .section-lead {
+    margin: 0;
+    color: var(--color-body);
+    font-size: var(--type-intro-size);
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+
+  /* 1. Hero Section */
+  .nirvan-hero {
+    position: relative;
+    background: radial-gradient(circle at 10% 20%, rgba(201, 84, 43, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(43, 87, 126, 0.06) 0%, transparent 50%),
+                var(--color-paper);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  }
+
+  .nirvan-hero-copy h1 span {
+    display: block;
+  }
+
+  .nirvan-btn-hero {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.75rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 999px;
+    box-shadow: 0 8px 24px -8px rgba(201, 84, 43, 0.4);
+  }
+
+  .nirvan-btn-secondary {
+    padding: 0.85rem 1.65rem;
+    font-size: 1rem;
+    font-weight: 650;
+    border-radius: 999px;
+    background: #ffffff;
+    color: var(--color-navy);
+    border: 1px solid #dcd4c8;
+    text-decoration: none;
+    transition: all var(--duration-fast) ease;
+  }
+
+  .nirvan-btn-secondary:hover {
+    border-color: var(--color-navy);
+    background: #f4efe7;
+  }
+
+  .nirvan-hero-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+  }
+
+  .nirvan-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .nirvan-meta-check {
+    color: var(--color-orange);
+    flex-shrink: 0;
+  }
+
+  /* Hero Visual & Interactive Mockup */
+  .nirvan-preview-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .nirvan-preview-frame {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid #e2dacd;
+    border-radius: var(--radius-large, 16px);
+    overflow: hidden;
+    box-shadow: 0 24px 60px -20px rgba(15, 23, 42, 0.18),
+                0 6px 20px -6px rgba(15, 23, 42, 0.08);
+  }
+
+  .nirvan-preview-chrome {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.65rem 0.95rem;
+    background: #f5efe6;
+    border-bottom: 1px solid #e7ded3;
+  }
+
+  .nirvan-chrome-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+  }
+  .nirvan-chrome-dot.is-red { background: #ef4444; }
+  .nirvan-chrome-dot.is-yellow { background: #f59e0b; }
+  .nirvan-chrome-dot.is-green { background: #10b981; }
+
+  .nirvan-chrome-url {
+    margin-left: 0.5rem;
+    font-size: 0.74rem;
+    color: #64748b;
+    font-family: monospace;
+    background: #ffffff;
+    padding: 0.15rem 0.65rem;
+    border-radius: 4px;
+    border: 1px solid #e2dacd;
+  }
+
+  .nirvan-preview-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  /* Floating Chips */
+  .nirvan-float-chip {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2dacd;
+    box-shadow: 0 16px 36px -12px rgba(15, 23, 42, 0.16);
+    z-index: 2;
+  }
+
+  .chip-top {
+    top: -18px;
+    right: -14px;
+  }
+
+  .chip-bottom {
+    bottom: -22px;
+    left: -14px;
+  }
+
+  .chip-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #10b981;
+    flex-shrink: 0;
+  }
+
+  .chip-dot.is-pulse {
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+  }
+
+  .chip-icon-box {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: rgba(201, 84, 43, 0.1);
+    color: var(--color-orange);
+    flex-shrink: 0;
+  }
+
+  .nirvan-float-chip strong {
+    display: block;
+    font-size: 0.82rem;
+    color: var(--color-navy);
+    font-weight: 700;
+  }
+
+  .nirvan-float-chip span {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+  }
+
+  /* 2. Solutions Section */
+  .nirvan-solutions-section {
+    background: #ffffff;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  }
+
+  .nirvan-solutions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(1.5rem, 2.5vw, 2.25rem);
+  }
+
+  .nirvan-solution-card {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.75rem, 2.5vw, 2.35rem);
+    background: #fbf9f6;
+    border: 1px solid #e8e2d8;
+    border-radius: var(--radius-large, 16px);
+    transition: transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease, border-color var(--duration-fast) ease;
+  }
+
+  .nirvan-solution-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -18px rgba(15, 23, 42, 0.12);
+    border-color: rgba(201, 84, 43, 0.35);
+  }
+
+  .solution-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+
+  .solution-icon-wrap {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(201, 84, 43, 0.1);
+    color: var(--color-orange-dark);
+  }
+
+  .solution-badge {
+    padding: 0.3rem 0.7rem;
+    background: #ede6dc;
+    border-radius: 999px;
+    color: var(--color-navy);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .solution-title {
+    margin: 0 0 0.4rem;
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--color-navy);
+  }
+
+  .solution-headline {
+    margin: 0 0 0.85rem;
+    color: var(--color-orange-dark);
+    font-size: 0.95rem;
+    font-weight: 650;
+    line-height: 1.4;
+  }
+
+  .solution-desc {
+    margin: 0 0 1.25rem;
+    color: var(--color-body);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    flex-grow: 1;
+  }
+
+  .solution-divider {
+    height: 1px;
+    background: #e9e2d7;
+    margin-bottom: 1.15rem;
+  }
+
+  .solution-points {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .solution-points li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.86rem;
+    color: var(--color-ink);
+    line-height: 1.45;
+  }
+
+  .point-check {
+    color: var(--color-orange);
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+
+  .solution-card-foot {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px dashed #e4dcce;
+  }
+
+  .solution-cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--color-navy);
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color var(--duration-fast) ease, gap var(--duration-fast) ease;
+  }
+
+  .solution-cta-link:hover {
+    color: var(--color-orange);
+    gap: 0.6rem;
+  }
+
+  /* 3. Core Features Section */
+  .nirvan-features-section {
+    background: var(--color-paper);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  }
+
+  .nirvan-features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .nirvan-feature-card {
+    padding: 1.75rem 1.45rem;
+    background: #ffffff;
+    border: 1px solid #e7ded3;
+    border-radius: var(--radius-large, 16px);
+    box-shadow: 0 8px 24px -14px rgba(15, 23, 42, 0.08);
+    transition: transform var(--duration-fast) ease, border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+  }
+
+  .nirvan-feature-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(201, 84, 43, 0.35);
+    box-shadow: 0 16px 36px -16px rgba(15, 23, 42, 0.14);
+  }
+
+  .feature-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+
+  .feature-card-icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 11px;
+    background: rgba(43, 87, 126, 0.09);
+    color: #2b577e;
+    transition: background var(--duration-fast) ease, color var(--duration-fast) ease;
+  }
+
+  .nirvan-feature-card:hover .feature-card-icon {
+    background: var(--color-orange);
+    color: #ffffff;
+  }
+
+  .feature-index {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #94a3b8;
+    font-family: monospace;
+  }
+
+  .feature-title {
+    margin: 0 0 0.65rem;
+    font-family: var(--font-heading);
+    font-size: 1.12rem;
+    font-weight: 750;
+    color: var(--color-navy);
+    line-height: 1.35;
+  }
+
+  .feature-desc {
+    margin: 0;
+    color: var(--color-body);
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  /* 4. Benefits Section */
+  .nirvan-benefits-section {
+    background: #ffffff;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  }
+
+  .nirvan-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .nirvan-benefit-card {
+    display: flex;
+    flex-direction: column;
+    padding: 2.25rem;
+    background: #fcfbf9;
+    border: 1px solid #e9e2d7;
+    border-radius: var(--radius-large, 16px);
+  }
+
+  .benefit-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .benefit-icon {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: rgba(201, 84, 43, 0.1);
+    color: var(--color-orange-dark);
+  }
+
+  .benefit-stat-box {
+    text-align: right;
+  }
+
+  .benefit-metric {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--color-navy);
+    line-height: 1.2;
+  }
+
+  .benefit-metric-label {
+    display: block;
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--color-muted);
+    letter-spacing: 0.02em;
+  }
+
+  .benefit-title {
+    margin: 0 0 0.75rem;
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--color-navy);
+  }
+
+  .benefit-desc {
+    margin: 0;
+    color: var(--color-body);
+    font-size: 0.94rem;
+    line-height: 1.6;
+  }
+
+  /* 5. Pricing Section */
+  .nirvan-pricing-section {
+    background: var(--color-paper);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  }
+
+  /* Notice Banner */
+  .nirvan-pricing-disclaimer {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    max-width: 900px;
+    margin: 0 auto 3rem;
+    padding: 1.15rem 1.45rem;
+    background: #fff8f1;
+    border: 1px solid rgba(201, 84, 43, 0.28);
+    border-radius: 12px;
+  }
+
+  .disclaimer-icon {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(201, 84, 43, 0.12);
+    color: var(--color-orange-dark);
+    flex-shrink: 0;
+  }
+
+  .disclaimer-content strong {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: var(--color-orange-dark);
+    font-size: 0.92rem;
+    font-weight: 750;
+  }
+
+  .disclaimer-content p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #6a5749;
+    line-height: 1.5;
+  }
+
+  .nirvan-pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.85rem;
+    align-items: stretch;
+  }
+
+  .nirvan-pricing-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 2.25rem 1.85rem;
+    background: #ffffff;
+    border: 1px solid #e4dccc;
+    border-radius: var(--radius-large, 16px);
+    box-shadow: 0 10px 30px -18px rgba(15, 23, 42, 0.1);
+    transition: transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+  }
+
+  .nirvan-pricing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 48px -20px rgba(15, 23, 42, 0.16);
+  }
+
+  .nirvan-pricing-card.is-popular {
+    border: 2px solid var(--color-orange);
+    box-shadow: 0 18px 44px -16px rgba(201, 84, 43, 0.22);
+  }
+
+  .pricing-badge-popular {
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.3rem 0.85rem;
+    background: var(--color-orange);
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 750;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .pricing-tier-tag {
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    margin-bottom: 0.75rem;
+    background: #f4ede3;
+    color: var(--color-navy);
+    font-size: 0.74rem;
+    font-weight: 700;
+    border-radius: 999px;
+  }
+
+  .pricing-plan-name {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-heading);
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--color-navy);
+  }
+
+  .pricing-plan-desc {
+    margin: 0 0 1.25rem;
+    color: var(--color-body);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    min-height: 2.7rem;
+  }
+
+  .pricing-rate-box {
+    margin-bottom: 1.25rem;
+  }
+
+  .pricing-amount {
+    font-family: var(--font-heading);
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: var(--color-navy);
+    line-height: 1;
+  }
+
+  .pricing-unit {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--color-muted);
+  }
+
+  .pricing-divider {
+    height: 1px;
+    background: #eee8de;
+    margin-bottom: 1.25rem;
+  }
+
+  .pricing-features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    flex-grow: 1;
+  }
+
+  .pricing-features-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55rem;
+    font-size: 0.86rem;
+    color: var(--color-ink);
+    line-height: 1.45;
+  }
+
+  .pricing-check {
+    color: var(--color-orange);
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+
+  .pricing-cta-btn {
+    width: 100%;
+    justify-content: center;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.92rem;
+    padding-block: 0.75rem;
+  }
+
+  /* 6. Final CTA Section */
+  .nirvan-final-cta {
+    padding-block: clamp(3.5rem, 6vw, 6rem);
+    background: var(--color-paper);
+  }
+
+  .final-cta-card {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 4.5vw, 4rem) clamp(1.5rem, 3.5vw, 3.5rem);
+    background: #0f172a;
+    border-radius: var(--radius-large, 24px);
+    text-align: center;
+    color: #ffffff;
+    box-shadow: 0 28px 64px -24px rgba(15, 23, 42, 0.35);
+  }
+
+  .final-cta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.9rem;
+    margin-bottom: 1.5rem;
+    background: rgba(201, 84, 43, 0.2);
+    border: 1px solid rgba(201, 84, 43, 0.4);
+    border-radius: 999px;
+    color: #ff9d7a;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .final-cta-card h2 {
+    margin: 0 auto 1.25rem;
+    max-width: 720px;
+    font-family: var(--font-heading);
+    font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: #ffffff;
+    text-wrap: balance;
+  }
+
+  .final-cta-text {
+    margin: 0 auto 2.25rem;
+    max-width: 620px;
+    font-size: 1.05rem;
+    color: #cbd5e1;
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+
+  .final-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .final-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.85rem 1.85rem;
+    font-size: 0.98rem;
+    font-weight: 700;
+    border-radius: 999px;
+  }
+
+  .final-cta-secondary {
+    padding: 0.85rem 1.75rem;
+    font-size: 0.98rem;
+    font-weight: 650;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+    transition: all var(--duration-fast) ease;
+  }
+
+  .final-cta-secondary:hover {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: #ffffff;
+    color: #ffffff;
+  }
+
+  .final-cta-footnote {
+    margin: 0;
+    font-size: 0.78rem;
+    color: #94a3b8;
+  }
+
+  /* Dedicated Standalone Product Footer */
+  .nirvan-footer {
+    background: #090e1a;
+    color: #94a3b8;
+    padding-block: 3.5rem 2.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .nirvan-footer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+  }
+
+  .nirvan-footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .nirvan-footer-logo {
+    height: 30px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.95;
+  }
+
+  .nirvan-footer-tagline {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    max-width: 520px;
+  }
+
+  .nirvan-footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem 2rem;
+    padding-block: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .nirvan-footer-nav a {
+    color: #cbd5e1;
+    font-size: 0.88rem;
+    font-weight: 550;
+    text-decoration: none;
+    transition: color var(--duration-fast) ease;
+  }
+
+  .nirvan-footer-nav a:hover {
+    color: var(--color-orange);
+  }
+
+  .nirvan-footer-nav .nirvan-corporate-link {
+    margin-left: auto;
+    color: var(--color-orange);
+    font-weight: 650;
+  }
+
+  .nirvan-footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-size: 0.8rem;
+    color: #64748b;
+  }
+
+  .nirvan-copyright {
+    margin: 0;
+  }
+
+  .nirvan-footer-note {
+    margin: 0;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 1080px) {
+    .nirvan-features-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .nirvan-pricing-grid {
+      grid-template-columns: 1fr;
+      max-width: 520px;
+      margin-inline: auto;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .nirvan-solutions-grid {
+      grid-template-columns: 1fr;
+    }
+    .nirvan-benefits-grid {
+      grid-template-columns: 1fr;
+    }
+    .nirvan-menu {
+      display: none;
+    }
+    .nirvan-footer-nav .nirvan-corporate-link {
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 540px) {
+    .nirvan-features-grid {
+      grid-template-columns: 1fr;
+    }
+    .nirvan-hero-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .nirvan-btn-hero,
+    .nirvan-btn-secondary {
+      width: 100%;
+      justify-content: center;
+    }
+    .nirvan-float-chip {
+      display: none;
+    }
+    /* Brand row + CTA must fit inside 335px: drop the decorative pill and
+       divider, keep logo, product name and the demo button. */
+    .nirvan-nav-inner {
+      gap: 0.75rem;
+    }
+    .nirvan-brand {
+      gap: 0.5rem;
+      min-width: 0;
+    }
+    .nirvan-brand-sep,
+    .nirvan-product-pill {
+      display: none;
+    }
+    .nirvan-logo-img {
+      height: 26px;
+    }
+    .nirvan-product-name {
+      font-size: 1rem;
+    }
+    .nirvan-nav-cta {
+      flex-shrink: 0;
+      padding: 0.55rem 0.9rem;
+      font-size: 0.82rem;
+    }
+  }
+</style>

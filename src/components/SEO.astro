@@ -1,0 +1,177 @@
+---
+/**
+ * Document-head SEO metadata: title, description, canonical, robots,
+ * Open Graph, Twitter/X card, favicons and a single JSON-LD @graph.
+ * Rendered once per page by BaseLayout or StandaloneLayout.
+ */
+import { getImage } from 'astro:assets'
+import defaultSocialImage from '../assets/hero-orbit.png'
+import logo from '../assets/incaendo-logo.png'
+import {
+  NOINDEX_PATHS,
+  ORGANIZATION,
+  SITE_NAME,
+  absoluteUrl,
+} from '../data/seo.js'
+
+const {
+  title,
+  description,
+  // Path of the preferred URL when this page duplicates another route.
+  canonicalPath = Astro.url.pathname,
+  noindex = false,
+  openGraphType = 'website',
+  siteName = SITE_NAME,
+  // ImageMetadata (from an import) or an absolute/root-relative URL string.
+  image = defaultSocialImage,
+  imageAlt = 'Incaendo software engineering and technology',
+  // schema.org WebPage subtype: WebPage, AboutPage, ContactPage, CollectionPage…
+  pageType = 'WebPage',
+  // [{ name, path }] in order, excluding the current page.
+  breadcrumbs = [],
+  // Label for the current page in the breadcrumb trail (defaults to title).
+  breadcrumbLabel = title,
+  // { publishedTime, author, section, tags } for openGraphType="article".
+  article,
+  // Extra JSON-LD nodes for this page; `{ webPage }` refs are resolved below.
+  schema = [],
+} = Astro.props
+
+const site = Astro.site
+const canonicalUrl = absoluteUrl(canonicalPath, site)
+const robots =
+  noindex || NOINDEX_PATHS.includes(new URL(canonicalUrl).pathname)
+    ? 'noindex, follow'
+    : 'index, follow, max-image-preview:large'
+
+let socialImage
+if (typeof image === 'string') {
+  socialImage = { src: absoluteUrl(image, site) }
+} else {
+  const optimized = await getImage({ src: image, width: 1200, format: 'jpg' })
+  socialImage = {
+    src: absoluteUrl(optimized.src, site),
+    width: optimized.attributes.width,
+    height: optimized.attributes.height,
+  }
+}
+
+const siteUrl = absoluteUrl('/', site)
+const ids = {
+  organization: `${siteUrl}#organization`,
+  website: `${siteUrl}#website`,
+  webPage: `${canonicalUrl}#webpage`,
+  breadcrumb: `${canonicalUrl}#breadcrumb`,
+  image: `${canonicalUrl}#primaryimage`,
+}
+
+const graph = [
+  {
+    '@type': 'Organization',
+    '@id': ids.organization,
+    name: ORGANIZATION.name,
+    alternateName: ORGANIZATION.alternateName,
+    url: siteUrl,
+    logo: {
+      '@type': 'ImageObject',
+      url: absoluteUrl(logo.src, site),
+      width: logo.width,
+      height: logo.height,
+    },
+    email: ORGANIZATION.email,
+    address: { '@type': 'PostalAddress', ...ORGANIZATION.address },
+    sameAs: ORGANIZATION.sameAs,
+  },
+  {
+    '@type': 'WebSite',
+    '@id': ids.website,
+    url: siteUrl,
+    name: SITE_NAME,
+    publisher: { '@id': ids.organization },
+    inLanguage: 'en',
+  },
+  {
+    '@type': pageType,
+    '@id': ids.webPage,
+    url: canonicalUrl,
+    name: title,
+    description,
+    isPartOf: { '@id': ids.website },
+    about: canonicalPath === '/' ? { '@id': ids.organization } : undefined,
+    primaryImageOfPage: {
+      '@type': 'ImageObject',
+      '@id': ids.image,
+      url: socialImage.src,
+      width: socialImage.width,
+      height: socialImage.height,
+    },
+    breadcrumb: breadcrumbs.length ? { '@id': ids.breadcrumb } : undefined,
+    inLanguage: 'en',
+  },
+]
+
+if (breadcrumbs.length) {
+  graph.push({
+    '@type': 'BreadcrumbList',
+    '@id': ids.breadcrumb,
+    itemListElement: [...breadcrumbs, { name: breadcrumbLabel }].map(
+      (crumb, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: crumb.name,
+        item: crumb.path ? absoluteUrl(crumb.path, site) : undefined,
+      }),
+    ),
+  })
+}
+
+graph.push(...schema)
+
+// Let page-level nodes reference shared entities without knowing their URLs.
+const jsonLd = JSON.stringify(
+  { '@context': 'https://schema.org', '@graph': graph },
+  (key, value) =>
+    value && typeof value === 'object' && typeof value.$ref === 'string'
+      ? { '@id': ids[value.$ref] }
+      : value,
+).replace(/</g, '\\u003c')
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="robots" content={robots} />
+<link rel="canonical" href={canonicalUrl} />
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+<meta property="og:type" content={openGraphType} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={socialImage.src} />
+{socialImage.width && (
+  <meta property="og:image:width" content={String(socialImage.width)} />
+)}
+{socialImage.height && (
+  <meta property="og:image:height" content={String(socialImage.height)} />
+)}
+<meta property="og:image:alt" content={imageAlt} />
+{article?.publishedTime && (
+  <meta property="article:published_time" content={article.publishedTime} />
+)}
+{article?.section && (
+  <meta property="article:section" content={article.section} />
+)}
+{article?.tags?.map((tag) => (
+  <meta property="article:tag" content={tag} />
+))}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={socialImage.src} />
+<meta name="twitter:image:alt" content={imageAlt} />
+
+<script type="application/ld+json" set:html={jsonLd} />

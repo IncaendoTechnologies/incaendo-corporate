@@ -106,19 +106,21 @@ const applications = [
   aria-labelledby="ai-applications-title"
 >
   <div class="site-container">
-    <div class="ai-section-heading ai-applications-heading">
-      <div>
+    <div class="ai-applications-heading reveal">
+      <div class="ai-applications-title-wrap">
         <p class="eyebrow">BUSINESS APPLICATIONS</p>
         <h2 id="ai-applications-title">
-          AI agents for the work
-          <br />
-          <span>your teams do every day.</span>
+          AI Agents <span>Purpose-Built</span> for the Work{' '}
+          <br class="ai-applications-heading-break" />
+          Your Teams <span>Do Every Day.</span>
         </h2>
       </div>
-      <p>
-        Examples of AI agents we can design and integrate into your existing
-        systems. Each one takes on repetitive steps in a specific workflow,
-        while people review the output and make the final decisions.
+      <p class="ai-applications-lead">
+        We design and integrate custom AI agents directly into your existing enterprise systems and daily business tools.{' '}
+        <br class="ai-applications-lead-break" />
+        Each agent takes on repetitive, multi-step tasks across customer support, finance, reporting, and team workflows,{' '}
+        <br class="ai-applications-lead-break" />
+        while your people stay in complete control, reviewing outputs and making every final decision.
       </p>
     </div>
   </div>
@@ -126,6 +128,7 @@ const applications = [
     class="application-track"
     style={`--application-count: ${applications.length}`}
     data-application-track
+    data-entrance-exclude
   >
     <div class="application-sticky">
       <div class="site-container application-inner">
@@ -157,7 +160,7 @@ const applications = [
                   <h3 id={`application-title-${index + 1}`}>{item.title}</h3>
                   <p class="application-description">{item.scenario}</p>
                   <div class="application-involves">
-                    <h4>What it can involve</h4>
+                    <h4>What It Can Involve</h4>
                     <ul>
                       {item.involves.map((point) => (
                         <li>{point}</li>
@@ -190,12 +193,14 @@ const applications = [
 <script>
   const applicationTrack = document.querySelector('[data-application-track]')
 
-  if (applicationTrack) {
-    const slides = [
-      ...applicationTrack.querySelectorAll('[data-application-slide]'),
-    ]
+  if (applicationTrack instanceof HTMLElement) {
+    const slides = Array.from(
+      applicationTrack.querySelectorAll('[data-application-slide]'),
+    ).filter((slide) => slide instanceof HTMLElement)
     const deck = applicationTrack.querySelector('.application-deck')
-    const current = applicationTrack.querySelector('[data-application-current]')
+    const current = applicationTrack.querySelector(
+      '[data-application-current]',
+    )
     const progress = applicationTrack.querySelector(
       '[data-application-progress]',
     )
@@ -203,7 +208,8 @@ const applications = [
       '(min-width: 801px) and (min-height: 700px)',
     )
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const clamp = (value, min, max) => Math.min(Math.max(value, min), max)
+    const clamp = (value, min, max) =>
+      Math.min(Math.max(value, min), max)
     const smooth = (t) => t * t * (3 - 2 * t)
     let activeIndex = -1
     let frame = 0
@@ -211,13 +217,23 @@ const applications = [
     function setActive(index) {
       if (index === activeIndex) return
       activeIndex = index
-      slides.forEach((slide, i) =>
-        slide.classList.toggle('is-active', i === index),
-      )
-      current.textContent = String(index + 1).padStart(2, '0')
+      slides.forEach((slide, i) => {
+        if (slide instanceof HTMLElement) {
+          slide.classList.toggle('is-active', i === index)
+        }
+      })
+      if (current) {
+        current.textContent = String(index + 1).padStart(2, '0')
+      }
     }
 
-    function applyDepth(slide, { y = 0, scale = 1, dim = 0, lift = 0 }) {
+    function applyDepth(slide, options) {
+      if (!(slide instanceof HTMLElement)) return
+      const opts = options || {}
+      const y = typeof opts.y === 'number' ? opts.y : 0
+      const scale = typeof opts.scale === 'number' ? opts.scale : 1
+      const dim = typeof opts.dim === 'number' ? opts.dim : 0
+      const lift = typeof opts.lift === 'number' ? opts.lift : 0
       slide.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0) scale(${scale.toFixed(4)})`
       slide.style.setProperty('--dim', dim.toFixed(3))
       slide.style.setProperty('--lift', lift.toFixed(3))
@@ -226,6 +242,7 @@ const applications = [
     // Desktop: the section is pinned and scroll position drives each card's
     // rise from below, while earlier cards shrink, dim, and peek out above.
     function updatePinned() {
+      if (!(applicationTrack instanceof HTMLElement) || !(deck instanceof HTMLElement) || !(progress instanceof HTMLElement)) return
       const viewport = window.innerHeight
       const distance = applicationTrack.offsetHeight - viewport
       const scrolled = clamp(
@@ -250,6 +267,7 @@ const applications = [
       })
 
       slides.forEach((slide, i) => {
+        if (!(slide instanceof HTMLElement)) return
         let covered = 0
         for (let j = i + 1; j < slides.length; j++) covered += rise[j]
         const depth = Math.min(covered, 3)
@@ -272,8 +290,9 @@ const applications = [
     // slides over one, ease it back slightly without changing the scroll.
     function updateFlow() {
       slides.forEach((slide, i) => {
+        if (!(slide instanceof HTMLElement)) return
         const next = slides[i + 1]
-        if (!next) return applyDepth(slide, {})
+        if (!(next instanceof HTMLElement)) return applyDepth(slide, {})
         const card = slide.getBoundingClientRect()
         const cover = clamp(
           (card.bottom - next.getBoundingClientRect().top) / card.height,
@@ -300,8 +319,9 @@ const applications = [
 
     function reset() {
       slides.forEach((slide) => {
+        if (!(slide instanceof HTMLElement)) return
         slide.removeAttribute('style')
-        slide.style.setProperty('--slide-index', slides.indexOf(slide))
+        slide.style.setProperty('--slide-index', String(slides.indexOf(slide)))
       })
       requestUpdate()
     }
@@ -329,32 +349,61 @@ const applications = [
     word-spacing: var(--type-section-word-spacing);
     line-height: var(--type-section-line-height);
   }
-  .ai-section-heading {
+  /* ---------- Heading (Centered & Aligned with AI-Assisted Dev) ---------- */
+  .ai-applications-heading {
     display: flex;
-    align-items: end;
-    justify-content: space-between;
-    gap: clamp(2rem, 5vw, 4.8rem);
-    margin-bottom: 2.5rem;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.85rem;
+    margin-bottom: clamp(1.1rem, 1.8vw, 1.5rem);
   }
-  .ai-section-heading > div {
-    max-width: 680px;
+
+  .ai-applications-title-wrap {
+    text-align: center;
+    width: 100%;
   }
-  .ai-section-heading h2 {
-    margin-bottom: 0;
+
+  .ai-applications-heading .eyebrow {
+    margin-bottom: 0.45rem;
   }
-  .ai-section-heading h2 span {
+
+  .ai-applications-heading h2 {
+    margin: 0;
+    font-size: var(--type-section-size);
+    font-weight: var(--type-heading-weight);
+    letter-spacing: var(--type-section-letter-spacing);
+    word-spacing: var(--type-section-word-spacing);
+    line-height: var(--type-section-line-height);
+    text-wrap: balance;
+  }
+
+  .ai-applications-heading h2 span {
     color: var(--color-orange-dark);
   }
-  .ai-section-heading > p {
-    max-width: 440px;
-    margin-bottom: 0.15rem;
+
+  .ai-applications-heading-break {
+    display: none;
+  }
+
+  .ai-applications-lead-break {
+    display: none;
+  }
+
+  .ai-applications-lead {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 58rem;
     color: var(--color-body);
     font-size: 0.94rem;
     line-height: 1.7;
+    text-align: center;
+    text-wrap: balance;
   }
 
   .ai-applications {
-    padding-block: clamp(4.4rem, 7.2vw, 6.8rem);
+    padding-top: clamp(2.5rem, 4vw, 3.8rem);
+    padding-bottom: clamp(3rem, 5vw, 4.5rem);
     background: #f0ede8;
   }
   .application-progress {
@@ -587,10 +636,11 @@ const applications = [
       height: 100vh;
       height: 100svh;
       overflow: hidden;
-      align-items: center;
+      align-items: flex-start;
+      padding-top: clamp(1rem, 2vh, 1.6rem);
     }
     [data-enhanced] .application-inner {
-      padding-block: clamp(1.25rem, 3vh, 2rem);
+      padding-block: clamp(0.5rem, 1.2vh, 0.9rem);
     }
     [data-enhanced] .application-progress {
       display: flex;
@@ -692,23 +742,30 @@ const applications = [
     }
   }
 
-  @media (max-width: 800px) {
-    .ai-section-heading {
-      align-items: flex-start;
-      flex-direction: column;
-      gap: 1rem;
+  @media (min-width: 1101px) {
+    .ai-applications-heading h2 {
+      white-space: nowrap;
     }
-    .ai-section-heading > p {
-      max-width: 650px;
-      margin: 0;
+
+    .ai-applications-heading-break {
+      display: inline;
+    }
+
+    .ai-applications-lead-break {
+      display: inline;
+    }
+
+    .ai-applications-lead {
+      max-width: 58rem;
     }
   }
+
   @media (max-width: 560px) {
-    .ai-section-heading {
-      margin-bottom: 1.7rem;
+    .ai-applications-heading {
+      margin-bottom: 1.8rem;
     }
-    .ai-section-heading > p {
-      font-size: 0.86rem;
+    .ai-applications-lead {
+      font-size: 0.88rem;
     }
   }
   @media (prefers-reduced-motion: reduce) {

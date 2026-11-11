@@ -1,0 +1,106 @@
+/* Reach out and FAQ */
+.reachout-section {
+  padding-block: var(--section-space-md);
+  background: #eee5dc;
+}
+.reachout-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+}
+.reachout-inner h2 {
+  margin: 0;
+  font-size: var(--type-section-size);
+  font-weight: var(--type-heading-weight);
+  letter-spacing: var(--type-section-letter-spacing);
+  word-spacing: var(--type-section-word-spacing);
+  line-height: var(--type-section-line-height);
+}
+.reachout-action {
+  max-width: 360px;
+}
+.reachout-action p {
+  margin-bottom: 1.1rem;
+  color: var(--color-body);
+  font-size: var(--type-intro-size);
+  line-height: var(--type-intro-line-height);
+}
+.small-note {
+  display: block;
+  margin-top: 0.85rem;
+  color: var(--color-muted);
+  font-size: var(--type-meta-size);
+}
+.section-faq {
+  background: #fbfaf8;
+}
+.faq-layout {
+  display: grid;
+  grid-template-columns: 0.75fr 1.25fr;
+  gap: clamp(3rem, 8vw, 7rem);
+}
+.faq-layout h2 {
+  margin-bottom: 1.4rem;
+  font-size: var(--type-section-size);
+  font-weight: var(--type-heading-weight);
+  letter-spacing: var(--type-section-letter-spacing);
+  word-spacing: var(--type-section-word-spacing);
+  line-height: var(--type-section-line-height);
+}
+.faq-list {
+  border-top: 1px solid var(--color-line);
+}
+.faq-item {
+  border-bottom: 1px solid var(--color-line);
+}
+.faq-item summary {
+  display: flex;
+  min-height: 70px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--color-ink);
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-size: 0.97rem;
+  font-weight: 600;
+  list-style: none;
+}
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.faq-mark {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+}
+.faq-mark::before,
+.faq-mark::after {
+  position: absolute;
+  top: 9px;
+  left: 3px;
+  width: 14px;
+  height: 1px;
+  background: var(--color-orange-dark);
+  content: '';
+  transition: transform var(--duration-fast) ease;
+}
+.faq-mark::after {
+  transform: rotate(90deg);
+}
+.faq-item[open] .faq-mark::after {
+  transform: rotate(0);
+}
+.faq-answer {
+  padding: 0 2rem 1.4rem 0;
+}
+.faq-answer p {
+  max-width: 650px;
+  margin: 0;
+  color: var(--color-body);
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-line-height);
+}
+

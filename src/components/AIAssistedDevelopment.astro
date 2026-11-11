@@ -1,0 +1,1323 @@
+---
+/* AI-assisted software development: an approved heading and lead,
+   followed by an exact symmetrical 3D AI visualization showcase featuring
+   the authentic 3D AI cube from the master design directly on the warm
+   page background, compact proportions, exact fibers design with glowing
+   nodes, synchronized signal particles, and interactive hover effects. */
+import {
+  BarChart3,
+  CodeXml,
+  Layers,
+  MessageSquareText,
+  Settings,
+  Terminal,
+} from 'lucide-react'
+
+const capabilitiesLeft = [
+  {
+    title: 'Vibe Coding',
+    desc: 'Turn ideas into early working prototypes',
+    icon: CodeXml,
+    idx: 0,
+  },
+  {
+    title: 'AI-Assisted Engineering',
+    desc: 'Build, test, and refine software with AI support',
+    icon: Settings,
+    idx: 1,
+  },
+  {
+    title: 'Agentic AI & Automation',
+    desc: 'Coordinate multi-step tasks and workflows',
+    icon: Layers,
+    idx: 2,
+  },
+]
+
+const capabilitiesRight = [
+  {
+    title: 'Prompt Engineering',
+    desc: 'Translate business needs into clear AI instructions',
+    icon: Terminal,
+    idx: 3,
+  },
+  {
+    title: 'Large Language Models (LLMs)',
+    desc: 'Power intelligent conversations and knowledge',
+    icon: MessageSquareText,
+    idx: 4,
+  },
+  {
+    title: 'Machine Learning (ML)',
+    desc: 'Find patterns and make data-driven predictions',
+    icon: BarChart3,
+    idx: 5,
+  },
+]
+---
+
+<section
+  class="aidev section"
+  id="ai-assisted-development"
+  aria-labelledby="ai-dev-title"
+  data-aidev
+>
+  <div class="site-container">
+    <div class="aidev-heading reveal">
+      <div class="aidev-title-wrap">
+        <p class="eyebrow">AI-ASSISTED SOFTWARE DEVELOPMENT</p>
+        <h2 id="ai-dev-title">
+          When Engineering <span>Meets AI</span>, Your Product{' '}
+          <br class="aidev-heading-break" />
+          <span>Goes Beyond</span> the Ordinary.
+        </h2>
+      </div>
+      <p class="aidev-lead">
+        AI helps us take your idea to working software sooner, speeding up
+        prototyping, coding, testing and routine development work.{' '}
+        <br class="aidev-lead-break" />
+        Speed never replaces engineering: experienced engineers design the
+        architecture, review every change and decide what ships,{' '}
+        <br class="aidev-lead-break" />
+        so your software is secure, reliable, maintainable and ready to grow
+        with your business.
+      </p>
+    </div>
+
+    <!-- Exact 3D AI Visualization Section (Compact, Balanced Composition) -->
+    <div
+      class="ai-vis-section reveal"
+      id="ai-vis-root"
+      data-aidev-vis
+      data-reveal-role="stage"
+    >
+      <!-- SVG Fibers & Glowing Nodes Overlay -->
+      <svg
+        class="ai-vis-svg"
+        id="ai-vis-svg"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <filter
+            id="ai-particle-glow"
+            x="-80%"
+            y="-80%"
+            width="260%"
+            height="260%"
+          >
+            <feGaussianBlur stdDeviation="3.5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <filter
+            id="ai-line-glow"
+            x="-20%"
+            y="-20%"
+            width="140%"
+            height="140%"
+          >
+            <feGaussianBlur stdDeviation="1.5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <filter
+            id="ai-node-glow"
+            x="-50%"
+            y="-50%"
+            width="200%"
+            height="200%"
+          >
+            <feGaussianBlur stdDeviation="2.5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        <!-- 6 Thin Glowing Fiber Paths (Rendered cleanly without objectBoundingBox clipping) -->
+        <path id="ai-fiber-0" class="ai-fiber-path" fill="none" />
+        <path id="ai-fiber-1" class="ai-fiber-path" fill="none" />
+        <path id="ai-fiber-2" class="ai-fiber-path" fill="none" />
+        <path id="ai-fiber-3" class="ai-fiber-path" fill="none" />
+        <path id="ai-fiber-4" class="ai-fiber-path" fill="none" />
+        <path id="ai-fiber-5" class="ai-fiber-path" fill="none" />
+
+        <!-- 6 Glowing Fiber Circular Nodes (Matching Exact Reference Design) -->
+        <g id="ai-node-0" class="ai-fiber-node" filter="url(#ai-node-glow)">
+          <circle
+            class="ai-node-halo"
+            r="8"
+            fill="rgba(224, 76, 36, 0.15)"
+            stroke="rgba(224, 76, 36, 0.45)"
+            stroke-width="1.2"
+          />
+          <circle
+            class="ai-node-core"
+            r="3.5"
+            fill="#e04c24"
+            stroke="#ffffff"
+            stroke-width="1.5"
+          />
+        </g>
+        <g id="ai-node-1" class="ai-fiber-node" filter="url(#ai-node-glow)">
+          <circle
+            class="ai-node-halo"
+            r="8"
+            fill="rgba(224, 76, 36, 0.15)"
+            stroke="rgba(224, 76, 36, 0.45)"
+            stroke-width="1.2"
+          />
+          <circle
+            class="ai-node-core"
+            r="3.5"
+            fill="#e04c24"
+            stroke="#ffffff"
+            stroke-width="1.5"
+          />
+        </g>
+        <g id="ai-node-2" class="ai-fiber-node" filter="url(#ai-node-glow)">
+          <circle
+            class="ai-node-halo"
+            r="8"
+            fill="rgba(224, 76, 36, 0.15)"
+            stroke="rgba(224, 76, 36, 0.45)"
+            stroke-width="1.2"
+          />
+          <circle
+            class="ai-node-core"
+            r="3.5"
+            fill="#e04c24"
+            stroke="#ffffff"
+            stroke-width="1.5"
+          />
+        </g>
+        <g id="ai-node-3" class="ai-fiber-node" filter="url(#ai-node-glow)">
+          <circle
+            class="ai-node-halo"
+            r="8"
+            fill="rgba(224, 76, 36, 0.15)"
+            stroke="rgba(224, 76, 36, 0.45)"
+            stroke-width="1.2"
+          />
+          <circle
+            class="ai-node-core"
+            r="3.5"
+            fill="#e04c24"
+            stroke="#ffffff"
+            stroke-width="1.5"
+          />
+        </g>
+        <g id="ai-node-4" class="ai-fiber-node" filter="url(#ai-node-glow)">
+          <circle
+            class="ai-node-halo"
+            r="8"
+            fill="rgba(224, 76, 36, 0.15)"
+            stroke="rgba(224, 76, 36, 0.45)"
+            stroke-width="1.2"
+          />
+          <circle
+            class="ai-node-core"
+            r="3.5"
+            fill="#e04c24"
+            stroke="#ffffff"
+            stroke-width="1.5"
+          />
+        </g>
+        <g id="ai-node-5" class="ai-fiber-node" filter="url(#ai-node-glow)">
+          <circle
+            class="ai-node-halo"
+            r="8"
+            fill="rgba(224, 76, 36, 0.15)"
+            stroke="rgba(224, 76, 36, 0.45)"
+            stroke-width="1.2"
+          />
+          <circle
+            class="ai-node-core"
+            r="3.5"
+            fill="#e04c24"
+            stroke="#ffffff"
+            stroke-width="1.5"
+          />
+        </g>
+
+        <!-- 6 Synchronized Glowing Orange Signal Particles (Radiating Outward from AI Core) -->
+        <g id="ai-particle-0" class="ai-particle">
+          <circle
+            class="ai-particle-halo"
+            r="8"
+            fill="rgba(224, 76, 36, 0.35)"
+            filter="url(#ai-particle-glow)"
+          />
+          <circle class="ai-particle-ring" r="4.2" fill="#e04c24" />
+          <circle class="ai-particle-core" r="2.2" fill="#ffffff" />
+        </g>
+        <g id="ai-particle-1" class="ai-particle">
+          <circle
+            class="ai-particle-halo"
+            r="8"
+            fill="rgba(224, 76, 36, 0.35)"
+            filter="url(#ai-particle-glow)"
+          />
+          <circle class="ai-particle-ring" r="4.2" fill="#e04c24" />
+          <circle class="ai-particle-core" r="2.2" fill="#ffffff" />
+        </g>
+        <g id="ai-particle-2" class="ai-particle">
+          <circle
+            class="ai-particle-halo"
+            r="8"
+            fill="rgba(224, 76, 36, 0.35)"
+            filter="url(#ai-particle-glow)"
+          />
+          <circle class="ai-particle-ring" r="4.2" fill="#e04c24" />
+          <circle class="ai-particle-core" r="2.2" fill="#ffffff" />
+        </g>
+        <g id="ai-particle-3" class="ai-particle">
+          <circle
+            class="ai-particle-halo"
+            r="8"
+            fill="rgba(224, 76, 36, 0.35)"
+            filter="url(#ai-particle-glow)"
+          />
+          <circle class="ai-particle-ring" r="4.2" fill="#e04c24" />
+          <circle class="ai-particle-core" r="2.2" fill="#ffffff" />
+        </g>
+        <g id="ai-particle-4" class="ai-particle">
+          <circle
+            class="ai-particle-halo"
+            r="8"
+            fill="rgba(224, 76, 36, 0.35)"
+            filter="url(#ai-particle-glow)"
+          />
+          <circle class="ai-particle-ring" r="4.2" fill="#e04c24" />
+          <circle class="ai-particle-core" r="2.2" fill="#ffffff" />
+        </g>
+        <g id="ai-particle-5" class="ai-particle">
+          <circle
+            class="ai-particle-halo"
+            r="8"
+            fill="rgba(224, 76, 36, 0.35)"
+            filter="url(#ai-particle-glow)"
+          />
+          <circle class="ai-particle-ring" r="4.2" fill="#e04c24" />
+          <circle class="ai-particle-core" r="2.2" fill="#ffffff" />
+        </g>
+      </svg>
+
+      <!-- Exact 3-Column Balanced Grid -->
+      <div class="ai-vis-grid">
+        <!-- Left Column (3 cards, middle indented inward) -->
+        <div class="ai-cards-col is-left">
+          {capabilitiesLeft.map((cap) => {
+            const Icon = cap.icon
+            const isIndented = cap.idx === 1
+            return (
+              <div
+                class:list={[
+                  'ai-node-card',
+                  'is-left',
+                  isIndented && 'is-indented',
+                ]}
+                data-card-idx={cap.idx}
+              >
+                <div class="ai-card-shimmer" aria-hidden="true" />
+                <div class="ai-node-icon" aria-hidden="true">
+                  <Icon size={24} strokeWidth={2.2} />
+                </div>
+                <div class="ai-node-divider" aria-hidden="true" />
+                <div class="ai-node-info">
+                  <h3 class="ai-node-title">{cap.title}</h3>
+                  <p class="ai-node-desc">{cap.desc}</p>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+
+        <!-- Center Column: Animated 3D AI Core with Multi-Axis Movement & Depth Visuals -->
+        <div class="ai-center-stage" id="ai-center-stage">
+          <div class="ai-cube-wrapper" id="ai-cube-wrapper">
+            <!-- Pulsing Ambient Energy Aura -->
+            <div class="ai-cube-ambient-glow" aria-hidden="true" />
+            <!-- Delicate Orbiting Energy Ring -->
+            <div class="ai-cube-energy-ring" aria-hidden="true" />
+            <!-- 3D Floating & Mouse-Interactive Cube Rig -->
+            <div class="ai-cube-3d-rig" id="ai-cube-3d-rig">
+              <img
+                class="ai-cube-img"
+                id="ai-cube-img"
+                src="/assets/exact-3d-ai-cube.png"
+                alt="Incaendo 3D AI Core"
+                width="235"
+                height="260"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <!-- Soft Realistic 3D Floor Shadow -->
+            <div class="ai-cube-floor-shadow" aria-hidden="true" />
+          </div>
+        </div>
+
+        <!-- Right Column (3 cards, middle indented inward) -->
+        <div class="ai-cards-col is-right">
+          {capabilitiesRight.map((cap) => {
+            const Icon = cap.icon
+            const isIndented = cap.idx === 4
+            return (
+              <div
+                class:list={[
+                  'ai-node-card',
+                  'is-right',
+                  isIndented && 'is-indented',
+                ]}
+                data-card-idx={cap.idx}
+              >
+                <div class="ai-card-shimmer" aria-hidden="true" />
+                <div class="ai-node-icon" aria-hidden="true">
+                  <Icon size={24} strokeWidth={2.2} />
+                </div>
+                <div class="ai-node-divider" aria-hidden="true" />
+                <div class="ai-node-info">
+                  <h3 class="ai-node-title">{cap.title}</h3>
+                  <p class="ai-node-desc">{cap.desc}</p>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </div>
+
+    <!-- Streamlined Action Bridge directly connecting to the 5-Step AI Workflow -->
+    <div class="aidev-bridge">
+      <p class="aidev-bridge-text">
+        Explore how our engineers transform real business needs into reliable,
+        production-ready AI outcomes.
+      </p>
+      <a
+        class="button button-primary aidev-bridge-btn"
+        href="#ai-practical-path"
+      >
+        <span>Explore AI-Powered Process</span>
+        <svg
+          class="aidev-bridge-icon"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M12 5v14M19 12l-7 7-7-7" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  function setupAIVisualization() {
+    const root = document.getElementById('ai-vis-root')
+    const svg = document.getElementById('ai-vis-svg')
+    const cube = document.getElementById('ai-cube-wrapper')
+    const cubeRig = document.getElementById('ai-cube-3d-rig')
+    if (!root || !svg || !cube) return
+
+    const cards = [0, 1, 2, 3, 4, 5].map((i) =>
+      root.querySelector(`[data-card-idx="${i}"]`),
+    )
+    const fibers = [0, 1, 2, 3, 4, 5].map((i) =>
+      document.getElementById(`ai-fiber-${i}`),
+    )
+    const nodes = [0, 1, 2, 3, 4, 5].map((i) =>
+      document.getElementById(`ai-node-${i}`),
+    )
+    const particles = [0, 1, 2, 3, 4, 5].map((i) =>
+      document.getElementById(`ai-particle-${i}`),
+    )
+
+    if (
+      !cards.every(Boolean) ||
+      !fibers.every(Boolean) ||
+      !nodes.every(Boolean) ||
+      !particles.every(Boolean)
+    ) {
+      return
+    }
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+    const updateGeometry = () => {
+      if (window.innerWidth <= 900) {
+        svg.style.display = 'none'
+        return
+      }
+      svg.style.display = 'block'
+
+      const rootRect = root.getBoundingClientRect()
+      const cubeRect = cube.getBoundingClientRect()
+
+      const cubeCenterY = cubeRect.top + cubeRect.height / 2 - rootRect.top
+      const cubeLeftX = cubeRect.left + 10 - rootRect.left
+      const cubeRightX = cubeRect.right - 10 - rootRect.left
+
+      // Exact attachment coordinates on the sleek 3D AI cube
+      const cubeOrigins = [
+        { x: cubeLeftX + 12, y: cubeCenterY - 34 }, // 0: top-left
+        { x: cubeLeftX, y: cubeCenterY }, // 1: mid-left
+        { x: cubeLeftX + 12, y: cubeCenterY + 34 }, // 2: bottom-left
+        { x: cubeRightX - 12, y: cubeCenterY - 34 }, // 3: top-right
+        { x: cubeRightX, y: cubeCenterY }, // 4: mid-right
+        { x: cubeRightX - 12, y: cubeCenterY + 34 }, // 5: bottom-right
+      ]
+
+      cards.forEach((card, i) => {
+        if (!card) return
+        const cardRect = card.getBoundingClientRect()
+        const cardY = cardRect.top + cardRect.height / 2 - rootRect.top
+        const isLeft = i < 3
+
+        const cardX = isLeft
+          ? cardRect.right - rootRect.left
+          : cardRect.left - rootRect.left
+
+        const origin = cubeOrigins[i]
+        const fiber = fibers[i]
+        const node = nodes[i]
+        if (!fiber || !node) return
+
+        const isMidCard = i === 1 || i === 4
+        // Position circular node along the horizontal span
+        // With spacious distance from AI, outer nodes are 38px from card, indented 30px
+        const nodeDist = isMidCard ? 30 : 38
+        const nodeX = isLeft ? cardX + nodeDist : cardX - nodeDist
+        const nodeY = cardY
+
+        node.setAttribute('transform', `translate(${nodeX}, ${nodeY})`)
+
+        // Path originates FROM the AI cube origin and terminates at the Card edge
+        // This ensures signal particles travel outward from AI into each capability
+        let d = ''
+        if (isMidCard) {
+          // Straight horizontal path: AI Origin -> Node -> Card
+          d = `M ${origin.x} ${origin.y} L ${nodeX} ${nodeY} L ${cardX} ${cardY}`
+        } else {
+          // Curved path: leaves AI horizontally, sweeps smoothly through Node, straight into Card
+          const dx = nodeX - origin.x
+          const c1x = origin.x + dx * 0.28
+          const c1y = origin.y
+          const c2x = origin.x + dx * 0.72
+          const c2y = nodeY
+          d = `M ${origin.x} ${origin.y} C ${c1x} ${c1y}, ${c2x} ${c2y}, ${nodeX} ${nodeY} L ${cardX} ${cardY}`
+        }
+
+        fiber.setAttribute('d', d)
+      })
+    }
+
+    updateGeometry()
+
+    // Interactive Hover Synchronization (Card <-> Fiber <-> Node)
+    cards.forEach((card, i) => {
+      if (!card) return
+      const fiber = fibers[i]
+      const node = nodes[i]
+
+      card.addEventListener('pointerenter', () => {
+        card.classList.add('is-hovered')
+        fiber?.classList.add('is-hovered')
+        node?.classList.add('is-hovered')
+      })
+
+      card.addEventListener('pointerleave', () => {
+        card.classList.remove('is-hovered')
+        fiber?.classList.remove('is-hovered')
+        node?.classList.remove('is-hovered')
+      })
+    })
+
+    // Interactive 3D Parallax Tilt Tracking on Mouse Move
+    let targetTiltX = 0
+    let targetTiltY = 0
+    let currentTiltX = 0
+    let currentTiltY = 0
+    let isHoveringRoot = false
+
+    root.addEventListener('pointerenter', () => {
+      isHoveringRoot = true
+    })
+
+    root.addEventListener('pointermove', (e) => {
+      if (window.innerWidth <= 900) return
+      const rect = root.getBoundingClientRect()
+      const centerX = rect.left + rect.width / 2
+      const centerY = rect.top + rect.height / 2
+      const nx = (e.clientX - centerX) / (rect.width / 2)
+      const ny = (e.clientY - centerY) / (rect.height / 2)
+      targetTiltX = Math.max(-1, Math.min(1, ny)) * -9
+      targetTiltY = Math.max(-1, Math.min(1, nx)) * 12
+    })
+
+    root.addEventListener('pointerleave', () => {
+      isHoveringRoot = false
+      targetTiltX = 0
+      targetTiltY = 0
+    })
+
+    // Synchronized Particle Animation Loop (Shared lock-step cycle)
+    let animProgress = 0
+    const CYCLE_DURATION = 3000 // ms
+    let lastTime = performance.now()
+    let rafId = 0
+    let isVisible = true
+
+    const animateParticles = (now = performance.now()) => {
+      if (!isVisible || reducedMotion.matches || window.innerWidth <= 900) {
+        rafId = 0
+        return
+      }
+
+      const delta = now - lastTime
+      lastTime = now
+
+      animProgress = (animProgress + delta / CYCLE_DURATION) % 1
+
+      let travelP = 0
+      let opacity = 0
+
+      if (animProgress < 0.78) {
+        const t = animProgress / 0.78
+        // Smooth acceleration out of AI, cruising along fiber, deceleration into card
+        travelP = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
+
+        // Quick fade-in as particle launches from AI (0 to 0.12),
+        // brilliant steady glow across fiber & node (0.12 to 0.86),
+        // smooth fade-out as it enters the card (0.86 to 1.0)
+        if (t < 0.12) {
+          opacity = t / 0.12
+        } else if (t > 0.86) {
+          opacity = (1 - t) / 0.14
+        } else {
+          opacity = 1
+        }
+      } else {
+        // Rest pause before next pulse launches from AI
+        travelP = 1
+        opacity = 0
+      }
+
+      fibers.forEach((fiber, i) => {
+        const pGroup = particles[i]
+        if (!fiber || !pGroup) return
+
+        try {
+          if (fiber instanceof SVGPathElement) {
+            const totalLen = fiber.getTotalLength()
+            if (totalLen > 0) {
+              const pt = fiber.getPointAtLength(totalLen * travelP)
+              pGroup.setAttribute('transform', `translate(${pt.x}, ${pt.y})`)
+              pGroup.style.opacity = String(opacity)
+            }
+          }
+        } catch {
+          // ignore layout math transitions
+        }
+      })
+
+      // Interactive 3D Parallax update on cube rig
+      if (cubeRig && window.innerWidth > 900) {
+        currentTiltX += (targetTiltX - currentTiltX) * 0.08
+        currentTiltY += (targetTiltY - currentTiltY) * 0.08
+
+        if (
+          isHoveringRoot ||
+          Math.abs(currentTiltX) > 0.05 ||
+          Math.abs(currentTiltY) > 0.05
+        ) {
+          cubeRig.style.transform = `perspective(800px) rotateX(${currentTiltX.toFixed(2)}deg) rotateY(${currentTiltY.toFixed(2)}deg) translateZ(8px)`
+        } else {
+          cubeRig.style.transform = ''
+        }
+      }
+
+      rafId = requestAnimationFrame(animateParticles)
+    }
+
+    const startAnimation = () => {
+      if (rafId) return
+      lastTime = performance.now()
+      rafId = requestAnimationFrame(animateParticles)
+    }
+
+    const stopAnimation = () => {
+      if (rafId) {
+        cancelAnimationFrame(rafId)
+        rafId = 0
+      }
+    }
+
+    startAnimation()
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting
+        if (isVisible) {
+          updateGeometry()
+          startAnimation()
+        } else {
+          stopAnimation()
+        }
+      },
+      { threshold: 0.15 },
+    )
+    observer.observe(root)
+
+    const handleResize = () => {
+      updateGeometry()
+      if (isVisible && !reducedMotion.matches && window.innerWidth > 900) {
+        startAnimation()
+      } else {
+        stopAnimation()
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+  }
+
+  setupAIVisualization()
+  document.addEventListener('astro:page-load', setupAIVisualization)
+</script>
+
+<style>
+  .aidev {
+    position: relative;
+    border-top: 1px solid var(--color-line);
+    background: linear-gradient(180deg, #fdfbf9 0%, #fef7f4 50%, #fdfbf9 100%);
+  }
+
+  /* ---------- Heading ---------- */
+  .aidev-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: clamp(1rem, 2vw, 1.35rem);
+    margin-bottom: clamp(1.75rem, 3.2vw, 2.5rem);
+  }
+
+  .aidev-title-wrap {
+    text-align: center;
+    width: 100%;
+  }
+
+  .aidev-heading h2 {
+    margin: 0;
+    font-size: var(--type-section-size);
+    font-weight: var(--type-heading-weight);
+    letter-spacing: var(--type-section-letter-spacing);
+    word-spacing: var(--type-section-word-spacing);
+    line-height: var(--type-section-line-height);
+    text-wrap: balance;
+  }
+
+  .aidev-heading h2 span {
+    color: var(--color-orange-dark);
+  }
+
+  .aidev-heading-break {
+    display: none;
+  }
+
+  .aidev-lead-break {
+    display: none;
+  }
+
+  .aidev-lead {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 58rem;
+    color: var(--color-body);
+    font-size: 0.94rem;
+    line-height: 1.7;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  /* ---------- 3D AI Visualization Section (Spacious & Balanced) ---------- */
+  .ai-vis-section {
+    position: relative;
+    width: 100%;
+    max-width: 1280px;
+    margin: 1.25rem auto 2.5rem;
+    background: transparent;
+  }
+
+  /* SVG Connections Overlay */
+  .ai-vis-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: visible;
+    background: transparent;
+  }
+
+  .ai-fiber-path {
+    fill: none !important;
+    stroke: rgba(224, 76, 36, 0.48);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    transition:
+      stroke 0.3s ease,
+      stroke-width 0.3s ease,
+      filter 0.3s ease;
+  }
+
+  .ai-fiber-path.is-hovered {
+    stroke: #e04c24;
+    stroke-width: 2.2;
+    filter: drop-shadow(0 0 5px rgba(224, 76, 36, 0.8));
+  }
+
+  /* Glowing Circular Node along each Fiber */
+  .ai-fiber-node {
+    transition: transform 0.25s ease;
+  }
+
+  .ai-fiber-node.is-hovered .ai-node-halo {
+    fill: rgba(224, 76, 36, 0.3);
+    stroke: #e04c24;
+    stroke-width: 1.6;
+  }
+
+  .ai-fiber-node.is-hovered .ai-node-core {
+    fill: #ffffff;
+    stroke: #e04c24;
+  }
+
+  /* Spacious 3-Column Grid with Comfortable Distance from Central AI */
+  .ai-vis-grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 395px 1fr 395px;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(35px, 4.5vw, 65px);
+    min-height: 440px;
+  }
+
+  /* Cards Columns (Left & Right) */
+  .ai-cards-col {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: relative;
+    z-index: 3;
+    width: 395px;
+  }
+
+  .ai-cards-col.is-left {
+    align-items: flex-start;
+  }
+
+  /* Indented Middle Card on Left (AI-Assisted Engineering): shifted inward towards AI */
+  .ai-cards-col.is-left .ai-node-card.is-indented {
+    margin-left: 28px;
+  }
+
+  .ai-cards-col.is-right {
+    align-items: flex-end;
+  }
+
+  /* Indented Middle Card on Right (Large Language Models): shifted inward towards AI */
+  .ai-cards-col.is-right .ai-node-card.is-indented {
+    margin-right: 28px;
+  }
+
+  /* Capability Node Card (Generously sized, crisp & prominent) */
+  .ai-node-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 395px;
+    box-sizing: border-box;
+    padding: 18px 24px;
+    background: #ffffff;
+    border: 1px solid rgba(238, 230, 222, 0.95);
+    border-radius: 22px;
+    box-shadow:
+      0 10px 24px -10px rgba(224, 76, 36, 0.1),
+      0 2px 10px rgba(16, 27, 45, 0.035);
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    transition:
+      transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1),
+      box-shadow 0.32s cubic-bezier(0.2, 0.8, 0.2, 1),
+      border-color 0.28s ease;
+    cursor: default;
+  }
+
+  /* Shimmer Light Reflection Sweep on Hover */
+  .ai-card-shimmer {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      115deg,
+      transparent 28%,
+      rgba(255, 255, 255, 0.85) 50%,
+      transparent 72%
+    );
+    transform: translateX(-110%);
+    transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .ai-node-card:hover .ai-card-shimmer,
+  .ai-node-card.is-hovered .ai-card-shimmer {
+    transform: translateX(110%);
+  }
+
+  /* Left Cards Hover Animated Moving Effect: lifts up and shifts towards center */
+  .ai-node-card.is-left:hover,
+  .ai-node-card.is-left.is-hovered {
+    transform: translateY(-5px) translateX(6px) scale(1.018);
+    border-color: rgba(224, 76, 36, 0.48);
+    box-shadow:
+      0 16px 32px -8px rgba(224, 76, 36, 0.24),
+      0 4px 14px rgba(16, 27, 45, 0.06);
+  }
+
+  /* Right Cards Hover Animated Moving Effect: lifts up and shifts towards center */
+  .ai-node-card.is-right:hover,
+  .ai-node-card.is-right.is-hovered {
+    transform: translateY(-5px) translateX(-6px) scale(1.018);
+    border-color: rgba(224, 76, 36, 0.48);
+    box-shadow:
+      0 16px 32px -8px rgba(224, 76, 36, 0.24),
+      0 4px 14px rgba(16, 27, 45, 0.06);
+  }
+
+  .ai-node-icon {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    background: rgba(224, 76, 36, 0.08);
+    color: #e04c24;
+    flex-shrink: 0;
+    transition:
+      background 0.3s ease,
+      transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+      box-shadow 0.3s ease;
+    position: relative;
+    z-index: 2;
+  }
+
+  .ai-node-card:hover .ai-node-icon,
+  .ai-node-card.is-hovered .ai-node-icon {
+    background: rgba(224, 76, 36, 0.16);
+    transform: scale(1.12) rotate(6deg);
+    box-shadow: 0 0 14px rgba(224, 76, 36, 0.28);
+  }
+
+  .ai-node-divider {
+    width: 1px;
+    height: 36px;
+    background: rgba(228, 220, 212, 0.85);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .ai-node-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .ai-node-title {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: var(--color-navy);
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+  }
+
+  .ai-node-desc {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 0.86rem;
+    color: var(--color-body);
+    line-height: 1.4;
+  }
+
+  /* Center Cube Stage (Refined, Sleek Proportion) */
+  .ai-center-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 3;
+    padding: 6px;
+    background: transparent;
+  }
+
+  .ai-cube-wrapper {
+    position: relative;
+    width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    perspective: 800px;
+  }
+
+  /* 3D Floating Rig with Multi-Axis Perspective Rotation */
+  .ai-cube-3d-rig {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+    animation: ai3DCubeLevitate 6.5s ease-in-out infinite;
+    will-change: transform;
+    transition: transform 0.18s ease-out;
+  }
+
+  @keyframes ai3DCubeLevitate {
+    0% {
+      transform: perspective(800px) translateY(0px) rotateX(3.5deg)
+        rotateY(-6deg) scale(1);
+    }
+    25% {
+      transform: perspective(800px) translateY(-5px) rotateX(-2deg)
+        rotateY(-2.5deg) scale(1.02);
+    }
+    50% {
+      transform: perspective(800px) translateY(-9px) rotateX(-5deg)
+        rotateY(4.5deg) scale(1.035);
+    }
+    75% {
+      transform: perspective(800px) translateY(-4px) rotateX(1.5deg)
+        rotateY(5.5deg) scale(1.02);
+    }
+    100% {
+      transform: perspective(800px) translateY(0px) rotateX(3.5deg)
+        rotateY(-6deg) scale(1);
+    }
+  }
+
+  /* 3D Dimensional Realistic Floor Shadow (Scaled to sleek cube) */
+  .ai-cube-floor-shadow {
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 110px;
+    height: 18px;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(224, 76, 36, 0.4) 0%,
+      rgba(16, 27, 45, 0.16) 42%,
+      transparent 74%
+    );
+    border-radius: 50%;
+    pointer-events: none;
+    animation: aiFloorShadowBreathe 6.5s ease-in-out infinite;
+    z-index: 1;
+  }
+
+  @keyframes aiFloorShadowBreathe {
+    0%,
+    100% {
+      transform: translateX(-50%) scale(1);
+      opacity: 0.85;
+    }
+    50% {
+      transform: translateX(-50%) scale(0.76);
+      opacity: 0.45;
+    }
+  }
+
+  /* Subtle Warm Ambient Glow behind Cube */
+  .ai-cube-ambient-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(
+      circle,
+      rgba(224, 76, 36, 0.24) 0%,
+      rgba(224, 76, 36, 0.08) 46%,
+      transparent 72%
+    );
+    border-radius: 50%;
+    pointer-events: none;
+    animation: ambientPulse 4.5s ease-in-out infinite alternate;
+    z-index: 1;
+  }
+
+  @keyframes ambientPulse {
+    0% {
+      opacity: 0.82;
+      transform: translate(-50%, -50%) scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.06);
+    }
+  }
+
+  /* Delicate Orbiting Energy Ring */
+  .ai-cube-energy-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 1px dashed rgba(224, 76, 36, 0.22);
+    animation: ringOrbit 26s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  @keyframes ringOrbit {
+    from {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+
+  .ai-cube-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 2;
+    background: transparent;
+    filter: drop-shadow(0 12px 26px rgba(224, 76, 36, 0.28))
+      drop-shadow(0 4px 10px rgba(16, 27, 45, 0.08));
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 1080px) {
+    .ai-vis-section {
+      max-width: 100%;
+      padding: 0 16px;
+    }
+
+    .ai-vis-grid {
+      grid-template-columns: minmax(280px, 315px) 1fr minmax(280px, 315px);
+      gap: 24px;
+    }
+
+    .ai-cards-col {
+      width: 100%;
+    }
+
+    .ai-node-card {
+      width: 100%;
+      padding: 13px 16px;
+      gap: 12px;
+    }
+
+    .ai-cards-col.is-left .ai-node-card.is-indented {
+      margin-left: 22px;
+    }
+
+    .ai-cards-col.is-right .ai-node-card.is-indented {
+      margin-right: 22px;
+    }
+
+    .ai-node-title {
+      font-size: 0.94rem;
+    }
+
+    .ai-node-desc {
+      font-size: 0.77rem;
+    }
+
+    .ai-cube-wrapper {
+      width: 130px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .ai-vis-svg {
+      display: none !important;
+    }
+
+    .ai-vis-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      min-height: auto;
+    }
+
+    .ai-cards-col {
+      width: 100%;
+      max-width: 440px;
+      gap: 12px;
+      align-items: stretch !important;
+    }
+
+    .ai-cards-col.is-left .ai-node-card.is-indented,
+    .ai-cards-col.is-right .ai-node-card.is-indented {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    .ai-node-card {
+      width: 100% !important;
+      max-width: 440px;
+    }
+
+    .ai-center-stage {
+      order: -1;
+    }
+
+    .ai-cube-wrapper {
+      width: 135px;
+      margin: 8px 0 12px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ai-cube-3d-rig,
+    .ai-cube-ambient-glow,
+    .ai-cube-energy-ring,
+    .ai-cube-floor-shadow {
+      animation: none !important;
+      transform: none !important;
+    }
+
+    .ai-particle {
+      display: none !important;
+    }
+  }
+
+  /* ---------- Streamlined Action Bridge to AI Workflow ---------- */
+  .aidev-bridge {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem 2rem;
+    margin-top: clamp(2rem, 3.5vw, 3rem);
+    padding: clamp(1.25rem, 2.5vw, 1.65rem) clamp(1.5rem, 3vw, 2.25rem);
+    background: #ffffff;
+    border: 1px solid rgba(238, 230, 222, 0.95);
+    border-radius: 22px;
+    box-shadow:
+      0 12px 30px -12px rgba(224, 76, 36, 0.12),
+      0 2px 10px rgba(16, 27, 45, 0.03);
+    max-width: 1040px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .aidev-bridge-text {
+    flex: 1 1 380px;
+    margin: 0;
+    color: var(--color-body);
+    font-size: 0.94rem;
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: normal;
+  }
+
+  .aidev-bridge-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 0.8rem 1.6rem;
+    border-radius: 9999px;
+    font-size: 0.94rem;
+    font-weight: 600;
+    white-space: nowrap;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(224, 76, 36, 0.28);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      background 0.25s ease;
+  }
+
+  .aidev-bridge-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(224, 76, 36, 0.38);
+  }
+
+  .aidev-bridge-icon {
+    transition: transform 0.25s ease;
+  }
+
+  .aidev-bridge-btn:hover .aidev-bridge-icon {
+    transform: translateY(3px);
+  }
+
+  /* Desktop: clean typography and aligned line breaks */
+  @media (min-width: 1101px) {
+    .aidev-heading h2 {
+      white-space: nowrap;
+    }
+
+    .aidev-heading-break {
+      display: inline;
+    }
+
+    .aidev-lead-break {
+      display: inline;
+    }
+
+    .aidev-lead {
+      max-width: 58rem;
+    }
+  }
+
+  @media (max-width: 820px) {
+    .aidev-bridge {
+      flex-direction: column;
+      text-align: center;
+      gap: 1.2rem;
+      padding: 1.25rem;
+    }
+
+    .aidev-bridge-text {
+      flex: initial;
+    }
+  }
+</style>

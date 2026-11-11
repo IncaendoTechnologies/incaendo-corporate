@@ -132,7 +132,7 @@ const row3Logos = [
 // Dynamically repeat each row's items so each track has enough elements
 // (minimum 14 items) to span ultra-wide/4K monitors without any empty gaps.
 function buildMarqueeSequence(items, minCount = 14) {
-  let seq = []
+  let seq = items.slice()
   while (seq.length < minCount) {
     seq = seq.concat(items)
   }
@@ -179,7 +179,7 @@ const marqueeRows = [
     <div class="client-marquee-intro reveal" data-client-intro>
       <p class="eyebrow">Client &amp; partner network</p>
       <h2 id="client-marquee-heading">
-        Good technology moves <span>forward together.</span>
+        Good Technology Moves <span>Forward Together.</span>
       </h2>
       <p class="section-intro">
         Strong partnerships turn ambitious ideas into thoughtful, dependable

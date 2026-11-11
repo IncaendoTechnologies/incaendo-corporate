@@ -1,0 +1,24 @@
+---
+/**
+ * Runs in <head> before first paint. Marks the document so motion.css can
+ * pre-hide entrance content, avoiding a visible flash before motion.js runs.
+ * Content stays visible when scripts are off, motion is reduced, or
+ * motion.js has not started within 3s (failsafe). Individual elements opt
+ * out with [data-entrance-exclude].
+ */
+---
+
+<script is:inline>
+  ;(() => {
+    const root = document.documentElement
+    try {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    } catch {
+      return
+    }
+    root.dataset.entrance = 'pending'
+    window.setTimeout(() => {
+      if (root.dataset.entrance === 'pending') delete root.dataset.entrance
+    }, 3000)
+  })()
+</script>

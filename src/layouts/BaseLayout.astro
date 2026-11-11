@@ -2,19 +2,19 @@
 import '../styles/global.css'
 import SiteHeader from '../components/SiteHeader.astro'
 import SiteFooter from '../components/SiteFooter.astro'
-import heroVisual from '../assets/hero-orbit.png'
+import ContactModal from '../components/ContactModal.astro'
+import HubSpotTracking from '../components/HubSpotTracking.astro'
+import SEO from '../components/SEO.astro'
+import EntranceMotionBoot from '../components/EntranceMotionBoot.astro'
 import introLogo from '../assets/Modern Blue and Orange iN Logo.png'
 
 const {
   title = 'Incaendo | Software Development & Technology',
   description = 'Incaendo is a software development and technology company with 15 years of industry experience.',
-  openGraphType = 'website',
+  // canonicalPath, noindex, openGraphType, image, imageAlt, pageType,
+  // breadcrumbs, article and schema pass through to the SEO component.
+  ...seo
 } = Astro.props
-const siteUrl = import.meta.env.PUBLIC_SITE_URL?.replace(/\/$/, '')
-const canonicalUrl = siteUrl
-  ? new URL(Astro.url.pathname, siteUrl).href
-  : undefined
-const socialImage = siteUrl ? new URL(heroVisual.src, siteUrl).href : undefined
 ---
 
 <!doctype html>
@@ -22,8 +22,8 @@ const socialImage = siteUrl ? new URL(heroVisual.src, siteUrl).href : undefined
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
     <meta name="theme-color" content="#f8f7f4" />
+    <EntranceMotionBoot />
     <script is:inline>
       try {
         const introSeen = sessionStorage.getItem('incaendo-brand-intro-seen')
@@ -38,18 +38,7 @@ const socialImage = siteUrl ? new URL(heroVisual.src, siteUrl).href : undefined
         // If storage or scripting is unavailable, keep the site unobstructed.
       }
     </script>
-    <title>{title}</title>
-    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
-    <meta property="og:type" content={openGraphType} />
-    <meta property="og:site_name" content="Incaendo" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
-    {socialImage && <meta property="og:image" content={socialImage} />}
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    {socialImage && <meta name="twitter:image" content={socialImage} />}
+    <SEO title={title} description={description} {...seo} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       rel="preconnect"
@@ -60,6 +49,7 @@ const socialImage = siteUrl ? new URL(heroVisual.src, siteUrl).href : undefined
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <HubSpotTracking />
   </head>
   <body>
     <div class="site-intro" data-site-intro aria-hidden="true" inert>
@@ -109,6 +99,7 @@ const socialImage = siteUrl ? new URL(heroVisual.src, siteUrl).href : undefined
     <SiteHeader />
     <slot />
     <SiteFooter />
+    <ContactModal />
     <script>
       import '../scripts/motion.js'
       import '../scripts/ai-showcase.js'

@@ -40,47 +40,411 @@ const workflowSteps = [
 >
   <div class="ai-workflow ai-reveal" id="ai-practical-path">
     <div class="site-container">
-      <div class="ai-workflow-heading">
-        <div>
-          <p class="eyebrow">A PRACTICAL PATH FROM NEED TO IMPACT</p>
+      <div class="ai-workflow-heading ai-workflow-heading-centered">
+        <div class="ai-workflow-title-wrap">
+          <p class="eyebrow">5-STEP IMPLEMENTATION ROADMAP</p>
           <h2 id="ai-practical-path-title">
-            From Business Need to an AI-Powered Outcome.
+            From Strategic Business Needs{' '}
+            <br class="ai-workflow-heading-break" />
+            to Measurable <span><span class="ai-nowrap">AI-Powered</span> Outcomes.</span>
           </h2>
         </div>
-        <p>
-          Understand the business, choose the right AI approach, connect it to
-          your workflow, and keep improving it.
-        </p>
+      </div>
+
+      <!-- Five Connected Animated SVG Cards -->
+      <div class="ai-practical-overview" aria-label="Five practical steps from need to outcome">
+        <!-- Interactive hint for client engagement -->
+        <div class="ai-cards-hint-wrap" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 15l6 6m-6-6v4.5m0-4.5h4.5M3 12a9 9 0 1 1 18 0 9 9 0 0 1-18 0z"></path>
+          </svg>
+          <span>Click any step to inspect its live architecture below</span>
+        </div>
+
+        <div class="ai-overview-row">
+          <!-- Card 1: Understand the Need -->
+          <article
+            class="ai-overview-card is-active"
+            style="--card-i: 0;"
+            data-target-step="understand"
+            tabindex="0"
+            role="button"
+            aria-label="Step 01: Understand the Need"
+          >
+            <div class="ai-overview-icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 68 68" fill="none" class="ai-step-svg svg-target" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <radialGradient id="target-ambient-glow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#ea580c" stop-opacity="0.35" />
+                    <stop offset="100%" stop-color="#ea580c" stop-opacity="0" />
+                  </radialGradient>
+                  <linearGradient id="target-red-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ff5722" />
+                    <stop offset="100%" stop-color="#dc2626" />
+                  </linearGradient>
+                  <linearGradient id="target-center-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ff3d00" />
+                    <stop offset="100%" stop-color="#991b1b" />
+                  </linearGradient>
+                  <linearGradient id="arrow-shaft-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#f8fafc" />
+                    <stop offset="100%" stop-color="#cbd5e1" />
+                  </linearGradient>
+                  <filter id="target-3d-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#ea580c" flood-opacity="0.36" />
+                  </filter>
+                </defs>
+                <!-- Pulsing Ambient Aura -->
+                <circle cx="32" cy="34" r="28" fill="url(#target-ambient-glow)" class="target-ambient-aura" />
+                <!-- Concentric Radar / Sonar Rings expanding from Bullseye -->
+                <circle cx="32" cy="34" r="8" stroke="#ff5722" stroke-width="1.6" fill="none" class="target-sonar-ring sonar-1" />
+                <circle cx="32" cy="34" r="8" stroke="#ea580c" stroke-width="1.6" fill="none" class="target-sonar-ring sonar-2" />
+                <g filter="url(#target-3d-shadow)">
+                  <circle cx="32" cy="34" r="23" fill="#ffffff" stroke="#f1ede6" stroke-width="1.5" />
+                  <circle cx="32" cy="34" r="18.5" fill="url(#target-red-grad)" class="target-pulse-ring" />
+                  <circle cx="32" cy="34" r="12" fill="#ffffff" />
+                  <circle cx="32" cy="34" r="6.8" fill="url(#target-center-grad)" class="target-bullseye-dot" />
+                  <path d="M 28 31 A 5 5 0 0 1 35 31" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" opacity="0.6" fill="none" />
+                </g>
+                <!-- Animated Target Arrow with Dynamic Strike & Vibration -->
+                <g class="target-arrow-rig">
+                  <line x1="32" y1="34" x2="54" y2="12" stroke="url(#arrow-shaft-grad)" stroke-width="3" stroke-linecap="round" />
+                  <circle cx="32" cy="34" r="1.8" fill="#7f1d1d" class="arrow-tip-glow" />
+                  <path d="M 45 15 L 53 13 L 51 21 Z" fill="#ff4d26" />
+                  <path d="M 50 10 L 58 8 L 56 16 Z" fill="#dc2626" />
+                  <line x1="49" y1="17" x2="55" y2="11" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" opacity="0.7" />
+                </g>
+                <g class="sparkle-ray" style="transform-origin: 56px 10px;">
+                  <line x1="56" y1="6" x2="60" y2="3" stroke="#ea580c" stroke-width="2" stroke-linecap="round" />
+                  <line x1="62" y1="10" x2="66" y2="12" stroke="#ea580c" stroke-width="2" stroke-linecap="round" />
+                  <line x1="52" y1="3" x2="50" y2="0" stroke="#ea580c" stroke-width="1.6" stroke-linecap="round" />
+                </g>
+              </svg>
+            </div>
+            <h3 class="ai-overview-card-title">Understand the Need</h3>
+          </article>
+
+          <!-- Connector 1 -->
+          <div class="ai-overview-bridge" aria-hidden="true">
+            <span class="ai-bridge-line"></span>
+            <span class="ai-bridge-node">
+              <span class="ai-bridge-dot"></span>
+            </span>
+          </div>
+
+          <!-- Card 2: Gather the Right Information -->
+          <article
+            class="ai-overview-card"
+            style="--card-i: 1;"
+            data-target-step="prepare"
+            tabindex="0"
+            role="button"
+            aria-label="Step 02: Gather the Right Information"
+          >
+            <div class="ai-overview-icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 68 68" fill="none" class="ai-step-svg svg-data" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="doc-bg-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff" />
+                    <stop offset="100%" stop-color="#f0f9ff" />
+                  </linearGradient>
+                  <linearGradient id="mag-rim-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ff5722" />
+                    <stop offset="100%" stop-color="#c2410c" />
+                  </linearGradient>
+                  <radialGradient id="mag-lens-flare" cx="35%" cy="35%" r="65%">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8" />
+                    <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.25" />
+                    <stop offset="100%" stop-color="#0284c7" stop-opacity="0.05" />
+                  </radialGradient>
+                  <filter id="doc-3d-shadow" x="-15%" y="-15%" width="130%" height="130%">
+                    <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#0284c7" flood-opacity="0.18" />
+                  </filter>
+                  <filter id="mag-3d-shadow" x="-25%" y="-25%" width="150%" height="150%">
+                    <feDropShadow dx="1" dy="4" stdDeviation="4" flood-color="#ea580c" flood-opacity="0.38" />
+                  </filter>
+                </defs>
+                <!-- Document Base with Live Glowing Data Lines and Rising Bars -->
+                <g filter="url(#doc-3d-shadow)">
+                  <rect x="14" y="10" width="30" height="42" rx="4" fill="url(#doc-bg-grad)" stroke="#38bdf8" stroke-width="1.8" />
+                  <path d="M 36 10 L 44 18 L 36 18 Z" fill="#bae6fd" />
+                  <path d="M 36 10 L 36 18 L 44 18" stroke="#38bdf8" stroke-width="1.6" fill="none" stroke-linejoin="round" />
+                  <line x1="20" y1="20" x2="31" y2="20" stroke="#0284c7" stroke-width="2.4" stroke-linecap="round" class="doc-line doc-line-1" />
+                  <line x1="20" y1="26" x2="38" y2="26" stroke="#0284c7" stroke-width="2.4" stroke-linecap="round" class="doc-line doc-line-2" />
+                  <line x1="20" y1="32" x2="33" y2="32" stroke="#0284c7" stroke-width="2.4" stroke-linecap="round" class="doc-line doc-line-3" />
+                  <!-- Live Data Stream Bars on Document -->
+                  <rect x="20" y="40" width="3.2" height="6" rx="1" fill="#0284c7" class="doc-bar doc-bar-1" />
+                  <rect x="25" y="37" width="3.2" height="9" rx="1" fill="#0284c7" class="doc-bar doc-bar-2" />
+                  <rect x="30" y="34" width="3.2" height="12" rx="1" fill="#38bdf8" class="doc-bar doc-bar-3" />
+                </g>
+                <!-- Active Scanning Magnifier with Smooth Orbit/Sweep Motion -->
+                <g class="magnifier-active-scanner" filter="url(#mag-3d-shadow)">
+                  <circle cx="41" cy="27" r="11" fill="url(#mag-lens-flare)" class="mag-glass-glow" />
+                  <circle cx="41" cy="27" r="11" stroke="url(#mag-rim-grad)" stroke-width="3" />
+                  <path d="M 35 22 A 7.5 7.5 0 0 1 45 22" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" fill="none" />
+                  <line x1="49" y1="35" x2="58" y2="44" stroke="url(#mag-rim-grad)" stroke-width="4.5" stroke-linecap="round" />
+                  <line x1="50" y1="36" x2="57" y2="43" stroke="#ffd0b5" stroke-width="1.4" stroke-linecap="round" />
+                  <!-- Laser Scan Crosshair / Reticle Pulse -->
+                  <circle cx="41" cy="27" r="3" fill="#ea580c" opacity="0.65" class="mag-reticle-dot" />
+                </g>
+                <g class="sparkle-ray" style="transform-origin: 55px 10px;">
+                  <line x1="55" y1="6" x2="59" y2="3" stroke="#ea580c" stroke-width="2" stroke-linecap="round" />
+                  <line x1="61" y1="10" x2="65" y2="12" stroke="#ea580c" stroke-width="2" stroke-linecap="round" />
+                </g>
+              </svg>
+            </div>
+            <h3 class="ai-overview-card-title">Gather the Right Information</h3>
+          </article>
+
+          <!-- Connector 2 -->
+          <div class="ai-overview-bridge" aria-hidden="true">
+            <span class="ai-bridge-line"></span>
+            <span class="ai-bridge-node">
+              <span class="ai-bridge-dot"></span>
+            </span>
+          </div>
+
+          <!-- Card 3: Choose the Right AI Solution -->
+          <article
+            class="ai-overview-card"
+            style="--card-i: 2;"
+            data-target-step="design"
+            tabindex="0"
+            role="button"
+            aria-label="Step 03: Choose the Right AI Solution"
+          >
+            <div class="ai-overview-icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 68 68" fill="none" class="ai-step-svg svg-chip" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="chip-grad-body" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ff5722" />
+                    <stop offset="50%" stop-color="#ea1d24" />
+                    <stop offset="100%" stop-color="#b91c1c" />
+                  </linearGradient>
+                  <linearGradient id="pin-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#fb923c" />
+                    <stop offset="100%" stop-color="#ea580c" />
+                  </linearGradient>
+                  <radialGradient id="chip-aura-pulse" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#ea580c" stop-opacity="0.45" />
+                    <stop offset="100%" stop-color="#ea580c" stop-opacity="0" />
+                  </radialGradient>
+                  <filter id="chip-ambient-glow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feDropShadow dx="0" dy="5" stdDeviation="5.5" flood-color="#ea580c" flood-opacity="0.5" />
+                  </filter>
+                </defs>
+                <!-- Energy Aura behind Chip -->
+                <circle cx="33" cy="33" r="26" fill="url(#chip-aura-pulse)" class="chip-energy-aura" />
+                <!-- Electronic Circuit Pins with Active Energy Pulse -->
+                <g class="chip-pins-layer">
+                  <rect x="25" y="8" width="4" height="10" rx="1.5" fill="url(#pin-grad)" class="chip-pin pin-v1" />
+                  <rect x="37" y="8" width="4" height="10" rx="1.5" fill="url(#pin-grad)" class="chip-pin pin-v2" />
+                  <rect x="25" y="48" width="4" height="10" rx="1.5" fill="url(#pin-grad)" class="chip-pin pin-v3" />
+                  <rect x="37" y="48" width="4" height="10" rx="1.5" fill="url(#pin-grad)" class="chip-pin pin-v4" />
+                  <rect x="8" y="25" width="10" height="4" rx="1.5" fill="url(#pin-grad)" class="chip-pin pin-h1" />
+                  <rect x="8" y="37" width="10" height="4" rx="1.5" fill="url(#pin-grad)" class="chip-pin pin-h2" />
+                  <rect x="48" y="25" width="10" height="4" rx="1.5" fill="url(#pin-grad)" class="chip-pin pin-h3" />
+                  <rect x="48" y="37" width="10" height="4" rx="1.5" fill="url(#pin-grad)" class="chip-pin pin-h4" />
+                  <!-- Streaming electric signal packets -->
+                  <circle cx="27" cy="11" r="1.5" fill="#ffffff" class="signal-dot dot-t1" />
+                  <circle cx="39" cy="11" r="1.5" fill="#ffffff" class="signal-dot dot-t2" />
+                  <circle cx="11" cy="27" r="1.5" fill="#ffffff" class="signal-dot dot-l1" />
+                  <circle cx="11" cy="39" r="1.5" fill="#ffffff" class="signal-dot dot-l2" />
+                  <circle cx="55" cy="27" r="1.5" fill="#ffffff" class="signal-dot dot-r1" />
+                  <circle cx="55" cy="39" r="1.5" fill="#ffffff" class="signal-dot dot-r2" />
+                  <circle cx="27" cy="55" r="1.5" fill="#ffffff" class="signal-dot dot-b1" />
+                  <circle cx="39" cy="55" r="1.5" fill="#ffffff" class="signal-dot dot-b2" />
+                </g>
+                <!-- AI Processor Core with Dynamic Respiration & Bezel -->
+                <g class="chip-core-glow" filter="url(#chip-ambient-glow)">
+                  <rect x="16" y="16" width="34" height="34" rx="8" fill="url(#chip-grad-body)" class="chip-body-rect" />
+                  <rect x="18.5" y="18.5" width="29" height="29" rx="6" stroke="rgba(255, 255, 255, 0.55)" stroke-width="1.4" fill="none" class="chip-inner-bezel" />
+                  <!-- AI Text with Glowing Neural Pulse -->
+                  <text x="33" y="39" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="16" fill="#ffffff" text-anchor="middle" letter-spacing="0.04em" class="chip-ai-label">AI</text>
+                </g>
+                <g class="sparkle-ray" style="transform-origin: 55px 11px;">
+                  <line x1="54" y1="7" x2="58" y2="4" stroke="#ea580c" stroke-width="2" stroke-linecap="round" />
+                  <line x1="60" y1="11" x2="64" y2="13" stroke="#ea580c" stroke-width="2" stroke-linecap="round" />
+                </g>
+              </svg>
+            </div>
+            <h3 class="ai-overview-card-title">Choose the Right AI Solution</h3>
+          </article>
+
+          <!-- Connector 3 -->
+          <div class="ai-overview-bridge" aria-hidden="true">
+            <span class="ai-bridge-line"></span>
+            <span class="ai-bridge-node">
+              <span class="ai-bridge-dot"></span>
+            </span>
+          </div>
+
+          <!-- Card 4: Connect Your Workflow -->
+          <article
+            class="ai-overview-card"
+            style="--card-i: 3;"
+            data-target-step="connect"
+            tabindex="0"
+            role="button"
+            aria-label="Step 04: Connect Your Workflow"
+          >
+            <div class="ai-overview-icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 68 68" fill="none" class="ai-step-svg svg-stack" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="layer-top-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#bae6fd" />
+                    <stop offset="100%" stop-color="#38bdf8" />
+                  </linearGradient>
+                  <linearGradient id="layer-mid-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#60a5fa" />
+                    <stop offset="100%" stop-color="#2563eb" />
+                  </linearGradient>
+                  <linearGradient id="layer-bot-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#3b82f6" />
+                    <stop offset="100%" stop-color="#1d4ed8" />
+                  </linearGradient>
+                  <linearGradient id="gear-3d-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ff5722" />
+                    <stop offset="100%" stop-color="#dc2626" />
+                  </linearGradient>
+                  <filter id="stack-3d-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#0284c7" flood-opacity="0.28" />
+                  </filter>
+                  <filter id="gear-3d-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="1" dy="3" stdDeviation="3.5" flood-color="#ea580c" flood-opacity="0.38" />
+                  </filter>
+                </defs>
+
+                <!-- Red-Orange Gear spinning smoothly around true center (48, 24) -->
+                <g class="workflow-gear" filter="url(#gear-3d-shadow)">
+                  <circle cx="48" cy="24" r="11" fill="url(#gear-3d-grad)" />
+                  <rect x="45.5" y="10" width="5" height="28" rx="1.5" fill="url(#gear-3d-grad)" />
+                  <rect x="34" y="21.5" width="28" height="5" rx="1.5" fill="url(#gear-3d-grad)" />
+                  <rect x="37.5" y="13.5" width="21" height="21" rx="1.5" fill="url(#gear-3d-grad)" transform="rotate(45 48 24)" />
+                  <circle cx="48" cy="24" r="8.5" fill="#f97316" />
+                  <circle cx="48" cy="24" r="4" fill="#ffffff" />
+                </g>
+
+                <!-- 3D Stacked Isometric Diamond Layers with Accordion Float Motion -->
+                <g class="stack-layers-group" filter="url(#stack-3d-shadow)">
+                  <!-- Bottom Layer -->
+                  <g class="stack-layer layer-bottom">
+                    <path d="M 9 40 L 25 48 L 41 40 L 41 44 L 25 52 L 9 44 Z" fill="#1e40af" />
+                    <path d="M 25 34 L 41 42 L 25 50 L 9 42 Z" fill="url(#layer-bot-grad)" />
+                  </g>
+
+                  <!-- Middle Layer -->
+                  <g class="stack-layer layer-middle">
+                    <path d="M 9 30 L 25 38 L 41 30 L 41 34 L 25 42 L 9 34 Z" fill="#1d4ed8" />
+                    <path d="M 25 24 L 41 32 L 25 40 L 9 32 Z" fill="url(#layer-mid-grad)" />
+                  </g>
+
+                  <!-- Top Layer -->
+                  <g class="stack-layer layer-top">
+                    <path d="M 9 20 L 25 28 L 41 20 L 41 24 L 25 32 L 9 24 Z" fill="#0284c7" />
+                    <path d="M 25 14 L 41 22 L 25 30 L 9 22 Z" fill="url(#layer-top-grad)" />
+                    <path d="M 12 22 L 25 28.5 L 38 22" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" opacity="0.6" fill="none" />
+                  </g>
+                </g>
+
+                <!-- Action rays / energy sparkles at top right -->
+                <g class="sparkle-ray" style="transform-origin: 59px 9px;">
+                  <line x1="58" y1="6" x2="62" y2="3" stroke="#ea580c" stroke-width="2" stroke-linecap="round" />
+                  <line x1="64" y1="10" x2="68" y2="12" stroke="#ea580c" stroke-width="2" stroke-linecap="round" />
+                </g>
+              </svg>
+            </div>
+            <h3 class="ai-overview-card-title">Connect Your Workflow</h3>
+          </article>
+
+          <!-- Connector 4 -->
+          <div class="ai-overview-bridge" aria-hidden="true">
+            <span class="ai-bridge-line"></span>
+            <span class="ai-bridge-node">
+              <span class="ai-bridge-dot"></span>
+            </span>
+          </div>
+
+          <!-- Card 5: Improve with Results -->
+          <article
+            class="ai-overview-card"
+            style="--card-i: 4;"
+            data-target-step="improve"
+            tabindex="0"
+            role="button"
+            aria-label="Step 05: Improve with Results"
+          >
+            <div class="ai-overview-icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 68 68" fill="none" class="ai-step-svg svg-bars" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="bar-3d-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#ff6b4a" />
+                    <stop offset="100%" stop-color="#d9381e" />
+                  </linearGradient>
+                  <linearGradient id="arrow-sweep-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#f97316" />
+                    <stop offset="100%" stop-color="#dc2626" />
+                  </linearGradient>
+                  <radialGradient id="beacon-glow-grad" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#ff5722" stop-opacity="0.75" />
+                    <stop offset="100%" stop-color="#ff5722" stop-opacity="0" />
+                  </radialGradient>
+                  <filter id="bars-3d-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="4" stdDeviation="3.8" flood-color="#ea580c" flood-opacity="0.32" />
+                  </filter>
+                </defs>
+                <!-- Dynamically Surging Metric Growth Bars -->
+                <g filter="url(#bars-3d-shadow)" class="metric-bars-group">
+                  <g class="metric-bar-item bar-1">
+                    <rect x="13" y="39" width="7" height="15" rx="2" fill="url(#bar-3d-grad)" />
+                    <line x1="15" y1="41" x2="15" y2="52" stroke="#ff8c70" stroke-width="1.2" stroke-linecap="round" opacity="0.6" />
+                  </g>
+                  <g class="metric-bar-item bar-2">
+                    <rect x="23" y="31" width="7" height="23" rx="2" fill="url(#bar-3d-grad)" />
+                    <line x1="25" y1="33" x2="25" y2="52" stroke="#ff8c70" stroke-width="1.2" stroke-linecap="round" opacity="0.6" />
+                  </g>
+                  <g class="metric-bar-item bar-3">
+                    <rect x="33" y="23" width="7" height="31" rx="2" fill="url(#bar-3d-grad)" />
+                    <line x1="35" y1="25" x2="35" y2="52" stroke="#ff8c70" stroke-width="1.2" stroke-linecap="round" opacity="0.6" />
+                  </g>
+                  <g class="metric-bar-item bar-4">
+                    <rect x="43" y="15" width="7" height="39" rx="2" fill="url(#bar-3d-grad)" />
+                    <line x1="45" y1="17" x2="45" y2="52" stroke="#ff8c70" stroke-width="1.2" stroke-linecap="round" opacity="0.6" />
+                  </g>
+                </g>
+                <!-- Soaring Growth Arrow -->
+                <g class="growth-arrow-soar">
+                  <path d="M 11 36 C 20 31, 31 19, 50 8" stroke="url(#arrow-sweep-grad)" stroke-width="3.2" stroke-linecap="round" fill="none" />
+                  <polygon points="55,7 46,6 50,14" fill="#dc2626" />
+                </g>
+                <!-- Achievement Beacon / Pulse at Peak -->
+                <circle cx="55" cy="7" r="7" fill="url(#beacon-glow-grad)" class="beacon-pulse" />
+                <circle cx="55" cy="7" r="2.2" fill="#ffffff" />
+                <g class="sparkle-ray" style="transform-origin: 55px 6px;">
+                  <line x1="53" y1="4" x2="57" y2="1" stroke="#ea580c" stroke-width="2" stroke-linecap="round" />
+                  <line x1="59" y1="7" x2="63" y2="9" stroke="#ea580c" stroke-width="2" stroke-linecap="round" />
+                </g>
+              </svg>
+            </div>
+            <h3 class="ai-overview-card-title">Improve with Results</h3>
+          </article>
+        </div>
       </div>
 
       <div class="ai-workflow-layout" data-active-step="understand">
-        <fieldset class="ai-workflow-steps">
-          <legend class="ai-workflow-legend">
-            Explore the workflow stages
-          </legend>
+        <!-- Visually hidden radio inputs to preserve state management across steps -->
+        <div class="ai-workflow-hidden-inputs" aria-hidden="true">
           {workflowSteps.map((step, index) => (
-            <label class="ai-workflow-step" for={`workflow-${step.id}`}>
-              <input
-                id={`workflow-${step.id}`}
-                type="radio"
-                name="ai-workflow-step"
-                value={step.id}
-                aria-describedby={`workflow-description-${step.id}`}
-                checked={index === 0}
-              />
-              <span class="ai-step-number">{step.number}</span>
-              <span class="ai-step-copy">
-                <strong>{step.title}</strong>
-                <small id={`workflow-description-${step.id}`}>
-                  {step.detail}
-                </small>
-              </span>
-              <span class="ai-step-arrow" aria-hidden="true">
-                ↗
-              </span>
-            </label>
+            <input
+              id={`workflow-${step.id}`}
+              type="radio"
+              name="ai-workflow-step"
+              value={step.id}
+              checked={index === 0}
+              tabindex="-1"
+            />
           ))}
-        </fieldset>
+        </div>
 
         <div class="ai-workflow-demo" data-workflow-demo>
           <div class="ai-demo-topline">
@@ -104,7 +468,7 @@ const workflowSteps = [
                 <span class="ai-state-kicker">
                   01 · UNDERSTAND THE BUSINESS
                 </span>
-                <h4>Interpret the request, then define what success means.</h4>
+                <h4>Interpret the Request, then Define What Success Means.</h4>
                 <p>
                   LLM-based analysis connects business requests with goals,
                   context, and constraints, helping teams identify the right
@@ -163,7 +527,7 @@ const workflowSteps = [
               <header class="ai-state-head">
                 <span class="ai-state-kicker">02 · PREPARE THE INPUTS</span>
                 <h4>
-                  Turn raw business information into searchable knowledge.
+                  Turn Raw Business Information into Searchable Knowledge.
                 </h4>
                 <p>
                   Data processing and retrieval organize relevant business
@@ -233,7 +597,7 @@ const workflowSteps = [
             <article class="ai-state-card" data-flow-state="design">
               <header class="ai-state-head">
                 <span class="ai-state-kicker">03 · DESIGN THE AI SOLUTION</span>
-                <h4>Retrieve the right context, generate, then check it.</h4>
+                <h4>Retrieve the Right Context, Generate, then Check It.</h4>
                 <p>
                   LLMs and RAG can deliver more relevant, context-aware
                   responses, helping businesses improve customer decisions and
@@ -336,7 +700,7 @@ const workflowSteps = [
             <article class="ai-state-card" data-flow-state="connect">
               <header class="ai-state-head">
                 <span class="ai-state-kicker">04 · CONNECT THE WORKFLOW</span>
-                <h4>Plug AI into the systems your team already uses.</h4>
+                <h4>Plug AI into the Systems Your Team Already Uses.</h4>
                 <p>
                   APIs and AI agents automate connected workflows, helping teams
                   reduce repetitive effort, manage operating costs, and use
@@ -413,7 +777,7 @@ const workflowSteps = [
             <article class="ai-state-card" data-flow-state="improve">
               <header class="ai-state-head">
                 <span class="ai-state-kicker">05 · MEASURE &amp; IMPROVE</span>
-                <h4>Check quality, watch the signals, and keep refining.</h4>
+                <h4>Check Quality, Watch the Signals, and Keep Refining.</h4>
                 <p>
                   Monitoring business outcomes helps identify efficiency gains,
                   cost-saving opportunities, and ways to improve profitability
@@ -521,6 +885,105 @@ const workflowSteps = [
 
 <script>
   import '../scripts/home-ai-experience.js'
+
+  function setupPracticalCardSync() {
+    const cards = Array.from(
+      document.querySelectorAll('.ai-overview-card[data-target-step]'),
+    ).filter((el) => el instanceof HTMLElement)
+    if (!cards.length) return
+
+    const updateActiveCard = (activeId) => {
+      if (!activeId) return
+      cards.forEach((card) => {
+        if (card instanceof HTMLElement) {
+          const isMatch = card.getAttribute('data-target-step') === activeId
+          card.classList.toggle('is-active', isMatch)
+          card.setAttribute('aria-pressed', isMatch ? 'true' : 'false')
+        }
+      })
+    }
+
+    const scrollToFitSection = () => {
+      const cardsWrap = document.querySelector('.ai-practical-overview')
+      const demoCard = document.querySelector('.ai-workflow-demo')
+      if (!(cardsWrap instanceof HTMLElement) || !(demoCard instanceof HTMLElement)) return
+
+      const cardsRect = cardsWrap.getBoundingClientRect()
+      const demoRect = demoCard.getBoundingClientRect()
+      const vh = window.innerHeight
+
+      // Check if both cards and demo are already comfortably framed
+      const isCardsTopVisible = cardsRect.top >= 5 && cardsRect.top <= 80
+      const isDemoBottomVisible = demoRect.bottom <= vh - 10 && demoRect.bottom >= vh * 0.6
+      if (isCardsTopVisible && isDemoBottomVisible) {
+        return
+      }
+
+      // Frame the interactive cards and the full visual layout together
+      const blockTop = cardsRect.top + window.scrollY
+      const blockBottom = demoRect.bottom + window.scrollY
+      const blockHeight = blockBottom - blockTop
+
+      let targetScrollY
+      if (blockHeight <= vh - 20) {
+        // Position cards near the top with a subtle margin so the entire visual demo card fits fully below
+        const topGap = Math.min(20, Math.max(10, (vh - blockHeight) * 0.2))
+        targetScrollY = blockTop - topGap
+      } else {
+        // If vertical viewport is tighter, ensure the bottom of the visual demo card is fully visible
+        targetScrollY = blockBottom - vh + 16
+      }
+
+      window.scrollTo({
+        top: Math.max(0, Math.round(targetScrollY)),
+        behavior: 'smooth',
+      })
+    }
+
+    cards.forEach((card) => {
+      if (card instanceof HTMLElement) {
+        const activate = () => {
+          const stepId = card.getAttribute('data-target-step')
+          if (!stepId) return
+          const input = document.getElementById(`workflow-${stepId}`)
+          if (input instanceof HTMLInputElement && !input.checked) {
+            input.checked = true
+            input.dispatchEvent(new Event('change', { bubbles: true }))
+          }
+          updateActiveCard(stepId)
+          scrollToFitSection()
+        }
+        card.addEventListener('click', activate)
+        card.addEventListener('keydown', (e) => {
+          if (e instanceof KeyboardEvent) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault()
+              activate()
+            }
+          }
+        })
+      }
+    })
+
+    const radios = Array.from(
+      document.querySelectorAll('input[name="ai-workflow-step"]'),
+    ).filter((el) => el instanceof HTMLInputElement)
+    radios.forEach((radio) => {
+      radio.addEventListener('change', (e) => {
+        if (e.target instanceof HTMLInputElement && e.target.checked) {
+          updateActiveCard(e.target.value)
+        }
+      })
+    })
+
+    const checked = document.querySelector('input[name="ai-workflow-step"]:checked')
+    if (checked instanceof HTMLInputElement) {
+      updateActiveCard(checked.value)
+    }
+  }
+
+  setupPracticalCardSync()
+  document.addEventListener('astro:page-load', setupPracticalCardSync)
 </script>
 
 <style>
@@ -546,35 +1009,621 @@ const workflowSteps = [
   }
   .ai-workflow-heading {
     display: flex;
-    align-items: end;
-    justify-content: space-between;
-    gap: 2rem;
-    margin-bottom: clamp(1.6rem, 2.4vw, 2.25rem);
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto clamp(1.35rem, 2.2vw, 1.85rem);
+  }
+  .ai-workflow-title-wrap {
+    text-align: center;
+    width: 100%;
+  }
+  .ai-workflow-heading .eyebrow {
+    margin-bottom: 0.45rem;
+    color: var(--color-orange-dark);
+    font-size: var(--type-eyebrow-size);
+    font-weight: 750;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
   .ai-workflow-heading h2 {
     margin: 0;
-    font-size: clamp(1.75rem, 2.6vw, 2.4rem);
-    font-weight: 650;
-    letter-spacing: -0.06em;
-    word-spacing: 0.06em;
-    line-height: 1.1;
+    font-size: var(--type-section-size);
+    font-weight: var(--type-heading-weight);
+    letter-spacing: var(--type-section-letter-spacing);
+    word-spacing: var(--type-section-word-spacing);
+    line-height: var(--type-section-line-height);
+    color: var(--color-navy);
+    text-wrap: balance;
   }
-  .ai-workflow-heading .eyebrow {
-    margin-bottom: 0.5rem;
+  .ai-workflow-heading h2 span {
+    color: var(--color-orange-dark);
   }
-  .ai-workflow-heading > p {
-    max-width: 380px;
-    margin: 0 0 0.1rem;
-    color: var(--color-body);
-    font-size: 0.95rem;
-    line-height: 1.55;
+  .ai-nowrap {
+    white-space: nowrap;
+  }
+  .ai-workflow-heading-break {
+    display: none;
+  }
+  .desktop-only {
+    display: block;
+  }
+  @media (max-width: 640px) {
+    .desktop-only {
+      display: none;
+    }
+  }
+  @media (min-width: 680px) {
+    .ai-workflow-heading-break {
+      display: inline;
+    }
+  }
+  @media (min-width: 1101px) {
+    .ai-workflow-heading h2 {
+      white-space: nowrap;
+    }
+  }
+
+  /* Five Connected Animated SVG Cards (Row) */
+  .ai-practical-overview {
+    position: relative;
+    margin-bottom: clamp(1.5rem, 2.8vw, 2.5rem);
+    width: 100%;
+  }
+
+  /* Interactive hint above cards */
+  .ai-cards-hint-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: -0.5rem auto 1.6rem;
+    color: var(--color-muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .ai-cards-hint-wrap svg {
+    color: var(--color-orange-dark);
+  }
+
+  .ai-overview-row {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .ai-overview-card {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 215px;
+    background: #ffffff;
+    border: 1.5px solid rgba(226, 232, 240, 0.95);
+    border-radius: 18px;
+    padding: 1.35rem 1rem 1.45rem;
+    min-height: 162px;
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 4px 10px -2px rgba(15, 23, 42, 0.02);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    transition:
+      transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+      background 0.25s ease;
+    animation: overviewCardIn 0.55s var(--ease-out) both;
+    animation-delay: calc(var(--card-i, 0) * 80ms + 100ms);
+  }
+
+  .ai-overview-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20%;
+    right: 20%;
+    height: 3px;
+    background: #ea580c;
+    border-radius: 0 0 3px 3px;
+    opacity: 0;
+    transform: scaleX(0.4);
+    transition: all 0.25s ease;
+  }
+
+  @keyframes overviewCardIn {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .ai-overview-card:hover,
+  .ai-overview-card:focus-visible {
+    transform: translateY(-4px);
+    border-color: rgba(234, 88, 12, 0.45);
+    box-shadow: 0 14px 28px -6px rgba(234, 88, 12, 0.14), 0 4px 10px rgba(15, 23, 42, 0.04);
+    outline: none;
+  }
+
+  .ai-overview-card:hover .ai-overview-card-title {
+    color: var(--color-orange-dark);
+  }
+
+  .ai-overview-card.is-active {
+    border-color: #ea580c;
+    background: linear-gradient(180deg, #ffffff 0%, #fff9f6 100%);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px -6px rgba(234, 88, 12, 0.22), 0 0 0 1px rgba(234, 88, 12, 0.18);
+  }
+
+  .ai-overview-card.is-active::before {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .ai-overview-card.is-active .ai-overview-card-title {
+    color: var(--color-orange-dark);
+  }
+
+  .ai-overview-icon-wrap {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.85rem;
+    position: relative;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .ai-overview-card:hover .ai-overview-icon-wrap {
+    transform: scale(1.1);
+  }
+
+  .ai-step-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .ai-overview-card-title {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 0.98rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--color-navy);
+    line-height: 1.3;
+    text-align: center;
+    transition: color 0.2s ease;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+  }
+
+  /* Connector Bridge Between Cards */
+  .ai-overview-bridge {
+    position: relative;
+    flex: 1 1 36px;
+    min-width: 24px;
+    max-width: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2px;
+    margin-top: 51px;
+    align-self: flex-start;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .ai-bridge-line {
+    position: absolute;
+    left: -4px;
+    right: -4px;
+    top: 0;
+    height: 2px;
+    background: repeating-linear-gradient(
+      to right,
+      #ea580c,
+      #ea580c 4px,
+      transparent 4px,
+      transparent 8px
+    );
+    opacity: 0.65;
+  }
+
+  .ai-bridge-node {
+    position: relative;
+    z-index: 3;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1.8px solid #ea580c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 8px rgba(234, 88, 12, 0.45);
+  }
+
+  .ai-bridge-dot {
+    width: 3.5px;
+    height: 3.5px;
+    border-radius: 50%;
+    background: #ea580c;
+    animation: bridgeDotPulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes bridgeDotPulse {
+    0%, 100% { transform: scale(1); opacity: 0.85; }
+    50% { transform: scale(1.35); opacity: 1; filter: drop-shadow(0 0 4px #ea580c); }
+  }
+
+  /* =========================================================
+     Dynamic Visual Effects & SVG Micro-Animations
+     ========================================================= */
+
+  /* --- Card 1: Understand the Need (Bullseye Radar Sonar Waves & Arrow Strike) --- */
+  .target-ambient-aura {
+    transform-origin: 32px 34px;
+    animation: targetAuraPulse 3s ease-in-out infinite;
+  }
+  @keyframes targetAuraPulse {
+    0%, 100% { opacity: 0.55; transform: scale(0.95); }
+    50% { opacity: 1; transform: scale(1.1); }
+  }
+
+  .target-sonar-ring {
+    transform-origin: 32px 34px;
+    animation: targetSonarExpand 2.8s cubic-bezier(0.1, 0.6, 0.3, 1) infinite;
+  }
+  .target-sonar-ring.sonar-2 {
+    animation-delay: 1.4s;
+  }
+  @keyframes targetSonarExpand {
+    0% {
+      r: 8px;
+      opacity: 0.9;
+      stroke-width: 2px;
+    }
+    100% {
+      r: 26px;
+      opacity: 0;
+      stroke-width: 0.5px;
+    }
+  }
+
+  .target-pulse-ring {
+    transform-origin: 32px 34px;
+    animation: targetPulseRing 2.6s ease-in-out infinite;
+  }
+  @keyframes targetPulseRing {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(220, 38, 38, 0)); }
+    50% { transform: scale(1.05); filter: drop-shadow(0 0 5px rgba(220, 38, 38, 0.5)); }
+  }
+
+  .target-arrow-rig {
+    transform-origin: 32px 34px;
+    animation: arrowStrikeVibrate 3.2s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+  }
+  @keyframes arrowStrikeVibrate {
+    0%, 100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    18% {
+      transform: translate(2.5px, -2.5px) rotate(2deg);
+    }
+    24% {
+      transform: translate(-1.2px, 1.2px) rotate(-1.2deg);
+    }
+    30% {
+      transform: translate(0.6px, -0.6px) rotate(0.6deg);
+    }
+    38% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+  }
+
+  .arrow-tip-glow {
+    animation: arrowTipFlash 3.2s ease-in-out infinite;
+  }
+  @keyframes arrowTipFlash {
+    0%, 18%, 38%, 100% { fill: #7f1d1d; }
+    24% { fill: #ff5722; filter: drop-shadow(0 0 6px #ff5722); }
+  }
+
+  /* --- Card 2: Gather the Right Information (Scanning Magnifier & Data Stream) --- */
+  .magnifier-active-scanner {
+    transform-origin: 41px 27px;
+    animation: magSearchLoop 4.5s ease-in-out infinite;
+  }
+  @keyframes magSearchLoop {
+    0%, 100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+      transform: translate(-12px, -3px) rotate(-6deg);
+    }
+    50% {
+      transform: translate(-10px, 9px) rotate(4deg);
+    }
+    75% {
+      transform: translate(-2px, 5px) rotate(-2deg);
+    }
+  }
+
+  .mag-glass-glow {
+    animation: magLensGlow 3s ease-in-out infinite;
+  }
+  @keyframes magLensGlow {
+    0%, 100% { opacity: 0.65; }
+    50% { opacity: 1; filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.6)); }
+  }
+
+  .mag-reticle-dot {
+    transform-origin: 41px 27px;
+    animation: reticlePulse 2s ease-in-out infinite;
+  }
+  @keyframes reticlePulse {
+    0%, 100% { transform: scale(1); opacity: 0.45; }
+    50% { transform: scale(1.45); opacity: 1; filter: drop-shadow(0 0 3px #ea580c); }
+  }
+
+  .doc-line-1 { animation: docLineGlow 3s ease-in-out infinite 0.2s; }
+  .doc-line-2 { animation: docLineGlow 3s ease-in-out infinite 0.6s; }
+  .doc-line-3 { animation: docLineGlow 3s ease-in-out infinite 1s; }
+  @keyframes docLineGlow {
+    0%, 100% { stroke: #0284c7; stroke-width: 2.4; }
+    50% { stroke: #38bdf8; stroke-width: 2.8; filter: drop-shadow(0 0 3px #38bdf8); }
+  }
+
+  .doc-bar-1 {
+    transform-origin: 21.6px 46px;
+    animation: docBarDance 2.4s ease-in-out infinite 0s;
+  }
+  .doc-bar-2 {
+    transform-origin: 26.6px 46px;
+    animation: docBarDance 2.4s ease-in-out infinite 0.3s;
+  }
+  .doc-bar-3 {
+    transform-origin: 31.6px 46px;
+    animation: docBarDance 2.4s ease-in-out infinite 0.6s;
+  }
+  @keyframes docBarDance {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(1.4); }
+  }
+
+  /* --- Card 3: Choose the Right AI Solution (AI Chip Core Glow & Circuit Signals) --- */
+  .chip-energy-aura {
+    transform-origin: 33px 33px;
+    animation: chipAuraBreath 3s ease-in-out infinite;
+  }
+  @keyframes chipAuraBreath {
+    0%, 100% { transform: scale(0.92); opacity: 0.4; }
+    50% { transform: scale(1.15); opacity: 0.95; }
+  }
+
+  .chip-core-glow {
+    transform-origin: 33px 33px;
+    animation: chipCoreBreathe 2.8s ease-in-out infinite;
+  }
+  @keyframes chipCoreBreathe {
+    0%, 100% {
+      filter: drop-shadow(0 3px 8px rgba(234, 88, 12, 0.4));
+      transform: scale(1);
+    }
+    50% {
+      filter: drop-shadow(0 6px 18px rgba(234, 88, 12, 0.8));
+      transform: scale(1.03);
+    }
+  }
+
+  .chip-ai-label {
+    animation: aiTextShimmer 2.8s ease-in-out infinite;
+  }
+  @keyframes aiTextShimmer {
+    0%, 100% { fill: #ffffff; }
+    50% { fill: #fff7ed; filter: drop-shadow(0 0 4px #ea580c); }
+  }
+
+  .signal-dot {
+    animation: signalFlowPulse 2s ease-in-out infinite;
+  }
+  .dot-t1, .dot-l1, .dot-r1, .dot-b1 { animation-delay: 0s; }
+  .dot-t2, .dot-l2, .dot-r2, .dot-b2 { animation-delay: 1s; }
+  @keyframes signalFlowPulse {
+    0%, 100% { opacity: 0.25; transform: scale(0.85); }
+    50% { opacity: 1; transform: scale(1.45); filter: drop-shadow(0 0 4px #ffffff); }
+  }
+
+  /* --- Card 4: Connect Your Workflow (Gear Rotation & Accordion Stack Floating) --- */
+  .workflow-gear {
+    transform-origin: 48px 24px;
+    animation: gearSmoothSpin 8s linear infinite;
+  }
+  @keyframes gearSmoothSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .stack-layer.layer-top {
+    animation: layerFloatTop 3.6s ease-in-out infinite;
+  }
+  .stack-layer.layer-middle {
+    animation: layerFloatMid 3.6s ease-in-out infinite;
+  }
+  @keyframes layerFloatTop {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3.5px); }
+  }
+  @keyframes layerFloatMid {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-1.8px); }
+  }
+
+  /* --- Card 5: Improve with Results (Metric Bars Surge & Soaring Arrow) --- */
+  .metric-bar-item {
+    transform-box: fill-box;
+    transform-origin: bottom;
+    animation: barSurgeBounce 2.5s ease-in-out infinite;
+  }
+  .metric-bar-item.bar-1 { animation-delay: 0s; }
+  .metric-bar-item.bar-2 { animation-delay: 0.22s; }
+  .metric-bar-item.bar-3 { animation-delay: 0.44s; }
+  .metric-bar-item.bar-4 { animation-delay: 0.66s; }
+  @keyframes barSurgeBounce {
+    0%, 100% { transform: scaleY(1); }
+    40% { transform: scaleY(1.24); filter: brightness(1.15); }
+    60% { transform: scaleY(0.95); }
+  }
+
+  .growth-arrow-soar {
+    animation: arrowSoarGlide 2.8s ease-in-out infinite;
+  }
+  @keyframes arrowSoarGlide {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(2.5px, -3.2px); filter: drop-shadow(0 0 5px rgba(220, 38, 38, 0.45)); }
+  }
+
+  .beacon-pulse {
+    transform-origin: 55px 7px;
+    animation: beaconFlash 2.8s ease-in-out infinite;
+  }
+  @keyframes beaconFlash {
+    0%, 100% { transform: scale(0.8); opacity: 0.35; }
+    50% { transform: scale(1.6); opacity: 0.95; }
+  }
+
+  /* --- Universal Twinkling Sparkles --- */
+  .sparkle-ray {
+    animation: sparkleTwinkle 2.2s ease-in-out infinite;
+  }
+  @keyframes sparkleTwinkle {
+    0%, 100% { opacity: 0.35; transform: scale(0.85) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.25) rotate(8deg); filter: drop-shadow(0 0 3px #ea580c); }
+  }
+
+  /* Responsive Layouts */
+  @media (max-width: 991px) {
+    .ai-overview-row {
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .ai-overview-card {
+      flex: 1 1 calc(33.333% - 1rem);
+      max-width: 210px;
+      min-width: 155px;
+      min-height: 148px;
+    }
+    .ai-overview-bridge {
+      display: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .ai-overview-row {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .ai-overview-card {
+      width: 100%;
+      max-width: 320px;
+      min-height: auto;
+      padding: 1.15rem 1rem;
+    }
+    .ai-overview-bridge {
+      display: flex;
+      width: 24px;
+      height: 28px;
+      margin-top: 0;
+      align-self: center;
+    }
+    .ai-bridge-line {
+      left: 50%;
+      right: auto;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      height: 100%;
+      background: repeating-linear-gradient(
+        to bottom,
+        #ea580c,
+        #ea580c 4px,
+        transparent 4px,
+        transparent 8px
+      );
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .target-ambient-aura,
+    .target-sonar-ring,
+    .target-pulse-ring,
+    .target-arrow-rig,
+    .arrow-tip-glow,
+    .magnifier-active-scanner,
+    .mag-glass-glow,
+    .mag-reticle-dot,
+    .doc-line-1,
+    .doc-line-2,
+    .doc-line-3,
+    .doc-bar-1,
+    .doc-bar-2,
+    .doc-bar-3,
+    .chip-energy-aura,
+    .chip-core-glow,
+    .chip-ai-label,
+    .signal-dot,
+    .workflow-gear,
+    .stack-layer,
+    .metric-bar-item,
+    .growth-arrow-soar,
+    .beacon-pulse,
+    .sparkle-ray,
+    .bridge-dot,
+    .ai-overview-card {
+      animation: none !important;
+      transform: none !important;
+    }
   }
 
   .ai-workflow-layout {
-    display: grid;
-    grid-template-columns: minmax(270px, 0.66fr) minmax(0, 1.7fr);
-    align-items: stretch;
-    gap: 1rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+  }
+  .ai-workflow-hidden-inputs {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+    opacity: 0;
+    pointer-events: none;
   }
   .ai-workflow-steps {
     display: flex;
@@ -694,15 +1743,18 @@ const workflowSteps = [
   .ai-workflow-demo {
     display: flex;
     min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
     flex-direction: column;
     overflow: hidden;
-    padding: clamp(1.1rem, 1.8vw, 1.4rem) clamp(1rem, 2vw, 1.5rem);
+    padding: clamp(1.6rem, 2.8vw, 2.5rem);
     border: 1px solid rgb(16 27 45 / 9%);
     border-radius: var(--radius-large);
-    background: linear-gradient(145deg, #fff 0%, #fdfbf8 65%, #f7f2ec 100%);
+    background: linear-gradient(165deg, #fffdfb 0%, #fbf8f4 60%, #f8f3ed 100%);
     box-shadow:
-      0 20px 50px -34px rgb(16 27 45 / 30%),
-      0 2px 8px rgb(16 27 45 / 4%);
+      0 1px 2px rgb(16 27 45 / 4%),
+      0 20px 48px -20px rgb(16 27 45 / 20%);
     container: ai-demo / inline-size;
   }
   .ai-demo-topline {
@@ -787,20 +1839,20 @@ const workflowSteps = [
     letter-spacing: 0.11em;
   }
   .ai-state-head h4 {
-    margin: 0.5rem 0 0.7rem;
+    margin: 0.45rem 0 0.6rem;
     color: var(--color-ink);
-    font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+    font-size: clamp(1.25rem, 1.8vw, 1.55rem);
     font-weight: 700;
     letter-spacing: -0.045em;
     word-spacing: 0.045em;
     line-height: 1.2;
   }
   .ai-state-head p {
-    max-width: 720px;
+    max-width: 920px;
     margin: 0;
     color: var(--color-body);
-    font-size: 0.9rem;
-    line-height: 1.5;
+    font-size: 0.94rem;
+    line-height: 1.6;
   }
 
   /* Diagram primitives */
@@ -1468,7 +2520,7 @@ const workflowSteps = [
   .dg-signals-head small {
     padding: 0.15rem 0.45rem;
     border-radius: 999px;
-    background: #f1efeb;
+    background: var(--surface-subtle);
     color: var(--color-muted);
     font-size: 0.66rem;
     font-weight: 700;
@@ -1798,25 +2850,9 @@ const workflowSteps = [
     }
   }
 
-  @media (max-width: 1199px) {
-    .ai-workflow-layout {
-      grid-template-columns: minmax(250px, 0.7fr) minmax(0, 1.75fr);
-    }
-  }
-
   @media (max-width: 991px) {
-    .ai-workflow-layout {
-      grid-template-columns: 1fr;
-    }
-    .ai-workflow-steps {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    .ai-workflow-step {
-      min-height: 0;
-    }
-    .ai-workflow-step:last-child {
-      grid-column: 1 / -1;
+    .ai-workflow-demo {
+      max-width: 100%;
     }
   }
 
@@ -1825,10 +2861,7 @@ const workflowSteps = [
       --ai-space: 3.75rem;
     }
     .ai-workflow-heading {
-      display: block;
-    }
-    .ai-workflow-heading > p {
-      margin-top: 0.75rem;
+      text-align: center;
     }
     .ai-workflow-step {
       grid-template-columns: 34px minmax(0, 1fr);

@@ -2,12 +2,19 @@
 import InsightArtwork from './InsightArtwork.astro'
 import { Image } from 'astro:assets'
 
-const { article, variant = 'standard', thumbnail } = Astro.props
+const {
+  article,
+  variant = 'standard',
+  thumbnail,
+  target,
+  rel,
+} = Astro.props
 const image = thumbnail ?? article.image?.src
 const categoryKey = article.category
   .toLocaleLowerCase()
   .replace(/[^a-z0-9]+/g, '-')
   .replace(/^-|-$/g, '')
+const linkRel = target === '_blank' ? rel || 'noopener noreferrer' : rel
 ---
 
 <article
@@ -20,6 +27,8 @@ const categoryKey = article.category
     class="insight-card-art-link"
     href={`/insights/${article.slug}/`}
     aria-label={`Read article: ${article.title}`}
+    target={target}
+    rel={linkRel}
   >
     {image ? (
       <Image
@@ -59,7 +68,9 @@ const categoryKey = article.category
       )}
     </div>
     <h2>
-      <a href={`/insights/${article.slug}/`}>{article.title}</a>
+      <a href={`/insights/${article.slug}/`} target={target} rel={linkRel}>
+        {article.title}
+      </a>
     </h2>
     <p class="insight-card-excerpt">{article.excerpt}</p>
     <div class="insight-card-footer">
@@ -67,8 +78,10 @@ const categoryKey = article.category
         {article.author ? (
           <>
             {article.author} <span aria-hidden="true">·</span>{' '}
-            {article.dateFormatted || article.publishedDate || 'Published'}{' '}
-            <span aria-hidden="true">·</span> {article.readMinutes} min read
+            {/* Non-breaking spaces keep the date and read time whole when
+                the line wraps. */}
+            {(article.dateFormatted || article.publishedDate || 'Published').replace(/ /g, ' ')}{' '}
+            <span aria-hidden="true">·</span> {`${article.readMinutes} min read`}
           </>
         ) : (
           <>
@@ -77,7 +90,12 @@ const categoryKey = article.category
           </>
         )}
       </p>
-      <a class="insight-read-link" href={`/insights/${article.slug}/`}>
+      <a
+        class="insight-read-link"
+        href={`/insights/${article.slug}/`}
+        target={target}
+        rel={linkRel}
+      >
         Read article{' '}
         <span class="link-arrow" aria-hidden="true">
           →

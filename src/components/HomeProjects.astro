@@ -12,7 +12,7 @@ const featuredNames = [
 ]
 const featuredProjects = featuredNames
   .map((name) => projects.find((project) => project.name === name))
-  .filter(Boolean)
+  .flatMap((project) => (project ? [project] : []))
 
 const projectHref = (project) =>
   `/projects/#project-${projects.indexOf(project) + 1}-heading`
@@ -24,8 +24,8 @@ const projectHref = (project) =>
       <div>
         <p class="eyebrow">Selected projects</p>
         <h2 id="home-projects-heading">
-          Different challenges.{' '}
-          <span class="hero-title-accent">Thoughtful digital work.</span>
+          Different Challenges.{' '}
+          <span class="hero-title-accent">Thoughtful Digital Work.</span>
         </h2>
         <p class="section-intro">
           Explore products and platforms across commerce, mobile experiences,
@@ -33,7 +33,12 @@ const projectHref = (project) =>
           context.
         </p>
       </div>
-      <a class="button button-primary" href="/projects/">
+      <a
+        class="button button-primary"
+        href="/projects/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         Explore all projects <span aria-hidden="true">↗</span>
       </a>
     </div>
@@ -211,7 +216,11 @@ const projectHref = (project) =>
       }, rotationDelay)
     }
 
-    function showSlide(index, announce = true, explicitDirection = null) {
+    function showSlide(
+      index,
+      announce = true,
+      explicitDirection = '',
+    ) {
       const newIndex = (index + slides.length) % slides.length
       if (newIndex === activeIndex && previousIndex !== -1) return
 
@@ -498,7 +507,7 @@ const projectHref = (project) =>
 
 <style>
   .home-projects-section {
-    padding-block: clamp(2rem, 4vh, 3rem);
+    padding-block: var(--section-space-md) var(--section-space-sm);
     background: var(--color-paper);
   }
 
@@ -537,8 +546,8 @@ const projectHref = (project) =>
     max-width: 630px;
     margin: 0.9rem 0 0;
     color: var(--color-body);
-    font-size: var(--type-body-size);
-    line-height: var(--type-body-line-height);
+    font-size: var(--type-intro-size);
+    line-height: var(--type-intro-line-height);
   }
 
   .home-projects-intro > .button {
@@ -764,7 +773,7 @@ const projectHref = (project) =>
     border: 1px solid rgb(255 255 255 / 32%);
     background: rgb(16 27 45 / 78%);
     color: var(--color-white);
-    font-size: 0.58rem;
+    font-size: var(--type-label-size);
     font-weight: 700;
     letter-spacing: 0.12em;
   }
@@ -783,7 +792,7 @@ const projectHref = (project) =>
   .home-project-category {
     margin: 0;
     color: var(--color-orange-dark);
-    font-size: 0.64rem;
+    font-size: var(--type-label-size);
     font-weight: 700;
     letter-spacing: 0.1em;
     line-height: 1.4;
@@ -794,8 +803,8 @@ const projectHref = (project) =>
     margin: 0.6rem 0 0;
     color: var(--color-navy);
     font-family: var(--font-heading);
-    font-size: clamp(1.3rem, 2vw, 1.8rem);
-    font-weight: 620;
+    font-size: var(--type-card-title-lg-size);
+    font-weight: var(--type-heading-weight);
     letter-spacing: -0.045em;
     word-spacing: 0.045em;
     line-height: 1.2;
@@ -804,7 +813,7 @@ const projectHref = (project) =>
   .home-project-description {
     margin: 0.7rem 0 1rem;
     color: var(--color-body);
-    font-size: 0.84rem;
+    font-size: var(--type-card-text-size);
     line-height: 1.65;
   }
 
@@ -814,8 +823,8 @@ const projectHref = (project) =>
     gap: 0.4rem;
     margin-top: 0.75rem;
     color: var(--color-orange-dark);
-    font-size: 0.76rem;
-    font-weight: 650;
+    font-size: var(--type-ui-size);
+    font-weight: 600;
     text-decoration: underline;
     text-decoration-color: transparent;
     text-decoration-thickness: 1px;
@@ -983,10 +992,6 @@ const projectHref = (project) =>
       --preview-overlap: 10px;
     }
 
-    .home-projects-section {
-      padding-block: 3.5rem;
-    }
-
     .home-project-slide {
       grid-template-columns: minmax(0, 1fr);
       align-content: start;
@@ -1016,7 +1021,6 @@ const projectHref = (project) =>
 
     .home-project-description {
       margin-top: 0.55rem;
-      font-size: 0.82rem;
     }
 
     .home-projects-controls {

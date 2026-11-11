@@ -1,0 +1,15 @@
+---
+// HubSpot tracking code (na2). It sets the first-party `hubspotutk` cookie,
+// which the contact form sends as `context.hutk` so HubSpot can link each
+// submission to the visitor's contact record and page history.
+import { HUBSPOT_TRACKING_SCRIPT_URL } from '../scripts/hubspot-form.js'
+---
+
+<script
+  is:inline
+  type="text/javascript"
+  id="hs-script-loader"
+  async
+  defer
+  src={HUBSPOT_TRACKING_SCRIPT_URL}
+></script>

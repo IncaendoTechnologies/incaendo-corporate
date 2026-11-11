@@ -10,12 +10,12 @@
 
 const TAU = Math.PI * 2
 // Letter size in the open view, relative to idle.
-const OPEN_SCALE = 0.64
+const OPEN_SCALE = 0.74
 // Open-view sphere radius as a share of the field, and how many extra
 // particles join it, relative to the idle cloud. Larger and denser than the
 // idle cloud so the open view reads as a rich, full sphere around the
 // letters rather than a thin shell.
-const SPHERE_R = 0.37
+const SPHERE_R = 0.385
 const SPHERE_EXTRA = 2.1
 // Length of the idle/open morph, and how long closing waits for the cards to
 // start fading before the letters grow back.

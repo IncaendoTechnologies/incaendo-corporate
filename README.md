@@ -53,8 +53,10 @@ src/
 public/         Static files such as robots.txt
 ```
 
-Bootstrap CSS is imported through the global stylesheet. Add Bootstrap JavaScript only if a component requires its interactive behavior. React is used for the contact form island; its submit button stays disabled until `PUBLIC_CONTACT_ENDPOINT` is configured with a verified HTTPS endpoint that validates and safely handles the JSON payload.
+Bootstrap CSS is imported through the global stylesheet. Add Bootstrap JavaScript only if a component requires its interactive behavior. The contact form (`src/components/ContactForm.astro`) submits directly to HubSpot through the public Forms Submission API; portal ID, form ID, region, field mapping and response handling live in `src/scripts/hubspot-form.js`, and no HubSpot credentials are used.
 
-Copy `.env.example` to `.env` for local public configuration. Set `PUBLIC_SITE_URL` to the production origin to emit canonical and absolute social metadata. A sitemap is not generated until the production origin is known.
+Copy `.env.example` to `.env` for local public configuration.
+
+SEO: the production origin (`https://www.incaendo.com`) is set as `site` in `astro.config.mjs` and drives canonical URLs, Open Graph/Twitter URLs, JSON-LD and `/sitemap.xml`. Page metadata is rendered by `src/components/SEO.astro`; pages pass `title`, `description` and optional overrides (`canonicalPath`, `noindex`, `image`, `pageType`, `breadcrumbs`, `schema`) through the layouts. Duplicate routes and non-indexable pages are listed in `src/data/seo.js`. Hosting redirects and launch tasks are tracked in `docs/deployment-checklist.md`.
 
 The project materials did not include approved client names, project outcomes, testimonials, team biographies, company contact details, or legal privacy text. Pages call out these content gaps for review; replace the notices only with verified, approved information before launch. The privacy page is a draft checklist, not a final policy.

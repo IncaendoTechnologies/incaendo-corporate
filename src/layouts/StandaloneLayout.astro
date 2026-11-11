@@ -1,0 +1,65 @@
+---
+import '../styles/global.css'
+import ContactModal from '../components/ContactModal.astro'
+import HubSpotTracking from '../components/HubSpotTracking.astro'
+import SEO from '../components/SEO.astro'
+import EntranceMotionBoot from '../components/EntranceMotionBoot.astro'
+
+const {
+  title = 'NIRVAN | Healthcare CRM & Hospital Management Platform',
+  description = 'Simplify healthcare operations with one connected platform for clinics, hospitals, and growing healthcare networks.',
+  // canonicalPath, noindex, openGraphType, image, imageAlt, pageType,
+  // breadcrumbs, article and schema pass through to the SEO component.
+  ...seo
+} = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f8f7f4" />
+    <EntranceMotionBoot />
+    <SEO
+      title={title}
+      description={description}
+      siteName="NIRVAN by Incaendo"
+      {...seo}
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <HubSpotTracking />
+  </head>
+  <body class="standalone-product-body">
+    <a class="skip-link" href="#main-content">
+      Skip to content
+    </a>
+    <slot />
+    <ContactModal />
+    <script>
+      import '../scripts/motion.js'
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  body.standalone-product-body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+</style>

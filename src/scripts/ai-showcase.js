@@ -7,7 +7,6 @@ if (showcase) {
   const captionKicker = showcase.querySelector('[data-ai-caption-kicker]')
   const caption = showcase.querySelector('[data-ai-caption]')
   const captionPanel = showcase.querySelector('.ai-showcase-caption')
-  const section = showcase.closest('#ai-highlight')
   const prefersReducedMotion = window.matchMedia(
     '(prefers-reduced-motion: reduce)',
   )

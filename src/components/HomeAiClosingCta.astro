@@ -12,17 +12,21 @@
       </div>
       <div class="ai-closing-copy">
         <p class="eyebrow">START WITH THE BUSINESS NEED</p>
-        <h3 id="ai-closing-title">
+        <h2 id="ai-closing-title">
           Your Business Challenge.
           <br />
           <span>A Practical AI Solution.</span>
-        </h3>
+        </h2>
         <p>
           Every business is different. Let’s explore where AI and automation
           could make a meaningful difference to yours.
         </p>
       </div>
-      <a class="button button-primary ai-closing-button" href="/contact">
+      <a
+        class="button button-primary ai-closing-button"
+        href="/contact#project-inquiry"
+        data-open-contact-modal
+      >
         Let’s Talk About AI{' '}
         <span class="link-arrow" aria-hidden="true">
           →
@@ -39,11 +43,10 @@
 <style>
   .ai-closing {
     /* Same rhythm as the homepage AI section it was split from */
-    --ai-space: clamp(4.5rem, 7vw, 6.5rem);
-    padding-block: var(--ai-space);
+    padding-block: var(--section-space-sm) var(--section-space-md);
     background: var(--color-paper);
   }
-  .ai-closing-copy h3 span {
+  .ai-closing-copy h2 span {
     color: var(--color-orange-dark);
   }
 
@@ -69,11 +72,11 @@
   .ai-closing-copy .eyebrow {
     margin-bottom: 0.6rem;
   }
-  .ai-closing-copy h3 {
+  .ai-closing-copy h2 {
     margin: 0 0 0.6rem;
     color: var(--color-ink);
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-    font-weight: 650;
+    font-size: var(--type-section-size);
+    font-weight: var(--type-heading-weight);
     letter-spacing: -0.065em;
     word-spacing: 0.065em;
     line-height: 1.08;
@@ -82,8 +85,8 @@
     max-width: 620px;
     margin: 0;
     color: var(--color-body);
-    font-size: 0.88rem;
-    line-height: 1.6;
+    font-size: var(--type-intro-size);
+    line-height: var(--type-intro-line-height);
   }
   .ai-closing-button {
     position: relative;
@@ -124,9 +127,6 @@
   }
 
   @media (max-width: 767px) {
-    .ai-closing {
-      --ai-space: 3.75rem;
-    }
     .ai-closing-cta {
       align-items: flex-start;
       flex-direction: column;
@@ -134,9 +134,6 @@
   }
 
   @media (max-width: 480px) {
-    .ai-closing-copy h3 {
-      font-size: 1.85rem;
-    }
     .ai-closing-button {
       min-width: 0;
     }
