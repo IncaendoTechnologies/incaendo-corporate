@@ -1,7 +1,5 @@
 ---
 import ContactForm from './ContactForm.astro'
-
-const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? ''
 ---
 
 <div
@@ -36,7 +34,7 @@ const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? ''
       </button>
     </div>
     <div class="contact-modal-body">
-      <ContactForm endpoint={contactEndpoint} idPrefix="modal" />
+      <ContactForm idPrefix="modal" />
     </div>
   </div>
 </div>
@@ -157,6 +155,11 @@ const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? ''
     border-color: var(--color-orange);
     background: var(--color-peach);
     color: var(--color-orange-dark);
+  }
+
+  .contact-modal-close:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
   }
 
   .contact-modal-close:focus-visible {

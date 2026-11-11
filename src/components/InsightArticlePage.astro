@@ -51,7 +51,7 @@ const relatedArticles = articles
     </div>
   </header>
 
-  <main class="article-main">
+  <div class="article-main">
     <div class="site-container">
       <figure class="article-cover reveal">
         {article.image ? (
@@ -231,14 +231,14 @@ const relatedArticles = articles
         </article>
       </div>
     </div>
-  </main>
+  </div>
 
   <section
     class="article-related section"
     aria-labelledby="related-insights-heading"
   >
     <div class="site-container">
-      <div class="article-related-heading">
+      <div class="article-related-heading reveal">
         <div>
           <p class="eyebrow">Keep exploring</p>
           <h2 id="related-insights-heading">More Ideas to Consider.</h2>
@@ -250,7 +250,7 @@ const relatedArticles = articles
           </span>
         </a>
       </div>
-      <div class="article-related-grid">
+      <div class="article-related-grid reveal" data-reveal-stagger>
         {relatedArticles.map((relatedArticle) => (
           <InsightCard article={relatedArticle} variant="related" />
         ))}
@@ -259,7 +259,7 @@ const relatedArticles = articles
   </section>
 
   <section class="article-closing" aria-labelledby="article-closing-heading">
-    <div class="site-container article-closing-inner">
+    <div class="site-container article-closing-inner reveal">
       <div>
         <p class="eyebrow eyebrow-light">Put an idea into context</p>
         <h2 id="article-closing-heading">

@@ -1,5 +1,8 @@
 ---
-const { endpoint = '', idPrefix = 'contact' } = Astro.props
+import { HUBSPOT_SUBMIT_URL } from '../scripts/hubspot-form.js'
+
+const { idPrefix = 'contact' } = Astro.props
+const endpoint = HUBSPOT_SUBMIT_URL
 const fieldId = (suffix) => `${idPrefix}-${suffix}`
 ---
 
@@ -7,6 +10,7 @@ const fieldId = (suffix) => `${idPrefix}-${suffix}`
   class="contact-form"
   data-contact-form
   data-endpoint={endpoint}
+  data-hs-do-not-collect="true"
   novalidate
 >
   <div class="row gx-3 gy-3 form-grid">
@@ -111,7 +115,8 @@ const fieldId = (suffix) => `${idPrefix}-${suffix}`
         <option>₹5–15 lakh</option>
         <option>₹15–50 lakh</option>
         <option>Above ₹50 lakh</option>
-        <option>Prefer to discuss</option>
+        <!-- Value must match the HubSpot project_budget option exactly. -->
+        <option value="- Prefer to discuss">Prefer to discuss</option>
       </select>
     </div>
     <div class="form-field col-12">
@@ -159,10 +164,28 @@ const fieldId = (suffix) => `${idPrefix}-${suffix}`
     ></span>
   </div>
 
+  <!-- Spam honeypot: invisible to people, often filled by bots. -->
+  <div class="contact-form-hp" aria-hidden="true">
+    <label for={fieldId('website')}>Website</label>
+    <input
+      id={fieldId('website')}
+      name="website"
+      type="text"
+      tabindex="-1"
+      autocomplete="off"
+    />
+  </div>
+
   <div class="form-submit-row">
     <button class="button button-primary" type="submit">
+      <span
+        class="form-submit-spinner"
+        data-submit-spinner
+        aria-hidden="true"
+        hidden
+      ></span>
       <span data-submit-label>Send project inquiry</span>
-      <span aria-hidden="true">↗</span>
+      <span aria-hidden="true" data-submit-arrow>↗</span>
     </button>
     <p>
       {endpoint ? (
@@ -177,10 +200,16 @@ const fieldId = (suffix) => `${idPrefix}-${suffix}`
       )}
     </p>
   </div>
-  <p class="form-status" data-form-status role="status" aria-live="polite"></p>
 </form>
 
 <script>
+  import {
+    buildHubSpotPayload,
+    describeHubSpotError,
+    SUBMIT_FAILED_MESSAGE,
+  } from '../scripts/hubspot-form.js'
+  import { showToast } from '../scripts/toast.js'
+
   function initializeContactForms() {
     const forms = Array.from(
       document.querySelectorAll('[data-contact-form]'),
@@ -191,15 +220,42 @@ const fieldId = (suffix) => `${idPrefix}-${suffix}`
       if (form.dataset.initialized === 'true') return
       form.dataset.initialized = 'true'
 
-      const status = form.querySelector('[data-form-status]')
       const submitLabel = form.querySelector('[data-submit-label]')
+      const submitSpinner = form.querySelector('[data-submit-spinner]')
+      const submitArrow = form.querySelector('[data-submit-arrow]')
       const originalButtonText = submitLabel?.textContent ?? 'Send project inquiry'
 
-      const setStatus = (message, isError = false) => {
-        if (status instanceof HTMLElement) {
-          status.textContent = message
-          status.setAttribute('role', isError ? 'alert' : 'status')
+      // Submission feedback is shown as a toast (src/scripts/toast.js);
+      // field validation stays inline next to each field. The submit button
+      // stays locked for the toast's full lifetime as well as the request.
+      const FEEDBACK_MS = 3000
+      let dismissToast = () => {}
+      const notifySuccess = () => {
+        dismissToast()
+        dismissToast = showToast({
+          type: 'success',
+          title: 'Inquiry sent successfully!',
+          description:
+            'Thank you for reaching out. Our team will get back to you soon.',
+          duration: FEEDBACK_MS,
+        })
+      }
+      const notifyError = (description = SUBMIT_FAILED_MESSAGE) => {
+        dismissToast()
+        dismissToast = showToast({
+          type: 'error',
+          title: 'Unable to send your inquiry',
+          description,
+          duration: FEEDBACK_MS,
+        })
+      }
+
+      const setSending = (sending) => {
+        if (submitLabel) {
+          submitLabel.textContent = sending ? 'Sending…' : originalButtonText
         }
+        if (submitSpinner instanceof HTMLElement) submitSpinner.hidden = !sending
+        if (submitArrow instanceof HTMLElement) submitArrow.hidden = sending
       }
 
       const setFieldError = (name, message = '') => {
@@ -269,8 +325,11 @@ const fieldId = (suffix) => `${idPrefix}-${suffix}`
         }
       })
 
+      let isSubmitting = false
+
       form.addEventListener('submit', async (event) => {
         event.preventDefault()
+        if (isSubmitting) return
         validate()
         const firstInvalid = form.querySelector('[aria-invalid="true"]')
         if (firstInvalid instanceof HTMLElement) {
@@ -280,9 +339,8 @@ const fieldId = (suffix) => `${idPrefix}-${suffix}`
 
         const endpoint = form.dataset.endpoint?.trim() ?? ''
         if (!endpoint) {
-          setStatus(
-            'Your message was not sent because form delivery is not configured. Please email info@incaendo.com to reach us.',
-            true,
+          notifyError(
+            'Online sending isn’t set up yet. Please email info@incaendo.com.',
           )
           return
         }
@@ -293,30 +351,72 @@ const fieldId = (suffix) => `${idPrefix}-${suffix}`
           if (target.protocol !== 'https:')
             throw new Error('A secure endpoint is required.')
         } catch {
-          setStatus(
-            'Your message was not sent because the configured form endpoint is invalid. Please email info@incaendo.com to reach us.',
-            true,
+          notifyError(
+            'Online sending isn’t available right now. Please email info@incaendo.com.',
           )
           return
         }
 
-        const payload = Object.fromEntries(new FormData(form).entries())
+        // Read values before disabling controls: disabled fields are
+        // excluded from FormData.
+        const formData = new FormData(form)
+        const honeypot = formData.get('website')
+        const payload = buildHubSpotPayload(formData)
+
         const controls = Array.from(
           form.querySelectorAll('input, select, textarea, button'),
         ).filter((c) => 'disabled' in c)
+        isSubmitting = true
+        let succeeded = false
         controls.forEach((control) => {
           control.disabled = true
         })
-        if (submitLabel) submitLabel.textContent = 'Sending…'
-        setStatus('')
+        setSending(true)
+        dismissToast()
+        // Lifecycle events (bubbling) let a container such as the contact
+        // modal react without coupling to this component:
+        //   contact-form:pending  -> request in flight
+        //   contact-form:settled  -> response handled, toast shown
+        //   contact-form:complete -> toast lifecycle done, button unlocked
+        const emit = (name) =>
+          form.dispatchEvent(
+            new CustomEvent(`contact-form:${name}`, {
+              bubbles: true,
+              detail: { success: succeeded },
+            }),
+          )
+        emit('pending')
 
         try {
-          const response = await fetch(target.href, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
-          })
-          if (!response.ok) throw new Error('The enquiry could not be sent.')
+          // Bot filled the hidden field: don't forward it, but don't tip it off.
+          if (typeof honeypot === 'string' && honeypot.trim()) {
+            form.reset()
+            succeeded = true
+            notifySuccess()
+            return
+          }
+
+          let response
+          try {
+            response = await fetch(target.href, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+            })
+          } catch {
+            notifyError()
+            return
+          }
+
+          if (!response.ok) {
+            // Keep everything the visitor typed; only flag what HubSpot rejected.
+            const { fieldErrors } = await describeHubSpotError(response)
+            Object.entries(fieldErrors).forEach(([name, fieldMessage]) =>
+              setFieldError(name, fieldMessage),
+            )
+            notifyError()
+            return
+          }
 
           form.reset()
           form.querySelectorAll('[aria-invalid="true"]').forEach((field) => {
@@ -328,17 +428,30 @@ const fieldId = (suffix) => `${idPrefix}-${suffix}`
               error.hidden = true
             }
           })
-          setStatus('Thank you. Your enquiry has been sent.')
+          succeeded = true
+          notifySuccess()
         } catch {
-          setStatus(
-            'We could not send your enquiry. Please try again later.',
-            true,
-          )
+          notifyError()
         } finally {
+          // Every path above has shown a toast. Fields come back right away
+          // (values are kept on failure); the submit button and the
+          // duplicate-submit guard stay locked until the toast has run.
+          const submitButton = form.querySelector('button[type="submit"]')
           controls.forEach((control) => {
-            control.disabled = false
+            if (control !== submitButton) control.disabled = false
           })
-          if (submitLabel) submitLabel.textContent = originalButtonText
+          setSending(false)
+          emit('settled')
+          // If HubSpot rejected specific fields, move focus to the first one.
+          const rejected = form.querySelector('[aria-invalid="true"]')
+          if (rejected instanceof HTMLElement) rejected.focus()
+
+          await new Promise((resolve) => window.setTimeout(resolve, FEEDBACK_MS))
+          if (submitButton instanceof HTMLButtonElement) {
+            submitButton.disabled = false
+          }
+          isSubmitting = false
+          emit('complete')
         }
       })
     })
@@ -349,7 +462,42 @@ const fieldId = (suffix) => `${idPrefix}-${suffix}`
 </script>
 
 <style>
-  .form-field-error[hidden] {
+  .form-field-error[hidden],
+  .form-submit-spinner[hidden],
+  [data-submit-arrow][hidden] {
     display: none !important;
+  }
+
+  .form-submit-spinner {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    flex: 0 0 auto;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: form-submit-spin 0.7s linear infinite;
+  }
+
+  @keyframes form-submit-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .form-submit-spinner {
+      animation-duration: 2s;
+    }
+  }
+
+
+  /* Off-screen rather than display:none so naive bots still see and fill it. */
+  .contact-form-hp {
+    position: absolute !important;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
   }
 </style>

@@ -233,11 +233,33 @@ const pricingPlans = [
     cta: 'Talk to Our Team',
   },
 ]
+
+const pageDescription =
+  'Simplify healthcare operations with one connected platform for clinics, hospitals, and growing healthcare networks. Patient management, appointment scheduling, billing, and clinical workflows.'
+
+// Pricing shown on this page is marked provisional, so no `offers` are
+// published in structured data until final plans are approved.
+const softwareSchema = [
+  {
+    '@type': 'SoftwareApplication',
+    '@id': new URL('/products/nirvan/#software', Astro.site).href,
+    name: 'NIRVAN',
+    applicationCategory: 'BusinessApplication',
+    description: pageDescription,
+    url: new URL('/products/nirvan/', Astro.site).href,
+    featureList: coreFeatures.map((feature) => feature.title),
+    publisher: { $ref: 'organization' },
+    mainEntityOfPage: { $ref: 'webPage' },
+  },
+]
 ---
 
 <StandaloneLayout
   title="NIRVAN | Healthcare CRM & Hospital Management Platform"
-  description="Simplify healthcare operations with one connected platform for clinics, hospitals, and growing healthcare networks. Patient management, appointment scheduling, billing, and clinical workflows."
+  description={pageDescription}
+  image={heroDashboard}
+  imageAlt="NIRVAN Healthcare CRM and Hospital Management Dashboard"
+  schema={softwareSchema}
 >
   <!-- Dedicated Standalone Product Navigation (No Corporate Header) -->
   <header class="nirvan-nav">
@@ -283,7 +305,7 @@ const pricingPlans = [
     <!-- 1. Hero Section -->
     <section class="nirvan-hero hero-system hero-system--split" aria-labelledby="nirvan-hero-title">
       <div class="site-container nirvan-hero-grid hero-system__inner">
-          <div class="nirvan-hero-copy hero-system__copy">
+          <div class="nirvan-hero-copy hero-system__copy reveal">
             <h1 id="nirvan-hero-title" class="hero-system__title">
               Connected Healthcare. <span class="hero-system__accent">Smarter Operations.</span>
             </h1>
@@ -325,7 +347,7 @@ const pricingPlans = [
             </div>
           </div>
 
-          <div class="nirvan-hero-visual hero-system__visual">
+          <div class="nirvan-hero-visual hero-system__visual reveal">
             <div class="nirvan-preview-wrapper">
               <div class="nirvan-preview-frame">
                 <div class="nirvan-preview-chrome">
@@ -371,7 +393,7 @@ const pricingPlans = [
     <!-- 2. Healthcare Solutions Section -->
     <section class="nirvan-section nirvan-solutions-section" id="solutions" aria-labelledby="solutions-title">
       <div class="site-container">
-        <div class="section-intro">
+        <div class="section-intro reveal">
           <p class="section-eyebrow">Healthcare Solutions</p>
           <h2 id="solutions-title">
             Tailored for Every Stage of <span>Healthcare Delivery</span>
@@ -382,7 +404,7 @@ const pricingPlans = [
           </p>
         </div>
 
-        <div class="nirvan-solutions-grid">
+        <div class="nirvan-solutions-grid reveal" data-reveal-stagger>
           {solutions.map((item) => {
             const Icon = item.icon
             return (
@@ -428,7 +450,7 @@ const pricingPlans = [
     <!-- 3. Core Features Section -->
     <section class="nirvan-section nirvan-features-section" id="features" aria-labelledby="features-title">
       <div class="site-container">
-        <div class="section-intro">
+        <div class="section-intro reveal">
           <p class="section-eyebrow">Comprehensive Capabilities</p>
           <h2 id="features-title">
             8 Core Features Built for <span>Clinical Excellence</span>
@@ -438,7 +460,7 @@ const pricingPlans = [
           </p>
         </div>
 
-        <div class="nirvan-features-grid">
+        <div class="nirvan-features-grid reveal" data-reveal-stagger>
           {coreFeatures.map((feat, index) => {
             const Icon = feat.icon
             return (
@@ -461,7 +483,7 @@ const pricingPlans = [
     <!-- 4. Benefits Section -->
     <section class="nirvan-section nirvan-benefits-section" id="benefits" aria-labelledby="benefits-title">
       <div class="site-container">
-        <div class="section-intro">
+        <div class="section-intro reveal">
           <p class="section-eyebrow">Measurable Impact</p>
           <h2 id="benefits-title">
             Why Healthcare Organizations <span>Choose NIRVAN</span>
@@ -471,7 +493,7 @@ const pricingPlans = [
           </p>
         </div>
 
-        <div class="nirvan-benefits-grid">
+        <div class="nirvan-benefits-grid reveal" data-reveal-stagger>
           {benefits.map((benefit) => {
             const Icon = benefit.icon
             return (
@@ -498,7 +520,7 @@ const pricingPlans = [
     <!-- 5. Pricing Section (Dummy provisional plans with prominent disclaimer) -->
     <section class="nirvan-section nirvan-pricing-section" id="pricing" aria-labelledby="pricing-title">
       <div class="site-container">
-        <div class="section-intro">
+        <div class="section-intro reveal">
           <p class="section-eyebrow">Provisional Pricing Plans</p>
           <h2 id="pricing-title">
             Simple, Transparent Plans for <span>Every Facility</span>
@@ -509,7 +531,7 @@ const pricingPlans = [
         </div>
 
         <!-- Sample Pricing Disclaimer Banner -->
-        <div class="nirvan-pricing-disclaimer" role="note" aria-label="Provisional pricing notice">
+        <div class="nirvan-pricing-disclaimer reveal" role="note" aria-label="Provisional pricing notice">
           <div class="disclaimer-icon" aria-hidden="true">
             <Sparkles size={20} />
           </div>
@@ -522,7 +544,7 @@ const pricingPlans = [
           </div>
         </div>
 
-        <div class="nirvan-pricing-grid">
+        <div class="nirvan-pricing-grid reveal" data-reveal-stagger>
           {pricingPlans.map((plan) => (
             <article class={`nirvan-pricing-card ${plan.popular ? 'is-popular' : ''}`}>
               {plan.popular && <span class="pricing-badge-popular">Recommended for Hospitals</span>}
@@ -569,7 +591,7 @@ const pricingPlans = [
     <!-- 6. Final CTA Section -->
     <section class="nirvan-final-cta" aria-labelledby="final-cta-title">
       <div class="site-container">
-        <div class="final-cta-card">
+        <div class="final-cta-card reveal">
           <div class="final-cta-badge">
             <HeartPulse size={16} aria-hidden="true" />
             <span>Modernise Healthcare Delivery</span>

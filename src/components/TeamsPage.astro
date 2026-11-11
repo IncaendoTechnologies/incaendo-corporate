@@ -3,24 +3,21 @@ import TeamProfile from './TeamProfile.astro'
 import { Image } from 'astro:assets'
 import { teamMembers } from '../data/team.js'
 import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
-
-const heroDisciplines = [
-  'Software Engineering',
-  'Architecture & Technical Leadership',
-  'Quality Assurance',
-  'Business Operations',
-]
 ---
 
 <section class="team-hero page-intro hero-system hero-system--split hero-system--feature" aria-labelledby="team-page-heading">
   <div class="site-container team-hero-inner hero-system__inner">
     <div class="team-hero-copy hero-system__copy reveal">
       <h1 id="team-page-heading" class="hero-system__title">
-        Good Technology Is a <span class="hero-system__accent">Team Effort.</span>
+        Different Minds.<br />
+        <span class="hero-system__accent">One Shared Vision.</span><br />
+        Digital Solutions that Deliver.
       </h1>
       <p class="page-intro-description hero-system__description">
-        Meet the people and disciplines behind Incaendo—from leadership and
-        software engineering to architecture, quality and business operations.
+        Meet the people behind Incaendo’s digital solutions. Our engineers,
+        architects, quality experts, and business teams bring diverse skills
+        together to turn complex challenges into thoughtful, reliable
+        technology.
       </p>
       <div class="team-hero-actions hero-system__actions">
         <a class="button button-primary" href="#team-directory">
@@ -29,25 +26,6 @@ const heroDisciplines = [
         <a class="button button-outline" href="#team-expertise">
           Explore our expertise <span aria-hidden="true">↘</span>
         </a>
-      </div>
-      <a class="team-hero-work-link" href="/projects">
-        Explore our work{' '}
-        <span class="link-arrow" aria-hidden="true">
-          →
-        </span>
-      </a>
-      <div class="team-hero-disciplines-support hero-system__support">
-        <span class="hero-system__support-label">Four disciplines</span>
-        <ol class="team-hero-disciplines-list">
-          {heroDisciplines.map((discipline, index) => (
-            <li>
-              <span class="discipline-idx" aria-hidden="true">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <span class="discipline-name">{discipline}</span>
-            </li>
-          ))}
-        </ol>
       </div>
     </div>
 
@@ -81,12 +59,14 @@ const heroDisciplines = [
       <div>
         <p class="eyebrow">The people behind the work</p>
         <h2 id="team-directory-heading">
-          Meet the <span>Team.</span>
+          The Ingenuity Behind <span>Every Great Solution.</span>
         </h2>
       </div>
       <p>
-        Meet the people behind our work. Profiles show confirmed roster details;
-        biographies and project credits will be added only when approved.
+        Great solutions take more than technical skills. They come from creative
+        thinking, deep expertise, and people who know how to turn complex
+        challenges into meaningful outcomes. Meet the talented team behind
+        Incaendo’s digital solutions.
       </p>
     </header>
 
@@ -234,7 +214,6 @@ const heroDisciplines = [
     color: var(--color-orange-dark);
   }
 
-  .team-hero-work-link,
   .team-text-link {
     display: inline-flex;
     align-items: center;
@@ -242,10 +221,6 @@ const heroDisciplines = [
     color: var(--color-orange-dark);
     font-size: 0.79rem;
     font-weight: 650;
-  }
-
-  .team-hero-work-link {
-    margin-top: 1.25rem;
   }
 
 
@@ -315,63 +290,6 @@ const heroDisciplines = [
     gap: 0.9rem;
     width: fit-content;
     color: inherit;
-  }
-
-  /* Four disciplines support block in hero copy */
-  .team-hero-disciplines-support {
-    margin-top: 1.75rem;
-    padding-top: 1.35rem;
-    border-top: 1px solid rgb(16 27 45 / 9%);
-  }
-
-  .team-hero-disciplines-support .hero-system__support-label {
-    display: block;
-    margin-bottom: 0.85rem;
-    color: var(--color-orange-dark);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .team-hero-disciplines-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem 1.75rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .team-hero-disciplines-list li {
-    display: flex;
-    align-items: baseline;
-    gap: 0.6rem;
-    color: var(--color-ink);
-    font-size: 0.88rem;
-    font-weight: 550;
-    line-height: 1.35;
-  }
-
-  .team-hero-disciplines-list li .discipline-idx {
-    flex: 0 0 auto;
-    color: var(--color-orange-dark);
-    font-family: var(--font-heading);
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    opacity: 0.9;
-  }
-
-  .team-hero-disciplines-list li .discipline-name {
-    color: var(--color-navy);
-  }
-
-  @media (max-width: 580px) {
-    .team-hero-disciplines-list {
-      grid-template-columns: 1fr;
-      gap: 0.55rem;
-    }
   }
 
   .team-section-heading {

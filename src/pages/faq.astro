@@ -9,7 +9,7 @@ import { faqs, pages } from '../data/site-content.js'
       class="faq-hero hero-system hero-system--center hero-system--dark"
       aria-labelledby="faq-hero-heading"
     >
-      <div class="site-container faq-hero-inner hero-system__inner">
+      <div class="site-container faq-hero-inner hero-system__inner reveal">
         <h1 id="faq-hero-heading" class="faq-hero-title hero-system__title">
           Frequently Asked Questions.
         </h1>
@@ -22,7 +22,7 @@ import { faqs, pages } from '../data/site-content.js'
 
     <section class="faq-content-section" aria-labelledby="faq-section-heading">
       <div class="site-container faq-layout">
-        <div class="faq-header-block">
+        <div class="faq-header-block reveal">
           <span class="faq-label">FAQ</span>
           <h2 id="faq-section-heading" class="faq-section-title">
             Common Questions about How We Work
@@ -44,7 +44,7 @@ import { faqs, pages } from '../data/site-content.js'
         </div>
 
         <div class="faq-accordion-wrap">
-          <div class="faq-list">
+          <div class="faq-list reveal" data-reveal-stagger>
             {faqs.map((faq, index) => (
               <details class="faq-item" open={index === 0}>
                 <summary>
@@ -63,7 +63,7 @@ import { faqs, pages } from '../data/site-content.js'
 
     <section class="faq-bottom-cta">
       <div class="site-container">
-        <div class="faq-cta-card">
+        <div class="faq-cta-card reveal">
           <div class="faq-cta-content">
             <span class="faq-cta-badge">Still Have Questions?</span>
             <h2>We’re Here to Help You Make Informed Decisions.</h2>

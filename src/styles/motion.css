@@ -1,6 +1,15 @@
-/* Motion: content remains visible if scripts are unavailable */
-.reveal {
-  will-change: transform, opacity;
+/* Entrance motion (see src/scripts/motion.js).
+   Content is only pre-hidden after the inline boot script has confirmed that
+   scripts run and motion is allowed, so it stays visible without JS, with
+   reduced motion, on opted-out pages, and if motion.js fails to start. */
+html[data-entrance='pending']
+  .reveal:not(:where([data-entrance-exclude], [data-ai-experience]) .reveal),
+html[data-entrance='pending']
+  [data-reveal-stagger]:not(
+    :where([data-entrance-exclude], [data-ai-experience]) [data-reveal-stagger]
+  ),
+html[data-entrance='active'] [data-motion='pending'] {
+  opacity: 0;
 }
 
 @media (min-width: 1600px) {

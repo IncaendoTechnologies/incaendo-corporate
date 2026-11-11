@@ -157,7 +157,7 @@ const statIcons = {
     aria-labelledby="ai-tech-title"
   >
     <div class="site-container ai-tech-hero-grid hero-system__inner">
-      <div class="ai-tech-hero-copy hero-system__copy">
+      <div class="ai-tech-hero-copy hero-system__copy reveal">
         <h1 id="ai-tech-title" class="hero-system__title">
           AI Moves <span class="hero-system__accent">Your Business</span>{' '}
           Forward.
@@ -185,7 +185,8 @@ const statIcons = {
       </div>
 
       <div
-        class="ai-particles hero-system__visual"
+        class="ai-particles hero-system__visual reveal"
+        data-reveal-role="stage"
         data-ai-particles
         data-state="idle"
       >
@@ -244,7 +245,7 @@ const statIcons = {
     aria-labelledby="ai-capabilities-title"
   >
     <div class="site-container">
-      <div class="ai-section-heading ai-capabilities-heading">
+      <div class="ai-section-heading ai-capabilities-heading reveal">
         <div>
           <h2 id="ai-capabilities-title">
             The Right Building Blocks.
@@ -258,7 +259,7 @@ const statIcons = {
           constraints.
         </p>
       </div>
-      <div class="ai-capability-grid">
+      <div class="ai-capability-grid reveal" data-reveal-stagger>
         {capabilities.map((item) => (
           <article class="ai-detail-card" data-service-tilt>
             <div class="ai-card-meta">

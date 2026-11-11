@@ -11,7 +11,7 @@ import {
 const productCards = [
   {
     id: 'hrms',
-    name: 'Incaendo HRMS',
+    name: 'HRMS',
     category: 'Human Resources Platform',
     description:
       'Manage your people, attendance, leave, payroll, and performance from one connected HR platform.',
@@ -19,9 +19,7 @@ const productCards = [
     tone: 'orange',
     urlHost: 'hrms.incaendo.com',
     exploreHref: 'https://hrms.incaendo.com/',
-    learnHref: '/products/hrm',
     exploreText: 'Explore',
-    learnText: 'Learn More',
     external: true,
     highlights: [
       'Employee & attendance management',
@@ -32,22 +30,22 @@ const productCards = [
     slides: [
       {
         image: '/products/hrms-workforce-directory.jpg',
-        alt: 'Incaendo HRMS workforce directory showing active staff counts, department rosters, and employee records',
+        alt: 'HRMS workforce directory showing active staff counts, department rosters, and employee records',
         caption: 'Team Roster & Staff Analytics',
       },
       {
         image: '/products/hrms-leave-management.jpg',
-        alt: 'Incaendo HRMS leave management showing team leave calendar and pending approvals',
+        alt: 'HRMS leave management showing team leave calendar and pending approvals',
         caption: 'Leave Approvals & Team Calendar',
       },
       {
         image: '/products/hrms-employee-self-service.jpg',
-        alt: 'Incaendo HRMS employee profile and personal information self-service view',
+        alt: 'HRMS employee profile and personal information self-service view',
         caption: 'Employee Profile & Self-Service',
       },
       {
         image: '/products/hrms-leave-overview.png',
-        alt: 'Incaendo HRMS leave balances, leave types, and transaction history overview',
+        alt: 'HRMS leave balances, leave types, and transaction history overview',
         caption: 'Leave Entitlements & Balances',
       },
     ],
@@ -62,9 +60,7 @@ const productCards = [
     tone: 'blue',
     urlHost: 'nirvan.incaendo.com',
     exploreHref: '/products/nirvan',
-    learnHref: '/products/nirvan',
     exploreText: 'Explore',
-    learnText: 'Learn More',
     external: true,
     highlights: [
       'Clinic & patient management',
@@ -289,15 +285,6 @@ const productCards = [
                 aria-label={`Explore ${product.name}`}
               >
                 {product.exploreText} <span aria-hidden="true">→</span>
-              </a>
-              <a
-                href={product.learnHref}
-                class="saas-link-learn"
-                target={product.external ? '_blank' : undefined}
-                rel={product.external ? 'noopener noreferrer' : undefined}
-                aria-label={`Learn more about ${product.name}`}
-              >
-                {product.learnText} <span class="link-arrow" aria-hidden="true">→</span>
               </a>
             </div>
           </article>
@@ -782,29 +769,6 @@ const productCards = [
     text-decoration: none;
   }
 
-  .saas-link-learn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: var(--color-navy);
-    font-size: var(--type-ui-size);
-    font-weight: 600;
-    text-decoration: none;
-    transition: color var(--duration-fast) ease;
-  }
-
-  .saas-link-learn:hover {
-    color: var(--color-orange);
-  }
-
-  .saas-link-learn .link-arrow {
-    transition: transform var(--duration-fast) ease;
-  }
-
-  .saas-link-learn:hover .link-arrow {
-    transform: translateX(3px);
-  }
-
   /* --- Responsive Breakpoints -------------------------------------------- */
 
   @media (max-width: 1040px) {
@@ -871,10 +835,12 @@ const productCards = [
     const carousels = document.querySelectorAll<HTMLElement>('[data-card-carousel]')
     if (!carousels.length) return
 
-    carousels.forEach((carouselEl) => {
-      // Prevent double init
-      if (carouselEl.dataset.initialized === 'true') return
-      carouselEl.dataset.initialized = 'true'
+    carousels.forEach((carouselEl, cardIdx) => {
+      // Clean up any existing timer or observer on re-init
+      const existingCleanup = (carouselEl as any).__carouselCleanup
+      if (typeof existingCleanup === 'function') {
+        existingCleanup()
+      }
 
       const track = carouselEl.querySelector<HTMLElement>('[data-carousel-track]')
       const slides = Array.from(carouselEl.querySelectorAll<HTMLElement>('[data-carousel-slide]'))
@@ -886,7 +852,7 @@ const productCards = [
 
       if (!track || slides.length === 0) return
 
-      // Use predefined captions from dots aria-label
+      // Predefined captions from dots aria-label
       const dotLabels = dots.map((d) => {
         const label = d.getAttribute('aria-label') || ''
         return label.replace(/^Go to slide \d+:\s*/, '')
@@ -895,7 +861,13 @@ const productCards = [
       let currentIdx = 0
       const totalSlides = slides.length
       let autoPlayTimer: any = null
-      const AUTO_PLAY_INTERVAL = 5500
+      let resumeTimeout: any = null
+      let isVisible = true
+      let isHovered = false
+
+      // Slight natural stagger so HRMS and NIRVAN don't change at the exact same millisecond
+      const AUTO_PLAY_INTERVAL = cardIdx === 0 ? 4400 : 4800
+      const INITIAL_DELAY = cardIdx === 0 ? 1200 : 3200
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
       function updateSlide(idx: number) {
@@ -904,21 +876,18 @@ const productCards = [
           track.style.transform = `translateX(-${currentIdx * 100}%)`
         }
 
-        // Update slides aria-hidden
         slides.forEach((s, i) => {
           const isActive = i === currentIdx
           s.classList.toggle('is-active', isActive)
           s.setAttribute('aria-hidden', isActive ? 'false' : 'true')
         })
 
-        // Update dots
         dots.forEach((dot, i) => {
           const isActive = i === currentIdx
           dot.classList.toggle('is-active', isActive)
           dot.setAttribute('aria-selected', isActive ? 'true' : 'false')
         })
 
-        // Update caption text
         if (captionText && dotLabels[currentIdx]) {
           captionText.textContent = dotLabels[currentIdx]
         }
@@ -932,17 +901,43 @@ const productCards = [
         updateSlide(currentIdx - 1)
       }
 
+      function stopTimer() {
+        if (autoPlayTimer) {
+          clearInterval(autoPlayTimer)
+          autoPlayTimer = null
+        }
+        if (resumeTimeout) {
+          clearTimeout(resumeTimeout)
+          resumeTimeout = null
+        }
+      }
+
+      function startTimer() {
+        if (prefersReducedMotion || !isVisible || isHovered) return
+        stopTimer()
+        autoPlayTimer = window.setInterval(nextSlide, AUTO_PLAY_INTERVAL)
+      }
+
+      function handleUserInteraction() {
+        stopTimer()
+        // Always resume auto-sliding 4.5 seconds after user click/swipe
+        resumeTimeout = window.setTimeout(() => {
+          isHovered = false
+          startTimer()
+        }, 4500)
+      }
+
       // Arrow listeners
       nextBtn?.addEventListener('click', (e) => {
         e.stopPropagation()
         nextSlide()
-        resetTimer()
+        handleUserInteraction()
       })
 
       prevBtn?.addEventListener('click', (e) => {
         e.stopPropagation()
         prevSlide()
-        resetTimer()
+        handleUserInteraction()
       })
 
       // Dot listeners
@@ -950,7 +945,7 @@ const productCards = [
         dot.addEventListener('click', (e) => {
           e.stopPropagation()
           updateSlide(dotIdx)
-          resetTimer()
+          handleUserInteraction()
         })
       })
 
@@ -974,7 +969,7 @@ const productCards = [
             } else {
               prevSlide()
             }
-            resetTimer()
+            handleUserInteraction()
           }
         }
       }, { passive: true })
@@ -984,41 +979,58 @@ const productCards = [
         if (e.key === 'ArrowLeft') {
           e.preventDefault()
           prevSlide()
-          resetTimer()
+          handleUserInteraction()
         } else if (e.key === 'ArrowRight') {
           e.preventDefault()
           nextSlide()
-          resetTimer()
+          handleUserInteraction()
         }
       })
 
-      // Autoplay management
-      function startTimer() {
-        if (prefersReducedMotion) return
+      // Hover handling: pause on active hover, but automatically resume on leave
+      carouselEl.addEventListener('mouseenter', () => {
+        isHovered = true
         stopTimer()
-        autoPlayTimer = window.setInterval(nextSlide, AUTO_PLAY_INTERVAL)
+      })
+      carouselEl.addEventListener('mouseleave', () => {
+        isHovered = false
+        startTimer()
+      })
+
+      // Viewport Intersection Observer: run only when visible
+      let observer: IntersectionObserver | null = null
+      if ('IntersectionObserver' in window) {
+        observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            isVisible = entry.isIntersecting
+            if (isVisible) {
+              startTimer()
+            } else {
+              stopTimer()
+            }
+          })
+        }, { threshold: 0.15 })
+        observer.observe(carouselEl)
+      } else {
+        // Fallback for environments without IntersectionObserver
+        const initialTimer = window.setTimeout(startTimer, INITIAL_DELAY)
       }
 
-      function stopTimer() {
-        if (autoPlayTimer) {
-          clearInterval(autoPlayTimer)
-          autoPlayTimer = null
+      // Start initial staggered auto-play
+      const initialTimer = window.setTimeout(() => {
+        if (isVisible && !isHovered) {
+          startTimer()
+        }
+      }, INITIAL_DELAY)
+
+      // Store cleanup on element
+      ;(carouselEl as any).__carouselCleanup = () => {
+        stopTimer()
+        clearTimeout(initialTimer)
+        if (observer) {
+          observer.disconnect()
         }
       }
-
-      function resetTimer() {
-        stopTimer()
-        startTimer()
-      }
-
-      // Pause on hover or focus
-      carouselEl.addEventListener('mouseenter', stopTimer)
-      carouselEl.addEventListener('mouseleave', startTimer)
-      carouselEl.addEventListener('focusin', stopTimer)
-      carouselEl.addEventListener('focusout', startTimer)
-
-      // Start initial autoplay
-      startTimer()
     })
   }
 

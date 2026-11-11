@@ -186,9 +186,9 @@ export const faqs = [
 
 export const pages = {
   home: {
-    title: 'Incaendo | Software Engineering for What Comes Next',
+    title: 'Incaendo | Custom Software, AI & App Development Company',
     description:
-      'Incaendo is a software development and technology company with 15 years of industry experience.',
+      'Incaendo is a Noida-based software development company with 15 years of experience building custom software, web and mobile apps, AI solutions and cloud platforms.',
   },
   ai: {
     title: 'AI Technology & Innovation | Incaendo',
@@ -213,20 +213,20 @@ export const pages = {
   insights: {
     title: 'Technology Insights & Engineering Ideas | Incaendo',
     description:
-      'Explore sample editorial drafts on artificial intelligence, software engineering, web development, cloud, data and digital transformation.',
+      'Articles and case studies from Incaendo on choosing a software partner, custom software, tech stacks, AI, web development, cloud and data.',
   },
   contact: {
     title: 'Discuss a Project | Contact Incaendo',
     description:
-      'Prepare a business enquiry for Incaendo. Contact form delivery is awaiting a verified endpoint.',
+      'Tell us about your software, web, mobile or AI project. Send an enquiry to the Incaendo team in Noida or email info@incaendo.com.',
   },
   careers: {
     title: 'Careers & Opportunities | Incaendo',
     description:
-      'Learn about opportunities at Incaendo. Current openings are being confirmed.',
+      'Careers at Incaendo, a software development company in Noida. No openings are listed right now; roles will be published here when ready.',
   },
   faq: {
-    title: 'FAQ | Incaendo',
+    title: 'Frequently Asked Questions | Incaendo',
     description:
       'Frequently asked questions about Incaendo mobile app development, web applications, UI/UX design, and technology solutions.',
   },

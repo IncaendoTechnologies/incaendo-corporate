@@ -8,6 +8,9 @@ function initContactModal() {
   const dialog = overlay.querySelector('.contact-modal-dialog')
   const closeButtons = overlay.querySelectorAll('[data-modal-close]')
   let lastFocused = null
+  // True while the modal's contact form has a request in flight; blocks
+  // every dismissal path (close button, backdrop, Escape).
+  let submitting = false
 
   const getFocusable = () =>
     Array.from(
@@ -50,6 +53,7 @@ function initContactModal() {
   }
 
   const closeModal = () => {
+    if (submitting) return
     overlay.classList.remove('is-open')
     document.body.classList.remove('modal-open')
     document.removeEventListener('keydown', onKeydown)
@@ -64,6 +68,23 @@ function initContactModal() {
 
   closeButtons.forEach((button) => {
     button.addEventListener('click', closeModal)
+  })
+
+  // Events dispatched by ContactForm.astro (they bubble from the form).
+  const setSubmitting = (value) => {
+    submitting = value
+    closeButtons.forEach((button) => {
+      button.disabled = value
+    })
+  }
+  overlay.addEventListener('contact-form:pending', () => setSubmitting(true))
+  overlay.addEventListener('contact-form:settled', () => setSubmitting(false))
+  // After a confirmed success and its 3s toast, close and return the visitor
+  // to the page they were on. On failure the modal stays open.
+  overlay.addEventListener('contact-form:complete', (event) => {
+    if (event.detail?.success && overlay.classList.contains('is-open')) {
+      closeModal()
+    }
   })
 
   triggers.forEach((trigger) => {

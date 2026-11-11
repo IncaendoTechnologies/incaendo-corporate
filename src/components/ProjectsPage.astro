@@ -17,7 +17,7 @@ const filterItems = projectCategories.map((category, index) => ({
 
 <section class="projects-hero hero-system hero-system--split hero-system--feature" aria-labelledby="projects-page-heading">
   <div class="site-container projects-hero-layout hero-system__inner">
-    <div class="projects-hero-copy hero-system__copy">
+    <div class="projects-hero-copy hero-system__copy reveal">
       <h1 id="projects-page-heading" class="hero-system__title">
         A Portfolio of <span class="hero-system__accent">Digital Work</span>, Shaped around What Matters.
       </h1>
@@ -44,7 +44,7 @@ const filterItems = projectCategories.map((category, index) => ({
       </div>
     </div>
 
-    <div class="projects-hero-visual hero-system__visual" aria-hidden="true">
+    <div class="projects-hero-visual hero-system__visual reveal" aria-hidden="true">
       <figure class="hero-screen hero-screen-main">
         <Image
           src={dominos.image}
@@ -550,27 +550,6 @@ const filterItems = projectCategories.map((category, index) => ({
     color: var(--color-body);
     font-size: 0.94rem;
     line-height: 1.7;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .projects-hero-copy {
-      animation: projects-rise-in 650ms var(--ease-out) both;
-    }
-
-    .projects-hero-visual {
-      animation: projects-rise-in 800ms 100ms var(--ease-out) both;
-    }
-
-    @keyframes projects-rise-in {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
   }
 
   @media (max-width: 1050px) {

@@ -6,7 +6,7 @@ const total = String(aiAgents.length).padStart(2, '0')
 
 <section class="ai-agents" aria-labelledby="ai-agents-title">
   <div class="site-container">
-    <div class="ai-agents-heading">
+    <div class="ai-agents-heading reveal">
       <div>
         <p class="eyebrow">AI AGENTS IN ACTION</p>
         <h2 id="ai-agents-title">
@@ -36,6 +36,7 @@ const total = String(aiAgents.length).padStart(2, '0')
     class="ai-agents-track"
     style={`--stack-count: ${aiAgents.length}`}
     data-stack
+    data-entrance-exclude
     data-stack-pin="(min-width: 801px) and (min-height: 700px)"
   >
     <div class="ai-agents-sticky">
