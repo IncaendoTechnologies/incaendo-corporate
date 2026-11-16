@@ -62,25 +62,7 @@ try {
       <h3>{member.name}</h3>
       <p>{member.designation}</p>
     </div>
-    {linkedinUrl && (
-      <a
-        class="team-profile-linkedin"
-        href={linkedinUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={
-          hasConfirmedLinkedin
-            ? `View ${member.name}'s LinkedIn profile`
-            : `LinkedIn placeholder link for ${member.name}`
-        }
-      >
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M5.2 8.3H2.4V21h2.8V8.3ZM3.8 6.6a1.7 1.7 0 1 0 0-3.4 1.7 1.7 0 0 0 0 3.4ZM21.6 13.7c0-3.8-2-5.6-4.7-5.6a4.1 4.1 0 0 0-3.7 2V8.3h-2.8V21h2.8v-6.3c0-1.7.3-3.4 2.5-3.4s2.2 2 2.2 3.5V21h2.8l.9-7.3Z" />
-        </svg>
-      </a>
-    )}
   </div>
-  {description && <p class="team-profile-description">{description}</p>}
 </article>
 
 <style>
