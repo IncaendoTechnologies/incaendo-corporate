@@ -457,6 +457,7 @@ const capabilitiesRight = [
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
+    const fiberLengths = new Float32Array(fibers.length)
     const updateGeometry = () => {
       if (window.innerWidth <= 900) {
         svg.style.display = 'none'
@@ -522,6 +523,9 @@ const capabilitiesRight = [
         }
 
         fiber.setAttribute('d', d)
+        if (fiber instanceof SVGPathElement) {
+          fiberLengths[i] = fiber.getTotalLength()
+        }
       })
     }
 
@@ -579,7 +583,7 @@ const capabilitiesRight = [
     const CYCLE_DURATION = 3000 // ms
     let lastTime = performance.now()
     let rafId = 0
-    let isVisible = true
+    let isVisible = false
 
     const animateParticles = (now = performance.now()) => {
       if (!isVisible || reducedMotion.matches || window.innerWidth <= 900) {
@@ -622,7 +626,7 @@ const capabilitiesRight = [
 
         try {
           if (fiber instanceof SVGPathElement) {
-            const totalLen = fiber.getTotalLength()
+            const totalLen = fiberLengths[i] || fiber.getTotalLength()
             if (totalLen > 0) {
               const pt = fiber.getPointAtLength(totalLen * travelP)
               pGroup.setAttribute('transform', `translate(${pt.x}, ${pt.y})`)
@@ -665,8 +669,6 @@ const capabilitiesRight = [
         rafId = 0
       }
     }
-
-    startAnimation()
 
     const observer = new IntersectionObserver(
       ([entry]) => {

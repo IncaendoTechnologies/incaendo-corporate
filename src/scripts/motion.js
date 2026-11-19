@@ -54,6 +54,7 @@ const ROLES = {
   card: { y: 26, duration: 850 },
   block: { y: 20, duration: 900 },
   stage: { y: 22, duration: 1100 },
+  cta: { y: 24, scale: 0.96, duration: 850 },
 }
 
 const VISUAL =
