@@ -1,4 +1,10 @@
 /* Header */
+html[data-restoring-scroll='true'] .site-header {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 .site-header {
   position: relative;
   z-index: 20;

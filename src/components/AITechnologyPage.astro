@@ -275,7 +275,11 @@ const statIcons = {
           </article>
         ))}
       </div>
-      <a class="button button-primary ai-capabilities-cta" href="/projects">
+      <a
+        class="button button-primary ai-capabilities-cta reveal"
+        data-reveal-role="cta"
+        href="/projects"
+      >
         <span>Where Ideas Become Impact</span>
         <span class="link-arrow" aria-hidden="true">
           →
@@ -294,7 +298,7 @@ const statIcons = {
   .ai-tech-page {
     --ai-panel: #f0ede8;
     --ai-blue-wash: #e9eef2;
-    overflow: clip;
+    overflow-x: clip;
     background: var(--color-paper);
   }
   .ai-tech-page section {
@@ -462,6 +466,8 @@ const statIcons = {
     animation: ai-card-float 6.4s ease-in-out infinite alternate paused;
     animation-delay: calc(var(--order) * -1.45s);
     backdrop-filter: blur(6px);
+    transform: translateZ(0);
+    will-change: transform;
     transition:
       transform 300ms var(--ease-out),
       box-shadow 300ms ease,

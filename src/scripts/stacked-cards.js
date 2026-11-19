@@ -122,7 +122,6 @@ function setupStack(track) {
   )
 
   track.dataset.enhanced = ''
-  setActive(0)
   update()
   observer.observe(track)
   window.addEventListener('scroll', requestUpdate, { passive: true })

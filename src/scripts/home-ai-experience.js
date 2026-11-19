@@ -57,9 +57,14 @@ function setupAiExperience(root) {
     },
     { threshold: 0.08 },
   )
-  root
-    .querySelectorAll('.ai-reveal')
-    .forEach((element) => revealObserver.observe(element))
+  root.querySelectorAll('.ai-reveal').forEach((element) => {
+    const rect = element.getBoundingClientRect()
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      element.classList.add('is-visible')
+    } else {
+      revealObserver.observe(element)
+    }
+  })
   root.dataset.motionReady = 'true'
 
   const dispose = () => {

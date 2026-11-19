@@ -104,6 +104,38 @@ const {
       import '../scripts/motion.js'
       import '../scripts/ai-showcase.js'
       import '../scripts/site-intro.js'
+
+      // Smooth scroll for in-page anchor navigation while keeping native reload scroll restoration instant
+      document.addEventListener('click', (event) => {
+        const target = event.target
+        if (!(target instanceof Element)) return
+        const link = target.closest('a[href^="#"]')
+        if (!link || !(link instanceof HTMLAnchorElement)) return
+        const href = link.getAttribute('href')
+        if (!href || href === '#' || href === '#main-content') return
+        try {
+          const destination = document.querySelector(href)
+          if (destination instanceof HTMLElement) {
+            event.preventDefault()
+            const reduced = window.matchMedia(
+              '(prefers-reduced-motion: reduce)',
+            ).matches
+            destination.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' })
+            history.pushState(null, '', href)
+          }
+        } catch {
+          // If selector is invalid, let normal anchor jump occur
+        }
+      })
+
+      // Store scroll position so page reload never flashes header
+      const saveScroll = () => {
+        try {
+          sessionStorage.setItem('incaendo-scroll-y', String(window.scrollY))
+        } catch {}
+      }
+      window.addEventListener('scroll', saveScroll, { passive: true })
+      window.addEventListener('pagehide', saveScroll)
     </script>
   </body>
 </html>
