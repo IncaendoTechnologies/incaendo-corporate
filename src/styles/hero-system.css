@@ -1,0 +1,307 @@
+/* Shared page hero layout and type scale. Page components keep their own
+   backgrounds, image art, and motion; this file owns the common geometry.
+
+   Geometry model (all values come from the :root tokens in global.css):
+   - Vertical rhythm is fixed padding (--hero-space-top / --hero-space-bottom),
+     never a viewport-height min-height, so the gap between the header and the
+     heading is the same on every page and no hero carries dead space below
+     its content.
+   - Split heroes share one "stage": the grid row is at least
+     --hero-stage-height tall and both columns centre within it. Pages whose
+     copy and visual are shorter than the stage end up the same height; a
+     taller visual simply grows the hero instead of being clipped.
+   - Visuals fill their column up to --hero-system-visual-max. A visual that
+     needs a different size (e.g. a square field) overrides that custom
+     property on itself rather than fighting these selectors. */
+.hero-system {
+  --hero-system-gap: var(--hero-gap);
+  --hero-system-pad-top: var(--hero-space-top);
+  --hero-system-pad-bottom: var(--hero-space-bottom);
+  --hero-system-stage: var(--hero-stage-height);
+  --hero-system-title-size: var(--type-hero-h1-size);
+  --hero-system-body-size: var(--type-hero-desc-size);
+  --hero-system-visual-max: var(--hero-visual-max);
+}
+
+.hero-system.hero-system--split,
+.hero-system.hero-system--center,
+.hero-system.hero-system--text,
+.hero-system.hero-system--article {
+  padding-block: var(--hero-system-pad-top) var(--hero-system-pad-bottom);
+}
+
+.hero-system:is(
+    .hero-system--split,
+    .hero-system--center,
+    .hero-system--text,
+    .hero-system--article
+  )
+  .hero-system__inner {
+  width: min(var(--content-width), calc(100% - var(--gutter) * 2));
+  margin-inline: auto;
+}
+
+.hero-system.hero-system--split .hero-system__inner {
+  display: grid;
+  min-height: var(--hero-system-stage);
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  align-items: center;
+  gap: var(--hero-system-gap);
+}
+
+.hero-system.hero-system--split .hero-system__copy {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  max-width: 40rem;
+  padding: 0;
+}
+
+.hero-system__eyebrow {
+  margin: 0 0 0.85rem;
+  color: var(--color-orange-dark);
+  font-family: var(--font-body);
+  font-size: var(--type-eyebrow-size);
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.hero-system:is(
+    .hero-system--split,
+    .hero-system--center,
+    .hero-system--text,
+    .hero-system--article
+  )
+  .hero-system__title {
+  max-width: var(--type-hero-title-measure);
+  margin: 0 0 clamp(1rem, 1.6vw, 1.35rem);
+  color: var(--color-navy);
+  font-family: var(--font-heading);
+  font-size: var(--hero-system-title-size);
+  font-weight: var(--type-hero-h1-weight);
+  letter-spacing: var(--type-hero-h1-letter-spacing);
+  word-spacing: var(--type-hero-h1-word-spacing);
+  line-height: var(--type-hero-h1-line-height);
+  text-wrap: balance;
+}
+
+.hero-system:is(
+    .hero-system--split,
+    .hero-system--center,
+    .hero-system--text,
+    .hero-system--article
+  )
+  .hero-system__description {
+  max-width: var(--type-hero-desc-measure);
+  margin: 0 0 clamp(1.5rem, 2.2vw, 2rem);
+  color: var(--color-body);
+  font-family: var(--font-body);
+  font-size: var(--hero-system-body-size);
+  font-weight: var(--type-hero-desc-weight);
+  line-height: var(--type-hero-desc-line-height);
+  text-wrap: pretty;
+}
+
+.hero-system:is(
+    .hero-system--split,
+    .hero-system--center,
+    .hero-system--text,
+    .hero-system--article
+  )
+  .hero-system__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem 1.2rem;
+  margin: 0;
+}
+
+.hero-system.hero-system--split .hero-system__visual {
+  display: block;
+  position: relative;
+  width: 100%;
+  max-width: var(--hero-system-visual-max);
+  min-width: 0;
+  justify-self: end;
+  margin: 0;
+}
+
+.hero-system__image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.hero-system__accent {
+  color: var(--color-orange-dark);
+}
+
+/* Optional supporting strip under the hero actions (team snapshot, topic
+   links, next steps): a hairline divider and a small uppercase label. */
+.hero-system .hero-system__support {
+  margin-top: 1.9rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid rgb(16 27 45 / 9%);
+}
+
+.hero-system__support-label {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: var(--color-muted);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero-system.hero-system--center .hero-system__inner {
+  max-width: 56rem;
+  text-align: center;
+}
+
+.hero-system.hero-system--center .hero-system__title {
+  max-width: 20ch;
+}
+
+.hero-system.hero-system--center .hero-system__title,
+.hero-system.hero-system--center .hero-system__description {
+  margin-inline: auto;
+}
+
+.hero-system.hero-system--text .hero-system__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 2rem;
+}
+
+.hero-system.hero-system--text .hero-system__copy {
+  max-width: 52rem;
+}
+
+.hero-system.hero-system--text .hero-system__title {
+  max-width: 20ch;
+}
+
+.hero-system--text .hero-system__index {
+  align-self: end;
+  margin-bottom: 0.4rem;
+}
+
+.hero-system.hero-system--article .hero-system__inner {
+  max-width: 58rem;
+}
+
+.hero-system.hero-system--article .hero-system__title {
+  max-width: 19ch;
+}
+
+.hero-system.hero-system--article .hero-system__description {
+  max-width: 68ch;
+}
+
+.hero-system.hero-system--dark .hero-system__title {
+  color: var(--color-white);
+}
+
+.hero-system.hero-system--dark .hero-system__description {
+  color: rgb(255 255 255 / 84%);
+}
+
+.hero-system.hero-system--dark .hero-system__accent {
+  color: #8ed0ff;
+}
+
+/* Feature heroes (AI, Teams, Insights, Contact): on desktop the visual gets
+   a wider column and may grow to 46rem, so a richer composition (cards,
+   supporting panels) has room. A page may widen the split further with
+   --hero-feature-columns. Tablet/mobile keep the shared layout. */
+@media (min-width: 1101px) {
+  .hero-system.hero-system--feature {
+    --hero-system-visual-max: 46rem;
+  }
+
+  .hero-system.hero-system--feature .hero-system__inner {
+    grid-template-columns: var(
+      --hero-feature-columns,
+      minmax(0, 0.88fr) minmax(0, 1.12fr)
+    );
+  }
+}
+
+@media (max-width: 1100px) {
+  .hero-system {
+    --hero-system-stage: clamp(22rem, 38vw, 26rem);
+  }
+
+  .hero-system.hero-system--split .hero-system__inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-system {
+    --hero-system-gap: 2.25rem;
+    --hero-system-pad-top: clamp(2.5rem, 6vw, 3.25rem);
+    --hero-system-pad-bottom: clamp(2.75rem, 6vw, 3.5rem);
+    --hero-system-stage: 0px;
+    --hero-system-title-size: clamp(2.35rem, 5vw, 3.3rem);
+  }
+
+  .hero-system.hero-system--split .hero-system__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-system:is(.hero-system--split, .hero-system--center, .hero-system--text)
+    .hero-system__title {
+    max-width: 18ch;
+  }
+
+  .hero-system.hero-system--split .hero-system__visual {
+    width: min(100%, 34rem);
+    justify-self: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-system {
+    --hero-system-gap: 1.75rem;
+    --hero-system-pad-top: 2.25rem;
+    --hero-system-pad-bottom: 2.75rem;
+    --hero-system-title-size: clamp(2rem, 8vw, 2.6rem);
+  }
+
+  .hero-system:is(.hero-system--split, .hero-system--center, .hero-system--text)
+    .hero-system__title {
+    max-width: none;
+  }
+
+  .hero-system.hero-system--split .hero-system__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .hero-system.hero-system--split .hero-system__actions .button {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .hero-system.hero-system--text .hero-system__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-system--text .hero-system__index {
+    justify-self: end;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-system__motion {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

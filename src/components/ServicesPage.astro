@@ -30,7 +30,7 @@ const serviceDetails = [
       'A scoped workflow, connected application or assistant, and clear review and exception paths.',
     image: serviceAIAutomationImage,
     imageAlt:
-      'An AI assistant showing supplier, total and due date extracted and validated from an invoice, flagging it for manager review, above an extract, validate, review and done workflow',
+      'Invoices, emails and contracts flowing into an AI assistant that reads documents, extracts details and matches records before a human review, with the approved work filed and a results card showing items processed, accuracy and hours saved',
     link: '/ai-technology',
     linkLabel: 'Explore AI',
   },
@@ -53,7 +53,7 @@ const serviceDetails = [
       'A clear product scope, working software, integration points, and a maintainable foundation for future change.',
     image: serviceCustomSoftwareImage,
     imageAlt:
-      'A code editor showing a POST /orders API route with passing tests, above a diagram connecting a customer portal, an orders API and a database',
+      'Sales, operations and finance teams connected to one custom business app that captures requests, handles approvals, fulfils orders and raises invoices, synced to accounts with a monthly orders summary',
     link: '/contact',
     linkLabel: 'Discuss custom software',
   },
@@ -76,7 +76,7 @@ const serviceDetails = [
       'A responsive application experience with the interfaces and connections needed for its intended users.',
     image: serviceWebApplicationsImage,
     imageAlt:
-      'A customer portal showing active, delivered and due figures and a list of orders with their status, beside the same orders in a phone app',
+      'Customers, partners and an admin team using one web application to sign in, search, place requests and track their status, running on cloud hosting with live visitor and uptime figures',
     link: '/contact',
     linkLabel: 'Discuss a web application',
   },
@@ -99,7 +99,7 @@ const serviceDetails = [
       'A mobile product scope, platform-aligned experience, and connections to the services and data it depends on.',
     image: serviceMobileApplicationsImage,
     imageAlt:
-      'A delivery app showing an order arriving today with options to track the driver, read messages and reorder, beside a shipped notification and an iOS and Android card',
+      'Drivers, customers and field staff using an iOS and Android app that notifies them, opens tasks, records updates on site and syncs with the back office, with weekly user and rating figures',
     link: '/contact',
     linkLabel: 'Discuss a mobile app',
   },
@@ -122,7 +122,7 @@ const serviceDetails = [
       'A mapped operating workflow, connected solution scope, and a practical integration and rollout plan.',
     image: serviceEnterpriseSolutionsImage,
     imageAlt:
-      'An operations dashboard with order and approval figures, a purchase order waiting at the finance approval stage, daily orders processed this week, and synced ERP, CRM and HR systems',
+      'ERP, CRM and HR systems connected through an integration hub that runs one process from request and approval to ordering, payment and reporting, shown in a single overview of orders and monthly spend',
     link: '/contact',
     linkLabel: 'Discuss an enterprise solution',
   },
@@ -150,73 +150,33 @@ const serviceDetails = [
     linkLabel: 'Discuss cloud & data',
   },
 ]
-
-const deliverySteps = [
-  {
-    number: '01',
-    title: 'Discover',
-    description:
-      'Understand objectives, users, current systems, constraints, and what a useful outcome means.',
-    output: 'Shared problem definition',
-  },
-  {
-    number: '02',
-    title: 'Plan & architect',
-    description:
-      'Prioritise requirements and make proportionate product, design, and technical decisions.',
-    output: 'Scope and delivery plan',
-  },
-  {
-    number: '03',
-    title: 'Design & develop',
-    description:
-      'Shape the experience and build in reviewable steps, keeping feedback close to the work.',
-    output: 'Working product increments',
-  },
-  {
-    number: '04',
-    title: 'Integrate & test',
-    description:
-      'Connect relevant systems and check behavior, usability, and quality against agreed needs.',
-    output: 'Validated release candidate',
-  },
-  {
-    number: '05',
-    title: 'Deploy',
-    description:
-      'Prepare the release, coordinate the move into its intended environment, and support handover.',
-    output: 'Production-ready release',
-  },
-  {
-    number: '06',
-    title: 'Support & improve',
-    description:
-      'Use operational feedback and changing business needs to guide maintenance and next steps.',
-    output: 'A considered improvement path',
-  },
-]
 ---
 
 <div class="services-page">
-  <section class="services-hero" aria-labelledby="services-page-title">
-    <div class="site-container services-hero-grid">
-      <div class="services-hero-copy reveal">
-        <p class="eyebrow">
-          <span class="eyebrow-dot"></span> SERVICES &amp; SOLUTIONS
-        </p>
-        <h1 id="services-page-title">
-          Technology that <span>works around your business.</span>
+  <section
+    class="services-hero hero-system hero-system--split hero-system--feature"
+    aria-labelledby="services-page-title"
+  >
+    <div class="site-container services-hero-grid hero-system__inner">
+      <div class="services-hero-copy hero-system__copy reveal">
+        <h1 id="services-page-title" class="hero-system__title">
+          Technology that{' '}
+          <span class="hero-system__accent">Works around Your Business.</span>
         </h1>
-        <p class="services-hero-lead">
+        <p class="services-hero-lead hero-system__description">
           From AI and custom software to connected web, mobile, enterprise, and
           cloud solutions, we help turn business requirements into thoughtful,
           useful technology.
         </p>
-        <div class="services-hero-actions">
+        <div class="services-hero-actions hero-system__actions">
           <a class="button button-primary" href="#service-overview">
             Explore our services <span aria-hidden="true">↘</span>
           </a>
-          <a class="text-link" href="/contact">
+          <a
+            class="text-link"
+            href="/contact#project-inquiry"
+            data-open-contact-modal
+          >
             Discuss your project{' '}
             <span class="link-arrow" aria-hidden="true">
               →
@@ -234,15 +194,30 @@ const deliverySteps = [
         </div>
       </div>
 
-      <div class="services-hero-visual reveal">
-        <Image
-          src={servicesHeroImage}
-          alt="A developer workspace with a code editor, a cloud architecture diagram, and a business dashboard on a laptop"
-          width={1200}
-          sizes="(max-width: 900px) 92vw, 52vw"
-          loading="eager"
-          class="services-hero-image"
-        />
+      <div class="services-hero-feature hero-system__visual reveal">
+        <div class="services-hero-visual">
+          <Image
+            src={servicesHeroImage}
+            alt="A developer workspace with a code editor, a cloud architecture diagram, and a business dashboard on a laptop"
+            width={1200}
+            sizes="(max-width: 900px) 92vw, 52vw"
+            loading="eager"
+            class="services-hero-image hero-system__image"
+          />
+        </div>
+        <nav class="services-hero-areas" aria-label="Service areas">
+          <span class="hero-system__support-label">Six service areas</span>
+          <ol>
+            {serviceDetails.map((service) => (
+              <li>
+                <a href={`#${service.id}`}>
+                  <span aria-hidden="true">{service.number}</span>
+                  {service.title}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
       </div>
     </div>
   </section>
@@ -256,7 +231,7 @@ const deliverySteps = [
       <header class="services-section-heading reveal">
         <p class="eyebrow">A connected set of capabilities</p>
         <h2 id="service-overview-title">
-          Start with the challenge. <span>Choose the right capability.</span>
+          Start with the Challenge. <span>Choose the Right Capability.</span>
         </h2>
         <p>
           Explore the service areas and the problems each one can help address.
@@ -265,7 +240,7 @@ const deliverySteps = [
       </header>
 
       <div class="services-overview-grid reveal" data-reveal-stagger>
-        {homepageServices.map((service, index) => {
+        {homepageServices.map((service) => {
           const Icon = service.icon
           return (
             <a
@@ -299,7 +274,7 @@ const deliverySteps = [
       <header class="services-section-heading services-detail-heading reveal">
         <p class="eyebrow">What the work can include</p>
         <h2 id="service-details-title">
-          Useful technology, <span>made specific to the work.</span>
+          Useful Technology, <span>Made Specific to the Work.</span>
         </h2>
         <p>
           Each engagement is shaped to its context. These are practical starting
@@ -311,9 +286,10 @@ const deliverySteps = [
         {serviceDetails.map((service, index) => (
           <article
             class:list={[
-              'service-detail reveal',
+              'service-detail accent-card reveal',
               index % 2 === 1 && 'service-detail-reverse',
             ]}
+            data-accent-side={index % 2 === 1 ? 'left' : 'right'}
             data-reveal-stagger
             id={service.id}
             aria-labelledby={`${service.id}-title`}
@@ -330,7 +306,7 @@ const deliverySteps = [
                 <p>{service.challenge}</p>
               </div>
               <div class="service-detail-scope">
-                <h4>How we can help</h4>
+                <h4>How We Can Help</h4>
                 <ul>
                   {service.capabilities.map((capability) => (
                     <li>{capability}</li>
@@ -341,7 +317,16 @@ const deliverySteps = [
                 <span>Potential outcome</span>
                 <p>{service.deliverables}</p>
               </div>
-              <a class="text-link service-detail-link" href={service.link}>
+              <a
+                class="text-link service-detail-link"
+                href={service.link}
+                target={service.link === '/contact' ? undefined : '_blank'}
+                rel={
+                  service.link === '/contact'
+                    ? undefined
+                    : 'noopener noreferrer'
+                }
+              >
                 {service.linkLabel}{' '}
                 <span class="link-arrow" aria-hidden="true">
                   →
@@ -371,7 +356,7 @@ const deliverySteps = [
   >
     <div class="site-container experience-panel">
       <div class="experience-number reveal">
-        <span>15</span>
+        <span>15+</span>
         <small>
           YEARS OF INDUSTRY
           <br />
@@ -382,14 +367,19 @@ const deliverySteps = [
       <div class="experience-message reveal">
         <p class="eyebrow eyebrow-light">Business context meets engineering</p>
         <h2 id="services-experience-title">
-          Good technology starts with <span>understanding the work.</span>
+          Good Technology Starts with <span>Understanding the Work.</span>
         </h2>
         <p>
           We bring business requirements, user needs, and existing systems into
           the conversation before settling on a technical direction. That
           context helps shape software around the problem it needs to solve.
         </p>
-        <a class="text-link text-link-light" href="/projects">
+        <a
+          class="text-link text-link-light"
+          href="/projects"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           How we share project work{' '}
           <span class="link-arrow" aria-hidden="true">
             →
@@ -417,41 +407,6 @@ const deliverySteps = [
   </section>
 
   <DeliveryProcess />
-
-  <section
-    class="delivery-section section section-soft"
-    id="how-we-work"
-    aria-labelledby="delivery-heading"
-  >
-    <div class="site-container">
-      <header class="services-section-heading reveal">
-        <p class="eyebrow">How we work</p>
-        <h2 id="delivery-heading">
-          A clear route from <span>requirement to release.</span>
-        </h2>
-        <p>
-          Planning, engineering, review, and communication stay connected
-          throughout the work—not just at handover.
-        </p>
-      </header>
-      <div class="delivery-steps reveal" data-reveal-stagger>
-        {deliverySteps.map((step) => (
-          <article class="delivery-step" data-reveal-item>
-            <div class="delivery-step-top">
-              <span>{step.number}</span>
-              <i aria-hidden="true"></i>
-            </div>
-            <h3>{step.title}</h3>
-            <p>{step.description}</p>
-            <small>
-              <b>FOCUS</b>
-              {step.output}
-            </small>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
 </div>
 
 <style>
@@ -475,10 +430,6 @@ const deliverySteps = [
     color: var(--color-orange-dark);
   }
   .services-hero {
-    display: grid;
-    min-height: min(690px, calc(100svh - var(--site-header-height)));
-    align-items: center;
-    padding-block: 55px;
     background:
       radial-gradient(
         ellipse at 92% 12%,
@@ -486,41 +437,6 @@ const deliverySteps = [
         transparent 34%
       ),
       linear-gradient(125deg, #fbfaf8 0%, var(--color-paper) 53%, #f0ece6 100%);
-  }
-  .services-hero-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(480px, 1.1fr);
-    align-items: center;
-    gap: clamp(2.5rem, 5.6vw, 5.3rem);
-  }
-  .services-hero-copy {
-    max-width: 575px;
-  }
-  .services-hero-copy .eyebrow {
-    margin-bottom: 1.15rem;
-  }
-  .services-hero-copy h1 {
-    max-width: 650px;
-    margin-bottom: 1.2rem;
-    color: var(--color-navy);
-    font-size: var(--type-page-hero-size);
-    font-weight: var(--type-display-weight);
-    letter-spacing: var(--type-display-letter-spacing);
-    word-spacing: var(--type-display-word-spacing);
-    line-height: var(--type-page-hero-line-height);
-  }
-  .services-hero-lead {
-    max-width: 550px;
-    margin-bottom: 1.55rem;
-    color: var(--color-body);
-    font-size: var(--type-lead-size);
-    line-height: var(--type-lead-line-height);
-  }
-  .services-hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1rem 1.35rem;
   }
   .services-hero-actions .button {
     gap: 0.75rem;
@@ -556,6 +472,78 @@ const deliverySteps = [
   .services-hero-proof small {
     color: var(--color-muted);
     font-size: 0.7rem;
+  }
+
+  /* Hero visual wrapper: the framed image plus a service-areas card that
+     overlaps its lower-left corner (outside the image's clipped frame). */
+  .services-hero-feature {
+    position: relative;
+  }
+  .services-hero-areas {
+    position: absolute;
+    z-index: 2;
+    bottom: -1.75rem;
+    left: -1.75rem;
+    display: grid;
+    gap: 0.7rem;
+    width: min(17.5rem, 58%);
+    padding: 1rem 1.15rem 1.05rem;
+    border: 1px solid rgb(16 27 45 / 7%);
+    border-radius: 18px;
+    background: rgb(255 255 255 / 93%);
+    box-shadow:
+      0 1px 0 #fff inset,
+      0 22px 44px -24px rgb(16 27 45 / 40%),
+      0 2px 6px -3px rgb(16 27 45 / 10%);
+    backdrop-filter: blur(6px);
+  }
+  .services-hero-areas .hero-system__support-label {
+    margin-bottom: 0;
+    color: var(--color-orange-dark);
+  }
+  .services-hero-areas ol {
+    display: grid;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .services-hero-areas a {
+    display: grid;
+    grid-template-columns: 1.5rem minmax(0, 1fr);
+    align-items: baseline;
+    color: var(--color-ink);
+    font-size: 0.8rem;
+    font-weight: 550;
+    line-height: 1.3;
+    transition: color var(--duration-fast) ease;
+  }
+  .services-hero-areas a span {
+    color: var(--color-muted);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .services-hero-areas a:hover {
+    color: var(--color-orange-dark);
+  }
+  /* Stacked layouts: the card sits below the image at full width, with
+     the areas in two columns while there is room */
+  @media (max-width: 900px) {
+    .services-hero-areas {
+      position: static;
+      width: auto;
+      margin-top: 0.85rem;
+    }
+    .services-hero-areas ol {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 1rem;
+    }
+  }
+  @media (max-width: 480px) {
+    .services-hero-areas ol {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 
   .services-hero-visual {
@@ -750,27 +738,24 @@ const deliverySteps = [
   }
   .service-detail {
     display: grid;
-    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
     align-items: center;
-    gap: clamp(2rem, 5vw, 5rem);
+    gap: clamp(1.75rem, 4vw, 3.5rem);
     padding: clamp(1.35rem, 3vw, 2.4rem);
-    border: 1px solid rgb(16 27 45 / 8%);
+    /* Border, hover lift and orange edge (on the image side): shared
+       .accent-card (src/styles/accent-card.css). */
     border-radius: var(--radius-large);
     background: linear-gradient(135deg, #fff 0%, #fbf9f6 100%);
     box-shadow: 0 12px 34px rgb(16 27 45 / 4%);
     scroll-margin-top: calc(var(--site-header-height) + 1rem);
-    transition:
-      border-color 260ms var(--ease-out),
-      box-shadow 260ms var(--ease-out),
-      background-color 260ms var(--ease-out);
   }
   .service-detail:nth-child(even) {
-    border-color: rgb(84 123 157 / 14%);
+    --accent-card-border: rgb(84 123 157 / 14%);
     background: linear-gradient(135deg, #f4f7f9 0%, #fff 100%);
   }
-  .service-detail:hover {
-    border-color: rgb(201 84 43 / 28%);
-    box-shadow: 0 18px 40px rgb(16 27 45 / 8%);
+  /* Image on the left: keep the wider column for the image. */
+  .service-detail-reverse {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
   }
   .service-detail-reverse .service-detail-copy {
     order: 2;
@@ -895,19 +880,17 @@ const deliverySteps = [
     color: var(--color-orange-dark);
     font-size: 0.78rem;
   }
+  /* Every service image is 3:2, so the frame matches it and the whole
+     image shows without cropping. */
   .service-detail-visual {
     position: relative;
     min-width: 0;
-    min-height: 370px;
+    aspect-ratio: 3 / 2;
     overflow: hidden;
     border: 1px solid rgb(16 27 45 / 10%);
     border-radius: var(--radius-large);
-    background: #e9eef2;
+    background: #f6efe8;
     box-shadow: 0 18px 48px rgb(16 27 45 / 8%);
-    transition:
-      transform 360ms var(--ease-out),
-      box-shadow 360ms var(--ease-out),
-      border-color 260ms var(--ease-out);
   }
   .service-detail-image {
     position: absolute;
@@ -917,19 +900,6 @@ const deliverySteps = [
     height: 100%;
     object-fit: cover;
     object-position: center;
-    transition: transform 700ms var(--ease-out);
-  }
-  .service-detail:hover .service-detail-visual {
-    transform: translateY(-3px);
-    border-color: rgb(201 84 43 / 32%);
-    box-shadow: 0 22px 52px rgb(16 27 45 / 13%);
-  }
-  .service-detail:hover .service-detail-image {
-    transform: scale(1.045);
-  }
-  /* Gentler zoom keeps the monitor clear of the container edges. */
-  .service-detail#web-application-development:hover .service-detail-image {
-    transform: scale(1.02);
   }
   .detail-visual-head,
   .detail-visual-foot {
@@ -1758,81 +1728,6 @@ const deliverySteps = [
     background: var(--color-green);
   }
 
-  .delivery-section {
-    padding-block: clamp(4.5rem, 7vw, 6rem);
-  }
-  .delivery-section .services-section-heading {
-    margin-bottom: 2.5rem;
-  }
-  .delivery-steps {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 0.65rem;
-  }
-  .delivery-step {
-    min-width: 0;
-    padding: 0.75rem 0.85rem 0.9rem;
-    border-top: 1px solid #d6d0c9;
-    transition:
-      border-color 240ms var(--ease-out),
-      transform 240ms var(--ease-out);
-  }
-  .delivery-step:hover {
-    border-color: var(--color-orange);
-    transform: translateY(-3px);
-  }
-  .delivery-step-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 0.75rem;
-  }
-  .delivery-step-top span {
-    color: var(--color-orange-dark);
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-  }
-  .delivery-step-top i {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #d5cfc8;
-  }
-  .delivery-step:first-child .delivery-step-top i,
-  .delivery-step:hover .delivery-step-top i {
-    background: var(--color-orange);
-    box-shadow: 0 0 0 4px rgb(201 84 43 / 9%);
-  }
-  .delivery-step h3 {
-    margin-bottom: 0.5rem;
-    color: var(--color-navy);
-    font-size: 0.98rem;
-    font-weight: 650;
-    letter-spacing: -0.035em;
-    word-spacing: 0.035em;
-  }
-  .delivery-step p {
-    min-height: 5.2rem;
-    margin-bottom: 0.75rem;
-    color: var(--color-body);
-    font-size: 0.69rem;
-    line-height: 1.52;
-  }
-  .delivery-step small {
-    display: grid;
-    gap: 0.2rem;
-    color: var(--color-navy-soft);
-    font-size: 0.63rem;
-    font-weight: 600;
-    line-height: 1.4;
-  }
-  .delivery-step small b {
-    color: var(--color-muted);
-    font-size: 0.48rem;
-    letter-spacing: 0.1em;
-  }
-
   .services-experience {
     padding-block: clamp(3.5rem, 6vw, 5rem);
     background: var(--color-paper);
@@ -1891,7 +1786,7 @@ const deliverySteps = [
   .experience-message h2 {
     margin-bottom: 0.85rem;
     color: #fff;
-    font-size: clamp(1.9rem, 3vw, 2.9rem);
+    font-size: var(--type-section-size);
     font-weight: 550;
     letter-spacing: -0.06em;
     word-spacing: 0.06em;
@@ -1904,7 +1799,7 @@ const deliverySteps = [
     max-width: 620px;
     margin-bottom: 1rem;
     color: rgb(255 255 255 / 72%);
-    font-size: 0.83rem;
+    font-size: var(--type-intro-size);
     line-height: 1.65;
   }
   .experience-message .text-link {
@@ -1964,26 +1859,6 @@ const deliverySteps = [
     }
   }
   @media (max-width: 1050px) {
-    /* Show the whole scene in the narrower container; bands match the scene. */
-    #web-application-development .service-detail-image,
-    #cloud-data .service-detail-image {
-      object-fit: contain;
-      background: linear-gradient(180deg, #f8f3ee 50%, #ddc4a7 50%);
-    }
-    .services-hero-grid {
-      grid-template-columns: minmax(0, 0.9fr) minmax(390px, 1.1fr);
-      gap: 2.3rem;
-    }
-    .services-hero-copy h1 {
-      font-size: clamp(2.55rem, 4.25vw, 3.5rem);
-    }
-    .delivery-steps {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      row-gap: 1.2rem;
-    }
-    .delivery-step p {
-      min-height: 3.2rem;
-    }
     .experience-panel {
       grid-template-columns: 105px minmax(0, 1fr);
     }
@@ -2003,54 +1878,24 @@ const deliverySteps = [
     }
   }
   @media (max-width: 900px) {
-    .services-hero-grid {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 2.5rem;
-    }
-    .services-hero-copy {
-      max-width: 700px;
-    }
-    .services-hero-visual {
-      width: min(100%, 700px);
-      justify-self: center;
-    }
     .services-overview-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-    .service-detail {
-      gap: 2rem;
+    /* Tablets: stack text and image so the image gets the full width. */
+    .service-detail,
+    .service-detail-reverse {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.5rem;
     }
-    .service-detail-visual {
-      min-height: 340px;
+    .service-detail-reverse .service-detail-copy,
+    .service-detail-reverse .service-detail-visual {
+      order: initial;
     }
   }
   @media (max-width: 700px) {
-    .services-hero {
-      min-height: 0;
-      padding-block: 55px;
-    }
-    .services-hero-grid {
-      gap: 2rem;
-    }
-    .services-hero-copy h1 {
-      font-size: clamp(2.45rem, 9.2vw, 3.3rem);
-    }
-    .services-hero-lead {
-      font-size: 0.98rem;
-      line-height: 1.62;
-    }
-    .services-hero-actions {
-      align-items: flex-start;
-      flex-direction: column;
-      gap: 0.9rem;
-    }
-    .services-hero-actions .button {
-      width: 100%;
-      justify-content: space-between;
-    }
     .services-hero-visual {
-      min-height: 390px;
-      aspect-ratio: auto;
+      min-height: 0;
+      aspect-ratio: 1.27;
       border-radius: 16px;
     }
     .services-section-heading {
@@ -2061,7 +1906,7 @@ const deliverySteps = [
       margin-left: 0;
     }
     .services-section-heading h2 {
-      font-size: clamp(1.9rem, 7.5vw, 2.45rem);
+      font-size: var(--type-section-size);
     }
     .services-overview-grid {
       gap: 0.7rem;
@@ -2083,19 +1928,6 @@ const deliverySteps = [
     .service-detail-visual,
     .service-detail-reverse .service-detail-visual {
       order: initial;
-    }
-    .service-detail-visual {
-      min-height: 330px;
-    }
-    .delivery-steps {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.7rem;
-    }
-    .delivery-step {
-      padding-inline: 0.5rem;
-    }
-    .delivery-step p {
-      min-height: 4.5rem;
     }
     .experience-panel {
       grid-template-columns: minmax(0, 1fr);
@@ -2120,7 +1952,7 @@ const deliverySteps = [
       margin-top: 0.15rem;
     }
     .experience-message h2 {
-      font-size: clamp(1.85rem, 7vw, 2.5rem);
+      font-size: var(--type-section-size);
     }
     .experience-principles {
       grid-column: auto;
@@ -2150,10 +1982,6 @@ const deliverySteps = [
       align-items: flex-start;
       flex-direction: column;
       gap: 0.35rem;
-    }
-    .service-detail-visual {
-      min-height: 340px;
-      padding-inline: 0.8rem;
     }
     .enterprise-node {
       min-width: 111px;
@@ -2187,12 +2015,6 @@ const deliverySteps = [
     .cloud-pipeline-nodes > div > small {
       font-size: 0.43rem;
     }
-    .delivery-steps {
-      grid-template-columns: minmax(0, 1fr);
-    }
-    .delivery-step p {
-      min-height: 0;
-    }
   }
   @media (prefers-reduced-motion: reduce) {
     .services-page *,
@@ -2204,11 +2026,7 @@ const deliverySteps = [
     }
     .service-overview-card,
     .service-overview-card:hover,
-    .service-overview-card:focus-visible,
-    .delivery-step:hover,
-    .service-detail:hover .service-detail-visual,
-    .service-detail:hover .service-detail-image,
-    .service-detail#web-application-development:hover .service-detail-image {
+    .service-overview-card:focus-visible {
       transform: none;
     }
   }

@@ -193,7 +193,7 @@ const stats = [
               </div>
               <div class="home-dashboard-heading">
                 <span class="dashboard-kicker">Technology overview</span>
-                <h3 class="dashboard-title">Solutions for what’s next.</h3>
+                <p class="dashboard-title">Solutions for what’s next.</p>
               </div>
 
               <!-- 5 Services in 2 Columns -->
@@ -363,11 +363,11 @@ const stats = [
           </div>
           <div class="home-phone-greeting">
             <span class="phone-kicker">YOUR WORKSPACE</span>
-            <h4 class="phone-headline">
+            <p class="phone-headline">
               Build around
               <br />
               your business.
-            </h4>
+            </p>
           </div>
           <div class="home-phone-card">
             <span class="home-phone-card-icon">iN</span>
@@ -585,6 +585,7 @@ const stats = [
     content: '';
     pointer-events: none;
     filter: blur(24px);
+    animation: home-glow-arrive 800ms cubic-bezier(0.16, 1, 0.3, 1) 150ms both;
   }
 
   .home-visual-scene {
@@ -603,6 +604,8 @@ const stats = [
     overflow: visible;
     fill: none;
     pointer-events: none;
+    transform-origin: center center;
+    animation: home-orbits-arrive 760ms cubic-bezier(0.16, 1, 0.3, 1) 200ms both;
   }
 
   .home-orbit-main {
@@ -1316,6 +1319,26 @@ const stats = [
   }
 
   /* Keyframe Animations */
+  @keyframes home-orbits-arrive {
+    from {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes home-glow-arrive {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
   @keyframes home-device-arrive {
     from {
       opacity: 0;
@@ -1464,6 +1487,8 @@ const stats = [
       display: none;
     }
 
+    .home-visual-orbits,
+    .home-visual-stage::before,
     .home-laptop,
     .home-phone,
     .home-stat-card {

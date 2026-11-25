@@ -5,16 +5,15 @@ import { faqs, pages } from '../data/site-content.js'
 
 <BaseLayout title={pages.faq.title} description={pages.faq.description}>
   <main id="main-content" class="faq-page">
-    <section class="faq-hero" aria-labelledby="faq-hero-heading">
-      <div class="site-container faq-hero-inner">
-        <div class="faq-hero-badge">
-          <span class="faq-hero-dot" aria-hidden="true"></span>
-          <span>Knowledge & Support</span>
-        </div>
-        <h1 id="faq-hero-heading" class="faq-hero-title">
+    <section
+      class="faq-hero hero-system hero-system--center hero-system--dark"
+      aria-labelledby="faq-hero-heading"
+    >
+      <div class="site-container faq-hero-inner hero-system__inner reveal">
+        <h1 id="faq-hero-heading" class="faq-hero-title hero-system__title">
           Frequently Asked Questions.
         </h1>
-        <p class="faq-hero-lead">
+        <p class="faq-hero-lead hero-system__description">
           Find clear, direct answers about Incaendo’s services, technologies,
           custom application development, and ongoing support.
         </p>
@@ -23,17 +22,17 @@ import { faqs, pages } from '../data/site-content.js'
 
     <section class="faq-content-section" aria-labelledby="faq-section-heading">
       <div class="site-container faq-layout">
-        <div class="faq-header-block">
+        <div class="faq-header-block reveal">
           <span class="faq-label">FAQ</span>
           <h2 id="faq-section-heading" class="faq-section-title">
-            Common questions about how we work
+            Common Questions about How We Work
           </h2>
           <p class="faq-section-desc">
             Everything you need to know about our capabilities, platforms,
             design process, security practices, and post-launch maintenance.
           </p>
           <div class="faq-sidebar-card">
-            <h3>Have a specific project requirement?</h3>
+            <h3>Have a Specific Project Requirement?</h3>
             <p>
               Our engineering team is ready to consult on architecture,
               technology choices, and project feasibility.
@@ -45,7 +44,7 @@ import { faqs, pages } from '../data/site-content.js'
         </div>
 
         <div class="faq-accordion-wrap">
-          <div class="faq-list">
+          <div class="faq-list reveal" data-reveal-stagger>
             {faqs.map((faq, index) => (
               <details class="faq-item" open={index === 0}>
                 <summary>
@@ -64,10 +63,10 @@ import { faqs, pages } from '../data/site-content.js'
 
     <section class="faq-bottom-cta">
       <div class="site-container">
-        <div class="faq-cta-card">
+        <div class="faq-cta-card reveal">
           <div class="faq-cta-content">
             <span class="faq-cta-badge">Still Have Questions?</span>
-            <h2>We’re here to help you make informed decisions.</h2>
+            <h2>We’re Here to Help You Make Informed Decisions.</h2>
             <p>
               Connect with our technology consultants to explore how Incaendo
               can build and support solutions tailored to your business goals.
@@ -95,8 +94,6 @@ import { faqs, pages } from '../data/site-content.js'
 
   .faq-hero {
     position: relative;
-    padding-top: calc(var(--site-header-height) + 3.5rem);
-    padding-bottom: clamp(3rem, 6vw, 4.5rem);
     background:
       radial-gradient(
         circle at 85% 20%,
@@ -111,55 +108,6 @@ import { faqs, pages } from '../data/site-content.js'
       linear-gradient(135deg, #07111e 0%, #101b2d 60%, #17263c 100%);
     color: var(--color-white);
     overflow: hidden;
-  }
-
-  .faq-hero-inner {
-    max-width: 860px;
-    margin-inline: auto;
-    text-align: center;
-  }
-
-  .faq-hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.35rem 0.9rem;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 999px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #ffd8cc;
-    margin-bottom: 1.5rem;
-  }
-
-  .faq-hero-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: var(--color-orange);
-    box-shadow: 0 0 8px var(--color-orange);
-  }
-
-  .faq-hero-title {
-    font-family: var(--font-heading);
-    font-size: clamp(2.4rem, 5vw, 3.8rem);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.04em;
-    word-spacing: 0.04em;
-    margin-bottom: 1.25rem;
-    color: var(--color-white);
-  }
-
-  .faq-hero-lead {
-    font-size: clamp(1.05rem, 1.4vw, 1.22rem);
-    line-height: 1.65;
-    color: rgba(255, 255, 255, 0.8);
-    max-width: 680px;
-    margin-inline: auto;
   }
 
   .faq-content-section {
@@ -197,7 +145,7 @@ import { faqs, pages } from '../data/site-content.js'
 
   .faq-section-title {
     font-family: var(--font-heading);
-    font-size: clamp(1.8rem, 2.8vw, 2.3rem);
+    font-size: var(--type-section-size);
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: -0.03em;
@@ -207,7 +155,7 @@ import { faqs, pages } from '../data/site-content.js'
   }
 
   .faq-section-desc {
-    font-size: 1rem;
+    font-size: var(--type-intro-size);
     line-height: 1.65;
     color: var(--color-body);
     margin-bottom: 2rem;
@@ -310,7 +258,7 @@ import { faqs, pages } from '../data/site-content.js'
 
   .faq-cta-content h2 {
     font-family: var(--font-heading);
-    font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+    font-size: var(--type-section-size);
     font-weight: 700;
     line-height: 1.25;
     letter-spacing: -0.02em;

@@ -1,0 +1,69 @@
+/*
+ * Shared keyframes used across the site. Animation names are global in CSS
+ * (Astro does not scope @keyframes), so a common movement is defined once
+ * here instead of being copied under different names in each component.
+ *
+ * Section-specific animations stay in their own component.
+ */
+
+/* One full turn (loaders, rotating rings). */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Seamless marquees: the track holds two copies of its items and moves by
+   half its width per cycle (see src/scripts/marquee-drag.js). */
+@keyframes marquee-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+@keyframes marquee-right {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Fill a bar from the left (set transform-origin on the element). */
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Appear from the element's own starting opacity. */
+@keyframes fade-to-visible {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Settle into place from the element's own starting offset and opacity. */
+@keyframes rise-to-place {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Gentle hover-free floating for hero images. */
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}

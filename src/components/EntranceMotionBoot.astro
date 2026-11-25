@@ -1,0 +1,51 @@
+---
+/**
+ * Runs in <head> before first paint. Marks the document so motion.css can
+ * pre-hide entrance content, avoiding a visible flash before motion.js runs.
+ * Content stays visible when scripts are off, motion is reduced, or
+ * motion.js has not started within 3s (failsafe). Individual elements opt
+ * out with [data-entrance-exclude].
+ */
+---
+
+<script is:inline>
+  ;(() => {
+    const root = document.documentElement
+    try {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    } catch {
+      return
+    }
+    root.dataset.entrance = 'pending'
+
+    try {
+      const nav = performance.getEntriesByType('navigation')
+      const isReload = nav.length > 0 && nav[0].type === 'reload'
+      const lastScroll = Number(
+        sessionStorage.getItem('incaendo-scroll-y') || 0,
+      )
+
+      if (isReload && lastScroll > 150) {
+        root.dataset.restoringScroll = 'true'
+        const check = () => {
+          if (document.documentElement.scrollHeight > lastScroll) {
+            window.scrollTo(0, lastScroll)
+          }
+          if (window.scrollY > 100) {
+            delete root.dataset.restoringScroll
+          } else {
+            requestAnimationFrame(check)
+          }
+        }
+        requestAnimationFrame(check)
+        window.setTimeout(() => {
+          delete root.dataset.restoringScroll
+        }, 600)
+      }
+    } catch {}
+
+    window.setTimeout(() => {
+      if (root.dataset.entrance === 'pending') delete root.dataset.entrance
+    }, 3000)
+  })()
+</script>

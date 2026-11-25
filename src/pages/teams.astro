@@ -4,7 +4,11 @@ import TeamsPage from '../components/TeamsPage.astro'
 import { pages } from '../data/site-content.js'
 ---
 
-<BaseLayout title={pages.teams.title} description={pages.teams.description}>
+<BaseLayout
+  title={pages.teams.title}
+  description={pages.teams.description}
+  pageType="AboutPage"
+>
   <main id="main-content">
     <TeamsPage />
   </main>

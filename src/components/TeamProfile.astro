@@ -136,11 +136,11 @@ try {
 
   .team-profile-copy {
     display: flex;
-    min-height: 5rem;
+    min-height: 4.25rem;
     align-items: center;
     justify-content: space-between;
     gap: 0.65rem;
-    padding: 0.85rem 0.25rem 0.2rem;
+    padding: 0.85rem 0.35rem 0.35rem;
     min-width: 0;
   }
 
@@ -174,31 +174,35 @@ try {
   }
 
   .team-profile-linkedin {
-    display: grid;
-    width: 2rem;
-    height: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.1rem;
+    height: 2.1rem;
     flex: 0 0 auto;
-    place-items: center;
-    border: 1px solid var(--color-line);
-    border-radius: 50%;
-    color: var(--color-navy);
-    background: #fff;
+    border-radius: 6px;
+    background: transparent;
     transition:
-      color 180ms ease,
-      background-color 180ms ease,
-      border-color 180ms ease;
+      transform 200ms ease,
+      opacity 200ms ease;
   }
 
   .team-profile-linkedin svg {
-    width: 0.9rem;
-    height: 0.9rem;
-    fill: currentColor;
+    width: 1.65rem;
+    height: 1.65rem;
+    display: block;
+    border-radius: 4px;
+    transition:
+      transform 180ms ease,
+      filter 180ms ease;
   }
 
   .team-profile-linkedin:hover {
-    border-color: var(--color-orange-dark);
-    color: white;
-    background: var(--color-orange-dark);
+    transform: translateY(-2px);
+  }
+
+  .team-profile-linkedin:hover svg {
+    filter: drop-shadow(0 3px 6px rgba(10, 102, 194, 0.4));
   }
 
   @media (prefers-reduced-motion: reduce) {

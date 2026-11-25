@@ -1,12 +1,25 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import ServicesPage from '../components/ServicesPage.astro'
-import { pages } from '../data/site-content.js'
+import { homepageServices, pages } from '../data/site-content.js'
+
+const serviceSchema = homepageServices.map((service) => {
+  const url = new URL(`/services/#${service.id}`, Astro.site).href
+  return {
+    '@type': 'Service',
+    '@id': url,
+    name: service.title,
+    description: service.description,
+    url,
+    provider: { $ref: 'organization' },
+  }
+})
 ---
 
 <BaseLayout
   title={pages.services.title}
   description={pages.services.description}
+  schema={serviceSchema}
 >
   <main id="main-content">
     <ServicesPage />

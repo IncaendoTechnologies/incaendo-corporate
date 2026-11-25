@@ -1,0 +1,371 @@
+---
+import ContactForm from './ContactForm.astro'
+---
+
+<div
+  class="contact-modal-overlay"
+  id="project-inquiry-modal"
+  data-contact-modal
+>
+  <div
+    class="contact-modal-dialog contact-form-card"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="project-inquiry-modal-title"
+  >
+    <div class="contact-modal-header">
+      <h2 id="project-inquiry-modal-title">
+        Let’s Talk about <span>Your Project</span>
+      </h2>
+      <button
+        type="button"
+        class="icon-link contact-modal-close"
+        data-modal-close
+        aria-label="Close dialog"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          fill="none"
+          focusable="false"
+        >
+          <path d="m6 6 12 12M18 6 6 18" />
+        </svg>
+      </button>
+    </div>
+    <div class="contact-modal-body">
+      <ContactForm idPrefix="modal" />
+    </div>
+  </div>
+</div>
+
+<script>
+  import '../scripts/contact-modal.js'
+</script>
+
+<style>
+  /* Prefixed contact-modal- throughout: Bootstrap (imported in global.css)
+     already defines .modal, .modal-dialog, .modal-body, etc. for its own
+     modal system, which would otherwise collide (e.g. Bootstrap's
+     .modal-dialog sets pointer-events: none). */
+  .contact-modal-overlay {
+    position: fixed;
+    z-index: 500;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1rem, 3vw, 2rem);
+    background: rgb(16 27 45 / 55%);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 400ms var(--ease-out),
+      visibility 400ms var(--ease-out);
+  }
+
+  .contact-modal-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .contact-modal-dialog {
+    position: relative;
+    display: flex;
+    width: 100%;
+    max-width: 680px;
+    /* `100%` of the flex-centered, inset:0 overlay already resolves to the
+       viewport minus its padding; the dvh term is a belt-and-braces cap for
+       mobile browser chrome that can change the visual viewport height. */
+    max-height: min(100%, calc(100dvh - 2rem));
+    flex-direction: column;
+    transform: translateY(16px) scale(0.97);
+    transition:
+      transform 400ms var(--ease-out),
+      opacity 400ms var(--ease-out);
+    opacity: 0;
+  }
+
+  .contact-modal-overlay.is-open .contact-modal-dialog {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+
+  .contact-modal-header {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .contact-modal-header h2 {
+    max-width: calc(100% - 3.5rem);
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-heading);
+    font-size: clamp(1.4rem, 2.5vw, 1.75rem);
+    font-weight: var(--type-heading-weight);
+    letter-spacing: var(--type-section-letter-spacing);
+    line-height: 1.2;
+    word-spacing: var(--type-section-word-spacing);
+  }
+
+  .contact-modal-header h2 span {
+    color: var(--color-orange-dark);
+  }
+
+  .contact-modal-close {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    place-items: center;
+    padding: 0;
+    border: 1px solid var(--color-line);
+    border-radius: 50%;
+    background: var(--color-white);
+    color: var(--color-ink);
+    cursor: pointer;
+    transition:
+      border-color var(--duration-fast) ease,
+      background-color var(--duration-fast) ease,
+      color var(--duration-fast) ease;
+  }
+
+  .contact-modal-close svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+    overflow: visible;
+  }
+
+  .contact-modal-close path {
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-width: 1.8;
+  }
+
+  .contact-modal-close:hover {
+    border-color: var(--color-orange);
+    background: var(--color-peach);
+    color: var(--color-orange-dark);
+  }
+
+  .contact-modal-close:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .contact-modal-close:focus-visible {
+    border-color: var(--color-orange);
+    outline: 3px solid rgb(201 84 43 / 30%);
+    outline-offset: 3px;
+    color: var(--color-orange-dark);
+  }
+
+  /* overflow-y: auto implicitly computes overflow-x to auto too (per the
+     CSS Overflow spec, an axis left as `visible` is forced to `auto` once
+     the other axis isn't `visible`). Bootstrap's .row.gx-3 (used inside
+     ContactForm) relies on a few pixels of negative horizontal margin that
+     a surrounding .container normally absorbs invisibly; here that same
+     harmless bleed became a real horizontal scrollbar once this element
+     became a scroll container. overflow-x: hidden contains exactly that
+     margin bleed — it never clips form content, which all sits comfortably
+     inside the padding on either side of it.
+     Sizes below are modal-only overrides (scoped to this component) that
+     compact the shared .contact-form-card field styling just enough for
+     the full form to fit a standard laptop viewport without scrolling; the
+     Contact page's own inline form is untouched. */
+  /* The scrollbar sits out in the dialog's side padding, right against
+     the dialog border, away from the fields, and is thin and faint. */
+  .contact-modal-body {
+    min-height: 0;
+    margin-right: calc(-1 * var(--modal-pad-x));
+    padding-right: var(--modal-pad-x);
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-color: rgb(16 27 45 / 14%) transparent;
+    scrollbar-width: thin;
+  }
+
+  .contact-modal-body::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .contact-modal-body::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .contact-modal-body::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: rgb(16 27 45 / 14%);
+  }
+
+  .contact-modal-dialog.contact-form-card {
+    --modal-pad-x: clamp(1.15rem, 2vw, 1.5rem);
+
+    padding: var(--modal-pad-x);
+    border-radius: 16px;
+  }
+
+  .contact-modal-dialog .contact-form {
+    gap: 0.8rem;
+  }
+
+  .contact-modal-dialog :global(.row.form-grid) {
+    --bs-gutter-y: 0.6rem;
+  }
+
+  .contact-modal-dialog.contact-form-card :global(.form-field input),
+  .contact-modal-dialog.contact-form-card :global(.form-field select) {
+    min-height: 44px;
+    padding-block: 0.55rem;
+  }
+
+  .contact-modal-dialog.contact-form-card :global(.form-field textarea) {
+    min-height: 80px;
+    padding-block: 0.6rem;
+  }
+
+  .contact-modal-dialog :global(.form-submit-row .button) {
+    min-height: 44px;
+  }
+
+  .contact-modal-dialog :global(.form-submit-row) {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1rem;
+  }
+
+  .contact-modal-dialog :global(.form-submit-row p) {
+    max-width: 340px;
+    margin: 0;
+  }
+
+  /* Phones: spacing and sizes follow a standard compact mobile form
+     (14px labels and text, 40px fields, ~16px between fields). */
+  @media (max-width: 560px) {
+    .contact-modal-overlay {
+      padding: 0.75rem;
+    }
+
+    .contact-modal-dialog.contact-form-card {
+      --modal-pad-x: 1.25rem;
+
+      padding: 1.25rem var(--modal-pad-x) 1rem;
+      border-radius: 18px;
+    }
+
+    .contact-modal-header {
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.85rem;
+    }
+
+    .contact-modal-header h2 {
+      max-width: none;
+      font-size: 1.3rem;
+    }
+
+    .contact-modal-close {
+      width: 38px;
+      height: 38px;
+      flex-basis: 38px;
+      border-radius: 10px;
+    }
+
+    .contact-modal-dialog .contact-form {
+      gap: 1rem;
+    }
+
+    .contact-modal-dialog :global(.row.form-grid) {
+      --bs-gutter-y: 1rem;
+    }
+
+    .contact-modal-dialog.contact-form-card :global(.form-field) {
+      gap: 0.375rem;
+    }
+
+    .contact-modal-dialog.contact-form-card :global(.form-field label) {
+      font-size: 0.875rem;
+      line-height: 1.4;
+    }
+
+    .contact-modal-dialog.contact-form-card :global(.form-optional) {
+      font-size: 0.75rem;
+    }
+
+    .contact-modal-dialog.contact-form-card :global(.form-field input),
+    .contact-modal-dialog.contact-form-card :global(.form-field select),
+    .contact-modal-dialog.contact-form-card :global(.form-field textarea) {
+      font-size: 0.875rem;
+      line-height: 1.4;
+    }
+
+    .contact-modal-dialog.contact-form-card :global(.form-field input),
+    .contact-modal-dialog.contact-form-card :global(.form-field select) {
+      min-height: 40px;
+      padding: 0.5rem 0.875rem;
+    }
+
+    .contact-modal-dialog.contact-form-card :global(.form-field select) {
+      padding-right: 2.5rem;
+      background-position: right 0.875rem center;
+    }
+
+    .contact-modal-dialog.contact-form-card :global(.form-field textarea) {
+      height: 96px;
+      min-height: 96px;
+      padding: 0.6rem 0.875rem;
+      resize: none;
+    }
+
+    .contact-modal-dialog.contact-form-card :global(.form-field-error) {
+      font-size: 0.78rem;
+    }
+
+    .contact-modal-dialog :global(.contact-privacy-consent) {
+      gap: 0.6rem;
+      font-size: 0.8125rem;
+      line-height: 1.45;
+    }
+
+    /* Line the consent error up with the consent text (checkbox + gap). */
+    .contact-modal-dialog.contact-form-card
+      :global(.contact-consent .form-field-error) {
+      margin-left: calc(1.15rem + 0.6rem);
+    }
+
+    .contact-modal-dialog :global(.form-submit-row) {
+      align-items: stretch;
+      flex-direction: column-reverse;
+      gap: 0.6rem;
+    }
+
+    .contact-modal-dialog :global(.form-submit-row p) {
+      font-size: 0.8125rem;
+    }
+
+    .contact-modal-dialog :global(.form-submit-row .button) {
+      width: 100%;
+      min-height: 44px;
+      justify-content: space-between;
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-modal-overlay,
+    .contact-modal-dialog {
+      transition: none !important;
+    }
+  }
+</style>

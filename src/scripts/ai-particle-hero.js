@@ -10,12 +10,12 @@
 
 const TAU = Math.PI * 2
 // Letter size in the open view, relative to idle.
-const OPEN_SCALE = 0.64
+const OPEN_SCALE = 0.74
 // Open-view sphere radius as a share of the field, and how many extra
 // particles join it, relative to the idle cloud. Larger and denser than the
 // idle cloud so the open view reads as a rich, full sphere around the
 // letters rather than a thin shell.
-const SPHERE_R = 0.37
+const SPHERE_R = 0.385
 const SPHERE_EXTRA = 2.1
 // Length of the idle/open morph, and how long closing waits for the cards to
 // start fading before the letters grow back.
@@ -90,7 +90,7 @@ function gaussian() {
 // normal for lighting. Coordinates are in raster pixels, centred on the word.
 
 function sampleGlyphs(fontFamily) {
-  const fontSize = 320
+  const fontSize = 200
   const font = `800 ${fontSize}px ${fontFamily}`
   const probe = document.createElement('canvas').getContext('2d')
   probe.font = font
@@ -219,6 +219,14 @@ function sampleGlyphs(fontFamily) {
   }
 }
 
+const glyphCache = new Map()
+function getSampledGlyph(fontFamily) {
+  if (!glyphCache.has(fontFamily)) {
+    glyphCache.set(fontFamily, sampleGlyphs(fontFamily))
+  }
+  return glyphCache.get(fontFamily)
+}
+
 // Picks a point on the glyph raster and returns its relief and normal.
 function glyphPoint(glyph, list, out) {
   const { w, height, letter } = glyph
@@ -269,7 +277,7 @@ function setupParticleHero(root) {
   let lx, ly, lz, nx, ny, nz, mat, speck, dither
   // Field particles: home in the open-view sphere (unit ball), its depth and
   // lighting this frame, and the opacity extras take on once open.
-  let sx, sy, sz, depth, light, openAlpha
+  let sx, sy, sz, depth, light, openAlpha, invR
   // Per-frame size and opacity handed to the renderer during and after the
   // morph (the base arrays are used as-is while fully idle).
   let drawSize, drawAlpha
@@ -316,6 +324,140 @@ function setupParticleHero(root) {
     fieldEnd = extraStart + extraCount
     count = fieldEnd + letterCount
 
+    const scale = Math.min(Math.max(span / 600, 0.75), 1.15)
+
+    if (renderer.isGPU) {
+      const gpuData = new Float32Array(count * STRIDE)
+      const pt = {}
+
+      for (let i = 0; i < shadowEnd; i++) {
+        glyphPoint(glyph, glyph.inside, pt)
+        const o = i * STRIDE
+        gpuData[o] = pt.x + glyph.capH * 0.045
+        gpuData[o + 1] = pt.y + glyph.capH * 0.075
+        gpuData[o + 2] = 0
+        gpuData[o + 6] = SHADOW_COLOR[0]
+        gpuData[o + 7] = SHADOW_COLOR[1]
+        gpuData[o + 8] = SHADOW_COLOR[2]
+        gpuData[o + 9] = 1.0 // soft = 1
+        gpuData[o + 10] = 0.0 // type = 0 (shadow)
+        gpuData[o + 11] = Math.random() * TAU // phase
+        gpuData[o + 12] = (16 + Math.random() * 14) * scale // size
+        gpuData[o + 13] = 0.05 + Math.random() * 0.03 // alpha
+        gpuData[o + 15] = 1.0
+        gpuData[o + 17] = -1.0
+      }
+
+      for (let i = shadowEnd; i < fieldEnd; i++) {
+        const isExtra = i >= extraStart
+        const z = Math.random() * 2 - 1
+        const a = Math.random() * TAU
+        const ring = Math.sqrt(1 - z * z)
+        const pick = Math.random()
+        const r =
+          pick < 0.34
+            ? 0.92 + Math.random() * 0.08
+            : pick < 0.96
+              ? Math.cbrt(Math.random())
+              : 1 + Math.random() * 0.12
+        const pxx = ring * Math.cos(a) * r
+        const pyy = ring * Math.sin(a) * r
+        const pzz = z * r
+        const invRadius = 1 / (r || 1)
+
+        let tone = 0
+        let hue = Math.random()
+        const weights = isExtra ? SPHERE_WEIGHTS : FIELD_WEIGHTS
+        while (tone < weights.length - 1 && hue > weights[tone]) {
+          hue -= weights[tone]
+          tone++
+        }
+        const col = FIELD_COLORS[tone]
+
+        let s = 0
+        let a_val = 0
+        let oAlpha = 0
+
+        if (!isExtra) {
+          const pPick = Math.random()
+          const d =
+            pPick < 0.5
+              ? Math.random() * 0.35
+              : pPick < 0.88
+                ? 0.35 + Math.random() * 0.4
+                : 0.75 + Math.random() * 0.25
+          s = (1.1 + d * 3.2) * scale
+          a_val = Math.min(0.32 + d * 0.62, 0.95)
+        } else {
+          const near = Math.random()
+          s = (0.9 + near * near * 2.6) * scale
+          oAlpha = 0.42 + near * 0.53
+        }
+
+        const o = i * STRIDE
+        gpuData[o] = pxx
+        gpuData[o + 1] = pyy
+        gpuData[o + 2] = pzz
+        gpuData[o + 6] = col[0]
+        gpuData[o + 7] = col[1]
+        gpuData[o + 8] = col[2]
+        gpuData[o + 9] = 0 // soft = 0
+        gpuData[o + 10] = 1.0 // type = 1 (sphere)
+        gpuData[o + 11] = Math.random() * TAU // phase
+        gpuData[o + 12] = s
+        gpuData[o + 13] = a_val
+        gpuData[o + 14] = oAlpha
+        gpuData[o + 15] = invRadius
+        gpuData[o + 17] = -1.0
+      }
+
+      const letters = []
+      for (let n = 0; n < letterCount; n++) {
+        glyphPoint(glyph, Math.random() < 0.22 ? glyph.rim : glyph.inside, pt)
+        letters.push({ ...pt })
+      }
+      letters.sort((a, b) => a.z - b.z)
+
+      for (let n = 0; n < letterCount; n++) {
+        const i = fieldEnd + n
+        const q = letters[n]
+        const isSpeck = Math.random() < (q.letter === 0 ? 0.075 : 0.06) ? 1 : 0
+        const relief = q.z / glyph.R
+        const grain = Math.random()
+        const s =
+          (isSpeck ? 2.2 + grain * 2 : 1.6 + grain * grain * 2.3) *
+          (0.85 + relief * 0.3) *
+          scale
+        const a_val = q.edge ? 0.8 + grain * 0.15 : 0.88 + grain * 0.12
+        const m = MATERIALS[q.letter]
+        const col = isSpeck ? m.speck : m.ramp[2]
+
+        const o = i * STRIDE
+        gpuData[o] = q.x
+        gpuData[o + 1] = q.y
+        gpuData[o + 2] = q.z
+        gpuData[o + 3] = q.nx
+        gpuData[o + 4] = q.ny
+        gpuData[o + 5] = q.nz
+        gpuData[o + 6] = col[0]
+        gpuData[o + 7] = col[1]
+        gpuData[o + 8] = col[2]
+        gpuData[o + 9] = 0 // soft = 0
+        gpuData[o + 10] = 2.0 // type = 2 (letter)
+        gpuData[o + 11] = Math.random() * TAU // phase
+        gpuData[o + 12] = s
+        gpuData[o + 13] = a_val
+        gpuData[o + 14] = 0
+        gpuData[o + 15] = 1.0
+        gpuData[o + 16] = isSpeck ? 1.0 : 0.0
+        gpuData[o + 17] = q.letter
+      }
+
+      renderer.uploadStatic(gpuData)
+      assembled = true
+      return
+    }
+
     px = new Float32Array(count)
     py = new Float32Array(count)
     vx = new Float32Array(count)
@@ -344,11 +486,11 @@ function setupParticleHero(root) {
     depth = new Float32Array(count)
     light = new Float32Array(count)
     openAlpha = new Float32Array(count)
+    invR = new Float32Array(count)
     drawSize = new Float32Array(count)
     drawAlpha = new Float32Array(count)
 
     // Particles scale with the field so small screens keep the same texture.
-    const scale = Math.min(Math.max(span / 600, 0.75), 1.15)
     const pt = {}
 
     // Soft contact shadow under the letters, offset down and to the right.
@@ -449,6 +591,7 @@ function setupParticleHero(root) {
       sx[i] = ring * Math.cos(a) * r
       sy[i] = ring * Math.sin(a) * r
       sz[i] = z * r
+      invR[i] = 1 / (r || 1)
     }
 
     // The letters: mostly even coverage, with extra particles tracing the
@@ -558,6 +701,22 @@ function setupParticleHero(root) {
       out.y = cy + y2 * k + Math.cos(time * 0.8 + phase[i] * 2) * wobble
       return
     }
+
+    if (mix === 1) {
+      const x1 = sx[i] * orbit.cosY + sz[i] * orbit.sinY
+      const z1 = -sx[i] * orbit.sinY + sz[i] * orbit.cosY
+      const y2 = sy[i] * orbit.cosX - z1 * orbit.sinX
+      const z2 = sy[i] * orbit.sinX + z1 * orbit.cosX
+      const k = (span * SPHERE_R) / (1 - z2 * 0.28)
+      out.x = cx + x1 * k + Math.sin(time * 0.5 + phase[i]) * 1.4
+      out.y = cy + y2 * k + Math.cos(time * 0.45 + phase[i]) * 1.4
+      depth[i] = z2
+      const dot =
+        (x1 * LIGHT[0] + y2 * LIGHT[1] + z2 * LIGHT[2]) * (invR[i] || 1)
+      light[i] = dot > 0 ? dot : 0
+      return
+    }
+
     const r = homeR[i] + Math.sin(time * 0.8 + phase[i]) * 4
     let x =
       cx + Math.cos(angle[i]) * r + Math.sin(time * 0.6 + phase[i] * 2) * 1.8
@@ -574,12 +733,9 @@ function setupParticleHero(root) {
       x += (cx + x1 * k + drift - x) * mix
       y += (cy + y2 * k + Math.cos(time * 0.45 + phase[i]) * 1.4 - y) * mix
       depth[i] = z2
-      // Key light from the upper left, as on the letters.
-      const len = Math.hypot(x1, y2, z2) || 1
-      light[i] = Math.max(
-        (x1 * LIGHT[0] + y2 * LIGHT[1] + z2 * LIGHT[2]) / len,
-        0,
-      )
+      const dot =
+        (x1 * LIGHT[0] + y2 * LIGHT[1] + z2 * LIGHT[2]) * (invR[i] || 1)
+      light[i] = dot > 0 ? dot : 0
     }
     out.x = x
     out.y = y
@@ -650,13 +806,13 @@ function setupParticleHero(root) {
       let ay = (scratch.y - py[i]) * stiff[i]
 
       // Keep the sampled glyph and its contact shadow protected; only the
-      // surrounding field reacts to the cursor.
+      // surrounding field reacts to the cursor with a tight, subtle ripple.
       if (pointer && field) {
         const dx = px[i] - pointer.x
         const dy = py[i] - pointer.y
         const d2 = dx * dx + dy * dy
-        if (d2 < 6400 && d2 > 1) {
-          const push = (1 - d2 / 6400) * 900
+        if (d2 < 1600 && d2 > 1) {
+          const push = (1 - d2 / 1600) * 450
           const d = Math.sqrt(d2)
           ax += (dx / d) * push
           ay += (dy / d) * push
@@ -685,12 +841,63 @@ function setupParticleHero(root) {
   }
 
   function draw() {
+    if (renderer.isGPU) {
+      renderer.draw({
+        count,
+        width,
+        height,
+        dpr,
+        cx,
+        cy,
+        span,
+        glyphScale,
+        time,
+        mix,
+        orbit,
+        pose,
+        pointer,
+        light: LIGHT,
+        half: HALF,
+      })
+      return
+    }
     if (!mix) {
       // Idle: the extras' base opacity is zero, so the arrays draw as-is.
       renderer.draw({ count, px, py, size, color, shade: alpha, soft })
       return
     }
-    // Open: depth and light give the sphere its volume (near and lit
+    if (mix === 1) {
+      for (let i = 0; i < count; i++) {
+        let a = alpha[i]
+        let s = size[i]
+        if (i < shadowEnd) {
+          a *= 0.8
+        } else if (i < fieldEnd) {
+          const near = Math.min(Math.max((depth[i] + 1) * 0.5, 0), 1)
+          const shade = Math.min(
+            (0.45 + 0.55 * near) * (0.72 + 0.48 * light[i]),
+            1,
+          )
+          a = (i >= extraStart ? openAlpha[i] : a) * shade
+          s *= (0.6 + 0.5 * near) * (0.9 + 0.25 * light[i])
+        } else {
+          s *= speck[i] ? 0.6 : 0.8
+        }
+        drawAlpha[i] = a
+        drawSize[i] = s
+      }
+      renderer.draw({
+        count,
+        px,
+        py,
+        size: drawSize,
+        color,
+        shade: drawAlpha,
+        soft,
+      })
+      return
+    }
+    // Morphing: depth and light give the sphere its volume (near and lit
     // particles larger and stronger, far and shadowed ones small and soft),
     // and the letter grain, especially the specks, gets finer as the letters
     // shrink.
@@ -733,8 +940,32 @@ function setupParticleHero(root) {
     frame = 0
     const dt = Math.min((now - (lastFrame || now)) / 1000, 0.05)
     lastFrame = now
-    step(dt)
-    draw()
+    time += dt
+    updateMix()
+    updatePose()
+
+    if (renderer.isGPU) {
+      renderer.draw({
+        count,
+        width,
+        height,
+        dpr,
+        cx,
+        cy,
+        span,
+        glyphScale,
+        time,
+        mix,
+        orbit,
+        pose,
+        pointer,
+        light: LIGHT,
+        half: HALF,
+      })
+    } else {
+      step(dt)
+      draw()
+    }
     schedule()
   }
 
@@ -752,7 +983,30 @@ function setupParticleHero(root) {
   }
 
   function renderStill() {
-    if (!reducedMotion.matches || !count) return
+    if (!count) return
+    if (renderer.isGPU) {
+      mix = open ? 1 : 0
+      updatePose()
+      renderer.draw({
+        count,
+        width,
+        height,
+        dpr,
+        cx,
+        cy,
+        span,
+        glyphScale,
+        time,
+        mix,
+        orbit,
+        pose,
+        pointer,
+        light: LIGHT,
+        half: HALF,
+      })
+      return
+    }
+    if (!reducedMotion.matches) return
     settle()
     draw()
   }
@@ -855,7 +1109,7 @@ function setupParticleHero(root) {
     new Promise((resolve) => setTimeout(resolve, FONT_TIMEOUT_MS)),
   ]).then(() => {
     if (disposed) return
-    glyph = sampleGlyphs(fontFamily)
+    glyph = getSampledGlyph(fontFamily)
     if (measure()) {
       if (reducedMotion.matches) renderStill()
       else draw()
@@ -891,20 +1145,135 @@ function setupParticleHero(root) {
 // same per-frame particle data.
 
 const VERTEX_SHADER = `
-attribute vec2 a_position;
-attribute float a_size;
+attribute vec3 a_position;
+attribute vec3 a_normal;
 attribute vec4 a_color;
-attribute float a_soft;
+attribute vec4 a_attribs;
+attribute vec4 a_extra;
+
 uniform vec2 u_resolution;
 uniform float u_dpr;
+uniform vec2 u_center;
+uniform float u_span;
+uniform float u_glyphScale;
+uniform float u_time;
+uniform float u_mix;
+
+uniform vec2 u_orbitCosSinY;
+uniform vec2 u_orbitCosSinX;
+uniform vec2 u_poseCosSinY;
+uniform vec2 u_poseCosSinX;
+uniform float u_persp;
+
+uniform vec3 u_light;
+uniform vec3 u_half;
+uniform vec2 u_pointer;
+uniform float u_hasPointer;
+
 varying vec4 v_color;
 varying float v_soft;
+
+vec3 getRampA(float t) {
+  if (t < 0.25) return mix(vec3(0.376, 0.125, 0.047), vec3(0.659, 0.255, 0.129), t * 4.0);
+  if (t < 0.5) return mix(vec3(0.659, 0.255, 0.129), vec3(0.824, 0.361, 0.157), (t - 0.25) * 4.0);
+  if (t < 0.75) return mix(vec3(0.824, 0.361, 0.157), vec3(0.933, 0.518, 0.235), (t - 0.5) * 4.0);
+  return mix(vec3(0.933, 0.518, 0.235), vec3(0.988, 0.698, 0.431), (t - 0.75) * 4.0);
+}
+
+vec3 getRampI(float t) {
+  if (t < 0.25) return mix(vec3(0.008, 0.016, 0.035), vec3(0.031, 0.051, 0.094), t * 4.0);
+  if (t < 0.5) return mix(vec3(0.031, 0.051, 0.094), vec3(0.063, 0.106, 0.176), (t - 0.25) * 4.0);
+  if (t < 0.75) return mix(vec3(0.063, 0.106, 0.176), vec3(0.125, 0.196, 0.298), (t - 0.5) * 4.0);
+  return mix(vec3(0.125, 0.196, 0.298), vec3(0.227, 0.322, 0.439), (t - 0.75) * 4.0);
+}
+
 void main() {
-  vec2 clip = a_position / u_resolution * 2.0 - 1.0;
+  float type = a_attribs.x;
+  float phase = a_attribs.y;
+  float baseSize = a_attribs.z;
+  float baseAlpha = a_attribs.w;
+  float soft = a_color.a;
+
+  vec2 pos2d;
+  float finalSize = baseSize;
+  float finalAlpha = baseAlpha;
+  vec3 finalColor = a_color.rgb;
+
+  if (type < 0.5) {
+    float x1 = a_position.x * u_poseCosSinY.x + a_position.z * u_poseCosSinY.y;
+    float z1 = -a_position.x * u_poseCosSinY.y + a_position.z * u_poseCosSinY.x;
+    float y2 = a_position.y * u_poseCosSinX.x - z1 * u_poseCosSinX.y;
+    float z2 = a_position.y * u_poseCosSinX.y + z1 * u_poseCosSinX.x;
+    float k = (u_glyphScale * (1.0 + (0.74 - 1.0) * u_mix)) / max(1.0 - z2 * u_persp, 0.1);
+    vec2 wobble = vec2(sin(u_time * 0.9 + phase), cos(u_time * 0.8 + phase * 2.0)) * 1.5;
+    pos2d = u_center + vec2(x1, y2) * k + wobble;
+    finalAlpha *= (1.0 - u_mix * 0.2);
+  } else if (type > 1.5) {
+    float x1 = a_position.x * u_poseCosSinY.x + a_position.z * u_poseCosSinY.y;
+    float z1 = -a_position.x * u_poseCosSinY.y + a_position.z * u_poseCosSinY.x;
+    float y2 = a_position.y * u_poseCosSinX.x - z1 * u_poseCosSinX.y;
+    float z2 = a_position.y * u_poseCosSinX.y + z1 * u_poseCosSinX.x;
+    float k = (u_glyphScale * (1.0 + (0.74 - 1.0) * u_mix)) / max(1.0 - z2 * u_persp, 0.1);
+    vec2 wobble = vec2(sin(u_time * 0.9 + phase), cos(u_time * 0.8 + phase * 2.0)) * 0.55;
+    pos2d = u_center + vec2(x1, y2) * k + wobble;
+
+    float speck = a_extra.z;
+    if (speck > 0.5) {
+      finalColor = a_color.rgb;
+      finalSize *= (1.0 - u_mix * 0.4);
+    } else {
+      float nx1 = a_normal.x * u_poseCosSinY.x + a_normal.z * u_poseCosSinY.y;
+      float nz1 = -a_normal.x * u_poseCosSinY.y + a_normal.z * u_poseCosSinY.x;
+      float ny2 = a_normal.y * u_poseCosSinX.x - nz1 * u_poseCosSinX.y;
+      float nz2 = a_normal.y * u_poseCosSinX.y + nz1 * u_poseCosSinX.x;
+      float diffuse = max(nx1 * u_light.x + ny2 * u_light.y + nz2 * u_light.z, 0.0);
+      float spec = max(nx1 * u_half.x + ny2 * u_half.y + nz2 * u_half.z, 0.0);
+      spec = pow(spec, 16.0);
+      float lum = clamp(0.1 + diffuse * 0.88, 0.0, 1.0);
+      float mat = a_extra.w;
+      vec3 rampCol = mat < 0.5 ? getRampA(lum) : getRampI(lum);
+      vec3 specCol = mat < 0.5 ? vec3(1.0, 0.933, 0.863) : vec3(0.839, 0.886, 0.941);
+      float s = min(spec * 0.7, 0.7);
+      finalColor = rampCol * (1.0 - s) + specCol * s;
+      finalSize *= (1.0 - u_mix * 0.2);
+    }
+  } else {
+    float x1 = a_position.x * u_orbitCosSinY.x + a_position.z * u_orbitCosSinY.y;
+    float z1 = -a_position.x * u_orbitCosSinY.y + a_position.z * u_orbitCosSinY.x;
+    float y2 = a_position.y * u_orbitCosSinX.x - z1 * u_orbitCosSinX.y;
+    float z2 = a_position.y * u_orbitCosSinX.y + z1 * u_orbitCosSinX.x;
+    float k = (u_span * 0.385) / max(1.0 - z2 * 0.28, 0.1);
+    vec2 drift = vec2(sin(u_time * 0.5 + phase), cos(u_time * 0.45 + phase)) * 1.4;
+    pos2d = u_center + vec2(x1, y2) * k + drift;
+
+    if (u_hasPointer > 0.5) {
+      vec2 d = pos2d - u_pointer;
+      float d2 = dot(d, d);
+      if (d2 < 1600.0 && d2 > 1.0) {
+        float push = (1.0 - d2 / 1600.0) * 16.0;
+        pos2d += (d / sqrt(d2)) * push;
+      }
+    }
+
+    float dotL = (x1 * u_light.x + y2 * u_light.y + z2 * u_light.z) * a_extra.y;
+    float light = max(dotL, 0.0);
+    float near = clamp((z2 + 1.0) * 0.5, 0.0, 1.0);
+    float shade = min((0.45 + 0.55 * near) * (0.72 + 0.48 * light), 1.0);
+
+    float openAlpha = a_extra.x;
+    if (openAlpha > 0.0) {
+      finalAlpha = openAlpha * shade * u_mix;
+    } else {
+      finalAlpha = baseAlpha * (1.0 + (shade - 1.0) * u_mix);
+    }
+    finalSize = baseSize * (1.0 + ((0.6 + 0.5 * near) * (0.9 + 0.25 * light) - 1.0) * u_mix);
+  }
+
+  vec2 clip = pos2d / u_resolution * 2.0 - 1.0;
   gl_Position = vec4(clip.x, -clip.y, 0.0, 1.0);
-  gl_PointSize = a_size * u_dpr;
-  v_color = a_color;
-  v_soft = a_soft;
+  gl_PointSize = max(finalSize * u_dpr, 1.0);
+  v_color = vec4(finalColor, finalAlpha);
+  v_soft = soft;
 }
 `
 
@@ -920,20 +1289,20 @@ void main() {
 }
 `
 
-const STRIDE = 8 // x, y, size, r, g, b, a, soft
+const STRIDE = 18 // x, y, z, nx, ny, nz, r, g, b, soft, type, phase, size, alpha, openAlpha, invR, speck, mat
 
 function createWebGLRenderer(canvas) {
   const gl = canvas.getContext('webgl', {
     alpha: true,
     antialias: false,
     premultipliedAlpha: true,
-    preserveDrawingBuffer: true,
+    preserveDrawingBuffer: false,
+    powerPreference: 'high-performance',
   })
   if (!gl) return null
 
   let program
   let buffer
-  let data = new Float32Array(0)
   let loc = {}
 
   function compile(type, source) {
@@ -959,14 +1328,30 @@ function createWebGLRenderer(canvas) {
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
     loc = {
       position: gl.getAttribLocation(program, 'a_position'),
-      size: gl.getAttribLocation(program, 'a_size'),
+      normal: gl.getAttribLocation(program, 'a_normal'),
       color: gl.getAttribLocation(program, 'a_color'),
-      soft: gl.getAttribLocation(program, 'a_soft'),
+      attribs: gl.getAttribLocation(program, 'a_attribs'),
+      extra: gl.getAttribLocation(program, 'a_extra'),
       resolution: gl.getUniformLocation(program, 'u_resolution'),
       dpr: gl.getUniformLocation(program, 'u_dpr'),
+      center: gl.getUniformLocation(program, 'u_center'),
+      span: gl.getUniformLocation(program, 'u_span'),
+      glyphScale: gl.getUniformLocation(program, 'u_glyphScale'),
+      time: gl.getUniformLocation(program, 'u_time'),
+      mix: gl.getUniformLocation(program, 'u_mix'),
+      orbitCosSinY: gl.getUniformLocation(program, 'u_orbitCosSinY'),
+      orbitCosSinX: gl.getUniformLocation(program, 'u_orbitCosSinX'),
+      poseCosSinY: gl.getUniformLocation(program, 'u_poseCosSinY'),
+      poseCosSinX: gl.getUniformLocation(program, 'u_poseCosSinX'),
+      persp: gl.getUniformLocation(program, 'u_persp'),
+      light: gl.getUniformLocation(program, 'u_light'),
+      half: gl.getUniformLocation(program, 'u_half'),
+      pointer: gl.getUniformLocation(program, 'u_pointer'),
+      hasPointer: gl.getUniformLocation(program, 'u_hasPointer'),
     }
     const bytes = Float32Array.BYTES_PER_ELEMENT
     const attrib = (index, size, offset) => {
+      if (index === -1) return
       gl.enableVertexAttribArray(index)
       gl.vertexAttribPointer(
         index,
@@ -977,10 +1362,11 @@ function createWebGLRenderer(canvas) {
         offset * bytes,
       )
     }
-    attrib(loc.position, 2, 0)
-    attrib(loc.size, 1, 2)
-    attrib(loc.color, 4, 3)
-    attrib(loc.soft, 1, 7)
+    attrib(loc.position, 3, 0)
+    attrib(loc.normal, 3, 3)
+    attrib(loc.color, 4, 6)
+    attrib(loc.attribs, 4, 10)
+    attrib(loc.extra, 4, 14)
     gl.enable(gl.BLEND)
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA)
   }
@@ -993,32 +1379,48 @@ function createWebGLRenderer(canvas) {
   }
 
   return {
+    isGPU: true,
     resize(width, height, dpr) {
       canvas.width = Math.round(width * dpr)
       canvas.height = Math.round(height * dpr)
       if (gl.isContextLost()) return
       gl.viewport(0, 0, canvas.width, canvas.height)
-      gl.uniform2f(loc.resolution, width, height)
-      gl.uniform1f(loc.dpr, dpr)
     },
-    draw({ count, px, py, size, color, shade, soft }) {
+    uploadStatic(gpuData) {
       if (gl.isContextLost()) return
-      if (data.length < count * STRIDE) data = new Float32Array(count * STRIDE)
-      let o = 0
-      for (let i = 0; i < count; i++, o += STRIDE) {
-        data[o] = px[i]
-        data[o + 1] = py[i]
-        data[o + 2] = size[i]
-        data[o + 3] = color[i * 3]
-        data[o + 4] = color[i * 3 + 1]
-        data[o + 5] = color[i * 3 + 2]
-        data[o + 6] = !soft[i] && shade[i] < 0.06 ? 0 : shade[i]
-        data[o + 7] = soft[i]
-      }
+      gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
+      gl.bufferData(gl.ARRAY_BUFFER, gpuData, gl.STATIC_DRAW)
+    },
+    draw(p) {
+      if (gl.isContextLost()) return
       gl.clearColor(0, 0, 0, 0)
       gl.clear(gl.COLOR_BUFFER_BIT)
-      gl.bufferData(gl.ARRAY_BUFFER, data.subarray(0, o), gl.DYNAMIC_DRAW)
-      gl.drawArrays(gl.POINTS, 0, count)
+
+      gl.uniform2f(loc.resolution, p.width, p.height)
+      gl.uniform1f(loc.dpr, p.dpr)
+      gl.uniform2f(loc.center, p.cx, p.cy)
+      gl.uniform1f(loc.span, p.span)
+      gl.uniform1f(loc.glyphScale, p.glyphScale)
+      gl.uniform1f(loc.time, p.time)
+      gl.uniform1f(loc.mix, p.mix)
+
+      gl.uniform2f(loc.orbitCosSinY, p.orbit.cosY, p.orbit.sinY)
+      gl.uniform2f(loc.orbitCosSinX, p.orbit.cosX, p.orbit.sinX)
+      gl.uniform2f(loc.poseCosSinY, p.pose.cosY, p.pose.sinY)
+      gl.uniform2f(loc.poseCosSinX, p.pose.cosX, p.pose.sinX)
+      gl.uniform1f(loc.persp, p.pose.persp)
+
+      gl.uniform3fv(loc.light, p.light)
+      gl.uniform3fv(loc.half, p.half)
+
+      if (p.pointer) {
+        gl.uniform2f(loc.pointer, p.pointer.x, p.pointer.y)
+        gl.uniform1f(loc.hasPointer, 1.0)
+      } else {
+        gl.uniform1f(loc.hasPointer, 0.0)
+      }
+
+      gl.drawArrays(gl.POINTS, 0, p.count)
     },
     restore() {
       init()
