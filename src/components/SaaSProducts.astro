@@ -1091,10 +1091,9 @@ const productCards = [
           })
         }, { threshold: 0.15 })
         observer.observe(carouselEl)
-      } else {
-        // Fallback for environments without IntersectionObserver
-        const initialTimer = window.setTimeout(startTimer, INITIAL_DELAY)
       }
+      // Without IntersectionObserver isVisible stays true, so the initial
+      // timer below starts the carousel on its own.
 
       // Start initial staggered auto-play
       const initialTimer = window.setTimeout(() => {

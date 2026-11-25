@@ -31,32 +31,32 @@ import za from '../assets/flags/za.svg'
 export const DEFAULT_PHONE_COUNTRY = 'IN'
 
 const countries = [
-  ['IN', 'India', inFlag],
-  ['US', 'United States', us],
-  ['GB', 'United Kingdom', gb],
-  ['AE', 'United Arab Emirates', ae],
-  ['CA', 'Canada', ca],
-  ['AU', 'Australia', au],
-  ['SG', 'Singapore', sg],
-  ['SA', 'Saudi Arabia', sa],
-  ['BH', 'Bahrain', bh],
-  ['BD', 'Bangladesh', bd],
-  ['FR', 'France', fr],
-  ['DE', 'Germany', de],
-  ['IE', 'Ireland', ie],
-  ['KW', 'Kuwait', kw],
-  ['MY', 'Malaysia', my],
-  ['NP', 'Nepal', np],
-  ['NL', 'Netherlands', nl],
-  ['NZ', 'New Zealand', nz],
-  ['OM', 'Oman', om],
-  ['QA', 'Qatar', qa],
-  ['ZA', 'South Africa', za],
-  ['LK', 'Sri Lanka', lk],
-  ['CH', 'Switzerland', ch],
+  { iso: 'IN', name: 'India', flag: inFlag },
+  { iso: 'US', name: 'United States', flag: us },
+  { iso: 'GB', name: 'United Kingdom', flag: gb },
+  { iso: 'AE', name: 'United Arab Emirates', flag: ae },
+  { iso: 'CA', name: 'Canada', flag: ca },
+  { iso: 'AU', name: 'Australia', flag: au },
+  { iso: 'SG', name: 'Singapore', flag: sg },
+  { iso: 'SA', name: 'Saudi Arabia', flag: sa },
+  { iso: 'BH', name: 'Bahrain', flag: bh },
+  { iso: 'BD', name: 'Bangladesh', flag: bd },
+  { iso: 'FR', name: 'France', flag: fr },
+  { iso: 'DE', name: 'Germany', flag: de },
+  { iso: 'IE', name: 'Ireland', flag: ie },
+  { iso: 'KW', name: 'Kuwait', flag: kw },
+  { iso: 'MY', name: 'Malaysia', flag: my },
+  { iso: 'NP', name: 'Nepal', flag: np },
+  { iso: 'NL', name: 'Netherlands', flag: nl },
+  { iso: 'NZ', name: 'New Zealand', flag: nz },
+  { iso: 'OM', name: 'Oman', flag: om },
+  { iso: 'QA', name: 'Qatar', flag: qa },
+  { iso: 'ZA', name: 'South Africa', flag: za },
+  { iso: 'LK', name: 'Sri Lanka', flag: lk },
+  { iso: 'CH', name: 'Switzerland', flag: ch },
 ]
 
-export const phoneCountries = countries.map(([iso, name, flag]) => {
+export const phoneCountries = countries.map(({ iso, name, flag }) => {
   const dial = getCountryCallingCode(iso)
   const example = getExampleNumber(iso, examples)
   return {

@@ -377,8 +377,9 @@ const defaultCountry =
       // Phone numbers are checked with libphonenumber-js (Google's phone
       // number data). It is loaded only when the visitor uses the phone field
       // or submits, so it doesn't slow down every page.
-      let phoneLib = null
-      let phoneLibLoading = null
+      type PhoneLib = typeof import('libphonenumber-js/max')
+      let phoneLib: PhoneLib | null = null
+      let phoneLibLoading: Promise<PhoneLib> | null = null
       const loadPhoneLib = () =>
         (phoneLibLoading ??= import('libphonenumber-js/max').then(
           (module) => (phoneLib = module),
@@ -394,7 +395,9 @@ const defaultCountry =
         return field && 'value' in field ? String(field.value).trim() : ''
       }
       const countryOptions = Array.from(
-        form.querySelectorAll('[data-phone-country-menu] [role="option"]'),
+        form.querySelectorAll<HTMLElement>(
+          '[data-phone-country-menu] [role="option"]',
+        ),
       )
       const getCountry = () => {
         const iso = getValue('phoneCountry')
@@ -415,7 +418,11 @@ const defaultCountry =
         const value = getValue('phone')
         if (!value || !phoneLib) return null
         const country = getCountry()
-        const parsed = phoneLib.parsePhoneNumberFromString(value, country.iso)
+        // iso always comes from the country list built from libphonenumber-js.
+        const parsed = phoneLib.parsePhoneNumberFromString(
+          value,
+          country.iso as import('libphonenumber-js').CountryCode,
+        )
         return parsed?.isValid() && parsed.countryCallingCode === country.dial
           ? parsed
           : null
@@ -488,14 +495,18 @@ const defaultCountry =
 
       // Country picker: a button with the flag and dial code that opens a
       // searchable list.
-      const countryInput = form.querySelector('[data-phone-country]')
-      const countryButton = form.querySelector('[data-phone-country-button]')
-      const countryMenu = form.querySelector('[data-phone-country-menu]')
-      const countrySearch = form.querySelector('[data-phone-country-search]')
-      const countryEmpty = form.querySelector('[data-phone-country-empty]')
-      const countryFlag = form.querySelector('[data-phone-country-flag]')
-      const countryDial = form.querySelector('[data-phone-country-dial]')
-      let activeOption = null
+      const countryInput = form.querySelector<HTMLInputElement>('[data-phone-country]')
+      const countryButton = form.querySelector<HTMLButtonElement>(
+        '[data-phone-country-button]',
+      )
+      const countryMenu = form.querySelector<HTMLElement>('[data-phone-country-menu]')
+      const countrySearch = form.querySelector<HTMLInputElement>(
+        '[data-phone-country-search]',
+      )
+      const countryEmpty = form.querySelector<HTMLElement>('[data-phone-country-empty]')
+      const countryFlag = form.querySelector<HTMLImageElement>('[data-phone-country-flag]')
+      const countryDial = form.querySelector<HTMLElement>('[data-phone-country-dial]')
+      let activeOption: HTMLElement | null = null
 
       const setCountry = (iso) => {
         const option = countryOptions.find((o) => o.dataset.value === iso)

@@ -1057,7 +1057,7 @@ const workflowSteps = [
     radios.forEach((radio) => radio.addEventListener('change', updateArrows))
     updateArrows()
 
-    let pointerId = null
+    let pointerId: number | null = null
     let startX = 0
     let startY = 0
     let startTime = 0
