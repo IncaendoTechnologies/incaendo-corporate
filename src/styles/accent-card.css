@@ -18,7 +18,7 @@
 .accent-card {
   --accent-dir: 1;
   --accent-soft: rgba(232, 93, 38, 0.38);
-  --accent-strong: #e85d26;
+  --accent-strong: var(--action);
   --accent-hover-shadow:
     0 28px 56px -18px rgba(16, 27, 45, 0.24),
     0 8px 20px -4px rgba(16, 27, 45, 0.1),

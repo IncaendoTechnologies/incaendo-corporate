@@ -88,7 +88,7 @@ export const homepageServices = [
       'Web platforms & portals',
       'Responsive product interfaces',
       'Progressive web apps',
-      'Performance optimization',
+      'Performance optimisation',
     ],
     href: '/services#web-application-development',
     icon: Globe,
@@ -160,7 +160,7 @@ export const faqs = [
     question:
       'Can you build custom applications tailored to our business needs?',
     answer:
-      'Absolutely! We provide fully customized app solutions that align with your business goals and user expectations.',
+      'Absolutely. We provide fully customised app solutions that align with your business goals and user expectations.',
   },
   {
     question: 'Do you offer app maintenance and post-launch support?',
@@ -170,7 +170,7 @@ export const faqs = [
   {
     question: 'How much does app development cost?',
     answer:
-      'The cost varies based on factors like app complexity, features, design, and platform. Contact us for a customized quote.',
+      'The cost varies based on factors like app complexity, features, design, and platform. Contact us for a customised quote.',
   },
   {
     question: 'Do you provide UI/UX design services?',

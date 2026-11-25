@@ -19,18 +19,32 @@
 .narrow-section-heading h2,
 .service-page-header h2 {
   margin-bottom: 1rem;
-  font-size: var(--type-section-size);
-  font-weight: var(--type-heading-weight);
-  letter-spacing: var(--type-section-letter-spacing);
-  word-spacing: var(--type-section-word-spacing);
-  line-height: var(--type-section-line-height);
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 36px;
+  color: var(--ink);
+}
+@media (min-width: 1024px) {
+  .section-heading h2,
+  .narrow-section-heading h2,
+  .service-page-header h2 {
+    font-size: 40px;
+    line-height: 48px;
+  }
 }
 .section-intro {
   max-width: 650px;
   margin-bottom: 0;
-  color: var(--text-intro);
-  font-size: var(--type-intro-size);
-  line-height: var(--type-intro-line-height);
+  color: var(--ink-muted);
+  font-size: 16px;
+  line-height: 24px;
+}
+@media (min-width: 768px) {
+  .section-intro {
+    font-size: 18px;
+    line-height: 28px;
+  }
 }
 
 .section-heading > .text-link {

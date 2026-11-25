@@ -7,8 +7,8 @@
   background: linear-gradient(
     180deg,
     var(--color-paper) 0,
-    #efebe5 3.25rem,
-    #efebe5 100%
+    var(--surface-raised) 3.25rem,
+    var(--surface-raised) 100%
   );
   padding-block: clamp(2rem, 4vh, 3.25rem);
 }

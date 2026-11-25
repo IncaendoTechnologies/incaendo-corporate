@@ -593,8 +593,8 @@ const projectHref = (project) =>
   }
 
   .home-projects-carousel:focus-visible {
-    outline: 3px solid #e1784f;
-    outline-offset: 4px;
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
   }
 
   .home-projects-carousel.is-dragging,
@@ -654,7 +654,7 @@ const projectHref = (project) =>
     visibility: visible;
     pointer-events: auto;
     border-color: rgba(232, 93, 38, 0.38);
-    border-right-color: #e85d26;
+    border-right-color: var(--action);
     transform: translate3d(0, 0, 0) scale(1);
     box-shadow:
       0 20px 48px -12px rgba(16, 27, 45, 0.2),

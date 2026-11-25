@@ -1,0 +1,221 @@
+/* Incaendo — generated from tokens.json */
+:root, [data-theme="light"] {
+  --surface: #ffffff; /* Slide and document background; cards that sit on the warm canvas. Default ground for all text tokens. */
+  --canvas: #f8f7f4; /* Warm off-white page background for websites and landing pages. Documents and slides stay on surface. */
+  --surface-raised: #f2ede7; /* Warm grey panels, cards and bands sitting on surface or canvas; alternate table rows. */
+  --surface-sunk: #ebe4dc; /* Recessed areas: code blocks, input fills, the cover-page client box. */
+  --line: #e6ddd3; /* Hairlines, table borders and dividers. Decorative only; never the only thing marking a control. */
+  --ink: #0f2136; /* Primary text and headings on surface, surface-raised and surface-sunk. */
+  --ink-muted: #4b5b6e; /* Secondary text, captions, footers and metadata on surface, surface-raised and surface-sunk. */
+  --navy: #0f2136; /* Deep brand ground: dark title slides, footer bands, the cover block. Pair with on-navy text. */
+  --on-navy: #ffffff; /* Text and the reversed logo on a navy fill. */
+  --blue: #145aa8; /* Incaendo Blue (#145AA8, measured from the logo). Supporting colour only (under 5%): focus ring, info messages, chart series 3. As text, on surface, canvas, surface-raised or blue-soft. */
+  --blue-soft: #e5eef8; /* Tinted background behind blue text: info callouts and info badges only. */
+  --on-blue: #ffffff; /* Text and icons on a blue fill. */
+  --action: #c24c12; /* Action orange: primary buttons and the main call to action. White label in light theme (4.84:1), navy label in dark theme. Never use the logo orange for buttons. */
+  --action-hover: #a83f0a; /* Hover state of action fills. */
+  --action-pressed: #8f3608; /* Pressed (active) state of action fills. White label 7.78:1 in light theme. */
+  --overlay: rgba(15,33,54,0.6); /* Scrim behind modals, the mobile menu and image lightboxes. */
+  --chart-1: var(--action); /* Chart series 1 (the series that matters most). */
+  --chart-2: var(--navy); /* Chart series 2. */
+  --chart-3: var(--blue); /* Chart series 3. */
+  --chart-4: #d9773f; /* Chart series 4. 3.15:1 on white, so label the series directly. */
+  --chart-5: #7a8799; /* Chart series 5 and 'other'. Five series at most; prefer bars. */
+  --on-action: #ffffff; /* Label and icon on an action fill. */
+  --orange: #ee5d10; /* Logo orange (#EE5D10, measured from the logo). Accents only: section bars, the i-dot, the + on stats, large display text 24px+. 3.4:1 on white, so never for body text or with a white label; use orange-text or action. */
+  --orange-text: #b5450b; /* Readable orange for text: eyebrows, links, highlighted words in headlines, icons. On surface, canvas, surface-raised or orange-soft. */
+  --orange-soft: #fdede3; /* Brand tint: icon circles, highlighted cards, callouts, table header rows, brand badges. Pair with orange-text or ink. */
+  --on-orange: #0f2136; /* Text on an orange fill. Navy, not white: white on brand orange is only 3.4:1. */
+  --success: #1d7446; /* Done, approved, on track. Always with a word, never colour alone. */
+  --success-soft: #e3f3ea; /* Background behind success text. */
+  --warning: #8f5b00; /* At risk, pending, needs attention. Always with a word. */
+  --warning-soft: #fbf0d9; /* Background behind warning text. */
+  --danger: #b3261e; /* Blocked, failed, overdue. Always with a word. */
+  --danger-soft: #fbe7e5; /* Background behind danger text. */
+  --focus: #145aa8; /* Keyboard focus ring: 2px solid, 2px offset. Stays blue so it stands out from orange buttons. At least 5.5:1 on every surface in both themes. */
+  --link: var(--orange-text); /* Links. An alias of orange-text, so links follow the readable brand orange in every theme. */
+  --shadow-1: 0 1px 2px rgba(15,33,54,0.08), 0 2px 8px rgba(15,33,54,0.06); /* Raised cards on a surface or the warm canvas. Prefer surface-raised over shadow where possible. */
+  --shadow-2: 0 4px 12px rgba(15,33,54,0.10), 0 2px 4px rgba(15,33,54,0.06); /* Floating elements: dropdowns, sticky header once scrolled, hovered cards. */
+  --shadow-3: 0 16px 40px rgba(15,33,54,0.18), 0 4px 12px rgba(15,33,54,0.08); /* Modals and the open mobile menu only. */
+}
+[data-theme="dark"] {
+  --surface: #0b1626;
+  --canvas: #0b1626;
+  --surface-raised: #122136;
+  --surface-sunk: #1a2c45;
+  --line: #2a3f5b;
+  --ink: #ecf2f9;
+  --ink-muted: #a6b5c8;
+  --navy: #1a2c45;
+  --on-navy: #ecf2f9;
+  --blue: #6ea5ec;
+  --blue-soft: #15304f;
+  --on-blue: #0b1626;
+  --action: #f47a3a;
+  --action-hover: #ff9a62;
+  --action-pressed: #ffb68a;
+  --overlay: rgba(0,0,0,0.7);
+  --chart-1: var(--action);
+  --chart-2: var(--navy);
+  --chart-3: var(--blue);
+  --chart-4: #f0a070;
+  --chart-5: #a6b5c8;
+  --on-action: #0b1626;
+  --orange: #f47a3a;
+  --orange-text: #ff9a62;
+  --orange-soft: #3b1f10;
+  --on-orange: #0b1626;
+  --success: #5fcf93;
+  --success-soft: #123324;
+  --warning: #f0b44c;
+  --warning-soft: #3a2a0b;
+  --danger: #ff8a80;
+  --danger-soft: #3d1513;
+  --focus: #6ea5ec;
+  --link: var(--orange-text);
+  --shadow-1: 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-2: 0 4px 12px rgba(0,0,0,0.5);
+  --shadow-3: 0 16px 40px rgba(0,0,0,0.6);
+}
+:root {
+  --space-1: 4px; /* Icon-to-label gap. */
+  --space-2: 8px; /* Tight stacks; badge padding. */
+  --space-3: 12px; /* Gap between related lines; table cell padding. */
+  --space-4: 16px; /* Card padding (compact); paragraph gap. */
+  --space-5: 24px; /* Card padding; grid gutter. */
+  --space-6: 32px; /* Between blocks within a section. */
+  --space-7: 48px; /* Between sections; slide margin. */
+  --space-8: 64px; /* Page margins on covers and title slides; section padding on phones. */
+  --space-9: 96px; /* Vertical padding of website sections on desktop. */
+  --space-10: 128px; /* Hero padding and the largest section breaks on desktop. */
+  --radius-sm: 4px; /* Badges, inputs, table corners. */
+  --radius-md: 8px; /* Buttons and cards. The default. */
+  --radius-lg: 16px; /* Large panels, slide content boxes, the proposal cover box. */
+  --radius-pill: 999px; /* Pills and tags only. */
+  --bp-sm: 640px; /* Breakpoint: large phones. Below this, one column and full-width buttons. */
+  --bp-md: 768px; /* Breakpoint: tablets. Two-column grids start here. */
+  --bp-lg: 1024px; /* Breakpoint: laptops. Full navigation replaces the mobile menu; three-column grids. */
+  --bp-xl: 1280px; /* Breakpoint: desktops. Four-column grids and the widest hero layouts. */
+  --container-text: 720px; /* Maximum width for reading text: articles, section intros, forms. */
+  --container-content: 1200px; /* Maximum width of page content on websites and landing pages. */
+  --gutter: 24px; /* Grid gutter and page side padding from bp-md up. */
+  --gutter-mobile: 16px; /* Grid gutter and page side padding on phones. */
+  --tap-min: 44px; /* Minimum height and width of anything tappable, including padding around text links. */
+  --font-display: "Plus Jakarta Sans", Arial, sans-serif;
+  --font-sans: "Plus Jakarta Sans", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", Menlo, Consolas, monospace;
+  --text-web-display: 800 64px/72px var(--font-display); /* Website and landing page hero headline, one per page. 36px/44px on phones. */
+  --text-web-h1: 800 48px/56px var(--font-display); /* Inner page titles on the web. 32px/40px on phones. */
+  --text-web-h2: 700 40px/48px var(--font-display); /* Website section titles. 28px/36px on phones. */
+  --text-display: 800 48px/56px var(--font-display); /* Cover titles and title slides. One per page. */
+  --text-h1: 700 36px/44px var(--font-display); /* Page and slide titles. */
+  --text-h2: 700 28px/36px var(--font-display); /* Document sections; slide headlines. */
+  --text-h3: 700 20px/28px var(--font-display); /* Subsections, card titles. */
+  --text-eyebrow: 700 12px/16px var(--font-display); /* Kicker above a title, uppercase, in orange-text or blue. */
+  --text-web-lead: 400 20px/30px var(--font-sans); /* Hero and section lead paragraphs on the web. 18px/28px on phones. */
+  --text-body-lg: 400 18px/28px var(--font-sans); /* Lead paragraphs, slide body copy. */
+  --text-body: 400 16px/24px var(--font-sans); /* Default text for pages and documents (11pt in Word or Google Docs). */
+  --text-body-strong: 600 16px/24px var(--font-sans); /* Emphasis inside body copy and table headers. */
+  --text-small: 400 14px/20px var(--font-sans); /* Table cells, notes, card descriptions. */
+  --text-caption: 400 12px/16px var(--font-sans); /* Footers, figure captions, legal lines; ink-muted. */
+  --text-code: 400 14px/20px var(--font-mono); /* Endpoints, commands and code in technical proposals. */
+}
+.web-display {
+  font-family: var(--font-display);
+  font-size: 64px;
+  line-height: 72px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.web-h1 {
+  font-family: var(--font-display);
+  font-size: 48px;
+  line-height: 56px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.web-h2 {
+  font-family: var(--font-display);
+  font-size: 40px;
+  line-height: 48px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.display {
+  font-family: var(--font-display);
+  font-size: 48px;
+  line-height: 56px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.h1 {
+  font-family: var(--font-display);
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+/* .eyebrow defined in base.css */
+.web-lead {
+  font-family: var(--font-sans);
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.body-lg {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.body-strong {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.small {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.caption {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.code {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+}

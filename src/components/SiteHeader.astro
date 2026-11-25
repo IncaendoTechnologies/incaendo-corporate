@@ -48,10 +48,11 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
         <li class="header-cta">
           <a
             href="/contact"
+            class="button button-primary header-cta-btn"
             data-contact-page-link
             aria-current={currentPath === '/contact' ? 'page' : undefined}
           >
-            Contact us <span aria-hidden="true">→</span>
+            Book a call
           </a>
         </li>
         <li class="mobile-contact-link">

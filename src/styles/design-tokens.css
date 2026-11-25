@@ -1,45 +1,107 @@
 /*
- * Shared design tokens for every Incaendo page.
- * Page and component styles may override a token locally for a deliberate
- * visual treatment; shared values belong here so changes have one source.
+ * Incaendo design system tokens — November 2026.
+ * Canonical source for colours, typography, spacing, layout, radius, shadow
+ * and motion. All page and component styles reference these tokens.
+ *
+ * Legacy `--color-*` aliases are kept so existing component CSS picks up the
+ * new palette without a find-and-replace across every file.
  */
 :root {
   color-scheme: light;
 
-  /* Brand palette */
-  --color-ink: #172231;
-  --color-navy: #101b2d;
-  --color-navy-soft: #1b2a40;
-  --color-body: #405064;
-  --color-muted: #758194;
-  --color-line: #e5e2dd;
-  --color-paper: #f8f7f4;
-  --color-white: #fff;
-  --color-peach: #f4e9df;
-  --color-orange: #c9542b;
-  --color-orange-dark: #a84121;
-  --color-orange-gradient-start: #c64e27;
+  /* ===== Design-system palette (canonical) ===== */
+  --surface: #ffffff;
+  --canvas: #f8f7f4;
+  --surface-raised: #f2ede7;
+  --surface-sunk: #ebe4dc;
+  --line: #e6ddd3;
+  --ink: #0f2136;
+  --ink-muted: #4b5b6e;
+  --navy: #0f2136;
+  --on-navy: #ffffff;
+  --blue: #145aa8;
+  --blue-soft: #e5eef8;
+  --on-blue: #ffffff;
+  --action: #c24c12;
+  --action-hover: #a83f0a;
+  --action-pressed: #8f3608;
+  --overlay: rgba(15, 33, 54, 0.6);
+  --on-action: #ffffff;
+  --orange: #ee5d10;
+  --orange-text: #b5450b;
+  --orange-soft: #fdede3;
+  --on-orange: #0f2136;
+  --success: #1d7446;
+  --success-soft: #e3f3ea;
+  --warning: #8f5b00;
+  --warning-soft: #fbf0d9;
+  --danger: #b3261e;
+  --danger-soft: #fbe7e5;
+  --focus: #145aa8;
+  --link: var(--orange-text);
+  --chart-1: var(--action);
+  --chart-2: var(--navy);
+  --chart-3: var(--blue);
+  --chart-4: #d9773f;
+  --chart-5: #7a8799;
+
+  /* ===== Legacy aliases (existing component CSS) ===== */
+  --color-ink: var(--ink);
+  --color-navy: var(--navy);
+  --color-navy-soft: #1a2c45;
+  --color-body: var(--ink-muted);
+  --color-muted: var(--ink-muted);
+  --color-line: var(--line);
+  --color-paper: var(--canvas);
+  --color-white: var(--surface);
+  --color-peach: var(--surface-raised);
+  --color-orange: var(--action);
+  --color-orange-dark: var(--action-hover);
+  --color-orange-gradient-start: var(--action);
   --color-orange-gradient-end: #d96d39;
-  --color-focus: #e1784f;
-  --color-button-outline: #d5d1cc;
-  --color-green: #5a806c;
-  --color-blue: #547b9d;
+  --color-focus: var(--focus);
+  --color-button-outline: var(--line);
+  --color-green: var(--success);
+  --color-blue: var(--blue);
 
-  /* Semantic surfaces and text aliases used by shared page primitives */
-  --surface-page: var(--color-paper);
-  --surface-card: var(--color-white);
-  --surface-subtle: #f1efeb;
-  --surface-contrast: var(--color-navy);
-  --text-primary: var(--color-ink);
-  --text-secondary: var(--color-body);
-  --text-muted: var(--color-muted);
-  --text-intro: #697586;
-  --accent-primary: var(--color-orange);
-  --accent-hover: var(--color-orange-dark);
+  /* Semantic surfaces and text aliases */
+  --surface-page: var(--canvas);
+  --surface-card: var(--surface);
+  --surface-subtle: var(--surface-raised);
+  --surface-contrast: var(--navy);
+  --text-primary: var(--ink);
+  --text-secondary: var(--ink-muted);
+  --text-muted: var(--ink-muted);
+  --text-intro: var(--ink-muted);
+  --accent-primary: var(--action);
+  --accent-hover: var(--action-hover);
 
-  /* Typography */
-  --font-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-  --font-heading: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  /* ===== Typography ===== */
+  --font-display: 'Plus Jakarta Sans', Arial, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', Menlo, Consolas, monospace;
+  /* Legacy aliases */
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-display);
+
+  /* Design-system type scale */
+  --text-web-display: 800 64px/72px var(--font-display);
+  --text-web-h1: 800 48px/56px var(--font-display);
+  --text-web-h2: 700 40px/48px var(--font-display);
+  --text-display: 800 48px/56px var(--font-display);
+  --text-h1: 700 36px/44px var(--font-display);
+  --text-h2: 700 28px/36px var(--font-display);
+  --text-h3: 700 20px/28px var(--font-display);
+  --text-eyebrow: 700 12px/16px var(--font-display);
+  --text-web-lead: 400 20px/30px var(--font-sans);
+  --text-body-lg: 400 18px/28px var(--font-sans);
+  --text-body: 400 16px/24px var(--font-sans);
+  --text-body-strong: 600 16px/24px var(--font-sans);
+  --text-small: 400 14px/20px var(--font-sans);
+  --text-caption: 400 12px/16px var(--font-sans);
+  --text-code: 400 14px/20px var(--font-mono);
+
+  /* Legacy type roles (existing component CSS) */
   --type-hero-h1-size: 59.64px;
   --type-hero-h1-weight: 700;
   --type-hero-h1-line-height: 1.08;
@@ -59,7 +121,7 @@
   --hero-visual-max: 41rem;
   --hero-visual-ratio: 1.27;
 
-  /* Type roles: pages and components use roles, not one-off scales. */
+  /* Type roles */
   --type-display-size: var(--type-hero-h1-size);
   --type-page-title-size: var(--type-hero-h1-size);
   --type-page-hero-size: var(--type-hero-h1-size);
@@ -96,32 +158,71 @@
   --type-label-size: 0.75rem;
   --type-eyebrow-size: 11.2px;
 
-  /* Spacing, layout, shape, and motion */
+  /* ===== Spacing ===== */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* Legacy spacing */
   --section-space-sm: clamp(3rem, 4.5vw, 4rem);
   --section-space-md: clamp(4rem, 6.7vw, 6rem);
   --section-space-lg: clamp(5rem, 8.9vw, 8rem);
-  --site-header-height: 89px;
-  --site-header-row-height: 88px;
+  --space-section: clamp(5rem, 9vw, 8.25rem);
+
+  /* ===== Layout ===== */
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+  --container-text: 720px;
+  --container-content: 1200px;
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --gutter-mobile: 16px;
+  --tap-min: 44px;
+  --site-header-height: 72px;
+  --site-header-row-height: 72px;
   --nav-font-size: 0.9375rem;
   --nav-gap: clamp(1.5rem, 2.5vw, 2.5rem);
   --content-width: 1320px;
-  --gutter: clamp(1.25rem, 4vw, 4rem);
-  --space-section: clamp(5rem, 9vw, 8.25rem);
-  --radius-small: 5px;
-  --radius-medium: 12px;
-  --radius-large: 24px;
-  --shadow-soft: 0 20px 70px rgb(16 27 45 / 9%);
-  --shadow-header:
-    0 2px 4px rgb(16 27 45 / 4%), 0 6px 16px rgb(16 27 45 / 6%),
-    0 16px 32px -2px rgb(201 84 43 / 7%);
+
+  /* ===== Radius ===== */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+  /* Legacy aliases */
+  --radius-small: var(--radius-sm);
+  --radius-medium: var(--radius-md);
+  --radius-large: var(--radius-lg);
+
+  /* ===== Shadow ===== */
+  --shadow-1: 0 1px 2px rgba(15, 33, 54, 0.08), 0 2px 8px rgba(15, 33, 54, 0.06);
+  --shadow-2: 0 4px 12px rgba(15, 33, 54, 0.10), 0 2px 4px rgba(15, 33, 54, 0.06);
+  --shadow-3: 0 16px 40px rgba(15, 33, 54, 0.18), 0 4px 12px rgba(15, 33, 54, 0.08);
+  /* Legacy aliases */
+  --shadow-soft: var(--shadow-1);
+  --shadow-header: var(--shadow-2);
   --shadow-footer:
     0 -2px 4px rgb(16 27 45 / 4%), 0 -6px 16px rgb(16 27 45 / 6%),
     0 -16px 32px -2px rgb(201 84 43 / 7%);
-  --ease-out: cubic-bezier(0.2, 0.75, 0.25, 1);
-  --duration-fast: 180ms;
-  --duration-standard: 320ms;
 
-  font-family: var(--font-body);
+  /* ===== Motion ===== */
+  --motion-fast: 150ms;
+  --motion-base: 250ms;
+  --motion-slow: 400ms;
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  /* Legacy aliases */
+  --duration-fast: var(--motion-fast);
+  --duration-standard: var(--motion-base);
+
+  font-family: var(--font-sans);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   scroll-behavior: auto !important;

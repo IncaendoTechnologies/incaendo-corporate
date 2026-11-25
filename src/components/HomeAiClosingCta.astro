@@ -43,11 +43,11 @@
 <style>
   .ai-closing {
     /* Same rhythm as the homepage AI section it was split from */
-    padding-block: var(--section-space-sm) var(--section-space-md);
+    padding-block: var(--space-8, 64px) var(--space-9, 96px);
     background: var(--color-paper);
   }
   .ai-closing-copy h2 span {
-    color: var(--color-orange-dark);
+    color: var(--orange, #ee5d10);
   }
 
   /* Closing CTA */
@@ -58,11 +58,11 @@
     justify-content: space-between;
     gap: 2rem;
     overflow: hidden;
-    padding: clamp(1.6rem, 4vw, 3rem);
-    border: 1px solid rgb(201 84 43 / 22%);
-    border-radius: var(--radius-large);
-    background: linear-gradient(110deg, #fffdfa 0%, #fff 48%, #f8eee8 100%);
-    box-shadow: 0 24px 60px -42px rgb(168 65 33 / 36%);
+    padding: clamp(2.5rem, 5vw, 4rem);
+    border: none;
+    border-radius: var(--radius-lg, 16px);
+    background: var(--navy, #0f2136);
+    color: var(--on-navy, #ffffff);
   }
   .ai-closing-copy {
     position: relative;
@@ -71,10 +71,11 @@
   }
   .ai-closing-copy .eyebrow {
     margin-bottom: 0.6rem;
+    color: var(--orange, #ee5d10);
   }
   .ai-closing-copy h2 {
     margin: 0 0 0.6rem;
-    color: var(--color-ink);
+    color: var(--on-navy, #ffffff);
     font-size: var(--type-section-size);
     font-weight: var(--type-heading-weight);
     letter-spacing: -0.065em;
@@ -84,7 +85,8 @@
   .ai-closing-copy > p:last-child {
     max-width: 620px;
     margin: 0;
-    color: var(--color-body);
+    color: var(--on-navy, #ffffff);
+    opacity: 0.85;
     font-size: var(--type-intro-size);
     line-height: var(--type-intro-line-height);
   }
@@ -107,9 +109,9 @@
   .ai-closing-accent span {
     width: 44px;
     height: 180px;
-    border: 1px solid rgb(201 84 43 / 16%);
+    border: 1px solid rgba(238, 93, 16, 0.2);
     border-radius: 999px;
-    background: linear-gradient(180deg, rgb(201 84 43 / 8%), transparent);
+    background: linear-gradient(180deg, rgba(238, 93, 16, 0.12), transparent);
   }
 
   .ai-reveal {

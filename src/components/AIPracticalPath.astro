@@ -347,13 +347,13 @@ const workflowSteps = [
   .ai-workflow-heading {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
     width: 100%;
-    margin: 0 auto clamp(1.35rem, 2.2vw, 1.85rem);
+    margin: 0 0 clamp(1.35rem, 2.2vw, 1.85rem);
   }
   .ai-workflow-title-wrap {
-    text-align: center;
+    text-align: left;
     width: 100%;
   }
   .ai-workflow-heading .eyebrow {
@@ -878,8 +878,8 @@ const workflowSteps = [
     transform: translate(1px, -1px);
   }
   .ai-workflow-step:has(input:focus-visible) {
-    outline: 3px solid #e1784f;
-    outline-offset: 3px;
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
   }
 
   .ai-workflow-demo {

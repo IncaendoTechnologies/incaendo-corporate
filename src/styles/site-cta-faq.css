@@ -1,7 +1,8 @@
 /* Reach out and FAQ */
 .reachout-section {
   padding-block: var(--section-space-md);
-  background: #eee5dc;
+  background: var(--navy, #0f2136);
+  color: var(--on-navy, #ffffff);
 }
 .reachout-inner {
   display: flex;
@@ -11,29 +12,44 @@
 }
 .reachout-inner h2 {
   margin: 0;
+  color: var(--on-navy, #ffffff);
   font-size: var(--type-section-size);
   font-weight: var(--type-heading-weight);
   letter-spacing: var(--type-section-letter-spacing);
   word-spacing: var(--type-section-word-spacing);
   line-height: var(--type-section-line-height);
 }
+.reachout-section .eyebrow {
+  color: var(--orange, #ee5d10);
+}
 .reachout-action {
   max-width: 360px;
 }
 .reachout-action p {
   margin-bottom: 1.1rem;
-  color: var(--color-body);
+  color: var(--on-navy, #ffffff);
+  opacity: 0.85;
   font-size: var(--type-intro-size);
   line-height: var(--type-intro-line-height);
 }
-.small-note {
+.reachout-section .small-note {
   display: block;
   margin-top: 0.85rem;
-  color: var(--color-muted);
+  color: var(--on-navy, #ffffff);
+  opacity: 0.6;
   font-size: var(--type-meta-size);
 }
+.reachout-section .button-primary {
+  background: var(--on-navy, #ffffff);
+  color: var(--navy, #0f2136);
+  border-color: var(--on-navy, #ffffff);
+}
+.reachout-section .button-primary:hover {
+  background: var(--canvas, #f8f7f4);
+  color: var(--navy, #0f2136);
+}
 .section-faq {
-  background: #fbfaf8;
+  background: var(--canvas, #f8f7f4);
 }
 .faq-layout {
   display: grid;

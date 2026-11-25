@@ -61,8 +61,8 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 summary:focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 4px;
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
 }
 
 button,
@@ -99,19 +99,20 @@ textarea {
 
 .eyebrow {
   margin-bottom: 1.15rem;
-  color: var(--color-orange-dark);
-  font-size: var(--type-eyebrow-size);
+  color: var(--orange-text, #b5450b);
+  font-family: var(--font-display);
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.15em;
-  line-height: 1.4;
+  letter-spacing: 0.12em;
+  line-height: 16px;
   text-transform: uppercase;
 }
 
 .eyebrow-dark {
-  color: #a94426;
+  color: var(--orange-text, #b5450b);
 }
 .eyebrow-light {
-  color: #e8a080;
+  color: var(--orange, #ee5d10);
 }
 
 .eyebrow-dot {
@@ -124,7 +125,12 @@ textarea {
 }
 
 .section {
-  padding-block: var(--space-section);
+  padding-block: var(--space-8, 64px);
+}
+@media (min-width: 768px) {
+  .section {
+    padding-block: var(--space-9, 96px);
+  }
 }
 .section-soft {
   background: var(--surface-subtle);
@@ -161,16 +167,15 @@ textarea {
   transform: translateY(-2px);
 }
 .button-primary {
-  background: linear-gradient(
-    110deg,
-    var(--color-orange-gradient-start),
-    var(--color-orange-gradient-end)
-  );
-  color: var(--color-white);
+  background: var(--action);
+  color: var(--on-action);
 }
 .button-primary:hover {
-  background: var(--accent-hover);
-  color: var(--color-white);
+  background: var(--action-hover);
+  color: var(--on-action);
+}
+.button-primary:active {
+  background: var(--action-pressed);
 }
 .button-outline {
   border-color: var(--color-button-outline);
@@ -188,7 +193,7 @@ textarea {
 }
 .button-light:hover {
   border-color: var(--color-white);
-  background: #f3e9df;
+  background: var(--surface-raised);
   color: var(--color-navy);
 }
 .button-small {

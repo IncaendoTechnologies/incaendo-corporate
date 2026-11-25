@@ -1,8 +1,8 @@
 /* Client, project, review sections */
 .client-section {
-  padding-block: 3.5rem;
-  border-block: 1px solid var(--color-line);
-  background: #fbfaf8;
+  padding-block: var(--space-8, 64px);
+  border-block: 1px solid var(--line);
+  background: var(--canvas);
 }
 .client-row {
   display: grid;
@@ -172,8 +172,7 @@
 }
 .review-intro {
   max-width: 760px;
-  margin-inline: auto;
-  text-align: center;
+  text-align: left;
 }
 .review-layout h2 {
   margin: 0;
@@ -193,7 +192,7 @@
 }
 .awards-section {
   padding-block: var(--section-space-md);
-  background: linear-gradient(180deg, #efebe5 0%, var(--color-paper) 100%);
+  background: linear-gradient(180deg, var(--surface-raised) 0%, var(--canvas) 100%);
 }
 .awards-content {
   display: grid;
@@ -201,28 +200,31 @@
 }
 .awards-intro {
   max-width: 790px;
-  margin-inline: auto;
-  text-align: center;
+  text-align: left;
 }
 .awards-intro .eyebrow {
   margin-bottom: 0.75rem;
 }
 .awards-intro h2 {
   margin-bottom: 0.85rem;
-  color: var(--color-ink);
-  font-family: var(--font-heading);
-  font-size: var(--type-section-size);
-  font-weight: var(--type-heading-weight);
-  letter-spacing: var(--type-section-letter-spacing);
-  word-spacing: var(--type-section-word-spacing);
-  line-height: var(--type-section-line-height);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 36px;
+}
+@media (min-width: 1024px) {
+  .awards-intro h2 {
+    font-size: 40px;
+    line-height: 48px;
+  }
 }
 .awards-intro-copy {
   max-width: 700px;
-  margin: 0 auto;
-  color: var(--color-body);
-  font-size: var(--type-intro-size);
-  line-height: var(--type-intro-line-height);
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 16px;
+  line-height: 24px;
 }
 .awards-grid {
   display: grid;

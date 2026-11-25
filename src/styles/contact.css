@@ -1028,7 +1028,7 @@ a.contact-hero-card--office:hover strong {
 }
 .page-intro-contact .page-intro-copy {
   width: min(100%, 860px);
-  text-align: center;
+  text-align: left;
 }
 .page-intro-contact .eyebrow {
   margin-bottom: 0.9rem;
