@@ -58,7 +58,9 @@ const total = String(aiAgents.length).padStart(2, '0')
               data-stack-card
             >
               <article
-                class="ai-agent-card"
+                class="ai-agent-card accent-card"
+                data-accent-side={index % 2 === 0 ? 'left' : 'right'}
+                data-accent-from="wide"
                 aria-labelledby={`ai-agent-${agent.id}`}
               >
                 <figure class="ai-agent-media">
@@ -193,16 +195,14 @@ const total = String(aiAgents.length).padStart(2, '0')
     gap: 1.1rem;
     overflow: hidden;
     padding: 0.85rem;
-    border: 1px solid rgb(16 27 45 / 9%);
+    /* Border, hover lift and orange edge (on the image side, wide screens
+       only): shared .accent-card (src/styles/accent-card.css). */
+    --accent-card-border: rgb(16 27 45 / 9%);
     border-radius: var(--radius-large);
     background: linear-gradient(165deg, #fffdfb 0%, #fbf8f4 60%, #f8f3ed 100%);
     box-shadow:
       0 1px 2px rgb(16 27 45 / 4%),
       0 18px 40px -20px rgb(16 27 45 / 22%);
-    transition:
-      transform 450ms var(--ease-out),
-      border-color 450ms var(--ease-out),
-      box-shadow 450ms var(--ease-out);
   }
   /* Fades a card back as later cards cover it */
   .ai-agent-card::after {
@@ -354,39 +354,6 @@ const total = String(aiAgents.length).padStart(2, '0')
     }
     .ai-agent:nth-child(even) .ai-agent-media {
       order: 1;
-    }
-    /* Thick edge on the image side (alternating) so the orange hover accent
-       doesn't shift the layout; same hover as the Services cards. */
-    .ai-agent-card {
-      border-left: 2.5px solid rgb(16 27 45 / 9%);
-    }
-    .ai-agent:nth-child(even) .ai-agent-card {
-      border-left-width: 1px;
-      border-right-width: 2.5px;
-    }
-  }
-
-  @media (min-width: 801px) and (hover: hover) {
-    .ai-agent-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(232, 93, 38, 0.38);
-      border-left-color: #e85d26;
-      box-shadow:
-        0 28px 56px -18px rgba(16, 27, 45, 0.24),
-        0 8px 20px -4px rgba(16, 27, 45, 0.1),
-        -12px 0 28px -4px rgba(232, 93, 38, 0.28),
-        -4px 0 12px -2px rgba(232, 93, 38, 0.32),
-        0 0 0 1px rgba(232, 93, 38, 0.12);
-    }
-    .ai-agent:nth-child(even) .ai-agent-card:hover {
-      border-left-color: rgba(232, 93, 38, 0.38);
-      border-right-color: #e85d26;
-      box-shadow:
-        0 28px 56px -18px rgba(16, 27, 45, 0.24),
-        0 8px 20px -4px rgba(16, 27, 45, 0.1),
-        12px 0 28px -4px rgba(232, 93, 38, 0.28),
-        4px 0 12px -2px rgba(232, 93, 38, 0.32),
-        0 0 0 1px rgba(232, 93, 38, 0.12);
     }
   }
 
