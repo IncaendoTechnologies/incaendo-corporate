@@ -116,11 +116,14 @@ const applications = [
         </h2>
       </div>
       <p class="ai-applications-lead">
-        We design and integrate custom AI agents directly into your existing enterprise systems and daily business tools.{' '}
+        We design and integrate custom AI agents directly into your existing
+        enterprise systems and daily business tools.{' '}
         <br class="ai-applications-lead-break" />
-        Each agent takes on repetitive, multi-step tasks across customer support, finance, reporting, and team workflows,{' '}
+        Each agent takes on repetitive, multi-step tasks across customer
+        support, finance, reporting, and team workflows,{' '}
         <br class="ai-applications-lead-break" />
-        while your people stay in complete control, reviewing outputs and making every final decision.
+        while your people stay in complete control, reviewing outputs and making
+        every final decision.
       </p>
     </div>
   </div>
@@ -200,9 +203,7 @@ const applications = [
       applicationTrack.querySelectorAll('[data-application-slide]'),
     ).filter((slide) => slide instanceof HTMLElement)
     const deck = applicationTrack.querySelector('.application-deck')
-    const current = applicationTrack.querySelector(
-      '[data-application-current]',
-    )
+    const current = applicationTrack.querySelector('[data-application-current]')
     const progress = applicationTrack.querySelector(
       '[data-application-progress]',
     )
@@ -210,8 +211,7 @@ const applications = [
       '(min-width: 801px) and (min-height: 700px)',
     )
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const clamp = (value, min, max) =>
-      Math.min(Math.max(value, min), max)
+    const clamp = (value, min, max) => Math.min(Math.max(value, min), max)
     const smooth = (t) => t * t * (3 - 2 * t)
     let activeIndex = -1
     let frame = 0
@@ -244,7 +244,12 @@ const applications = [
     // Desktop: the section is pinned and scroll position drives each card's
     // rise from below, while earlier cards shrink, dim, and peek out above.
     function updatePinned() {
-      if (!(applicationTrack instanceof HTMLElement) || !(deck instanceof HTMLElement) || !(progress instanceof HTMLElement)) return
+      if (
+        !(applicationTrack instanceof HTMLElement) ||
+        !(deck instanceof HTMLElement) ||
+        !(progress instanceof HTMLElement)
+      )
+        return
       const viewport = window.innerHeight
       const distance = applicationTrack.offsetHeight - viewport
       const scrolled = clamp(

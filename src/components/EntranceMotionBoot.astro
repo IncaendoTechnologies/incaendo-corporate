@@ -21,7 +21,9 @@
     try {
       const nav = performance.getEntriesByType('navigation')
       const isReload = nav.length > 0 && nav[0].type === 'reload'
-      const lastScroll = Number(sessionStorage.getItem('incaendo-scroll-y') || 0)
+      const lastScroll = Number(
+        sessionStorage.getItem('incaendo-scroll-y') || 0,
+      )
 
       if (isReload && lastScroll > 150) {
         root.dataset.restoringScroll = 'true'

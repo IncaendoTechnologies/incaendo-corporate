@@ -110,10 +110,10 @@ const productCards = [
         Work.
       </h2>
       <p class="saas-lead">
-        From managing people and operations to centralizing healthcare and business
-        workflows, Incaendo's business software helps bring essential operations into
-        one place. Choose the products you need, simplify everyday work, and scale as
-        your business grows.
+        From managing people and operations to centralizing healthcare and
+        business workflows, Incaendo's business software helps bring essential
+        operations into one place. Choose the products you need, simplify
+        everyday work, and scale as your business grows.
       </p>
       <div class="saas-actions">
         <a class="text-link saas-text-link" href="/contact">
@@ -135,7 +135,10 @@ const productCards = [
       {productCards.map((product) => {
         const Icon = product.icon
         return (
-          <article class={`saas-product-card is-${product.tone}`} data-reveal-item>
+          <article
+            class={`saas-product-card is-${product.tone}`}
+            data-reveal-item
+          >
             <!-- Card Header: Icon & Category Badge -->
             <div class="saas-card-top">
               <span class={`saas-icon is-${product.tone}`} aria-hidden="true">
@@ -223,18 +226,26 @@ const productCards = [
                   data-carousel-next
                   aria-label={`Next ${product.name} image`}
                 >
-                  <ChevronRight size={18} strokeWidth={2.4} aria-hidden="true" />
+                  <ChevronRight
+                    size={18}
+                    strokeWidth={2.4}
+                    aria-hidden="true"
+                  />
                 </button>
 
                 <!-- Bottom Floating Overlay Bar -->
                 <div class="carousel-overlay-bar">
                   <!-- Slide Caption Tag -->
-                  <div
-                    class="carousel-caption-pill"
-                    data-carousel-caption
-                  >
-                    <span class="caption-text">{product.slides[0].caption}</span>
-                    <ArrowUpRight size={12} strokeWidth={2.2} className="caption-arrow" aria-hidden="true" />
+                  <div class="carousel-caption-pill" data-carousel-caption>
+                    <span class="caption-text">
+                      {product.slides[0].caption}
+                    </span>
+                    <ArrowUpRight
+                      size={12}
+                      strokeWidth={2.2}
+                      className="caption-arrow"
+                      aria-hidden="true"
+                    />
                   </div>
 
                   <!-- Pagination Dots with Active Pill -->
@@ -266,7 +277,10 @@ const productCards = [
               <ul class="saas-highlights-list">
                 {product.highlights.map((highlight) => (
                   <li>
-                    <span class={`saas-check is-${product.tone}`} aria-hidden="true">
+                    <span
+                      class={`saas-check is-${product.tone}`}
+                      aria-hidden="true"
+                    >
                       <Check size={14} strokeWidth={2.4} />
                     </span>
                     <span>{highlight}</span>
@@ -492,9 +506,15 @@ const productCards = [
     height: 8.5px;
     border-radius: 50%;
   }
-  .chrome-dot.is-red { background: #ef4444; }
-  .chrome-dot.is-yellow { background: #f59e0b; }
-  .chrome-dot.is-green { background: #10b981; }
+  .chrome-dot.is-red {
+    background: #ef4444;
+  }
+  .chrome-dot.is-yellow {
+    background: #f59e0b;
+  }
+  .chrome-dot.is-green {
+    background: #10b981;
+  }
 
   .chrome-url-bar {
     display: inline-flex;
@@ -858,7 +878,9 @@ const productCards = [
   }
 
   function initCardCarousels() {
-    const carousels = document.querySelectorAll<HTMLElement>('[data-card-carousel]')
+    const carousels = document.querySelectorAll<HTMLElement>(
+      '[data-card-carousel]',
+    )
     if (!carousels.length) return
 
     carousels.forEach((carouselEl) => {
@@ -868,13 +890,26 @@ const productCards = [
         existingCleanup()
       }
 
-      const track = carouselEl.querySelector<HTMLElement>('[data-carousel-track]')
-      const slides = Array.from(carouselEl.querySelectorAll<HTMLElement>('[data-carousel-slide]'))
-      const prevBtn = carouselEl.querySelector<HTMLButtonElement>('[data-carousel-prev]')
-      const nextBtn = carouselEl.querySelector<HTMLButtonElement>('[data-carousel-next]')
-      const dots = Array.from(carouselEl.querySelectorAll<HTMLButtonElement>('[data-carousel-dot]'))
-      const captionPill = carouselEl.querySelector<HTMLElement>('[data-carousel-caption]')
-      const captionText = captionPill?.querySelector<HTMLElement>('.caption-text')
+      const track = carouselEl.querySelector<HTMLElement>(
+        '[data-carousel-track]',
+      )
+      const slides = Array.from(
+        carouselEl.querySelectorAll<HTMLElement>('[data-carousel-slide]'),
+      )
+      const prevBtn = carouselEl.querySelector<HTMLButtonElement>(
+        '[data-carousel-prev]',
+      )
+      const nextBtn = carouselEl.querySelector<HTMLButtonElement>(
+        '[data-carousel-next]',
+      )
+      const dots = Array.from(
+        carouselEl.querySelectorAll<HTMLButtonElement>('[data-carousel-dot]'),
+      )
+      const captionPill = carouselEl.querySelector<HTMLElement>(
+        '[data-carousel-caption]',
+      )
+      const captionText =
+        captionPill?.querySelector<HTMLElement>('.caption-text')
 
       if (!track || slides.length === 0) return
 
@@ -892,7 +927,9 @@ const productCards = [
       let isHovered = false
 
       const INITIAL_DELAY = 1200
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      const prefersReducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)',
+      ).matches
 
       function updateSlide(idx: number) {
         currentIdx = (idx + totalSlides) % totalSlides
@@ -978,7 +1015,9 @@ const productCards = [
 
       // Drag / swipe with mouse, finger or pen: the image follows the
       // pointer, and a faster swipe snaps to the next slide faster.
-      const viewport = carouselEl.querySelector<HTMLElement>('.card-carousel-viewport')
+      const viewport = carouselEl.querySelector<HTMLElement>(
+        '.card-carousel-viewport',
+      )
       let dragPointerId: number | null = null
       let dragStartX = 0
       let dragStartY = 0
@@ -1027,9 +1066,14 @@ const productCards = [
         const dx = e.clientX - dragStartX
         const speed = Math.abs(dx) / Math.max(e.timeStamp - dragStartTime, 1)
         // 450ms normal snap, down to 200ms for a quick flick.
-        const snapMs = Math.round(Math.min(450, Math.max(200, 450 - (speed - 0.3) * 250)))
+        const snapMs = Math.round(
+          Math.min(450, Math.max(200, 450 - (speed - 0.3) * 250)),
+        )
         track.style.transition = `transform ${snapMs}ms cubic-bezier(0.25, 1, 0.5, 1)`
-        if (e.type !== 'pointercancel' && (Math.abs(dx) > 40 || (speed > 0.5 && Math.abs(dx) > 15))) {
+        if (
+          e.type !== 'pointercancel' &&
+          (Math.abs(dx) > 40 || (speed > 0.5 && Math.abs(dx) > 15))
+        ) {
           updateSlide(currentIdx + (dx < 0 ? 1 : -1))
         } else {
           updateSlide(currentIdx) // snap back
@@ -1080,16 +1124,19 @@ const productCards = [
       // Viewport Intersection Observer: run only when visible
       let observer: IntersectionObserver | null = null
       if ('IntersectionObserver' in window) {
-        observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            isVisible = entry.isIntersecting
-            if (isVisible) {
-              startTimer()
-            } else {
-              stopTimer()
-            }
-          })
-        }, { threshold: 0.15 })
+        observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              isVisible = entry.isIntersecting
+              if (isVisible) {
+                startTimer()
+              } else {
+                stopTimer()
+              }
+            })
+          },
+          { threshold: 0.15 },
+        )
         observer.observe(carouselEl)
       }
       // Without IntersectionObserver isVisible stays true, so the initial

@@ -140,31 +140,31 @@ const defaultCountry =
             role="listbox"
             aria-label="Country"
           >
-            {
-              phoneCountries.map((country) => (
-                <li
-                  id={fieldId(`phone-country-${country.iso.toLowerCase()}`)}
-                  role="option"
-                  aria-selected={country.iso === defaultCountry.iso ? 'true' : 'false'}
-                  data-value={country.iso}
-                  data-name={country.name}
-                  data-dial={country.dial}
-                  data-flag={country.flag}
-                  data-example={country.example}
-                >
-                  <img
-                    class="phone-flag"
-                    src={country.flag}
-                    alt=""
-                    width="22"
-                    height="16"
-                    loading="lazy"
-                  />
-                  <span class="phone-country-name">{country.name}</span>
-                  <span class="phone-country-dial">+{country.dial}</span>
-                </li>
-              ))
-            }
+            {phoneCountries.map((country) => (
+              <li
+                id={fieldId(`phone-country-${country.iso.toLowerCase()}`)}
+                role="option"
+                aria-selected={
+                  country.iso === defaultCountry.iso ? 'true' : 'false'
+                }
+                data-value={country.iso}
+                data-name={country.name}
+                data-dial={country.dial}
+                data-flag={country.flag}
+                data-example={country.example}
+              >
+                <img
+                  class="phone-flag"
+                  src={country.flag}
+                  alt=""
+                  width="22"
+                  height="16"
+                  loading="lazy"
+                />
+                <span class="phone-country-name">{country.name}</span>
+                <span class="phone-country-dial">+{country.dial}</span>
+              </li>
+            ))}
           </ul>
           <p class="phone-country-empty" data-phone-country-empty hidden>
             No country found
@@ -257,8 +257,11 @@ const defaultCountry =
         aria-describedby={fieldId('privacy-error')}
       />
       <span>
-        I agree to the <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and understand my
-        details will be used to respond to this enquiry.
+        I agree to the{' '}
+        <a href="/privacy" target="_blank" rel="noopener noreferrer">
+          Privacy Policy
+        </a>{' '}
+        and understand my details will be used to respond to this enquiry.
       </span>
     </label>
     <span
@@ -290,7 +293,9 @@ const defaultCountry =
         hidden
       ></span>
       <span data-submit-label>Send project inquiry</span>
-      <span aria-hidden="true" data-submit-arrow>↗</span>
+      <span aria-hidden="true" data-submit-arrow>
+        ↗
+      </span>
     </button>
     <p>
       {endpoint ? (
@@ -328,7 +333,8 @@ const defaultCountry =
       const submitLabel = form.querySelector('[data-submit-label]')
       const submitSpinner = form.querySelector('[data-submit-spinner]')
       const submitArrow = form.querySelector('[data-submit-arrow]')
-      const originalButtonText = submitLabel?.textContent ?? 'Send project inquiry'
+      const originalButtonText =
+        submitLabel?.textContent ?? 'Send project inquiry'
 
       // Submission feedback is shown as a toast (src/scripts/toast.js);
       // field validation stays inline next to each field. The submit button
@@ -359,14 +365,16 @@ const defaultCountry =
         if (submitLabel) {
           submitLabel.textContent = sending ? 'Sending…' : originalButtonText
         }
-        if (submitSpinner instanceof HTMLElement) submitSpinner.hidden = !sending
+        if (submitSpinner instanceof HTMLElement)
+          submitSpinner.hidden = !sending
         if (submitArrow instanceof HTMLElement) submitArrow.hidden = sending
       }
 
       const setFieldError = (name, message = '') => {
         const field = form.elements.namedItem(name)
         const error = form.querySelector(`[data-error-for="${name}"]`)
-        if (!(field instanceof HTMLElement) || !(error instanceof HTMLElement)) return
+        if (!(field instanceof HTMLElement) || !(error instanceof HTMLElement))
+          return
 
         const hasError = Boolean(message)
         field.setAttribute('aria-invalid', String(hasError))
@@ -434,7 +442,7 @@ const defaultCountry =
           if (!value) return 'Enter your full name.'
           if (value.length < 2) return 'Name is too short.'
           if (!NAME_PATTERN.test(value))
-            return 'Use letters only (spaces, . \' - are fine).'
+            return "Use letters only (spaces, . ' - are fine)."
           return ''
         },
         email: () => {
@@ -495,17 +503,27 @@ const defaultCountry =
 
       // Country picker: a button with the flag and dial code that opens a
       // searchable list.
-      const countryInput = form.querySelector<HTMLInputElement>('[data-phone-country]')
+      const countryInput = form.querySelector<HTMLInputElement>(
+        '[data-phone-country]',
+      )
       const countryButton = form.querySelector<HTMLButtonElement>(
         '[data-phone-country-button]',
       )
-      const countryMenu = form.querySelector<HTMLElement>('[data-phone-country-menu]')
+      const countryMenu = form.querySelector<HTMLElement>(
+        '[data-phone-country-menu]',
+      )
       const countrySearch = form.querySelector<HTMLInputElement>(
         '[data-phone-country-search]',
       )
-      const countryEmpty = form.querySelector<HTMLElement>('[data-phone-country-empty]')
-      const countryFlag = form.querySelector<HTMLImageElement>('[data-phone-country-flag]')
-      const countryDial = form.querySelector<HTMLElement>('[data-phone-country-dial]')
+      const countryEmpty = form.querySelector<HTMLElement>(
+        '[data-phone-country-empty]',
+      )
+      const countryFlag = form.querySelector<HTMLImageElement>(
+        '[data-phone-country-flag]',
+      )
+      const countryDial = form.querySelector<HTMLElement>(
+        '[data-phone-country-dial]',
+      )
       let activeOption: HTMLElement | null = null
 
       const setCountry = (iso) => {
@@ -516,9 +534,13 @@ const defaultCountry =
           o.setAttribute('aria-selected', String(o === option)),
         )
         const { name, dial, flag, example } = option.dataset
-        if (countryFlag instanceof HTMLImageElement && flag) countryFlag.src = flag
+        if (countryFlag instanceof HTMLImageElement && flag)
+          countryFlag.src = flag
         if (countryDial) countryDial.textContent = `+${dial}`
-        countryButton?.setAttribute('aria-label', `Country code: ${name} +${dial}`)
+        countryButton?.setAttribute(
+          'aria-label',
+          `Country code: ${name} +${dial}`,
+        )
         if (phoneField instanceof HTMLInputElement) {
           phoneField.placeholder = example ?? ''
         }
@@ -551,13 +573,14 @@ const defaultCountry =
           const { name = '', dial = '', value = '' } = o.dataset
           o.hidden = Boolean(
             query &&
-              !name.toLowerCase().includes(query) &&
-              value.toLowerCase() !== query &&
-              !(digits && dial.startsWith(digits)),
+            !name.toLowerCase().includes(query) &&
+            value.toLowerCase() !== query &&
+            !(digits && dial.startsWith(digits)),
           )
         })
         const shown = visibleOptions()
-        if (countryEmpty instanceof HTMLElement) countryEmpty.hidden = shown.length > 0
+        if (countryEmpty instanceof HTMLElement)
+          countryEmpty.hidden = shown.length > 0
         setActive(shown[0] ?? null)
       }
 
@@ -572,8 +595,9 @@ const defaultCountry =
         if (countrySearch instanceof HTMLInputElement) countrySearch.value = ''
         filterCountries()
         setActive(
-          countryOptions.find((o) => o.getAttribute('aria-selected') === 'true') ??
-            null,
+          countryOptions.find(
+            (o) => o.getAttribute('aria-selected') === 'true',
+          ) ?? null,
         )
         countryMenu.scrollIntoView({ block: 'nearest' })
         if (countrySearch instanceof HTMLElement) countrySearch.focus()
@@ -637,7 +661,8 @@ const defaultCountry =
       document.addEventListener('pointerdown', (event) => {
         if (!isMenuOpen()) return
         const wrapper = form.querySelector('[data-phone-input]')
-        if (event.target instanceof Node && wrapper?.contains(event.target)) return
+        if (event.target instanceof Node && wrapper?.contains(event.target))
+          return
         closeMenu(false)
       })
 
@@ -654,7 +679,9 @@ const defaultCountry =
       })
 
       if (phoneField instanceof HTMLInputElement) {
-        phoneField.addEventListener('focus', () => loadPhoneLib(), { once: true })
+        phoneField.addEventListener('focus', () => loadPhoneLib(), {
+          once: true,
+        })
       }
 
       // Check a field once the visitor leaves it, but only if they typed
@@ -821,7 +848,9 @@ const defaultCountry =
           const rejected = form.querySelector('[aria-invalid="true"]')
           if (rejected instanceof HTMLElement) rejected.focus()
 
-          await new Promise((resolve) => window.setTimeout(resolve, FEEDBACK_MS))
+          await new Promise((resolve) =>
+            window.setTimeout(resolve, FEEDBACK_MS),
+          )
           if (submitButton instanceof HTMLButtonElement) {
             submitButton.disabled = false
           }
@@ -865,7 +894,6 @@ const defaultCountry =
       animation-duration: 2s;
     }
   }
-
 
   /* Off-screen rather than display:none so naive bots still see and fill it. */
   .contact-form-hp {

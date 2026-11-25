@@ -711,7 +711,8 @@ function setupParticleHero(root) {
       out.x = cx + x1 * k + Math.sin(time * 0.5 + phase[i]) * 1.4
       out.y = cy + y2 * k + Math.cos(time * 0.45 + phase[i]) * 1.4
       depth[i] = z2
-      const dot = (x1 * LIGHT[0] + y2 * LIGHT[1] + z2 * LIGHT[2]) * (invR[i] || 1)
+      const dot =
+        (x1 * LIGHT[0] + y2 * LIGHT[1] + z2 * LIGHT[2]) * (invR[i] || 1)
       light[i] = dot > 0 ? dot : 0
       return
     }
@@ -732,7 +733,8 @@ function setupParticleHero(root) {
       x += (cx + x1 * k + drift - x) * mix
       y += (cy + y2 * k + Math.cos(time * 0.45 + phase[i]) * 1.4 - y) * mix
       depth[i] = z2
-      const dot = (x1 * LIGHT[0] + y2 * LIGHT[1] + z2 * LIGHT[2]) * (invR[i] || 1)
+      const dot =
+        (x1 * LIGHT[0] + y2 * LIGHT[1] + z2 * LIGHT[2]) * (invR[i] || 1)
       light[i] = dot > 0 ? dot : 0
     }
     out.x = x

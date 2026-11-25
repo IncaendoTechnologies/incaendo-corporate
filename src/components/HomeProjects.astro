@@ -226,11 +226,7 @@ const projectHref = (project) =>
       }, rotationDelay)
     }
 
-    function showSlide(
-      index,
-      announce = true,
-      explicitDirection = '',
-    ) {
+    function showSlide(index, announce = true, explicitDirection = '') {
       const newIndex = (index + slides.length) % slides.length
       if (newIndex === activeIndex && previousIndex !== -1) return
 

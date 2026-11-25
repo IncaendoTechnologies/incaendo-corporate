@@ -77,7 +77,8 @@ const listingIncludes = [
   <div class="site-container hero-system__inner">
     <div class="careers-hero-copy hero-system__copy reveal">
       <h1 id="careers-page-heading" class="hero-system__title">
-        Do Thoughtful Work <span class="hero-system__accent">with Good People.</span>
+        Do Thoughtful Work{' '}
+        <span class="hero-system__accent">with Good People.</span>
       </h1>
       <p class="page-intro-description hero-system__description">
         See the kind of work we do and the technologies behind it—so you know
@@ -103,11 +104,16 @@ const listingIncludes = [
       </div>
     </div>
 
-    <div class="careers-hero-visual hero-system__visual reveal" data-reveal-role="stage">
+    <div
+      class="careers-hero-visual hero-system__visual reveal"
+      data-reveal-role="stage"
+    >
       <div class="careers-stack">
         <div class="careers-stack-bar" aria-hidden="true">
           <span class="careers-stack-dots">
-            <i></i><i></i><i></i>
+            <i></i>
+            <i></i>
+            <i></i>
           </span>
           <span class="careers-stack-title">incaendo / tech-stack</span>
           <span class="careers-stack-live">
@@ -117,9 +123,11 @@ const listingIncludes = [
         </div>
 
         <ul class="visually-hidden" aria-label="Technologies we work with">
-          {stackRows.flatMap((row) => row.items).map((tech) => (
-            <li>{tech.name}</li>
-          ))}
+          {stackRows
+            .flatMap((row) => row.items)
+            .map((tech) => (
+              <li>{tech.name}</li>
+            ))}
         </ul>
 
         <div class="careers-stack-rows" aria-hidden="true">
@@ -197,8 +205,8 @@ const listingIncludes = [
       </div>
     </div>
     <ReviewNotice title="Careers information to confirm">
-      Add current openings, location and work model, hiring contact, and a
-      clear applicant privacy process before inviting applications.
+      Add current openings, location and work model, hiring contact, and a clear
+      applicant privacy process before inviting applications.
     </ReviewNotice>
   </div>
 </section>
@@ -266,11 +274,7 @@ const listingIncludes = [
     border: 1px solid rgb(16 27 45 / 10%);
     border-radius: var(--radius-large);
     background:
-      radial-gradient(
-        ellipse at 85% 0%,
-        rgb(232 93 38 / 10%),
-        transparent 45%
-      ),
+      radial-gradient(ellipse at 85% 0%, rgb(232 93 38 / 10%), transparent 45%),
       linear-gradient(145deg, #fffdfb 0%, #f6f1eb 100%);
     box-shadow: 0 24px 60px rgb(16 27 45 / 11%);
   }

@@ -121,7 +121,9 @@ const {
             const reduced = window.matchMedia(
               '(prefers-reduced-motion: reduce)',
             ).matches
-            destination.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' })
+            destination.scrollIntoView({
+              behavior: reduced ? 'auto' : 'smooth',
+            })
             history.pushState(null, '', href)
           }
         } catch {

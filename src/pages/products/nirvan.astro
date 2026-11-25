@@ -265,7 +265,11 @@ const softwareSchema = [
   <header class="nirvan-nav">
     <div class="site-container nirvan-nav-inner">
       <div class="nirvan-brand">
-        <a href="/" class="nirvan-logo-link" aria-label="Incaendo corporate home">
+        <a
+          href="/"
+          class="nirvan-logo-link"
+          aria-label="Incaendo corporate home"
+        >
           <img
             src={logo.src}
             alt="Incaendo Technologies"
@@ -282,10 +286,18 @@ const softwareSchema = [
       </div>
 
       <nav class="nirvan-menu" aria-label="NIRVAN sections">
-        <a href="#solutions" class="nirvan-menu-link">Solutions</a>
-        <a href="#features" class="nirvan-menu-link">Core Features</a>
-        <a href="#benefits" class="nirvan-menu-link">Benefits</a>
-        <a href="#pricing" class="nirvan-menu-link">Pricing</a>
+        <a href="#solutions" class="nirvan-menu-link">
+          Solutions
+        </a>
+        <a href="#features" class="nirvan-menu-link">
+          Core Features
+        </a>
+        <a href="#benefits" class="nirvan-menu-link">
+          Benefits
+        </a>
+        <a href="#pricing" class="nirvan-menu-link">
+          Pricing
+        </a>
       </nav>
 
       <div class="nirvan-nav-actions">
@@ -303,95 +315,108 @@ const softwareSchema = [
 
   <main id="main-content" class="nirvan-page">
     <!-- 1. Hero Section -->
-    <section class="nirvan-hero hero-system hero-system--split" aria-labelledby="nirvan-hero-title">
+    <section
+      class="nirvan-hero hero-system hero-system--split"
+      aria-labelledby="nirvan-hero-title"
+    >
       <div class="site-container nirvan-hero-grid hero-system__inner">
-          <div class="nirvan-hero-copy hero-system__copy reveal">
-            <h1 id="nirvan-hero-title" class="hero-system__title">
-              Connected Healthcare. <span class="hero-system__accent">Smarter Operations.</span>
-            </h1>
+        <div class="nirvan-hero-copy hero-system__copy reveal">
+          <h1 id="nirvan-hero-title" class="hero-system__title">
+            Connected Healthcare.{' '}
+            <span class="hero-system__accent">Smarter Operations.</span>
+          </h1>
 
-            <p class="nirvan-hero-lead hero-system__description">
-              NIRVAN brings patient records, doctor scheduling, ward workflows,
-              pharmacy orders, billing, and multi-location governance into one
-              connected platform. Purpose-built for clinics, single hospitals,
-              and expanding healthcare networks.
-            </p>
+          <p class="nirvan-hero-lead hero-system__description">
+            NIRVAN brings patient records, doctor scheduling, ward workflows,
+            pharmacy orders, billing, and multi-location governance into one
+            connected platform. Purpose-built for clinics, single hospitals, and
+            expanding healthcare networks.
+          </p>
 
-            <div class="nirvan-hero-actions hero-system__actions">
-              <a
-                href="/contact#project-inquiry"
-                class="button button-primary nirvan-btn-hero"
-                data-open-contact-modal
-              >
-                <span>Book a Demo</span>
-                <ArrowRight size={16} aria-hidden="true" />
-              </a>
-              <a href="#features" class="button button-secondary nirvan-btn-secondary">
-                Explore Features
-              </a>
-            </div>
-
-            <div class="nirvan-hero-meta">
-              <div class="nirvan-meta-item">
-                <CheckCircle2 size={16} className="nirvan-meta-check" />
-                <span>Designed for Clinics & Hospital Networks</span>
-              </div>
-              <div class="nirvan-meta-item">
-                <CheckCircle2 size={16} className="nirvan-meta-check" />
-                <span>Role-Based Security & Compliance</span>
-              </div>
-              <div class="nirvan-meta-item">
-                <CheckCircle2 size={16} className="nirvan-meta-check" />
-                <span>Cloud or On-Premise Ready</span>
-              </div>
-            </div>
+          <div class="nirvan-hero-actions hero-system__actions">
+            <a
+              href="/contact#project-inquiry"
+              class="button button-primary nirvan-btn-hero"
+              data-open-contact-modal
+            >
+              <span>Book a Demo</span>
+              <ArrowRight size={16} aria-hidden="true" />
+            </a>
+            <a
+              href="#features"
+              class="button button-secondary nirvan-btn-secondary"
+            >
+              Explore Features
+            </a>
           </div>
 
-          <div class="nirvan-hero-visual hero-system__visual reveal">
-            <div class="nirvan-preview-wrapper">
-              <div class="nirvan-preview-frame">
-                <div class="nirvan-preview-chrome">
-                  <span class="nirvan-chrome-dot is-red"></span>
-                  <span class="nirvan-chrome-dot is-yellow"></span>
-                  <span class="nirvan-chrome-dot is-green"></span>
-                  <span class="nirvan-chrome-url">nirvan.incaendo.com/dashboard/operations</span>
-                </div>
-                <Image
-                  src={heroDashboard}
-                  alt="NIRVAN Healthcare CRM and Hospital Management Dashboard"
-                  class="nirvan-preview-image"
-                  widths={[480, 720, 1080]}
-                  sizes="(max-width: 991px) 100vw, 560px"
-                  loading="eager"
-                  decoding="async"
-                />
-              </div>
+          <div class="nirvan-hero-meta">
+            <div class="nirvan-meta-item">
+              <CheckCircle2 size={16} className="nirvan-meta-check" />
+              <span>Designed for Clinics & Hospital Networks</span>
+            </div>
+            <div class="nirvan-meta-item">
+              <CheckCircle2 size={16} className="nirvan-meta-check" />
+              <span>Role-Based Security & Compliance</span>
+            </div>
+            <div class="nirvan-meta-item">
+              <CheckCircle2 size={16} className="nirvan-meta-check" />
+              <span>Cloud or On-Premise Ready</span>
+            </div>
+          </div>
+        </div>
 
-              <!-- Live Metric Chips (Illustrative) -->
-              <div class="nirvan-float-chip chip-top">
-                <span class="chip-dot is-pulse"></span>
-                <div>
-                  <strong>Active Inpatients</strong>
-                  <span>84 / 96 Beds (88% Occupancy)</span>
-                </div>
+        <div class="nirvan-hero-visual hero-system__visual reveal">
+          <div class="nirvan-preview-wrapper">
+            <div class="nirvan-preview-frame">
+              <div class="nirvan-preview-chrome">
+                <span class="nirvan-chrome-dot is-red"></span>
+                <span class="nirvan-chrome-dot is-yellow"></span>
+                <span class="nirvan-chrome-dot is-green"></span>
+                <span class="nirvan-chrome-url">
+                  nirvan.incaendo.com/dashboard/operations
+                </span>
               </div>
+              <Image
+                src={heroDashboard}
+                alt="NIRVAN Healthcare CRM and Hospital Management Dashboard"
+                class="nirvan-preview-image"
+                widths={[480, 720, 1080]}
+                sizes="(max-width: 991px) 100vw, 560px"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
 
-              <div class="nirvan-float-chip chip-bottom">
-                <div class="chip-icon-box">
-                  <Activity size={18} />
-                </div>
-                <div>
-                  <strong>Today's Consultations</strong>
-                  <span>342 OPD Visits &bull; 98.4% on schedule</span>
-                </div>
+            <!-- Live Metric Chips (Illustrative) -->
+            <div class="nirvan-float-chip chip-top">
+              <span class="chip-dot is-pulse"></span>
+              <div>
+                <strong>Active Inpatients</strong>
+                <span>84 / 96 Beds (88% Occupancy)</span>
+              </div>
+            </div>
+
+            <div class="nirvan-float-chip chip-bottom">
+              <div class="chip-icon-box">
+                <Activity size={18} />
+              </div>
+              <div>
+                <strong>Today's Consultations</strong>
+                <span>342 OPD Visits &bull; 98.4% on schedule</span>
               </div>
             </div>
           </div>
         </div>
+      </div>
     </section>
 
     <!-- 2. Healthcare Solutions Section -->
-    <section class="nirvan-section nirvan-solutions-section" id="solutions" aria-labelledby="solutions-title">
+    <section
+      class="nirvan-section nirvan-solutions-section"
+      id="solutions"
+      aria-labelledby="solutions-title"
+    >
       <div class="site-container">
         <div class="section-intro reveal">
           <p class="section-eyebrow">Healthcare Solutions</p>
@@ -399,8 +424,9 @@ const softwareSchema = [
             Tailored for Every Stage of <span>Healthcare Delivery</span>
           </h2>
           <p class="section-lead">
-            Whether you operate a standalone private clinic, a multispecialty hospital,
-            or an expansive regional hospital group, NIRVAN scales cleanly with your clinical requirements.
+            Whether you operate a standalone private clinic, a multispecialty
+            hospital, or an expansive regional hospital group, NIRVAN scales
+            cleanly with your clinical requirements.
           </p>
         </div>
 
@@ -425,7 +451,11 @@ const softwareSchema = [
                 <ul class="solution-points">
                   {item.points.map((pt) => (
                     <li>
-                      <Check size={15} className="point-check" aria-hidden="true" />
+                      <Check
+                        size={15}
+                        className="point-check"
+                        aria-hidden="true"
+                      />
                       <span>{pt}</span>
                     </li>
                   ))}
@@ -437,7 +467,8 @@ const softwareSchema = [
                     class="solution-cta-link"
                     data-open-contact-modal
                   >
-                    Request demo for {item.title} <ChevronRight size={14} aria-hidden="true" />
+                    Request demo for {item.title}{' '}
+                    <ChevronRight size={14} aria-hidden="true" />
                   </a>
                 </div>
               </article>
@@ -448,7 +479,11 @@ const softwareSchema = [
     </section>
 
     <!-- 3. Core Features Section -->
-    <section class="nirvan-section nirvan-features-section" id="features" aria-labelledby="features-title">
+    <section
+      class="nirvan-section nirvan-features-section"
+      id="features"
+      aria-labelledby="features-title"
+    >
       <div class="site-container">
         <div class="section-intro reveal">
           <p class="section-eyebrow">Comprehensive Capabilities</p>
@@ -456,7 +491,8 @@ const softwareSchema = [
             8 Core Features Built for <span>Clinical Excellence</span>
           </h2>
           <p class="section-lead">
-            Everything your clinical, front-desk, pharmacy, and administrative teams need to operate in harmony.
+            Everything your clinical, front-desk, pharmacy, and administrative
+            teams need to operate in harmony.
           </p>
         </div>
 
@@ -481,7 +517,11 @@ const softwareSchema = [
     </section>
 
     <!-- 4. Benefits Section -->
-    <section class="nirvan-section nirvan-benefits-section" id="benefits" aria-labelledby="benefits-title">
+    <section
+      class="nirvan-section nirvan-benefits-section"
+      id="benefits"
+      aria-labelledby="benefits-title"
+    >
       <div class="site-container">
         <div class="section-intro reveal">
           <p class="section-eyebrow">Measurable Impact</p>
@@ -489,7 +529,8 @@ const softwareSchema = [
             Why Healthcare Organizations <span>Choose NIRVAN</span>
           </h2>
           <p class="section-lead">
-            Eliminate operational bottlenecks, minimize administrative fatigue, and deliver higher standards of patient care.
+            Eliminate operational bottlenecks, minimize administrative fatigue,
+            and deliver higher standards of patient care.
           </p>
         </div>
 
@@ -504,7 +545,9 @@ const softwareSchema = [
                   </div>
                   <div class="benefit-stat-box">
                     <span class="benefit-metric">{benefit.metric}</span>
-                    <span class="benefit-metric-label">{benefit.metricLabel}</span>
+                    <span class="benefit-metric-label">
+                      {benefit.metricLabel}
+                    </span>
                   </div>
                 </div>
 
@@ -518,7 +561,11 @@ const softwareSchema = [
     </section>
 
     <!-- 5. Pricing Section (Dummy provisional plans with prominent disclaimer) -->
-    <section class="nirvan-section nirvan-pricing-section" id="pricing" aria-labelledby="pricing-title">
+    <section
+      class="nirvan-section nirvan-pricing-section"
+      id="pricing"
+      aria-labelledby="pricing-title"
+    >
       <div class="site-container">
         <div class="section-intro reveal">
           <p class="section-eyebrow">Provisional Pricing Plans</p>
@@ -526,28 +573,45 @@ const softwareSchema = [
             Simple, Transparent Plans for <span>Every Facility</span>
           </h2>
           <p class="section-lead">
-            Flexible deployment configurations engineered to support outpatient medical practices, standalone hospitals, and large health systems.
+            Flexible deployment configurations engineered to support outpatient
+            medical practices, standalone hospitals, and large health systems.
           </p>
         </div>
 
         <!-- Sample Pricing Disclaimer Banner -->
-        <div class="nirvan-pricing-disclaimer reveal" role="note" aria-label="Provisional pricing notice">
+        <div
+          class="nirvan-pricing-disclaimer reveal"
+          role="note"
+          aria-label="Provisional pricing notice"
+        >
           <div class="disclaimer-icon" aria-hidden="true">
             <Sparkles size={20} />
           </div>
           <div class="disclaimer-content">
-            <strong>Provisional Demonstration Pricing &bull; Subject to Final Confirmation</strong>
+            <strong>
+              Provisional Demonstration Pricing &bull; Subject to Final
+              Confirmation
+            </strong>
             <p>
-              The figures below are illustrative sample tiers designed for feature evaluation and demonstration purposes.
-              Final subscription and rollout pricing is determined based on facility bed capacity, active doctor accounts, and specific hospital ERP or LIS integrations.
+              The figures below are illustrative sample tiers designed for
+              feature evaluation and demonstration purposes. Final subscription
+              and rollout pricing is determined based on facility bed capacity,
+              active doctor accounts, and specific hospital ERP or LIS
+              integrations.
             </p>
           </div>
         </div>
 
         <div class="nirvan-pricing-grid reveal" data-reveal-stagger>
           {pricingPlans.map((plan) => (
-            <article class={`nirvan-pricing-card ${plan.popular ? 'is-popular' : ''}`}>
-              {plan.popular && <span class="pricing-badge-popular">Recommended for Hospitals</span>}
+            <article
+              class={`nirvan-pricing-card ${plan.popular ? 'is-popular' : ''}`}
+            >
+              {plan.popular && (
+                <span class="pricing-badge-popular">
+                  Recommended for Hospitals
+                </span>
+              )}
 
               <div class="pricing-card-header">
                 <span class="pricing-tier-tag">{plan.tier}</span>
@@ -567,7 +631,11 @@ const softwareSchema = [
               <ul class="pricing-features-list">
                 {plan.highlights.map((feat) => (
                   <li>
-                    <Check size={16} className="pricing-check" aria-hidden="true" />
+                    <Check
+                      size={16}
+                      className="pricing-check"
+                      aria-hidden="true"
+                    />
                     <span>{feat}</span>
                   </li>
                 ))}
@@ -602,8 +670,9 @@ const softwareSchema = [
           </h2>
 
           <p class="final-cta-text">
-            See how NIRVAN centralizes clinic appointments, inpatient wards, lab workflows,
-            and billing operations into one unified system. Schedule a tailored consultation with our healthcare solutions team.
+            See how NIRVAN centralizes clinic appointments, inpatient wards, lab
+            workflows, and billing operations into one unified system. Schedule
+            a tailored consultation with our healthcare solutions team.
           </p>
 
           <div class="final-cta-actions">
@@ -625,7 +694,8 @@ const softwareSchema = [
           </div>
 
           <p class="final-cta-footnote">
-            No obligation &bull; Tailored to your facility scale &bull; Fast cloud or on-premise onboarding
+            No obligation &bull; Tailored to your facility scale &bull; Fast
+            cloud or on-premise onboarding
           </p>
         </div>
       </div>
@@ -636,7 +706,11 @@ const softwareSchema = [
   <footer class="nirvan-footer" role="contentinfo">
     <div class="site-container nirvan-footer-inner">
       <div class="nirvan-footer-brand">
-        <a href="/" class="nirvan-footer-logo-link" aria-label="Incaendo corporate home">
+        <a
+          href="/"
+          class="nirvan-footer-logo-link"
+          aria-label="Incaendo corporate home"
+        >
           <img
             src={logo.src}
             alt="Incaendo Technologies"
@@ -646,7 +720,8 @@ const softwareSchema = [
           />
         </a>
         <p class="nirvan-footer-tagline">
-          NIRVAN &bull; Healthcare CRM & Hospital Management Platform by Incaendo Technologies.
+          NIRVAN &bull; Healthcare CRM & Hospital Management Platform by
+          Incaendo Technologies.
         </p>
       </div>
 
@@ -656,15 +731,19 @@ const softwareSchema = [
         <a href="#benefits">Benefits</a>
         <a href="#pricing">Pricing</a>
         <a href="/contact">Contact Sales</a>
-        <a href="/" class="nirvan-corporate-link">Incaendo Corporate &rarr;</a>
+        <a href="/" class="nirvan-corporate-link">
+          Incaendo Corporate &rarr;
+        </a>
       </nav>
 
       <div class="nirvan-footer-bottom">
         <p class="nirvan-copyright">
-          &copy; {new Date().getFullYear()} Incaendo Pvt Ltd. All rights reserved.
+          &copy; {new Date().getFullYear()} Incaendo Pvt Ltd. All rights
+          reserved.
         </p>
         <p class="nirvan-footer-note">
-          NIRVAN is a proprietary healthcare software product. Illustrative metrics and provisional pricing shown for evaluation purposes.
+          NIRVAN is a proprietary healthcare software product. Illustrative
+          metrics and provisional pricing shown for evaluation purposes.
         </p>
       </div>
     </div>
@@ -691,7 +770,9 @@ const softwareSchema = [
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(15, 23, 42, 0.08);
-    transition: background var(--duration-fast) ease, border-color var(--duration-fast) ease;
+    transition:
+      background var(--duration-fast) ease,
+      border-color var(--duration-fast) ease;
   }
 
   .nirvan-nav-inner {
@@ -840,9 +921,18 @@ const softwareSchema = [
   /* 1. Hero Section */
   .nirvan-hero {
     position: relative;
-    background: radial-gradient(circle at 10% 20%, rgba(201, 84, 43, 0.04) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(43, 87, 126, 0.06) 0%, transparent 50%),
-                var(--color-paper);
+    background:
+      radial-gradient(
+        circle at 10% 20%,
+        rgba(201, 84, 43, 0.04) 0%,
+        transparent 40%
+      ),
+      radial-gradient(
+        circle at 90% 80%,
+        rgba(43, 87, 126, 0.06) 0%,
+        transparent 50%
+      ),
+      var(--color-paper);
     border-bottom: 1px solid rgba(15, 23, 42, 0.06);
   }
 
@@ -912,8 +1002,9 @@ const softwareSchema = [
     border: 1px solid #e2dacd;
     border-radius: var(--radius-large, 16px);
     overflow: hidden;
-    box-shadow: 0 24px 60px -20px rgba(15, 23, 42, 0.18),
-                0 6px 20px -6px rgba(15, 23, 42, 0.08);
+    box-shadow:
+      0 24px 60px -20px rgba(15, 23, 42, 0.18),
+      0 6px 20px -6px rgba(15, 23, 42, 0.08);
   }
 
   .nirvan-preview-chrome {
@@ -930,9 +1021,15 @@ const softwareSchema = [
     height: 9px;
     border-radius: 50%;
   }
-  .nirvan-chrome-dot.is-red { background: #ef4444; }
-  .nirvan-chrome-dot.is-yellow { background: #f59e0b; }
-  .nirvan-chrome-dot.is-green { background: #10b981; }
+  .nirvan-chrome-dot.is-red {
+    background: #ef4444;
+  }
+  .nirvan-chrome-dot.is-yellow {
+    background: #f59e0b;
+  }
+  .nirvan-chrome-dot.is-green {
+    background: #10b981;
+  }
 
   .nirvan-chrome-url {
     margin-left: 0.5rem;
@@ -1030,7 +1127,10 @@ const softwareSchema = [
     background: #fbf9f6;
     border: 1px solid #e8e2d8;
     border-radius: var(--radius-large, 16px);
-    transition: transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease, border-color var(--duration-fast) ease;
+    transition:
+      transform var(--duration-fast) ease,
+      box-shadow var(--duration-fast) ease,
+      border-color var(--duration-fast) ease;
   }
 
   .nirvan-solution-card:hover {
@@ -1134,7 +1234,9 @@ const softwareSchema = [
     font-size: 0.88rem;
     font-weight: 700;
     text-decoration: none;
-    transition: color var(--duration-fast) ease, gap var(--duration-fast) ease;
+    transition:
+      color var(--duration-fast) ease,
+      gap var(--duration-fast) ease;
   }
 
   .solution-cta-link:hover {
@@ -1160,7 +1262,10 @@ const softwareSchema = [
     border: 1px solid #e7ded3;
     border-radius: var(--radius-large, 16px);
     box-shadow: 0 8px 24px -14px rgba(15, 23, 42, 0.08);
-    transition: transform var(--duration-fast) ease, border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+    transition:
+      transform var(--duration-fast) ease,
+      border-color var(--duration-fast) ease,
+      box-shadow var(--duration-fast) ease;
   }
 
   .nirvan-feature-card:hover {
@@ -1184,7 +1289,9 @@ const softwareSchema = [
     border-radius: 11px;
     background: rgba(43, 87, 126, 0.09);
     color: #2b577e;
-    transition: background var(--duration-fast) ease, color var(--duration-fast) ease;
+    transition:
+      background var(--duration-fast) ease,
+      color var(--duration-fast) ease;
   }
 
   .nirvan-feature-card:hover .feature-card-icon {
@@ -1351,7 +1458,9 @@ const softwareSchema = [
     border: 1px solid #e4dccc;
     border-radius: var(--radius-large, 16px);
     box-shadow: 0 10px 30px -18px rgba(15, 23, 42, 0.1);
-    transition: transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+    transition:
+      transform var(--duration-fast) ease,
+      box-shadow var(--duration-fast) ease;
   }
 
   .nirvan-pricing-card:hover {

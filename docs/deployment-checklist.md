@@ -21,14 +21,14 @@ These routes still render the page today and declare the main URL as
 canonical (see `NON_CANONICAL_PATHS` and `articleSeo()` in
 `src/data/seo.js`). After hosting is chosen, replace them with 301 redirects:
 
-| From | To |
-| --- | --- |
-| `/blog/` | `/insights/` |
-| `/blog/:slug/` | `/insights/:slug/` |
-| `/post/:slug/` | `/insights/:slug/` |
-| `/blog/choosing-tech-stack-for-startup-2025/` and `/post/…` | `/insights/choosing-the-right-tech-stack-for-your-startup-in-2025/` |
+| From                                                                                                            | To                                                                                                   |
+| --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `/blog/`                                                                                                        | `/insights/`                                                                                         |
+| `/blog/:slug/`                                                                                                  | `/insights/:slug/`                                                                                   |
+| `/post/:slug/`                                                                                                  | `/insights/:slug/`                                                                                   |
+| `/blog/choosing-tech-stack-for-startup-2025/` and `/post/…`                                                     | `/insights/choosing-the-right-tech-stack-for-your-startup-in-2025/`                                  |
 | `/blog/case-study-how-we-helped-domino-s-india-centralise-data-automate-settlements-and-refunds/` and `/post/…` | `/insights/case-study-how-we-helped-dominos-india-centralise-data-automate-settlements-and-refunds/` |
-| `/privacy/` | `/privacy-policy/` |
+| `/privacy/`                                                                                                     | `/privacy-policy/`                                                                                   |
 
 - [ ] Add the redirects above.
 - [ ] After the redirects work, remove the duplicate route files

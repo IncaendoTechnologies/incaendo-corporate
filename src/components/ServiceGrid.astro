@@ -36,7 +36,9 @@ const serviceItems = isHomepage ? homepageServices : services
           <p>{service.description}</p>
           {isHomepage && (
             <ul class="service-points">
-              {service.points.map((point) => <li>{point}</li>)}
+              {service.points.map((point) => (
+                <li>{point}</li>
+              ))}
             </ul>
           )}
         </div>

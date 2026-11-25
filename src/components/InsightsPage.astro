@@ -26,18 +26,34 @@ const filterItems = [
 ---
 
 <div class="insights-page">
-  <section class="insights-hero hero-system hero-system--split hero-system--feature" aria-labelledby="insights-page-heading">
+  <section
+    class="insights-hero hero-system hero-system--split hero-system--feature"
+    aria-labelledby="insights-page-heading"
+  >
     <div class="site-container insights-hero-inner hero-system__inner">
-      <div class="insights-hero-copy hero-system__copy reveal" data-reveal-stagger>
-        <h1 id="insights-page-heading" class="hero-system__title" data-reveal-item>
+      <div
+        class="insights-hero-copy hero-system__copy reveal"
+        data-reveal-stagger
+      >
+        <h1
+          id="insights-page-heading"
+          class="hero-system__title"
+          data-reveal-item
+        >
           The Thinking Behind <span>Better Digital Solutions.</span>
         </h1>
-        <p class="insights-hero-description hero-system__description" data-reveal-item>
+        <p
+          class="insights-hero-description hero-system__description"
+          data-reveal-item
+        >
           Explore practical insights, emerging technologies, and proven
           approaches to building digital products that solve real business
           challenges and create lasting value.
         </p>
-        <div class="insights-hero-actions hero-system__actions" data-reveal-item>
+        <div
+          class="insights-hero-actions hero-system__actions"
+          data-reveal-item
+        >
           <a class="button button-primary" href="#article-archive">
             Explore insights <span aria-hidden="true">↘</span>
           </a>
@@ -48,12 +64,19 @@ const filterItems = [
             </span>
           </a>
         </div>
-        <nav class="insights-hero-topics hero-system__support" aria-label="Browse insights by topic" data-reveal-item>
+        <nav
+          class="insights-hero-topics hero-system__support"
+          aria-label="Browse insights by topic"
+          data-reveal-item
+        >
           <span class="hero-system__support-label">Explore by topic</span>
           <ul>
             {insightCategories.map((category) => (
               <li>
-                <a href="#article-archive" data-insights-topic={categoryKey(category)}>
+                <a
+                  href="#article-archive"
+                  data-insights-topic={categoryKey(category)}
+                >
                   {category}
                 </a>
               </li>
@@ -154,13 +177,14 @@ const filterItems = [
 
   const setupInsights = () => {
     const page = document.querySelector('.insights-page')
-    if (!(page instanceof HTMLElement) || page.dataset.insightsReady === 'true') return
+    if (!(page instanceof HTMLElement) || page.dataset.insightsReady === 'true')
+      return
     page.dataset.insightsReady = 'true'
 
     const reset = page.querySelector('[data-insights-reset]')
-    const filters = Array.from(page.querySelectorAll('[data-insights-filter]')).filter(
-      (el) => el instanceof HTMLElement,
-    )
+    const filters = Array.from(
+      page.querySelectorAll('[data-insights-filter]'),
+    ).filter((el) => el instanceof HTMLElement)
     const empty = page.querySelector('[data-insights-empty]')
     const archive = page.querySelector('[data-insights-latest]')
     const archiveCards = archive
@@ -170,9 +194,9 @@ const filterItems = [
       : []
     const featureSection = page.querySelector('[data-insight-featured-section]')
     const featureCards = featureSection
-      ? Array.from(featureSection.querySelectorAll('[data-insight-card]')).filter(
-          (el) => el instanceof HTMLElement,
-        )
+      ? Array.from(
+          featureSection.querySelectorAll('[data-insight-card]'),
+        ).filter((el) => el instanceof HTMLElement)
       : []
     const pagination = page.querySelector('[data-insights-pagination]')
     const pageNumbers = page.querySelector('[data-insights-page-numbers]')
@@ -223,7 +247,8 @@ const filterItems = [
 
       if (archive instanceof HTMLElement) archive.hidden = matches.length === 0
       if (empty instanceof HTMLElement) empty.hidden = matches.length !== 0
-      if (reset instanceof HTMLButtonElement) reset.disabled = activeCategory === 'all'
+      if (reset instanceof HTMLButtonElement)
+        reset.disabled = activeCategory === 'all'
 
       if (pagination instanceof HTMLElement) {
         pagination.hidden = matches.length === 0 || totalPages <= 1
@@ -293,7 +318,8 @@ const filterItems = [
       if (!(link instanceof HTMLElement)) return
       link.addEventListener('click', () => {
         const match = filters.find(
-          (button) => button.dataset.insightsFilter === link.dataset.insightsTopic,
+          (button) =>
+            button.dataset.insightsFilter === link.dataset.insightsTopic,
         )
         if (match instanceof HTMLElement) match.click()
       })

@@ -112,12 +112,10 @@
   --radius-large: 24px;
   --shadow-soft: 0 20px 70px rgb(16 27 45 / 9%);
   --shadow-header:
-    0 2px 4px rgb(16 27 45 / 4%),
-    0 6px 16px rgb(16 27 45 / 6%),
+    0 2px 4px rgb(16 27 45 / 4%), 0 6px 16px rgb(16 27 45 / 6%),
     0 16px 32px -2px rgb(201 84 43 / 7%);
   --shadow-footer:
-    0 -2px 4px rgb(16 27 45 / 4%),
-    0 -6px 16px rgb(16 27 45 / 6%),
+    0 -2px 4px rgb(16 27 45 / 4%), 0 -6px 16px rgb(16 27 45 / 6%),
     0 -16px 32px -2px rgb(201 84 43 / 7%);
   --ease-out: cubic-bezier(0.2, 0.75, 0.25, 1);
   --duration-fast: 180ms;
