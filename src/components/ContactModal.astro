@@ -182,15 +182,35 @@ import ContactForm from './ContactForm.astro'
      compact the shared .contact-form-card field styling just enough for
      the full form to fit a standard laptop viewport without scrolling; the
      Contact page's own inline form is untouched. */
+  /* The scrollbar sits out in the dialog's side padding, right against
+     the dialog border, away from the fields, and is thin and faint. */
   .contact-modal-body {
     min-height: 0;
-    padding-right: 2px;
+    margin-right: calc(-1 * var(--modal-pad-x));
+    padding-right: var(--modal-pad-x);
     overflow-x: hidden;
     overflow-y: auto;
+    scrollbar-color: rgb(16 27 45 / 14%) transparent;
+    scrollbar-width: thin;
+  }
+
+  .contact-modal-body::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .contact-modal-body::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .contact-modal-body::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: rgb(16 27 45 / 14%);
   }
 
   .contact-modal-dialog.contact-form-card {
-    padding: clamp(1.15rem, 2vw, 1.5rem);
+    --modal-pad-x: clamp(1.15rem, 2vw, 1.5rem);
+
+    padding: var(--modal-pad-x);
     border-radius: 16px;
   }
 
@@ -230,71 +250,115 @@ import ContactForm from './ContactForm.astro'
     margin: 0;
   }
 
+  /* Phones: spacing and sizes follow a standard compact mobile form
+     (14px labels and text, 40px fields, ~16px between fields). */
   @media (max-width: 560px) {
     .contact-modal-overlay {
       padding: 0.75rem;
     }
 
     .contact-modal-dialog.contact-form-card {
-      padding: 0.6rem;
+      --modal-pad-x: 1.25rem;
+
+      padding: 1.25rem var(--modal-pad-x) 1rem;
+      border-radius: 18px;
     }
 
     .contact-modal-header {
       gap: 0.75rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.85rem;
     }
 
     .contact-modal-header h2 {
       max-width: none;
-      font-size: 1.35rem;
+      font-size: 1.3rem;
+    }
+
+    .contact-modal-close {
+      width: 38px;
+      height: 38px;
+      flex-basis: 38px;
+      border-radius: 10px;
+    }
+
+    .contact-modal-dialog .contact-form {
+      gap: 1rem;
     }
 
     .contact-modal-dialog :global(.row.form-grid) {
-      --bs-gutter-y: 0;
+      --bs-gutter-y: 1rem;
     }
 
     .contact-modal-dialog.contact-form-card :global(.form-field) {
-      gap: 0.1rem;
+      gap: 0.375rem;
     }
 
     .contact-modal-dialog.contact-form-card :global(.form-field label) {
-      font-size: 0.82rem;
-      line-height: 1.2;
+      font-size: 0.875rem;
+      line-height: 1.4;
+    }
+
+    .contact-modal-dialog.contact-form-card :global(.form-optional) {
+      font-size: 0.75rem;
+    }
+
+    .contact-modal-dialog.contact-form-card :global(.form-field input),
+    .contact-modal-dialog.contact-form-card :global(.form-field select),
+    .contact-modal-dialog.contact-form-card :global(.form-field textarea) {
+      font-size: 0.875rem;
+      line-height: 1.4;
     }
 
     .contact-modal-dialog.contact-form-card :global(.form-field input),
     .contact-modal-dialog.contact-form-card :global(.form-field select) {
-      min-height: 38px;
-      padding-block: 0.35rem;
+      min-height: 40px;
+      padding: 0.5rem 0.875rem;
+    }
+
+    .contact-modal-dialog.contact-form-card :global(.form-field select) {
+      padding-right: 2.5rem;
+      background-position: right 0.875rem center;
     }
 
     .contact-modal-dialog.contact-form-card :global(.form-field textarea) {
-      height: 56px;
-      min-height: 56px;
-      padding-block: 0.35rem;
+      height: 96px;
+      min-height: 96px;
+      padding: 0.6rem 0.875rem;
       resize: none;
     }
 
+    .contact-modal-dialog.contact-form-card :global(.form-field-error) {
+      font-size: 0.78rem;
+    }
+
     .contact-modal-dialog :global(.contact-privacy-consent) {
-      font-size: 0.82rem;
-      line-height: 1.4;
+      gap: 0.6rem;
+      font-size: 0.8125rem;
+      line-height: 1.45;
     }
 
-    .contact-modal-dialog.contact-form-card :global(.contact-consent) {
-      margin-top: 0.1rem;
-    }
-
-    .contact-modal-dialog .contact-form {
-      gap: 0.2rem;
+    /* Line the consent error up with the consent text (checkbox + gap). */
+    .contact-modal-dialog.contact-form-card
+      :global(.contact-consent .form-field-error) {
+      margin-left: calc(1.15rem + 0.6rem);
     }
 
     .contact-modal-dialog :global(.form-submit-row) {
       align-items: stretch;
       flex-direction: column-reverse;
+      gap: 0.6rem;
+    }
+
+    .contact-modal-dialog :global(.form-submit-row p) {
+      font-size: 0.8125rem;
     }
 
     .contact-modal-dialog :global(.form-submit-row .button) {
       width: 100%;
+      min-height: 44px;
       justify-content: space-between;
+      font-size: 0.9rem;
     }
   }
 

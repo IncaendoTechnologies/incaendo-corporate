@@ -42,7 +42,7 @@ function setupStack(track) {
   }
 
   function applyDepth(card, { y = 0, scale = 1, dim = 0, lift = 0 }) {
-    card.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0) scale(${scale.toFixed(4)})`
+    card.style.transform = `translate3d(0, ${Math.round(y)}px, 0) scale(${scale.toFixed(4)})`
     card.style.setProperty('--dim', dim.toFixed(3))
     card.style.setProperty('--lift', lift.toFixed(3))
   }

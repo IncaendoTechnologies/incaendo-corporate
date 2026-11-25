@@ -48,13 +48,16 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
         <li class="header-cta">
           <a
             href="/contact"
+            data-contact-page-link
             aria-current={currentPath === '/contact' ? 'page' : undefined}
           >
             Contact us <span aria-hidden="true">→</span>
           </a>
         </li>
         <li class="mobile-contact-link">
-          <a href="/contact">Contact</a>
+          <a href="/contact" data-contact-page-link>
+            Contact
+          </a>
         </li>
       </ul>
     </nav>
@@ -88,7 +91,8 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
     })
 
     navigation.addEventListener('click', (event) => {
-      if (event.target instanceof HTMLAnchorElement) closeMenu()
+      if (event.target instanceof Element && event.target.closest('a'))
+        closeMenu()
     })
 
     window.addEventListener('keydown', (event) => {

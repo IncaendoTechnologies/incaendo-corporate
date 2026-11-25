@@ -72,6 +72,8 @@ const projectHref = (project) =>
             <a
               class="home-project-image"
               href={projectHref(project)}
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label={`Explore ${project.name} project overview`}
               tabindex={index === 0 ? undefined : '-1'}
             >
@@ -91,7 +93,12 @@ const projectHref = (project) =>
               <p class="home-project-category">{project.category}</p>
               <h3>{project.name}</h3>
               <p class="home-project-description">{project.overview}</p>
-              <a class="home-project-link" href={projectHref(project)}>
+              <a
+                class="home-project-link"
+                href={projectHref(project)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 View project overview{' '}
                 <span class="link-arrow" aria-hidden="true">
                   →
@@ -181,7 +188,7 @@ const projectHref = (project) =>
     /** @type {HTMLElement | null} */
     const stage = carousel.querySelector('.home-projects-stage')
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const rotationDelay = 4500
+    const rotationDelay = 3500
     let activeIndex = 0
     let previousIndex = -1
     /** @type {number | undefined} */
@@ -191,7 +198,10 @@ const projectHref = (project) =>
     let activePointerId
     let pointerStartX = 0
     let pointerStartY = 0
+    let pointerStartTime = 0
     let isDragging = false
+    /** @type {number | undefined} */
+    let swipeSpeedTimer
     let suppressClick = false
 
     const stopRotation = () => {
@@ -422,6 +432,17 @@ const projectHref = (project) =>
       window.removeEventListener('pointercancel', cancelPointer, true)
 
       if (completedSwipe) {
+        // Faster swipe = faster slide (800ms normal, down to 320ms for a flick).
+        const speed =
+          Math.abs(deltaX) / Math.max(event.timeStamp - pointerStartTime, 1)
+        const slideMs = Math.round(
+          Math.min(800, Math.max(320, 800 - (speed - 0.3) * 400)),
+        )
+        window.clearTimeout(swipeSpeedTimer)
+        carousel.style.setProperty('--slide-duration', `${slideMs}ms`)
+        swipeSpeedTimer = window.setTimeout(() => {
+          carousel.style.removeProperty('--slide-duration')
+        }, slideMs + 100)
         const restoreFocus = slides[activeIndex]?.contains(
           document.activeElement,
         )
@@ -479,6 +500,7 @@ const projectHref = (project) =>
       activePointerId = event.pointerId
       pointerStartX = event.clientX
       pointerStartY = event.clientY
+      pointerStartTime = event.timeStamp
       stopRotation()
       window.addEventListener('pointermove', movePointer, {
         capture: true,
@@ -619,13 +641,14 @@ const projectHref = (project) =>
     pointer-events: none;
     transform-origin: left center;
     transform: translate3d(calc(100% + 60px), 0, 0) scale(0.95);
+    /* --slide-duration is shortened briefly by a fast swipe (see script). */
     transition:
-      transform 800ms cubic-bezier(0.22, 1, 0.36, 1),
-      opacity 800ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform var(--slide-duration, 800ms) cubic-bezier(0.22, 1, 0.36, 1),
+      opacity var(--slide-duration, 800ms) cubic-bezier(0.22, 1, 0.36, 1),
       border-color 600ms cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 800ms cubic-bezier(0.22, 1, 0.36, 1),
-      filter 800ms cubic-bezier(0.22, 1, 0.36, 1),
-      visibility 800ms cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow var(--slide-duration, 800ms) cubic-bezier(0.22, 1, 0.36, 1),
+      filter var(--slide-duration, 800ms) cubic-bezier(0.22, 1, 0.36, 1),
+      visibility var(--slide-duration, 800ms) cubic-bezier(0.22, 1, 0.36, 1);
     will-change: transform, opacity;
   }
 

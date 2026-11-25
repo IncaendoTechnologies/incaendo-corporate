@@ -1,9 +1,16 @@
 ---
 import { HUBSPOT_SUBMIT_URL } from '../scripts/hubspot-form.js'
+import {
+  DEFAULT_PHONE_COUNTRY,
+  phoneCountries,
+} from '../data/phone-countries.js'
 
 const { idPrefix = 'contact' } = Astro.props
 const endpoint = HUBSPOT_SUBMIT_URL
 const fieldId = (suffix) => `${idPrefix}-${suffix}`
+const defaultCountry =
+  phoneCountries.find((c) => c.iso === DEFAULT_PHONE_COUNTRY) ??
+  phoneCountries[0]
 ---
 
 <form
@@ -22,6 +29,7 @@ const fieldId = (suffix) => `${idPrefix}-${suffix}`
         id={fieldId('name')}
         name="name"
         autocomplete="name"
+        maxlength="80"
         required
         aria-invalid="false"
         aria-describedby={fieldId('name-error')}
@@ -42,6 +50,8 @@ const fieldId = (suffix) => `${idPrefix}-${suffix}`
         name="email"
         type="email"
         autocomplete="email"
+        inputmode="email"
+        maxlength="254"
         required
         aria-invalid="false"
         aria-describedby={fieldId('email-error')}
@@ -61,18 +71,112 @@ const fieldId = (suffix) => `${idPrefix}-${suffix}`
         id={fieldId('company')}
         name="company"
         autocomplete="organization"
+        maxlength="120"
       />
     </div>
     <div class="form-field col-md-6">
       <label for={fieldId('phone')}>
         Phone number <span class="form-optional">(optional)</span>
       </label>
-      <input
-        id={fieldId('phone')}
-        name="phone"
-        type="tel"
-        autocomplete="tel"
-      />
+      <div class="phone-input" data-phone-input>
+        <input
+          type="hidden"
+          name="phoneCountry"
+          value={defaultCountry.iso}
+          data-default={defaultCountry.iso}
+          data-phone-country
+        />
+        <button
+          type="button"
+          class="phone-country-button"
+          aria-haspopup="listbox"
+          aria-expanded="false"
+          aria-controls={fieldId('phone-country-list')}
+          aria-label={`Country code: ${defaultCountry.name} +${defaultCountry.dial}`}
+          data-phone-country-button
+        >
+          <img
+            class="phone-flag"
+            src={defaultCountry.flag}
+            alt=""
+            width="22"
+            height="16"
+            data-phone-country-flag
+          />
+          <span data-phone-country-dial>+{defaultCountry.dial}</span>
+          <svg
+            class="phone-country-chevron"
+            viewBox="0 0 16 16"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="m4 6 4 4 4-4"></path>
+          </svg>
+        </button>
+        <input
+          id={fieldId('phone')}
+          name="phone"
+          type="tel"
+          inputmode="tel"
+          autocomplete="tel-national"
+          maxlength="20"
+          placeholder={defaultCountry.example}
+          aria-invalid="false"
+          aria-describedby={fieldId('phone-error')}
+        />
+        <div class="phone-country-menu" data-phone-country-menu hidden>
+          <input
+            type="search"
+            class="phone-country-search"
+            placeholder="Search country or code"
+            aria-label="Search country or dial code"
+            aria-controls={fieldId('phone-country-list')}
+            autocomplete="off"
+            data-phone-country-search
+          />
+          <ul
+            class="phone-country-list"
+            id={fieldId('phone-country-list')}
+            role="listbox"
+            aria-label="Country"
+          >
+            {
+              phoneCountries.map((country) => (
+                <li
+                  id={fieldId(`phone-country-${country.iso.toLowerCase()}`)}
+                  role="option"
+                  aria-selected={country.iso === defaultCountry.iso ? 'true' : 'false'}
+                  data-value={country.iso}
+                  data-name={country.name}
+                  data-dial={country.dial}
+                  data-flag={country.flag}
+                  data-example={country.example}
+                >
+                  <img
+                    class="phone-flag"
+                    src={country.flag}
+                    alt=""
+                    width="22"
+                    height="16"
+                    loading="lazy"
+                  />
+                  <span class="phone-country-name">{country.name}</span>
+                  <span class="phone-country-dial">+{country.dial}</span>
+                </li>
+              ))
+            }
+          </ul>
+          <p class="phone-country-empty" data-phone-country-empty hidden>
+            No country found
+          </p>
+        </div>
+      </div>
+      <span
+        class="form-field-error"
+        id={fieldId('phone-error')}
+        data-error-for="phone"
+        hidden
+      ></span>
     </div>
     <div class="form-field col-md-6">
       <label for={fieldId('topic')}>
@@ -127,6 +231,7 @@ const fieldId = (suffix) => `${idPrefix}-${suffix}`
         id={fieldId('message')}
         name="message"
         rows="4"
+        maxlength="3000"
         required
         placeholder="What are you planning, and what would a useful outcome look like?"
         aria-invalid="false"
@@ -269,44 +374,290 @@ const fieldId = (suffix) => `${idPrefix}-${suffix}`
         error.hidden = !hasError
       }
 
-      const validate = () => {
-        const formEl = form.elements
-        const nameField = formEl.namedItem('name')
-        const emailField = formEl.namedItem('email')
-        const topicField = formEl.namedItem('topic')
-        const messageField = formEl.namedItem('message')
-        const privacyField = formEl.namedItem('privacyConsent')
+      // Phone numbers are checked with libphonenumber-js (Google's phone
+      // number data). It is loaded only when the visitor uses the phone field
+      // or submits, so it doesn't slow down every page.
+      let phoneLib = null
+      let phoneLibLoading = null
+      const loadPhoneLib = () =>
+        (phoneLibLoading ??= import('libphonenumber-js/max').then(
+          (module) => (phoneLib = module),
+        ))
 
-        const nameVal = nameField instanceof HTMLInputElement ? nameField.value.trim() : ''
-        const emailVal = emailField instanceof HTMLInputElement ? emailField.value.trim() : ''
-        const emailValid = emailField instanceof HTMLInputElement ? emailField.validity.valid : false
-        const topicVal = topicField instanceof HTMLSelectElement || topicField instanceof HTMLInputElement ? topicField.value : ''
-        const messageVal = messageField instanceof HTMLTextAreaElement || messageField instanceof HTMLInputElement ? messageField.value.trim() : ''
-        const privacyChecked = privacyField instanceof HTMLInputElement ? privacyField.checked : false
+      const NAME_PATTERN = /^\p{L}[\p{L}\p{M} .'’-]*$/u
+      const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@.]{2,}$/
+      const MESSAGE_MIN = 10
 
-        const errors = {
-          name: nameVal ? '' : 'Enter your full name.',
-          email: !emailVal
-            ? 'Enter your work email.'
-            : emailValid
-              ? ''
-              : 'Enter a valid email address.',
-          topic: topicVal
-            ? ''
-            : 'Choose the service you need help with.',
-          message: messageVal
-            ? ''
-            : 'Tell us a little about your project.',
-          privacyConsent: privacyChecked
-            ? ''
-            : 'Please confirm before continuing.',
+      const getControl = (name) => form.elements.namedItem(name)
+      const getValue = (name) => {
+        const field = getControl(name)
+        return field && 'value' in field ? String(field.value).trim() : ''
+      }
+      const countryOptions = Array.from(
+        form.querySelectorAll('[data-phone-country-menu] [role="option"]'),
+      )
+      const getCountry = () => {
+        const iso = getValue('phoneCountry')
+        const option =
+          countryOptions.find((o) => o.dataset.value === iso) ??
+          countryOptions[0]
+        return {
+          iso: option?.dataset.value ?? 'IN',
+          name: option?.dataset.name ?? 'India',
+          dial: option?.dataset.dial ?? '91',
+          example: option?.dataset.example ?? '',
         }
+      }
 
-        Object.entries(errors).forEach(([name, message]) =>
-          setFieldError(name, message),
-        )
+      // Parsed number when it is valid for the chosen country's dial code
+      // (a typed "+code" or leading 0 is fine), otherwise null.
+      const parsePhone = () => {
+        const value = getValue('phone')
+        if (!value || !phoneLib) return null
+        const country = getCountry()
+        const parsed = phoneLib.parsePhoneNumberFromString(value, country.iso)
+        return parsed?.isValid() && parsed.countryCallingCode === country.dial
+          ? parsed
+          : null
+      }
+
+      const validators = {
+        name: () => {
+          const value = getValue('name')
+          if (!value) return 'Enter your full name.'
+          if (value.length < 2) return 'Name is too short.'
+          if (!NAME_PATTERN.test(value))
+            return 'Use letters only (spaces, . \' - are fine).'
+          return ''
+        },
+        email: () => {
+          const value = getValue('email')
+          const field = getControl('email')
+          if (!value) return 'Enter your work email.'
+          const browserValid =
+            field instanceof HTMLInputElement ? field.validity.valid : true
+          return browserValid && EMAIL_PATTERN.test(value)
+            ? ''
+            : 'Enter a valid email address, like name@company.com.'
+        },
+        phone: () => {
+          if (!getValue('phone') || !phoneLib) return '' // optional
+          if (parsePhone()) return ''
+          const country = getCountry()
+          return `Enter a valid ${country.name} number (e.g. +${country.dial} ${country.example}).`
+        },
+        topic: () =>
+          getValue('topic') ? '' : 'Choose the service you need help with.',
+        message: () => {
+          const value = getValue('message')
+          if (!value) return 'Tell us a little about your project.'
+          return value.length < MESSAGE_MIN
+            ? `Please add a few more details (at least ${MESSAGE_MIN} characters).`
+            : ''
+        },
+        privacyConsent: () => {
+          const field = getControl('privacyConsent')
+          return field instanceof HTMLInputElement && field.checked
+            ? ''
+            : 'Please confirm before continuing.'
+        },
+      }
+
+      const validateField = (name) => {
+        const message = validators[name]?.() ?? ''
+        setFieldError(name, message)
+        return message
+      }
+
+      const validate = () => {
+        const errors = {}
+        Object.keys(validators).forEach((name) => {
+          errors[name] = validateField(name)
+        })
         return errors
       }
+
+      // Phone box: keep only characters a phone number can contain.
+      const phoneField = getControl('phone')
+      if (phoneField instanceof HTMLInputElement) {
+        phoneField.addEventListener('input', () => {
+          const cleaned = phoneField.value.replace(/[^\d\s()+-]/g, '')
+          if (cleaned !== phoneField.value) phoneField.value = cleaned
+        })
+      }
+
+      // Country picker: a button with the flag and dial code that opens a
+      // searchable list.
+      const countryInput = form.querySelector('[data-phone-country]')
+      const countryButton = form.querySelector('[data-phone-country-button]')
+      const countryMenu = form.querySelector('[data-phone-country-menu]')
+      const countrySearch = form.querySelector('[data-phone-country-search]')
+      const countryEmpty = form.querySelector('[data-phone-country-empty]')
+      const countryFlag = form.querySelector('[data-phone-country-flag]')
+      const countryDial = form.querySelector('[data-phone-country-dial]')
+      let activeOption = null
+
+      const setCountry = (iso) => {
+        const option = countryOptions.find((o) => o.dataset.value === iso)
+        if (!option || !(countryInput instanceof HTMLInputElement)) return
+        countryInput.value = iso
+        countryOptions.forEach((o) =>
+          o.setAttribute('aria-selected', String(o === option)),
+        )
+        const { name, dial, flag, example } = option.dataset
+        if (countryFlag instanceof HTMLImageElement && flag) countryFlag.src = flag
+        if (countryDial) countryDial.textContent = `+${dial}`
+        countryButton?.setAttribute('aria-label', `Country code: ${name} +${dial}`)
+        if (phoneField instanceof HTMLInputElement) {
+          phoneField.placeholder = example ?? ''
+        }
+        if (getValue('phone')) {
+          loadPhoneLib().then(() => validateField('phone'))
+        }
+      }
+
+      const setActive = (option) => {
+        activeOption?.classList.remove('is-active')
+        activeOption = option
+        if (!option) {
+          countrySearch?.removeAttribute('aria-activedescendant')
+          return
+        }
+        option.classList.add('is-active')
+        countrySearch?.setAttribute('aria-activedescendant', option.id)
+        option.scrollIntoView({ block: 'nearest' })
+      }
+
+      const visibleOptions = () => countryOptions.filter((o) => !o.hidden)
+
+      const filterCountries = () => {
+        const query =
+          countrySearch instanceof HTMLInputElement
+            ? countrySearch.value.trim().toLowerCase()
+            : ''
+        const digits = query.replace(/\D/g, '')
+        countryOptions.forEach((o) => {
+          const { name = '', dial = '', value = '' } = o.dataset
+          o.hidden = Boolean(
+            query &&
+              !name.toLowerCase().includes(query) &&
+              value.toLowerCase() !== query &&
+              !(digits && dial.startsWith(digits)),
+          )
+        })
+        const shown = visibleOptions()
+        if (countryEmpty instanceof HTMLElement) countryEmpty.hidden = shown.length > 0
+        setActive(shown[0] ?? null)
+      }
+
+      const isMenuOpen = () =>
+        countryMenu instanceof HTMLElement && !countryMenu.hidden
+
+      const openMenu = () => {
+        if (!(countryMenu instanceof HTMLElement)) return
+        loadPhoneLib()
+        countryMenu.hidden = false
+        countryButton?.setAttribute('aria-expanded', 'true')
+        if (countrySearch instanceof HTMLInputElement) countrySearch.value = ''
+        filterCountries()
+        setActive(
+          countryOptions.find((o) => o.getAttribute('aria-selected') === 'true') ??
+            null,
+        )
+        countryMenu.scrollIntoView({ block: 'nearest' })
+        if (countrySearch instanceof HTMLElement) countrySearch.focus()
+      }
+
+      const closeMenu = (focusButton = false) => {
+        if (!(countryMenu instanceof HTMLElement) || countryMenu.hidden) return
+        countryMenu.hidden = true
+        countryButton?.setAttribute('aria-expanded', 'false')
+        setActive(null)
+        if (focusButton && countryButton instanceof HTMLElement) {
+          countryButton.focus()
+        }
+      }
+
+      const chooseOption = (option) => {
+        if (!option?.dataset.value) return
+        setCountry(option.dataset.value)
+        closeMenu(false)
+        if (phoneField instanceof HTMLElement) phoneField.focus()
+      }
+
+      countryButton?.addEventListener('click', () => {
+        if (isMenuOpen()) closeMenu(true)
+        else openMenu()
+      })
+      countryButton?.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+          event.preventDefault()
+          openMenu()
+        }
+      })
+      countrySearch?.addEventListener('input', filterCountries)
+      countrySearch?.addEventListener('keydown', (event) => {
+        const shown = visibleOptions()
+        const index = activeOption ? shown.indexOf(activeOption) : -1
+        if (event.key === 'ArrowDown') {
+          event.preventDefault()
+          setActive(shown[Math.min(index + 1, shown.length - 1)] ?? null)
+        } else if (event.key === 'ArrowUp') {
+          event.preventDefault()
+          setActive(shown[Math.max(index - 1, 0)] ?? null)
+        } else if (event.key === 'Enter') {
+          event.preventDefault()
+          if (activeOption) chooseOption(activeOption)
+        } else if (event.key === 'Escape') {
+          // Close only the list, not the contact popup around the form.
+          event.preventDefault()
+          event.stopPropagation()
+          closeMenu(true)
+        } else if (event.key === 'Tab') {
+          closeMenu(false)
+        }
+      })
+      countryOptions.forEach((option) => {
+        option.addEventListener('click', () => chooseOption(option))
+        option.addEventListener('pointermove', () => {
+          if (activeOption !== option) setActive(option)
+        })
+      })
+      document.addEventListener('pointerdown', (event) => {
+        if (!isMenuOpen()) return
+        const wrapper = form.querySelector('[data-phone-input]')
+        if (event.target instanceof Node && wrapper?.contains(event.target)) return
+        closeMenu(false)
+      })
+
+      // A reset puts the country back to the default.
+      form.addEventListener('reset', () => {
+        closeMenu(false)
+        // A hidden input keeps its current value on reset, so the default
+        // is read from data-default and applied after the reset finishes.
+        const defaultIso =
+          countryInput instanceof HTMLElement
+            ? (countryInput.dataset.default ?? 'IN')
+            : 'IN'
+        setTimeout(() => setCountry(defaultIso))
+      })
+
+      if (phoneField instanceof HTMLInputElement) {
+        phoneField.addEventListener('focus', () => loadPhoneLib(), { once: true })
+      }
+
+      // Check a field once the visitor leaves it, but only if they typed
+      // something, so empty fields aren't flagged before submitting.
+      form.addEventListener('focusout', (event) => {
+        const name =
+          event.target instanceof HTMLElement
+            ? event.target.getAttribute('name')
+            : null
+        if (!name || !validators[name] || name === 'privacyConsent') return
+        if (!getValue(name)) return
+        if (name === 'phone') loadPhoneLib().then(() => validateField('phone'))
+        else validateField(name)
+      })
 
       form.addEventListener('input', (event) => {
         if (event.target instanceof HTMLElement) {
@@ -330,6 +681,13 @@ const fieldId = (suffix) => `${idPrefix}-${suffix}`
       form.addEventListener('submit', async (event) => {
         event.preventDefault()
         if (isSubmitting) return
+        if (getValue('phone')) {
+          try {
+            await loadPhoneLib()
+          } catch {
+            // Couldn't load the checker (offline?): send the number as typed.
+          }
+        }
         validate()
         const firstInvalid = form.querySelector('[aria-invalid="true"]')
         if (firstInvalid instanceof HTMLElement) {
@@ -360,6 +718,12 @@ const fieldId = (suffix) => `${idPrefix}-${suffix}`
         // Read values before disabling controls: disabled fields are
         // excluded from FormData.
         const formData = new FormData(form)
+        const parsedPhone = parsePhone()
+        if (parsedPhone) {
+          formData.set('phone', parsedPhone.formatInternational())
+        } else if (getValue('phone')) {
+          formData.set('phone', `+${getCountry().dial} ${getValue('phone')}`)
+        }
         const honeypot = formData.get('website')
         const payload = buildHubSpotPayload(formData)
 

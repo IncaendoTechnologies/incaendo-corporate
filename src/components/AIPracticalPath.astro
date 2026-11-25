@@ -451,13 +451,34 @@ const workflowSteps = [
             <span class="ai-demo-label">
               <i aria-hidden="true"></i> ILLUSTRATIVE ARCHITECTURE
             </span>
-            <span class="ai-demo-count" aria-live="polite" data-step-count>
-              01 <b>/</b> 05
+            <span class="ai-demo-nav">
+              <button
+                type="button"
+                class="ai-demo-arrow"
+                aria-label="Previous step"
+                data-step-prev
+              >
+                <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M10 3 5 8l5 5"></path></svg>
+              </button>
+              <span class="ai-demo-count" aria-live="polite" data-step-count>
+                01 <b>/</b> 05
+              </span>
+              <button
+                type="button"
+                class="ai-demo-arrow"
+                aria-label="Next step"
+                data-step-next
+              >
+                <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6 3 5 5-5 5"></path></svg>
+              </button>
             </span>
           </div>
           <div class="ai-demo-progress" aria-hidden="true">
             <span data-step-progress></span>
           </div>
+          <p class="ai-demo-swipe-hint" aria-hidden="true">
+            <span>←</span> Swipe or drag to change step <span>→</span>
+          </p>
 
           <div class="ai-state-stage" aria-live="polite" aria-atomic="true">
             <article
@@ -929,6 +950,10 @@ const workflowSteps = [
         // Position cards near the top with a subtle margin so the entire visual demo card fits fully below
         const topGap = Math.min(20, Math.max(10, (vh - blockHeight) * 0.2))
         targetScrollY = blockTop - topGap
+      } else if (window.matchMedia('(max-width: 640px)').matches) {
+        // Phones: bring the top of the architecture panel into view so the
+        // change the visitor just asked for is what they see.
+        targetScrollY = demoRect.top + window.scrollY - 12
       } else {
         // If vertical viewport is tighter, ensure the bottom of the visual demo card is fully visible
         targetScrollY = blockBottom - vh + 16
@@ -982,8 +1007,174 @@ const workflowSteps = [
     }
   }
 
+  // Swipe (touch) or drag (mouse) the architecture panel sideways, or use
+  // the arrow buttons, to move to the previous or next step without
+  // scrolling back up to the step list.
+  function setupWorkflowSwipe() {
+    const demo = document.querySelector('[data-workflow-demo]')
+    if (!(demo instanceof HTMLElement) || demo.dataset.swipeReady) return
+    demo.dataset.swipeReady = 'true'
+    const stage = demo.querySelector('.ai-state-stage')
+    const radios = Array.from(
+      document.querySelectorAll('input[name="ai-workflow-step"]'),
+    ).filter((el) => el instanceof HTMLInputElement)
+    const prevButton = demo.querySelector('[data-step-prev]')
+    const nextButton = demo.querySelector('[data-step-next]')
+    if (!(stage instanceof HTMLElement) || !radios.length) return
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const currentIndex = () => Math.max(0, radios.findIndex((r) => r.checked))
+    const activeCard = () => stage.querySelector('.ai-state-card.is-active')
+
+    const updateArrows = () => {
+      const index = currentIndex()
+      if (prevButton instanceof HTMLButtonElement) prevButton.disabled = index === 0
+      if (nextButton instanceof HTMLButtonElement)
+        nextButton.disabled = index === radios.length - 1
+    }
+
+    // direction: 1 = next, -1 = previous
+    const goTo = (index, direction) => {
+      const radio = radios[index]
+      if (!radio || radio.checked) return false
+      radio.checked = true
+      radio.dispatchEvent(new Event('change', { bubbles: true }))
+      const card = activeCard()
+      if (card instanceof HTMLElement && !reducedMotion.matches) {
+        card.animate(
+          [
+            { opacity: 0, translate: `${direction * 48}px 0` },
+            { opacity: 1, translate: '0 0' },
+          ],
+          { duration: 320, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' },
+        )
+      }
+      return true
+    }
+
+    prevButton?.addEventListener('click', () => goTo(currentIndex() - 1, -1))
+    nextButton?.addEventListener('click', () => goTo(currentIndex() + 1, 1))
+    radios.forEach((radio) => radio.addEventListener('change', updateArrows))
+    updateArrows()
+
+    let pointerId = null
+    let startX = 0
+    let startY = 0
+    let startTime = 0
+    let dragging = false
+    let suppressClick = false
+
+    const setOffset = (px) => {
+      const card = activeCard()
+      if (!(card instanceof HTMLElement)) return
+      card.style.translate = px ? `${px}px 0` : ''
+      card.style.opacity = px ? String(Math.max(0.35, 1 - Math.abs(px) / 400)) : ''
+    }
+
+    demo.addEventListener('pointerdown', (event) => {
+      if (event.pointerType === 'mouse' && event.button !== 0) return
+      if (event.target instanceof Element && event.target.closest('button')) return
+      pointerId = event.pointerId
+      startX = event.clientX
+      startY = event.clientY
+      startTime = event.timeStamp
+      dragging = false
+    })
+
+    demo.addEventListener('pointermove', (event) => {
+      if (event.pointerId !== pointerId) return
+      const dx = event.clientX - startX
+      const dy = event.clientY - startY
+      if (!dragging) {
+        if (Math.abs(dy) > 8 && Math.abs(dy) > Math.abs(dx)) {
+          pointerId = null // vertical: let the page scroll
+          return
+        }
+        if (Math.abs(dx) < 8) return
+        dragging = true
+        demo.setPointerCapture(event.pointerId)
+        demo.classList.add('is-swiping')
+      }
+      // Resist at the first and last step.
+      const index = currentIndex()
+      const atEdge =
+        (dx > 0 && index === 0) || (dx < 0 && index === radios.length - 1)
+      setOffset(atEdge ? dx * 0.25 : dx * 0.6)
+    })
+
+    const endSwipe = (event) => {
+      if (event.pointerId !== pointerId) return
+      pointerId = null
+      if (!dragging) return
+      dragging = false
+      suppressClick = true
+      demo.classList.remove('is-swiping')
+      const dx = event.clientX - startX
+      const fast = Math.abs(dx) / Math.max(event.timeStamp - startTime, 1) > 0.5
+      const card = activeCard()
+      const offset = card instanceof HTMLElement ? card.style.translate : ''
+      setOffset(0)
+      const direction = dx < 0 ? 1 : -1
+      const changed =
+        (Math.abs(dx) > 60 || (fast && Math.abs(dx) > 25)) &&
+        goTo(currentIndex() + direction, direction)
+      // Not enough to change step: ease the card back into place.
+      if (!changed && offset && card instanceof HTMLElement && !reducedMotion.matches) {
+        card.animate([{ translate: offset }, { translate: '0 0' }], {
+          duration: 260,
+          easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+        })
+      }
+    }
+    demo.addEventListener('pointerup', endSwipe)
+    demo.addEventListener('pointercancel', endSwipe)
+    demo.addEventListener(
+      'click',
+      (event) => {
+        if (!suppressClick) return
+        suppressClick = false
+        event.preventDefault()
+        event.stopPropagation()
+      },
+      true,
+    )
+    demo.addEventListener('dragstart', (event) => event.preventDefault())
+
+    // Trackpad: a sideways two-finger swipe (or Shift + wheel) changes the
+    // step once per gesture. Vertical wheel still scrolls the page.
+    let wheelTotal = 0
+    let wheelLocked = false
+    let wheelTimer = 0
+    demo.addEventListener(
+      'wheel',
+      (event) => {
+        const dx = event.shiftKey && !event.deltaX ? event.deltaY : event.deltaX
+        if (Math.abs(dx) <= Math.abs(event.shiftKey ? 0 : event.deltaY)) return
+        event.preventDefault()
+        clearTimeout(wheelTimer)
+        // The gesture ends after a short pause; then another one can count.
+        wheelTimer = window.setTimeout(() => {
+          wheelTotal = 0
+          wheelLocked = false
+        }, 180)
+        if (wheelLocked) return
+        wheelTotal += dx
+        if (Math.abs(wheelTotal) > 60) {
+          const direction = wheelTotal > 0 ? 1 : -1
+          goTo(currentIndex() + direction, direction)
+          wheelLocked = true
+        }
+      },
+      { passive: false },
+    )
+  }
+
   setupPracticalCardSync()
-  document.addEventListener('astro:page-load', setupPracticalCardSync)
+  setupWorkflowSwipe()
+  document.addEventListener('astro:page-load', () => {
+    setupPracticalCardSync()
+    setupWorkflowSwipe()
+  })
 </script>
 
 <style>
@@ -1535,40 +1726,90 @@ const workflowSteps = [
     }
   }
 
+  /* Phones: the five steps become a compact list (icon, title, number), so
+     the whole list and the architecture panel below it fit close together
+     and a tap visibly changes the panel. */
   @media (max-width: 640px) {
+    .ai-cards-hint-wrap {
+      margin: -0.25rem 0 0.9rem;
+      justify-content: flex-start;
+      font-size: 0.8rem;
+      text-align: left;
+    }
     .ai-overview-row {
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
       gap: 0.5rem;
+      counter-reset: ai-step;
     }
     .ai-overview-card {
+      flex: none;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.85rem;
       width: 100%;
-      max-width: 320px;
-      min-height: auto;
-      padding: 1.15rem 1rem;
+      max-width: none;
+      min-width: 0;
+      min-height: 0;
+      padding: 0.6rem 0.9rem 0.6rem 0.7rem;
+      border-radius: 14px;
+      text-align: left;
+      counter-increment: ai-step;
+    }
+    .ai-overview-card,
+    .ai-overview-card:hover,
+    .ai-overview-card:focus-visible,
+    .ai-overview-card.is-active {
+      transform: none;
+    }
+    /* Active marker: a bar on the left instead of the top. */
+    .ai-overview-card::before {
+      top: 18%;
+      bottom: 18%;
+      left: 0;
+      right: auto;
+      width: 3px;
+      height: auto;
+      border-radius: 0 3px 3px 0;
+      transform: scaleY(0.4);
+    }
+    .ai-overview-card.is-active::before {
+      transform: scaleY(1);
+    }
+    .ai-overview-card::after {
+      content: counter(ai-step, decimal-leading-zero);
+      margin-left: auto;
+      color: var(--color-muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+    .ai-overview-card.is-active::after {
+      color: var(--color-orange-dark);
+    }
+    .ai-overview-icon-wrap {
+      width: 44px;
+      height: 44px;
+      flex: none;
+      margin-bottom: 0;
+    }
+    .ai-overview-card:hover .ai-overview-icon-wrap {
+      transform: none;
+    }
+    .ai-overview-card-title {
+      flex-grow: 0;
+      justify-content: flex-start;
+      padding: 0;
+      font-size: 0.95rem;
+      text-align: left;
     }
     .ai-overview-bridge {
-      display: flex;
-      width: 24px;
-      height: 28px;
-      margin-top: 0;
-      align-self: center;
+      display: none;
     }
-    .ai-bridge-line {
-      left: 50%;
-      right: auto;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      height: 100%;
-      background: repeating-linear-gradient(
-        to bottom,
-        #ea580c,
-        #ea580c 4px,
-        transparent 4px,
-        transparent 8px
-      );
-      transform: translateX(-50%);
+    /* Only the selected step's architecture takes space, so the panel is
+       as tall as its content (no empty area under shorter steps). */
+    .ai-state-card:not(.is-active) {
+      display: none;
     }
   }
 
@@ -1777,7 +2018,76 @@ const workflowSteps = [
     background: var(--color-green);
     box-shadow: 0 0 0 4px rgb(90 128 108 / 10%);
   }
+  .ai-demo-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+  .ai-demo-arrow {
+    display: grid;
+    width: 30px;
+    height: 30px;
+    place-items: center;
+    padding: 0;
+    border: 1px solid #e3ded6;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--color-ink);
+    cursor: pointer;
+    transition:
+      border-color 200ms ease,
+      color 200ms ease,
+      background-color 200ms ease;
+  }
+  .ai-demo-arrow svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+  }
+  .ai-demo-arrow:hover,
+  .ai-demo-arrow:focus-visible {
+    border-color: var(--color-orange);
+    background: #fff6f0;
+    color: var(--color-orange-dark);
+  }
+  .ai-demo-arrow:disabled {
+    cursor: default;
+    opacity: 0.35;
+  }
+  .ai-demo-arrow:disabled:hover {
+    border-color: #e3ded6;
+    background: #fff;
+    color: var(--color-ink);
+  }
+  .ai-demo-swipe-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    margin: 0.6rem 0 0;
+    color: var(--color-muted);
+    font-size: 0.74rem;
+    font-weight: 600;
+  }
+  .ai-demo-swipe-hint span {
+    color: var(--color-orange-dark);
+  }
+  /* The whole panel can be swiped (touch) or dragged (mouse) sideways. */
+  [data-workflow-demo] {
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+  }
+  [data-workflow-demo].is-swiping,
+  [data-workflow-demo].is-swiping * {
+    cursor: grabbing;
+  }
   .ai-demo-count {
+    white-space: nowrap;
     color: var(--color-ink);
     font-size: 0.8rem;
     font-weight: 750;

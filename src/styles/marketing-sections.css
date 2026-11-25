@@ -246,6 +246,10 @@
 }
 .award-image-frame {
   display: grid;
+  /* Fixed row/column so the image's height: 100% resolves to the frame and
+     object-fit: contain shows the whole award instead of cropping it. */
+  grid-template-rows: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   height: var(--award-image-height);
   place-items: center;
   overflow: hidden;
@@ -312,7 +316,12 @@
     transform: translateX(-50%);
   }
 }
-.review-marquee-window:hover .review-marquee-track,
+/* Hover pause only for real pointers (touch keeps a sticky hover after a swipe). */
+@media (hover: hover) {
+  .review-marquee-window:hover .review-marquee-track {
+    animation-play-state: paused;
+  }
+}
 .review-marquee-window:focus-within .review-marquee-track {
   animation-play-state: paused;
 }

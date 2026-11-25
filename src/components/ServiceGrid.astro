@@ -24,7 +24,6 @@ const serviceItems = isHomepage ? homepageServices : services
         ]}
         id={service.id ?? service.href.split('#')[1]}
         data-reveal-item={isHomepage ? '' : undefined}
-        data-service-tilt={isHomepage ? '' : undefined}
       >
         <div class="service-card-top">
           <span class="service-number">{service.number}</span>
@@ -45,6 +44,8 @@ const serviceItems = isHomepage ? homepageServices : services
           <a
             class="service-card-explore"
             href={service.href}
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label={`Explore ${service.title}`}
           >
             <span>Explore</span>
@@ -68,7 +69,3 @@ const serviceItems = isHomepage ? homepageServices : services
     )
   })}
 </div>
-
-<script>
-  import '../scripts/service-card-tilt.js'
-</script>

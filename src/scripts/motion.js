@@ -7,12 +7,14 @@
  *   [data-reveal-item]           an item of a stagger group (optional; direct
  *                                children are used when no items are marked)
  *   [data-reveal-role="…"]       optional override: heading | text | visual |
- *                                card | block | stage. On a .reveal block it
+ *                                card | block | stage | showcase. On a .reveal block it
  *                                also makes the block ONE unit: its inner
  *                                elements are never split or animated.
  *                                `stage` = visual entrance without scale, for
  *                                containers whose scripts measure their own
  *                                size (canvas, diagrams), so geometry stays exact.
+ *                                `showcase` = a stronger card entrance (longer
+ *                                rise, scale and a short blur) for feature cards.
  *   [data-entrance-exclude]      opt a subtree out of this system (use it on
  *                                anything with its own entrance or scroll-
  *                                driven animation)
@@ -55,6 +57,7 @@ const ROLES = {
   block: { y: 20, duration: 900 },
   stage: { y: 22, duration: 1100 },
   cta: { y: 24, scale: 0.96, duration: 850 },
+  showcase: { y: 64, scale: 0.94, blur: 6, duration: 1150 },
 }
 
 const VISUAL =
@@ -173,6 +176,7 @@ function animateUnit(unit) {
   // computed style (a lone keyframe would otherwise default to offset 1).
   const from = { offset: 0, opacity: 0, translate: `0 ${role.y}px` }
   if (role.scale) from.scale = role.scale
+  if (role.blur) from.filter = `blur(${role.blur}px)`
 
   // Lift the CSS pre-hide and start the animation in the same task; the
   // "backwards" fill keeps the unit at its start state during the delay.

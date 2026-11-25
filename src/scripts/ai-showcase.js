@@ -10,7 +10,6 @@ if (showcase) {
   const prefersReducedMotion = window.matchMedia(
     '(prefers-reduced-motion: reduce)',
   )
-  const canTilt = window.matchMedia('(hover: hover) and (pointer: fine)')
 
   function animateCounter(el) {
     const target = Number(el.dataset.aiCounter)
@@ -96,26 +95,6 @@ if (showcase) {
       }
     })
   })
-
-  if (canTilt.matches && !prefersReducedMotion.matches) {
-    showcase.addEventListener('pointermove', (event) => {
-      if (prefersReducedMotion.matches) return
-      const bounds = showcase.getBoundingClientRect()
-      const x = (event.clientX - bounds.left) / bounds.width - 0.5
-      const y = (event.clientY - bounds.top) / bounds.height - 0.5
-      showcase.style.setProperty('--ai-tilt-x', `${y * -1.3}deg`)
-      showcase.style.setProperty('--ai-tilt-y', `${x * 1.3}deg`)
-    })
-    showcase.addEventListener('pointerleave', () => {
-      showcase.style.setProperty('--ai-tilt-x', '0deg')
-      showcase.style.setProperty('--ai-tilt-y', '0deg')
-    })
-    prefersReducedMotion.addEventListener('change', (event) => {
-      if (!event.matches) return
-      showcase.style.setProperty('--ai-tilt-x', '0deg')
-      showcase.style.setProperty('--ai-tilt-y', '0deg')
-    })
-  }
 
   const initiallyActive = visuals.find((visual) =>
     visual.classList.contains('is-active'),

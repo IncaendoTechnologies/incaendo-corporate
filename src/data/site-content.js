@@ -188,7 +188,7 @@ export const pages = {
   home: {
     title: 'Incaendo | Custom Software, AI & App Development Company',
     description:
-      'Incaendo is a Noida-based software development company with 15 years of experience building custom software, web and mobile apps, AI solutions and cloud platforms.',
+      'Incaendo is a Noida-based software development company with 15+ years of experience building custom software, web and mobile apps, AI solutions and cloud platforms.',
   },
   ai: {
     title: 'AI Technology & Innovation | Incaendo',

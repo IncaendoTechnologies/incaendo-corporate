@@ -17,8 +17,8 @@ const productCards = [
       'Manage your people, attendance, leave, payroll, and performance from one connected HR platform.',
     icon: Users,
     tone: 'orange',
-    urlHost: 'hrms.incaendo.com',
-    exploreHref: 'https://hrms.incaendo.com/',
+    urlHost: 'nitipulse.com',
+    exploreHref: 'https://nitipulse.com/',
     exploreText: 'Explore',
     external: true,
     highlights: [
@@ -533,9 +533,21 @@ const productCards = [
   .card-carousel-viewport {
     position: relative;
     overflow: hidden;
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
     width: 100%;
     aspect-ratio: 1024 / 484;
     background: #fdfdfc;
+  }
+
+  .card-carousel-viewport.is-dragging {
+    cursor: grabbing;
+  }
+
+  .card-carousel-viewport img {
+    -webkit-user-drag: none;
   }
 
   .card-carousel-track {
@@ -831,11 +843,25 @@ const productCards = [
 </style>
 
 <script>
+  // One shared clock for every card carousel, so HRMS and NIRVAN slide at
+  // the same moment. A paused carousel (hover, drag, off-screen) skips ticks
+  // and rejoins on the next one, so they stay in step afterwards too.
+  const AUTO_PLAY_INTERVAL = 4400
+  const carouselTicks = new Set<() => void>()
+  let sharedTimer = 0
+
+  function ensureSharedTimer() {
+    if (sharedTimer) return
+    sharedTimer = window.setInterval(() => {
+      carouselTicks.forEach((tick) => tick())
+    }, AUTO_PLAY_INTERVAL)
+  }
+
   function initCardCarousels() {
     const carousels = document.querySelectorAll<HTMLElement>('[data-card-carousel]')
     if (!carousels.length) return
 
-    carousels.forEach((carouselEl, cardIdx) => {
+    carousels.forEach((carouselEl) => {
       // Clean up any existing timer or observer on re-init
       const existingCleanup = (carouselEl as any).__carouselCleanup
       if (typeof existingCleanup === 'function') {
@@ -860,14 +886,12 @@ const productCards = [
 
       let currentIdx = 0
       const totalSlides = slides.length
-      let autoPlayTimer: any = null
+      let autoPlaying = false
       let resumeTimeout: any = null
       let isVisible = true
       let isHovered = false
 
-      // Slight natural stagger so HRMS and NIRVAN don't change at the exact same millisecond
-      const AUTO_PLAY_INTERVAL = cardIdx === 0 ? 4400 : 4800
-      const INITIAL_DELAY = cardIdx === 0 ? 1200 : 3200
+      const INITIAL_DELAY = 1200
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
       function updateSlide(idx: number) {
@@ -902,10 +926,7 @@ const productCards = [
       }
 
       function stopTimer() {
-        if (autoPlayTimer) {
-          clearInterval(autoPlayTimer)
-          autoPlayTimer = null
-        }
+        autoPlaying = false
         if (resumeTimeout) {
           clearTimeout(resumeTimeout)
           resumeTimeout = null
@@ -915,8 +936,14 @@ const productCards = [
       function startTimer() {
         if (prefersReducedMotion || !isVisible || isHovered) return
         stopTimer()
-        autoPlayTimer = window.setInterval(nextSlide, AUTO_PLAY_INTERVAL)
+        autoPlaying = true
       }
+
+      const tick = () => {
+        if (autoPlaying) nextSlide()
+      }
+      carouselTicks.add(tick)
+      ensureSharedTimer()
 
       function handleUserInteraction() {
         stopTimer()
@@ -949,30 +976,83 @@ const productCards = [
         })
       })
 
-      // Touch / Swipe support
-      let touchStartX = 0
-      let touchEndX = 0
+      // Drag / swipe with mouse, finger or pen: the image follows the
+      // pointer, and a faster swipe snaps to the next slide faster.
+      const viewport = carouselEl.querySelector<HTMLElement>('.card-carousel-viewport')
+      let dragPointerId: number | null = null
+      let dragStartX = 0
+      let dragStartY = 0
+      let dragStartTime = 0
+      let dragging = false
+      let suppressClick = false
 
-      carouselEl.addEventListener('touchstart', (e: TouchEvent) => {
-        if (e.changedTouches?.[0]) {
-          touchStartX = e.changedTouches[0].screenX
-        }
-      }, { passive: true })
+      viewport?.addEventListener('pointerdown', (e: PointerEvent) => {
+        if (prefersReducedMotion) return
+        if (e.pointerType === 'mouse' && e.button !== 0) return
+        if ((e.target as Element).closest('button')) return
+        dragPointerId = e.pointerId
+        dragStartX = e.clientX
+        dragStartY = e.clientY
+        dragStartTime = e.timeStamp
+        dragging = false
+      })
 
-      carouselEl.addEventListener('touchend', (e: TouchEvent) => {
-        if (e.changedTouches?.[0]) {
-          touchEndX = e.changedTouches[0].screenX
-          const diff = touchEndX - touchStartX
-          if (Math.abs(diff) > 40) {
-            if (diff < 0) {
-              nextSlide()
-            } else {
-              prevSlide()
-            }
-            handleUserInteraction()
+      viewport?.addEventListener('pointermove', (e: PointerEvent) => {
+        if (e.pointerId !== dragPointerId || !track) return
+        const dx = e.clientX - dragStartX
+        const dy = e.clientY - dragStartY
+        if (!dragging) {
+          if (Math.abs(dy) > 8 && Math.abs(dy) > Math.abs(dx)) {
+            dragPointerId = null // vertical: let the page scroll
+            return
           }
+          if (Math.abs(dx) < 8) return
+          dragging = true
+          stopTimer()
+          viewport.setPointerCapture(e.pointerId)
+          viewport.classList.add('is-dragging')
+          track.style.transition = 'none'
         }
-      }, { passive: true })
+        track.style.transform = `translateX(calc(-${currentIdx * 100}% + ${dx}px))`
+      })
+
+      function endDrag(e: PointerEvent) {
+        if (e.pointerId !== dragPointerId) return
+        dragPointerId = null
+        if (!dragging || !track) return
+        dragging = false
+        suppressClick = true
+        viewport?.classList.remove('is-dragging')
+
+        const dx = e.clientX - dragStartX
+        const speed = Math.abs(dx) / Math.max(e.timeStamp - dragStartTime, 1)
+        // 450ms normal snap, down to 200ms for a quick flick.
+        const snapMs = Math.round(Math.min(450, Math.max(200, 450 - (speed - 0.3) * 250)))
+        track.style.transition = `transform ${snapMs}ms cubic-bezier(0.25, 1, 0.5, 1)`
+        if (e.type !== 'pointercancel' && (Math.abs(dx) > 40 || (speed > 0.5 && Math.abs(dx) > 15))) {
+          updateSlide(currentIdx + (dx < 0 ? 1 : -1))
+        } else {
+          updateSlide(currentIdx) // snap back
+        }
+        window.setTimeout(() => {
+          if (track) track.style.transition = ''
+        }, snapMs + 50)
+        handleUserInteraction()
+      }
+
+      viewport?.addEventListener('pointerup', endDrag)
+      viewport?.addEventListener('pointercancel', endDrag)
+      viewport?.addEventListener('dragstart', (e) => e.preventDefault())
+      viewport?.addEventListener(
+        'click',
+        (e) => {
+          if (!suppressClick) return
+          suppressClick = false
+          e.preventDefault()
+          e.stopPropagation()
+        },
+        true,
+      )
 
       // Keyboard support within card
       carouselEl.addEventListener('keydown', (e: KeyboardEvent) => {
@@ -1026,6 +1106,7 @@ const productCards = [
       // Store cleanup on element
       ;(carouselEl as any).__carouselCleanup = () => {
         stopTimer()
+        carouselTicks.delete(tick)
         clearTimeout(initialTimer)
         if (observer) {
           observer.disconnect()

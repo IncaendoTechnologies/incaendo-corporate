@@ -1,7 +1,6 @@
 /* Archive / insights / careers */
 .project-archive,
-.insights-empty-section,
-.careers-section {
+.insights-empty-section {
   background: #fbfaf8;
 }
 .archive-heading {
@@ -146,21 +145,6 @@
 .insights-empty > p:not(.eyebrow) {
   max-width: 590px;
   margin-bottom: 1.5rem;
-  font-size: var(--type-body-size);
-  line-height: var(--type-body-line-height);
-}
-.careers-empty {
-  display: grid;
-  justify-items: start;
-  max-width: 850px;
-}
-.careers-empty h2 {
-  max-width: 780px;
-  font-size: var(--type-feature-size);
-  font-weight: var(--type-heading-weight);
-}
-.careers-empty > p:not(.eyebrow) {
-  max-width: 660px;
   font-size: var(--type-body-size);
   line-height: var(--type-body-line-height);
 }

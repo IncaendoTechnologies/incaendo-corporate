@@ -161,14 +161,10 @@
     0 1px 2px rgb(16 27 45 / 4%),
     0 14px 32px -12px rgb(16 27 45 / 12%),
     0 42px 80px -28px rgb(16 27 45 / 18%);
-  transform: perspective(1200px) rotateX(var(--ai-tilt-x, 0deg))
-    rotateY(var(--ai-tilt-y, 0deg));
-  transform-style: preserve-3d;
+  /* No 3D tilt: rotating the frame made its text blurry. */
   transition:
-    transform 450ms var(--ease-out),
     border-color var(--duration-standard) ease,
     box-shadow 450ms var(--ease-out);
-  will-change: transform;
 }
 .ai-showcase-frame::before {
   position: absolute;

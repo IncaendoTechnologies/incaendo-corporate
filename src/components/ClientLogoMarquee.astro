@@ -199,10 +199,11 @@ const marqueeRows = [
           'client-marquee-row',
           `client-marquee-row-${row.direction}`,
         ]}
+        data-marquee-drag
         data-direction={row.direction}
         style={`--marquee-duration: ${row.duration}; --marquee-delay: ${row.delay};`}
       >
-        <div class="client-marquee-track">
+        <div class="client-marquee-track" data-marquee-track>
           {[0, 1].map((copyIndex) => (
             <div
               class="client-marquee-group"

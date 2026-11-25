@@ -4,7 +4,7 @@ import operationsImage from '../assets/ai-applications/agent-workflow-automation
 import customerSupportImage from '../assets/ai-applications/agent-customer-support.jpg'
 import knowledgeImage from '../assets/ai-applications/agent-knowledge-management.jpg'
 import documentImage from '../assets/ai-applications/agent-finance-invoice.jpg'
-import reportingImage from '../assets/ai-applications/reporting.jpg'
+import reportingImage from '../assets/ai-applications/agent-data-reporting.jpg'
 import employeeImage from '../assets/ai-applications/agent-it-helpdesk.jpg'
 
 const applications = [
@@ -21,7 +21,7 @@ const applications = [
       'Draft replies and hand complex cases to a person',
     ],
     image: customerSupportImage,
-    alt: 'A support inbox where an AI agent has summarized a ticket and drafted a reply for an agent to approve',
+    alt: 'A support desk where an AI agent has summarized a damaged-item ticket and drafted a replacement reply for an agent to approve, with a refund dispute handed to a person',
   },
   {
     title: 'Finance & Invoice Processing Agent',
@@ -36,7 +36,7 @@ const applications = [
       'Flag mismatches, duplicates, and unclear values for review',
     ],
     image: documentImage,
-    alt: 'An invoice being scanned, with extracted fields matched to a purchase order and a possible duplicate flagged',
+    alt: 'An invoice agent showing extracted supplier, date, PO and tax fields with confidence scores, a matched invoice, PO and receipt, and a possible duplicate flagged for finance',
   },
   {
     title: 'Workflow Automation Agent',
@@ -51,7 +51,7 @@ const applications = [
       'Pause for human approval and log every action taken',
     ],
     image: operationsImage,
-    alt: 'An onboarding workflow routing requests to connected systems and pausing for a manager approval',
+    alt: 'An employee onboarding workflow where an AI step routes requests to IT access, payroll and equipment, with an activity log and a laptop order waiting for approval',
   },
   {
     title: 'Data Analysis & Reporting Agent',
@@ -66,7 +66,7 @@ const applications = [
       'Highlight notable changes for analysts to check',
     ],
     image: reportingImage,
-    alt: 'Performance charts and metrics displayed on a laptop screen',
+    alt: 'A reporting dashboard answering a plain-language question about weekly sales, with revenue, orders and a sales-by-week chart, scheduled reports, and a weekly summary waiting for an analyst to review',
   },
   {
     title: 'Knowledge Management Agent',
@@ -81,7 +81,7 @@ const applications = [
       'Cite the source document behind each answer',
     ],
     image: knowledgeImage,
-    alt: 'An internal knowledge search answering a policy question with citations to the source documents',
+    alt: 'A company knowledge search answering a contractor notice-period question with citations to the policy and agreement it came from',
   },
   {
     title: 'IT Support & Employee Helpdesk Agent',
@@ -96,7 +96,7 @@ const applications = [
       'Create a complete ticket when escalation is needed',
     ],
     image: employeeImage,
-    alt: 'An employee helpdesk chat guiding a sign-in fix step by step, with a ticket drafted for escalation',
+    alt: 'An employee helpdesk chat guiding a locked-out user through a sign-in fix step by step, with a ticket drafted and an HR leave-balance answer',
   },
 ]
 ---
@@ -177,8 +177,9 @@ const applications = [
                   <Image
                     src={item.image}
                     alt={item.alt}
-                    widths={[560, 840, 1200]}
-                    sizes="(max-width: 800px) calc(100vw - 2.5rem), 640px"
+                    widths={[640, 960, 1280, 1600, 2100]}
+                    sizes="(max-width: 800px) calc(100vw - 2.5rem), (max-width: 1100px) 46vw, 680px"
+                    quality={90}
                     loading={index === 0 ? 'eager' : 'lazy'}
                   />
                 </figure>
@@ -235,7 +236,7 @@ const applications = [
       const scale = typeof opts.scale === 'number' ? opts.scale : 1
       const dim = typeof opts.dim === 'number' ? opts.dim : 0
       const lift = typeof opts.lift === 'number' ? opts.lift : 0
-      slide.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0) scale(${scale.toFixed(4)})`
+      slide.style.transform = `translate3d(0, ${Math.round(y)}px, 0) scale(${scale.toFixed(4)})`
       slide.style.setProperty('--dim', dim.toFixed(3))
       slide.style.setProperty('--lift', lift.toFixed(3))
     }
@@ -445,6 +446,10 @@ const applications = [
     box-shadow:
       0 1px 2px rgb(16 27 45 / 4%),
       0 18px 40px -20px rgb(16 27 45 / 22%);
+    transition:
+      transform 450ms var(--ease-out),
+      border-color 450ms var(--ease-out),
+      box-shadow 450ms var(--ease-out);
   }
   .application-card::after {
     position: absolute;
@@ -460,7 +465,7 @@ const applications = [
     position: relative;
     order: -1;
     margin: 0;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 3 / 2;
     overflow: hidden;
     border: 1px solid rgb(16 27 45 / 8%);
     border-radius: 16px;
@@ -580,11 +585,22 @@ const applications = [
       gap: clamp(2rem, 4.2vw, 4.25rem);
       padding: clamp(1.6rem, 2.8vw, 2.5rem);
     }
+    /* The images are 3:2, so the frame matches and shows them whole
+       (no cropping or upscaling, which made the screen text soft). */
     .application-media {
       order: 0;
-      aspect-ratio: auto;
-      min-height: 400px;
+      align-self: center;
+      aspect-ratio: 3 / 2;
       border-radius: 18px;
+    }
+    /* Thick edge on the image side (alternating) so the orange hover accent
+       doesn't shift the layout; same hover as the Services and Projects cards. */
+    .application-card {
+      border-right: 2.5px solid rgb(16 27 45 / 9%);
+    }
+    .application-slide:nth-child(even) .application-card {
+      border-right-width: 1px;
+      border-left-width: 2.5px;
     }
     .application-copy {
       padding: 0;
@@ -610,6 +626,30 @@ const applications = [
     }
     .application-slide:nth-child(even) .application-media {
       order: -1;
+    }
+  }
+
+  @media (min-width: 801px) and (hover: hover) {
+    .application-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(232, 93, 38, 0.38);
+      border-right-color: #e85d26;
+      box-shadow:
+        0 28px 56px -18px rgba(16, 27, 45, 0.24),
+        0 8px 20px -4px rgba(16, 27, 45, 0.1),
+        12px 0 28px -4px rgba(232, 93, 38, 0.28),
+        4px 0 12px -2px rgba(232, 93, 38, 0.32),
+        0 0 0 1px rgba(232, 93, 38, 0.12);
+    }
+    .application-slide:nth-child(even) .application-card:hover {
+      border-right-color: rgba(232, 93, 38, 0.38);
+      border-left-color: #e85d26;
+      box-shadow:
+        0 28px 56px -18px rgba(16, 27, 45, 0.24),
+        0 8px 20px -4px rgba(16, 27, 45, 0.1),
+        -12px 0 28px -4px rgba(232, 93, 38, 0.28),
+        -4px 0 12px -2px rgba(232, 93, 38, 0.32),
+        0 0 0 1px rgba(232, 93, 38, 0.12);
     }
   }
 
@@ -734,7 +774,7 @@ const applications = [
     }
     .application-media {
       order: -1;
-      aspect-ratio: 16 / 10;
+      aspect-ratio: 3 / 2;
       min-height: 0;
     }
     [data-enhanced] .application-deck {
