@@ -429,12 +429,7 @@
 }
 .ai-diagram.is-active .diagram-spin-ring {
   opacity: 0.9;
-  animation: diagram-spin 1.4s linear infinite;
-}
-@keyframes diagram-spin {
-  to {
-    transform: rotate(360deg);
-  }
+  animation: spin 1.4s linear infinite;
 }
 
 .diagram-check-badge {
@@ -457,17 +452,12 @@
   animation: diagram-badge-in 0.4s var(--ease-out) both;
 }
 .ai-diagram.is-active .diagram-check-mark {
-  animation: diagram-mark-in 0.3s var(--ease-out) both;
+  animation: fade-to-visible 0.3s var(--ease-out) both;
 }
 @keyframes diagram-badge-in {
   to {
     opacity: 1;
     transform: scale(1);
-  }
-}
-@keyframes diagram-mark-in {
-  to {
-    opacity: 1;
   }
 }
 .ai-diagram.is-active .diagram-check-1 {
@@ -644,14 +634,14 @@
   transform-origin: left center;
 }
 .ai-diagram.is-active .diagram-model-progress-fill {
-  animation: diagram-progress-in 1s var(--ease-out) both;
+  animation: grow-x 1s var(--ease-out) both;
   animation-delay: 0.25s;
 }
 .diagram-model-metric {
   font-size: 26px;
 }
 .ai-diagram.is-active .diagram-model-metric {
-  animation: diagram-fade-in 0.45s var(--ease-out) both;
+  animation: fade-to-visible 0.45s var(--ease-out) both;
   animation-delay: 0.75s;
 }
 .ai-diagram.is-active .diagram-model-eval-ready {
@@ -737,7 +727,7 @@
   transform-origin: left center;
 }
 .ai-diagram.is-active .diagram-progress-fill {
-  animation: diagram-progress-in 0.8s var(--ease-out) both;
+  animation: grow-x 0.8s var(--ease-out) both;
 }
 .ai-diagram.is-active .diagram-progress-1 {
   animation-delay: 0.3s;
@@ -747,14 +737,6 @@
 }
 .ai-diagram.is-active .diagram-progress-3 {
   animation-delay: 2.3s;
-}
-@keyframes diagram-progress-in {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
 }
 
 .diagram-ready-badge rect {
@@ -777,14 +759,8 @@
   transform: translateY(6px);
 }
 .ai-diagram.is-active .diagram-ready-badge {
-  animation: diagram-badge-rise 0.5s var(--ease-out) both;
+  animation: rise-to-place 0.5s var(--ease-out) both;
   animation-delay: 3.4s;
-}
-@keyframes diagram-badge-rise {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 @keyframes diagram-node-pulse {
@@ -951,13 +927,8 @@
   opacity: 0;
 }
 .ai-diagram.is-active .diagram-feedback-label {
-  animation: diagram-fade-in 0.5s var(--ease-out) both;
+  animation: fade-to-visible 0.5s var(--ease-out) both;
   animation-delay: 1.8s;
-}
-@keyframes diagram-fade-in {
-  to {
-    opacity: 1;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

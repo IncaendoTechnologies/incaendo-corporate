@@ -64,7 +64,7 @@
     0 20px 50px rgba(16, 27, 45, 0.08),
     0 4px 14px rgba(16, 27, 45, 0.03);
   overflow: hidden;
-  animation: heroVisualFloat 7.5s ease-in-out infinite;
+  animation: float-y 7.5s ease-in-out infinite;
 }
 /* Hero visual wrapper: the framed image plus two contact cards that sit on
    its top/bottom edges (over the blurred fill, clear of the artwork). */
@@ -259,15 +259,6 @@ a.contact-hero-card--office:hover strong {
     #000 93%,
     transparent 100%
   );
-}
-@keyframes heroVisualFloat {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
 }
 .contact-hero-visual img,
 .contact-hero-image {

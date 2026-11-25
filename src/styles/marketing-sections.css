@@ -308,13 +308,8 @@
 .review-marquee-track {
   display: flex;
   width: max-content;
-  animation: client-marquee-left 85s linear infinite;
+  animation: marquee-left 85s linear infinite;
   will-change: transform;
-}
-@keyframes client-marquee-left {
-  to {
-    transform: translateX(-50%);
-  }
 }
 /* Hover pause only for real pointers (touch keeps a sticky hover after a swipe). */
 @media (hover: hover) {

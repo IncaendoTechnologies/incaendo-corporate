@@ -75,7 +75,7 @@
 .hero-visual {
   width: 100%;
   min-width: 0;
-  animation: hero-visual-float 7s ease-in-out infinite;
+  animation: float-y 7s ease-in-out infinite;
 }
 .hero-visual-image {
   display: block;
@@ -90,15 +90,6 @@
     width: calc(100% + 100px);
     max-width: none;
     margin-inline-start: -50px;
-  }
-}
-@keyframes hero-visual-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
   }
 }
 @media (hover: hover) {
@@ -328,12 +319,12 @@
 }
 
 .client-marquee-row-left .client-marquee-track {
-  animation: client-marquee-left var(--marquee-duration, 54s) linear infinite;
+  animation: marquee-left var(--marquee-duration, 54s) linear infinite;
   animation-delay: var(--marquee-delay, 0s);
 }
 
 .client-marquee-row-right .client-marquee-track {
-  animation: client-marquee-right var(--marquee-duration, 62s) linear infinite;
+  animation: marquee-right var(--marquee-duration, 62s) linear infinite;
   animation-delay: var(--marquee-delay, 0s);
 }
 
@@ -347,24 +338,6 @@
 
 .client-marquee-row:focus-within .client-marquee-track {
   animation-play-state: paused;
-}
-
-@keyframes client-marquee-left {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
-@keyframes client-marquee-right {
-  from {
-    transform: translate3d(-50%, 0, 0);
-  }
-  to {
-    transform: translate3d(0, 0, 0);
-  }
 }
 
 .client-marquee-group {

@@ -376,34 +376,16 @@ const listingIncludes = [
   }
 
   .careers-stack-row.is-left .careers-stack-track {
-    animation: careers-row-left var(--row-duration, 36s) linear infinite;
+    animation: marquee-left var(--row-duration, 36s) linear infinite;
   }
 
   .careers-stack-row.is-right .careers-stack-track {
-    animation: careers-row-right var(--row-duration, 36s) linear infinite;
+    animation: marquee-right var(--row-duration, 36s) linear infinite;
   }
 
   @media (hover: hover) {
     .careers-stack-row:hover .careers-stack-track {
       animation-play-state: paused;
-    }
-  }
-
-  @keyframes careers-row-left {
-    from {
-      transform: translate3d(0, 0, 0);
-    }
-    to {
-      transform: translate3d(-50%, 0, 0);
-    }
-  }
-
-  @keyframes careers-row-right {
-    from {
-      transform: translate3d(-50%, 0, 0);
-    }
-    to {
-      transform: translate3d(0, 0, 0);
     }
   }
 

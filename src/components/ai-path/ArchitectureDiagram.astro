@@ -652,7 +652,7 @@ const { name } = Astro.props
     transform-origin: left;
   }
   :global(.ai-state-card.is-active) .dg-matches i {
-    animation: dg-bar-in 600ms var(--ease-out) 500ms both;
+    animation: grow-x 600ms var(--ease-out) 500ms both;
   }
   .dg-typing {
     display: inline-flex;
@@ -970,7 +970,7 @@ const { name } = Astro.props
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 1.8;
-    animation: dg-spin 9s linear infinite;
+    animation: spin 9s linear infinite;
   }
   .dg-signals ul {
     display: grid;
@@ -1216,14 +1216,6 @@ const { name } = Astro.props
       transform: scale(1);
     }
   }
-  @keyframes dg-bar-in {
-    from {
-      transform: scaleX(0);
-    }
-    to {
-      transform: scaleX(1);
-    }
-  }
   @keyframes dg-db-glow {
     0%,
     100% {
@@ -1251,11 +1243,6 @@ const { name } = Astro.props
     }
     50% {
       box-shadow: 0 0 0 5px rgb(201 84 43 / 0%);
-    }
-  }
-  @keyframes dg-spin {
-    to {
-      transform: rotate(360deg);
     }
   }
 
