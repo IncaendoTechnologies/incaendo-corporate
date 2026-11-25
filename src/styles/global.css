@@ -1,9 +1,11 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import './design-tokens.css';
+@import './animations.css';
 @import './hero-system.css';
 @import './base.css';
 @import './site-header.css';
 @import './shared-sections.css';
+@import './accent-card.css';
 @import './ai-sections.css';
 @import './marketing-sections.css';
 @import './site-cta-faq.css';

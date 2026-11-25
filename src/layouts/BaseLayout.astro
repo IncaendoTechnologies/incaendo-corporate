@@ -10,7 +10,7 @@ import introLogo from '../assets/Modern Blue and Orange iN Logo.png'
 
 const {
   title = 'Incaendo | Software Development & Technology',
-  description = 'Incaendo is a software development and technology company with 15 years of industry experience.',
+  description = 'Incaendo is a software development and technology company with 15+ years of industry experience.',
   // canonicalPath, noindex, openGraphType, image, imageAlt, pageType,
   // breadcrumbs, article and schema pass through to the SEO component.
   ...seo
@@ -104,6 +104,7 @@ const {
       import '../scripts/motion.js'
       import '../scripts/ai-showcase.js'
       import '../scripts/site-intro.js'
+      import '../scripts/marquee-drag.js'
 
       // Smooth scroll for in-page anchor navigation while keeping native reload scroll restoration instant
       document.addEventListener('click', (event) => {
@@ -120,7 +121,9 @@ const {
             const reduced = window.matchMedia(
               '(prefers-reduced-motion: reduce)',
             ).matches
-            destination.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' })
+            destination.scrollIntoView({
+              behavior: reduced ? 'auto' : 'smooth',
+            })
             history.pushState(null, '', href)
           }
         } catch {

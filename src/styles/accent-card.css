@@ -1,0 +1,83 @@
+/*
+ * Accent card: the shared card hover used on Projects, Services and the AI
+ * page decks. On hover the card lifts, its border turns orange and one side
+ * gets a stronger orange edge with a soft glow.
+ *
+ * Markup:
+ *   class="accent-card"
+ *   data-accent-side="left | right"  side that gets the orange edge (usually
+ *                                    the image side, so it alternates)
+ *   data-accent-from="wide"          optional: edge and hover only on screens
+ *                                    wider than 800px (cards that stack on
+ *                                    phones)
+ *
+ * The component keeps its own background, radius and resting shadow, and
+ * sets its border colour with --accent-card-border instead of `border`.
+ */
+
+.accent-card {
+  --accent-dir: 1;
+  --accent-soft: rgba(232, 93, 38, 0.38);
+  --accent-strong: #e85d26;
+  --accent-hover-shadow:
+    0 28px 56px -18px rgba(16, 27, 45, 0.24),
+    0 8px 20px -4px rgba(16, 27, 45, 0.1),
+    calc(12px * var(--accent-dir)) 0 28px -4px rgba(232, 93, 38, 0.28),
+    calc(4px * var(--accent-dir)) 0 12px -2px rgba(232, 93, 38, 0.32),
+    0 0 0 1px rgba(232, 93, 38, 0.12);
+
+  border: 1px solid var(--accent-card-border, rgb(16 27 45 / 8%));
+  transition:
+    transform 450ms var(--ease-out),
+    border-color 450ms var(--ease-out),
+    box-shadow 450ms var(--ease-out);
+}
+
+/* The accent side is 2.5px wide even at rest, so the hover never shifts
+   the layout. */
+.accent-card[data-accent-side='right'] {
+  --accent-right: var(--accent-strong);
+  border-right-width: 2.5px;
+}
+.accent-card[data-accent-side='left'] {
+  --accent-dir: -1;
+  --accent-left: var(--accent-strong);
+  border-left-width: 2.5px;
+}
+
+@media (max-width: 800px) {
+  .accent-card[data-accent-from='wide'] {
+    border-width: 1px;
+  }
+}
+
+/* Hover only where a mouse or trackpad can hover (not on touch screens). */
+@media (hover: hover) {
+  .accent-card[data-accent-side]:not([data-accent-from='wide']):hover {
+    transform: translateY(-8px);
+    border-color: var(--accent-soft);
+    border-right-color: var(--accent-right, var(--accent-soft));
+    border-left-color: var(--accent-left, var(--accent-soft));
+    box-shadow: var(--accent-hover-shadow);
+  }
+}
+@media (hover: hover) and (min-width: 801px) {
+  .accent-card[data-accent-side][data-accent-from='wide']:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent-soft);
+    border-right-color: var(--accent-right, var(--accent-soft));
+    border-left-color: var(--accent-left, var(--accent-soft));
+    box-shadow: var(--accent-hover-shadow);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accent-card {
+    transition: none;
+  }
+  /* Same selectors as the hover rules above, so this wins. */
+  .accent-card[data-accent-side]:not([data-accent-from='wide']):hover,
+  .accent-card[data-accent-side][data-accent-from='wide']:hover {
+    transform: none;
+  }
+}

@@ -30,8 +30,16 @@ interface Props {
   cards: [Card, Card, Card]
 }
 
-const { headingId, titleLead, titleAccent, description, points, tags, doc, cards } =
-  Astro.props
+const {
+  headingId,
+  titleLead,
+  titleAccent,
+  description,
+  points,
+  tags,
+  doc,
+  cards,
+} = Astro.props
 const DocIcon = doc.icon
 const StatusIcon = doc.statusIcon
 ---
@@ -45,33 +53,36 @@ const StatusIcon = doc.statusIcon
   <div class="site-container legal-hero-wrap hero-system__inner">
     <div class="legal-hero-copy hero-system__copy reveal">
       <h1 id={headingId} class="hero-system__title">
-        {titleLead}<br />
+        {titleLead}
+        <br />
         <em class="hero-system__accent">{titleAccent}</em>
       </h1>
 
       <p class="hero-system__description">{description}</p>
 
       <ul class="legal-hero-points">
-        {
-          points.map((point) => (
-            <li class="legal-hero-point">
-              <span class="point-bullet" aria-hidden="true" />
-              {point}
-            </li>
-          ))
-        }
+        {points.map((point) => (
+          <li class="legal-hero-point">
+            <span class="point-bullet" aria-hidden="true" />
+            {point}
+          </li>
+        ))}
       </ul>
 
       <div class="hero-system__actions">
-        <a class="button button-primary" href="/contact">Talk To Our Team</a>
+        <a class="button button-primary" href="/contact">
+          Talk To Our Team
+        </a>
       </div>
 
       <div class="hero-system__support">
-        <span class="hero-system__support-label" id={`${headingId}-topics`}
-          >Key Topics</span
-        >
+        <span class="hero-system__support-label" id={`${headingId}-topics`}>
+          Key Topics
+        </span>
         <ul class="legal-hero-tags" aria-labelledby={`${headingId}-topics`}>
-          {tags.map((tag) => <li class="hero-tag">{tag}</li>)}
+          {tags.map((tag) => (
+            <li class="hero-tag">{tag}</li>
+          ))}
         </ul>
       </div>
     </div>
@@ -97,7 +108,9 @@ const StatusIcon = doc.statusIcon
               <span>{doc.updated}</span>
             </p>
             <ul class="legal-doc-list">
-              {doc.highlights.map((item) => <li>{item}</li>)}
+              {doc.highlights.map((item) => (
+                <li>{item}</li>
+              ))}
             </ul>
             <p class="legal-doc-status">
               <StatusIcon size={16} strokeWidth={2} aria-hidden="true" />
@@ -106,22 +119,23 @@ const StatusIcon = doc.statusIcon
           </article>
         </div>
 
-        {
-          cards.map((card, index) => {
-            const Icon = card.icon
-            return (
-              <div class={`legal-card legal-card--${index + 1}`} style={`--i: ${index}`}>
-                <span class="legal-card-icon" aria-hidden="true">
-                  <Icon size={18} strokeWidth={1.9} />
-                </span>
-                <span class="legal-card-body">
-                  <strong>{card.title}</strong>
-                  <span>{card.text}</span>
-                </span>
-              </div>
-            )
-          })
-        }
+        {cards.map((card, index) => {
+          const Icon = card.icon
+          return (
+            <div
+              class={`legal-card legal-card--${index + 1}`}
+              style={`--i: ${index}`}
+            >
+              <span class="legal-card-icon" aria-hidden="true">
+                <Icon size={18} strokeWidth={1.9} />
+              </span>
+              <span class="legal-card-body">
+                <strong>{card.title}</strong>
+                <span>{card.text}</span>
+              </span>
+            </div>
+          )
+        })}
       </div>
     </div>
   </div>
@@ -192,7 +206,8 @@ const StatusIcon = doc.statusIcon
     height: 7px;
     border-radius: 50%;
     background: var(--color-orange);
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-orange) 14%, transparent);
+    box-shadow: 0 0 0 4px
+      color-mix(in srgb, var(--color-orange) 14%, transparent);
   }
 
   .legal-hero-tags {
@@ -299,8 +314,13 @@ const StatusIcon = doc.statusIcon
     flex: none;
     place-items: center;
     border-radius: 12px;
-    background: linear-gradient(140deg, var(--color-orange), var(--color-orange-dark));
-    box-shadow: 0 8px 18px -6px color-mix(in srgb, var(--color-orange) 60%, transparent);
+    background: linear-gradient(
+      140deg,
+      var(--color-orange),
+      var(--color-orange-dark)
+    );
+    box-shadow: 0 8px 18px -6px
+      color-mix(in srgb, var(--color-orange) 60%, transparent);
     color: var(--color-white);
   }
 

@@ -3,14 +3,14 @@
 Technical documentation for how the Incaendo corporate website's project
 inquiry form sends submissions to HubSpot.
 
-| | |
-| --- | --- |
-| **Repository** | `incaendo-corp` (Astro 7 + Bootstrap 5, static build) |
-| **Integration method** | Browser → HubSpot **Forms Submission API v3** (public, unauthenticated endpoint) |
-| **HubSpot form** | "Incaendo Website Project Inquiry" (name taken from the code comment in `src/scripts/hubspot-form.js`) |
-| **Backend / server code** | None. The site has no server-side handler for the form. |
-| **Credentials** | None. No API key or private app token is used anywhere. |
-| **Status in git** | The integration is in the working tree on `feature/website-enhancement` and is **not yet committed** (`src/scripts/hubspot-form.js` and `src/components/HubSpotTracking.astro` are untracked; `ContactForm.astro`, the layouts, `README.md` and `.env.example` are modified). |
+|                           |                                                                                                                                                                                                                                                                               |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Repository**            | `incaendo-corp` (Astro 7 + Bootstrap 5, static build)                                                                                                                                                                                                                         |
+| **Integration method**    | Browser → HubSpot **Forms Submission API v3** (public, unauthenticated endpoint)                                                                                                                                                                                              |
+| **HubSpot form**          | "Incaendo Website Project Inquiry" (name taken from the code comment in `src/scripts/hubspot-form.js`)                                                                                                                                                                        |
+| **Backend / server code** | None. The site has no server-side handler for the form.                                                                                                                                                                                                                       |
+| **Credentials**           | None. No API key or private app token is used anywhere.                                                                                                                                                                                                                       |
+| **Status in git**         | The integration is in the working tree on `feature/website-enhancement` and is **not yet committed** (`src/scripts/hubspot-form.js` and `src/components/HubSpotTracking.astro` are untracked; `ContactForm.astro`, the layouts, `README.md` and `.env.example` are modified). |
 
 > **Legend.** Statements in this document are verified against the code unless
 > marked **Not verified in the codebase** or **Requires confirmation from
@@ -55,14 +55,14 @@ link the inquiry to the visitor's browsing history on the site.
 
 ### Implementation summary
 
-| Concern | How it is handled |
-| --- | --- |
-| Form markup and validation | `src/components/ContactForm.astro` (custom HTML form, not a HubSpot embed) |
-| HubSpot IDs, endpoint, field mapping, error parsing | `src/scripts/hubspot-form.js` |
-| Visitor tracking cookie | `src/components/HubSpotTracking.astro`, included in both layouts |
-| Success / error feedback | Toast notifications from `src/scripts/toast.js` |
-| Modal behavior while sending | `src/scripts/contact-modal.js` listens to events emitted by the form |
-| Spam | Hidden "honeypot" field (no CAPTCHA) |
+| Concern                                             | How it is handled                                                          |
+| --------------------------------------------------- | -------------------------------------------------------------------------- |
+| Form markup and validation                          | `src/components/ContactForm.astro` (custom HTML form, not a HubSpot embed) |
+| HubSpot IDs, endpoint, field mapping, error parsing | `src/scripts/hubspot-form.js`                                              |
+| Visitor tracking cookie                             | `src/components/HubSpotTracking.astro`, included in both layouts           |
+| Success / error feedback                            | Toast notifications from `src/scripts/toast.js`                            |
+| Modal behavior while sending                        | `src/scripts/contact-modal.js` listens to events emitted by the form       |
+| Spam                                                | Hidden "honeypot" field (no CAPTCHA)                                       |
 
 ---
 
@@ -126,24 +126,24 @@ flowchart TD
 
 ## 3. Technology and Components
 
-| Component | Type | Responsibility |
-| --- | --- | --- |
-| `src/pages/contact.astro` | Astro page | Contact page. Renders `<ContactForm />` (line 168) inside `.contact-form-card`. |
-| `src/components/ContactModal.astro` | Astro component | Modal dialog with `<ContactForm idPrefix="modal" />` (line 37). `idPrefix` keeps element IDs unique when both forms exist on `/contact`. |
-| `src/components/ContactForm.astro` | Astro component + client `<script>` | Form markup, client validation, submit flow, loading state, honeypot, lifecycle events, toasts. |
-| `src/scripts/hubspot-form.js` | ES module (shared by build and browser) | Portal ID, form ID, region, endpoint URL, tracking script URL, field map, payload builder, error interpreter, generic error copy. |
-| `src/components/HubSpotTracking.astro` | Astro component | Injects the HubSpot tracking code `<script id="hs-script-loader">`. |
-| `src/layouts/BaseLayout.astro` | Layout | Includes `<HubSpotTracking />` (line 52) and `<ContactModal />` (line 102) on every standard page. |
-| `src/layouts/StandaloneLayout.astro` | Layout | Same includes (lines 40 and 47), used by `src/pages/products/nirvan.astro`. |
-| `src/scripts/contact-modal.js` | Browser script | Opens and closes the modal. It blocks closing while a submission is in flight and closes the modal after a successful submit. |
-| `src/scripts/toast.js` + `src/styles/toast.css` | Browser module | Dependency-free toast notifications with screen-reader live regions (`role="status"` for success, `role="alert"` for errors). |
+| Component                                       | Type                                    | Responsibility                                                                                                                           |
+| ----------------------------------------------- | --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/pages/contact.astro`                       | Astro page                              | Contact page. Renders `<ContactForm />` (line 168) inside `.contact-form-card`.                                                          |
+| `src/components/ContactModal.astro`             | Astro component                         | Modal dialog with `<ContactForm idPrefix="modal" />` (line 37). `idPrefix` keeps element IDs unique when both forms exist on `/contact`. |
+| `src/components/ContactForm.astro`              | Astro component + client `<script>`     | Form markup, client validation, submit flow, loading state, honeypot, lifecycle events, toasts.                                          |
+| `src/scripts/hubspot-form.js`                   | ES module (shared by build and browser) | Portal ID, form ID, region, endpoint URL, tracking script URL, field map, payload builder, error interpreter, generic error copy.        |
+| `src/components/HubSpotTracking.astro`          | Astro component                         | Injects the HubSpot tracking code `<script id="hs-script-loader">`.                                                                      |
+| `src/layouts/BaseLayout.astro`                  | Layout                                  | Includes `<HubSpotTracking />` (line 52) and `<ContactModal />` (line 102) on every standard page.                                       |
+| `src/layouts/StandaloneLayout.astro`            | Layout                                  | Same includes (lines 40 and 47), used by `src/pages/products/nirvan.astro`.                                                              |
+| `src/scripts/contact-modal.js`                  | Browser script                          | Opens and closes the modal. It blocks closing while a submission is in flight and closes the modal after a successful submit.            |
+| `src/scripts/toast.js` + `src/styles/toast.css` | Browser module                          | Dependency-free toast notifications with screen-reader live regions (`role="status"` for success, `role="alert"` for errors).            |
 
 **HubSpot services involved**
 
-| Service | Host (derived from region `na2`) | Purpose |
-| --- | --- | --- |
-| Forms Submission API v3 | `https://api-na2.hsforms.com` | Receives the form data |
-| Tracking code loader | `https://js-na2.hs-scripts.com/247936160.js` | Sets `hubspotutk`, records page views |
+| Service                 | Host (derived from region `na2`)             | Purpose                               |
+| ----------------------- | -------------------------------------------- | ------------------------------------- |
+| Forms Submission API v3 | `https://api-na2.hsforms.com`                | Receives the form data                |
+| Tracking code loader    | `https://js-na2.hs-scripts.com/247936160.js` | Sets `hubspotutk`, records page views |
 
 The tracking loader may in turn load further HubSpot scripts from other
 domains. **Not verified in the codebase.** This matters only if a Content
@@ -164,17 +164,17 @@ variables**. `.env.example` states this explicitly.
 
 All HubSpot properties belong to the **Contact object** (`objectTypeId: "0-1"`).
 
-| Form field (`name`) | Label | Input type | Required | Client validation and message | Sent to HubSpot as | Transformation |
-| --- | --- | --- | --- | --- | --- | --- |
-| `name` | Full name | text | Yes | Non-empty after trim → *"Enter your full name."* | `full_name` | `trim()` |
-| `email` | Work email | `email` | Yes | Empty → *"Enter your work email."*; fails browser email format check → *"Enter a valid email address."* | `email` | `trim()` |
-| `company` | Company name (optional) | text | No | None | `company` | `trim()`; omitted if empty |
-| `phone` | Phone number (optional) | `tel` | No | None (no format check) | `phone` | `trim()`; omitted if empty |
-| `topic` | Service | `select` | Yes | A value must be chosen → *"Choose the service you need help with."* | `services` | Option text sent as-is (see below) |
-| `budget` | Project budget (optional) | `select` | No | None | `project_budget` | Option text sent as-is; empty "Select a range" is omitted |
-| `message` | Project details | `textarea` (4 rows) | Yes | Non-empty after trim → *"Tell us a little about your project."* | `project_details` | `trim()` |
-| `privacyConsent` | "I agree to the Privacy Policy…" | checkbox | Yes | Must be checked → *"Please confirm before continuing."* | **Not sent** | Not in the field map |
-| `website` | Website (hidden honeypot) | text, off-screen, `tabindex="-1"` | n/a | If filled, submission is silently dropped | **Not sent** | n/a |
+| Form field (`name`) | Label                            | Input type                        | Required | Client validation and message                                                                           | Sent to HubSpot as | Transformation                                            |
+| ------------------- | -------------------------------- | --------------------------------- | -------- | ------------------------------------------------------------------------------------------------------- | ------------------ | --------------------------------------------------------- |
+| `name`              | Full name                        | text                              | Yes      | Non-empty after trim → _"Enter your full name."_                                                        | `full_name`        | `trim()`                                                  |
+| `email`             | Work email                       | `email`                           | Yes      | Empty → _"Enter your work email."_; fails browser email format check → _"Enter a valid email address."_ | `email`            | `trim()`                                                  |
+| `company`           | Company name (optional)          | text                              | No       | None                                                                                                    | `company`          | `trim()`; omitted if empty                                |
+| `phone`             | Phone number (optional)          | `tel`                             | No       | None (no format check)                                                                                  | `phone`            | `trim()`; omitted if empty                                |
+| `topic`             | Service                          | `select`                          | Yes      | A value must be chosen → _"Choose the service you need help with."_                                     | `services`         | Option text sent as-is (see below)                        |
+| `budget`            | Project budget (optional)        | `select`                          | No       | None                                                                                                    | `project_budget`   | Option text sent as-is; empty "Select a range" is omitted |
+| `message`           | Project details                  | `textarea` (4 rows)               | Yes      | Non-empty after trim → _"Tell us a little about your project."_                                         | `project_details`  | `trim()`                                                  |
+| `privacyConsent`    | "I agree to the Privacy Policy…" | checkbox                          | Yes      | Must be checked → _"Please confirm before continuing."_                                                 | **Not sent**       | Not in the field map                                      |
+| `website`           | Website (hidden honeypot)        | text, off-screen, `tabindex="-1"` | n/a      | If filled, submission is silently dropped                                                               | **Not sent**       | n/a                                                       |
 
 **Service option values** (sent to `services`): `Custom Software`,
 `AI & Automation`, `Web Applications`, `Mobile Apps`, `Enterprise Solutions`,
@@ -256,16 +256,16 @@ comment (line 118) says this value must match the HubSpot option exactly.
     (**Requires confirmation from HubSpot**: which notifications or workflows
     are configured).
 11. **Response handling.**
-    - **2xx:** the form resets, errors clear and a success toast appears: *"Inquiry
-      sent successfully!"* / *"Thank you for reaching out. Our team will get
-      back to you soon."*
+    - **2xx:** the form resets, errors clear and a success toast appears: _"Inquiry
+      sent successfully!"_ / _"Thank you for reaching out. Our team will get
+      back to you soon."_
     - **Non-2xx:** `describeHubSpotError()` logs the status and HubSpot's
       `errors` to the console. It maps `INVALID_EMAIL`/`BLOCKED_EMAIL` to the
-      email field (*"Enter a valid work email address."*) and maps
+      email field (_"Enter a valid work email address."_) and maps
       `REQUIRED_FIELD`/`VALUE_NOT_IN_FIELD_DEFINITION` to the fields named in
-      the error messages (*"Please check this field."*). Then an error toast
-      appears: *"Unable to send your inquiry"* / *"Please check your connection
-      and try again."*
+      the error messages (_"Please check this field."_). Then an error toast
+      appears: _"Unable to send your inquiry"_ / _"Please check your connection
+      and try again."_
     - **Network failure** (offline, DNS, blocked request): the same error toast
       appears.
 12. **Settle.** Fields re-enable immediately and `contact-form:settled` fires. If
@@ -286,14 +286,14 @@ comment (line 118) says this value must match the HubSpot option exactly.
 
 ### In the repository (`src/scripts/hubspot-form.js`)
 
-| Setting | Value | Notes |
-| --- | --- | --- |
-| `HUBSPOT_PORTAL_ID` | `247936160` | HubSpot account (Hub) ID. A public identifier. |
-| `HUBSPOT_FORM_ID` | `f9e71662-d369-42b4-a9f4-15faf91bf131` | Form GUID. A public identifier. |
-| `HUBSPOT_REGION` | `na2` | Data-centre region. Picks the `api-na2` / `js-na2` hosts. |
-| `HUBSPOT_SUBMIT_URL` | `https://api-na2.hsforms.com/submissions/v3/integration/submit/{portal}/{form}` | Derived. |
-| `HUBSPOT_TRACKING_SCRIPT_URL` | `https://js-na2.hs-scripts.com/247936160.js` | Derived. |
-| `HUBSPOT_FIELD_MAP` | See §4 | Website name → HubSpot property. |
+| Setting                       | Value                                                                           | Notes                                                     |
+| ----------------------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `HUBSPOT_PORTAL_ID`           | `247936160`                                                                     | HubSpot account (Hub) ID. A public identifier.            |
+| `HUBSPOT_FORM_ID`             | `f9e71662-d369-42b4-a9f4-15faf91bf131`                                          | Form GUID. A public identifier.                           |
+| `HUBSPOT_REGION`              | `na2`                                                                           | Data-centre region. Picks the `api-na2` / `js-na2` hosts. |
+| `HUBSPOT_SUBMIT_URL`          | `https://api-na2.hsforms.com/submissions/v3/integration/submit/{portal}/{form}` | Derived.                                                  |
+| `HUBSPOT_TRACKING_SCRIPT_URL` | `https://js-na2.hs-scripts.com/247936160.js`                                    | Derived.                                                  |
+| `HUBSPOT_FIELD_MAP`           | See §4                                                                          | Website name → HubSpot property.                          |
 
 The form element also has `data-hs-do-not-collect="true"`. This attribute
 tells HubSpot's tracking code not to capture this form through its "collected
@@ -304,16 +304,16 @@ twice, once by the API call and once by the tracking script.
 
 These cannot be verified from the repository:
 
-| Item | What must be true | Status |
-| --- | --- | --- |
-| Form "Incaendo Website Project Inquiry" | Exists in portal `247936160` with the form ID above | **Requires confirmation from HubSpot** |
-| Form fields | Contains `full_name`, `email`, `company`, `phone`, `services`, `project_budget`, `project_details` | **Requires confirmation** |
-| Required fields in HubSpot | Should not require anything the website treats as optional (company, phone, budget). Otherwise HubSpot returns `REQUIRED_FIELD` | **Requires confirmation** |
-| Custom properties | `full_name`, `services`, `project_budget`, `project_details` are not HubSpot defaults and must exist as Contact properties | **Requires confirmation** |
-| Dropdown options | `services` / `project_budget` option values match §4 exactly | **Requires confirmation** |
-| Notifications / workflows | Who is notified about new inquiries | **Not verified in the codebase** |
-| Domain / tracking settings | Whether the account restricts tracking or forms to specific domains | **Requires confirmation from HubSpot** |
-| Email blocking rules | Whether free email domains are blocked (this would produce `BLOCKED_EMAIL`) | **Requires confirmation** |
+| Item                                    | What must be true                                                                                                               | Status                                 |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| Form "Incaendo Website Project Inquiry" | Exists in portal `247936160` with the form ID above                                                                             | **Requires confirmation from HubSpot** |
+| Form fields                             | Contains `full_name`, `email`, `company`, `phone`, `services`, `project_budget`, `project_details`                              | **Requires confirmation**              |
+| Required fields in HubSpot              | Should not require anything the website treats as optional (company, phone, budget). Otherwise HubSpot returns `REQUIRED_FIELD` | **Requires confirmation**              |
+| Custom properties                       | `full_name`, `services`, `project_budget`, `project_details` are not HubSpot defaults and must exist as Contact properties      | **Requires confirmation**              |
+| Dropdown options                        | `services` / `project_budget` option values match §4 exactly                                                                    | **Requires confirmation**              |
+| Notifications / workflows               | Who is notified about new inquiries                                                                                             | **Not verified in the codebase**       |
+| Domain / tracking settings              | Whether the account restricts tracking or forms to specific domains                                                             | **Requires confirmation from HubSpot** |
+| Email blocking rules                    | Whether free email domains are blocked (this would produce `BLOCKED_EMAIL`)                                                     | **Requires confirmation**              |
 
 > **Rule:** if anyone edits the HubSpot form (renames a property, changes a
 > dropdown option or makes a field required), they must update
@@ -363,7 +363,7 @@ repository.**
 
 The repository does contain a **Cloudflare Quick Tunnel** hostname in
 `astro.config.mjs` (`vite.preview.allowedHosts`). Its comment says it is a
-*temporary demo* allowance for `astro preview`, so someone outside the local
+_temporary demo_ allowance for `astro preview`, so someone outside the local
 network could open the preview build. It is unrelated to how the form talks
 to HubSpot.
 
@@ -398,22 +398,22 @@ exercise the form.
 
 Run each one on `/contact` **and** in the modal.
 
-| # | Scenario | Steps | Expected result |
-| --- | --- | --- | --- |
-| 1 | Successful submission | Fill all required fields, tick consent, submit | Spinner and "Sending…", then success toast. Form resets. The modal closes after about 3 s. Record appears in HubSpot. |
-| 2 | Required fields | Submit an empty form | Inline errors on name, email, service, project details and consent. Focus on "Full name". No network request. |
-| 3 | Invalid email | Enter `abc` as email | *"Enter a valid email address."* No request. |
-| 4 | Error clears on edit | Trigger an error, then type in that field | That field's error disappears. |
-| 5 | Optional fields empty | Leave company, phone and budget empty | Submission succeeds. Those fields are absent from the payload. |
-| 6 | Budget "Prefer to discuss" | Choose that option | HubSpot accepts `- Prefer to discuss`. |
-| 7 | Every service option | Submit once per service value | All accepted (no `VALUE_NOT_IN_FIELD_DEFINITION`). |
-| 8 | HubSpot rejection | Temporarily use a blocked email domain, or test against a form copy with stricter rules | Error toast. Affected field highlighted and focused. Values kept. Console logs the status. |
-| 9 | Network failure | DevTools → Network → Offline, then submit | Error toast *"Please check your connection and try again."* Values kept. |
-| 10 | Duplicate submission | Double-click submit, or press Enter repeatedly | Exactly one `POST`. The button stays disabled until 3 s after the response. |
-| 11 | Modal lock | Press Escape or click the backdrop while "Sending…" | Modal does not close. |
-| 12 | Honeypot | In DevTools, fill `#contact-website` and submit | Success toast but **no** `POST` to HubSpot. |
-| 13 | Tracking link | Browse a few pages, then submit | Payload `context.hutk` present. The contact's timeline in HubSpot shows page views. |
-| 14 | Screen reader | Submit with VoiceOver/NVDA | Errors are announced. Success is read politely, errors assertively. |
+| #   | Scenario                   | Steps                                                                                   | Expected result                                                                                                       |
+| --- | -------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| 1   | Successful submission      | Fill all required fields, tick consent, submit                                          | Spinner and "Sending…", then success toast. Form resets. The modal closes after about 3 s. Record appears in HubSpot. |
+| 2   | Required fields            | Submit an empty form                                                                    | Inline errors on name, email, service, project details and consent. Focus on "Full name". No network request.         |
+| 3   | Invalid email              | Enter `abc` as email                                                                    | _"Enter a valid email address."_ No request.                                                                          |
+| 4   | Error clears on edit       | Trigger an error, then type in that field                                               | That field's error disappears.                                                                                        |
+| 5   | Optional fields empty      | Leave company, phone and budget empty                                                   | Submission succeeds. Those fields are absent from the payload.                                                        |
+| 6   | Budget "Prefer to discuss" | Choose that option                                                                      | HubSpot accepts `- Prefer to discuss`.                                                                                |
+| 7   | Every service option       | Submit once per service value                                                           | All accepted (no `VALUE_NOT_IN_FIELD_DEFINITION`).                                                                    |
+| 8   | HubSpot rejection          | Temporarily use a blocked email domain, or test against a form copy with stricter rules | Error toast. Affected field highlighted and focused. Values kept. Console logs the status.                            |
+| 9   | Network failure            | DevTools → Network → Offline, then submit                                               | Error toast _"Please check your connection and try again."_ Values kept.                                              |
+| 10  | Duplicate submission       | Double-click submit, or press Enter repeatedly                                          | Exactly one `POST`. The button stays disabled until 3 s after the response.                                           |
+| 11  | Modal lock                 | Press Escape or click the backdrop while "Sending…"                                     | Modal does not close.                                                                                                 |
+| 12  | Honeypot                   | In DevTools, fill `#contact-website` and submit                                         | Success toast but **no** `POST` to HubSpot.                                                                           |
+| 13  | Tracking link              | Browse a few pages, then submit                                                         | Payload `context.hutk` present. The contact's timeline in HubSpot shows page views.                                   |
+| 14  | Screen reader              | Submit with VoiceOver/NVDA                                                              | Errors are announced. Success is read politely, errors assertively.                                                   |
 
 ### Still to be performed
 
@@ -436,12 +436,12 @@ changes to go live.
 
 ### 9.2 Configuration-only changes
 
-| Item | Change | Why |
-| --- | --- | --- |
-| HTTPS on the host | Serve the site over HTTPS (also on the existing `docs/deployment-checklist.md`) | Protects the data in transit from page to browser and avoids mixed-content issues. The API call itself is already HTTPS-only. |
-| `astro.config.mjs` → `vite.preview.allowedHosts` | Remove the `*.trycloudflare.com` hostname | Leftover temporary demo setting. Affects only `astro preview`, not the production static build, so this is cleanup. It is already listed in `docs/deployment-checklist.md` §3. |
-| Content Security Policy (only if one is added) | Allow `script-src https://js-na2.hs-scripts.com` (plus any domains it loads) and `connect-src https://api-na2.hsforms.com` | The repository has no CSP or headers file today. Without these entries, a future CSP would break tracking and submission. |
-| `/privacy` link | Make sure `/privacy` redirects to `/privacy-policy/` (planned in `docs/deployment-checklist.md` §2), or point the consent link straight at `/privacy-policy/` | The consent checkbox links to `/privacy` (`ContactForm.astro` line 155), which is a legacy route scheduled for removal. |
+| Item                                             | Change                                                                                                                                                        | Why                                                                                                                                                                            |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| HTTPS on the host                                | Serve the site over HTTPS (also on the existing `docs/deployment-checklist.md`)                                                                               | Protects the data in transit from page to browser and avoids mixed-content issues. The API call itself is already HTTPS-only.                                                  |
+| `astro.config.mjs` → `vite.preview.allowedHosts` | Remove the `*.trycloudflare.com` hostname                                                                                                                     | Leftover temporary demo setting. Affects only `astro preview`, not the production static build, so this is cleanup. It is already listed in `docs/deployment-checklist.md` §3. |
+| Content Security Policy (only if one is added)   | Allow `script-src https://js-na2.hs-scripts.com` (plus any domains it loads) and `connect-src https://api-na2.hsforms.com`                                    | The repository has no CSP or headers file today. Without these entries, a future CSP would break tracking and submission.                                                      |
+| `/privacy` link                                  | Make sure `/privacy` redirects to `/privacy-policy/` (planned in `docs/deployment-checklist.md` §2), or point the consent link straight at `/privacy-policy/` | The consent checkbox links to `/privacy` (`ContactForm.astro` line 155), which is a legacy route scheduled for removal.                                                        |
 
 ### 9.3 Changes that are not required
 
@@ -484,18 +484,18 @@ changes to go live.
 
 ## 10. Security and Privacy
 
-| Topic | Current state |
-| --- | --- |
-| Credentials in the frontend | **None.** Only the portal ID and form ID ship to the browser. HubSpot designs these as public identifiers, and they appear in any HubSpot embed code. No private app token or API key exists in the repository. |
-| Public vs private API | The v3 `integration/submit` endpoint is HubSpot's **unauthenticated** form endpoint. It can only submit to that form. It cannot read CRM data. |
-| Sensitive value handling | If a server-side HubSpot API (private app token) is ever needed, the token must live in a server environment variable and never in client code or a `PUBLIC_` variable. |
-| Input validation | Client-side presence and email-format checks only. The client does no sanitization. Values are sent as JSON strings, and HubSpot validates them against its form definition. The site never renders submitted values back into the page. |
-| Transport | All HubSpot calls are HTTPS. The code refuses a non-HTTPS endpoint (lines 350–352). |
-| Spam protection | A honeypot field only. **No CAPTCHA and no rate limiting.** Because the endpoint is public, a determined bot can call it directly and skip the website entirely. |
-| Personal data collected | Full name, work email, and optionally company, phone, service of interest, budget and free-text project details. Also page URL, page title and the `hubspotutk` cookie. |
-| Consent | A required checkbox confirms agreement to the Privacy Policy. The consent value itself **is not sent** to HubSpot, so HubSpot holds no consent record from this form. |
-| Data residency | Data is stored by HubSpot in the account's `na2` region (North America). |
-| Console logging | On failure, only the HTTP status and HubSpot's error list are logged. Form values are not logged. |
+| Topic                       | Current state                                                                                                                                                                                                                            |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Credentials in the frontend | **None.** Only the portal ID and form ID ship to the browser. HubSpot designs these as public identifiers, and they appear in any HubSpot embed code. No private app token or API key exists in the repository.                          |
+| Public vs private API       | The v3 `integration/submit` endpoint is HubSpot's **unauthenticated** form endpoint. It can only submit to that form. It cannot read CRM data.                                                                                           |
+| Sensitive value handling    | If a server-side HubSpot API (private app token) is ever needed, the token must live in a server environment variable and never in client code or a `PUBLIC_` variable.                                                                  |
+| Input validation            | Client-side presence and email-format checks only. The client does no sanitization. Values are sent as JSON strings, and HubSpot validates them against its form definition. The site never renders submitted values back into the page. |
+| Transport                   | All HubSpot calls are HTTPS. The code refuses a non-HTTPS endpoint (lines 350–352).                                                                                                                                                      |
+| Spam protection             | A honeypot field only. **No CAPTCHA and no rate limiting.** Because the endpoint is public, a determined bot can call it directly and skip the website entirely.                                                                         |
+| Personal data collected     | Full name, work email, and optionally company, phone, service of interest, budget and free-text project details. Also page URL, page title and the `hubspotutk` cookie.                                                                  |
+| Consent                     | A required checkbox confirms agreement to the Privacy Policy. The consent value itself **is not sent** to HubSpot, so HubSpot holds no consent record from this form.                                                                    |
+| Data residency              | Data is stored by HubSpot in the account's `na2` region (North America).                                                                                                                                                                 |
+| Console logging             | On failure, only the HTTP status and HubSpot's error list are logged. Form values are not logged.                                                                                                                                        |
 
 **Gaps to consider before production** (recommendations, not implemented):
 
@@ -512,19 +512,19 @@ changes to go live.
 
 ## 11. Error Handling and Troubleshooting
 
-| Symptom | Possible cause | How to verify | Recommended resolution |
-| --- | --- | --- | --- |
-| Success toast but no record in HubSpot | Honeypot field was filled (autofill or a browser extension) | Network tab shows **no** `POST` to `hsforms.com` | Check what filled `website`. Test in a clean browser profile. |
-| Error toast; console shows 404 | Wrong portal ID or form ID, or the form was deleted | Console status `404`; check the form in HubSpot | Fix the constants in `hubspot-form.js` (lines 11–12). |
-| Error toast; console shows 400 with `VALUE_NOT_IN_FIELD_DEFINITION` | Dropdown option text changed in HubSpot or on the site | Read `errors[].message` in the console | Make the `<option>` values and HubSpot options identical. |
-| Error toast; 400 with `REQUIRED_FIELD` | HubSpot form marks a field required that the site treats as optional, or a property was renamed | Console error message names the property | Align required flags, or the field map in `hubspot-form.js`. |
-| Email field flagged *"Enter a valid work email address."* after submit | `INVALID_EMAIL` or `BLOCKED_EMAIL` from HubSpot (for example free email domains blocked) | Console `errorType` | Adjust the HubSpot email rules, or accept that this is intended. |
-| Error toast immediately; no response status | Network offline, ad blocker blocking `hsforms.com`, or DNS problem | Network tab shows the request failed or was blocked | Retry without the blocker or on another network. |
-| Request blocked with a CSP error in console | A Content Security Policy was added without HubSpot domains | Console CSP violation message | Add the hosts from §9.2. |
-| Submission works but no page history on the contact | Tracking script blocked, so no `hutk` | Payload has no `context.hutk`; no `hubspotutk` cookie | Expected when the visitor blocks tracking. Check the HubSpot tracking settings for the domain. |
-| Wrong region error / connection refused | `HUBSPOT_REGION` doesn't match the account | Check the account's data-centre region in HubSpot | Set the region (`na1` uses the un-suffixed hosts). |
-| `astro preview` via tunnel shows "Blocked request. This host is not allowed" | The Quick Tunnel hostname changed after a restart | Compare the URL with `allowedHosts` | Update or remove `allowedHosts`. Not related to HubSpot. |
-| Duplicate records for one inquiry | Collected-forms capture double-counting | Two submissions with the same timestamp | Make sure `data-hs-do-not-collect="true"` is still on the `<form>`. |
+| Symptom                                                                      | Possible cause                                                                                  | How to verify                                         | Recommended resolution                                                                         |
+| ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Success toast but no record in HubSpot                                       | Honeypot field was filled (autofill or a browser extension)                                     | Network tab shows **no** `POST` to `hsforms.com`      | Check what filled `website`. Test in a clean browser profile.                                  |
+| Error toast; console shows 404                                               | Wrong portal ID or form ID, or the form was deleted                                             | Console status `404`; check the form in HubSpot       | Fix the constants in `hubspot-form.js` (lines 11–12).                                          |
+| Error toast; console shows 400 with `VALUE_NOT_IN_FIELD_DEFINITION`          | Dropdown option text changed in HubSpot or on the site                                          | Read `errors[].message` in the console                | Make the `<option>` values and HubSpot options identical.                                      |
+| Error toast; 400 with `REQUIRED_FIELD`                                       | HubSpot form marks a field required that the site treats as optional, or a property was renamed | Console error message names the property              | Align required flags, or the field map in `hubspot-form.js`.                                   |
+| Email field flagged _"Enter a valid work email address."_ after submit       | `INVALID_EMAIL` or `BLOCKED_EMAIL` from HubSpot (for example free email domains blocked)        | Console `errorType`                                   | Adjust the HubSpot email rules, or accept that this is intended.                               |
+| Error toast immediately; no response status                                  | Network offline, ad blocker blocking `hsforms.com`, or DNS problem                              | Network tab shows the request failed or was blocked   | Retry without the blocker or on another network.                                               |
+| Request blocked with a CSP error in console                                  | A Content Security Policy was added without HubSpot domains                                     | Console CSP violation message                         | Add the hosts from §9.2.                                                                       |
+| Submission works but no page history on the contact                          | Tracking script blocked, so no `hutk`                                                           | Payload has no `context.hutk`; no `hubspotutk` cookie | Expected when the visitor blocks tracking. Check the HubSpot tracking settings for the domain. |
+| Wrong region error / connection refused                                      | `HUBSPOT_REGION` doesn't match the account                                                      | Check the account's data-centre region in HubSpot     | Set the region (`na1` uses the un-suffixed hosts).                                             |
+| `astro preview` via tunnel shows "Blocked request. This host is not allowed" | The Quick Tunnel hostname changed after a restart                                               | Compare the URL with `allowedHosts`                   | Update or remove `allowedHosts`. Not related to HubSpot.                                       |
+| Duplicate records for one inquiry                                            | Collected-forms capture double-counting                                                         | Two submissions with the same timestamp               | Make sure `data-hs-do-not-collect="true"` is still on the `<form>`.                            |
 
 ---
 
@@ -583,7 +583,7 @@ see the context of each lead.
 - **No backend to build or maintain.** The website stays a simple static
   site, which is cheaper and more secure to host.
 - **No passwords or secret keys in the website.** It uses HubSpot's public
-  form endpoint, which can only *add* submissions and can't read our CRM.
+  form endpoint, which can only _add_ submissions and can't read our CRM.
 - **We keep our own design.** We use our own form instead of HubSpot's embedded
   widget, so it matches the site's look, validation messages and
   accessibility.
@@ -602,36 +602,36 @@ values, who gets notified), spam protection, and a privacy/cookie review.
 
 ## 14. Code References
 
-| File | Symbol / location | Responsibility |
-| --- | --- | --- |
-| `src/scripts/hubspot-form.js` | Lines 1–9 | Header comment: public API, no token, keep in sync with the HubSpot form. |
-| | `HUBSPOT_PORTAL_ID`, `HUBSPOT_FORM_ID`, `HUBSPOT_REGION` (lines 11–13) | Account, form and region identifiers. |
-| | `apiHost`, `HUBSPOT_TRACKING_SCRIPT_URL`, `HUBSPOT_SUBMIT_URL` (lines 17–27) | Region-aware URL construction. |
-| | `SUBMIT_FAILED_MESSAGE` (lines 32–33) | Generic visitor-facing failure text. |
-| | `HUBSPOT_FIELD_MAP` (lines 37–45) | Form name → HubSpot contact property. |
-| | `buildHubSpotPayload()` (lines 57–78) | Builds `{ fields, context }`. Drops empty values. Adds `hutk`. |
-| | `describeHubSpotError()` (lines 84–128) | Parses HubSpot errors, logs them and maps them to field messages. |
-| `src/components/ContactForm.astro` | Frontmatter (lines 1–7) | Imports the endpoint. Accepts the `idPrefix` prop. |
-| | `<form>` (lines 9–15) | `data-endpoint`, `data-hs-do-not-collect`, `novalidate`. |
-| | Fields (lines 16–165) | Markup for the fields in §4. |
-| | Honeypot (lines 167–177, CSS 495–502) | Off-screen `website` field. |
-| | Submit row (lines 179–202) | Button with spinner and label. Fallback text if the endpoint is empty. |
-| | `notifySuccess` / `notifyError` (lines 228–251) | Toast feedback, 3 s duration. |
-| | `setSending`, `setFieldError` (lines 253–270) | Loading state and inline errors. |
-| | `validate()` (lines 272–309) | Client validation and messages. |
-| | Submit handler (lines 330–456) | Full workflow from §5, including lifecycle events. |
-| | Init (lines 460–461) | Runs on load and on `astro:page-load`. |
-| `src/components/HubSpotTracking.astro` | Whole file (15 lines) | Tracking script tag. |
-| `src/components/ContactModal.astro` | Line 37 | Modal instance of the form (`idPrefix="modal"`). |
-| `src/scripts/contact-modal.js` | Lines 73–88 | Locks the modal while submitting. Closes it on success. |
-| `src/scripts/toast.js` | `showToast()` (lines 45–101) | Accessible toast notifications. |
-| `src/pages/contact.astro` | Line 168 | Contact page form instance. |
-| `src/layouts/BaseLayout.astro` | Lines 52, 102 | Includes tracking and the modal. |
-| `src/layouts/StandaloneLayout.astro` | Lines 40, 47 | Includes tracking and the modal. |
-| `astro.config.mjs` | Lines 9–16 | Temporary tunnel `allowedHosts` (preview only). |
-| `.env.example` | Whole file | Documents that no environment variables are needed. |
-| `README.md` | Line 56 | One-paragraph integration summary. |
-| `docs/deployment-checklist.md` | §2, §3 | Related hosting tasks (`/privacy` redirect, tunnel removal). |
+| File                                   | Symbol / location                                                            | Responsibility                                                            |
+| -------------------------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `src/scripts/hubspot-form.js`          | Lines 1–9                                                                    | Header comment: public API, no token, keep in sync with the HubSpot form. |
+|                                        | `HUBSPOT_PORTAL_ID`, `HUBSPOT_FORM_ID`, `HUBSPOT_REGION` (lines 11–13)       | Account, form and region identifiers.                                     |
+|                                        | `apiHost`, `HUBSPOT_TRACKING_SCRIPT_URL`, `HUBSPOT_SUBMIT_URL` (lines 17–27) | Region-aware URL construction.                                            |
+|                                        | `SUBMIT_FAILED_MESSAGE` (lines 32–33)                                        | Generic visitor-facing failure text.                                      |
+|                                        | `HUBSPOT_FIELD_MAP` (lines 37–45)                                            | Form name → HubSpot contact property.                                     |
+|                                        | `buildHubSpotPayload()` (lines 57–78)                                        | Builds `{ fields, context }`. Drops empty values. Adds `hutk`.            |
+|                                        | `describeHubSpotError()` (lines 84–128)                                      | Parses HubSpot errors, logs them and maps them to field messages.         |
+| `src/components/ContactForm.astro`     | Frontmatter (lines 1–7)                                                      | Imports the endpoint. Accepts the `idPrefix` prop.                        |
+|                                        | `<form>` (lines 9–15)                                                        | `data-endpoint`, `data-hs-do-not-collect`, `novalidate`.                  |
+|                                        | Fields (lines 16–165)                                                        | Markup for the fields in §4.                                              |
+|                                        | Honeypot (lines 167–177, CSS 495–502)                                        | Off-screen `website` field.                                               |
+|                                        | Submit row (lines 179–202)                                                   | Button with spinner and label. Fallback text if the endpoint is empty.    |
+|                                        | `notifySuccess` / `notifyError` (lines 228–251)                              | Toast feedback, 3 s duration.                                             |
+|                                        | `setSending`, `setFieldError` (lines 253–270)                                | Loading state and inline errors.                                          |
+|                                        | `validate()` (lines 272–309)                                                 | Client validation and messages.                                           |
+|                                        | Submit handler (lines 330–456)                                               | Full workflow from §5, including lifecycle events.                        |
+|                                        | Init (lines 460–461)                                                         | Runs on load and on `astro:page-load`.                                    |
+| `src/components/HubSpotTracking.astro` | Whole file (15 lines)                                                        | Tracking script tag.                                                      |
+| `src/components/ContactModal.astro`    | Line 37                                                                      | Modal instance of the form (`idPrefix="modal"`).                          |
+| `src/scripts/contact-modal.js`         | Lines 73–88                                                                  | Locks the modal while submitting. Closes it on success.                   |
+| `src/scripts/toast.js`                 | `showToast()` (lines 45–101)                                                 | Accessible toast notifications.                                           |
+| `src/pages/contact.astro`              | Line 168                                                                     | Contact page form instance.                                               |
+| `src/layouts/BaseLayout.astro`         | Lines 52, 102                                                                | Includes tracking and the modal.                                          |
+| `src/layouts/StandaloneLayout.astro`   | Lines 40, 47                                                                 | Includes tracking and the modal.                                          |
+| `astro.config.mjs`                     | Lines 9–16                                                                   | Temporary tunnel `allowedHosts` (preview only).                           |
+| `.env.example`                         | Whole file                                                                   | Documents that no environment variables are needed.                       |
+| `README.md`                            | Line 56                                                                      | One-paragraph integration summary.                                        |
+| `docs/deployment-checklist.md`         | §2, §3                                                                       | Related hosting tasks (`/privacy` redirect, tunnel removal).              |
 
 ---
 
@@ -651,7 +651,7 @@ values, who gets notified), spam protection, and a privacy/cookie review.
 6. **Hard-coded coupling to HubSpot.** Dropdown values and property names must
    be kept in sync with HubSpot by hand.
 7. **Generic error copy.** Every failure, including HubSpot validation errors,
-   shows *"Please check your connection and try again."* in the toast, even
+   shows _"Please check your connection and try again."_ in the toast, even
    when the connection is fine. Field-level hints appear only when HubSpot
    names the field.
 8. **Consent link points to `/privacy`**, a legacy route scheduled for

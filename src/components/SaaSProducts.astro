@@ -17,8 +17,8 @@ const productCards = [
       'Manage your people, attendance, leave, payroll, and performance from one connected HR platform.',
     icon: Users,
     tone: 'orange',
-    urlHost: 'hrms.incaendo.com',
-    exploreHref: 'https://hrms.incaendo.com/',
+    urlHost: 'nitipulse.com',
+    exploreHref: 'https://nitipulse.com/',
     exploreText: 'Explore',
     external: true,
     highlights: [
@@ -110,10 +110,10 @@ const productCards = [
         Work.
       </h2>
       <p class="saas-lead">
-        From managing people and operations to centralizing healthcare and business
-        workflows, Incaendo's business software helps bring essential operations into
-        one place. Choose the products you need, simplify everyday work, and scale as
-        your business grows.
+        From managing people and operations to centralizing healthcare and
+        business workflows, Incaendo's business software helps bring essential
+        operations into one place. Choose the products you need, simplify
+        everyday work, and scale as your business grows.
       </p>
       <div class="saas-actions">
         <a class="text-link saas-text-link" href="/contact">
@@ -135,7 +135,10 @@ const productCards = [
       {productCards.map((product) => {
         const Icon = product.icon
         return (
-          <article class={`saas-product-card is-${product.tone}`} data-reveal-item>
+          <article
+            class={`saas-product-card is-${product.tone}`}
+            data-reveal-item
+          >
             <!-- Card Header: Icon & Category Badge -->
             <div class="saas-card-top">
               <span class={`saas-icon is-${product.tone}`} aria-hidden="true">
@@ -223,18 +226,26 @@ const productCards = [
                   data-carousel-next
                   aria-label={`Next ${product.name} image`}
                 >
-                  <ChevronRight size={18} strokeWidth={2.4} aria-hidden="true" />
+                  <ChevronRight
+                    size={18}
+                    strokeWidth={2.4}
+                    aria-hidden="true"
+                  />
                 </button>
 
                 <!-- Bottom Floating Overlay Bar -->
                 <div class="carousel-overlay-bar">
                   <!-- Slide Caption Tag -->
-                  <div
-                    class="carousel-caption-pill"
-                    data-carousel-caption
-                  >
-                    <span class="caption-text">{product.slides[0].caption}</span>
-                    <ArrowUpRight size={12} strokeWidth={2.2} className="caption-arrow" aria-hidden="true" />
+                  <div class="carousel-caption-pill" data-carousel-caption>
+                    <span class="caption-text">
+                      {product.slides[0].caption}
+                    </span>
+                    <ArrowUpRight
+                      size={12}
+                      strokeWidth={2.2}
+                      className="caption-arrow"
+                      aria-hidden="true"
+                    />
                   </div>
 
                   <!-- Pagination Dots with Active Pill -->
@@ -266,7 +277,10 @@ const productCards = [
               <ul class="saas-highlights-list">
                 {product.highlights.map((highlight) => (
                   <li>
-                    <span class={`saas-check is-${product.tone}`} aria-hidden="true">
+                    <span
+                      class={`saas-check is-${product.tone}`}
+                      aria-hidden="true"
+                    >
                       <Check size={14} strokeWidth={2.4} />
                     </span>
                     <span>{highlight}</span>
@@ -492,9 +506,15 @@ const productCards = [
     height: 8.5px;
     border-radius: 50%;
   }
-  .chrome-dot.is-red { background: #ef4444; }
-  .chrome-dot.is-yellow { background: #f59e0b; }
-  .chrome-dot.is-green { background: #10b981; }
+  .chrome-dot.is-red {
+    background: #ef4444;
+  }
+  .chrome-dot.is-yellow {
+    background: #f59e0b;
+  }
+  .chrome-dot.is-green {
+    background: #10b981;
+  }
 
   .chrome-url-bar {
     display: inline-flex;
@@ -533,9 +553,21 @@ const productCards = [
   .card-carousel-viewport {
     position: relative;
     overflow: hidden;
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
     width: 100%;
     aspect-ratio: 1024 / 484;
     background: #fdfdfc;
+  }
+
+  .card-carousel-viewport.is-dragging {
+    cursor: grabbing;
+  }
+
+  .card-carousel-viewport img {
+    -webkit-user-drag: none;
   }
 
   .card-carousel-track {
@@ -831,24 +863,53 @@ const productCards = [
 </style>
 
 <script>
+  // One shared clock for every card carousel, so HRMS and NIRVAN slide at
+  // the same moment. A paused carousel (hover, drag, off-screen) skips ticks
+  // and rejoins on the next one, so they stay in step afterwards too.
+  const AUTO_PLAY_INTERVAL = 4400
+  const carouselTicks = new Set<() => void>()
+  let sharedTimer = 0
+
+  function ensureSharedTimer() {
+    if (sharedTimer) return
+    sharedTimer = window.setInterval(() => {
+      carouselTicks.forEach((tick) => tick())
+    }, AUTO_PLAY_INTERVAL)
+  }
+
   function initCardCarousels() {
-    const carousels = document.querySelectorAll<HTMLElement>('[data-card-carousel]')
+    const carousels = document.querySelectorAll<HTMLElement>(
+      '[data-card-carousel]',
+    )
     if (!carousels.length) return
 
-    carousels.forEach((carouselEl, cardIdx) => {
+    carousels.forEach((carouselEl) => {
       // Clean up any existing timer or observer on re-init
       const existingCleanup = (carouselEl as any).__carouselCleanup
       if (typeof existingCleanup === 'function') {
         existingCleanup()
       }
 
-      const track = carouselEl.querySelector<HTMLElement>('[data-carousel-track]')
-      const slides = Array.from(carouselEl.querySelectorAll<HTMLElement>('[data-carousel-slide]'))
-      const prevBtn = carouselEl.querySelector<HTMLButtonElement>('[data-carousel-prev]')
-      const nextBtn = carouselEl.querySelector<HTMLButtonElement>('[data-carousel-next]')
-      const dots = Array.from(carouselEl.querySelectorAll<HTMLButtonElement>('[data-carousel-dot]'))
-      const captionPill = carouselEl.querySelector<HTMLElement>('[data-carousel-caption]')
-      const captionText = captionPill?.querySelector<HTMLElement>('.caption-text')
+      const track = carouselEl.querySelector<HTMLElement>(
+        '[data-carousel-track]',
+      )
+      const slides = Array.from(
+        carouselEl.querySelectorAll<HTMLElement>('[data-carousel-slide]'),
+      )
+      const prevBtn = carouselEl.querySelector<HTMLButtonElement>(
+        '[data-carousel-prev]',
+      )
+      const nextBtn = carouselEl.querySelector<HTMLButtonElement>(
+        '[data-carousel-next]',
+      )
+      const dots = Array.from(
+        carouselEl.querySelectorAll<HTMLButtonElement>('[data-carousel-dot]'),
+      )
+      const captionPill = carouselEl.querySelector<HTMLElement>(
+        '[data-carousel-caption]',
+      )
+      const captionText =
+        captionPill?.querySelector<HTMLElement>('.caption-text')
 
       if (!track || slides.length === 0) return
 
@@ -860,15 +921,15 @@ const productCards = [
 
       let currentIdx = 0
       const totalSlides = slides.length
-      let autoPlayTimer: any = null
+      let autoPlaying = false
       let resumeTimeout: any = null
       let isVisible = true
       let isHovered = false
 
-      // Slight natural stagger so HRMS and NIRVAN don't change at the exact same millisecond
-      const AUTO_PLAY_INTERVAL = cardIdx === 0 ? 4400 : 4800
-      const INITIAL_DELAY = cardIdx === 0 ? 1200 : 3200
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      const INITIAL_DELAY = 1200
+      const prefersReducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)',
+      ).matches
 
       function updateSlide(idx: number) {
         currentIdx = (idx + totalSlides) % totalSlides
@@ -902,10 +963,7 @@ const productCards = [
       }
 
       function stopTimer() {
-        if (autoPlayTimer) {
-          clearInterval(autoPlayTimer)
-          autoPlayTimer = null
-        }
+        autoPlaying = false
         if (resumeTimeout) {
           clearTimeout(resumeTimeout)
           resumeTimeout = null
@@ -915,8 +973,14 @@ const productCards = [
       function startTimer() {
         if (prefersReducedMotion || !isVisible || isHovered) return
         stopTimer()
-        autoPlayTimer = window.setInterval(nextSlide, AUTO_PLAY_INTERVAL)
+        autoPlaying = true
       }
+
+      const tick = () => {
+        if (autoPlaying) nextSlide()
+      }
+      carouselTicks.add(tick)
+      ensureSharedTimer()
 
       function handleUserInteraction() {
         stopTimer()
@@ -949,30 +1013,90 @@ const productCards = [
         })
       })
 
-      // Touch / Swipe support
-      let touchStartX = 0
-      let touchEndX = 0
+      // Drag / swipe with mouse, finger or pen: the image follows the
+      // pointer, and a faster swipe snaps to the next slide faster.
+      const viewport = carouselEl.querySelector<HTMLElement>(
+        '.card-carousel-viewport',
+      )
+      let dragPointerId: number | null = null
+      let dragStartX = 0
+      let dragStartY = 0
+      let dragStartTime = 0
+      let dragging = false
+      let suppressClick = false
 
-      carouselEl.addEventListener('touchstart', (e: TouchEvent) => {
-        if (e.changedTouches?.[0]) {
-          touchStartX = e.changedTouches[0].screenX
-        }
-      }, { passive: true })
+      viewport?.addEventListener('pointerdown', (e: PointerEvent) => {
+        if (prefersReducedMotion) return
+        if (e.pointerType === 'mouse' && e.button !== 0) return
+        if ((e.target as Element).closest('button')) return
+        dragPointerId = e.pointerId
+        dragStartX = e.clientX
+        dragStartY = e.clientY
+        dragStartTime = e.timeStamp
+        dragging = false
+      })
 
-      carouselEl.addEventListener('touchend', (e: TouchEvent) => {
-        if (e.changedTouches?.[0]) {
-          touchEndX = e.changedTouches[0].screenX
-          const diff = touchEndX - touchStartX
-          if (Math.abs(diff) > 40) {
-            if (diff < 0) {
-              nextSlide()
-            } else {
-              prevSlide()
-            }
-            handleUserInteraction()
+      viewport?.addEventListener('pointermove', (e: PointerEvent) => {
+        if (e.pointerId !== dragPointerId || !track) return
+        const dx = e.clientX - dragStartX
+        const dy = e.clientY - dragStartY
+        if (!dragging) {
+          if (Math.abs(dy) > 8 && Math.abs(dy) > Math.abs(dx)) {
+            dragPointerId = null // vertical: let the page scroll
+            return
           }
+          if (Math.abs(dx) < 8) return
+          dragging = true
+          stopTimer()
+          viewport.setPointerCapture(e.pointerId)
+          viewport.classList.add('is-dragging')
+          track.style.transition = 'none'
         }
-      }, { passive: true })
+        track.style.transform = `translateX(calc(-${currentIdx * 100}% + ${dx}px))`
+      })
+
+      function endDrag(e: PointerEvent) {
+        if (e.pointerId !== dragPointerId) return
+        dragPointerId = null
+        if (!dragging || !track) return
+        dragging = false
+        suppressClick = true
+        viewport?.classList.remove('is-dragging')
+
+        const dx = e.clientX - dragStartX
+        const speed = Math.abs(dx) / Math.max(e.timeStamp - dragStartTime, 1)
+        // 450ms normal snap, down to 200ms for a quick flick.
+        const snapMs = Math.round(
+          Math.min(450, Math.max(200, 450 - (speed - 0.3) * 250)),
+        )
+        track.style.transition = `transform ${snapMs}ms cubic-bezier(0.25, 1, 0.5, 1)`
+        if (
+          e.type !== 'pointercancel' &&
+          (Math.abs(dx) > 40 || (speed > 0.5 && Math.abs(dx) > 15))
+        ) {
+          updateSlide(currentIdx + (dx < 0 ? 1 : -1))
+        } else {
+          updateSlide(currentIdx) // snap back
+        }
+        window.setTimeout(() => {
+          if (track) track.style.transition = ''
+        }, snapMs + 50)
+        handleUserInteraction()
+      }
+
+      viewport?.addEventListener('pointerup', endDrag)
+      viewport?.addEventListener('pointercancel', endDrag)
+      viewport?.addEventListener('dragstart', (e) => e.preventDefault())
+      viewport?.addEventListener(
+        'click',
+        (e) => {
+          if (!suppressClick) return
+          suppressClick = false
+          e.preventDefault()
+          e.stopPropagation()
+        },
+        true,
+      )
 
       // Keyboard support within card
       carouselEl.addEventListener('keydown', (e: KeyboardEvent) => {
@@ -1000,21 +1124,23 @@ const productCards = [
       // Viewport Intersection Observer: run only when visible
       let observer: IntersectionObserver | null = null
       if ('IntersectionObserver' in window) {
-        observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            isVisible = entry.isIntersecting
-            if (isVisible) {
-              startTimer()
-            } else {
-              stopTimer()
-            }
-          })
-        }, { threshold: 0.15 })
+        observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              isVisible = entry.isIntersecting
+              if (isVisible) {
+                startTimer()
+              } else {
+                stopTimer()
+              }
+            })
+          },
+          { threshold: 0.15 },
+        )
         observer.observe(carouselEl)
-      } else {
-        // Fallback for environments without IntersectionObserver
-        const initialTimer = window.setTimeout(startTimer, INITIAL_DELAY)
       }
+      // Without IntersectionObserver isVisible stays true, so the initial
+      // timer below starts the carousel on its own.
 
       // Start initial staggered auto-play
       const initialTimer = window.setTimeout(() => {
@@ -1026,6 +1152,7 @@ const productCards = [
       // Store cleanup on element
       ;(carouselEl as any).__carouselCleanup = () => {
         stopTimer()
+        carouselTicks.delete(tick)
         clearTimeout(initialTimer)
         if (observer) {
           observer.disconnect()

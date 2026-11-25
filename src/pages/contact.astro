@@ -12,14 +12,21 @@ import contactHeroImage from '../assets/contact-hero-project-journey.jpg'
   pageType="ContactPage"
 >
   <main id="main-content" class="contact-page">
-    <section class="contact-hero hero-system hero-system--split hero-system--feature" aria-labelledby="contact-hero-heading">
+    <section
+      class="contact-hero hero-system hero-system--split hero-system--feature"
+      aria-labelledby="contact-hero-heading"
+    >
       <div class="site-container contact-hero-grid hero-system__inner">
         <div class="contact-hero-copy hero-system__copy reveal">
           <h1 id="contact-hero-heading" class="hero-system__title">
-            Let's Turn Your <span class="hero-system__accent">Next Big Idea</span> Into Something Real
+            Let's Turn Your{' '}
+            <span class="hero-system__accent">Next Big Idea</span> Into
+            Something Real
           </h1>
           <p class="contact-hero-description hero-system__description">
-            Every great idea starts with a conversation. Share your vision, challenges, or goals with us, and let's explore how the right technology can turn them into meaningful business outcomes.
+            Every great idea starts with a conversation. Share your vision,
+            challenges, or goals with us, and let's explore how the right
+            technology can turn them into meaningful business outcomes.
           </p>
           <div class="contact-hero-actions hero-system__actions">
             <a class="button button-primary" href="#project-inquiry">
@@ -30,51 +37,79 @@ import contactHeroImage from '../assets/contact-hero-project-journey.jpg'
             </a>
           </div>
           <div class="contact-hero-steps hero-system__support">
-            <span class="hero-system__support-label" id="contact-hero-steps-label">
+            <span
+              class="hero-system__support-label"
+              id="contact-hero-steps-label"
+            >
               What happens next
             </span>
             <ol aria-labelledby="contact-hero-steps-label">
-              <li><span aria-hidden="true">01</span>Share your requirements</li>
-              <li><span aria-hidden="true">02</span>We understand your goals and constraints</li>
-              <li><span aria-hidden="true">03</span>We discuss the right next steps</li>
+              <li>
+                <span aria-hidden="true">01</span>Share your requirements
+              </li>
+              <li>
+                <span aria-hidden="true">02</span>We understand your goals and
+                constraints
+              </li>
+              <li>
+                <span aria-hidden="true">03</span>We discuss the right next
+                steps
+              </li>
             </ol>
           </div>
         </div>
         <div class="contact-hero-feature hero-system__visual reveal">
-        <figure class="contact-hero-visual hero-system__motion">
-          <div class="contact-hero-stage">
-            <Image
-              src={contactHeroImage}
-              alt=""
-              aria-hidden="true"
-              widths={[560, 840, 1024, 1600]}
-              sizes="(max-width: 760px) calc(100vw - 2rem), (max-width: 1100px) 48vw, 680px"
-              quality={92}
-              loading="eager"
-              class="contact-hero-backdrop"
-            />
-            <Image
-              src={contactHeroImage}
-              alt="Incaendo project journey workspace with laptop showing project overview dashboard, branded mug, notebook, and collaboration milestones: Consult with experts, Discuss your idea, Get a tech plan, Build & launch together, and Ongoing support"
-              widths={[560, 840, 1024, 1600]}
-              sizes="(max-width: 760px) calc(100vw - 2rem), (max-width: 1100px) 48vw, 680px"
-              quality={92}
-              loading="eager"
-              fetchpriority="high"
-              class="contact-hero-image hero-system__image"
-            />
-          </div>
-        </figure>
-          <a class="contact-hero-card contact-hero-card--email" href="mailto:info@incaendo.com">
-            <span class="contact-hero-card-icon" aria-hidden="true">@</span>
+          <figure class="contact-hero-visual hero-system__motion">
+            <div class="contact-hero-stage">
+              <Image
+                src={contactHeroImage}
+                alt=""
+                aria-hidden="true"
+                widths={[560, 840, 1024, 1600]}
+                sizes="(max-width: 760px) calc(100vw - 2rem), (max-width: 1100px) 48vw, 680px"
+                quality={92}
+                loading="eager"
+                class="contact-hero-backdrop"
+              />
+              <Image
+                src={contactHeroImage}
+                alt="Incaendo project journey workspace with laptop showing project overview dashboard, branded mug, notebook, and collaboration milestones: Consult with experts, Discuss your idea, Get a tech plan, Build & launch together, and Ongoing support"
+                widths={[560, 840, 1024, 1600]}
+                sizes="(max-width: 760px) calc(100vw - 2rem), (max-width: 1100px) 48vw, 680px"
+                quality={92}
+                loading="eager"
+                fetchpriority="high"
+                class="contact-hero-image hero-system__image"
+              />
+            </div>
+          </figure>
+          <a
+            class="contact-hero-card contact-hero-card--email"
+            href="mailto:info@incaendo.com"
+          >
+            <span class="contact-hero-card-icon" aria-hidden="true">
+              @
+            </span>
             <span>
               <small>Business enquiries</small>
               <strong>info@incaendo.com</strong>
             </span>
           </a>
-          <a class="contact-hero-card contact-hero-card--office" href="#our-office">
+          <a
+            class="contact-hero-card contact-hero-card--office"
+            href="#our-office"
+          >
             <span class="contact-hero-card-icon" aria-hidden="true">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                width="17"
+                height="17"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
                 <circle cx="12" cy="10" r="3"></circle>
               </svg>
@@ -95,7 +130,8 @@ import contactHeroImage from '../assets/contact-hero-project-journey.jpg'
       >
         <p class="eyebrow">PROJECT INQUIRY</p>
         <h2 id="contact-form-heading">
-          Let’s Make the <span class="hero-title-accent">First Conversation</span> Useful.
+          Let’s Make the{' '}
+          <span class="hero-title-accent">First Conversation</span> Useful.
         </h2>
         <p>
           A little context is enough to get started. We’ll take it from there.
@@ -170,7 +206,10 @@ import contactHeroImage from '../assets/contact-hero-project-journey.jpg'
       </div>
     </section>
 
-    <section class="contact-value-section" aria-labelledby="contact-value-title">
+    <section
+      class="contact-value-section"
+      aria-labelledby="contact-value-title"
+    >
       <div class="site-container">
         <div class="contact-value-panel reveal">
           <div class="contact-value-stat">
@@ -186,10 +225,15 @@ import contactHeroImage from '../assets/contact-hero-project-journey.jpg'
           <div class="contact-value-message">
             <p class="eyebrow eyebrow-light">Direct Engineering Partnership</p>
             <h2 id="contact-value-title">
-              Good <span>Technology</span> Starts with the <span>Right Conversation</span>.
+              Good <span>Technology</span> Starts with the{' '}
+              <span>Right Conversation</span>.
             </h2>
             <p>
-              We evaluate your business goals, technical constraints, and existing systems before recommending an approach. In our first conversation, you get honest architectural direction, realistic timelines, and clear scoping—helping you de-risk decisions before investing.
+              We evaluate your business goals, technical constraints, and
+              existing systems before recommending an approach. In our first
+              conversation, you get honest architectural direction, realistic
+              timelines, and clear scoping—helping you de-risk decisions before
+              investing.
             </p>
             <a class="text-link text-link-light" href="#project-inquiry">
               Start your project inquiry{' '}
@@ -203,17 +247,26 @@ import contactHeroImage from '../assets/contact-hero-project-journey.jpg'
             <div>
               <span>01</span>
               <b>Senior Architects, Not Sales</b>
-              <small>Direct technical discussions with practitioners who build and scale production systems.</small>
+              <small>
+                Direct technical discussions with practitioners who build and
+                scale production systems.
+              </small>
             </div>
             <div>
               <span>02</span>
               <b>Actionable Scope &amp; Estimates</b>
-              <small>Receive clear architecture options, milestones, and honest cost estimates within 24–48 hours.</small>
+              <small>
+                Receive clear architecture options, milestones, and honest cost
+                estimates within 24–48 hours.
+              </small>
             </div>
             <div>
               <span>03</span>
               <b>100% Confidential &amp; No Lock-In</b>
-              <small>Mutual NDA upfront, full client code ownership, and zero pressure or commitment required.</small>
+              <small>
+                Mutual NDA upfront, full client code ownership, and zero
+                pressure or commitment required.
+              </small>
             </div>
           </div>
         </div>

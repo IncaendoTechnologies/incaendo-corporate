@@ -339,3 +339,22 @@ html[data-entrance='active'] [data-motion='pending'] {
   }
 }
 
+/* Draggable marquees (src/scripts/marquee-drag.js).
+   Horizontal swipes go to the marquee; vertical swipes still scroll the page.
+   Skipped for reduced motion, where marquees fall back to native scrolling. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-marquee-drag] {
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  [data-marquee-drag].is-marquee-dragging {
+    cursor: grabbing;
+  }
+
+  [data-marquee-drag] img {
+    -webkit-user-drag: none;
+  }
+}

@@ -21,8 +21,12 @@ import { reviews } from '../data/reviews.js'
       role="region"
       aria-label="Client reviews"
     >
-      <div class="review-marquee-window">
-        <div class="review-marquee-track">
+      <div
+        class="review-marquee-window"
+        data-marquee-drag
+        data-direction="left"
+      >
+        <div class="review-marquee-track" data-marquee-track>
           {[0, 1].map((copy) => (
             <div
               class="review-marquee-group"

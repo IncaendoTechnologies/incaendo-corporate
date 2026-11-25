@@ -330,7 +330,7 @@ html[data-brand-intro='playing'] .site-intro {
   word-spacing: 0.025em;
   opacity: 0;
   transform: translateY(9px);
-  animation: site-intro-tagline-in 420ms var(--ease-out) 690ms both;
+  animation: rise-to-place 420ms var(--ease-out) 690ms both;
 }
 
 .site-intro-tagline span {
@@ -370,13 +370,6 @@ html[data-brand-intro='playing'] .site-intro {
   }
 }
 
-@keyframes site-intro-tagline-in {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 @keyframes site-intro-exit {
   to {
     opacity: 0;
@@ -412,4 +405,3 @@ html[data-brand-intro='playing'] .site-intro {
 .text-link-light:hover {
   color: #f3b18f;
 }
-

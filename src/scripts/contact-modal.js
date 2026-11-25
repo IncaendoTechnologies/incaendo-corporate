@@ -1,7 +1,6 @@
 function initContactModal() {
   const overlay = document.querySelector('[data-contact-modal]')
-  const triggers = document.querySelectorAll('[data-open-contact-modal]')
-  if (!overlay || !triggers.length) return
+  if (!overlay) return
   if (overlay.dataset.initialized === 'true') return
   overlay.dataset.initialized = 'true'
 
@@ -87,12 +86,32 @@ function initContactModal() {
     }
   })
 
-  triggers.forEach((trigger) => {
-    trigger.addEventListener('click', (event) => {
-      event.preventDefault()
-      openModal()
-    })
+  // One listener for the whole page: every [data-open-contact-modal] element
+  // and every link to the /contact page opens the popup instead of navigating.
+  document.addEventListener('click', (event) => {
+    if (event.defaultPrevented || event.button !== 0) return
+    // Ctrl/Cmd/Shift-click keeps the browser's "open in new tab/window".
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+    const trigger = event.target.closest?.('[data-open-contact-modal], a[href]')
+    if (!trigger || !isContactTrigger(trigger)) return
+    event.preventDefault()
+    openModal()
   })
+}
+
+function isContactTrigger(element) {
+  // The contact page is the main page with the form: no popup there at all,
+  // its links work normally (e.g. #project-inquiry scrolls to the form).
+  if (window.location.pathname.replace(/\/+$/, '') === '/contact') return false
+  if (element.hasAttribute('data-open-contact-modal')) return true
+  // Header navigation goes to the main contact page, not the popup.
+  if (element.hasAttribute('data-contact-page-link')) return false
+  if (element.tagName !== 'A' || element.hasAttribute('download')) return false
+  const url = new URL(element.href, window.location.href)
+  return (
+    url.origin === window.location.origin &&
+    url.pathname.replace(/\/+$/, '') === '/contact'
+  )
 }
 
 initContactModal()

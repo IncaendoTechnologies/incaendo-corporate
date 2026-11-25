@@ -1878,7 +1878,7 @@ const stages = [
   .dp-orbit {
     transform-box: view-box;
     transform-origin: 110px 70px;
-    animation: dp-spin 36s linear infinite;
+    animation: spin 36s linear infinite;
   }
   .dp-link-flow,
   .dp-trace-flow {
@@ -1900,7 +1900,7 @@ const stages = [
     animation: dp-glow 3.6s ease-in-out infinite;
   }
   .dp-gear {
-    animation: dp-spin 14s linear infinite;
+    animation: spin 14s linear infinite;
   }
   .dp-gear-teeth {
     stroke: var(--color-navy);
@@ -1966,11 +1966,6 @@ const stages = [
     100% {
       opacity: 0;
       transform: scale(1.7);
-    }
-  }
-  @keyframes dp-spin {
-    to {
-      transform: rotate(360deg);
     }
   }
   @keyframes dp-flow {

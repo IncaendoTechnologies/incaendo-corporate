@@ -106,7 +106,14 @@ const currentYear = new Date().getFullYear()
           <span class="footer-contact-text">info@incaendo.com</span>
         </a>
 
-        <div class="footer-contact-row">
+        <!-- Same Google Maps link as the map on the Contact page. -->
+        <a
+          class="footer-contact-row"
+          href="https://www.google.com/maps/dir/?api=1&destination=TigerCubs%2C%20B-9%2C%20B%20Block%2C%20Sector%202%2C%20Noida%2C%20UP%20201301"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Office: TigerCubs, B-9, B Block, Sector 2, Noida, UP 201301 (opens Google Maps in a new tab)"
+        >
           <span class="footer-contact-icon" aria-hidden="true">
             <svg
               width="16"
@@ -127,7 +134,7 @@ const currentYear = new Date().getFullYear()
             <br />
             Noida, UP – 201301
           </address>
-        </div>
+        </a>
       </div>
 
       <!-- Area B: Explore navigation -->
@@ -160,16 +167,28 @@ const currentYear = new Date().getFullYear()
             <a href="/careers">Careers</a>
           </li>
           <li>
-            <a href="/contact">Contact</a>
+            <a href="/contact" data-contact-page-link>
+              Contact
+            </a>
           </li>
           <li>
-            <a href="/faq">FAQ</a>
+            <a href="/faq" target="_blank" rel="noopener noreferrer">
+              FAQ
+            </a>
           </li>
           <li>
-            <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+            <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">
+              Privacy Policy
+            </a>
           </li>
           <li>
-            <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer">Terms & Conditions</a>
+            <a
+              href="/terms-and-conditions"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Terms & Conditions
+            </a>
           </li>
         </ul>
       </div>

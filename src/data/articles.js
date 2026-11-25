@@ -676,7 +676,7 @@ export const articles = [
         },
         afterParagraphs: [
           'The impact of the MIS platform is reflected in the following performance improvements:',
-          "Table: Operational Improvements",
+          'Table: Operational Improvements',
         ],
         table: {
           headers: ['Metric', 'Before Implementation', 'After Implementation'],

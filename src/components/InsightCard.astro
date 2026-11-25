@@ -2,13 +2,7 @@
 import InsightArtwork from './InsightArtwork.astro'
 import { Image } from 'astro:assets'
 
-const {
-  article,
-  variant = 'standard',
-  thumbnail,
-  target,
-  rel,
-} = Astro.props
+const { article, variant = 'standard', thumbnail, target, rel } = Astro.props
 const image = thumbnail ?? article.image?.src
 const categoryKey = article.category
   .toLocaleLowerCase()
@@ -80,8 +74,13 @@ const linkRel = target === '_blank' ? rel || 'noopener noreferrer' : rel
             {article.author} <span aria-hidden="true">·</span>{' '}
             {/* Non-breaking spaces keep the date and read time whole when
                 the line wraps. */}
-            {(article.dateFormatted || article.publishedDate || 'Published').replace(/ /g, ' ')}{' '}
-            <span aria-hidden="true">·</span> {`${article.readMinutes} min read`}
+            {(
+              article.dateFormatted ||
+              article.publishedDate ||
+              'Published'
+            ).replace(/ /g, ' ')}{' '}
+            <span aria-hidden="true">·</span>{' '}
+            {`${article.readMinutes} min read`}
           </>
         ) : (
           <>

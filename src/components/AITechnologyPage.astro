@@ -175,7 +175,11 @@ const statIcons = {
           <a class="button button-primary" href="#ai-capabilities">
             Explore our AI capabilities <span aria-hidden="true">↘</span>
           </a>
-          <a class="text-link" href="/contact">
+          <a
+            class="text-link"
+            href="/contact#project-inquiry"
+            data-open-contact-modal
+          >
             Discuss an AI project{' '}
             <span class="link-arrow" aria-hidden="true">
               →
@@ -261,7 +265,7 @@ const statIcons = {
       </div>
       <div class="ai-capability-grid reveal" data-reveal-stagger>
         {capabilities.map((item) => (
-          <article class="ai-detail-card" data-service-tilt>
+          <article class="ai-detail-card">
             <div class="ai-card-meta">
               <span>{item.number}</span>
               <span>{item.tag}</span>
@@ -279,6 +283,8 @@ const statIcons = {
         class="button button-primary ai-capabilities-cta reveal"
         data-reveal-role="cta"
         href="/projects"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         <span>Where Ideas Become Impact</span>
         <span class="link-arrow" aria-hidden="true">
@@ -290,7 +296,6 @@ const statIcons = {
 </div>
 
 <script>
-  import '../scripts/service-card-tilt.js'
   import '../scripts/ai-particle-hero.js'
 </script>
 
@@ -482,7 +487,7 @@ const statIcons = {
       0 1px 0 #fff inset,
       0 24px 44px -22px rgb(16 27 45 / 42%),
       0 10px 26px -16px color-mix(in srgb, var(--accent) 60%, transparent);
-    transform: translateY(-4px) scale(1.035);
+    transform: translateY(-4px);
   }
   .ai-particles-stat-icon {
     flex: none;
@@ -717,9 +722,8 @@ const statIcons = {
       border-color 280ms var(--ease-out),
       box-shadow 280ms var(--ease-out),
       background-color 280ms var(--ease-out);
-    transform: perspective(1100px) translateY(var(--service-card-lift))
-      rotateX(var(--service-tilt-x, 0deg)) rotateY(var(--service-tilt-y, 0deg));
-    transform-style: preserve-3d;
+    /* Lift only: a 3D tilt or scale made the card text blurry on hover. */
+    transform: translateY(var(--service-card-lift));
   }
   .ai-detail-card::before {
     position: absolute;
@@ -751,9 +755,7 @@ const statIcons = {
     box-shadow:
       0 22px 42px rgb(16 27 45 / 15%),
       0 7px 20px rgb(168 65 33 / 8%);
-    transform: perspective(1100px) translateY(var(--service-card-lift))
-      rotateX(var(--service-tilt-x, 0deg)) rotateY(var(--service-tilt-y, 0deg))
-      scale(1.015);
+    transform: translateY(var(--service-card-lift));
   }
   .ai-detail-card:hover::before,
   .ai-detail-card:focus-within::before {

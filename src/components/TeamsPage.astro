@@ -5,12 +5,17 @@ import { teamMembers } from '../data/team.js'
 import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
 ---
 
-<section class="team-hero page-intro hero-system hero-system--split hero-system--feature" aria-labelledby="team-page-heading">
+<section
+  class="team-hero page-intro hero-system hero-system--split hero-system--feature"
+  aria-labelledby="team-page-heading"
+>
   <div class="site-container team-hero-inner hero-system__inner">
     <div class="team-hero-copy hero-system__copy reveal">
       <h1 id="team-page-heading" class="hero-system__title">
-        Different Minds.<br />
-        <span class="hero-system__accent">One Shared Vision.</span><br />
+        Different Minds.
+        <br />
+        <span class="hero-system__accent">One Shared Vision.</span>
+        <br />
         Digital Solutions that Deliver.
       </h1>
       <p class="page-intro-description hero-system__description">
@@ -145,51 +150,63 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
   </div>
 </section>
 
-<section
-  class="team-collaboration-section section"
-  aria-labelledby="team-collaboration-heading"
->
+<section class="contact-value-section" aria-labelledby="team-cta-title">
   <div class="site-container">
-    <header class="team-collaboration-intro reveal">
-      <p class="eyebrow">A connected way of working</p>
-      <h2 id="team-collaboration-heading">
-        Good Decisions Keep the Work <span>Moving.</span>
-      </h2>
-      <p>
-        Incaendo’s published delivery approach connects discovery, planning,
-        engineering, review and continued improvement. The right team mix
-        depends on the requirements and systems involved.
-      </p>
-    </header>
+    <div class="contact-value-panel reveal">
+      <div class="contact-value-stat">
+        <span>15+</span>
+        <small>
+          YEARS OF INDUSTRY
+          <br />
+          EXPERIENCE
+        </small>
+        <i aria-hidden="true"></i>
+      </div>
 
-    <ol class="team-journey reveal" data-reveal-stagger>
-      <li data-reveal-item>
-        <span>01</span>
-        <h3>Understand</h3>
-        <p>Clarify goals, users, constraints and existing workflows.</p>
-      </li>
-      <li data-reveal-item>
-        <span>02</span>
-        <h3>Plan</h3>
-        <p>Shape scope and make practical design and technical decisions.</p>
-      </li>
-      <li data-reveal-item>
-        <span>03</span>
-        <h3>Build & Review</h3>
-        <p>Develop in steps, share progress and validate the solution.</p>
-      </li>
-      <li data-reveal-item>
-        <span>04</span>
-        <h3>Improve</h3>
-        <p>Prepare for release and consider what should evolve next.</p>
-      </li>
-    </ol>
-    <a class="team-text-link" href="/services#how-we-work">
-      Explore how we work{' '}
-      <span class="link-arrow" aria-hidden="true">
-        →
-      </span>
-    </a>
+      <div class="contact-value-message">
+        <p class="eyebrow eyebrow-light">Work with the team</p>
+        <h2 id="team-cta-title">
+          The Right <span>People</span> for the <span>Work Ahead</span>.
+        </h2>
+        <p>
+          Every project brings together the skills it needs, from discovery and
+          design to engineering and delivery. Tell us what you are working
+          toward and we will help shape the right team and the next step.
+        </p>
+        <a
+          class="text-link text-link-light"
+          href="/contact#project-inquiry"
+          data-open-contact-modal
+        >
+          Discuss your project{' '}
+          <span class="link-arrow" aria-hidden="true">
+            ↗
+          </span>
+        </a>
+      </div>
+
+      <div class="contact-value-points">
+        <div>
+          <span>01</span>
+          <b>Understand &amp; Plan</b>
+          <small>
+            Clarify goals, users and constraints, then shape a practical scope.
+          </small>
+        </div>
+        <div>
+          <span>02</span>
+          <b>Build &amp; Review</b>
+          <small>
+            Develop in steps, share progress and validate the solution together.
+          </small>
+        </div>
+        <div>
+          <span>03</span>
+          <b>Improve</b>
+          <small>Prepare for release and plan what should evolve next.</small>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -209,20 +226,9 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
   }
 
   .team-hero h1 span,
-  .team-section-heading h2 span,
-  .team-collaboration-intro h2 span {
+  .team-section-heading h2 span {
     color: var(--color-orange-dark);
   }
-
-  .team-text-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: var(--color-orange-dark);
-    font-size: 0.79rem;
-    font-weight: 650;
-  }
-
 
   /* Same frame as the approved Services hero image (656 x 517 at desktop);
      the photo fills it above the caption row. Mobile min-heights below
@@ -304,8 +310,7 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
     max-width: 650px;
   }
 
-  .team-section-heading h2,
-  .team-collaboration-intro h2 {
+  .team-section-heading h2 {
     margin: 0;
     font-size: var(--type-section-size);
     font-weight: var(--type-heading-weight);
@@ -415,81 +420,6 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
     line-height: 1.5;
   }
 
-  .team-collaboration-section {
-    background: #fbfaf8;
-  }
-
-  .team-collaboration-intro {
-    max-width: 740px;
-    margin-bottom: 2rem;
-  }
-
-  .team-collaboration-intro h2 {
-    margin-bottom: 0.9rem;
-  }
-
-  .team-collaboration-intro > p:last-child {
-    max-width: 650px;
-    margin-bottom: 0;
-    color: var(--color-body);
-    font-size: 0.9rem;
-  }
-
-  .team-journey {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    margin: 0 0 1.25rem;
-    padding: 0;
-    border-top: 1px solid var(--color-line);
-    list-style: none;
-  }
-
-  .team-journey li {
-    position: relative;
-    min-width: 0;
-    padding: 1.1rem 1rem 0.4rem 0;
-  }
-
-  .team-journey li + li {
-    padding-left: 1rem;
-  }
-
-  .team-journey li::before {
-    position: absolute;
-    top: -4px;
-    left: 0;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--color-orange-dark);
-    content: '';
-  }
-
-  .team-journey span {
-    color: #a1a6ad;
-    font-size: 0.63rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-  }
-
-  .team-journey h3 {
-    margin: 0.6rem 0 0.45rem;
-    font-size: 0.97rem;
-    font-weight: 650;
-  }
-
-  .team-journey p {
-    max-width: 230px;
-    margin: 0;
-    color: var(--color-muted);
-    font-size: 0.73rem;
-    line-height: 1.55;
-  }
-
-  .team-text-link {
-    margin-top: 0.2rem;
-  }
-
   @media (max-width: 1100px) {
     .team-profile-grid > :global(.team-profile) {
       flex-basis: calc((100% - 2rem) / 3);
@@ -525,13 +455,6 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
     }
     .team-profile-grid > :global(.team-profile) {
       flex-basis: calc((100% - 1rem) / 2);
-    }
-    .team-journey {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      row-gap: 1rem;
-    }
-    .team-journey li:nth-child(3) {
-      padding-left: 0;
     }
   }
 
@@ -576,23 +499,6 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
     }
     .team-discipline p {
       min-height: 0;
-    }
-    .team-journey {
-      grid-template-columns: minmax(0, 1fr);
-      row-gap: 0.35rem;
-    }
-    .team-journey li,
-    .team-journey li + li,
-    .team-journey li:nth-child(3) {
-      padding: 0.8rem 0 0.7rem 1rem;
-      border-left: 1px solid var(--color-line);
-    }
-    .team-journey li::before {
-      top: 1.05rem;
-      left: -4px;
-    }
-    .team-journey p {
-      max-width: none;
     }
   }
 </style>

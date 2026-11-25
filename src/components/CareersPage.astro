@@ -1,0 +1,645 @@
+---
+import ReviewNotice from './ReviewNotice.astro'
+import aws from '../assets/tech/amazonwebservices.svg'
+import azure from '../assets/tech/azure.svg'
+import googleCloud from '../assets/tech/googlecloud.svg'
+import docker from '../assets/tech/docker.svg'
+import kubernetes from '../assets/tech/kubernetes.svg'
+import java from '../assets/tech/java.svg'
+import python from '../assets/tech/python.svg'
+import javascript from '../assets/tech/javascript.svg'
+import typescript from '../assets/tech/typescript.svg'
+import nodejs from '../assets/tech/nodejs.svg'
+import react from '../assets/tech/react.svg'
+import angular from '../assets/tech/angularjs.svg'
+import flutter from '../assets/tech/flutter.svg'
+import mongodb from '../assets/tech/mongodb.svg'
+import mysql from '../assets/tech/mysql.svg'
+import postgresql from '../assets/tech/postgresql.svg'
+
+// Technology logos: Devicon (MIT licence), https://devicon.dev
+// Shown as moving rows so the board reads as a sample, not a full list.
+const stackRows = [
+  {
+    direction: 'left',
+    duration: '34s',
+    items: [
+      { name: 'AWS', logo: aws },
+      { name: 'Java', logo: java },
+      { name: 'React', logo: react },
+      { name: 'MongoDB', logo: mongodb },
+    ],
+  },
+  {
+    direction: 'right',
+    duration: '40s',
+    items: [
+      { name: 'Python', logo: python },
+      { name: 'Azure', logo: azure },
+      { name: 'MySQL', logo: mysql },
+      { name: 'Node.js', logo: nodejs },
+    ],
+  },
+  {
+    direction: 'left',
+    duration: '37s',
+    items: [
+      { name: 'JavaScript', logo: javascript },
+      { name: 'Docker', logo: docker },
+      { name: 'Angular', logo: angular },
+      { name: 'PostgreSQL', logo: postgresql },
+    ],
+  },
+  {
+    direction: 'right',
+    duration: '43s',
+    items: [
+      { name: 'Google Cloud', logo: googleCloud },
+      { name: 'TypeScript', logo: typescript },
+      { name: 'Flutter', logo: flutter },
+      { name: 'Kubernetes', logo: kubernetes },
+    ],
+  },
+]
+
+const listingIncludes = [
+  'Role and responsibilities',
+  'Location and work model',
+  'How to apply and who to contact',
+  'How applicant information is handled',
+]
+---
+
+<section
+  class="careers-hero page-intro hero-system hero-system--split hero-system--feature"
+  aria-labelledby="careers-page-heading"
+>
+  <div class="site-container hero-system__inner">
+    <div class="careers-hero-copy hero-system__copy reveal">
+      <h1 id="careers-page-heading" class="hero-system__title">
+        Do Thoughtful Work{' '}
+        <span class="hero-system__accent">with Good People.</span>
+      </h1>
+      <p class="page-intro-description hero-system__description">
+        See the kind of work we do and the technologies behind it—so you know
+        what working at Incaendo involves when new roles open.
+      </p>
+      <div class="hero-system__actions">
+        <a class="button button-primary" href="#career-openings">
+          Current openings <span aria-hidden="true">↘</span>
+        </a>
+        <a
+          class="button button-outline"
+          href="/projects"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Explore our projects <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <div class="careers-hero-meta" aria-label="About Incaendo">
+        <span>Noida, India</span>
+        <span>Software, web, mobile &amp; AI</span>
+        <span>15+ years of experience</span>
+      </div>
+    </div>
+
+    <div
+      class="careers-hero-visual hero-system__visual reveal"
+      data-reveal-role="stage"
+    >
+      <div class="careers-stack">
+        <div class="careers-stack-bar" aria-hidden="true">
+          <span class="careers-stack-dots">
+            <i></i>
+            <i></i>
+            <i></i>
+          </span>
+          <span class="careers-stack-title">incaendo / tech-stack</span>
+          <span class="careers-stack-live">
+            <span class="careers-stack-live-dot"></span>
+            Always evolving
+          </span>
+        </div>
+
+        <ul class="visually-hidden" aria-label="Technologies we work with">
+          {stackRows
+            .flatMap((row) => row.items)
+            .map((tech) => (
+              <li>{tech.name}</li>
+            ))}
+        </ul>
+
+        <div class="careers-stack-rows" aria-hidden="true">
+          {stackRows.map((row) => (
+            <div
+              class:list={['careers-stack-row', `is-${row.direction}`]}
+              data-marquee-drag
+              data-direction={row.direction}
+              style={`--row-duration: ${row.duration}`}
+            >
+              <div class="careers-stack-track" data-marquee-track>
+                {[0, 1].map(() => (
+                  <div class="careers-stack-group">
+                    {[...row.items, ...row.items].map((tech) => (
+                      <span class="careers-tech">
+                        <img
+                          src={tech.logo.src}
+                          width="38"
+                          height="38"
+                          alt=""
+                          loading="eager"
+                          decoding="async"
+                        />
+                        {tech.name}
+                      </span>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <p class="careers-stack-note">
+          <span aria-hidden="true">+</span> and the tools each project needs
+        </p>
+      </div>
+      <span class="careers-hero-index" aria-hidden="true">
+        INCAENDO / CAREERS
+      </span>
+    </div>
+  </div>
+</section>
+
+<section
+  class="careers-openings section section-soft"
+  id="career-openings"
+  aria-labelledby="career-openings-heading"
+>
+  <div class="site-container">
+    <div class="careers-openings-card reveal">
+      <div class="careers-openings-status">
+        <span class="careers-status-pill">
+          <span class="careers-status-dot" aria-hidden="true"></span>
+          Openings status
+        </span>
+        <h2 id="career-openings-heading">
+          No Verified Openings Are Listed <span>Right Now.</span>
+        </h2>
+        <p>
+          We’ll publish roles here when the details and application process are
+          ready. We don’t collect CVs through this site yet.
+        </p>
+      </div>
+      <div class="careers-openings-list">
+        <span class="careers-openings-label">Each listing will include</span>
+        <ul>
+          {listingIncludes.map((item, index) => (
+            <li>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <ReviewNotice title="Careers information to confirm">
+      Add current openings, location and work model, hiring contact, and a clear
+      applicant privacy process before inviting applications.
+    </ReviewNotice>
+  </div>
+</section>
+
+<style>
+  /* Hero */
+  .careers-hero {
+    background:
+      radial-gradient(
+        ellipse at 92% 12%,
+        rgb(244 233 223 / 74%),
+        transparent 34%
+      ),
+      linear-gradient(125deg, #fbfaf8 0%, var(--color-paper) 53%, #f0ece6 100%);
+  }
+
+  .careers-hero::after {
+    content: none;
+  }
+
+  .careers-hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.15rem;
+    margin-top: 2.2rem;
+    color: #667283;
+    font-size: 0.69rem;
+    font-weight: 600;
+  }
+
+  .careers-hero-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .careers-hero-meta span::before {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-orange);
+    content: '';
+  }
+
+  .careers-hero-visual {
+    position: relative;
+    min-width: 0;
+    padding-bottom: 2.4rem;
+  }
+
+  .careers-hero-index {
+    position: absolute;
+    right: 0.1rem;
+    bottom: 0.8rem;
+    color: var(--color-muted);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+
+  /* Tech stack board */
+  .careers-stack {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgb(16 27 45 / 10%);
+    border-radius: var(--radius-large);
+    background:
+      radial-gradient(ellipse at 85% 0%, rgb(232 93 38 / 10%), transparent 45%),
+      linear-gradient(145deg, #fffdfb 0%, #f6f1eb 100%);
+    box-shadow: 0 24px 60px rgb(16 27 45 / 11%);
+  }
+
+  .careers-stack-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.85rem 1.1rem;
+    border-bottom: 1px solid rgb(16 27 45 / 8%);
+    background: rgb(255 255 255 / 70%);
+  }
+
+  .careers-stack-dots {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .careers-stack-dots i {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #f0a07a;
+  }
+
+  .careers-stack-dots i:nth-child(2) {
+    background: #f5c86b;
+  }
+
+  .careers-stack-dots i:nth-child(3) {
+    background: #8fc79a;
+  }
+
+  .careers-stack-title {
+    flex: 1;
+    color: #7a8492;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.7rem;
+  }
+
+  .careers-stack-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.25rem 0.65rem;
+    border: 1px solid rgb(201 84 43 / 24%);
+    border-radius: 999px;
+    background: #fff6f0;
+    color: var(--color-orange-dark);
+    font-size: 0.62rem;
+    font-weight: 700;
+  }
+
+  .careers-stack-live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #e85d26;
+    animation: careers-blink 1.6s ease-in-out infinite;
+  }
+
+  @keyframes careers-blink {
+    50% {
+      opacity: 0.25;
+    }
+  }
+
+  /* Moving rows: each row is a seamless marquee (two identical groups,
+     moved by 50%), faded at both edges so the list never looks "complete". */
+  .careers-stack-rows {
+    display: grid;
+    gap: clamp(0.6rem, 1.1vw, 0.85rem);
+    padding-block: clamp(1.2rem, 2.4vw, 1.8rem) 0.4rem;
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 14%,
+      black 86%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 14%,
+      black 86%,
+      transparent 100%
+    );
+  }
+
+  .careers-stack-row {
+    overflow: hidden;
+    padding-block: 4px;
+  }
+
+  .careers-stack-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+  }
+
+  .careers-stack-row.is-left .careers-stack-track {
+    animation: marquee-left var(--row-duration, 36s) linear infinite;
+  }
+
+  .careers-stack-row.is-right .careers-stack-track {
+    animation: marquee-right var(--row-duration, 36s) linear infinite;
+  }
+
+  @media (hover: hover) {
+    .careers-stack-row:hover .careers-stack-track {
+      animation-play-state: paused;
+    }
+  }
+
+  .careers-stack-group {
+    display: flex;
+    gap: 0.85rem;
+    padding-right: 0.85rem;
+  }
+
+  .careers-tech {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem 1.35rem 0.8rem 0.85rem;
+    border: 1px solid rgb(16 27 45 / 8%);
+    border-radius: 999px;
+    background: #fff;
+    box-shadow: 0 10px 24px -16px rgb(16 27 45 / 45%);
+    color: var(--color-navy);
+    font-size: 0.98rem;
+    font-weight: 650;
+    white-space: nowrap;
+    transition:
+      border-color 300ms var(--ease-out),
+      box-shadow 300ms var(--ease-out),
+      transform 300ms var(--ease-out);
+  }
+
+  .careers-tech img {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+  }
+
+  @media (hover: hover) {
+    .careers-tech:hover {
+      border-color: rgba(232, 93, 38, 0.4);
+      box-shadow:
+        0 12px 24px -14px rgb(16 27 45 / 40%),
+        0 0 0 3px rgba(232, 93, 38, 0.1);
+      transform: translateY(-2px);
+    }
+  }
+
+  .careers-stack-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0.9rem 1rem 1.2rem;
+    color: #7a8492;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.72rem;
+  }
+
+  .careers-stack-note span {
+    display: inline-grid;
+    place-items: center;
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 50%;
+    background: #e85d26;
+    color: #fff;
+    font-family: inherit;
+    font-weight: 700;
+  }
+
+  /* Openings status */
+  .careers-openings-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.9fr);
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-items: center;
+    padding: clamp(1.6rem, 3.5vw, 2.8rem);
+    border: 1px solid rgb(201 84 43 / 18%);
+    border-radius: var(--radius-large);
+    background: linear-gradient(110deg, #fffdfa 0%, #fff 48%, #f8eee8 100%);
+    box-shadow: 0 24px 60px -42px rgb(168 65 33 / 36%);
+  }
+
+  .careers-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-bottom: 1rem;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid rgb(16 27 45 / 10%);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--color-navy);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .careers-status-dot {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #e85d26;
+  }
+
+  .careers-status-dot::after {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #e85d26;
+    content: '';
+    animation: careers-pulse 1.8s ease-out infinite;
+  }
+
+  @keyframes careers-pulse {
+    from {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(2.8);
+    }
+  }
+
+  .careers-openings-status h2 {
+    margin: 0 0 0.85rem;
+    font-size: var(--type-section-size);
+    font-weight: var(--type-heading-weight);
+    letter-spacing: var(--type-section-letter-spacing);
+    word-spacing: var(--type-section-word-spacing);
+    line-height: var(--type-section-line-height);
+  }
+
+  .careers-openings-status h2 span {
+    color: var(--color-orange-dark);
+  }
+
+  .careers-openings-status p {
+    max-width: 560px;
+    margin: 0;
+    color: var(--color-body);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .careers-openings-label {
+    display: block;
+    margin-bottom: 0.75rem;
+    color: var(--color-orange-dark);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .careers-openings-list {
+    padding-left: clamp(1.2rem, 2.5vw, 2.2rem);
+    border-left: 1px solid rgb(16 27 45 / 10%);
+  }
+
+  .careers-openings-list ul {
+    display: grid;
+    gap: 0.2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .careers-openings-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid rgb(16 27 45 / 7%);
+    color: var(--color-navy);
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+
+  .careers-openings-list li:last-child {
+    border-bottom: 0;
+  }
+
+  .careers-openings-list li span {
+    color: var(--color-orange-dark);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .careers-openings :global(.review-notice) {
+    margin-top: 1.25rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 899px) {
+    .careers-openings-card {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .careers-openings-list {
+      padding-top: 1.25rem;
+      padding-left: 0;
+      border-top: 1px solid rgb(16 27 45 / 10%);
+      border-left: 0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .careers-hero-visual {
+      padding-bottom: 1.7rem;
+    }
+
+    .careers-hero-index {
+      right: 0;
+      bottom: 0.45rem;
+      font-size: 0.49rem;
+    }
+
+    .careers-tech {
+      gap: 0.55rem;
+      padding: 0.6rem 1rem 0.6rem 0.65rem;
+      font-size: 0.84rem;
+    }
+
+    .careers-tech img {
+      width: 30px;
+      height: 30px;
+    }
+
+    .careers-stack-live {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .careers-stack-row .careers-stack-track,
+    .careers-stack-live-dot,
+    .careers-status-dot::after {
+      animation: none !important;
+    }
+
+    .careers-stack-row {
+      overflow-x: auto;
+    }
+
+    .careers-tech {
+      transition: none;
+    }
+
+    .careers-tech:hover {
+      transform: none;
+    }
+  }
+</style>

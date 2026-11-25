@@ -58,7 +58,9 @@ const total = String(aiAgents.length).padStart(2, '0')
               data-stack-card
             >
               <article
-                class="ai-agent-card"
+                class="ai-agent-card accent-card"
+                data-accent-side={index % 2 === 0 ? 'left' : 'right'}
+                data-accent-from="wide"
                 aria-labelledby={`ai-agent-${agent.id}`}
               >
                 <figure class="ai-agent-media">
@@ -193,7 +195,9 @@ const total = String(aiAgents.length).padStart(2, '0')
     gap: 1.1rem;
     overflow: hidden;
     padding: 0.85rem;
-    border: 1px solid rgb(16 27 45 / 9%);
+    /* Border, hover lift and orange edge (on the image side, wide screens
+       only): shared .accent-card (src/styles/accent-card.css). */
+    --accent-card-border: rgb(16 27 45 / 9%);
     border-radius: var(--radius-large);
     background: linear-gradient(165deg, #fffdfb 0%, #fbf8f4 60%, #f8f3ed 100%);
     box-shadow:
@@ -342,6 +346,15 @@ const total = String(aiAgents.length).padStart(2, '0')
     .ai-agent-description {
       font-size: clamp(0.95rem, 1.1vw, 1.02rem);
     }
+    /* Alternate sides: every second card puts the image on the right */
+    .ai-agent:nth-child(even) .ai-agent-card {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      padding-right: clamp(1.25rem, 2.2vw, 1.75rem);
+      padding-left: clamp(1.6rem, 3vw, 2.75rem);
+    }
+    .ai-agent:nth-child(even) .ai-agent-media {
+      order: 1;
+    }
   }
 
   /* Pinned stack where there is room to read each card in turn */
@@ -425,7 +438,8 @@ const total = String(aiAgents.length).padStart(2, '0')
   }
 
   @media (min-width: 801px) and (max-width: 1100px) {
-    .ai-agent-card {
+    .ai-agent-card,
+    .ai-agent:nth-child(even) .ai-agent-card {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 1.75rem;
     }
@@ -440,10 +454,15 @@ const total = String(aiAgents.length).padStart(2, '0')
 
   /* Tall tablets: image above the text so neither column gets cramped */
   @media (min-width: 801px) and (max-width: 1100px) and (min-height: 1000px) {
-    .ai-agent-card {
+    .ai-agent-card,
+    .ai-agent:nth-child(even) .ai-agent-card {
       grid-template-columns: minmax(0, 1fr);
       align-content: start;
       gap: 1.4rem;
+    }
+    /* Single column: image always above the text */
+    .ai-agent:nth-child(even) .ai-agent-media {
+      order: 0;
     }
     .ai-agent-media {
       aspect-ratio: 5 / 4;
