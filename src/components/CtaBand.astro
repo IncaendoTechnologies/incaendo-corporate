@@ -1,0 +1,51 @@
+---
+/*
+ * Call-to-action band: the design system `CtaBand` (inc-cta-band), the
+ * page's one navy emphasis band, just above the footer. Markup and default
+ * copy as in the design system; a page may pass its own title, highlighted
+ * phrase and sentence. The primary button opens the shared contact popup;
+ * the outline button is the email address. Styles come from
+ * src/styles/incaendo/components.css.
+ */
+interface Props {
+  title?: string
+  highlight?: string
+  text?: string
+  headingId?: string
+}
+
+const {
+  title = 'Have a project in mind?',
+  highlight = 'Let’s talk.',
+  text = 'Tell us what you are working on, and we will come back to you with a few questions and the next steps.',
+  headingId = 'cta-band-title',
+} = Astro.props
+---
+
+<div class="inc-shell">
+  <section class="inc-cta-band" aria-labelledby={headingId}>
+    <div class="site-container">
+      <div class="inc-cta-inner">
+        <div>
+          <h2 class="inc-cta-title" id={headingId}>
+            {title}{' '}
+            {highlight && <span class="inc-highlight">{highlight}</span>}
+          </h2>
+          <p class="inc-cta-text">{text}</p>
+        </div>
+        <div class="inc-cta-actions">
+          <a
+            class="inc-btn inc-btn-primary"
+            href="/contact#project-inquiry"
+            data-open-contact-modal
+          >
+            Book a call
+          </a>
+          <a class="inc-btn inc-btn-on-navy" href="mailto:info@incaendo.com">
+            info@incaendo.com
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

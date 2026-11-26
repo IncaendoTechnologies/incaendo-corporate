@@ -86,7 +86,7 @@ const productCards = [
       },
       {
         image: '/products/nirvan-diagnostics-lab.png',
-        alt: 'NIRVAN diagnostic pathology and radiology center tracking sample barcodes and turnaround time',
+        alt: 'NIRVAN diagnostic pathology and radiology centre tracking sample barcodes and turnaround time',
         caption: 'Diagnostic Pathology & Imaging LIMS',
       },
     ],
@@ -106,11 +106,11 @@ const productCards = [
         <span class="saas-eyebrow-case">(SaaS)</span>
       </p>
       <h2 id="saas-products-title">
-        <span>Grow Your Business</span> with Software Built for the Way You
-        Work.
+        <span>Grow your business</span> with software built for the way you
+        work.
       </h2>
       <p class="saas-lead">
-        From managing people and operations to centralizing healthcare and
+        From managing people and operations to centralising healthcare and
         business workflows, Incaendo's business software helps bring essential
         operations into one place. Choose the products you need, simplify
         everyday work, and scale as your business grows.
@@ -248,19 +248,16 @@ const productCards = [
                     />
                   </div>
 
-                  <!-- Pagination Dots with Active Pill -->
-                  <div
-                    class="carousel-dots-list"
-                    role="tablist"
-                    aria-label={`${product.name} slide navigation`}
-                  >
+                  <!-- Slide position dots: a visual indicator only. The
+                       arrows (44px hit areas) are the controls, because
+                       6px dots cannot meet the 44px tap size. -->
+                  <div class="carousel-dots-list" aria-hidden="true">
                     {product.slides.map((slide, dotIdx) => (
                       <button
                         type="button"
                         class={`carousel-dot ${dotIdx === 0 ? 'is-active' : ''}`}
                         data-carousel-dot={dotIdx}
-                        role="tab"
-                        aria-selected={dotIdx === 0 ? 'true' : 'false'}
+                        tabindex="-1"
                         aria-label={`Go to slide ${dotIdx + 1}: ${slide.caption}`}
                       >
                         <span class="visually-hidden">Slide {dotIdx + 1}</span>
@@ -312,7 +309,6 @@ const productCards = [
   .saas-section {
     position: relative;
     padding-block: var(--section-space-sm) var(--section-space-md);
-    background: var(--color-paper);
   }
   .saas-section h2,
   .saas-section h3,
@@ -325,23 +321,23 @@ const productCards = [
   .saas-intro {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 0 auto clamp(2.25rem, 3.8vw, 3.25rem);
-    text-align: center;
+    align-items: flex-start;
+    margin: 0 0 clamp(2.25rem, 3.8vw, 3.25rem);
+    text-align: left;
   }
   .saas-intro h2 {
     max-width: 820px;
     margin-bottom: 1rem;
     color: var(--color-ink);
     font-size: var(--type-section-size);
-    font-weight: var(--type-heading-weight);
+    font-weight: var(--type-section-weight);
     letter-spacing: var(--type-section-letter-spacing);
     word-spacing: var(--type-section-word-spacing);
     line-height: var(--type-section-line-height);
     text-wrap: balance;
   }
   .saas-intro h2 span {
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
   }
   .saas-eyebrow-case {
     letter-spacing: 0.06em;
@@ -363,10 +359,10 @@ const productCards = [
     gap: 1rem 1.35rem;
   }
   .saas-text-link {
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
   }
   .saas-text-link:hover {
-    color: var(--color-orange);
+    color: var(--color-orange-text);
   }
 
   /* --- Product cards grid (2-column spacious layout) --------------------- */
@@ -385,10 +381,8 @@ const productCards = [
     flex-direction: column;
     justify-content: space-between;
     padding: clamp(1.75rem, 2.5vw, 2.35rem) clamp(1.5rem, 2.2vw, 2.25rem);
-    border: 1px solid #ebe5dc;
     border-radius: var(--radius-large, 24px);
-    background: #ffffff;
-    box-shadow: 0 14px 36px -22px rgba(16, 27, 45, 0.16);
+    box-shadow: var(--shadow-1);
     transition:
       transform var(--duration-standard) var(--ease-out),
       box-shadow var(--duration-standard) ease,
@@ -396,9 +390,9 @@ const productCards = [
   }
 
   .saas-product-card:hover {
-    border-color: rgba(201, 84, 43, 0.35);
-    box-shadow: 0 24px 52px -20px rgba(16, 27, 45, 0.22);
-    transform: translateY(-4px);
+    border-color: rgba(194, 76, 18, 0.35);
+    box-shadow: var(--shadow-2);
+    transform: none !important;
   }
 
   .saas-card-top {
@@ -411,18 +405,22 @@ const productCards = [
 
   /* Icon tiles, toned from the existing palette */
   .saas-icon {
+    /* Card icon (design system inc-card-icon): 40px orange-soft circle */
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--orange-soft);
+    color: var(--orange-text);
     display: grid;
-    width: 48px;
-    height: 48px;
     place-items: center;
-    border-radius: 12px;
     transition:
       background var(--duration-fast) ease,
       color var(--duration-fast) ease;
   }
   .saas-icon.is-orange {
-    background: rgb(201 84 43 / 11%);
-    color: var(--color-orange-dark);
+    background: rgb(194 76 18 / 11%);
+    color: var(--color-orange-text);
   }
   .saas-icon.is-blue {
     background: rgb(84 123 157 / 13%);
@@ -461,7 +459,7 @@ const productCards = [
     font-family: var(--font-heading);
     font-size: var(--type-card-title-lg-size);
     font-weight: var(--type-heading-weight);
-    letter-spacing: -0.025em;
+    letter-spacing: -0.01em;
     line-height: 1.2;
   }
 
@@ -476,10 +474,10 @@ const productCards = [
 
   .card-carousel-wrapper {
     position: relative;
-    border-radius: 16px;
+    border-radius: var(--radius-lg);
     background: #f8f7f4;
     border: 1px solid #ebe5dc;
-    box-shadow: 0 8px 24px -12px rgba(16, 27, 45, 0.12);
+    box-shadow: 0 8px 24px -12px rgba(15, 33, 54, 0.12);
     overflow: hidden;
     margin-bottom: 1.5rem;
     user-select: none;
@@ -523,7 +521,7 @@ const productCards = [
     padding: 3px 10px;
     background: #f5f2ec;
     border-radius: 999px;
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-family: monospace;
     color: #556270;
     max-width: 220px;
@@ -540,7 +538,7 @@ const productCards = [
   }
 
   .chrome-status-tag {
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     font-weight: 700;
     color: #2b577e;
     background: #eef5fb;
@@ -605,8 +603,8 @@ const productCards = [
     height: 34px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.94);
-    border: 1px solid rgba(16, 27, 45, 0.12);
-    box-shadow: 0 4px 14px rgba(16, 27, 45, 0.18);
+    border: 1px solid rgba(15, 33, 54, 0.12);
+    box-shadow: var(--shadow-1);
     display: grid;
     place-items: center;
     color: var(--color-navy);
@@ -633,11 +631,11 @@ const productCards = [
     color: #ffffff;
     border-color: var(--color-orange);
     transform: translateY(-50%) scale(1.08);
-    box-shadow: 0 6px 18px rgba(201, 84, 43, 0.32);
+    box-shadow: var(--shadow-2);
   }
 
   .carousel-nav-btn:focus-visible {
-    outline: 2px solid var(--color-orange);
+    outline: 2px solid var(--color-focus);
     outline-offset: 2px;
   }
 
@@ -659,7 +657,7 @@ const productCards = [
     align-items: center;
     gap: 4px;
     padding: 4px 10px;
-    background: rgba(16, 27, 45, 0.82);
+    background: rgba(15, 33, 54, 0.82);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border-radius: 999px;
@@ -667,7 +665,7 @@ const productCards = [
     font-size: var(--type-label-size);
     font-weight: 600;
     letter-spacing: 0.01em;
-    box-shadow: 0 4px 12px rgba(16, 27, 45, 0.22);
+    box-shadow: var(--shadow-1);
     max-width: 65%;
     overflow: hidden;
     pointer-events: auto;
@@ -690,12 +688,12 @@ const productCards = [
     align-items: center;
     gap: 6px;
     padding: 5px 9px;
-    background: rgba(16, 27, 45, 0.75);
+    background: rgba(15, 33, 54, 0.75);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border-radius: 999px;
-    box-shadow: 0 4px 12px rgba(16, 27, 45, 0.22);
-    pointer-events: auto;
+    box-shadow: var(--shadow-1);
+    pointer-events: none;
   }
 
   .carousel-dot {
@@ -775,8 +773,8 @@ const productCards = [
   }
 
   .saas-check.is-orange {
-    background: rgb(201 84 43 / 14%);
-    color: var(--color-orange-dark);
+    background: rgb(194 76 18 / 14%);
+    color: var(--color-orange-text);
   }
 
   .saas-check.is-blue {
@@ -796,8 +794,6 @@ const productCards = [
   }
 
   .saas-btn-explore {
-    padding: 0.7rem 1.6rem;
-    border-radius: 999px;
     text-decoration: none;
   }
 
@@ -870,8 +866,12 @@ const productCards = [
   const carouselTicks = new Set<() => void>()
   let sharedTimer = 0
 
+  // Design system ("Web foundations", Motion): nothing auto-advances while
+  // someone is reading, so the cards move only by the arrows, dots or swipe.
+  const AUTO_ADVANCE = false
+
   function ensureSharedTimer() {
-    if (sharedTimer) return
+    if (!AUTO_ADVANCE || sharedTimer) return
     sharedTimer = window.setInterval(() => {
       carouselTicks.forEach((tick) => tick())
     }, AUTO_PLAY_INTERVAL)
@@ -946,7 +946,6 @@ const productCards = [
         dots.forEach((dot, i) => {
           const isActive = i === currentIdx
           dot.classList.toggle('is-active', isActive)
-          dot.setAttribute('aria-selected', isActive ? 'true' : 'false')
         })
 
         if (captionText && dotLabels[currentIdx]) {

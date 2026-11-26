@@ -51,7 +51,7 @@ export const homepageServices = [
   {
     number: '01',
     id: 'ai-automation',
-    title: 'AI & Automation',
+    title: 'AI & automation',
     description:
       "Use AI to handle repetitive tasks, save your team's time, and make everyday business work easier.",
     points: [
@@ -66,7 +66,7 @@ export const homepageServices = [
   {
     number: '02',
     id: 'custom-software-development',
-    title: 'Custom Software Development',
+    title: 'Custom software development',
     description:
       'Build purpose-fit systems for business processes that off-the-shelf tools cannot support.',
     points: [
@@ -81,14 +81,14 @@ export const homepageServices = [
   {
     number: '03',
     id: 'web-application-development',
-    title: 'Web Application Development',
+    title: 'Web application development',
     description:
       'Create secure, responsive web applications for customers, staff, and business partners.',
     points: [
       'Web platforms & portals',
       'Responsive product interfaces',
       'Progressive web apps',
-      'Performance optimization',
+      'Performance optimisation',
     ],
     href: '/services#web-application-development',
     icon: Globe,
@@ -96,7 +96,7 @@ export const homepageServices = [
   {
     number: '04',
     id: 'mobile-app-development',
-    title: 'Mobile App Development',
+    title: 'Mobile app development',
     description:
       'Bring essential digital experiences to mobile with fast, intuitive apps for iOS and Android.',
     points: [
@@ -111,12 +111,12 @@ export const homepageServices = [
   {
     number: '05',
     id: 'enterprise-solutions',
-    title: 'Enterprise Solutions',
+    title: 'Enterprise solutions',
     description:
       'Connect teams and operations with scalable platforms designed for complex business environments.',
     points: [
       'Enterprise integrations',
-      'Modernization & workflows',
+      'Modernisation & workflows',
       'HRM & CRM systems',
       'Role-based access control',
     ],
@@ -126,7 +126,7 @@ export const homepageServices = [
   {
     number: '06',
     id: 'cloud-data',
-    title: 'Cloud & Data',
+    title: 'Cloud & data',
     description:
       'Build a reliable cloud foundation and turn well-governed data into clearer operational insight.',
     points: [
@@ -144,7 +144,7 @@ export const faqs = [
   {
     question: 'What services does your company offer?',
     answer:
-      'We specialize in mobile app development, web application development, UI/UX design, cross-platform development, and app maintenance & support.',
+      'We specialise in mobile app development, web application development, UI/UX design, cross-platform development, and app maintenance & support.',
   },
   {
     question: 'Do you develop both Android and iOS applications?',
@@ -160,7 +160,7 @@ export const faqs = [
     question:
       'Can you build custom applications tailored to our business needs?',
     answer:
-      'Absolutely! We provide fully customized app solutions that align with your business goals and user expectations.',
+      'Yes. We provide fully customised app solutions that align with your business goals and user expectations.',
   },
   {
     question: 'Do you offer app maintenance and post-launch support?',
@@ -170,7 +170,7 @@ export const faqs = [
   {
     question: 'How much does app development cost?',
     answer:
-      'The cost varies based on factors like app complexity, features, design, and platform. Contact us for a customized quote.',
+      'The cost varies based on factors like app complexity, features, design, and platform. Contact us for a customised quote.',
   },
   {
     question: 'Do you provide UI/UX design services?',
@@ -188,7 +188,7 @@ export const pages = {
   home: {
     title: 'Incaendo | Custom Software, AI & App Development Company',
     description:
-      'Incaendo is a Noida-based software development company with 15+ years of experience building custom software, web and mobile apps, AI solutions and cloud platforms.',
+      'Incaendo is a Noida-based software development company, building custom software, web and mobile apps, AI solutions and cloud platforms since 2012.',
   },
   ai: {
     title: 'AI Technology & Innovation | Incaendo',

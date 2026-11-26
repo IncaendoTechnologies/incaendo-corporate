@@ -1,39 +1,5 @@
-/* Reach out and FAQ */
-.reachout-section {
-  padding-block: var(--section-space-md);
-  background: #eee5dc;
-}
-.reachout-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 3rem;
-}
-.reachout-inner h2 {
-  margin: 0;
-  font-size: var(--type-section-size);
-  font-weight: var(--type-heading-weight);
-  letter-spacing: var(--type-section-letter-spacing);
-  word-spacing: var(--type-section-word-spacing);
-  line-height: var(--type-section-line-height);
-}
-.reachout-action {
-  max-width: 360px;
-}
-.reachout-action p {
-  margin-bottom: 1.1rem;
-  color: var(--color-body);
-  font-size: var(--type-intro-size);
-  line-height: var(--type-intro-line-height);
-}
-.small-note {
-  display: block;
-  margin-top: 0.85rem;
-  color: var(--color-muted);
-  font-size: var(--type-meta-size);
-}
+/* FAQ */
 .section-faq {
-  background: #fbfaf8;
 }
 .faq-layout {
   display: grid;
@@ -43,7 +9,7 @@
 .faq-layout h2 {
   margin-bottom: 1.4rem;
   font-size: var(--type-section-size);
-  font-weight: var(--type-heading-weight);
+  font-weight: var(--type-section-weight);
   letter-spacing: var(--type-section-letter-spacing);
   word-spacing: var(--type-section-word-spacing);
   line-height: var(--type-section-line-height);

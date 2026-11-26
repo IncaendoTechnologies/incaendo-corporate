@@ -11,17 +11,17 @@ const applications = [
   {
     title: 'Customer Support AI Agent',
     scenario:
-      'Answers common questions from your approved help content, sorts and summarizes incoming tickets, and drafts replies for your support team to check before sending.',
+      'Answers common questions from your approved help content, sorts and summarises incoming tickets, and drafts replies for your support team to check before sending.',
     value:
       'Agents spend less time on repeat questions and searching for answers, while a person still owns every reply.',
     category: 'Customer support',
     involves: [
       'Resolve routine questions from approved help content',
-      'Tag, prioritize, and summarize each new ticket',
+      'Tag, prioritise, and summarise each new ticket',
       'Draft replies and hand complex cases to a person',
     ],
     image: customerSupportImage,
-    alt: 'A support desk where an AI agent has summarized a damaged-item ticket and drafted a replacement reply for an agent to approve, with a refund dispute handed to a person',
+    alt: 'A support desk where an AI agent has summarised a damaged-item ticket and drafted a replacement reply for an agent to approve, with a refund dispute handed to a person',
   },
   {
     title: 'Finance & Invoice Processing Agent',
@@ -110,9 +110,9 @@ const applications = [
       <div class="ai-applications-title-wrap">
         <p class="eyebrow">BUSINESS APPLICATIONS</p>
         <h2 id="ai-applications-title">
-          AI Agents <span>Purpose-Built</span> for the Work{' '}
+          AI agents <span>purpose-built</span> for the work{' '}
           <br class="ai-applications-heading-break" />
-          Your Teams <span>Do Every Day.</span>
+          your teams <span>do every day.</span>
         </h2>
       </div>
       <p class="ai-applications-lead">
@@ -352,24 +352,25 @@ const applications = [
     margin-top: 0;
     margin-bottom: 1.1rem;
     font-size: var(--type-section-size);
-    font-weight: var(--type-heading-weight);
+    font-weight: var(--type-section-weight);
     letter-spacing: var(--type-section-letter-spacing);
     word-spacing: var(--type-section-word-spacing);
     line-height: var(--type-section-line-height);
   }
-  /* ---------- Heading (Centered & Aligned with AI-Assisted Dev) ---------- */
+  /* ---------- Heading aligned to the page content edge ---------- */
   .ai-applications-heading {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
     gap: 0.85rem;
     margin-bottom: clamp(1.1rem, 1.8vw, 1.5rem);
   }
 
   .ai-applications-title-wrap {
-    text-align: center;
+    text-align: left;
     width: 100%;
+    max-width: 790px;
   }
 
   .ai-applications-heading .eyebrow {
@@ -379,7 +380,7 @@ const applications = [
   .ai-applications-heading h2 {
     margin: 0;
     font-size: var(--type-section-size);
-    font-weight: var(--type-heading-weight);
+    font-weight: var(--type-section-weight);
     letter-spacing: var(--type-section-letter-spacing);
     word-spacing: var(--type-section-word-spacing);
     line-height: var(--type-section-line-height);
@@ -387,7 +388,7 @@ const applications = [
   }
 
   .ai-applications-heading h2 span {
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
   }
 
   .ai-applications-heading-break {
@@ -399,20 +400,18 @@ const applications = [
   }
 
   .ai-applications-lead {
-    margin: 0 auto;
+    margin: 0 0;
     width: 100%;
-    max-width: 58rem;
+    max-width: 760px;
     color: var(--color-body);
-    font-size: 0.94rem;
-    line-height: 1.7;
-    text-align: center;
-    text-wrap: balance;
+    font-size: var(--type-intro-size);
+    line-height: var(--type-intro-line-height);
+    text-align: left;
   }
 
   .ai-applications {
     padding-top: clamp(2.5rem, 4vw, 3.8rem);
     padding-bottom: clamp(3rem, 5vw, 4.5rem);
-    background: #f0ede8;
   }
   .application-progress {
     display: none;
@@ -434,14 +433,13 @@ const applications = [
     position: absolute;
     inset: 0;
     border-radius: var(--radius-large);
-    box-shadow:
-      0 34px 70px -26px rgb(16 27 45 / 34%),
-      0 14px 28px -14px rgb(16 27 45 / 16%);
+    box-shadow: var(--shadow-1);
     content: '';
     opacity: var(--lift, 0);
     pointer-events: none;
   }
   .application-card {
+    --accent-card-border: rgb(15 33 54 / 9%);
     position: relative;
     display: grid;
     gap: 1.1rem;
@@ -449,12 +447,8 @@ const applications = [
     padding: 0.85rem;
     /* Border, hover lift and orange edge (on the image side, wide screens
        only): shared .accent-card (src/styles/accent-card.css). */
-    --accent-card-border: rgb(16 27 45 / 9%);
     border-radius: var(--radius-large);
-    background: linear-gradient(165deg, #fffdfb 0%, #fbf8f4 60%, #f8f3ed 100%);
-    box-shadow:
-      0 1px 2px rgb(16 27 45 / 4%),
-      0 18px 40px -20px rgb(16 27 45 / 22%);
+    box-shadow: var(--shadow-1);
   }
   .application-card::after {
     position: absolute;
@@ -472,10 +466,9 @@ const applications = [
     margin: 0;
     aspect-ratio: 3 / 2;
     overflow: hidden;
-    border: 1px solid rgb(16 27 45 / 8%);
-    border-radius: 16px;
+    border-radius: var(--radius-lg);
     background: #e8e2da;
-    box-shadow: 0 16px 36px -22px rgb(16 27 45 / 38%);
+    box-shadow: var(--shadow-1);
   }
   .application-media img {
     position: absolute;
@@ -497,9 +490,9 @@ const applications = [
     align-items: center;
     gap: 0.7rem;
     margin: 0 0 0.9rem;
-    color: var(--color-orange-dark);
-    font-size: 0.68rem;
-    font-weight: 750;
+    color: var(--color-orange-text);
+    font-size: 0.75rem;
+    font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
   }
@@ -509,35 +502,35 @@ const applications = [
     height: 2rem;
     flex: none;
     place-items: center;
-    border: 1px solid rgb(201 84 43 / 28%);
+    border: 1px solid rgb(194 76 18 / 28%);
     border-radius: 50%;
     background: #fff;
-    font-size: 0.66rem;
+    font-size: 0.75rem;
     font-variant-numeric: tabular-nums;
     letter-spacing: 0.04em;
   }
   .application-copy h3 {
     margin-bottom: 0.7rem;
     font-size: clamp(1.4rem, 5.4vw, 1.75rem);
-    font-weight: 650;
+    font-weight: 600;
     line-height: 1.14;
-    letter-spacing: -0.05em;
-    word-spacing: 0.05em;
+    letter-spacing: -0.01em;
+    word-spacing: normal;
   }
   .application-description {
     max-width: 480px;
     margin-bottom: 1.1rem;
     color: var(--color-body);
-    font-size: 0.95rem;
-    line-height: 1.65;
+    font-size: var(--type-body-size); /* body 16px */
+    line-height: var(--type-body-line-height);
   }
   .application-involves h4 {
     margin: 0 0 0.5rem;
     color: var(--color-ink);
     font-size: 0.88rem;
-    font-weight: 650;
+    font-weight: 600;
     letter-spacing: -0.01em;
-    word-spacing: 0.01em;
+    word-spacing: normal;
   }
   .application-involves ul {
     display: grid;
@@ -570,16 +563,16 @@ const applications = [
     background: #f3ece4;
   }
   .application-value span {
-    color: var(--color-orange-dark);
-    font-size: 0.64rem;
-    font-weight: 750;
+    color: var(--color-orange-text);
+    font-size: 0.75rem;
+    font-weight: 800;
     letter-spacing: 0.12em;
   }
   .application-value p {
     margin: 0.3rem 0 0;
     color: var(--color-ink);
     font-size: 0.9rem;
-    font-weight: 550;
+    font-weight: 600;
     line-height: 1.5;
   }
 
@@ -596,7 +589,7 @@ const applications = [
       order: 0;
       align-self: center;
       aspect-ratio: 3 / 2;
-      border-radius: 18px;
+      border-radius: var(--radius-lg);
     }
     .application-copy {
       padding: 0;
@@ -629,7 +622,9 @@ const applications = [
   @media (max-width: 800px) and (min-height: 800px) {
     .application-slide {
       position: sticky;
-      top: calc(1rem + var(--slide-index) * 0.55rem);
+      top: calc(
+        var(--site-header-height) + 1rem + var(--slide-index) * 0.55rem
+      );
     }
   }
 
@@ -643,10 +638,10 @@ const applications = [
     }
     [data-enhanced] .application-sticky {
       position: sticky;
-      top: 0;
+      top: var(--site-header-height);
       display: flex;
-      height: 100vh;
-      height: 100svh;
+      height: calc(100vh - var(--site-header-height));
+      height: calc(100svh - var(--site-header-height));
       overflow: hidden;
       align-items: flex-start;
       padding-top: clamp(1rem, 2vh, 1.6rem);
@@ -661,20 +656,20 @@ const applications = [
     }
     .application-counter {
       color: var(--color-muted);
-      font-size: 0.74rem;
+      font-size: 0.75rem;
       font-weight: 700;
       font-variant-numeric: tabular-nums;
       letter-spacing: 0.08em;
     }
     .application-counter b {
-      color: var(--color-orange-dark);
+      color: var(--color-orange-text);
     }
     .application-progress-track {
       flex: 1;
       height: 3px;
       overflow: hidden;
-      border-radius: 3px;
-      background: rgb(16 27 45 / 10%);
+      border-radius: var(--radius-sm);
+      background: rgb(15 33 54 / 10%);
     }
     .application-progress-track i {
       display: block;
@@ -691,7 +686,7 @@ const applications = [
     }
     .application-hint {
       color: var(--color-muted);
-      font-size: 0.66rem;
+      font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -755,10 +750,6 @@ const applications = [
   }
 
   @media (min-width: 1101px) {
-    .ai-applications-heading h2 {
-      white-space: nowrap;
-    }
-
     .ai-applications-heading-break {
       display: inline;
     }

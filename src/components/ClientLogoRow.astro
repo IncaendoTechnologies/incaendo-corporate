@@ -1,0 +1,171 @@
+---
+/*
+ * Client proof row (Incaendo Design System, "Web pages": "Proof early: client
+ * logos in a quiet greyscale row"). A calm surface-raised band straight after
+ * the hero: a "Trusted by teams at" label and the client logos in greyscale.
+ * The row is static, because nothing on the page auto-advances while someone
+ * is reading.
+ */
+import activate from '../assets/svg/activate.svg'
+import admott from '../assets/svg/admott.svg'
+import cardekho from '../assets/svg/cardekho.svg'
+import dominos from '../assets/svg/dominos.svg'
+import hereAndNow from '../assets/svg/Here_&_Now_(WBUR)_masthead.svg'
+import italia from '../assets/svg/italia.svg'
+import jubilant from '../assets/svg/jubilant.svg'
+import policybazaar from '../assets/svg/policybazaar.svg'
+import procterGamble from '../assets/svg/ProcterGamble.svg'
+import schand from '../assets/svg/schand.svg'
+import spicejet from '../assets/svg/spicejet.svg'
+import theSeam from '../assets/svg/the seam.svg'
+import uflex from '../assets/svg/uflex.svg'
+import vmc from '../assets/svg/VMC.svg'
+import wagonex from '../assets/svg/wagonex.svg'
+import zeeMedia from '../assets/svg/ZeeMedia.svg'
+
+// `height` evens out the optical size of compact, square and wide marks.
+const logos = [
+  { src: dominos, alt: "Domino's", height: 26 },
+  { src: jubilant, alt: 'Jubilant FoodWorks', height: 34 },
+  { src: policybazaar, alt: 'Policybazaar', height: 26 },
+  { src: procterGamble, alt: 'Procter & Gamble', height: 36 },
+  { src: spicejet, alt: 'SpiceJet', height: 26 },
+  { src: zeeMedia, alt: 'Zee Media', height: 30 },
+  { src: schand, alt: 'S. Chand', height: 36 },
+  { src: cardekho, alt: 'CarDekho', height: 30 },
+  { src: uflex, alt: 'Uflex', height: 28 },
+  { src: italia, alt: 'Good Morning Italia', height: 16 },
+  { src: theSeam, alt: 'The Seam', height: 24 },
+  { src: wagonex, alt: 'Wagonex', height: 26 },
+  { src: admott, alt: 'Admott', height: 24 },
+  { src: hereAndNow, alt: 'Here & Now (WBUR)', height: 32 },
+  { src: vmc, alt: 'VMC', height: 30 },
+  { src: activate, alt: 'Activate Studio', height: 34 },
+]
+---
+
+<section class="client-row" aria-labelledby="client-row-label">
+  <div class="site-container client-row-inner">
+    <p id="client-row-label" class="client-row-label">
+      Trusted by teams at
+    </p>
+    <ul class="client-row-list">
+      {logos.map((logo) => (
+        <li class="client-row-item">
+          <img
+            src={logo.src.src}
+            width={logo.src.width}
+            height={logo.src.height}
+            alt={logo.alt}
+            style={`--logo-height: ${logo.height}px`}
+            loading="lazy"
+            decoding="async"
+          />
+        </li>
+      ))}
+    </ul>
+    <p class="client-row-note">
+      Logos shown represent current and past client and partner engagements.
+    </p>
+  </div>
+</section>
+
+<style>
+  .client-row {
+    display: block;
+    border-block: 1px solid var(--color-line);
+  }
+
+  .client-row-inner {
+    display: grid;
+    width: min(var(--content-width), calc(100% - var(--gutter) * 2));
+    margin-inline: auto;
+    gap: var(--space-5);
+    padding-block: var(--space-7);
+  }
+
+  /* Matches the design canvas: 600 14px, ink-muted. */
+  .client-row-label {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    text-align: center;
+  }
+
+  .client-row-list {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    align-items: center;
+    gap: var(--space-6) var(--space-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .client-row-item {
+    display: flex;
+    min-height: var(--tap-min);
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Quiet greyscale marks; colour returns only under a hovering pointer. */
+  .client-row-item img {
+    display: block;
+    width: auto;
+    max-width: min(100%, 132px);
+    height: var(--logo-height);
+    object-fit: contain;
+    filter: grayscale(1);
+    opacity: 0.72;
+    /* Blends white logo backgrounds (The Seam, Uflex) into the band. */
+    mix-blend-mode: multiply;
+    transition:
+      filter var(--motion-fast) var(--ease-out),
+      opacity var(--motion-fast) var(--ease-out);
+  }
+
+  @media (hover: hover) {
+    .client-row-item:hover img {
+      filter: none;
+      opacity: 1;
+    }
+  }
+
+  .client-row-note {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+  }
+
+  @media (max-width: 1023px) {
+    .client-row-list {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 639px) {
+    .client-row-inner {
+      padding-block: var(--space-6);
+    }
+    .client-row-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-3) var(--space-3);
+    }
+    .client-row-item img {
+      max-width: 100%;
+      max-height: 30px;
+      height: auto;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .client-row-item img {
+      transition: none;
+    }
+  }
+</style>

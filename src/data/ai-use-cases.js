@@ -13,17 +13,17 @@ export const aiUseCases = [
   {
     id: 'recruitment',
     area: 'Recruitment',
-    summary: 'Organize candidate information for structured review.',
+    summary: 'Organise candidate information for structured review.',
     challenge: 'Candidate information arrives in different formats.',
-    action: 'An assistant organizes profiles against clear role criteria.',
+    action: 'An assistant organises profiles against clear role criteria.',
     benefit: 'A more structured review for human decision-makers.',
   },
   {
     id: 'sales',
     area: 'Sales',
-    summary: 'Summarize leads and suggest follow-up actions.',
-    challenge: 'Enquiries need to be understood and prioritized.',
-    action: 'An agent summarizes each lead and suggests a follow-up.',
+    summary: 'Summarise leads and suggest follow-up actions.',
+    challenge: 'Enquiries need to be understood and prioritised.',
+    action: 'An agent summarises each lead and suggests a follow-up.',
     benefit: 'A clearer view of what may need attention first.',
   },
   {

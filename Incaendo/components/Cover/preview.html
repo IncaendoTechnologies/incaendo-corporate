@@ -1,0 +1,52 @@
+<!-- @dsCard height=288 -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Incaendo</title>
+<style>
+  html, body { margin:0; height:100%; }
+  body { background:var(--canvas, #f8f7f4); color:var(--ink); font-family:var(--font-sans); overflow:hidden; }
+  .cover { position:relative; width:960px; height:288px; overflow:hidden; }
+  .art { position:absolute; top:0; left:480px; width:480px; height:288px; overflow:hidden; }
+  .art svg { display:block; width:480px; height:288px; }
+  .navy { fill:var(--navy); }
+  .blue { fill:var(--action, #c24c12); }
+  .tint { fill:var(--orange-soft); }
+  .orange { fill:var(--orange); }
+  .lg { rx:var(--radius-lg); }
+  /* dark: navy sits within a few percent of the ground, so the slab takes line and its bars take blue */
+  [data-theme="dark"] .navy { fill:var(--line); }
+  [data-theme="dark"] .tint.bar { fill:var(--action, #f47a3a); }
+  .words { position:absolute; left:var(--space-7); bottom:var(--space-7); max-width:440px; }
+  .name { margin:0; font-family:var(--font-display); font-size:76px; line-height:.92; font-weight:800; letter-spacing:-.01em; color:var(--ink); }
+  .tag { margin:var(--space-3) 0 0 2px; font-size:14px; line-height:20px; color:var(--ink-muted); }
+</style>
+</head>
+<body>
+<div class="cover">
+<div class="art" aria-hidden="true">
+<svg viewBox="0 0 480 288" width="480" height="288">
+<!--
+  blocks      navy 152×264 slab bled off the top · blue 120×208 stem · blue diagonal 48 wide (the N stroke) · blue-soft 104×80 tint bled off the right · orange disc r18 (the i-dot) — ≈40% of the box, orange smallest as in the 70/20/10 rule
+  arrangement the "iN" monogram rebuilt as blocks: a stem with its dot, then a diagonal, bottoms on one line space-6 above the edge, space-4 gutters
+  pattern     literal motif row — the logo's own diagonal and dot: three slanted bars at a space-5 pitch cut into the navy slab in blue-soft, chosen because the monogram is the brand's one distinctive shape
+  scales      sides in space-2 multiples; gutters space-4; pitch space-5; corners radius-lg; disc r = space-2 + space-3/… ≈ 18
+-->
+<rect class="navy lg" x="24" y="-24" width="152" height="280" rx="16"/>
+<path class="tint bar" d="M56 216 L80 216 L128 120 L104 120 Z"/>
+<path class="tint bar" d="M88 216 L112 216 L160 120 L136 120 Z" opacity=".55"/>
+<path class="tint bar" d="M40 168 L64 168 L88 120 L64 120 Z" opacity=".35"/>
+<circle class="orange" cx="252" cy="26" r="18"/>
+<rect class="blue lg" x="192" y="56" width="120" height="200" rx="16"/>
+<path class="blue" d="M328 56 L376 56 L456 256 L408 256 Z"/>
+<rect class="tint lg" x="392" y="-16" width="104" height="80" rx="16"/>
+</svg>
+</div>
+<div class="words">
+  <h1 class="name">Incaendo</h1>
+  <p class="tag">Caring, inclusive and professional – one brand for every deck, proposal and page.</p>
+</div>
+</div>
+</body>
+</html>

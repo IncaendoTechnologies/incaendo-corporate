@@ -15,7 +15,7 @@ import ContactForm from './ContactForm.astro'
   >
     <div class="contact-modal-header">
       <h2 id="project-inquiry-modal-title">
-        Let’s Talk about <span>Your Project</span>
+        Let’s talk about <span>your project</span>
       </h2>
       <button
         type="button"
@@ -56,7 +56,7 @@ import ContactForm from './ContactForm.astro'
     align-items: center;
     justify-content: center;
     padding: clamp(1rem, 3vw, 2rem);
-    background: rgb(16 27 45 / 55%);
+    background: rgb(15 33 54 / 55%);
     -webkit-backdrop-filter: blur(6px);
     backdrop-filter: blur(6px);
     opacity: 0;
@@ -117,7 +117,7 @@ import ContactForm from './ContactForm.astro'
   }
 
   .contact-modal-header h2 span {
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
   }
 
   .contact-modal-close {
@@ -164,7 +164,7 @@ import ContactForm from './ContactForm.astro'
 
   .contact-modal-close:focus-visible {
     border-color: var(--color-orange);
-    outline: 3px solid rgb(201 84 43 / 30%);
+    outline: 2px solid var(--color-focus);
     outline-offset: 3px;
     color: var(--color-orange-dark);
   }
@@ -190,7 +190,7 @@ import ContactForm from './ContactForm.astro'
     padding-right: var(--modal-pad-x);
     overflow-x: hidden;
     overflow-y: auto;
-    scrollbar-color: rgb(16 27 45 / 14%) transparent;
+    scrollbar-color: rgb(15 33 54 / 14%) transparent;
     scrollbar-width: thin;
   }
 
@@ -204,14 +204,14 @@ import ContactForm from './ContactForm.astro'
 
   .contact-modal-body::-webkit-scrollbar-thumb {
     border-radius: 999px;
-    background: rgb(16 27 45 / 14%);
+    background: rgb(15 33 54 / 14%);
   }
 
   .contact-modal-dialog.contact-form-card {
     --modal-pad-x: clamp(1.15rem, 2vw, 1.5rem);
 
     padding: var(--modal-pad-x);
-    border-radius: 16px;
+    border-radius: var(--radius-lg);
   }
 
   .contact-modal-dialog .contact-form {
@@ -261,7 +261,7 @@ import ContactForm from './ContactForm.astro'
       --modal-pad-x: 1.25rem;
 
       padding: 1.25rem var(--modal-pad-x) 1rem;
-      border-radius: 18px;
+      border-radius: var(--radius-lg);
     }
 
     .contact-modal-header {
@@ -279,7 +279,7 @@ import ContactForm from './ContactForm.astro'
       width: 38px;
       height: 38px;
       flex-basis: 38px;
-      border-radius: 10px;
+      border-radius: var(--radius-md);
     }
 
     .contact-modal-dialog .contact-form {
@@ -306,13 +306,13 @@ import ContactForm from './ContactForm.astro'
     .contact-modal-dialog.contact-form-card :global(.form-field input),
     .contact-modal-dialog.contact-form-card :global(.form-field select),
     .contact-modal-dialog.contact-form-card :global(.form-field textarea) {
-      font-size: 0.875rem;
-      line-height: 1.4;
+      font-size: 16px; /* body size; also stops iOS zoom on focus */
+      line-height: 1.5;
     }
 
     .contact-modal-dialog.contact-form-card :global(.form-field input),
     .contact-modal-dialog.contact-form-card :global(.form-field select) {
-      min-height: 40px;
+      min-height: var(--tap-min);
       padding: 0.5rem 0.875rem;
     }
 

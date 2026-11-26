@@ -1,0 +1,127 @@
+{
+  "manifestVersion": 3,
+  "name": "Incaendo",
+  "namespace": "Incaendo",
+  "files": [
+    "assets/Logos/README.md",
+    "components/Badge/README.md",
+    "components/Button/README.md",
+    "components/Callout/README.md",
+    "components/Card/README.md",
+    "components/CtaBand/README.md",
+    "components/Hero/README.md",
+    "components/SectionHeader/README.md",
+    "components/SiteFooter/README.md",
+    "components/SiteHeader/README.md",
+    "components/Stat/README.md",
+    "components/Table/README.md",
+    "components/bundle.css",
+    "tokens.css"
+  ],
+  "libraries": [],
+  "components": [
+    {
+      "name": "Badge",
+      "group": "Status",
+      "summary": "A badge labels a thing with one or two words: a technology, a status or a phase."
+    },
+    {
+      "name": "Button",
+      "group": "Actions",
+      "summary": "Use a button for an action; one inc-btn-primary per view, for the thing the page or slide is for."
+    },
+    {
+      "name": "Callout",
+      "group": "Content",
+      "summary": "A short highlighted note: an assumption, a key benefit, a summary line under a process."
+    },
+    {
+      "name": "Card",
+      "group": "Layout",
+      "summary": "A card groups one idea: a service, a feature, a benefit or a case-study fact."
+    },
+    {
+      "name": "CtaBand",
+      "group": "Page shell",
+      "summary": "A navy band near the end of a page that asks for one action: an inc-cta-title (with an optional orange inc-highlight phrase), one inc-cta-text sentence and up…"
+    },
+    {
+      "name": "Hero",
+      "group": "Page shell",
+      "summary": "The opening section of a web page: an inc-eyebrow, an inc-hero-title (the page's only h1) that names the outcome for the client, one inc-hero-lead sentence, an…"
+    },
+    {
+      "name": "SectionHeader",
+      "group": "Layout",
+      "summary": "The opening of a page section or a content slide: an orange inc-eyebrow, an inc-section-title that states the point, and an optional inc-section-lead line."
+    },
+    {
+      "name": "SiteFooter",
+      "group": "Page shell",
+      "summary": "The navy footer on every web page: the reversed logo with one line about Incaendo, two link columns (Services and Company), the contact column (legal name, Noi…"
+    },
+    {
+      "name": "SiteHeader",
+      "group": "Page shell",
+      "summary": "The bar at the top of every web page: the primary logo on the left, up to six sentence-case links, and one primary Button (\"Book a call\") on the right."
+    },
+    {
+      "name": "Stat",
+      "group": "Data",
+      "summary": "A single proof number with a short label, used in rows of three or four on About slides, landing pages and proposal \"About Incaendo\" sections."
+    },
+    {
+      "name": "Table",
+      "group": "Data",
+      "summary": "For commercials, timelines, responsibility matrices and data in proposals and product UI."
+    }
+  ],
+  "assetGroups": [
+    {
+      "name": "Logos",
+      "tile": "l",
+      "order": [
+        "incaendo-logo.png",
+        "incaendo-logo-reversed.png",
+        "incaendo-mark.png"
+      ],
+      "files": [
+        {
+          "path": "assets/Logos/incaendo-logo.png",
+          "id": "806febc188d995deb5be193d03e0a25d"
+        },
+        {
+          "path": "assets/Logos/incaendo-logo-reversed.png",
+          "id": "de74fbc40629b7a66325c92dc96112cc"
+        },
+        {
+          "path": "assets/Logos/incaendo-mark.png",
+          "id": "426b4935fc77c30b6da0e8dd817d11fa"
+        }
+      ]
+    }
+  ],
+  "storage": {
+    "files": {
+      "assets/Logos/incaendo-logo-reversed.png": {
+        "store": "blob",
+        "id": "de74fbc40629b7a66325c92dc96112cc",
+        "bytes": 47167,
+        "type": "image/png"
+      },
+      "assets/Logos/incaendo-logo.png": {
+        "store": "blob",
+        "id": "806febc188d995deb5be193d03e0a25d",
+        "bytes": 58378,
+        "type": "image/png"
+      },
+      "assets/Logos/incaendo-mark.png": {
+        "store": "blob",
+        "id": "426b4935fc77c30b6da0e8dd817d11fa",
+        "bytes": 111039,
+        "type": "image/png"
+      }
+    },
+    "blobBytesUsed": 216584
+  }
+}

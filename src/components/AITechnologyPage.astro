@@ -33,7 +33,7 @@ const capabilities = [
     number: '04',
     title: 'AI Agents & Tool Integration',
     description:
-      'Connect bounded, task-oriented AI workflows to authorized tools and APIs, with permissions and confirmation around consequential actions.',
+      'Connect bounded, task-oriented AI workflows to authorised tools and APIs, with permissions and confirmation around consequential actions.',
     includes: 'Scoped tools · API actions · Approval gates',
     tag: 'ACT WITH CONTROL',
   },
@@ -149,6 +149,7 @@ const statIcons = {
   shield:
     '<path d="M12 3.5 5 6.2v5.3c0 4.3 2.9 7.6 7 9 4.1-1.4 7-4.7 7-9V6.2Z"/><path d="m8.8 12.1 2.2 2.2 4.3-4.4"/>',
 }
+import CtaBand from './CtaBand.astro'
 ---
 
 <div class="ai-tech-page" data-ai-technology>
@@ -158,17 +159,18 @@ const statIcons = {
   >
     <div class="site-container ai-tech-hero-grid hero-system__inner">
       <div class="ai-tech-hero-copy hero-system__copy reveal">
+        <p class="eyebrow hero-system__eyebrow">AI technology</p>
         <h1 id="ai-tech-title" class="hero-system__title">
-          AI Moves <span class="hero-system__accent">Your Business</span>{' '}
-          Forward.
+          AI moves <span class="hero-system__accent">your business</span>{' '}
+          forward.
           <br />
           Designed around the{' '}
-          <span class="hero-system__accent">Way You Work</span>.
+          <span class="hero-system__accent">way you work</span>.
         </h1>
         <p class="ai-tech-lead hero-system__description">
           We build AI-powered applications and integrations that connect
           business data, existing systems, and everyday workflows to useful
-          outcomes—with clear boundaries for quality, access, and human
+          outcomes – with clear boundaries for quality, access, and human
           judgment.
         </p>
         <div class="ai-tech-actions hero-system__actions">
@@ -176,7 +178,7 @@ const statIcons = {
             Explore our AI capabilities <span aria-hidden="true">↘</span>
           </a>
           <a
-            class="text-link"
+            class="button button-outline"
             href="/contact#project-inquiry"
             data-open-contact-modal
           >
@@ -243,6 +245,7 @@ const statIcons = {
 
   <AIAgentsShowcase />
 
+  <CtaBand />
   <section
     class="ai-capabilities section section-soft"
     id="ai-capabilities"
@@ -252,9 +255,9 @@ const statIcons = {
       <div class="ai-section-heading ai-capabilities-heading reveal">
         <div>
           <h2 id="ai-capabilities-title">
-            The Right Building Blocks.
+            The right building blocks.
             <br />
-            <span>Connected to Your Context.</span>
+            <span>Connected to your context.</span>
           </h2>
         </div>
         <p>
@@ -286,7 +289,7 @@ const statIcons = {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <span>Where Ideas Become Impact</span>
+        <span>Where ideas become impact</span>
         <span class="link-arrow" aria-hidden="true">
           →
         </span>
@@ -318,25 +321,14 @@ const statIcons = {
   .ai-tech-page h2 {
     margin-bottom: 1.1rem;
     font-size: var(--type-section-size);
-    font-weight: var(--type-heading-weight);
+    font-weight: var(--type-section-weight);
     letter-spacing: var(--type-section-letter-spacing);
     word-spacing: var(--type-section-word-spacing);
     line-height: var(--type-section-line-height);
   }
   .ai-tech-page h2 span,
   .ai-tech-page h1 span {
-    color: var(--color-orange-dark);
-  }
-  /* Plain warm off-white ground behind the particle field. On desktop the
-     field takes an even wider feature column than the other pages. */
-  .ai-tech-hero {
-    --hero-feature-columns: minmax(0, 0.84fr) minmax(0, 1.16fr);
-    background: linear-gradient(
-      125deg,
-      #fbfaf8 0%,
-      var(--color-paper) 52%,
-      #f0ece6 100%
-    );
+    color: var(--color-orange-text);
   }
   .ai-tech-actions .button {
     gap: 0.75rem;
@@ -460,13 +452,13 @@ const statIcons = {
     gap: clamp(0.65rem, 1.6cqmin, 0.85rem);
     padding: clamp(0.55rem, 1.35cqmin, 0.75rem) clamp(0.95rem, 2.2cqmin, 1.2rem)
       clamp(0.55rem, 1.35cqmin, 0.75rem) clamp(0.55rem, 1.35cqmin, 0.75rem);
-    border: 1px solid rgb(16 27 45 / 7%);
-    border-radius: 18px;
+    border: 1px solid rgb(15 33 54 / 7%);
+    border-radius: var(--radius-lg);
     background: rgb(255 255 255 / 90%);
     box-shadow:
       0 1px 0 #fff inset,
-      0 18px 38px -22px rgb(16 27 45 / 36%),
-      0 2px 6px -3px rgb(16 27 45 / 10%);
+      0 18px 38px -22px rgb(15 33 54 / 36%),
+      0 2px 6px -3px rgb(15 33 54 / 10%);
     white-space: nowrap;
     animation: ai-card-float 6.4s ease-in-out infinite alternate paused;
     animation-delay: calc(var(--order) * -1.45s);
@@ -485,9 +477,9 @@ const statIcons = {
     border-color: color-mix(in srgb, var(--accent) 32%, transparent);
     box-shadow:
       0 1px 0 #fff inset,
-      0 24px 44px -22px rgb(16 27 45 / 42%),
+      0 24px 44px -22px rgb(15 33 54 / 42%),
       0 10px 26px -16px color-mix(in srgb, var(--accent) 60%, transparent);
-    transform: translateY(-4px);
+    transform: none;
   }
   .ai-particles-stat-icon {
     flex: none;
@@ -495,7 +487,7 @@ const statIcons = {
     width: clamp(2.4rem, 7cqmin, 2.85rem);
     height: clamp(2.4rem, 7cqmin, 2.85rem);
     padding: clamp(0.55rem, 1.6cqmin, 0.65rem);
-    border-radius: 13px;
+    border-radius: var(--radius-lg);
     background: color-mix(in srgb, var(--accent) 11%, #fff);
     fill: none;
     stroke: var(--accent);
@@ -508,7 +500,7 @@ const statIcons = {
   }
   .ai-particles-stat-card:hover .ai-particles-stat-icon {
     background: color-mix(in srgb, var(--accent) 18%, #fff);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 9%, transparent);
+    box-shadow: var(--shadow-2);
   }
   .ai-particles-stat-card div {
     display: grid;
@@ -518,15 +510,15 @@ const statIcons = {
     color: var(--color-ink);
     font-family: var(--font-heading);
     font-size: clamp(1.2rem, 4.3cqmin, 1.75rem);
-    font-weight: 750;
-    letter-spacing: -0.035em;
-    word-spacing: 0.035em;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    word-spacing: normal;
     line-height: 1.05;
   }
   .ai-particles-stat span {
     color: var(--color-body);
-    font-size: clamp(0.72rem, 2.1cqmin, 0.875rem);
-    font-weight: 550;
+    font-size: clamp(0.75rem, 2.1cqmin, 0.875rem);
+    font-weight: 600;
     line-height: 1.3;
   }
   .ai-particles .ai-particles-provisional {
@@ -540,7 +532,7 @@ const statIcons = {
     gap: 0.4rem;
     margin: 0;
     color: #756b64;
-    font-size: 0.74rem;
+    font-size: 0.75rem;
     font-weight: 600;
   }
   .ai-particles-provisional::before {
@@ -567,7 +559,7 @@ const statIcons = {
     .ai-particles-stat-card {
       gap: 0.45rem;
       padding: 0.45rem 0.6rem 0.45rem 0.45rem;
-      border-radius: 12px;
+      border-radius: var(--radius-lg);
       white-space: normal;
     }
     .ai-particles-stat-card div {
@@ -577,20 +569,19 @@ const statIcons = {
       width: 2rem;
       height: 2rem;
       padding: 0.42rem;
-      border-radius: 9px;
+      border-radius: var(--radius-md);
     }
     .ai-particles-stat b {
       font-size: clamp(1rem, 5.2cqmin, 1.3rem);
     }
     .ai-particles-stat span {
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       line-height: 1.2;
     }
   }
   /* Desktop: the field is the page's centrepiece. hero-system--feature
-     gives it the wider column (0.84 : 1.16) and up to 46rem; here it gets a
-     taller 1.1:1 stage (--hero-feature-columns above widens the column to
-     0.84 : 1.16). The sphere and letters size
+     gives it the 5fr visual column (7 : 5) and up to 46rem; here it gets a
+     taller 1.1:1 stage. The sphere and letters size
      from the stage height (about 658px at 1440, was 517px), and the cards
      scale to ~1.15x their previous desktop size. The copy keeps its
      typography but is pinned near the top of the row (1.5rem below the
@@ -609,19 +600,19 @@ const statIcons = {
       padding: clamp(0.55rem, 1.53cqmin, 0.75rem)
         clamp(0.95rem, 2.67cqmin, 1.3rem) clamp(0.55rem, 1.53cqmin, 0.75rem)
         clamp(0.55rem, 1.53cqmin, 0.75rem);
-      border-radius: 20px;
+      border-radius: var(--radius-lg);
     }
     .ai-particles-stat-icon {
       width: clamp(2.4rem, 6.7cqmin, 3rem);
       height: clamp(2.4rem, 6.7cqmin, 3rem);
       padding: clamp(0.55rem, 1.53cqmin, 0.72rem);
-      border-radius: 15px;
+      border-radius: var(--radius-lg);
     }
     .ai-particles-stat b {
       font-size: clamp(1.2rem, 3.9cqmin, 1.8rem);
     }
     .ai-particles-stat span {
-      font-size: clamp(0.72rem, 2.02cqmin, 0.92rem);
+      font-size: clamp(0.75rem, 2.02cqmin, 0.92rem);
     }
   }
   /* Below desktop the wide frame is too shallow for the cards: stacked
@@ -661,29 +652,30 @@ const statIcons = {
   }
   .ai-section-heading {
     display: flex;
-    align-items: end;
-    justify-content: space-between;
-    gap: clamp(2rem, 5vw, 4.8rem);
+    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--space-4, 1rem);
     margin-bottom: 2.5rem;
+    text-align: left;
   }
   .ai-section-heading > div {
-    max-width: 680px;
+    width: 100%;
+    max-width: 790px;
   }
   .ai-section-heading h2 {
     margin-bottom: 0;
   }
   .ai-section-heading h2 span {
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
   }
   .ai-section-heading > p {
-    max-width: 440px;
-    margin-bottom: 0.15rem;
+    max-width: 760px;
+    margin: 0;
     color: var(--color-body);
-    font-size: 0.94rem;
-    line-height: 1.7;
+    font-size: var(--type-intro-size);
+    line-height: var(--type-intro-line-height);
   }
   .ai-capabilities {
-    background: #f0ede8;
   }
   .ai-capability-grid {
     display: grid;
@@ -697,12 +689,11 @@ const statIcons = {
     justify-content: center;
     margin: 2.1rem auto 0;
     gap: 0.7rem;
-    font-size: 0.9rem;
     text-decoration: none;
   }
   .ai-capabilities-cta:focus-visible {
     border-radius: var(--radius-small);
-    outline: 2px solid var(--color-orange-dark);
+    outline: 2px solid var(--color-focus);
     outline-offset: 4px;
   }
   .ai-detail-card {
@@ -713,10 +704,10 @@ const statIcons = {
     flex-direction: column;
     padding: 1.4rem 1.45rem 1.25rem;
     overflow: hidden;
-    border: 1px solid #e1ddd6;
-    border-radius: var(--radius-medium);
-    background: rgb(255 255 255 / 78%);
-    box-shadow: 0 8px 24px rgb(16 27 45 / 3%);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    background: var(--color-white);
+    box-shadow: var(--shadow-1);
     transition:
       transform 280ms var(--ease-out),
       border-color 280ms var(--ease-out),
@@ -753,7 +744,7 @@ const statIcons = {
     border-color: rgb(168 65 33 / 42%);
     background: #fff;
     box-shadow:
-      0 22px 42px rgb(16 27 45 / 15%),
+      0 22px 42px rgb(15 33 54 / 15%),
       0 7px 20px rgb(168 65 33 / 8%);
     transform: translateY(var(--service-card-lift));
   }
@@ -774,28 +765,28 @@ const statIcons = {
     justify-content: space-between;
     gap: 0.8rem;
     margin-bottom: 1.35rem;
-    color: var(--color-orange-dark);
-    font-size: 0.59rem;
-    font-weight: 750;
+    color: var(--color-orange-text);
+    font-size: 0.75rem;
+    font-weight: 800;
     letter-spacing: 0.11em;
   }
   .ai-card-meta span:last-child {
     color: var(--color-muted);
-    font-size: 0.52rem;
+    font-size: 0.75rem;
     text-align: right;
   }
   .ai-detail-card h3 {
     margin-bottom: 0.65rem;
-    font-size: 1.14rem;
-    font-weight: 650;
-    letter-spacing: -0.04em;
-    word-spacing: 0.04em;
+    font-size: var(--type-card-title-size);
+    font-weight: var(--type-heading-weight);
+    letter-spacing: -0.01em;
+    word-spacing: normal;
   }
   .ai-detail-card > p {
     margin-bottom: 1.1rem;
     color: var(--color-body);
-    font-size: 0.81rem;
-    line-height: 1.62;
+    font-size: var(--type-card-text-size);
+    line-height: var(--type-card-text-line-height);
   }
   .ai-includes {
     margin-top: auto;
@@ -804,14 +795,14 @@ const statIcons = {
   }
   .ai-includes > span {
     color: var(--color-muted);
-    font-size: 0.55rem;
-    font-weight: 750;
+    font-size: 0.75rem;
+    font-weight: 800;
     letter-spacing: 0.11em;
   }
   .ai-includes p {
     margin: 0.22rem 0 0;
     color: var(--color-ink);
-    font-size: 0.67rem;
+    font-size: 0.75rem;
     line-height: 1.5;
   }
 
@@ -832,6 +823,7 @@ const statIcons = {
   @media (max-width: 560px) {
     .ai-tech-page h2 {
       font-size: var(--type-section-size);
+      font-weight: var(--type-section-weight);
     }
     .section {
       padding-block: 3.8rem;
@@ -840,7 +832,7 @@ const statIcons = {
       margin-bottom: 1.7rem;
     }
     .ai-section-heading > p {
-      font-size: 0.86rem;
+      font-size: var(--type-intro-size);
     }
     .ai-capability-grid {
       grid-template-columns: minmax(0, 1fr);

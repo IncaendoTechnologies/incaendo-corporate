@@ -10,9 +10,9 @@ const total = String(aiAgents.length).padStart(2, '0')
       <div>
         <p class="eyebrow">AI AGENTS IN ACTION</p>
         <h2 id="ai-agents-title">
-          Meet the <span>AI Agents</span>
+          Meet the <span>AI agents</span>
           <br />
-          We’ve Built for <span>Real-World Business</span> Needs.
+          we’ve built for <span>real-world business</span> needs.
         </h2>
       </div>
       <div class="ai-agents-intro">
@@ -116,14 +116,14 @@ const total = String(aiAgents.length).padStart(2, '0')
   .ai-agents {
     padding-top: clamp(4.4rem, 7.2vw, 6.8rem);
     border-top: 1px solid var(--color-line);
-    background: var(--color-paper);
   }
   .ai-agents-heading {
     display: flex;
-    align-items: end;
-    justify-content: space-between;
-    gap: clamp(2rem, 5vw, 4.8rem);
+    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--space-4, 1rem);
     margin-bottom: 2.5rem;
+    text-align: left;
   }
   .ai-agents-heading > div:first-child {
     max-width: 680px;
@@ -131,22 +131,22 @@ const total = String(aiAgents.length).padStart(2, '0')
   .ai-agents h2 {
     margin: 0;
     font-size: var(--type-section-size);
-    font-weight: var(--type-heading-weight);
+    font-weight: var(--type-section-weight);
     letter-spacing: var(--type-section-letter-spacing);
     word-spacing: var(--type-section-word-spacing);
     line-height: var(--type-section-line-height);
   }
   .ai-agents h2 span {
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
   }
   .ai-agents-intro {
-    max-width: 460px;
+    max-width: 760px;
   }
   .ai-agents-intro p {
     margin: 0;
     color: var(--color-body);
-    font-size: 0.94rem;
-    line-height: 1.7;
+    font-size: var(--type-intro-size);
+    line-height: var(--type-intro-line-height);
   }
   .ai-agents-intro .ai-agents-claim {
     margin-top: 0.7rem;
@@ -182,14 +182,13 @@ const total = String(aiAgents.length).padStart(2, '0')
     position: absolute;
     inset: 0;
     border-radius: var(--radius-large);
-    box-shadow:
-      0 34px 70px -26px rgb(16 27 45 / 34%),
-      0 14px 28px -14px rgb(16 27 45 / 16%);
+    box-shadow: var(--shadow-1);
     content: '';
     opacity: var(--lift, 0);
     pointer-events: none;
   }
   .ai-agent-card {
+    --accent-card-border: rgb(15 33 54 / 9%);
     position: relative;
     display: grid;
     gap: 1.1rem;
@@ -197,12 +196,8 @@ const total = String(aiAgents.length).padStart(2, '0')
     padding: 0.85rem;
     /* Border, hover lift and orange edge (on the image side, wide screens
        only): shared .accent-card (src/styles/accent-card.css). */
-    --accent-card-border: rgb(16 27 45 / 9%);
     border-radius: var(--radius-large);
-    background: linear-gradient(165deg, #fffdfb 0%, #fbf8f4 60%, #f8f3ed 100%);
-    box-shadow:
-      0 1px 2px rgb(16 27 45 / 4%),
-      0 18px 40px -20px rgb(16 27 45 / 22%);
+    box-shadow: var(--shadow-1);
   }
   /* Fades a card back as later cards cover it */
   .ai-agent-card::after {
@@ -220,8 +215,8 @@ const total = String(aiAgents.length).padStart(2, '0')
     margin: 0;
     aspect-ratio: 5 / 4;
     overflow: hidden;
-    border: 1px solid rgb(16 27 45 / 8%);
-    border-radius: 16px;
+    border: 1px solid rgb(15 33 54 / 8%);
+    border-radius: var(--radius-lg);
     background: #f1ebe3;
   }
   .ai-agent-media img {
@@ -246,15 +241,15 @@ const total = String(aiAgents.length).padStart(2, '0')
     align-items: center;
     gap: 0.4rem 0.8rem;
     margin: 0 0 0.85rem;
-    color: var(--color-orange-dark);
-    font-size: 0.68rem;
-    font-weight: 750;
+    color: var(--color-orange-text);
+    font-size: 0.75rem;
+    font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
   }
   .ai-agent-kicker span {
     padding: 0.28rem 0.6rem;
-    border: 1px solid rgb(201 84 43 / 26%);
+    border: 1px solid rgb(194 76 18 / 26%);
     border-radius: 999px;
     background: #fff;
     color: var(--color-muted);
@@ -264,17 +259,17 @@ const total = String(aiAgents.length).padStart(2, '0')
   .ai-agent-copy h3 {
     margin: 0 0 0.7rem;
     font-size: clamp(1.4rem, 5.4vw, 1.75rem);
-    font-weight: 650;
+    font-weight: 600;
     line-height: 1.14;
-    letter-spacing: -0.05em;
-    word-spacing: 0.05em;
+    letter-spacing: -0.01em;
+    word-spacing: normal;
   }
   .ai-agent-description {
     max-width: 480px;
     margin: 0 0 1.1rem;
     color: var(--color-body);
-    font-size: 0.95rem;
-    line-height: 1.65;
+    font-size: var(--type-body-size); /* body 16px */
+    line-height: var(--type-body-line-height);
   }
   .ai-agent-context {
     padding: 0.8rem 1rem;
@@ -284,16 +279,16 @@ const total = String(aiAgents.length).padStart(2, '0')
   .ai-agent-context span,
   .ai-agent-related > span {
     display: block;
-    color: var(--color-orange-dark);
-    font-size: 0.64rem;
-    font-weight: 750;
+    color: var(--color-orange-text);
+    font-size: 0.75rem;
+    font-weight: 800;
     letter-spacing: 0.12em;
   }
   .ai-agent-context p {
     margin: 0.3rem 0 0;
     color: var(--color-ink);
     font-size: 0.9rem;
-    font-weight: 550;
+    font-weight: 600;
     line-height: 1.5;
   }
   .ai-agent-related {
@@ -307,15 +302,15 @@ const total = String(aiAgents.length).padStart(2, '0')
     justify-self: start;
     color: var(--color-ink);
     font-size: 0.92rem;
-    font-weight: 650;
-    text-decoration-color: rgb(201 84 43 / 45%);
+    font-weight: 600;
+    text-decoration-color: rgb(194 76 18 / 45%);
     text-underline-offset: 3px;
   }
   .ai-agent-related a:hover {
     color: var(--color-orange-dark);
   }
   .ai-agent-related a:focus-visible {
-    outline: 2px solid var(--color-orange);
+    outline: 2px solid var(--color-focus);
     outline-offset: 3px;
   }
   .ai-agent-related small {
@@ -335,7 +330,7 @@ const total = String(aiAgents.length).padStart(2, '0')
     .ai-agent-media {
       aspect-ratio: auto;
       min-height: 380px;
-      border-radius: 18px;
+      border-radius: var(--radius-lg);
     }
     .ai-agent-copy {
       padding: 0;
@@ -365,10 +360,10 @@ const total = String(aiAgents.length).padStart(2, '0')
     }
     [data-enhanced] .ai-agents-sticky {
       position: sticky;
-      top: 0;
+      top: var(--site-header-height);
       display: flex;
-      height: 100vh;
-      height: 100svh;
+      height: calc(100vh - var(--site-header-height));
+      height: calc(100svh - var(--site-header-height));
       overflow: hidden;
       align-items: center;
     }
@@ -382,20 +377,20 @@ const total = String(aiAgents.length).padStart(2, '0')
     }
     .ai-agents-counter {
       color: var(--color-muted);
-      font-size: 0.74rem;
+      font-size: 0.75rem;
       font-weight: 700;
       font-variant-numeric: tabular-nums;
       letter-spacing: 0.08em;
     }
     .ai-agents-counter b {
-      color: var(--color-orange-dark);
+      color: var(--color-orange-text);
     }
     .ai-agents-progress-track {
       flex: 1;
       height: 3px;
       overflow: hidden;
-      border-radius: 3px;
-      background: rgb(16 27 45 / 10%);
+      border-radius: var(--radius-sm);
+      background: rgb(15 33 54 / 10%);
     }
     .ai-agents-progress-track i {
       display: block;
@@ -412,7 +407,7 @@ const total = String(aiAgents.length).padStart(2, '0')
     }
     .ai-agents-hint {
       color: var(--color-muted);
-      font-size: 0.66rem;
+      font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -488,6 +483,7 @@ const total = String(aiAgents.length).padStart(2, '0')
   @media (max-width: 560px) {
     .ai-agents h2 {
       font-size: var(--type-section-size);
+      font-weight: var(--type-section-weight);
     }
     .ai-agent-copy {
       padding: 0.1rem 0.25rem 0.3rem;

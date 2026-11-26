@@ -1,771 +1,197 @@
 ---
-import logo from '../assets/incaendo-logo.png'
+/*
+ * Site footer: the design system `SiteFooter` (inc-footer), markup and copy
+ * as in the design system. The .inc-shell wrapper lets its container
+ * queries switch to four columns from 1024px. Styles come from
+ * src/styles/incaendo/components.css.
+ */
+import { Image } from 'astro:assets'
+import logoReversed from '../assets/incaendo-logo-reversed.png'
+import { homepageServices } from '../data/site-content.js'
 
 const currentYear = new Date().getFullYear()
+
+const companyLinks = [
+  { href: '/ai-technology', label: 'AI' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/teams', label: 'Teams' },
+  { href: '/insights', label: 'Insights' },
+  { href: '/careers', label: 'Careers' },
+  // Goes to the Contact page; the popup is for in-page calls to action.
+  { href: '/contact', label: 'Contact', contactPage: true },
+]
+
+const mapUrl =
+  'https://www.google.com/maps/dir/?api=1&destination=TigerCubs%2C%20B-9%2C%20B%20Block%2C%20Sector%202%2C%20Noida%2C%20UP%20201301'
 ---
 
-<footer class="site-footer">
-  <section class="footer-light" aria-label="Site footer">
-    <div class="footer-inner footer-grid">
-      <!-- Brand and social links have their own column so the three footer
-           section headings line up across the row. -->
-      <div class="footer-brand-col">
-        <a
-          class="footer-logo site-logo site-logo-header"
-          href="/"
-          aria-label="Incaendo home"
-        >
-          <img
-            src={logo.src}
-            width={logo.width}
-            height={logo.height}
-            alt="Incaendo Technologies"
-            loading="lazy"
-            decoding="async"
-          />
-        </a>
+<div class="inc-shell">
+  <footer class="inc-footer">
+    <div class="site-container">
+      <div class="inc-footer-grid">
+        <div class="inc-footer-brand">
+          <a href="/" aria-label="Incaendo home">
+            <Image
+              src={logoReversed}
+              width={348}
+              alt="Incaendo Technologies"
+              loading="lazy"
+            />
+          </a>
+          <p>
+            Web platforms, mobile apps, AI agents and cloud infrastructure for
+            startups, SMEs and enterprises, since 2012.
+          </p>
+        </div>
 
-        <nav class="footer-socials" aria-label="Social media">
-          <div class="footer-socials-links">
+        <nav aria-label="Services">
+          <p class="inc-footer-heading">Services</p>
+          <ul>
+            {homepageServices.map((service) => (
+              <li>
+                <a class="inc-footer-link" href={service.href}>
+                  {service.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <nav aria-label="Company">
+          <p class="inc-footer-heading">Company</p>
+          <ul>
+            {companyLinks.map((link) => (
+              <li>
+                <a
+                  class="inc-footer-link"
+                  href={link.href}
+                  data-contact-page-link={link.contactPage ? '' : undefined}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div class="inc-footer-contact">
+          <p class="inc-footer-heading">Get in touch</p>
+          <address>
+            Incaendo Technologies Private Limited
+            <br />
             <a
-              class="footer-social-link"
-              href="https://www.facebook.com/Incaendo/"
+              class="inc-footer-link"
+              href={mapUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Incaendo on Facebook"
-              title="Facebook"
+              aria-label="First Floor, B-9, B Block, Sector 2, Noida, UP 201301, India (opens Google Maps in a new tab)"
             >
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.095 10.125 24v-8.438H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.696 4.533-4.696 1.313 0 2.686.236 2.686.236v2.977h-1.513c-1.49 0-1.956.93-1.956 1.884v2.261h3.328l-.532 3.49h-2.796V24C19.612 23.095 24 18.1 24 12.073Z" />
-              </svg>
+              First Floor, B-9, B Block, Sector 2<br />
+              Noida, UP – 201301, India
             </a>
-            <a
-              class="footer-social-link"
-              href="https://www.instagram.com/incaendo_technologies/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Incaendo on Instagram"
-              title="Instagram"
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <rect x="3" y="3" width="18" height="18" rx="5" />
-                <circle cx="12" cy="12" r="4" />
-                <circle class="footer-social-dot" cx="17.5" cy="6.5" r="1" />
-              </svg>
+          </address>
+          <p class="footer-email">
+            <a class="inc-footer-link" href="mailto:info@incaendo.com">
+              info@incaendo.com
             </a>
+          </p>
+          <div class="inc-footer-social">
             <a
-              class="footer-social-link"
-              href="https://wa.me/919810146251"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Chat with Incaendo on WhatsApp"
-              title="WhatsApp"
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path d="M20.52 3.48A11.86 11.86 0 0 0 12.08 0C5.51 0 .17 5.34.17 11.91c0 2.1.55 4.15 1.59 5.96L.07 24l6.28-1.65a11.9 11.9 0 0 0 5.72 1.46h.01c6.56 0 11.9-5.34 11.91-11.9a11.84 11.84 0 0 0-3.47-8.43ZM12.08 21.8h-.01a9.88 9.88 0 0 1-5.03-1.38l-.36-.21-3.73.98.99-3.64-.24-.37a9.87 9.87 0 0 1-1.52-5.27c0-5.47 4.45-9.92 9.92-9.92a9.86 9.86 0 0 1 7.02 2.91 9.86 9.86 0 0 1 2.9 7.02c0 5.47-4.45 9.92-9.94 9.92Zm5.45-7.43c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.47-2.4-1.5-.89-.8-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.08-.79.38-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.21 5.08 4.5.71.3 1.27.48 1.7.62.71.22 1.36.19 1.87.12.57-.08 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.08-.12-.27-.2-.57-.35Z" />
-              </svg>
-            </a>
-            <a
-              class="footer-social-link"
               href="https://www.linkedin.com/company/incaendo-technologies-pvt-ltd-/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Incaendo on LinkedIn"
-              title="LinkedIn"
             >
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.9H4.98V9.4h2.95v9.5ZM6.45 8.1a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42ZM19.02 18.9h-2.95v-4.62c0-1.1-.02-2.51-1.53-2.51-1.53 0-1.77 1.2-1.77 2.43v4.7H9.82V9.4h2.83v1.3h.04c.4-.75 1.36-1.54 2.8-1.54 2.99 0 3.54 1.97 3.54 4.53v5.2Z" />
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect width="4" height="12" x="2" y="9"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+            <a
+              href="https://www.instagram.com/incaendo_technologies/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Incaendo on Instagram"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+              </svg>
+            </a>
+            <a
+              href="https://www.facebook.com/Incaendo/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Incaendo on Facebook"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
               </svg>
             </a>
           </div>
-        </nav>
-      </div>
-
-      <div class="footer-contact-col">
-        <div class="footer-contact-heading-group">
-          <h2 class="footer-contact-heading">Get in Touch</h2>
-          <span class="footer-heading-accent" aria-hidden="true"></span>
         </div>
-
-        <a class="footer-contact-row" href="mailto:info@incaendo.com">
-          <span class="footer-contact-icon" aria-hidden="true">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#c9542b"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-            </svg>
-          </span>
-          <span class="footer-contact-text">info@incaendo.com</span>
-        </a>
-
-        <!-- Same Google Maps link as the map on the Contact page. -->
-        <a
-          class="footer-contact-row"
-          href="https://www.google.com/maps/dir/?api=1&destination=TigerCubs%2C%20B-9%2C%20B%20Block%2C%20Sector%202%2C%20Noida%2C%20UP%20201301"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Office: TigerCubs, B-9, B Block, Sector 2, Noida, UP 201301 (opens Google Maps in a new tab)"
-        >
-          <span class="footer-contact-icon" aria-hidden="true">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#c9542b"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-              <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-          </span>
-          <address class="footer-contact-text">
-            TigerCubs, B-9, B Block, Sector 2,
-            <br />
-            Noida, UP – 201301
-          </address>
-        </a>
       </div>
 
-      <!-- Area B: Explore navigation -->
-      <div class="footer-nav-group footer-nav-group--explore">
-        <span class="footer-nav-heading">EXPLORE</span>
-        <ul class="footer-nav-links">
-          <li>
-            <a href="/ai-technology">AI</a>
-          </li>
-          <li>
-            <a href="/services">Services</a>
-          </li>
-          <li>
-            <a href="/projects">Projects</a>
-          </li>
-          <li>
-            <a href="/teams">Teams</a>
-          </li>
-          <li>
-            <a href="/insights">Insights</a>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Area C: Company navigation -->
-      <div class="footer-nav-group footer-nav-group--company">
-        <span class="footer-nav-heading">COMPANY</span>
-        <ul class="footer-nav-links">
-          <li>
-            <a href="/careers">Careers</a>
-          </li>
-          <li>
-            <a href="/contact" data-contact-page-link>
-              Contact
-            </a>
-          </li>
-          <li>
-            <a href="/faq" target="_blank" rel="noopener noreferrer">
-              FAQ
-            </a>
-          </li>
-          <li>
-            <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">
-              Privacy Policy
-            </a>
-          </li>
-          <li>
-            <a
-              href="/terms-and-conditions"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Terms & Conditions
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Area D: Project CTA card -->
-      <div class="footer-cta-card">
-        <div class="footer-cta-icon" aria-hidden="true">
-          <svg
-            width="17"
-            height="17"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#c9542b"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
-            <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
-            <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
-            <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
-          </svg>
-        </div>
-        <div class="footer-cta-body">
-          <h3 class="footer-cta-heading">Have a Project in Mind?</h3>
-          <p class="footer-cta-text">
-            Let’s turn your ideas into meaningful digital solutions.
-          </p>
+      <div class="inc-footer-legal">
+        <span>© {currentYear} Incaendo Technologies Private Limited</span>
+        <span>
+          <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">
+            Privacy policy
+          </a>{' '}
+          ·
           <a
-            href="/contact#project-inquiry"
-            class="button button-primary footer-cta-button"
-            data-open-contact-modal
+            href="/terms-and-conditions"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Discuss Your Project <span aria-hidden="true">→</span>
+            Terms
+          </a>{' '}
+          ·
+          <a href="/faq" target="_blank" rel="noopener noreferrer">
+            FAQ
           </a>
-        </div>
+        </span>
       </div>
     </div>
-
-    <!-- Soft full-width peach wave, fading in from the left so it never
-         sits behind the footer text -->
-    <div class="footer-decor" aria-hidden="true">
-      <svg
-        class="footer-decor-svg"
-        viewBox="0 0 1440 240"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none"
-      >
-        <defs>
-          <linearGradient
-            id="footer-wave-fill"
-            x1="0"
-            y1="0"
-            x2="1440"
-            y2="0"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop offset="0" stop-color="#f4e9df" stop-opacity="0"></stop>
-            <stop offset="0.5" stop-color="#f4e9df" stop-opacity="0.5"></stop>
-            <stop offset="1" stop-color="#f0d6c3" stop-opacity="0.8"></stop>
-          </linearGradient>
-          <linearGradient
-            id="footer-wave-line"
-            x1="0"
-            y1="0"
-            x2="1440"
-            y2="0"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop offset="0" stop-color="#c9542b" stop-opacity="0"></stop>
-            <stop offset="0.45" stop-color="#c9542b" stop-opacity="0.14"></stop>
-            <stop offset="1" stop-color="#c9542b" stop-opacity="0.28"></stop>
-          </linearGradient>
-        </defs>
-        <path
-          d="M0 204C250 178 430 132 700 142C970 152 1160 216 1440 156V240H0Z"
-          fill="url(#footer-wave-fill)"
-        ></path>
-        <path
-          d="M0 172C260 142 470 96 742 110C1012 124 1184 184 1440 116"
-          stroke="url(#footer-wave-line)"
-          stroke-width="1.25"
-          vector-effect="non-scaling-stroke"
-        ></path>
-        <path
-          d="M0 222C300 198 522 160 792 170C1062 180 1222 228 1440 184"
-          stroke="url(#footer-wave-line)"
-          stroke-width="1"
-          stroke-opacity="0.7"
-          vector-effect="non-scaling-stroke"
-        ></path>
-      </svg>
-    </div>
-
-    <!-- Bottom copyright row -->
-    <div class="footer-inner footer-bottom-row">
-      <span class="footer-copyright">© {currentYear} Incaendo Pvt Ltd</span>
-    </div>
-  </section>
-</footer>
+  </footer>
+</div>
 
 <style>
-  .site-footer {
-    display: block;
-    position: relative;
-    z-index: 10;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    background: transparent;
-  }
-
-  /* Warm ivory ground with two soft peach glows; all decoration stays at
-     very low saturation so the navy type keeps full contrast. */
-  .footer-light {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    background:
-      radial-gradient(
-        ellipse 60% 70% at 100% 100%,
-        rgb(244 233 223 / 70%),
-        transparent 70%
-      ),
-      radial-gradient(
-        ellipse 40% 60% at 0% 0%,
-        rgb(255 255 255 / 70%),
-        transparent 70%
-      ),
-      linear-gradient(180deg, #fbfaf7 0%, var(--color-paper) 60%, #f8f1ea 100%);
-    border-top: 1px solid rgb(23 34 49 / 6%);
-    box-shadow: var(--shadow-footer);
-  }
-
-  /* Same container as the header, heroes and page sections. */
-  .footer-inner {
-    position: relative;
-    z-index: 2;
-    width: min(var(--content-width), calc(100% - var(--gutter) * 2));
-    margin-inline: auto;
-  }
-
-  /* Give the brand its own track so the Get in Touch, Explore and Company
-     headings all start on the same horizontal line. */
-  .footer-grid {
-    display: grid;
-    grid-template-columns:
-      minmax(12rem, 0.9fr) minmax(13rem, 1.15fr) minmax(7rem, 0.6fr)
-      minmax(10rem, 0.85fr) minmax(17rem, 1.25fr);
-    grid-template-areas: 'brand contact explore company cta';
-    gap: clamp(1.5rem, 2.5vw, 3rem);
-    align-items: start;
-    padding-top: clamp(3rem, 4.5vw, 4rem);
-  }
-
-  /* ---- Brand and social links ---- */
-  .footer-brand-col {
-    grid-area: brand;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.2rem;
-    min-width: 0;
-    padding-top: 0.25rem;
-  }
-
-  /* ---- Area A: contact ---- */
-  .footer-contact-col {
-    grid-area: contact;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    min-width: 0;
-    gap: 0.8rem;
-    padding-top: 0.4rem;
-  }
-
-  .footer-logo {
-    transition: opacity 0.2s ease;
-  }
-
-  .footer-logo:hover {
-    opacity: 0.9;
-  }
-
-  .footer-contact-heading-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.55rem;
-    margin-top: 0;
-    margin-bottom: 0.2rem;
-  }
-
-  .footer-contact-heading {
-    margin: 0;
-    color: var(--color-navy);
-    font-family: var(--font-heading);
-    font-size: clamp(1.3rem, 1.4vw, 1.5rem);
-    font-weight: 650;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-  }
-
-  .footer-heading-accent {
-    display: block;
-    width: 36px;
-    height: 2px;
-    border-radius: 2px;
-    background: var(--color-orange);
-  }
-
-  .footer-contact-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.7rem;
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .footer-contact-icon {
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    border: 1px solid rgb(201 84 43 / 16%);
-    border-radius: 50%;
-    background: rgb(255 255 255 / 70%);
-  }
-
-  .footer-contact-icon svg {
-    width: 14px;
-    height: 14px;
-  }
-
-  .footer-contact-text {
-    margin: 0;
-    padding-top: 0.2rem;
-    color: var(--color-ink);
-    font-size: 0.9375rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.55;
-  }
-
-  a.footer-contact-row .footer-contact-text {
-    transition: color 0.18s ease;
-  }
-
-  a.footer-contact-row:hover .footer-contact-text {
-    color: var(--color-orange-dark);
-  }
-
-  .footer-socials {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .footer-socials-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.55rem;
-  }
-
-  .footer-social-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 38px;
-    height: 38px;
-    color: var(--color-navy);
-    border: 1px solid rgb(201 84 43 / 20%);
-    border-radius: 50%;
-    background: rgb(255 255 255 / 78%);
-    transition:
-      color 0.18s ease,
-      background-color 0.18s ease,
-      border-color 0.18s ease,
-      transform 0.18s ease;
-  }
-
-  .footer-social-link:hover {
-    color: #fff;
-    border-color: var(--color-orange);
-    background: var(--color-orange);
-    transform: translateY(-2px);
-  }
-
-  .footer-social-link:focus-visible {
-    outline: 2px solid var(--color-orange-dark);
-    outline-offset: 3px;
-  }
-
-  .footer-social-link svg {
-    width: 18px;
-    height: 18px;
-    fill: currentColor;
-  }
-
-  .footer-social-link:nth-child(2) svg,
-  .footer-social-link:nth-child(2) svg circle:not(.footer-social-dot) {
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 2;
-  }
-
-  .footer-social-link:nth-child(2) .footer-social-dot {
-    fill: currentColor;
-    stroke: none;
-  }
-
-  /* ---- Area B/C: navigation ---- */
-  .footer-nav-group {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    min-width: 0;
-    padding-top: 0.4rem;
-  }
-
-  .footer-nav-group--explore {
-    grid-area: explore;
-  }
-
-  /* The left border is the divider between the two link columns. */
-  .footer-nav-group--company {
-    grid-area: company;
-    padding-left: clamp(1.5rem, 2.5vw, 2.5rem);
-    border-left: 1px solid rgb(201 84 43 / 14%);
-  }
-
-  .footer-nav-heading {
-    display: block;
-    margin-bottom: 1.1rem;
-    color: var(--color-orange-dark);
-    font-size: 0.8125rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  .footer-nav-links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .footer-nav-links li {
-    margin: 0;
-    padding: 0;
-    line-height: 1.3;
-  }
-
-  .footer-nav-links a {
-    display: inline-block;
-    color: var(--color-body);
-    font-size: 1rem;
-    font-weight: 450;
-    line-height: 1.4;
-    text-decoration: none;
-    white-space: nowrap;
-    transition:
-      color 0.18s ease,
-      transform 0.18s ease;
-  }
-
-  .footer-nav-links a:hover {
-    color: var(--color-orange-dark);
-    transform: translateX(2px);
-  }
-
-  /* ---- Area D: project CTA card ---- */
-  .footer-cta-card {
-    grid-area: cta;
-    position: relative;
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    justify-self: end;
-    width: 100%;
-    max-width: 23rem;
-    padding: clamp(1.4rem, 2vw, 1.75rem);
-    overflow: hidden;
-    border: 1px solid rgb(201 84 43 / 16%);
-    border-radius: 18px;
-    background:
-      radial-gradient(
-        circle at 100% 0%,
-        rgb(244 233 223 / 90%),
-        transparent 55%
-      ),
-      rgb(255 255 255 / 78%);
-    box-shadow:
-      0 18px 44px rgb(16 27 45 / 6%),
-      0 2px 6px rgb(16 27 45 / 3%);
-  }
-
-  .footer-cta-icon {
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border: 1px solid rgb(201 84 43 / 22%);
-    border-radius: var(--radius-medium);
-    background: var(--color-peach);
-  }
-
-  .footer-cta-body {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    min-width: 0;
-  }
-
-  .footer-cta-heading {
-    margin: 0 0 0.35rem;
-    color: var(--color-navy);
-    font-family: var(--font-heading);
-    font-size: clamp(1.15rem, 1.25vw, 1.3rem);
-    font-weight: 650;
-    letter-spacing: -0.02em;
-    line-height: 1.25;
-    text-wrap: balance;
-  }
-
-  .footer-cta-text {
-    margin: 0 0 1.1rem;
-    color: var(--color-body);
-    font-size: 0.9375rem;
-    font-weight: 400;
-    line-height: 1.55;
-  }
-
-  .footer-cta-button {
-    min-height: 44px;
-    gap: 0.55rem;
-    padding: 0.65rem 0.75rem;
-    font-size: 0.84rem;
-    font-weight: 600;
-    white-space: nowrap;
-  }
-
-  /* ---- Decorative wave ---- */
-  .footer-decor {
-    position: absolute;
-    z-index: 1;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: clamp(130px, 15vw, 220px);
-    pointer-events: none;
-  }
-
-  .footer-decor-svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-
-  /* ---- Bottom copyright row ---- */
-  .footer-bottom-row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem 1.5rem;
-    margin-top: clamp(2.75rem, 4vw, 3.75rem);
-    padding-block: 1.35rem clamp(1.5rem, 2.2vw, 2rem);
-    border-top: 1px solid rgb(23 34 49 / 8%);
-  }
-
-  .footer-copyright {
-    color: var(--color-muted);
-    font-size: 0.875rem;
-    font-weight: 500;
-  }
-
-  /* ==========================================================================
-     RESPONSIVE BREAKPOINTS
-     ========================================================================== */
-  @media (max-width: 1200px) {
-    .footer-grid {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      grid-template-areas:
-        'brand contact'
-        'explore company'
-        'cta cta';
-      gap: 2.5rem 2rem;
-    }
-
-    .footer-cta-card {
-      max-width: 26rem;
-    }
-  }
-
-  @media (max-width: 700px) {
-    .footer-grid {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      grid-template-areas:
-        'brand brand'
-        'contact contact'
-        'explore company'
-        'cta cta';
-      gap: 2.25rem 1.5rem;
-      padding-top: 2.5rem;
-    }
-
-    .footer-brand-col {
-      gap: 1rem;
-    }
-
-    .footer-nav-group--company {
-      padding-left: 1.5rem;
-    }
-
-    .footer-cta-card {
-      justify-self: stretch;
-      max-width: none;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .footer-grid {
-      gap: 2rem 1rem;
-      padding-top: 2.75rem;
-    }
-
-    .footer-brand-col {
-      gap: 0.9rem;
-    }
-
-    .footer-nav-group--company {
-      padding-left: 1rem;
-    }
-
-    .footer-nav-links a {
-      white-space: normal;
-    }
-
-    .footer-cta-card {
-      flex-direction: column;
-      gap: 0.85rem;
-      padding: 1.35rem;
-    }
-
-    .footer-cta-button {
-      width: 100%;
-      justify-content: center;
-    }
-
-    .footer-bottom-row {
-      margin-top: 2.25rem;
-      padding-bottom: 1.5rem;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .footer-logo,
-    .footer-contact-row,
-    .footer-social-link,
-    .footer-nav-links a {
-      transition: none;
-    }
-
-    .footer-social-link:hover {
-      transform: none;
-    }
-
-    .footer-nav-links a:hover {
-      transform: none;
-    }
+  /* Matches the design system preview: the email sits 12px below the
+     address. */
+  .footer-email {
+    margin: var(--space-3) 0 0;
   }
 </style>

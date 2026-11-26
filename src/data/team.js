@@ -28,7 +28,7 @@ export const teamMembers = [
     designation: 'Software Engineer',
     group: 'engineering',
     description:
-      'Constructs responsive web interfaces and reusable UI components, ensuring seamless usability, intuitive navigation, and consistent visual styling across modern desktop and mobile browsers.',
+      'Constructs responsive web interfaces and reusable UI components, ensuring smooth usability, intuitive navigation, and consistent visual styling across modern desktop and mobile browsers.',
     image: '/team/photos/balram-nikam.webp',
     avatar: '/team/avatars/balram-nikam.svg',
     objectPosition: '50% 35%',
@@ -48,7 +48,7 @@ export const teamMembers = [
     designation: 'Software Engineer',
     group: 'engineering',
     description:
-      'Contributes across the full software lifecycle, taking client specifications from initial prototype through testing, code optimization, and successful production deployment.',
+      'Contributes across the full software lifecycle, taking client specifications from initial prototype through testing, code optimisation, and successful production deployment.',
     image: '/team/photos/deepanshu-gupta.webp',
     avatar: '/team/avatars/deepanshu-gupta.svg',
     objectPosition: '50% 29%',
@@ -58,7 +58,7 @@ export const teamMembers = [
     designation: 'Software Engineer',
     group: 'engineering',
     description:
-      'Specializes in server-side application engineering, optimizing execution speed, query throughput, and resource utilization to keep critical business workflows operating efficiently.',
+      'Specialises in server-side application engineering, optimising execution speed, query throughput, and resource utilisation to keep critical business workflows operating efficiently.',
     image: '/team/photos/devender-kumar.webp',
     avatar: '/team/avatars/devender-kumar.svg',
     objectPosition: '47% 32%',
@@ -88,7 +88,7 @@ export const teamMembers = [
     designation: 'Software Engineer',
     group: 'engineering',
     description:
-      'Crafts accessible, dynamic frontend features with modern JavaScript frameworks, prioritizing smooth user interactions, clean component architecture, and responsive page performance.',
+      'Crafts accessible, dynamic frontend features with modern JavaScript frameworks, prioritising smooth user interactions, clean component architecture, and responsive page performance.',
     image: '/team/photos/kritika-singh.webp',
     avatar: '/team/avatars/kritika-singh.svg',
     objectPosition: '49% 30%',
@@ -168,7 +168,7 @@ export const teamMembers = [
     designation: 'Tech Lead',
     group: 'engineering',
     description:
-      'Leads engineering teams in delivering robust application features, overseeing implementation standards, technical feasibility assessments, and seamless integration between disparate software services.',
+      'Leads engineering teams in delivering robust application features, overseeing implementation standards, technical feasibility assessments, and smooth integration between disparate software services.',
     image: '/team/photos/pradeep-gururani.webp',
     avatar: '/team/avatars/pradeep-gururani.svg',
     objectPosition: '50% 34%',
@@ -198,7 +198,7 @@ export const teamMembers = [
     designation: 'HR',
     group: 'operations',
     description:
-      'Facilitates people operations and talent engagement, overseeing employee onboarding, organizational culture, policy administration, and continuous workplace support across Incaendo’s multidisciplinary teams.',
+      'Facilitates people operations and talent engagement, overseeing employee onboarding, organisational culture, policy administration, and continuous workplace support across Incaendo’s multidisciplinary teams.',
     image: '/team/photos/prerna-kumari.webp',
     avatar: '/team/avatars/prerna-kumari.svg',
     objectPosition: '50% 28%',
@@ -208,7 +208,7 @@ export const teamMembers = [
     designation: 'Director',
     group: 'leadership',
     description:
-      'Oversees corporate governance and operational execution across Incaendo, ensuring engineering, quality, and business operations stay closely synchronized on delivery milestones and organizational priorities.',
+      'Oversees corporate governance and operational execution across Incaendo, ensuring engineering, quality, and business operations stay closely synchronised on delivery milestones and organisational priorities.',
     image: '/team/photos/ram-suresh-singh.webp',
     avatar: '/team/avatars/ram-suresh-singh.svg',
     objectPosition: '50% 32%',

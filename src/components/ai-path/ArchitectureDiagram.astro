@@ -349,21 +349,19 @@ const { name } = Astro.props
     gap: 0.4rem;
     min-width: 0;
     padding: 0.75rem 0.85rem;
-    border: 1px solid rgb(16 27 45 / 11%);
-    border-radius: 14px;
+    border: 1px solid rgb(15 33 54 / 11%);
+    border-radius: var(--radius-lg);
     background: #fff;
-    box-shadow: 0 10px 26px -22px rgb(16 27 45 / 40%);
+    box-shadow: var(--shadow-1);
   }
   .dg-node--tech {
     border-color: rgb(84 123 157 / 24%);
     background: #f3f7fa;
   }
   .dg-node--active {
-    border-color: rgb(201 84 43 / 34%);
+    border-color: rgb(194 76 18 / 34%);
     background: #fffaf6;
-    box-shadow:
-      0 0 0 4px rgb(201 84 43 / 6%),
-      0 10px 26px -22px rgb(168 65 33 / 45%);
+    box-shadow: var(--shadow-1);
   }
   .dg-node--core {
     border-color: transparent;
@@ -372,7 +370,7 @@ const { name } = Astro.props
       var(--color-navy-soft),
       var(--color-navy)
     );
-    box-shadow: 0 16px 32px -20px rgb(16 27 45 / 60%);
+    box-shadow: var(--shadow-1);
     color: #fff;
   }
   :global(.ai-state-card.is-active) .dg-node {
@@ -381,13 +379,13 @@ const { name } = Astro.props
   }
   .dg-tag {
     color: var(--color-blue);
-    font-size: 0.68rem;
-    font-weight: 750;
+    font-size: 0.75rem;
+    font-weight: 800;
     letter-spacing: 0.1em;
     line-height: 1.3;
   }
   .dg-node--active .dg-tag {
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
   }
   .dg-node--core .dg-tag {
     color: #f2b79f;
@@ -413,11 +411,12 @@ const { name } = Astro.props
   .dg-quote {
     margin: 0;
     padding: 0.6rem 0.7rem;
-    border-radius: 10px 10px 10px 3px;
+    border-radius: var(--radius-md) var(--radius-md) var(--radius-md)
+      var(--radius-sm);
     background: #f6f3ee;
     color: var(--color-ink);
     font-size: 0.82rem;
-    font-weight: 550;
+    font-weight: 600;
     line-height: 1.45;
   }
   .dg-chips {
@@ -430,7 +429,7 @@ const { name } = Astro.props
   }
   .dg-chips li {
     padding: 0.32rem 0.6rem;
-    border: 1px solid rgb(16 27 45 / 10%);
+    border: 1px solid rgb(15 33 54 / 10%);
     border-radius: 999px;
     background: #fff;
     color: var(--color-ink);
@@ -439,7 +438,7 @@ const { name } = Astro.props
     line-height: 1.3;
   }
   .dg-chips--blocks li {
-    border-radius: 8px;
+    border-radius: var(--radius-md);
   }
   .dg-chips li.is-accent {
     border-color: rgb(84 123 157 / 30%);
@@ -471,16 +470,16 @@ const { name } = Astro.props
     align-items: baseline;
     gap: 0.4rem;
     padding-top: 0.4rem;
-    border-top: 1px solid rgb(201 84 43 / 12%);
+    border-top: 1px solid rgb(194 76 18 / 12%);
   }
   .dg-spec div:first-child {
     padding-top: 0;
     border-top: 0;
   }
   .dg-spec dt {
-    color: var(--color-orange-dark);
-    font-size: 0.68rem;
-    font-weight: 750;
+    color: var(--color-orange-text);
+    font-size: 0.75rem;
+    font-weight: 800;
     letter-spacing: 0.06em;
     text-transform: uppercase;
   }
@@ -488,7 +487,7 @@ const { name } = Astro.props
     margin: 0;
     color: var(--color-ink);
     font-size: 0.8rem;
-    font-weight: 550;
+    font-weight: 600;
     line-height: 1.4;
   }
   .dg-files {
@@ -504,11 +503,11 @@ const { name } = Astro.props
     gap: 0.5rem;
     padding: 0.38rem 0.45rem;
     border: 1px solid #eeece8;
-    border-radius: 9px;
+    border-radius: var(--radius-md);
     background: #fff;
     color: var(--color-ink);
     font-size: 0.8rem;
-    font-weight: 550;
+    font-weight: 600;
   }
   .dg-files i {
     display: grid;
@@ -516,10 +515,10 @@ const { name } = Astro.props
     height: 22px;
     flex: none;
     place-items: center;
-    border-radius: 6px;
+    border-radius: var(--radius-md);
     background: #f8eee8;
-    color: var(--color-orange-dark);
-    font-size: 0.66rem;
+    color: var(--color-orange-text);
+    font-size: 0.75rem;
     font-style: normal;
     font-weight: 800;
     letter-spacing: 0.04em;
@@ -551,7 +550,7 @@ const { name } = Astro.props
     gap: 0.45rem;
     color: var(--color-ink);
     font-size: 0.8rem;
-    font-weight: 550;
+    font-weight: 600;
     line-height: 1.35;
     counter-increment: stage;
   }
@@ -564,7 +563,7 @@ const { name } = Astro.props
     background: var(--color-orange);
     color: #fff;
     content: '✓';
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     font-weight: 800;
   }
   :global(.ai-state-card.is-active) .dg-stages li::before {
@@ -587,12 +586,12 @@ const { name } = Astro.props
   .dg-chunks span {
     height: 8px;
     flex: 1;
-    border-radius: 3px;
-    background: rgb(201 84 43 / 22%);
+    border-radius: var(--radius-sm);
+    background: rgb(194 76 18 / 22%);
   }
   .dg-chunks span:nth-child(2) {
     flex: 1.6;
-    background: rgb(201 84 43 / 38%);
+    background: rgb(194 76 18 / 38%);
   }
   .dg-chunks span:nth-child(3) {
     flex: 0.8;
@@ -608,11 +607,11 @@ const { name } = Astro.props
   .dg-vectors code {
     overflow: hidden;
     padding: 0.22rem 0.4rem;
-    border-radius: 6px;
+    border-radius: var(--radius-md);
     background: #fff;
     color: #2f5677;
     font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -641,7 +640,7 @@ const { name } = Astro.props
     gap: 0.5rem;
     color: var(--color-ink);
     font-size: 0.78rem;
-    font-weight: 550;
+    font-weight: 600;
   }
   .dg-matches i {
     display: block;
@@ -686,7 +685,7 @@ const { name } = Astro.props
     gap: 0.45rem;
     color: var(--color-ink);
     font-size: 0.8rem;
-    font-weight: 550;
+    font-weight: 600;
     line-height: 1.35;
   }
   .dg-checks li::before {
@@ -695,7 +694,7 @@ const { name } = Astro.props
     font-weight: 800;
   }
   .dg-checks li.is-flag::before {
-    color: var(--color-orange);
+    color: var(--color-orange-text);
     content: '→';
   }
   .dg-result,
@@ -703,7 +702,7 @@ const { name } = Astro.props
     justify-self: start;
     padding: 0.3rem 0.55rem;
     border-radius: 999px;
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-weight: 700;
     line-height: 1.3;
   }
@@ -713,9 +712,9 @@ const { name } = Astro.props
   }
   .dg-approval {
     position: relative;
-    border: 1px solid rgb(201 84 43 / 35%);
+    border: 1px solid rgb(194 76 18 / 35%);
     background: #fff;
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
   }
   .dg-approval::before {
     display: inline-block;
@@ -733,8 +732,8 @@ const { name } = Astro.props
     height: 2px;
     align-self: center;
     margin-inline: 6px;
-    background: rgb(201 84 43 / 38%);
-    color: var(--color-orange);
+    background: rgb(194 76 18 / 38%);
+    color: var(--color-orange-text);
   }
   .dg-link::after {
     position: absolute;
@@ -765,7 +764,7 @@ const { name } = Astro.props
     border: 2px solid currentColor;
     border-radius: 50%;
     background: #fff8f4;
-    box-shadow: 0 0 0 4px rgb(201 84 43 / 12%);
+    box-shadow: 0 0 0 4px rgb(194 76 18 / 12%);
     content: '';
   }
   .dg-link.is-left::after {
@@ -821,9 +820,9 @@ const { name } = Astro.props
     bottom: 8px;
     left: 50%;
     color: var(--color-muted);
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     font-style: normal;
-    font-weight: 650;
+    font-weight: 600;
     transform: translateX(-50%);
     white-space: nowrap;
   }
@@ -959,10 +958,10 @@ const { name } = Astro.props
     grid-area: hub;
     place-self: center;
     place-items: center;
-    border: 1px solid rgb(201 84 43 / 25%);
+    border: 1px solid rgb(194 76 18 / 25%);
     border-radius: 50%;
     background: #fff;
-    color: var(--color-orange);
+    color: var(--color-orange-text);
   }
   .dg-loop-hub svg {
     width: 22px;
@@ -990,7 +989,7 @@ const { name } = Astro.props
     border-radius: 999px;
     background: var(--surface-subtle);
     color: var(--color-muted);
-    font-size: 0.66rem;
+    font-size: 0.75rem;
     font-weight: 700;
   }
   .dg-signals li {
@@ -1003,12 +1002,12 @@ const { name } = Astro.props
     border-bottom: 1px solid #f0eeeb;
     color: var(--color-ink);
     font-size: 0.8rem;
-    font-weight: 550;
+    font-weight: 600;
   }
   .dg-signals em {
     padding: 0.18rem 0.5rem;
     border-radius: 999px;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-style: normal;
     font-weight: 700;
     white-space: nowrap;
@@ -1023,11 +1022,11 @@ const { name } = Astro.props
   }
   .dg-signals em.is-watch {
     background: #f8eee8;
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
   }
   .dg-signals > .dg-text {
     color: var(--color-muted);
-    font-size: 0.74rem;
+    font-size: 0.75rem;
   }
   @container ai-demo (max-width: 800px) {
     .dg-connect {
@@ -1203,7 +1202,7 @@ const { name } = Astro.props
     15%,
     28% {
       border-color: rgb(242 183 159 / 70%);
-      background: rgb(201 84 43 / 45%);
+      background: rgb(194 76 18 / 45%);
     }
   }
   @keyframes dg-check-in {
@@ -1239,10 +1238,10 @@ const { name } = Astro.props
   @keyframes dg-pulse {
     0%,
     100% {
-      box-shadow: 0 0 0 0 rgb(201 84 43 / 40%);
+      box-shadow: var(--shadow-1);
     }
     50% {
-      box-shadow: 0 0 0 5px rgb(201 84 43 / 0%);
+      box-shadow: 0 0 0 5px rgb(194 76 18 / 0%);
     }
   }
 

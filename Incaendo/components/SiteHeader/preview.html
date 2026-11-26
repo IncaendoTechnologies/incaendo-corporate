@@ -1,0 +1,90 @@
+<!-- @dsCard group="Page shell" height=520 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Site header – preview</title>
+<style>.demo{padding:24px;display:flex;flex-direction:column;gap:24px;background:var(--canvas,#f8f7f4)}.demo-label{font-size:12px;line-height:16px;font-weight:600;color:var(--ink-muted);margin:0 0 8px}.frame{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}.phone{width:390px;max-width:100%}.scroll{overflow-x:auto}.wide{min-width:1040px}</style></head>
+<body>
+<div class="demo">
+<div><p class="demo-label">Desktop</p><div class="scroll"><div class="frame wide inc-shell">
+<header class="inc-header">
+  <div class="inc-container">
+    <div class="inc-header-bar">
+      <a class="inc-header-logo" href="#"><img src="/_blob/806febc188d995deb5be193d03e0a25d" alt="Incaendo Technologies, home"></a>
+      <nav class="inc-nav" aria-label="Main">
+        <ul class="inc-nav-list">
+          <li><a class="inc-nav-link" href="#" aria-current="page">Services</a></li>
+          <li><a class="inc-nav-link" href="#">Work</a></li>
+          <li><a class="inc-nav-link" href="#">Industries</a></li>
+          <li><a class="inc-nav-link" href="#">About</a></li>
+          <li><a class="inc-nav-link" href="#">Careers</a></li>
+        </ul>
+        <a class="inc-btn inc-btn-primary" href="#">Book a call</a>
+      </nav>
+      <button class="inc-menu-button" type="button" aria-expanded="false" aria-controls="menu-d" aria-label="Menu"><svg class="inc-icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><svg class="inc-icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="inc-mobile-menu" id="menu-d" hidden>
+      <nav aria-label="Main">
+        <ul>
+          <li><a class="inc-nav-link" href="#" aria-current="page">Services</a></li>
+          <li><a class="inc-nav-link" href="#">Work</a></li>
+          <li><a class="inc-nav-link" href="#">Industries</a></li>
+          <li><a class="inc-nav-link" href="#">About</a></li>
+          <li><a class="inc-nav-link" href="#">Careers</a></li>
+        </ul>
+        <a class="inc-btn inc-btn-primary" href="#">Book a call</a>
+      </nav>
+    </div>
+  </div>
+</header>
+</div></div></div>
+<div><p class="demo-label">Phone, 390px, menu open</p><div class="frame phone inc-shell">
+<header class="inc-header">
+  <div class="inc-container">
+    <div class="inc-header-bar">
+      <a class="inc-header-logo" href="#"><img src="/_blob/806febc188d995deb5be193d03e0a25d" alt="Incaendo Technologies, home"></a>
+      <nav class="inc-nav" aria-label="Main">
+        <ul class="inc-nav-list">
+          <li><a class="inc-nav-link" href="#" aria-current="page">Services</a></li>
+          <li><a class="inc-nav-link" href="#">Work</a></li>
+          <li><a class="inc-nav-link" href="#">Industries</a></li>
+          <li><a class="inc-nav-link" href="#">About</a></li>
+          <li><a class="inc-nav-link" href="#">Careers</a></li>
+        </ul>
+        <a class="inc-btn inc-btn-primary" href="#">Book a call</a>
+      </nav>
+      <button class="inc-menu-button" type="button" aria-expanded="true" aria-controls="menu-m" aria-label="Menu"><svg class="inc-icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><svg class="inc-icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="inc-mobile-menu" id="menu-m">
+      <nav aria-label="Main">
+        <ul>
+          <li><a class="inc-nav-link" href="#" aria-current="page">Services</a></li>
+          <li><a class="inc-nav-link" href="#">Work</a></li>
+          <li><a class="inc-nav-link" href="#">Industries</a></li>
+          <li><a class="inc-nav-link" href="#">About</a></li>
+          <li><a class="inc-nav-link" href="#">Careers</a></li>
+        </ul>
+        <a class="inc-btn inc-btn-primary" href="#">Book a call</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<div style="height:24px"></div></div></div>
+</div>
+<script>
+document.querySelectorAll(".inc-menu-button").forEach(function (b) {
+  b.addEventListener("click", function () {
+    var open = b.getAttribute("aria-expanded") === "true";
+    b.setAttribute("aria-expanded", String(!open));
+    document.getElementById(b.getAttribute("aria-controls")).hidden = open;
+  });
+});
+document.addEventListener("keydown", function (e) {
+  if (e.key !== "Escape") return;
+  document.querySelectorAll('.inc-menu-button[aria-expanded="true"]').forEach(function (b) {
+    b.setAttribute("aria-expanded", "false");
+    document.getElementById(b.getAttribute("aria-controls")).hidden = true;
+    b.focus();
+  });
+});
+</script>
+</body></html>

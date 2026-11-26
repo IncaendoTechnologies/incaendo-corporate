@@ -23,9 +23,10 @@ const filterItems = projectCategories.map((category, index) => ({
 >
   <div class="site-container projects-hero-layout hero-system__inner">
     <div class="projects-hero-copy hero-system__copy reveal">
+      <p class="eyebrow hero-system__eyebrow">Our work</p>
       <h1 id="projects-page-heading" class="hero-system__title">
-        A Portfolio of <span class="hero-system__accent">Digital Work</span>,
-        Shaped around What Matters.
+        A portfolio of <span class="hero-system__accent">digital work</span>,
+        shaped around what matters.
       </h1>
       <p class="projects-hero-description hero-system__description">
         Explore products, platforms, and digital experiences from across
@@ -40,7 +41,7 @@ const filterItems = projectCategories.map((category, index) => ({
         >
           Discuss your project <span aria-hidden="true">↗</span>
         </a>
-        <a class="text-link" href="#project-portfolio">
+        <a class="button button-outline" href="#project-portfolio">
           Explore the portfolio{' '}
           <span class="link-arrow link-arrow-down" aria-hidden="true">
             ↓
@@ -106,7 +107,7 @@ const filterItems = projectCategories.map((category, index) => ({
       <div>
         <p class="eyebrow">Project portfolio</p>
         <h2 id="portfolio-heading">
-          Different Challenges. <span>Thoughtful Digital Work.</span>
+          Different challenges. <span>Thoughtful digital work.</span>
         </h2>
       </div>
       <p>
@@ -305,13 +306,6 @@ const filterItems = projectCategories.map((category, index) => ({
   .projects-hero {
     position: relative;
     overflow: hidden;
-    background:
-      radial-gradient(
-        ellipse at 78% 46%,
-        rgb(244 233 223 / 76%),
-        transparent 34%
-      ),
-      var(--surface-subtle);
   }
 
   .projects-hero-layout {
@@ -321,12 +315,12 @@ const filterItems = projectCategories.map((category, index) => ({
 
   .projects-hero h1 span,
   .portfolio-intro h2 span {
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
   }
 
   .projects-hero-actions .text-link {
     font-size: 0.81rem;
-    font-weight: 650;
+    font-weight: 600;
   }
 
   .projects-hero-meta {
@@ -335,7 +329,7 @@ const filterItems = projectCategories.map((category, index) => ({
     gap: 0.5rem 1.15rem;
     margin-top: 2.4rem;
     color: #667283;
-    font-size: 0.69rem;
+    font-size: 0.75rem;
     font-weight: 600;
   }
 
@@ -368,10 +362,9 @@ const filterItems = projectCategories.map((category, index) => ({
     z-index: 1;
     overflow: hidden;
     margin: 0;
-    border: 1px solid rgb(255 255 255 / 85%);
-    border-radius: 14px;
+    border-radius: var(--radius-lg);
     background: var(--color-white);
-    box-shadow: 0 24px 70px rgb(16 27 45 / 17%);
+    box-shadow: var(--shadow-1);
     transform: translateZ(0);
   }
 
@@ -419,10 +412,10 @@ const filterItems = projectCategories.map((category, index) => ({
     gap: 0.5rem;
     padding: 0.55rem 0.7rem;
     border: 1px solid rgb(255 255 255 / 80%);
-    border-radius: 6px;
+    border-radius: var(--radius-md);
     background: rgb(255 255 255 / 92%);
     color: var(--color-navy);
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     font-weight: 700;
     line-height: 1.25;
     backdrop-filter: blur(10px);
@@ -430,7 +423,7 @@ const filterItems = projectCategories.map((category, index) => ({
 
   .hero-screen figcaption span {
     color: var(--color-muted);
-    font-size: 0.58rem;
+    font-size: 0.75rem;
     font-weight: 600;
   }
 
@@ -441,16 +434,13 @@ const filterItems = projectCategories.map((category, index) => ({
     top: 0.25rem;
     right: 0.2rem;
     color: #8e9298;
-    font-size: 0.55rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.17em;
   }
 
   .portfolio-section {
     padding-block: 70px;
-    background:
-      radial-gradient(ellipse at 10% 4%, rgb(84 123 157 / 7%), transparent 30%),
-      linear-gradient(180deg, #fbfaf8 0%, #f7f5f1 100%);
   }
 
   .portfolio-intro {
@@ -469,7 +459,7 @@ const filterItems = projectCategories.map((category, index) => ({
     max-width: 740px;
     margin: 0;
     font-size: var(--type-section-size);
-    font-weight: var(--type-heading-weight);
+    font-weight: var(--type-section-weight);
     letter-spacing: var(--type-section-letter-spacing);
     word-spacing: var(--type-section-word-spacing);
     line-height: var(--type-section-line-height);
@@ -498,10 +488,7 @@ const filterItems = projectCategories.map((category, index) => ({
     /* Border, hover lift and orange edge: shared .accent-card
        (src/styles/accent-card.css). */
     border-radius: var(--radius-large);
-    background: linear-gradient(135deg, #fff 0%, #fbf9f6 100%);
-    box-shadow:
-      0 1px 2px rgb(16 27 45 / 4%),
-      0 16px 36px -18px rgb(16 27 45 / 14%);
+    box-shadow: var(--shadow-1);
   }
 
   .project-row[hidden] {
@@ -515,10 +502,9 @@ const filterItems = projectCategories.map((category, index) => ({
     overflow: hidden;
     margin: 0;
     aspect-ratio: 1.72;
-    border: 1px solid rgb(16 27 45 / 9%);
     border-radius: var(--radius-medium);
     background: var(--color-paper);
-    box-shadow: 0 10px 24px -16px rgb(16 27 45 / 30%);
+    box-shadow: var(--shadow-1);
     transition:
       transform 420ms var(--ease-out),
       box-shadow 420ms var(--ease-out),
@@ -534,8 +520,8 @@ const filterItems = projectCategories.map((category, index) => ({
   }
 
   .project-row:hover .project-row-media {
-    border-color: rgb(201 84 43 / 26%);
-    box-shadow: 0 16px 32px -18px rgb(16 27 45 / 34%);
+    border-color: rgb(194 76 18 / 26%);
+    box-shadow: 0 16px 32px -18px rgb(15 33 54 / 34%);
     transform: translateY(-3px);
   }
 
@@ -565,8 +551,8 @@ const filterItems = projectCategories.map((category, index) => ({
     max-width: 620px;
     margin: 0;
     color: var(--color-body);
-    font-size: 0.94rem;
-    line-height: 1.7;
+    font-size: var(--type-body-size); /* body 16px */
+    line-height: var(--type-body-line-height);
   }
 
   @media (max-width: 1050px) {
@@ -633,7 +619,7 @@ const filterItems = projectCategories.map((category, index) => ({
     }
 
     .hero-screen {
-      border-radius: 9px;
+      border-radius: var(--radius-md);
     }
 
     .hero-screen figcaption {
@@ -641,7 +627,7 @@ const filterItems = projectCategories.map((category, index) => ({
       bottom: 0.35rem;
       left: 0.35rem;
       padding: 0.4rem 0.5rem;
-      font-size: 0.58rem;
+      font-size: 0.75rem;
     }
 
     .hero-screen figcaption span {

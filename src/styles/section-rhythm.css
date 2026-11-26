@@ -1,0 +1,54 @@
+/*
+ * Section rhythm (Incaendo Design System, "Web foundations"): sections
+ * alternate the canvas and surface-raised grounds; the CtaBand above the
+ * footer is each page's one navy band. Section backgrounds are set here
+ * only, in page order, so the alternation is easy to check.
+ */
+
+/* Canvas */
+.hero-section,
+.section-services,
+.ai-closing,
+.awards-section,
+.industries-section,
+.saas-section,
+.services-hero,
+.service-details,
+.delivery-process,
+.projects-hero,
+.ai-tech-hero,
+.ai-applications,
+.ai-agents,
+.team-hero,
+.team-expertise-section,
+.careers-hero,
+.contact-hero,
+.contact-page .contact-value-section,
+.insights-hero,
+.insights-archive-section,
+.faq-hero,
+.legal-hero {
+  background: var(--canvas);
+}
+
+/* Surface-raised */
+.client-row,
+.ai-experience,
+.review-section,
+.home-insights-section,
+.home-projects-section,
+.section-faq,
+.services-overview,
+.services-experience,
+.portfolio-section,
+.aidev,
+.ai-path,
+.ai-capabilities,
+.team-directory-section,
+.contact-value-section,
+.careers-openings,
+.contact-workspace,
+.insights-featured-section,
+.faq-content-section {
+  background: var(--surface-raised);
+}

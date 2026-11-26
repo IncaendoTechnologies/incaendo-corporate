@@ -18,7 +18,8 @@
   --hero-system-pad-top: var(--hero-space-top);
   --hero-system-pad-bottom: var(--hero-space-bottom);
   --hero-system-stage: var(--hero-stage-height);
-  --hero-system-title-size: var(--type-hero-h1-size);
+  /* Inner page titles use web-h1 (design system); Home uses inc-hero. */
+  --hero-system-title-size: var(--type-page-title-size);
   --hero-system-body-size: var(--type-hero-desc-size);
   --hero-system-visual-max: var(--hero-visual-max);
 }
@@ -44,7 +45,8 @@
 .hero-system.hero-system--split .hero-system__inner {
   display: grid;
   min-height: var(--hero-system-stage);
-  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  /* Copy wider than the visual: 7fr : 5fr, as inc-hero-grid. */
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
   align-items: center;
   gap: var(--hero-system-gap);
 }
@@ -57,13 +59,15 @@
   padding: 0;
 }
 
+/* inc-eyebrow; the hero copy stacks with 16px gaps (inc-hero-copy). */
 .hero-system__eyebrow {
-  margin: 0 0 0.85rem;
-  color: var(--color-orange-dark);
-  font-family: var(--font-body);
-  font-size: var(--type-eyebrow-size);
+  margin: 0 0 var(--space-4);
+  color: var(--orange-text);
+  font-family: var(--font-display);
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.12em;
+  line-height: 16px;
   text-transform: uppercase;
 }
 
@@ -75,12 +79,12 @@
   )
   .hero-system__title {
   max-width: var(--type-hero-title-measure);
-  margin: 0 0 clamp(1rem, 1.6vw, 1.35rem);
-  color: var(--color-navy);
+  margin: 0 0 var(--space-4);
+  color: var(--ink);
   font-family: var(--font-heading);
   font-size: var(--hero-system-title-size);
   font-weight: var(--type-hero-h1-weight);
-  letter-spacing: var(--type-hero-h1-letter-spacing);
+  letter-spacing: var(--type-page-title-letter-spacing);
   word-spacing: var(--type-hero-h1-word-spacing);
   line-height: var(--type-hero-h1-line-height);
   text-wrap: balance;
@@ -94,7 +98,7 @@
   )
   .hero-system__description {
   max-width: var(--type-hero-desc-measure);
-  margin: 0 0 clamp(1.5rem, 2.2vw, 2rem);
+  margin: 0 0 var(--space-5); /* 16px gap + 8px before the actions */
   color: var(--color-body);
   font-family: var(--font-body);
   font-size: var(--hero-system-body-size);
@@ -113,7 +117,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.8rem 1.2rem;
+  gap: var(--space-3);
   margin: 0;
 }
 
@@ -136,7 +140,7 @@
 }
 
 .hero-system__accent {
-  color: var(--color-orange-dark);
+  color: var(--color-orange-text);
 }
 
 /* Optional supporting strip under the hero actions (team snapshot, topic
@@ -144,14 +148,14 @@
 .hero-system .hero-system__support {
   margin-top: 1.9rem;
   padding-top: 1.4rem;
-  border-top: 1px solid rgb(16 27 45 / 9%);
+  border-top: 1px solid rgb(15 33 54 / 9%);
 }
 
 .hero-system__support-label {
   display: block;
   margin-bottom: 0.75rem;
   color: var(--color-muted);
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -227,7 +231,7 @@
   .hero-system.hero-system--feature .hero-system__inner {
     grid-template-columns: var(
       --hero-feature-columns,
-      minmax(0, 0.88fr) minmax(0, 1.12fr)
+      minmax(0, 7fr) minmax(0, 5fr)
     );
   }
 }
@@ -248,7 +252,6 @@
     --hero-system-pad-top: clamp(2.5rem, 6vw, 3.25rem);
     --hero-system-pad-bottom: clamp(2.75rem, 6vw, 3.5rem);
     --hero-system-stage: 0px;
-    --hero-system-title-size: clamp(2.35rem, 5vw, 3.3rem);
   }
 
   .hero-system.hero-system--split .hero-system__inner {
@@ -271,7 +274,6 @@
     --hero-system-gap: 1.75rem;
     --hero-system-pad-top: 2.25rem;
     --hero-system-pad-bottom: 2.75rem;
-    --hero-system-title-size: clamp(2rem, 8vw, 2.6rem);
   }
 
   .hero-system:is(.hero-system--split, .hero-system--center, .hero-system--text)

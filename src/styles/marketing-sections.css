@@ -17,7 +17,7 @@
   max-width: 360px;
   margin: 0;
   font-size: var(--type-section-size);
-  font-weight: var(--type-heading-weight);
+  font-weight: var(--type-section-weight);
 }
 .client-proof-card {
   display: grid;
@@ -35,7 +35,7 @@
   place-items: center;
   border-radius: 50%;
   background: #f3e8df;
-  color: var(--color-orange-dark);
+  color: var(--color-orange-text);
   font-size: 1.35rem;
 }
 .client-proof-card strong {
@@ -123,7 +123,7 @@
   border: 2px solid #ffd1ad;
   border-radius: 50%;
   background: #e57943;
-  box-shadow: 0 0 17px #e57943;
+  box-shadow: var(--shadow-1);
 }
 .project-node-one {
   top: 26%;
@@ -143,14 +143,14 @@
 }
 .project-index {
   color: #97745f;
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.14em;
 }
 .project-empty-copy h3 {
   margin: 1rem 0 1rem;
   font-size: var(--type-section-size);
-  font-weight: var(--type-heading-weight);
+  font-weight: var(--type-section-weight);
   letter-spacing: var(--type-section-letter-spacing);
   word-spacing: var(--type-section-word-spacing);
   line-height: var(--type-section-line-height);
@@ -163,7 +163,6 @@
 }
 .review-section {
   padding-block: var(--section-space-md);
-  background: var(--color-navy);
 }
 .review-layout {
   display: grid;
@@ -172,28 +171,27 @@
 }
 .review-intro {
   max-width: 760px;
-  margin-inline: auto;
-  text-align: center;
+  margin-inline: 0;
+  text-align: left;
 }
 .review-layout h2 {
   margin: 0;
-  color: var(--color-white);
+  color: var(--ink);
   font-size: var(--type-section-size);
-  font-weight: var(--type-heading-weight);
+  font-weight: var(--type-section-weight);
   letter-spacing: var(--type-section-letter-spacing);
   word-spacing: var(--type-section-word-spacing);
   line-height: var(--type-section-line-height);
 }
 .review-intro-copy {
   max-width: 680px;
-  margin: 0.75rem auto 0;
-  color: rgb(255 255 255 / 78%);
+  margin: var(--space-2) 0 0;
+  color: var(--ink-muted);
   font-size: var(--type-intro-size);
   line-height: var(--type-intro-line-height);
 }
 .awards-section {
   padding-block: var(--section-space-md);
-  background: linear-gradient(180deg, #efebe5 0%, var(--color-paper) 100%);
 }
 .awards-content {
   display: grid;
@@ -201,8 +199,8 @@
 }
 .awards-intro {
   max-width: 790px;
-  margin-inline: auto;
-  text-align: center;
+  margin-inline: 0;
+  text-align: left;
 }
 .awards-intro .eyebrow {
   margin-bottom: 0.75rem;
@@ -212,14 +210,14 @@
   color: var(--color-ink);
   font-family: var(--font-heading);
   font-size: var(--type-section-size);
-  font-weight: var(--type-heading-weight);
+  font-weight: var(--type-section-weight);
   letter-spacing: var(--type-section-letter-spacing);
   word-spacing: var(--type-section-word-spacing);
   line-height: var(--type-section-line-height);
 }
 .awards-intro-copy {
   max-width: 700px;
-  margin: 0 auto;
+  margin: 0 0;
   color: var(--color-body);
   font-size: var(--type-intro-size);
   line-height: var(--type-intro-line-height);
@@ -235,10 +233,10 @@
 
   min-width: 0;
   overflow: hidden;
-  border: 1px solid var(--color-line);
+  border: 0;
   border-radius: var(--radius-medium);
   background: var(--color-white);
-  box-shadow: 0 8px 24px rgb(16 27 45 / 5%);
+  box-shadow: var(--shadow-1);
   transition:
     transform 300ms var(--ease-out),
     border-color 300ms var(--ease-out),
@@ -286,7 +284,7 @@
 .award-card:hover {
   transform: translateY(-5px);
   border-color: rgb(168 65 33 / 34%);
-  box-shadow: 0 16px 34px rgb(16 27 45 / 10%);
+  box-shadow: var(--shadow-2);
 }
 .award-card:hover .award-image {
   transform: scale(1.018);
@@ -334,17 +332,12 @@
   flex-direction: column;
   justify-content: space-between;
   min-height: 250px;
-  padding: clamp(1.1rem, 1.7vw, 1.5rem);
+  padding: var(--space-5);
   overflow: hidden;
-  border: 1px solid rgb(255 255 255 / 16%);
-  border-radius: var(--radius-medium);
-  background: rgb(255 255 255 / 4%);
-  box-shadow: 0 12px 30px rgb(0 0 0 / 10%);
-  transition:
-    transform 300ms var(--ease-out),
-    border-color 300ms var(--ease-out),
-    box-shadow 300ms var(--ease-out),
-    background-color 300ms var(--ease-out);
+  border-radius: var(--radius-md);
+  background: var(--surface); /* Card, elevated: white with shadow-1 */
+  box-shadow: var(--shadow-1);
+  transition: box-shadow var(--motion-fast) var(--ease-out);
 }
 .review-card-logo {
   display: flex;
@@ -365,7 +358,7 @@
   justify-content: center;
   width: calc(var(--logo-w, 7rem) + 1.3rem);
   height: 2.85rem;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   background: var(--color-paper);
 }
 .review-card-logo-mark {
@@ -376,38 +369,19 @@
   display: block;
   width: 6.5rem;
   height: 1.7rem;
-  border: 1px solid rgb(255 255 255 / 18%);
-  border-radius: 5px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
 }
-.review-card::before {
-  position: absolute;
-  inset: 0 0 auto;
-  height: 3px;
-  background: var(--color-orange-dark);
-  content: '';
-  opacity: 0.85;
-  transition: opacity 300ms var(--ease-out);
-}
+/* Hovered cards take shadow-2 (design system). */
 .review-card:hover {
-  transform: translateY(-5px);
-  border-color: rgb(168 65 33 / 70%);
-  background: rgb(255 255 255 / 6%);
-  box-shadow: 0 20px 38px rgb(0 0 0 / 20%);
-}
-.review-card:hover::before {
-  opacity: 1;
-}
-.review-card:focus-visible {
-  outline: none;
-  border-color: var(--color-orange-dark);
-  box-shadow: 0 0 0 3px rgb(242 178 145 / 30%);
+  box-shadow: var(--shadow-2);
 }
 .review-quote {
   flex: 1;
   margin: 0 0 1.4rem;
-  color: rgb(255 255 255 / 86%);
+  color: var(--ink);
   font-size: var(--type-card-text-size);
-  line-height: 1.65;
+  line-height: 20px;
 }
 .review-attribution {
   display: flex;
@@ -415,10 +389,10 @@
   justify-content: flex-start;
   gap: 0.75rem;
   padding-top: 0.9rem;
-  border-top: 1px solid rgb(255 255 255 / 18%);
+  border-top: 1px solid var(--line);
 }
 .review-attribution strong {
-  color: var(--color-white);
+  color: var(--ink);
   font-size: var(--type-ui-size);
   font-weight: 600;
 }

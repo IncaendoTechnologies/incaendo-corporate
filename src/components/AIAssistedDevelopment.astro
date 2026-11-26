@@ -67,9 +67,9 @@ const capabilitiesRight = [
       <div class="aidev-title-wrap">
         <p class="eyebrow">AI-ASSISTED SOFTWARE DEVELOPMENT</p>
         <h2 id="ai-dev-title">
-          When Engineering <span>Meets AI</span>, Your Product{' '}
+          When engineering <span>meets AI</span>, your product{' '}
           <br class="aidev-heading-break" />
-          <span>Goes Beyond</span> the Ordinary.
+          <span>goes beyond</span> the ordinary.
         </h2>
       </div>
       <p class="aidev-lead">
@@ -405,7 +405,7 @@ const capabilitiesRight = [
         class="button button-primary aidev-bridge-btn"
         href="#ai-practical-path"
       >
-        <span>Explore AI-Powered Process</span>
+        <span>Explore AI-powered process</span>
         <svg
           class="aidev-bridge-icon"
           width="16"
@@ -704,28 +704,28 @@ const capabilitiesRight = [
   .aidev {
     position: relative;
     border-top: 1px solid var(--color-line);
-    background: linear-gradient(180deg, #fdfbf9 0%, #fef7f4 50%, #fdfbf9 100%);
   }
 
   /* ---------- Heading ---------- */
   .aidev-heading {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
     gap: clamp(1rem, 2vw, 1.35rem);
     margin-bottom: clamp(1.75rem, 3.2vw, 2.5rem);
   }
 
   .aidev-title-wrap {
-    text-align: center;
+    text-align: left;
     width: 100%;
+    max-width: 790px;
   }
 
   .aidev-heading h2 {
     margin: 0;
     font-size: var(--type-section-size);
-    font-weight: var(--type-heading-weight);
+    font-weight: var(--type-section-weight);
     letter-spacing: var(--type-section-letter-spacing);
     word-spacing: var(--type-section-word-spacing);
     line-height: var(--type-section-line-height);
@@ -733,7 +733,7 @@ const capabilitiesRight = [
   }
 
   .aidev-heading h2 span {
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
   }
 
   .aidev-heading-break {
@@ -745,14 +745,13 @@ const capabilitiesRight = [
   }
 
   .aidev-lead {
-    margin: 0 auto;
+    margin: 0 0;
     width: 100%;
-    max-width: 58rem;
+    max-width: 760px;
     color: var(--color-body);
-    font-size: 0.94rem;
-    line-height: 1.7;
-    text-align: center;
-    text-wrap: balance;
+    font-size: var(--type-body-size); /* body 16px */
+    line-height: var(--type-body-line-height);
+    text-align: left;
   }
 
   /* ---------- 3D AI Visualization Section (Spacious & Balanced) ---------- */
@@ -860,10 +859,8 @@ const capabilitiesRight = [
     padding: 18px 24px;
     background: #ffffff;
     border: 1px solid rgba(238, 230, 222, 0.95);
-    border-radius: 22px;
-    box-shadow:
-      0 10px 24px -10px rgba(224, 76, 36, 0.1),
-      0 2px 10px rgba(16, 27, 45, 0.035);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-1);
     text-decoration: none;
     color: inherit;
     overflow: hidden;
@@ -903,7 +900,7 @@ const capabilitiesRight = [
     border-color: rgba(224, 76, 36, 0.48);
     box-shadow:
       0 16px 32px -8px rgba(224, 76, 36, 0.24),
-      0 4px 14px rgba(16, 27, 45, 0.06);
+      0 4px 14px rgba(15, 33, 54, 0.06);
   }
 
   /* Right Cards Hover Animated Moving Effect: lifts up and shifts towards center */
@@ -913,17 +910,19 @@ const capabilitiesRight = [
     border-color: rgba(224, 76, 36, 0.48);
     box-shadow:
       0 16px 32px -8px rgba(224, 76, 36, 0.24),
-      0 4px 14px rgba(16, 27, 45, 0.06);
+      0 4px 14px rgba(15, 33, 54, 0.06);
   }
 
   .ai-node-icon {
+    /* Card icon (design system inc-card-icon): 40px orange-soft circle */
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--orange-soft);
+    color: var(--orange-text);
     display: grid;
     place-items: center;
-    width: 46px;
-    height: 46px;
-    border-radius: 14px;
-    background: rgba(224, 76, 36, 0.08);
-    color: #e04c24;
     flex-shrink: 0;
     transition:
       background 0.3s ease,
@@ -937,7 +936,7 @@ const capabilitiesRight = [
   .ai-node-card.is-hovered .ai-node-icon {
     background: rgba(224, 76, 36, 0.16);
     transform: scale(1.12) rotate(6deg);
-    box-shadow: 0 0 14px rgba(224, 76, 36, 0.28);
+    box-shadow: var(--shadow-2);
   }
 
   .ai-node-divider {
@@ -1044,7 +1043,7 @@ const capabilitiesRight = [
     background: radial-gradient(
       ellipse at center,
       rgba(224, 76, 36, 0.4) 0%,
-      rgba(16, 27, 45, 0.16) 42%,
+      rgba(15, 33, 54, 0.16) 42%,
       transparent 74%
     );
     border-radius: 50%;
@@ -1128,7 +1127,7 @@ const capabilitiesRight = [
     z-index: 2;
     background: transparent;
     filter: drop-shadow(0 12px 26px rgba(224, 76, 36, 0.28))
-      drop-shadow(0 4px 10px rgba(16, 27, 45, 0.08));
+      drop-shadow(0 4px 10px rgba(15, 33, 54, 0.08));
     user-select: none;
     pointer-events: none;
   }
@@ -1240,12 +1239,8 @@ const capabilitiesRight = [
     gap: 1.25rem 2rem;
     margin-top: clamp(2rem, 3.5vw, 3rem);
     padding: clamp(1.25rem, 2.5vw, 1.65rem) clamp(1.5rem, 3vw, 2.25rem);
-    background: #ffffff;
-    border: 1px solid rgba(238, 230, 222, 0.95);
-    border-radius: 22px;
-    box-shadow:
-      0 12px 30px -12px rgba(224, 76, 36, 0.12),
-      0 2px 10px rgba(16, 27, 45, 0.03);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-1);
     max-width: 1040px;
     margin-left: auto;
     margin-right: auto;
@@ -1255,32 +1250,17 @@ const capabilitiesRight = [
     flex: 1 1 380px;
     margin: 0;
     color: var(--color-body);
-    font-size: 0.94rem;
+    font-size: var(--type-body-size); /* body 16px */
     font-weight: 400;
-    line-height: 1.65;
+    line-height: var(--type-body-line-height);
     letter-spacing: normal;
   }
 
   .aidev-bridge-btn {
     display: inline-flex;
     align-items: center;
-    gap: 9px;
-    padding: 0.8rem 1.6rem;
-    border-radius: 9999px;
-    font-size: 0.94rem;
-    font-weight: 600;
     white-space: nowrap;
     text-decoration: none;
-    box-shadow: 0 4px 16px rgba(224, 76, 36, 0.28);
-    transition:
-      transform 0.25s ease,
-      box-shadow 0.25s ease,
-      background 0.25s ease;
-  }
-
-  .aidev-bridge-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(224, 76, 36, 0.38);
   }
 
   .aidev-bridge-icon {
@@ -1293,10 +1273,6 @@ const capabilitiesRight = [
 
   /* Desktop: clean typography and aligned line breaks */
   @media (min-width: 1101px) {
-    .aidev-heading h2 {
-      white-space: nowrap;
-    }
-
     .aidev-heading-break {
       display: inline;
     }

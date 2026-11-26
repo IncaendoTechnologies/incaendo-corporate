@@ -31,13 +31,13 @@
   max-width: 540px;
   margin-bottom: 1rem;
   font-size: var(--type-section-size);
-  font-weight: var(--type-heading-weight);
+  font-weight: var(--type-section-weight);
   letter-spacing: var(--type-section-letter-spacing);
   word-spacing: var(--type-section-word-spacing);
   line-height: var(--type-section-line-height);
 }
 .ai-copy h2 span {
-  color: var(--color-orange-dark);
+  color: var(--color-orange-text);
 }
 .ai-copy .section-intro {
   max-width: 510px;
@@ -49,7 +49,7 @@
 .ai-capability-list {
   display: grid;
   margin-top: 1rem;
-  border-top: 1px solid rgb(16 27 45 / 12%);
+  border-top: 1px solid rgb(15 33 54 / 12%);
 }
 .ai-capability {
   position: relative;
@@ -60,8 +60,8 @@
   gap: 0.55rem;
   padding: 0.35rem 0.7rem;
   border: 0;
-  border-bottom: 1px solid rgb(16 27 45 / 12%);
-  border-radius: 4px;
+  border-bottom: 1px solid rgb(15 33 54 / 12%);
+  border-radius: var(--radius-sm);
   background: transparent;
   color: var(--color-ink);
   text-align: left;
@@ -76,7 +76,7 @@
   inset-block: 0.45rem;
   left: 0;
   width: 2px;
-  border-radius: 2px;
+  border-radius: var(--radius-sm);
   background: var(--color-orange);
   content: '';
   opacity: 0;
@@ -90,7 +90,7 @@
 }
 .ai-capability[aria-pressed='true'] {
   background: rgb(255 255 255 / 70%);
-  box-shadow: 0 5px 18px rgb(16 27 45 / 5%);
+  box-shadow: 0 5px 18px rgb(15 33 54 / 5%);
 }
 .ai-capability[aria-pressed='true']::before {
   opacity: 1;
@@ -98,12 +98,12 @@
 }
 .ai-capability-number {
   color: var(--color-muted);
-  font-size: 0.7rem;
-  font-weight: 650;
+  font-size: 0.75rem;
+  font-weight: 600;
   letter-spacing: 0.08em;
 }
 .ai-capability[aria-pressed='true'] .ai-capability-number {
-  color: var(--color-orange-dark);
+  color: var(--color-orange-text);
 }
 .ai-capability-copy {
   display: grid;
@@ -111,7 +111,7 @@
 }
 .ai-capability-title {
   font-size: 0.98rem;
-  font-weight: 650;
+  font-weight: 600;
   line-height: 1.35;
 }
 .ai-capability-detail {
@@ -121,7 +121,7 @@
 }
 .ai-capability-indicator {
   justify-self: end;
-  color: var(--color-orange-dark);
+  color: var(--color-orange-text);
   font-size: 1rem;
   opacity: 0;
   transform: translate(-3px, 3px);
@@ -150,17 +150,17 @@
   flex-direction: column;
   overflow: hidden;
   padding: 1.25rem 1.45rem 1.2rem;
-  border: 1px solid rgb(16 27 45 / 9%);
+  border: 1px solid rgb(15 33 54 / 9%);
   border-radius: var(--radius-large);
   background:
-    radial-gradient(ellipse at 92% 0%, rgb(201 84 43 / 9%), transparent 42%),
+    radial-gradient(ellipse at 92% 0%, rgb(194 76 18 / 9%), transparent 42%),
     radial-gradient(ellipse at 0% 100%, rgb(84 123 157 / 10%), transparent 46%),
     linear-gradient(165deg, #fffdfa 0%, #faf6f0 55%, #f6f0e8 100%);
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 90%),
-    0 1px 2px rgb(16 27 45 / 4%),
-    0 14px 32px -12px rgb(16 27 45 / 12%),
-    0 42px 80px -28px rgb(16 27 45 / 18%);
+    0 1px 2px rgb(15 33 54 / 4%),
+    0 14px 32px -12px rgb(15 33 54 / 12%),
+    0 42px 80px -28px rgb(15 33 54 / 18%);
   /* No 3D tilt: rotating the frame made its text blurry. */
   transition:
     border-color var(--duration-standard) ease,
@@ -171,8 +171,8 @@
   inset: 0;
   border-radius: inherit;
   background-image:
-    linear-gradient(rgb(16 27 45 / 4.5%) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(16 27 45 / 4.5%) 1px, transparent 1px);
+    linear-gradient(rgb(15 33 54 / 4.5%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(15 33 54 / 4.5%) 1px, transparent 1px);
   background-size: 32px 32px;
   content: '';
   mask-image: radial-gradient(ellipse at center, black, transparent 74%);
@@ -189,7 +189,7 @@
 }
 .ai-showcase-heading {
   color: var(--color-body);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -204,23 +204,23 @@
   height: 6px;
   border-radius: 50%;
   background: var(--color-orange);
-  box-shadow: 0 0 0 3.5px rgb(201 84 43 / 14%);
+  box-shadow: 0 0 0 3.5px rgb(194 76 18 / 14%);
   content: '';
 }
 .ai-showcase-index,
 .ai-caption-kicker {
-  color: var(--color-orange-dark);
-  font-size: 0.7rem;
+  color: var(--color-orange-text);
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 .ai-showcase-index {
   padding: 0.28rem 0.62rem;
-  border: 1px solid rgb(201 84 43 / 18%);
+  border: 1px solid rgb(194 76 18 / 18%);
   border-radius: 999px;
   background: rgb(255 255 255 / 75%);
-  box-shadow: 0 2px 8px rgb(16 27 45 / 5%);
+  box-shadow: 0 2px 8px rgb(15 33 54 / 5%);
   font-variant-numeric: tabular-nums;
 }
 .ai-showcase-stage {
@@ -257,17 +257,17 @@
   visibility: visible;
 }
 .diagram-line {
-  stroke: rgb(16 27 45 / 24%);
+  stroke: rgb(15 33 54 / 24%);
   stroke-linecap: round;
   stroke-width: 1.6;
 }
 .diagram-line-placeholder {
-  stroke: rgb(16 27 45 / 13%);
+  stroke: rgb(15 33 54 / 13%);
   stroke-width: 3;
 }
 .diagram-node,
 .diagram-node-card {
-  stroke: rgb(16 27 45 / 14%);
+  stroke: rgb(15 33 54 / 14%);
   stroke-width: 1.25;
 }
 .diagram-node {
@@ -289,11 +289,11 @@
 }
 .diagram-node-card-active {
   fill: #fdf1e9;
-  stroke: rgb(201 84 43 / 55%);
+  stroke: rgb(194 76 18 / 55%);
   stroke-width: 1.5;
 }
 .ai-diagram.is-active .diagram-node-card:hover {
-  stroke: rgb(201 84 43 / 45%);
+  stroke: rgb(194 76 18 / 45%);
 }
 .ai-diagram.is-active .diagram-node-card-active:hover {
   stroke: var(--color-orange);
@@ -308,7 +308,7 @@
   fill: var(--color-orange);
 }
 .diagram-gridline {
-  stroke: rgb(16 27 45 / 9%);
+  stroke: rgb(15 33 54 / 9%);
   stroke-width: 1;
 }
 .diagram-gridline-strong {
@@ -328,7 +328,7 @@
   fill: #566173;
   font-family: var(--font-body);
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 400;
 }
 .diagram-text-center {
   text-anchor: middle;
@@ -501,7 +501,7 @@
   fill: var(--color-ink);
   font-family: var(--font-heading);
   font-size: 14px;
-  font-weight: 650;
+  font-weight: 600;
 }
 
 .diagram-data-row rect {
@@ -550,7 +550,7 @@
 .diagram-deploy-small {
   fill: #566173;
   font-family: var(--font-body);
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.02em;
 }
@@ -668,7 +668,7 @@
 }
 .diagram-model-loop {
   fill: none;
-  stroke: rgb(201 84 43 / 60%);
+  stroke: rgb(194 76 18 / 60%);
   stroke-width: 1.6;
   stroke-dasharray: 4 6;
 }
@@ -684,13 +684,13 @@
   stroke-width: 1.5;
 }
 .diagram-model-loop-label {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.05em;
 }
 
 .diagram-deploy-small {
-  font-size: 9.5px;
+  font-size: 12px;
 }
 .diagram-deploy-api-node {
   fill: var(--color-orange);
@@ -718,7 +718,7 @@
 }
 
 .diagram-progress-track {
-  fill: rgb(16 27 45 / 8%);
+  fill: rgb(15 33 54 / 8%);
 }
 .diagram-progress-fill {
   fill: var(--color-orange);
@@ -750,7 +750,7 @@
 .diagram-ready-badge text {
   fill: #24704a;
   font-family: var(--font-heading);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.05em;
 }
@@ -983,7 +983,7 @@
   min-height: 52px;
   align-items: baseline;
   padding-top: 0.9rem;
-  border-top: 1px solid rgb(16 27 45 / 9%);
+  border-top: 1px solid rgb(15 33 54 / 9%);
 }
 .ai-caption-kicker {
   flex: 0 0 auto;
@@ -1031,12 +1031,12 @@
   background: #f2b591;
 }
 .ai-showcase-frame:hover {
-  border-color: rgb(201 84 43 / 18%);
+  border-color: rgb(194 76 18 / 18%);
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 90%),
-    0 1px 2px rgb(16 27 45 / 4%),
-    0 18px 38px -12px rgb(16 27 45 / 15%),
-    0 52px 96px -30px rgb(16 27 45 / 22%);
+    0 1px 2px rgb(15 33 54 / 4%),
+    0 18px 38px -12px rgb(15 33 54 / 15%),
+    0 52px 96px -30px rgb(15 33 54 / 22%);
 }
 .ai-capability:focus-visible {
   z-index: 1;
@@ -1046,6 +1046,6 @@
 .content-review-note {
   margin: 1.25rem 0 0;
   color: #756b64;
-  font-size: 0.69rem;
+  font-size: 0.75rem;
   line-height: 1.5;
 }
