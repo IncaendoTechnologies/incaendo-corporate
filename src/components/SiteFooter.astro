@@ -11,14 +11,23 @@ import { homepageServices } from '../data/site-content.js'
 
 const currentYear = new Date().getFullYear()
 
+// Footer columns, one job each: what we do (Services), who we are
+// (Company), where to get help and the legal pages, and how to reach us.
 const companyLinks = [
   { href: '/ai-technology', label: 'AI' },
   { href: '/projects', label: 'Projects' },
   { href: '/teams', label: 'Teams' },
   { href: '/insights', label: 'Insights' },
-  { href: '/careers', label: 'Careers' },
   // Goes to the Contact page; the popup is for in-page calls to action.
-  { href: '/contact', label: 'Contact', contactPage: true },
+  { href: '/contact', label: 'Contact us', contactPage: true },
+]
+
+const helpLinks = [
+  { href: '/careers', label: 'Careers' },
+  // Help and legal pages open in a new tab, as they always have.
+  { href: '/faq', label: 'FAQ', newTab: true },
+  { href: '/privacy-policy', label: 'Privacy Policy', newTab: true },
+  { href: '/terms-and-conditions', label: 'Terms & Conditions', newTab: true },
 ]
 
 const mapUrl =
@@ -28,7 +37,7 @@ const mapUrl =
 <div class="inc-shell">
   <footer class="inc-footer">
     <div class="site-container">
-      <div class="inc-footer-grid">
+      <div class="inc-footer-grid site-footer-grid">
         <div class="inc-footer-brand">
           <a href="/" aria-label="Incaendo home">
             <Image
@@ -74,6 +83,25 @@ const mapUrl =
           </ul>
         </nav>
 
+        <nav aria-label="Help and legal">
+          <p class="inc-footer-heading">Help &amp; legal</p>
+          <ul>
+            {helpLinks.map((link) => (
+              <li>
+                <a
+                  class="inc-footer-link"
+                  href={link.href}
+                  data-contact-page-link={link.contactPage ? '' : undefined}
+                  target={link.newTab ? '_blank' : undefined}
+                  rel={link.newTab ? 'noopener noreferrer' : undefined}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
         <div class="inc-footer-contact">
           <p class="inc-footer-heading">Get in touch</p>
           <address>
@@ -106,16 +134,11 @@ const mapUrl =
                 width="20"
                 height="20"
                 viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                fill="currentColor"
+                class="is-solid"
                 aria-hidden="true"
               >
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                <rect width="4" height="12" x="2" y="9"></rect>
-                <circle cx="4" cy="4" r="2"></circle>
+                <path d="M2.5 9h4v12h-4zM4.5 2.8a2.2 2.2 0 1 1 0 4.4 2.2 2.2 0 0 1 0-4.4zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.7 4.8 6.1V21h-4v-5.5c0-1.4 0-3.1-1.9-3.1-1.9 0-2.2 1.5-2.2 3V21H9z"></path>
               </svg>
             </a>
             <a
@@ -150,14 +173,11 @@ const mapUrl =
                 width="20"
                 height="20"
                 viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                fill="currentColor"
+                class="is-solid"
                 aria-hidden="true"
               >
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                <path d="M14 22v-8h2.8l.4-3.3H14V8.6c0-.9.3-1.6 1.6-1.6h1.7V4.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.2v2.4H8v3.3h2.7v8z"></path>
               </svg>
             </a>
           </div>
@@ -166,23 +186,6 @@ const mapUrl =
 
       <div class="inc-footer-legal">
         <span>© {currentYear} Incaendo Technologies Private Limited</span>
-        <span>
-          <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">
-            Privacy policy
-          </a>{' '}
-          ·
-          <a
-            href="/terms-and-conditions"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Terms
-          </a>{' '}
-          ·
-          <a href="/faq" target="_blank" rel="noopener noreferrer">
-            FAQ
-          </a>
-        </span>
       </div>
     </div>
   </footer>
@@ -193,5 +196,106 @@ const mapUrl =
      address. */
   .footer-email {
     margin: var(--space-3) 0 0;
+  }
+
+  /* Column headings: a little larger than the design system's 12px, with a
+     short orange rule set a little below them. */
+  .inc-footer-heading {
+    position: relative;
+    margin-bottom: 1.4rem;
+    padding-bottom: 0.75rem;
+    font-size: 14px;
+    line-height: 20px;
+    opacity: 0.9;
+  }
+  .inc-footer-heading::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 32px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--orange);
+    content: '';
+  }
+
+  /* Social links under Get in touch, as solid orange circles. */
+  .inc-footer-contact .inc-footer-social {
+    margin-top: var(--space-4);
+  }
+  .inc-footer-social a {
+    border-color: var(--orange);
+    background: var(--orange);
+    color: #fff;
+    transition:
+      background 180ms ease,
+      border-color 180ms ease,
+      transform 180ms ease;
+  }
+  /* Bolder strokes so the white icons read clearly on orange. */
+  .inc-footer-social svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2.25;
+  }
+  .inc-footer-social svg.is-solid {
+    stroke: none;
+  }
+  .inc-footer-social a:hover,
+  .inc-footer-social a:focus-visible {
+    border-color: var(--orange-text);
+    background: var(--orange-text);
+    transform: translateY(-2px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .inc-footer-social a {
+      transition: none;
+    }
+    .inc-footer-social a:hover {
+      transform: none;
+    }
+  }
+
+  /* Five columns on wide screens: brand, Services, Company, Help & legal,
+     Get in touch (from 1200px). Narrower: brand on its own row, the three link groups
+     side by side, contact details below. Phones: two columns, with the
+     longer Services labels across the full width. */
+  .inc-footer-grid.site-footer-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  /* Below the five-column width, brand and contact take full rows (the
+     design system lets them share a row from 1024px). */
+  .site-footer-grid > .inc-footer-brand,
+  .site-footer-grid > .inc-footer-contact {
+    grid-column: 1 / -1;
+  }
+  @container (min-width: 1200px) {
+    .site-footer-grid > .inc-footer-brand,
+    .site-footer-grid > .inc-footer-contact {
+      grid-column: auto;
+    }
+  }
+
+  @container (min-width: 1200px) {
+    .inc-footer-grid.site-footer-grid {
+      grid-template-columns: 1.45fr 1.25fr 0.8fr 1fr 1.35fr;
+      gap: var(--space-6);
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .inc-footer-brand img {
+      height: 32px;
+      width: auto;
+    }
+  }
+
+  @container (max-width: 599px) {
+    .inc-footer-grid.site-footer-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .inc-footer-grid.site-footer-grid > nav[aria-label='Services'] {
+      grid-column: 1 / -1;
+    }
   }
 </style>

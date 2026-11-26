@@ -107,7 +107,7 @@ const homeArticles = publishedBlogArticles.slice(0, 3)
 
   .home-insights-grid :global(.insight-card-art-link) {
     width: 100%;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 3 / 2;
   }
 
   .home-insights-grid :global(.insight-card-content) {
@@ -162,6 +162,10 @@ const homeArticles = publishedBlogArticles.slice(0, 3)
 
   .home-insights-grid :global(.insight-read-link:hover) {
     color: var(--color-orange-text);
+  }
+
+  .home-insights-grid :global(.insight-read-link:active) {
+    color: var(--color-ink);
   }
 
   .home-insights-grid :global(.insight-photo) {
@@ -220,7 +224,7 @@ const homeArticles = publishedBlogArticles.slice(0, 3)
     }
 
     .home-insights-grid :global(.insight-card-art-link) {
-      aspect-ratio: 16 / 10;
+      aspect-ratio: 3 / 2;
     }
 
     .home-insights-grid :global(.insight-card-content) {

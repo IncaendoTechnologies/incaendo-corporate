@@ -1,0 +1,521 @@
+---
+// Teams hero visual: the Incaendo "iN" mark as a solid 3D object at the
+// centre, with four cards around it on what defines the team.
+//
+// The mark is the logo redrawn as vector shapes (checked against
+// src/assets/incaendo-mark.png) and extruded by stacking thin layers in 3D:
+// both faces carry the brand colours and the thin edge a slightly deeper
+// shade, so it stays the plain logo while showing depth as it turns. It
+// turns round 360 degrees on its own and can also be dragged (see
+// src/scripts/team-mark.js). With reduced motion it faces front and stays
+// still.
+
+// Logo shapes on the PNG's 760 x 668 grid.
+const MARK_W = 760
+const MARK_H = 668
+const BLUE_SHAPES = [
+  '<rect x="40" y="153" width="137" height="145"/>',
+  '<path d="M45 393 177 306v319H45z"/>',
+  '<path d="M212 230 305 300v325h-93z"/>',
+  '<path d="M212 48 615 492V42h105v583H612L212 178z"/>',
+].join('')
+const DOT = '<circle cx="107" cy="92" r="51"/>'
+
+// The light sweep on each face is masked to the logo's shape.
+const maskSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${MARK_W} ${MARK_H}">${BLUE_SHAPES}${DOT}</svg>`
+const flashMask = `url("data:image/svg+xml,${encodeURIComponent(maskSvg)}")`
+// Mirrored for the back face, which is turned round to face the other way.
+const backMaskSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${MARK_W} ${MARK_H}"><g transform="matrix(-1 0 0 1 ${MARK_W} 0)">${BLUE_SHAPES}${DOT}</g></svg>`
+const backFlashMask = `url("data:image/svg+xml,${encodeURIComponent(backMaskSvg)}")`
+
+// Extrusion: layer 0 is the back face, the last layer the front face.
+const LAYERS = 18
+const layers = Array.from({ length: LAYERS }, (_, i) => {
+  const t = i / (LAYERS - 1)
+  const face = i === 0 || i === LAYERS - 1
+  return {
+    z: t - 0.5,
+    blue: face ? '#145aa8' : '#0f4a8f',
+    orange: face ? '#ee5d10' : '#c94c0b',
+  }
+})
+
+const ICONS = {
+  people:
+    '<circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="17" cy="9" r="2.4"/><path d="M15.8 14.2c2.4-.2 4.2 1.4 4.7 4"/>',
+  calendar:
+    '<rect x="4" y="5.5" width="16" height="14.5" rx="2.2"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/>',
+  globe:
+    '<circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4c2.2 2.2 3.3 4.9 3.3 8s-1.1 5.8-3.3 8c-2.2-2.2-3.3-4.9-3.3-8S9.8 6.2 12 4z"/>',
+  route:
+    '<circle cx="6" cy="18" r="2.2"/><circle cx="18" cy="6" r="2.2"/><path d="M8.2 18H15a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6.8"/>',
+}
+
+// What defines the team. The figures are the design system's approved facts.
+const traits = [
+  {
+    value: '50+',
+    label: 'A close-knit team of specialists',
+    icon: 'people',
+    accent: 'orange',
+    x: 17,
+    y: 9,
+  },
+  {
+    value: 'Since 2012',
+    label: 'Building software together',
+    icon: 'calendar',
+    accent: 'blue',
+    x: 83,
+    y: 9,
+  },
+  {
+    value: '5+ countries',
+    label: 'Clients across three continents',
+    icon: 'globe',
+    accent: 'blue',
+    x: 17,
+    y: 91,
+  },
+  {
+    value: 'One team',
+    label: 'From discovery to delivery',
+    icon: 'route',
+    accent: 'orange',
+    x: 83,
+    y: 91,
+  },
+]
+---
+
+<div
+  class="team-constellation hero-system__visual reveal"
+  data-reveal-role="stage"
+  data-team-mark
+>
+  <svg class="tc-defs" aria-hidden="true" focusable="false">
+    <symbol id="tc-mark-shape" viewBox={`0 0 ${MARK_W} ${MARK_H}`}>
+      <g fill="var(--tc-layer-blue)" set:html={BLUE_SHAPES} />
+      <g fill="var(--tc-layer-orange)" set:html={DOT} />
+    </symbol>
+  </svg>
+
+  <div class="tc-stage">
+    <div class="tc-glow" aria-hidden="true"></div>
+    <div class="tc-shadow" aria-hidden="true"></div>
+    <div class="tc-mark-wrap" role="img" aria-label="The Incaendo iN mark">
+      <div class="tc-mark" data-team-mark-object>
+        {layers.map((layer) => (
+          <svg
+            class="tc-layer"
+            viewBox={`0 0 ${MARK_W} ${MARK_H}`}
+            style={`--z: ${layer.z.toFixed(4)}; --tc-layer-blue: ${layer.blue}; --tc-layer-orange: ${layer.orange}`}
+            aria-hidden="true"
+            focusable="false"
+          >
+            <use href="#tc-mark-shape" />
+          </svg>
+        ))}
+        <span
+          class="tc-flash is-front"
+          style={`--tc-mask: ${flashMask}`}
+          aria-hidden="true"
+        ></span>
+        <span
+          class="tc-flash is-back"
+          style={`--tc-mask: ${backFlashMask}`}
+          aria-hidden="true"
+        ></span>
+      </div>
+    </div>
+  </div>
+
+  <ul class="tc-traits" aria-label="What defines our team">
+    {traits.map((trait, index) => (
+      <li
+        class={`tc-trait is-${trait.accent}`}
+        style={`left: ${trait.x}%; top: ${trait.y}%; --order: ${index}`}
+      >
+        <div class="tc-trait-card">
+          <svg
+            class="tc-trait-icon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            set:html={ICONS[trait.icon]}
+          />
+          <div>
+            <b>{trait.value}</b>
+            <span>{trait.label}</span>
+          </div>
+        </div>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<script>
+  import '../scripts/team-mark.js'
+</script>
+
+<style>
+  .team-constellation {
+    --tc-orange: var(--orange, #ee5d10);
+    --tc-blue: var(--blue, #145aa8);
+
+    position: relative;
+    min-width: 0;
+    container-type: inline-size;
+  }
+  .tc-defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
+  .tc-stage {
+    position: relative;
+    display: grid;
+    width: 100%;
+    aspect-ratio: var(--hero-visual-ratio);
+    place-items: center;
+    container-type: size;
+    perspective: 1400px;
+  }
+
+  /* Soft light behind the mark and its shadow on the "floor" */
+  .tc-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70cqmin;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 42% 40%, rgb(20 90 168 / 14%), transparent 58%),
+      radial-gradient(circle at 62% 64%, rgb(238 93 16 / 12%), transparent 55%);
+    filter: blur(8px);
+    translate: -50% -50%;
+    animation: tc-fade 1.2s ease both;
+  }
+  .tc-shadow {
+    animation: tc-shadow-turn 14s linear var(--tc-turn-delay, 0s) infinite;
+    position: absolute;
+    top: 84%;
+    left: 50%;
+    width: 48cqw;
+    height: 6cqh;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgb(15 33 54 / 26%), transparent);
+    translate: -50% -50%;
+  }
+
+  .tc-mark-wrap {
+    position: relative;
+    z-index: 2;
+    width: 52cqw;
+    aspect-ratio: 760 / 668;
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+    animation: tc-float 6s ease-in-out infinite alternate;
+  }
+  .tc-mark-wrap:active {
+    cursor: grabbing;
+  }
+  .tc-mark {
+    --tc-depth: 2.6cqw;
+
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    will-change: transform;
+    /* The steady 360 degree turn; src/scripts/team-mark.js only steps in
+       while it is dragged. */
+    animation: tc-turn 14s linear var(--tc-turn-delay, 0s) infinite;
+  }
+  .tc-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    transform: translateZ(calc(var(--z) * var(--tc-depth)));
+  }
+
+  /* What defines the team */
+  .tc-traits {
+    position: absolute;
+    z-index: 5;
+    inset: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    pointer-events: none;
+  }
+  .tc-trait {
+    position: absolute;
+    translate: -50% -50%;
+    pointer-events: auto;
+    animation: tc-card-in 650ms var(--ease-out) both;
+    animation-delay: calc(1.1s + var(--order) * 110ms);
+  }
+  .tc-trait.is-orange {
+    --accent: var(--orange-text, #b5450b);
+  }
+  .tc-trait.is-blue {
+    --accent: var(--tc-blue);
+  }
+  .tc-trait-card {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.65rem, 1.8cqw, 0.9rem);
+    box-sizing: border-box;
+    width: clamp(11.5rem, 32cqw, 14rem);
+    height: clamp(5.25rem, 14cqw, 5.75rem);
+    padding: clamp(0.7rem, 1.9cqw, 0.95rem);
+    border: 1px solid rgb(238 93 16 / 14%);
+    border-radius: var(--radius-lg, 16px);
+    background: var(--orange-soft, #fdede3);
+    box-shadow:
+      0 1px 0 #fff inset,
+      0 22px 44px -24px rgb(15 33 54 / 40%),
+      0 2px 6px -3px rgb(15 33 54 / 10%);
+    backdrop-filter: blur(6px);
+    position: relative;
+    overflow: hidden;
+    /* Each card drifts gently in place, out of step with the others. */
+    animation: tc-card-float 5.5s ease-in-out infinite alternate;
+    animation-delay: calc(var(--order) * -1.6s);
+    transition:
+      border-color 300ms ease,
+      box-shadow 300ms ease;
+  }
+  /* The same soft light sweeps across the mark's faces, just before the
+     cards take their turn. Each face only shows from its own side. */
+  .tc-flash {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        110deg,
+        transparent 44%,
+        rgb(255 255 255 / 60%) 50%,
+        transparent 56%
+      )
+      no-repeat;
+    background-position: 150% 0;
+    background-size: 300% 100%;
+    mask: var(--tc-mask) center / 100% 100% no-repeat;
+    backface-visibility: hidden;
+    pointer-events: none;
+    animation: tc-mark-flash 8s ease-in-out 1s infinite;
+  }
+  .tc-flash.is-front {
+    transform: translateZ(calc(var(--tc-depth) * 0.5 + 0.5px));
+  }
+  /* Turned to face the back; its mask is mirrored to match the back face. */
+  .tc-flash.is-back {
+    transform: translateZ(calc(var(--tc-depth) * -0.5 - 0.5px)) rotateY(180deg);
+  }
+
+  /* A soft light sweeps across each card now and then, in turn. */
+  .tc-trait-card::after {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      110deg,
+      transparent 35%,
+      rgb(255 255 255 / 70%) 50%,
+      transparent 65%
+    );
+    content: '';
+    pointer-events: none;
+    translate: -100% 0;
+    animation: tc-card-flash 8s ease-in-out infinite;
+    animation-delay: calc(2s + var(--order) * 2s);
+  }
+  .tc-trait-card:hover {
+    border-color: color-mix(in srgb, var(--accent) 32%, transparent);
+    box-shadow:
+      0 1px 0 #fff inset,
+      0 26px 48px -24px rgb(15 33 54 / 46%),
+      0 10px 26px -16px color-mix(in srgb, var(--accent) 60%, transparent);
+  }
+  .tc-trait-icon {
+    flex: none;
+    box-sizing: border-box;
+    width: clamp(2.4rem, 7cqw, 3rem);
+    height: clamp(2.4rem, 7cqw, 3rem);
+    padding: clamp(0.55rem, 1.6cqw, 0.7rem);
+    border-radius: 12px;
+    background: var(--surface, #fff);
+    box-shadow: 0 2px 6px -3px rgb(15 33 54 / 18%);
+    fill: none;
+    stroke: var(--accent);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+  }
+  .tc-trait-card div {
+    display: grid;
+    gap: 0.2rem;
+    min-width: 0;
+  }
+  .tc-trait b {
+    color: var(--color-ink);
+    white-space: nowrap;
+    font-family: var(--font-heading);
+    font-size: clamp(1.05rem, 3.2cqw, 1.375rem);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+  .tc-trait span {
+    color: var(--color-body);
+    font-size: clamp(0.75rem, 2cqw, 0.875rem);
+    font-weight: 500;
+    line-height: 1.35;
+  }
+
+  /* Narrow frames: the cards move into a two-by-two grid below the mark,
+     and the mark grows into the freed space. */
+  @container (max-width: 520px) {
+    .tc-mark-wrap {
+      width: 58cqw;
+    }
+    .tc-shadow {
+      width: 54cqw;
+      top: 88%;
+    }
+    .tc-traits {
+      position: static;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-rows: 1fr;
+      gap: 0.6rem;
+      margin-top: 0.75rem;
+    }
+    .tc-trait {
+      position: static;
+      translate: none;
+    }
+    .tc-trait-card {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.55rem;
+      width: auto;
+      height: 100%;
+    }
+  }
+
+  /* Past edge-on (25% and 75%) the mark is mirrored so it reads "iN" from
+     behind too; the switch is invisible because it happens edge-on. */
+  @keyframes tc-turn {
+    0% {
+      transform: rotateY(0deg) scaleX(1);
+    }
+    25% {
+      transform: rotateY(90deg) scaleX(1);
+    }
+    25.001% {
+      transform: rotateY(90deg) scaleX(-1);
+    }
+    75% {
+      transform: rotateY(270deg) scaleX(-1);
+    }
+    75.001% {
+      transform: rotateY(270deg) scaleX(1);
+    }
+    100% {
+      transform: rotateY(360deg) scaleX(1);
+    }
+  }
+  /* The floor shadow narrows as the mark turns edge-on. */
+  @keyframes tc-shadow-turn {
+    0%,
+    50%,
+    100% {
+      scale: 1 1;
+      animation-timing-function: ease-in;
+    }
+    25%,
+    75% {
+      scale: 0.5 1;
+      animation-timing-function: ease-out;
+    }
+  }
+  [data-dragging] .tc-mark,
+  [data-dragging] .tc-shadow {
+    animation: none;
+  }
+  [data-offscreen] * {
+    animation-play-state: paused !important;
+  }
+  @keyframes tc-float {
+    from {
+      translate: 0 -1.2%;
+    }
+    to {
+      translate: 0 1.2%;
+    }
+  }
+  @keyframes tc-fade {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes tc-card-float {
+    from {
+      translate: 0 -3px;
+    }
+    to {
+      translate: 0 3px;
+    }
+  }
+  @keyframes tc-mark-flash {
+    0% {
+      background-position: 150% 0;
+    }
+    18%,
+    100% {
+      background-position: -50% 0;
+    }
+  }
+  @keyframes tc-card-flash {
+    0% {
+      translate: -100% 0;
+    }
+    18%,
+    100% {
+      translate: 100% 0;
+    }
+  }
+  @keyframes tc-card-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px) scale(0.95);
+    }
+  }
+
+  /* Hold the entrance while the first-visit brand intro covers the page. */
+  :global(:root[data-brand-intro='playing']) .team-constellation *,
+  :global(:root[data-brand-intro='playing']) .team-constellation *::after {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tc-glow,
+    .tc-shadow,
+    .tc-mark-wrap,
+    .tc-mark,
+    .tc-trait,
+    .tc-trait-card,
+    .tc-trait-card::after,
+    .tc-flash {
+      animation: none;
+    }
+    .tc-trait-card {
+      transition: none;
+    }
+  }
+</style>
