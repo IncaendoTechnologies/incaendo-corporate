@@ -247,64 +247,33 @@
   border: 0;
 }
 
+/* Design system Card: surface-raised panel, radius-md, space-5 padding.
+   No coloured top borders or gradient bars. */
 .service-card-featured {
-  --service-card-lift: 0px;
   position: relative;
   display: flex;
   min-width: 0;
-  min-height: 260px;
   height: 100%;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 0.6rem;
-  overflow: hidden;
-  padding: 1.1rem;
-  border: 1px solid rgb(16 27 45 / 9%);
-  border-radius: var(--radius-lg);
+  gap: var(--space-2, 8px);
+  padding: var(--space-5, 24px);
+  border-radius: var(--radius-md, 8px);
+  background: var(--surface, #ffffff);
   box-shadow: var(--shadow-1);
-  /* Lift only: a 3D tilt or scale made the card text blurry on hover. */
-  transform: translateY(var(--service-card-lift));
   transition:
-    transform 280ms var(--ease-out),
-    border-color 280ms var(--ease-out),
-    box-shadow 280ms var(--ease-out),
-    background-color 280ms var(--ease-out);
+    box-shadow var(--motion-fast, 150ms) var(--ease-out),
+    transform var(--motion-fast, 150ms) var(--ease-out);
 }
 
 .service-card-featured::before {
-  position: absolute;
-  z-index: 0;
-  inset: 0 0 auto;
-  height: 3px;
-  background: linear-gradient(
-    90deg,
-    var(--color-orange),
-    #e09a63 68%,
-    transparent
-  );
-  content: '';
-  opacity: 0.8;
-  transition:
-    opacity 280ms var(--ease-out),
-    filter 280ms var(--ease-out);
+  display: none;
 }
 
 .service-card-featured:hover,
 .service-card-featured:focus-within {
-  --service-card-lift: -8px;
-  z-index: 2;
-  border-color: rgb(168 65 33 / 42%);
-  background: #fff;
-  box-shadow:
-    0 22px 42px rgb(15 33 54 / 15%),
-    0 7px 20px rgb(168 65 33 / 8%);
-  transform: translateY(var(--service-card-lift));
-}
-
-.service-card-featured:hover::before,
-.service-card-featured:focus-within::before {
-  opacity: 1;
-  filter: drop-shadow(0 2px 7px rgb(168 65 33 / 28%));
+  box-shadow: var(--shadow-2);
+  transform: translateY(-3px);
 }
 
 .service-card-featured .service-card-top,
@@ -315,12 +284,12 @@
 }
 
 .service-card-featured .service-icon {
-  width: 44px;
-  height: 44px;
-  border: 1px solid rgb(168 65 33 / 13%);
-  border-radius: var(--radius-lg);
-  background: var(--color-peach);
-  color: var(--color-orange-text);
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--orange-soft, #fdede3);
+  color: var(--orange-text, #b5450b);
   transform: translateZ(0) rotate(0deg);
   transition:
     transform 280ms var(--ease-out),
