@@ -90,10 +90,6 @@ textarea {
   );
 }
 
-/* Separate the final navy call to action from the navy footer. */
-.inc-cta-band {
-  margin-bottom: var(--space-6, 32px);
-}
 
 .skip-link {
   position: fixed;
