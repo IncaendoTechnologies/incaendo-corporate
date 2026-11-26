@@ -51,7 +51,7 @@ a {
   text-decoration: none;
 }
 
-a:hover {
+a:where(:not(.button, .inc-btn)):hover {
   color: var(--accent-hover);
 }
 

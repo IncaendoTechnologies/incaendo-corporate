@@ -150,7 +150,6 @@ const serviceDetails = [
     linkLabel: 'Discuss cloud & data',
   },
 ]
-import CtaBand from './CtaBand.astro'
 ---
 
 <div class="services-page">
@@ -231,10 +230,12 @@ import CtaBand from './CtaBand.astro'
   >
     <div class="site-container">
       <header class="services-section-heading reveal">
-        <p class="eyebrow">A connected set of capabilities</p>
-        <h2 id="service-overview-title">
-          Start with the challenge. <span>Choose the right capability.</span>
-        </h2>
+        <div>
+          <p class="eyebrow">A connected set of capabilities</p>
+          <h2 id="service-overview-title">
+            Start with the challenge. <span>Choose the right capability.</span>
+          </h2>
+        </div>
         <p>
           Explore the service areas and the problems each one can help address.
           The right scope depends on your users, systems, and goals.
@@ -274,10 +275,12 @@ import CtaBand from './CtaBand.astro'
   >
     <div class="site-container">
       <header class="services-section-heading services-detail-heading reveal">
-        <p class="eyebrow">What the work can include</p>
-        <h2 id="service-details-title">
-          Useful technology, <span>made specific to the work.</span>
-        </h2>
+        <div>
+          <p class="eyebrow">What the work can include</p>
+          <h2 id="service-details-title">
+            Useful technology, <span>made specific to the work.</span>
+          </h2>
+        </div>
         <p>
           Each engagement is shaped to its context. These are practical starting
           points for a conversation about your requirements.
@@ -408,7 +411,6 @@ import CtaBand from './CtaBand.astro'
     </div>
   </section>
 
-  <CtaBand />
   <DeliveryProcess />
 </div>
 
@@ -569,15 +571,22 @@ import CtaBand from './CtaBand.astro'
     padding-block: clamp(4.5rem, 7vw, 6.5rem);
   }
   .services-section-heading {
-    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    max-width: 720px;
     margin: 0 0 clamp(2.2rem, 4vw, 3rem);
     text-align: left;
   }
+  .services-section-heading > div {
+    width: 100%;
+  }
   .services-section-heading .eyebrow {
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.5rem;
   }
   .services-section-heading h2 {
-    margin-bottom: 0.9rem;
+    margin-bottom: 0;
     color: var(--color-navy);
     font-size: var(--type-section-size);
     font-weight: var(--type-section-weight);
@@ -589,11 +598,11 @@ import CtaBand from './CtaBand.astro'
     color: var(--color-orange-text);
   }
   .services-section-heading > p:last-child {
-    max-width: 690px;
-    margin: 0 0;
+    max-width: 720px;
+    margin: 0;
     color: var(--color-body);
-    font-size: var(--type-body-size);
-    line-height: var(--type-body-line-height);
+    font-size: var(--type-intro-size);
+    line-height: var(--type-intro-line-height);
   }
   .services-overview-grid {
     display: grid;

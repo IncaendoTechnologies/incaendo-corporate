@@ -167,6 +167,7 @@
 }
 .inc-btn:hover {
   background: var(--surface-raised);
+  color: var(--ink);
 }
 .inc-btn-primary,
 .inc-btn-accent {
@@ -178,11 +179,13 @@
 .inc-btn-accent:hover {
   background: var(--action-hover, #a83f0a);
   border-color: var(--action-hover, #a83f0a);
+  color: var(--on-action, #ffffff);
 }
 .inc-btn-primary:active,
 .inc-btn-accent:active {
   background: var(--action-pressed, #8f3608);
   border-color: var(--action-pressed, #8f3608);
+  color: var(--on-action, #ffffff);
 }
 .inc-btn {
   transition:
@@ -722,6 +725,7 @@ a.inc-card:focus-visible {
 }
 .inc-btn-on-navy:hover {
   background: rgba(255, 255, 255, 0.12);
+  color: var(--on-navy);
 }
 .inc-on-navy :focus-visible,
 .inc-cta-band :focus-visible,

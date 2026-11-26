@@ -149,7 +149,6 @@ const statIcons = {
   shield:
     '<path d="M12 3.5 5 6.2v5.3c0 4.3 2.9 7.6 7 9 4.1-1.4 7-4.7 7-9V6.2Z"/><path d="m8.8 12.1 2.2 2.2 4.3-4.4"/>',
 }
-import CtaBand from './CtaBand.astro'
 ---
 
 <div class="ai-tech-page" data-ai-technology>
@@ -245,7 +244,6 @@ import CtaBand from './CtaBand.astro'
 
   <AIAgentsShowcase />
 
-  <CtaBand />
   <section
     class="ai-capabilities section section-soft"
     id="ai-capabilities"
@@ -254,16 +252,15 @@ import CtaBand from './CtaBand.astro'
     <div class="site-container">
       <div class="ai-section-heading ai-capabilities-heading reveal">
         <div>
+          <p class="eyebrow">AI CAPABILITIES</p>
           <h2 id="ai-capabilities-title">
-            The right building blocks.
-            <br />
+            The right building blocks.{' '}
             <span>Connected to your context.</span>
           </h2>
         </div>
         <p>
-          From focused workflow improvements to AI-enabled products, each
-          capability can be shaped around existing data, systems, and operating
-          constraints.
+          From focused workflow automation to AI-enabled products, every
+          capability is shaped around your data, systems, and constraints.
         </p>
       </div>
       <div class="ai-capability-grid reveal" data-reveal-stagger>
@@ -652,15 +649,18 @@ import CtaBand from './CtaBand.astro'
   }
   .ai-section-heading {
     display: flex;
-    align-items: flex-start;
     flex-direction: column;
-    gap: var(--space-4, 1rem);
+    align-items: flex-start;
+    gap: 0.75rem;
+    max-width: 720px;
     margin-bottom: 2.5rem;
     text-align: left;
   }
   .ai-section-heading > div {
     width: 100%;
-    max-width: 790px;
+  }
+  .ai-section-heading .eyebrow {
+    margin-bottom: 0.5rem;
   }
   .ai-section-heading h2 {
     margin-bottom: 0;
@@ -669,7 +669,7 @@ import CtaBand from './CtaBand.astro'
     color: var(--color-orange-text);
   }
   .ai-section-heading > p {
-    max-width: 760px;
+    max-width: 720px;
     margin: 0;
     color: var(--color-body);
     font-size: var(--type-intro-size);

@@ -192,18 +192,16 @@
 }
 
 .section-services .section-heading {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  justify-items: start;
-  gap: 0.7rem;
-  margin-bottom: 1.3rem;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 1.75rem;
   text-align: left;
 }
 
 .section-services .section-heading > div {
-  width: 100%;
-  max-width: 790px;
-  justify-self: start;
+  max-width: 720px;
   text-align: left;
 }
 
@@ -220,7 +218,7 @@
 }
 
 .section-services .section-intro {
-  max-width: 760px;
+  max-width: 680px;
   margin-inline: 0;
   color: var(--color-body);
   font-size: var(--type-intro-size);
@@ -228,7 +226,16 @@
 }
 
 .section-services .section-heading > .text-link {
-  margin: 0;
+  flex: 0 0 auto;
+  margin: 0 0 0.25rem;
+}
+
+@media (max-width: 900px) {
+  .section-services .section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
 }
 
 .service-grid-home {
