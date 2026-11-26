@@ -84,12 +84,6 @@ textarea {
 
 /* Keep the design-system shell sections aligned to the site's 1200px
    content width. The bundled inc-container max-width includes its gutters. */
-.inc-shell > :is(.inc-hero, .inc-cta-band, .inc-footer) .inc-container {
-  max-width: calc(
-    var(--container-content, 1200px) + var(--gutter, 24px) * 2
-  );
-}
-
 
 .skip-link {
   position: fixed;
@@ -117,10 +111,6 @@ textarea {
   line-height: 16px;
   text-transform: uppercase;
 }
-
-.eyebrow-dark {
-  color: var(--color-orange-text);
-}
 /* On navy: the dark-theme orange-text (#FF9A62). */
 .eyebrow-light {
   color: #ff9a62;
@@ -140,14 +130,6 @@ textarea {
 }
 .section-soft {
   background: var(--surface-subtle);
-}
-.section-navy {
-  background: var(--surface-contrast);
-  color: var(--color-white);
-}
-.section-navy h2,
-.section-navy p {
-  color: var(--color-white);
 }
 
 /*
@@ -215,11 +197,6 @@ textarea {
   color: var(--color-white);
 }
 /* `inc-btn-sm`: 36px for dense UI. */
-.button-small {
-  min-height: 36px;
-  padding: 0.3125rem var(--space-4); /* 5px + 24px + 1px borders = 36px */
-  font-size: 14px;
-}
 .button:disabled {
   cursor: not-allowed;
   opacity: 0.45;
@@ -422,12 +399,6 @@ html[data-brand-intro='playing'] .site-intro {
     animation: none !important;
   }
 }
-.text-link-light {
-  color: var(--color-white);
-}
-.text-link-light:hover {
-  color: #f3b18f;
-}
 
 /*
  * Tap targets (design system accessibility checklist): anything tappable is
@@ -475,14 +446,12 @@ html[data-brand-intro='playing'] .site-intro {
 
 /* On touch screens, standalone text links grow to 44px tall. */
 @media (pointer: coarse) {
-  .site-footer a:not(.button, .footer-social-link),
   .text-link,
   .insight-read-link,
   .service-card-explore,
   .home-project-link,
   .contact-hero-email,
   .contact-map-open,
-  .footer-contact-row,
   .site-logo,
   main a:not([class]):not(p *, label *) {
     display: inline-flex;
@@ -490,4 +459,29 @@ html[data-brand-intro='playing'] .site-intro {
     min-width: var(--tap-min);
     align-items: center;
   }
+}
+
+/* Shared reduced-motion switch: elements marked [data-motion-scope] (and
+   everything inside them, including nested components) finish their
+   animations and transitions instantly when the visitor prefers reduced
+   motion. */
+@media (prefers-reduced-motion: reduce) {
+  [data-motion-scope],
+  [data-motion-scope] *,
+  [data-motion-scope] *::before,
+  [data-motion-scope] *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Inline SVG that only holds shared <defs> (gradients, symbols): kept in the
+   page but takes no space. */
+.svg-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
 }

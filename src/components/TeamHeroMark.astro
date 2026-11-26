@@ -93,7 +93,7 @@ const traits = [
   data-reveal-role="stage"
   data-team-mark
 >
-  <svg class="tc-defs" aria-hidden="true" focusable="false">
+  <svg class="svg-defs" aria-hidden="true" focusable="false">
     <symbol id="tc-mark-shape" viewBox={`0 0 ${MARK_W} ${MARK_H}`}>
       <g fill="var(--tc-layer-blue)" set:html={BLUE_SHAPES} />
       <g fill="var(--tc-layer-orange)" set:html={DOT} />
@@ -166,13 +166,6 @@ const traits = [
     min-width: 0;
     container-type: inline-size;
   }
-  .tc-defs {
-    position: absolute;
-    width: 0;
-    height: 0;
-    overflow: hidden;
-  }
-
   .tc-stage {
     position: relative;
     display: grid;

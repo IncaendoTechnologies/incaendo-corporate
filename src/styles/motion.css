@@ -180,8 +180,7 @@ html[data-entrance='active'] [data-motion='pending'] {
   .client-proof-card {
     padding-inline: 0.9rem;
   }
-  .project-empty,
-  .archive-empty {
+  .project-empty {
     grid-template-columns: 1fr;
   }
   .project-empty-graphic {
@@ -202,62 +201,8 @@ html[data-entrance='active'] [data-motion='pending'] {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
-  .page-intro-inner {
-    align-items: flex-start;
-    flex-direction: column;
-  }
   .page-intro h1 {
     font-size: clamp(2.15rem, 8.5vw, 2.75rem);
-  }
-  .page-index {
-    order: -1;
-  }
-  .content-two-column {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  .question-grid {
-    grid-template-columns: 1fr;
-  }
-  .question-card,
-  .question-card + .question-card {
-    padding: 1.35rem 0;
-    border-right: 0;
-    border-bottom: 1px solid #d8d4cd;
-  }
-  .question-card:last-child {
-    border-bottom: 0;
-  }
-  .service-page-header {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  .value-grid {
-    grid-template-columns: 1fr;
-    gap: 1.4rem;
-  }
-  .archive-heading {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.7rem;
-  }
-  .archive-empty-art {
-    min-height: 280px;
-  }
-  .contact-layout {
-    grid-template-columns: minmax(0, 1.12fr) minmax(16rem, 0.88fr);
-    gap: 1.5rem;
-  }
-  .privacy-layout {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  .privacy-sidebar {
-    position: static;
-  }
-  .privacy-sidebar p {
-    max-width: none;
   }
 }
 

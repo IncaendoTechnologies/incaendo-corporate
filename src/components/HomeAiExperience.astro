@@ -38,6 +38,7 @@ const pct = (value, total) => `${((value / total) * 100).toFixed(3)}%`
 
 <section
   class="ai-experience"
+  data-motion-scope
   id="ai-highlight"
   aria-labelledby="ai-experience-title"
   data-ai-experience
@@ -514,14 +515,6 @@ const pct = (value, total) => `${((value / total) * 100).toFixed(3)}%`
     .ai-intro-cta:hover .link-arrow,
     .ai-intro-cta:focus-visible .link-arrow {
       transform: none;
-    }
-    .ai-experience *,
-    .ai-experience *::before,
-    .ai-experience *::after {
-      scroll-behavior: auto !important;
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
     }
   }
 </style>

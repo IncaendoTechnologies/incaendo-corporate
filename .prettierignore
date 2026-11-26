@@ -2,3 +2,6 @@ node_modules/
 dist/
 coverage/
 package-lock.json
+
+# Vendored copy of the Incaendo design system; keep it byte-for-byte.
+Incaendo/

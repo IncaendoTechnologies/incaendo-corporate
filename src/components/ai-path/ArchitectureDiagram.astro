@@ -1255,15 +1255,4 @@ const { name } = Astro.props
   :global([data-ai-experience][data-ai-paused='true']) .dg *::before {
     animation-play-state: paused;
   }
-  @media (prefers-reduced-motion: reduce) {
-    .dg,
-    .dg *,
-    .dg *::before,
-    .dg *::after {
-      scroll-behavior: auto !important;
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
 </style>

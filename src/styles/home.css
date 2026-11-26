@@ -75,9 +75,6 @@
   }
 }
 @media (max-width: 560px) {
-  .hero-title-line-inner {
-    white-space: normal;
-  }
   .hero-actions .button {
     width: 100%;
     flex: 0 0 auto;
@@ -95,52 +92,9 @@
 }
 
 @media (max-width: 700px) {
-  .page-intro-contact .page-intro-inner {
-    align-items: center;
-  }
-  .page-intro-contact .page-intro-copy {
-    width: 100%;
-    min-width: 0;
-  }
-  .page-intro-contact h1 {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 0.85rem;
-    font-size: clamp(1.9rem, 7.5vw, 2.55rem);
-    line-height: 1.08;
-    overflow-wrap: anywhere;
-    white-space: normal;
-  }
-  .page-intro-contact .page-intro-description {
-    width: 100%;
-    max-width: 100%;
-    font-size: 0.94rem;
-    line-height: 1.6;
-    overflow-wrap: anywhere;
-    white-space: normal;
-  }
-  .contact-form-column,
-  .contact-direct,
   .contact-form {
     width: 100%;
     max-width: 100%;
-  }
-  .contact-column-heading > p:last-child {
-    font-size: 0.85rem;
-    line-height: 1.55;
-  }
-  .contact-layout {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.75rem;
-  }
-  .contact-next-grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.65rem;
-  }
-  .contact-closing-inner {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.8rem;
   }
 }
 
@@ -210,11 +164,6 @@
   margin-inline: 0;
   color: var(--color-ink);
   font-family: var(--font-heading);
-  font-size: var(--type-section-size);
-  font-weight: var(--type-section-weight);
-  letter-spacing: var(--type-section-letter-spacing);
-  word-spacing: var(--type-section-word-spacing);
-  line-height: var(--type-section-line-height);
 }
 
 .section-services .section-intro {

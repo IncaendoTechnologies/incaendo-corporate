@@ -10,15 +10,8 @@
 .section-heading > div {
   max-width: 690px;
 }
-.section-heading h2,
-.narrow-section-heading h2,
-.service-page-header h2 {
+.section-heading h2 {
   margin-bottom: 1rem;
-  font-size: var(--type-section-size);
-  font-weight: var(--type-section-weight);
-  letter-spacing: var(--type-section-letter-spacing);
-  word-spacing: var(--type-section-word-spacing);
-  line-height: var(--type-section-line-height);
 }
 .section-intro {
   max-width: 650px;
@@ -115,4 +108,37 @@
 }
 .icon-link:hover span {
   transform: translate(2px, -2px);
+}
+
+/* Section titles: one shared type role (--type-section-*) for every section
+   heading, instead of each component repeating the same five lines. Add a
+   new section's heading selector here. */
+.ai-agents h2,
+.aidev-heading h2,
+.ai-applications h2,
+.ai-applications-heading h2,
+.ai-workflow-heading h2,
+.ai-tech-page h2,
+.careers-openings-status h2,
+.delivery-intro h2,
+.home-insights-intro h2,
+.home-projects-intro h2,
+.industries-intro h2,
+.insights-section-heading h2,
+.portfolio-intro h2,
+.saas-intro h2,
+.services-section-heading h2,
+.team-section-heading h2,
+.ai-copy h2,
+.section-services .section-heading h2,
+.project-empty-copy h3,
+.review-layout h2,
+.awards-intro h2,
+.faq-layout h2,
+.section-heading h2 {
+  font-size: var(--type-section-size);
+  font-weight: var(--type-section-weight);
+  letter-spacing: var(--type-section-letter-spacing);
+  word-spacing: var(--type-section-word-spacing);
+  line-height: var(--type-section-line-height);
 }
