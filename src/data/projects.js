@@ -22,15 +22,15 @@ export const projects = [
     alt: 'Tomo mobile app screens for habit tracking and wellbeing check-ins',
     // Full description from incaendo.com/projects, shown on the Projects page.
     description:
-      'Introducing TOMO, the innovative iOS app designed to support individuals struggling with depression by assisting them in managing their daily habits for better mental health. With its user-friendly conversational interface, TOMO provides personalized habit suggestions and tracks progress, acting as a personal smart agent for users. This revolutionary app is now available on the UK App Store, aiming to make a positive impact on the lives of those in need.',
+      'Introducing TOMO, the innovative iOS app designed to support individuals struggling with depression by assisting them in managing their daily habits for better mental health. With its user-friendly conversational interface, TOMO provides personalised habit suggestions and tracks progress, acting as a personal smart agent for users. This revolutionary app is now available on the UK App Store, aiming to make a positive impact on the lives of those in need.',
     overview:
-      'An iOS app that helps people build healthier daily habits in support of their mental wellbeing. Its conversational interface acts as a personal smart agent, offering personalized habit suggestions and tracking progress over time. The app is available on the UK App Store.',
+      'An iOS app that helps people build healthier daily habits in support of their mental wellbeing. Its conversational interface acts as a personal smart agent, offering personalised habit suggestions and tracking progress over time. The app is available on the UK App Store.',
     documentedScope:
       'iOS app, conversational personal-agent experience, habit suggestions, and activity tracking.',
     sections: [
       {
         title: 'Product approach',
-        text: 'The published project description centers the experience on everyday habits. People can interact conversationally, receive personalized suggestions, and review progress over time.',
+        text: 'The published project description centres the experience on everyday habits. People can interact conversationally, receive personalised suggestions, and review progress over time.',
       },
       {
         title: 'Technical implementation',
@@ -53,7 +53,7 @@ export const projects = [
     alt: 'Zee Media news and entertainment digital experience screens',
     // Full description from incaendo.com/projects, shown on the Projects page.
     description:
-      'Zee Media Corporation Limited, headquartered in Mumbai, India, is a prominent news broadcasting company. Specializing in the transmission of news, current affairs, and regional entertainment through satellite television channels, Zee Media has established itself as a key player in the industry. With a focus on providing up-to-date and reliable information, the company serves as a trusted source for viewers across the nation.',
+      'Zee Media Corporation Limited, headquartered in Mumbai, India, is a prominent news broadcasting company. Specialising in the transmission of news, current affairs, and regional entertainment through satellite television channels, Zee Media has established itself as a key player in the industry. With a focus on providing up-to-date and reliable information, the company serves as a trusted source for viewers across the nation.',
     overview:
       'A portfolio entry associated with Zee Media, a broadcaster whose published business context includes news, current affairs, and regional entertainment.',
     documentedScope:
@@ -115,9 +115,9 @@ export const projects = [
     alt: "Domino's ordering portal and digital menu screens",
     // Full description from incaendo.com/projects, shown on the Projects page.
     description:
-      "Developed a highly scalable and secure portal for Domino's Pizza in the Asia/Pacific region. This portal is hosted on three different data centers and can handle a high volume of transactions, with a successful track record of processing 50,000 transactions in a single day. The portal also has extensive support for REST API, allowing food aggregators to easily access and utilize its key features.",
+      "Developed a highly scalable and secure portal for Domino's Pizza in the Asia/Pacific region. This portal is hosted on three different data centres and can handle a high volume of transactions, with a successful track record of processing 50,000 transactions in a single day. The portal also has extensive support for REST API, allowing food aggregators to easily access and utilise its key features.",
     overview:
-      'A scalable, secure ordering portal for Domino’s Pizza in the Asia-Pacific region, hosted across three data centers. Built for high transaction volumes, it has processed 50,000 transactions in a single day, and its REST APIs give food aggregators access to key ordering features.',
+      'A scalable, secure ordering portal for Domino’s Pizza in the Asia-Pacific region, hosted across three data centres. Built for high transaction volumes, it has processed 50,000 transactions in a single day, and its REST APIs give food aggregators access to key ordering features.',
     documentedScope:
       'Portal deployment across three data centres, REST API support for aggregators, and a published reference of 50,000 transactions in one day.',
     sections: [
@@ -166,7 +166,7 @@ export const projects = [
       },
       {
         title: 'Our approach',
-        text: 'The source confirms website design work, with content organized around the company, its brands, and its business presence.',
+        text: 'The source confirms website design work, with content organised around the company, its brands, and its business presence.',
       },
       {
         title: 'Technical implementation',
@@ -189,7 +189,7 @@ export const projects = [
     alt: 'Credit Convey financial wellbeing platform screens',
     // Full description from incaendo.com/projects, shown on the Projects page.
     description:
-      "Credit Convey is a platform that focuses on improving clients' financial well-being through a combination of education, motivation, and advanced technologies. They offer unlimited interest-free cash advances to help bridge any financial gaps. By utilizing Credit Convey, individuals can gain the knowledge and support needed to better manage their finances and ultimately achieve greater financial stability.",
+      "Credit Convey is a platform that focuses on improving clients' financial well-being through a combination of education, motivation, and advanced technologies. They offer unlimited interest-free cash advances to help bridge any financial gaps. By utilising Credit Convey, individuals can gain the knowledge and support needed to better manage their finances and ultimately achieve greater financial stability.",
     overview:
       'A financial wellbeing platform that combines education, motivation, and technology to help people manage their money with more confidence. Alongside its learning resources, it offers interest-free cash advances that help bridge short-term financial gaps.',
     documentedScope:
@@ -236,11 +236,11 @@ export const projects = [
       },
       {
         title: 'Technical implementation',
-        text: 'Web, app, and email are the documented delivery surfaces. The content-management, notification, email, analytics, and synchronization technologies are not identified.',
+        text: 'Web, app, and email are the documented delivery surfaces. The content-management, notification, email, analytics, and synchronisation technologies are not identified.',
       },
     ],
     confirm:
-      'Confirm the editorial workflow, content-management system, email delivery service, mobile platform details, and any channel synchronization or analytics integrations.',
+      'Confirm the editorial workflow, content-management system, email delivery service, mobile platform details, and any channel synchronisation or analytics integrations.',
   },
   {
     name: 'Spritz',
@@ -251,7 +251,7 @@ export const projects = [
     alt: 'Spritz workspace for selecting and managing AI agents',
     // Full description from incaendo.com/projects, shown on the Projects page.
     description:
-      'Spritz is a cutting-edge platform that uses AI technology to facilitate smooth communication with various AI agents. It allows users to easily configure and choose AI agents based on specific tasks they need assistance with. The platform streamlines interaction, making it more accessible and user-friendly for individuals and businesses alike.',
+      'Spritz is a platform that uses AI technology to facilitate smooth communication with various AI agents. It allows users to easily configure and choose AI agents based on specific tasks they need assistance with. The platform streamlines interaction, making it more accessible and user-friendly for individuals and businesses alike.',
     overview:
       'An AI platform that brings different AI agents together in one place. Users can configure and choose the agent best suited to each task, making AI assistance simpler and more accessible for individuals and businesses.',
     documentedScope:
@@ -263,7 +263,7 @@ export const projects = [
       },
       {
         title: 'Our approach',
-        text: 'The available description emphasizes configurable agents and a common way to interact with them, keeping task choice visible to the user.',
+        text: 'The available description emphasises configurable agents and a common way to interact with them, keeping task choice visible to the user.',
       },
       {
         title: 'Technical implementation',
@@ -271,7 +271,7 @@ export const projects = [
       },
     ],
     confirm:
-      'Confirm agent/model integrations, tool authorization, context handling, evaluation, human review, and data-retention controls before publishing deeper AI architecture details.',
+      'Confirm agent/model integrations, tool authorisation, context handling, evaluation, human review, and data-retention controls before publishing deeper AI architecture details.',
   },
   {
     name: 'The Seam',
@@ -282,7 +282,7 @@ export const projects = [
     alt: 'The Seam garment care and repair service website',
     // Full description from incaendo.com/projects, shown on the Projects page.
     description:
-      'Seam is a reliable and established brand that has earned the trust of major international companies. By partnering with The Seam, businesses can effortlessly provide garment care and repair services on a large scale. This helps in minimizing returns, prolonging the lifecycle of garments, and ensuring that your business model remains relevant and adaptable in the future.',
+      'Seam is a reliable and established brand that has earned the trust of major international companies. By partnering with The Seam, businesses can effortlessly provide garment care and repair services on a large scale. This helps in minimising returns, prolonging the lifecycle of garments, and ensuring that your business model remains relevant and adaptable in the future.',
     overview:
       'A garment-care and repair service that connects brands and their customers with specialist repair providers.',
     documentedScope:
@@ -313,7 +313,7 @@ export const projects = [
     alt: 'Spice Express cargo booking and logistics website',
     // Full description from incaendo.com/projects, shown on the Projects page.
     description:
-      'Spice Express, the Cargo Division of SpiceJet, offers a seamless and customer-centric cargo delivery service. Backed by extensive experience in the airline industry, we prioritize customer satisfaction and aim to surpass expectations. Our professional approach ensures a hassle-free experience for our clients, making us the preferred choice for cargo transportation. Trust Spice Express for reliable and efficient cargo delivery.',
+      'Spice Express, the Cargo Division of SpiceJet, offers a reliable, customer-centric cargo delivery service. Backed by extensive experience in the airline industry, we prioritise customer satisfaction and aim to surpass expectations. Our professional approach ensures a hassle-free experience for our clients, making us the preferred choice for cargo transportation. Trust Spice Express for reliable and efficient cargo delivery.',
     overview:
       'A digital portfolio entry for Spice Express, the cargo division of SpiceJet, serving freight and logistics customers.',
     documentedScope:
@@ -379,11 +379,11 @@ export const projects = [
     alt: 'Fliplearn online learning platform and mobile learning experience',
     // Full description from incaendo.com/projects, shown on the Projects page.
     description:
-      'In partnership with Incaendo, Fliplearn Education Pvt. Ltd. has developed an online platform that revolutionizes education in the 21st century. By identifying and addressing existing and future barriers to education, Fliplearn and Incaendo have created a highly customized marketplace for online and mobile applications. This platform aims to provide innovative solutions to improve access to education, making it more personalized and effective for students.',
+      'In partnership with Incaendo, Fliplearn Education Pvt. Ltd. has developed an online platform that modernises everyday learning. By identifying and addressing existing and future barriers to education, Fliplearn and Incaendo have created a highly customised marketplace for online and mobile applications. This platform aims to provide innovative solutions to improve access to education, making it more personalised and effective for students.',
     overview:
       'An online learning platform and marketplace that brings educational content and interactive learning applications together across web and mobile. It helps learners explore learning resources and access their educational experience through a unified platform.',
     documentedScope:
-      'The source describes a customized marketplace spanning online and mobile applications, developed in partnership with Incaendo.',
+      'The source describes a customised marketplace spanning online and mobile applications, developed in partnership with Incaendo.',
     sections: [
       {
         title: 'The challenge',

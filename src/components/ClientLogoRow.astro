@@ -1,0 +1,244 @@
+---
+/*
+ * Client proof row (Incaendo Design System, "Web pages": "Proof early: client
+ * logos in a quiet row"). A calm surface-raised band straight after the hero:
+ * a "Trusted by teams at" label and the original-color client logos in a
+ * continuous, responsive marquee.
+ */
+import activate from '../assets/svg/activate.svg'
+import admott from '../assets/svg/admott.svg'
+import cardekho from '../assets/svg/cardekho.svg'
+import dominos from '../assets/svg/dominos.svg'
+import hereAndNow from '../assets/svg/Here_&_Now_(WBUR)_masthead.svg'
+import italia from '../assets/svg/italia.svg'
+import jubilant from '../assets/svg/jubilant.svg'
+import policybazaar from '../assets/svg/policybazaar.svg'
+import procterGamble from '../assets/svg/ProcterGamble.svg'
+import schand from '../assets/svg/schand.svg'
+import spicejet from '../assets/svg/spicejet.svg'
+import theSeam from '../assets/svg/the seam.svg'
+import uflex from '../assets/svg/uflex.svg'
+import vmc from '../assets/svg/VMC.svg'
+import wagonex from '../assets/svg/wagonex.svg'
+import zeeMedia from '../assets/svg/ZeeMedia.svg'
+
+// Larger optical heights keep compact and wide marks equally legible.
+const logos = [
+  { src: dominos, alt: "Domino's", height: 40 },
+  { src: jubilant, alt: 'Jubilant FoodWorks', height: 60 },
+  { src: policybazaar, alt: 'Policybazaar', height: 40 },
+  { src: procterGamble, alt: 'Procter & Gamble', height: 74 },
+  { src: spicejet, alt: 'SpiceJet', height: 40 },
+  { src: zeeMedia, alt: 'Zee Media', height: 44 },
+  { src: schand, alt: 'S. Chand', height: 74 },
+  { src: cardekho, alt: 'CarDekho', height: 56 },
+  { src: uflex, alt: 'Uflex', height: 42 },
+  { src: italia, alt: 'Good Morning Italia', height: 30 },
+  { src: theSeam, alt: 'The Seam', height: 38 },
+  { src: wagonex, alt: 'Wagonex', height: 40 },
+  { src: admott, alt: 'Admott', height: 38 },
+  { src: hereAndNow, alt: 'Here & Now (WBUR)', height: 48 },
+  { src: vmc, alt: 'VMC', height: 62 },
+  { src: activate, alt: 'Activate Studio', height: 70 },
+]
+
+const logoRows = [
+  { id: 'client-row-one', logos: logos.slice(0, 8), direction: 'left' },
+  { id: 'client-row-two', logos: logos.slice(8), direction: 'right' },
+]
+---
+
+<section class="client-row" aria-labelledby="client-row-label">
+  <div class="site-container client-row-inner">
+    <p id="client-row-label" class="client-row-label">
+      Trusted by teams at
+    </p>
+    <div class="client-row-marquees" aria-label="Client logos">
+      {logoRows.map((row, rowIndex) => (
+        <div
+          class="client-row-viewport"
+          data-marquee-drag
+          data-direction={row.direction}
+          role="region"
+          aria-label={`Client logo row ${rowIndex + 1}`}
+        >
+          <div
+            class:list={[
+              'client-row-track',
+              row.direction === 'right' && 'client-row-track-reverse',
+            ]}
+            data-marquee-track
+          >
+            {[0, 1].map((copyIndex) => (
+              <ul
+                class="client-row-list"
+                role="list"
+                aria-hidden={copyIndex === 1 ? 'true' : undefined}
+              >
+                {row.logos.map((logo) => (
+                  <li
+                    class="client-row-item"
+                    role={copyIndex === 0 ? 'listitem' : undefined}
+                  >
+                    <img
+                      src={logo.src.src}
+                      width={logo.src.width}
+                      height={logo.src.height}
+                      alt={copyIndex === 0 ? logo.alt : ''}
+                      style={`--logo-height: ${logo.height}px`}
+                      loading="eager"
+                      decoding="async"
+                    />
+                  </li>
+                ))}
+              </ul>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .client-row {
+    display: block;
+    border-block: 1px solid var(--color-line);
+  }
+
+  .client-row-inner {
+    display: grid;
+    width: min(var(--content-width), calc(100% - var(--gutter) * 2));
+    margin-inline: auto;
+    gap: var(--space-6);
+    padding-block: clamp(2.25rem, 4vw, 3.75rem);
+  }
+
+  /* Matches the design canvas: 600 14px, ink-muted. */
+  .client-row-label {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    text-align: center;
+  }
+
+  .client-row-viewport {
+    width: 100%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 4%,
+      #000 96%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 4%,
+      #000 96%,
+      transparent
+    );
+  }
+
+  .client-row-marquees {
+    display: grid;
+    gap: clamp(0.75rem, 1.4vw, 1.25rem);
+  }
+
+  .client-row-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: client-logo-scroll 54s linear infinite;
+  }
+
+  .client-row-track-reverse {
+    animation-direction: reverse;
+    animation-delay: -12s;
+  }
+
+  .client-row-list {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: clamp(1rem, 2vw, 2rem);
+    margin: 0;
+    padding: 0;
+    padding-right: clamp(1rem, 2vw, 2rem);
+    list-style: none;
+  }
+
+  .client-row-item {
+    display: flex;
+    min-height: var(--tap-min);
+    width: clamp(10rem, 13vw, 12rem);
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .client-row-item img {
+    display: block;
+    width: auto;
+    max-width: min(100%, 190px);
+    height: var(--logo-height);
+    object-fit: contain;
+    filter: none;
+    opacity: 1;
+    object-position: center;
+  }
+
+  @keyframes client-logo-scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (hover: hover) {
+    .client-row-viewport:hover .client-row-track {
+      animation-play-state: paused;
+    }
+  }
+
+  .client-row-viewport:focus-within .client-row-track {
+    animation-play-state: paused;
+  }
+
+  @media (max-width: 639px) {
+    .client-row-inner {
+      padding-block: var(--space-6);
+    }
+    .client-row-marquees {
+      gap: 0.5rem;
+    }
+    .client-row-list {
+      gap: 0.75rem;
+      padding-right: 0.75rem;
+    }
+    .client-row-item {
+      width: 8.5rem;
+    }
+    .client-row-item img {
+      max-width: 100%;
+      max-height: calc(var(--logo-height) * 0.78);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .client-row-track {
+      animation: none;
+      transform: none;
+    }
+    .client-row-viewport {
+      overflow-x: auto;
+      mask-image: none;
+      -webkit-mask-image: none;
+    }
+    .client-row-list[aria-hidden='true'] {
+      display: none;
+    }
+  }
+</style>

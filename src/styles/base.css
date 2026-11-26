@@ -37,13 +37,13 @@ h3,
 h4 {
   color: var(--text-primary);
   font-family: var(--font-heading);
-  letter-spacing: -0.045em;
-  word-spacing: 0.045em;
+  letter-spacing: -0.01em;
+  word-spacing: normal;
   line-height: var(--type-section-line-height);
 }
 
 p {
-  color: var(--text-secondary);
+  color: inherit; /* body text is ink (design system); leads and card text set ink-muted */
 }
 
 a {
@@ -51,7 +51,7 @@ a {
   text-decoration: none;
 }
 
-a:hover {
+a:where(:not(.button, .inc-btn)):hover {
   color: var(--accent-hover);
 }
 
@@ -61,7 +61,7 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 summary:focus-visible {
-  outline: 2px solid var(--focus);
+  outline: 2px solid var(--color-focus); /* focus: 2px solid, 2px offset */
   outline-offset: 2px;
 }
 
@@ -82,6 +82,19 @@ textarea {
   margin-inline: auto;
 }
 
+/* Keep the design-system shell sections aligned to the site's 1200px
+   content width. The bundled inc-container max-width includes its gutters. */
+.inc-shell > :is(.inc-hero, .inc-cta-band, .inc-footer) .inc-container {
+  max-width: calc(
+    var(--container-content, 1200px) + var(--gutter, 24px) * 2
+  );
+}
+
+/* Separate the final navy call to action from the navy footer. */
+.inc-cta-band {
+  margin-bottom: var(--space-6, 32px);
+}
+
 .skip-link {
   position: fixed;
   z-index: 1000;
@@ -97,11 +110,12 @@ textarea {
   transform: translateY(0);
 }
 
+/* Design system `eyebrow`: 700 12px/16px, uppercase, 0.12em, orange-text. */
 .eyebrow {
-  margin-bottom: 1.15rem;
-  color: var(--orange-text, #b5450b);
-  font-family: var(--font-display);
-  font-size: 12px;
+  margin-bottom: var(--space-2); /* inc-section gap */
+  color: var(--color-orange-text);
+  font-family: var(--font-heading);
+  font-size: var(--type-eyebrow-size);
   font-weight: 700;
   letter-spacing: 0.12em;
   line-height: 16px;
@@ -109,10 +123,11 @@ textarea {
 }
 
 .eyebrow-dark {
-  color: var(--orange-text, #b5450b);
+  color: var(--color-orange-text);
 }
+/* On navy: the dark-theme orange-text (#FF9A62). */
 .eyebrow-light {
-  color: var(--orange, #ee5d10);
+  color: #ff9a62;
 }
 
 .eyebrow-dot {
@@ -125,12 +140,7 @@ textarea {
 }
 
 .section {
-  padding-block: var(--space-8, 64px);
-}
-@media (min-width: 768px) {
-  .section {
-    padding-block: var(--space-9, 96px);
-  }
+  padding-block: var(--space-section);
 }
 .section-soft {
   background: var(--surface-subtle);
@@ -144,38 +154,48 @@ textarea {
   color: var(--color-white);
 }
 
+/*
+ * Design system `Button`: 44px tall, 600 16px/24px, radius-md, 0 24px.
+ * Primary is a flat `action` fill with a white label (no gradients);
+ * secondary is an `ink` outline. Hover changes colour only.
+ */
 .button {
   display: inline-flex;
-  min-height: 52px;
+  min-height: var(--tap-min);
   align-items: center;
   justify-content: center;
-  gap: 1.15rem;
-  padding: 0.85rem 1.2rem;
-  border: 1px solid transparent;
-  border-radius: var(--radius-small);
+  gap: var(--space-2);
+  padding: 0.5625rem var(--space-5); /* 9px + 24px line + 1px borders = 44px */
+  border: 1px solid var(--color-ink);
+  border-radius: var(--radius-medium);
+  background: transparent;
+  color: var(--color-ink);
+  font-family: var(--font-body);
   font-size: var(--type-button-size);
   font-weight: var(--type-button-weight);
-  line-height: 1.2;
+  line-height: 24px;
   transition:
-    background var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
     color var(--duration-fast) var(--ease-out),
-    border-color var(--duration-fast) var(--ease-out),
-    transform var(--duration-fast) var(--ease-out);
+    border-color var(--duration-fast) var(--ease-out);
 }
 
 .button:hover {
-  transform: translateY(-2px);
+  background: var(--surface-subtle);
 }
 .button-primary {
-  background: var(--action);
-  color: var(--on-action);
+  border-color: var(--accent-primary);
+  background: var(--accent-primary);
+  color: var(--color-white);
 }
 .button-primary:hover {
-  background: var(--action-hover);
-  color: var(--on-action);
+  border-color: var(--accent-hover);
+  background: var(--accent-hover);
+  color: var(--color-white);
 }
 .button-primary:active {
-  background: var(--action-pressed);
+  border-color: var(--color-orange-pressed);
+  background: var(--color-orange-pressed);
 }
 .button-outline {
   border-color: var(--color-button-outline);
@@ -184,27 +204,29 @@ textarea {
 }
 .button-outline:hover {
   border-color: var(--color-ink);
+  background: var(--surface-subtle);
   color: var(--color-ink);
 }
+/* On navy (`inc-btn-on-navy`): white outline and label. */
 .button-light {
-  border-color: rgb(255 255 255 / 36%);
-  background: var(--surface-card);
-  color: var(--color-navy);
+  border-color: var(--color-white);
+  background: transparent;
+  color: var(--color-white);
 }
 .button-light:hover {
   border-color: var(--color-white);
-  background: var(--surface-raised);
-  color: var(--color-navy);
+  background: rgb(255 255 255 / 12%);
+  color: var(--color-white);
 }
+/* `inc-btn-sm`: 36px for dense UI. */
 .button-small {
-  min-height: 43px;
-  padding: 0.7rem 1rem;
-  font-size: 0.76rem;
+  min-height: 36px;
+  padding: 0.3125rem var(--space-4); /* 5px + 24px + 1px borders = 36px */
+  font-size: 14px;
 }
 .button:disabled {
   cursor: not-allowed;
-  opacity: 0.54;
-  transform: none;
+  opacity: 0.45;
 }
 
 .text-link {
@@ -312,14 +334,14 @@ html[data-brand-intro='playing'] .site-intro {
 
 .site-intro-particle.is-orange {
   background: var(--color-orange);
-  box-shadow: 0 0 10px rgb(201 84 43 / 30%);
+  box-shadow: var(--shadow-1);
 }
 
 .site-intro-particle.is-blue {
   width: 4px;
   height: 4px;
   background: var(--color-blue);
-  box-shadow: 0 0 9px rgb(84 123 157 / 24%);
+  box-shadow: var(--shadow-1);
 }
 
 .site-intro-tagline {
@@ -330,9 +352,9 @@ html[data-brand-intro='playing'] .site-intro {
   color: var(--color-ink);
   font-family: var(--font-heading);
   font-size: clamp(1rem, 1.6vw, 1.18rem);
-  font-weight: 500;
-  letter-spacing: -0.025em;
-  word-spacing: 0.025em;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  word-spacing: normal;
   opacity: 0;
   transform: translateY(9px);
   animation: rise-to-place 420ms var(--ease-out) 690ms both;
@@ -341,7 +363,7 @@ html[data-brand-intro='playing'] .site-intro {
 .site-intro-tagline span {
   width: 17px;
   height: 2px;
-  border-radius: 2px;
+  border-radius: var(--radius-sm);
   background: var(--color-orange);
 }
 
@@ -409,4 +431,67 @@ html[data-brand-intro='playing'] .site-intro {
 }
 .text-link-light:hover {
   color: #f3b18f;
+}
+
+/*
+ * Tap targets (design system accessibility checklist): anything tappable is
+ * at least `tap-min` (44px) tall and wide, including padding around text
+ * links and carousel controls.
+ */
+
+/* Small standalone icon controls keep their look and get an invisible
+   44px hit area. */
+:is(
+  .carousel-nav-btn,
+  .home-project-arrow,
+  .ai-demo-arrow,
+  .footer-social-link,
+  .team-profile-linkedin
+) {
+  position: relative;
+}
+:is(
+  .carousel-nav-btn,
+  .home-project-arrow,
+  .ai-demo-arrow,
+  .footer-social-link,
+  .team-profile-linkedin
+)::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(100%, var(--tap-min));
+  height: max(100%, var(--tap-min));
+  transform: translate(-50%, -50%);
+  content: '';
+}
+
+/* Controls that sit side by side grow to the full size, so their hit areas
+   never overlap. */
+:is(.pagination-number, .pagination-arrow, .insights-pagination-number) {
+  min-width: var(--tap-min);
+  min-height: var(--tap-min);
+}
+.ui-filter-chip {
+  min-width: var(--tap-min);
+  min-height: var(--tap-min);
+}
+
+/* On touch screens, standalone text links grow to 44px tall. */
+@media (pointer: coarse) {
+  .site-footer a:not(.button, .footer-social-link),
+  .text-link,
+  .insight-read-link,
+  .service-card-explore,
+  .home-project-link,
+  .contact-hero-email,
+  .contact-map-open,
+  .footer-contact-row,
+  .site-logo,
+  main a:not([class]):not(p *, label *) {
+    display: inline-flex;
+    min-height: var(--tap-min);
+    min-width: var(--tap-min);
+    align-items: center;
+  }
 }

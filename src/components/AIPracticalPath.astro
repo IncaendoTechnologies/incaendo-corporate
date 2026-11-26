@@ -47,14 +47,19 @@ const workflowSteps = [
         <div class="ai-workflow-title-wrap">
           <p class="eyebrow">5-STEP IMPLEMENTATION ROADMAP</p>
           <h2 id="ai-practical-path-title">
-            From Strategic Business Needs{' '}
+            From strategic business needs{' '}
             <br class="ai-workflow-heading-break" />
-            to Measurable{' '}
+            to measurable{' '}
             <span>
-              <span class="ai-nowrap">AI-Powered</span> Outcomes.
+              <span class="ai-nowrap">AI-powered</span> outcomes.
             </span>
           </h2>
         </div>
+        <p class="ai-workflow-lead">
+          Each step pairs practical business context with defined engineering
+          boundaries—moving carefully from problem framing and data readiness to
+          controlled, measurable delivery.
+        </p>
       </div>
 
       <!-- Five Connected Animated SVG Cards -->
@@ -268,7 +273,7 @@ const workflowSteps = [
                   Turn Raw Business Information into Searchable Knowledge.
                 </h4>
                 <p>
-                  Data processing and retrieval organize relevant business
+                  Data processing and retrieval organise relevant business
                   information, helping AI deliver more useful responses and
                   reducing time spent searching across scattered sources.
                 </p>
@@ -331,13 +336,6 @@ const workflowSteps = [
     --ai-space: clamp(4.5rem, 7vw, 6.5rem);
     padding-block: var(--ai-space);
     border-block: 1px solid var(--color-line);
-    background:
-      radial-gradient(
-        ellipse at 93% 12%,
-        rgb(225 237 249 / 35%),
-        transparent 27rem
-      ),
-      var(--color-paper);
   }
 
   /* Workflow */
@@ -348,26 +346,35 @@ const workflowSteps = [
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    text-align: left;
-    width: 100%;
+    gap: 0.75rem;
+    max-width: 720px;
     margin: 0 0 clamp(1.35rem, 2.2vw, 1.85rem);
+    text-align: left;
   }
   .ai-workflow-title-wrap {
     text-align: left;
     width: 100%;
   }
+  .ai-workflow-lead {
+    margin: 0;
+    max-width: 720px;
+    color: var(--color-body);
+    font-size: var(--type-intro-size);
+    line-height: var(--type-intro-line-height);
+    text-align: left;
+  }
   .ai-workflow-heading .eyebrow {
     margin-bottom: 0.45rem;
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
     font-size: var(--type-eyebrow-size);
-    font-weight: 750;
+    font-weight: 800;
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
   .ai-workflow-heading h2 {
     margin: 0;
     font-size: var(--type-section-size);
-    font-weight: var(--type-heading-weight);
+    font-weight: var(--type-section-weight);
     letter-spacing: var(--type-section-letter-spacing);
     word-spacing: var(--type-section-word-spacing);
     line-height: var(--type-section-line-height);
@@ -375,7 +382,7 @@ const workflowSteps = [
     text-wrap: balance;
   }
   .ai-workflow-heading h2 span {
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
   }
   .ai-nowrap {
     white-space: nowrap;
@@ -422,7 +429,7 @@ const workflowSteps = [
     letter-spacing: 0.02em;
   }
   .ai-cards-hint-wrap svg {
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
   }
 
   .ai-overview-row {
@@ -439,14 +446,11 @@ const workflowSteps = [
     flex: 1 1 0;
     min-width: 0;
     max-width: 215px;
-    background: #ffffff;
     border: 1.5px solid rgba(226, 232, 240, 0.95);
-    border-radius: 18px;
+    border-radius: var(--radius-lg);
     padding: 1.35rem 1rem 1.45rem;
     min-height: 162px;
-    box-shadow:
-      0 10px 25px -5px rgba(15, 23, 42, 0.05),
-      0 4px 10px -2px rgba(15, 23, 42, 0.02);
+    box-shadow: var(--shadow-1);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -470,8 +474,8 @@ const workflowSteps = [
     left: 20%;
     right: 20%;
     height: 3px;
-    background: #ea580c;
-    border-radius: 0 0 3px 3px;
+    background: var(--color-orange);
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
     opacity: 0;
     transform: scaleX(0.4);
     transition: all 0.25s ease;
@@ -491,9 +495,9 @@ const workflowSteps = [
   .ai-overview-card:hover,
   .ai-overview-card:focus-visible {
     transform: translateY(-4px);
-    border-color: rgba(234, 88, 12, 0.45);
+    border-color: var(--color-orange-text);
     box-shadow:
-      0 14px 28px -6px rgba(234, 88, 12, 0.14),
+      0 14px 28px -6px rgb(168 65 33 / 14%),
       0 4px 10px rgba(15, 23, 42, 0.04);
     outline: none;
   }
@@ -503,12 +507,12 @@ const workflowSteps = [
   }
 
   .ai-overview-card.is-active {
-    border-color: #ea580c;
-    background: linear-gradient(180deg, #ffffff 0%, #fff9f6 100%);
+    border-color: var(--color-orange-text);
+    background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-peach) 100%);
     transform: translateY(-4px);
     box-shadow:
-      0 16px 36px -6px rgba(234, 88, 12, 0.22),
-      0 0 0 1px rgba(234, 88, 12, 0.18);
+      0 16px 36px -6px rgb(168 65 33 / 22%),
+      0 0 0 1px rgb(168 65 33 / 18%);
   }
 
   .ai-overview-card.is-active::before {
@@ -517,7 +521,7 @@ const workflowSteps = [
   }
 
   .ai-overview-card.is-active .ai-overview-card-title {
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
   }
 
   .ai-overview-icon-wrap {
@@ -679,7 +683,7 @@ const workflowSteps = [
       min-width: 0;
       min-height: 0;
       padding: 0.6rem 0.9rem 0.6rem 0.7rem;
-      border-radius: 14px;
+      border-radius: var(--radius-lg);
       text-align: left;
       counter-increment: ai-step;
     }
@@ -697,7 +701,7 @@ const workflowSteps = [
       right: auto;
       width: 3px;
       height: auto;
-      border-radius: 0 3px 3px 0;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
       transform: scaleY(0.4);
     }
     .ai-overview-card.is-active::before {
@@ -707,7 +711,7 @@ const workflowSteps = [
       content: counter(ai-step, decimal-leading-zero);
       margin-left: auto;
       color: var(--color-muted);
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.08em;
     }
@@ -794,7 +798,7 @@ const workflowSteps = [
     gap: 0.75rem;
     padding: 0.7rem 0.9rem;
     border: 1px solid transparent;
-    border-radius: 16px;
+    border-radius: var(--radius-lg);
     background: transparent;
     cursor: pointer;
     transition:
@@ -816,12 +820,12 @@ const workflowSteps = [
     width: 36px;
     height: 36px;
     place-items: center;
-    border: 1px solid rgb(16 27 45 / 12%);
-    border-radius: 12px;
+    border: 1px solid rgb(15 33 54 / 12%);
+    border-radius: var(--radius-lg);
     background: #fff;
     color: var(--color-body);
     font-size: 0.78rem;
-    font-weight: 750;
+    font-weight: 800;
     font-variant-numeric: tabular-nums;
     transition:
       color 200ms ease,
@@ -854,9 +858,9 @@ const workflowSteps = [
       transform 200ms ease;
   }
   .ai-workflow-step:has(input:checked) {
-    border-color: rgb(201 84 43 / 24%);
+    border-color: rgb(194 76 18 / 24%);
     background: #fff;
-    box-shadow: 0 10px 28px -20px rgb(16 27 45 / 30%);
+    box-shadow: var(--shadow-1);
   }
   .ai-workflow-step:has(input:checked)::before {
     position: absolute;
@@ -874,12 +878,12 @@ const workflowSteps = [
     color: #fff;
   }
   .ai-workflow-step:has(input:checked) .ai-step-arrow {
-    color: var(--color-orange);
+    color: var(--color-orange-text);
     transform: translate(1px, -1px);
   }
   .ai-workflow-step:has(input:focus-visible) {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
+    outline: 2px solid var(--color-focus);
+    outline-offset: 3px;
   }
 
   .ai-workflow-demo {
@@ -891,12 +895,8 @@ const workflowSteps = [
     flex-direction: column;
     overflow: hidden;
     padding: clamp(1.6rem, 2.8vw, 2.5rem);
-    border: 1px solid rgb(16 27 45 / 9%);
     border-radius: var(--radius-large);
-    background: linear-gradient(165deg, #fffdfb 0%, #fbf8f4 60%, #f8f3ed 100%);
-    box-shadow:
-      0 1px 2px rgb(16 27 45 / 4%),
-      0 20px 48px -20px rgb(16 27 45 / 20%);
+    box-shadow: var(--shadow-1);
     container: ai-demo / inline-size;
   }
   .ai-demo-topline {
@@ -910,8 +910,8 @@ const workflowSteps = [
     align-items: center;
     gap: 0.48rem;
     color: var(--color-muted);
-    font-size: 0.68rem;
-    font-weight: 750;
+    font-size: 0.75rem;
+    font-weight: 800;
     letter-spacing: 0.12em;
   }
   .ai-demo-label i {
@@ -955,7 +955,7 @@ const workflowSteps = [
   .ai-demo-arrow:focus-visible {
     border-color: var(--color-orange);
     background: #fff6f0;
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
   }
   .ai-demo-arrow:disabled {
     cursor: default;
@@ -973,11 +973,11 @@ const workflowSteps = [
     gap: 0.45rem;
     margin: 0.6rem 0 0;
     color: var(--color-muted);
-    font-size: 0.74rem;
+    font-size: 0.75rem;
     font-weight: 600;
   }
   .ai-demo-swipe-hint span {
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
   }
   /* The whole panel can be swiped (touch) or dragged (mouse) sideways. */
   [data-workflow-demo] {
@@ -993,12 +993,12 @@ const workflowSteps = [
     white-space: nowrap;
     color: var(--color-ink);
     font-size: 0.8rem;
-    font-weight: 750;
+    font-weight: 800;
     font-variant-numeric: tabular-nums;
   }
   .ai-demo-count b {
     color: #a0a8b1;
-    font-weight: 500;
+    font-weight: 400;
   }
   .ai-demo-progress {
     height: 2px;
@@ -1044,9 +1044,9 @@ const workflowSteps = [
   }
   .ai-state-kicker {
     display: block;
-    color: var(--color-orange-dark);
-    font-size: 0.7rem;
-    font-weight: 750;
+    color: var(--color-orange-text);
+    font-size: 0.75rem;
+    font-weight: 800;
     letter-spacing: 0.11em;
   }
   .ai-state-head h4 {
@@ -1054,8 +1054,8 @@ const workflowSteps = [
     color: var(--color-ink);
     font-size: clamp(1.25rem, 1.8vw, 1.55rem);
     font-weight: 700;
-    letter-spacing: -0.045em;
-    word-spacing: 0.045em;
+    letter-spacing: -0.01em;
+    word-spacing: normal;
     line-height: 1.2;
   }
   .ai-state-head p {
@@ -1147,7 +1147,7 @@ const workflowSteps = [
       --ai-space: 3.75rem;
     }
     .ai-workflow-heading {
-      text-align: center;
+      text-align: left;
     }
     .ai-workflow-step {
       grid-template-columns: 34px minmax(0, 1fr);
@@ -1157,7 +1157,7 @@ const workflowSteps = [
     .ai-step-number {
       width: 34px;
       height: 34px;
-      border-radius: 10px;
+      border-radius: var(--radius-md);
     }
     .ai-step-copy strong {
       font-size: 0.95rem;
@@ -1193,7 +1193,7 @@ const workflowSteps = [
   @media (max-width: 480px) {
     .ai-workflow-demo {
       padding: 0.85rem;
-      border-radius: 18px;
+      border-radius: var(--radius-lg);
     }
   }
 

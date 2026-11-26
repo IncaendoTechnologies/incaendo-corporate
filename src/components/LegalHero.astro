@@ -52,6 +52,7 @@ const StatusIcon = doc.statusIcon
 
   <div class="site-container legal-hero-wrap hero-system__inner">
     <div class="legal-hero-copy hero-system__copy reveal">
+      <p class="eyebrow hero-system__eyebrow">Legal</p>
       <h1 id={headingId} class="hero-system__title">
         {titleLead}
         <br />
@@ -71,7 +72,7 @@ const StatusIcon = doc.statusIcon
 
       <div class="hero-system__actions">
         <a class="button button-primary" href="/contact">
-          Talk To Our Team
+          Talk to our team
         </a>
       </div>
 
@@ -147,13 +148,6 @@ const StatusIcon = doc.statusIcon
     position: relative;
     overflow: hidden;
     isolation: isolate;
-    background:
-      radial-gradient(
-        ellipse 60% 70% at 82% 38%,
-        color-mix(in srgb, var(--color-peach) 85%, transparent),
-        transparent 70%
-      ),
-      linear-gradient(180deg, var(--color-white) 0%, var(--color-paper) 100%);
   }
 
   .legal-hero-ambient {
@@ -198,7 +192,7 @@ const StatusIcon = doc.statusIcon
     gap: 0.5rem;
     color: var(--color-ink);
     font-size: 0.92rem;
-    font-weight: 550;
+    font-weight: 600;
   }
 
   .point-bullet {
@@ -206,8 +200,7 @@ const StatusIcon = doc.statusIcon
     height: 7px;
     border-radius: 50%;
     background: var(--color-orange);
-    box-shadow: 0 0 0 4px
-      color-mix(in srgb, var(--color-orange) 14%, transparent);
+    box-shadow: var(--shadow-1);
   }
 
   .legal-hero-tags {
@@ -226,7 +219,7 @@ const StatusIcon = doc.statusIcon
     background: color-mix(in srgb, var(--color-white) 75%, transparent);
     color: var(--color-body);
     font-size: 0.76rem;
-    font-weight: 550;
+    font-weight: 600;
     transition:
       border-color var(--duration-fast) ease,
       color var(--duration-fast) ease,
@@ -292,7 +285,7 @@ const StatusIcon = doc.statusIcon
   .legal-doc {
     padding: clamp(1rem, 1.8vw, 1.45rem);
     border: 1px solid var(--color-line);
-    border-radius: 18px;
+    border-radius: var(--radius-lg);
     background: var(--color-white);
     box-shadow:
       0 30px 60px -18px color-mix(in srgb, var(--color-navy) 22%, transparent),
@@ -313,20 +306,19 @@ const StatusIcon = doc.statusIcon
     height: 2.4rem;
     flex: none;
     place-items: center;
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     background: linear-gradient(
       140deg,
       var(--color-orange),
       var(--color-orange-dark)
     );
-    box-shadow: 0 8px 18px -6px
-      color-mix(in srgb, var(--color-orange) 60%, transparent);
+    box-shadow: var(--shadow-1);
     color: var(--color-white);
   }
 
   .legal-doc-label {
-    color: var(--color-orange-dark);
-    font-size: 0.66rem;
+    color: var(--color-orange-text);
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -338,7 +330,7 @@ const StatusIcon = doc.statusIcon
     font-family: var(--font-heading);
     font-size: clamp(1.05rem, 1.4vw, 1.3rem);
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
     line-height: 1.2;
   }
 
@@ -355,7 +347,7 @@ const StatusIcon = doc.statusIcon
     gap: 0.2rem 0.9rem;
     margin: 0 0 0.75rem;
     color: var(--color-muted);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-weight: 600;
   }
 
@@ -388,7 +380,7 @@ const StatusIcon = doc.statusIcon
     padding-left: 1.05rem;
     color: var(--color-ink);
     font-size: 0.76rem;
-    font-weight: 550;
+    font-weight: 600;
     line-height: 1.35;
   }
 
@@ -409,11 +401,11 @@ const StatusIcon = doc.statusIcon
     gap: 0.4rem;
     margin: 0;
     padding: 0.5rem 0.7rem;
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     background: color-mix(in srgb, var(--color-green) 11%, transparent);
     color: var(--color-green);
-    font-size: 0.72rem;
-    font-weight: 650;
+    font-size: 0.75rem;
+    font-weight: 600;
     line-height: 1.3;
   }
 
@@ -429,7 +421,7 @@ const StatusIcon = doc.statusIcon
     gap: 0.75rem;
     padding: 0.85rem 0.95rem;
     border: 1px solid var(--color-line);
-    border-radius: 14px;
+    border-radius: var(--radius-lg);
     background: color-mix(in srgb, var(--color-white) 92%, transparent);
     box-shadow: 0 16px 36px -14px
       color-mix(in srgb, var(--color-navy) 22%, transparent);
@@ -466,8 +458,7 @@ const StatusIcon = doc.statusIcon
   .legal-card:hover {
     translate: 0 -4px;
     border-color: color-mix(in srgb, var(--color-orange) 45%, transparent);
-    box-shadow: 0 22px 44px -16px
-      color-mix(in srgb, var(--color-orange) 38%, transparent);
+    box-shadow: var(--shadow-2);
   }
 
   .legal-card-icon {
@@ -476,9 +467,9 @@ const StatusIcon = doc.statusIcon
     height: 2.1rem;
     flex: none;
     place-items: center;
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     background: color-mix(in srgb, var(--color-orange) 11%, transparent);
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
     transition:
       background 260ms ease,
       color 260ms ease;
@@ -510,7 +501,7 @@ const StatusIcon = doc.statusIcon
 
   .legal-card-body span {
     color: var(--color-body);
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     line-height: 1.45;
   }
 

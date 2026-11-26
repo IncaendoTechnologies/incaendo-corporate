@@ -61,7 +61,7 @@ const numbersAttr = { [dataNumbers]: '' }
     color: var(--color-navy);
     cursor: pointer;
     font-size: 0.78rem;
-    font-weight: 650;
+    font-weight: 600;
     line-height: 1.2;
     transition:
       color 180ms ease,
@@ -106,7 +106,7 @@ const numbersAttr = { [dataNumbers]: '' }
     color: var(--color-navy);
     cursor: pointer;
     font-size: 0.82rem;
-    font-weight: 650;
+    font-weight: 600;
     line-height: 1;
     transition:
       color 180ms ease,
@@ -138,16 +138,16 @@ const numbersAttr = { [dataNumbers]: '' }
     }
 
     .pagination-arrow {
-      min-height: 38px;
+      min-height: var(--tap-min);
       padding: 0.5rem 0.8rem;
-      font-size: 0.72rem;
+      font-size: 0.75rem;
     }
 
     .pagination-numbers :global(button),
     .pagination-numbers :global(.pagination-number),
     .pagination-numbers :global(.insights-pagination-number) {
-      min-width: 38px;
-      height: 38px;
+      min-width: var(--tap-min);
+      height: var(--tap-min);
       font-size: 0.78rem;
     }
   }

@@ -14,7 +14,7 @@ const serviceDetails = [
   {
     id: 'ai-automation',
     number: '01',
-    title: 'AI & Automation',
+    title: 'AI & automation',
     eyebrow: 'INTELLIGENCE, APPLIED TO THE WORK',
     description:
       'Use AI where it can help people move work forward: interpreting documents, finding useful knowledge, preparing a response, or coordinating a repeatable workflow. We start with the task, data, and review needs before choosing an approach.',
@@ -24,7 +24,7 @@ const serviceDetails = [
       'Workflow mapping and automation opportunities',
       'AI assistants and knowledge retrieval',
       'Document extraction with validation paths',
-      'Integration with authorized tools and APIs',
+      'Integration with authorised tools and APIs',
     ],
     deliverables:
       'A scoped workflow, connected application or assistant, and clear review and exception paths.',
@@ -37,7 +37,7 @@ const serviceDetails = [
   {
     id: 'custom-software-development',
     number: '02',
-    title: 'Custom Software Development',
+    title: 'Custom software development',
     eyebrow: 'SOFTWARE THAT FITS YOUR PROCESS',
     description:
       'Build a product around the way your business needs to work when an off-the-shelf tool is not a good fit. We can shape the requirements, application architecture, interfaces, APIs, and integrations as one considered system.',
@@ -60,7 +60,7 @@ const serviceDetails = [
   {
     id: 'web-application-development',
     number: '03',
-    title: 'Web Application Development',
+    title: 'Web application development',
     eyebrow: 'CONNECTED DIGITAL EXPERIENCES',
     description:
       'Create responsive web applications that make complex tasks easier to complete. From customer and partner portals to dashboards and internal platforms, the experience, data, and system connections are planned together.',
@@ -83,7 +83,7 @@ const serviceDetails = [
   {
     id: 'mobile-app-development',
     number: '04',
-    title: 'Mobile App Development',
+    title: 'Mobile app development',
     eyebrow: 'USEFUL EXPERIENCES, WHERE WORK HAPPENS',
     description:
       'Plan and build mobile experiences around real user needs, device capabilities, and the systems behind the app. Platform choices are made in context, including whether native or cross-platform development best serves the product.',
@@ -106,7 +106,7 @@ const serviceDetails = [
   {
     id: 'enterprise-solutions',
     number: '05',
-    title: 'Enterprise Solutions',
+    title: 'Enterprise solutions',
     eyebrow: 'CONNECT PEOPLE, PROCESS & SYSTEMS',
     description:
       'Bring business processes and software together across teams. Enterprise solutions can include operational applications, workflow digitisation, role-aware interfaces, and integrations planned around how information moves through an organisation.',
@@ -129,7 +129,7 @@ const serviceDetails = [
   {
     id: 'cloud-data',
     number: '06',
-    title: 'Cloud & Data',
+    title: 'Cloud & data',
     eyebrow: 'FOUNDATIONS FOR RELIABLE DIGITAL WORK',
     description:
       'Design cloud and data capabilities around the needs of the product and the team operating it. This can include application environments, integrations, data flows, reporting foundations, and the monitoring needed to understand how a service is behaving.',
@@ -159,9 +159,10 @@ const serviceDetails = [
   >
     <div class="site-container services-hero-grid hero-system__inner">
       <div class="services-hero-copy hero-system__copy reveal">
+        <p class="eyebrow hero-system__eyebrow">Our services</p>
         <h1 id="services-page-title" class="hero-system__title">
           Technology that{' '}
-          <span class="hero-system__accent">Works around Your Business.</span>
+          <span class="hero-system__accent">works around your business.</span>
         </h1>
         <p class="services-hero-lead hero-system__description">
           From AI and custom software to connected web, mobile, enterprise, and
@@ -173,7 +174,7 @@ const serviceDetails = [
             Explore our services <span aria-hidden="true">↘</span>
           </a>
           <a
-            class="text-link"
+            class="button button-outline"
             href="/contact#project-inquiry"
             data-open-contact-modal
           >
@@ -229,10 +230,12 @@ const serviceDetails = [
   >
     <div class="site-container">
       <header class="services-section-heading reveal">
-        <p class="eyebrow">A connected set of capabilities</p>
-        <h2 id="service-overview-title">
-          Start with the Challenge. <span>Choose the Right Capability.</span>
-        </h2>
+        <div>
+          <p class="eyebrow">A connected set of capabilities</p>
+          <h2 id="service-overview-title">
+            Start with the challenge. <span>Choose the right capability.</span>
+          </h2>
+        </div>
         <p>
           Explore the service areas and the problems each one can help address.
           The right scope depends on your users, systems, and goals.
@@ -272,10 +275,12 @@ const serviceDetails = [
   >
     <div class="site-container">
       <header class="services-section-heading services-detail-heading reveal">
-        <p class="eyebrow">What the work can include</p>
-        <h2 id="service-details-title">
-          Useful Technology, <span>Made Specific to the Work.</span>
-        </h2>
+        <div>
+          <p class="eyebrow">What the work can include</p>
+          <h2 id="service-details-title">
+            Useful technology, <span>made specific to the work.</span>
+          </h2>
+        </div>
         <p>
           Each engagement is shaped to its context. These are practical starting
           points for a conversation about your requirements.
@@ -356,18 +361,18 @@ const serviceDetails = [
   >
     <div class="site-container experience-panel">
       <div class="experience-number reveal">
-        <span>15+</span>
+        <span>2012</span>
         <small>
-          YEARS OF INDUSTRY
+          Building
           <br />
-          EXPERIENCE
+          software since
         </small>
         <i aria-hidden="true"></i>
       </div>
       <div class="experience-message reveal">
-        <p class="eyebrow eyebrow-light">Business context meets engineering</p>
+        <p class="eyebrow">Business context meets engineering</p>
         <h2 id="services-experience-title">
-          Good Technology Starts with <span>Understanding the Work.</span>
+          Good technology starts with <span>understanding the work.</span>
         </h2>
         <p>
           We bring business requirements, user needs, and existing systems into
@@ -375,7 +380,7 @@ const serviceDetails = [
           context helps shape software around the problem it needs to solve.
         </p>
         <a
-          class="text-link text-link-light"
+          class="text-link"
           href="/projects"
           target="_blank"
           rel="noopener noreferrer"
@@ -427,16 +432,9 @@ const serviceDetails = [
   .services-page h1 span,
   .services-page h2 span:not(.proof-mark),
   .services-page h3 span {
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
   }
   .services-hero {
-    background:
-      radial-gradient(
-        ellipse at 92% 12%,
-        rgb(244 233 223 / 74%),
-        transparent 34%
-      ),
-      linear-gradient(125deg, #fbfaf8 0%, var(--color-paper) 53%, #f0ece6 100%);
   }
   .services-hero-actions .button {
     gap: 0.75rem;
@@ -455,7 +453,7 @@ const serviceDetails = [
     place-items: center;
     border: 1px solid #dfc2ad;
     border-radius: 50%;
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
     font-family: var(--font-heading);
     font-size: 1rem;
     font-weight: 700;
@@ -467,11 +465,11 @@ const serviceDetails = [
   .services-hero-proof strong {
     color: var(--color-ink);
     font-size: 0.78rem;
-    font-weight: 650;
+    font-weight: 600;
   }
   .services-hero-proof small {
     color: var(--color-muted);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
   }
 
   /* Hero visual wrapper: the framed image plus a service-areas card that
@@ -488,18 +486,18 @@ const serviceDetails = [
     gap: 0.7rem;
     width: min(17.5rem, 58%);
     padding: 1rem 1.15rem 1.05rem;
-    border: 1px solid rgb(16 27 45 / 7%);
-    border-radius: 18px;
+    border: 1px solid rgb(15 33 54 / 7%);
+    border-radius: var(--radius-lg);
     background: rgb(255 255 255 / 93%);
     box-shadow:
       0 1px 0 #fff inset,
-      0 22px 44px -24px rgb(16 27 45 / 40%),
-      0 2px 6px -3px rgb(16 27 45 / 10%);
+      0 22px 44px -24px rgb(15 33 54 / 40%),
+      0 2px 6px -3px rgb(15 33 54 / 10%);
     backdrop-filter: blur(6px);
   }
   .services-hero-areas .hero-system__support-label {
     margin-bottom: 0;
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
   }
   .services-hero-areas ol {
     display: grid;
@@ -514,13 +512,13 @@ const serviceDetails = [
     align-items: baseline;
     color: var(--color-ink);
     font-size: 0.8rem;
-    font-weight: 550;
+    font-weight: 600;
     line-height: 1.3;
     transition: color var(--duration-fast) ease;
   }
   .services-hero-areas a span {
     color: var(--color-muted);
-    font-size: 0.66rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.04em;
   }
@@ -556,9 +554,7 @@ const serviceDetails = [
     align-items: stretch;
     border-radius: var(--radius-large);
     background: var(--color-paper);
-    box-shadow:
-      0 26px 65px rgb(16 27 45 / 18%),
-      0 3px 12px rgb(16 27 45 / 8%);
+    box-shadow: var(--shadow-1);
     color: var(--color-navy);
     isolation: isolate;
   }
@@ -575,31 +571,38 @@ const serviceDetails = [
     padding-block: clamp(4.5rem, 7vw, 6.5rem);
   }
   .services-section-heading {
-    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    max-width: 720px;
     margin: 0 0 clamp(2.2rem, 4vw, 3rem);
     text-align: left;
   }
+  .services-section-heading > div {
+    width: 100%;
+  }
   .services-section-heading .eyebrow {
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.5rem;
   }
   .services-section-heading h2 {
-    margin-bottom: 0.9rem;
+    margin-bottom: 0;
     color: var(--color-navy);
     font-size: var(--type-section-size);
-    font-weight: var(--type-heading-weight);
+    font-weight: var(--type-section-weight);
     letter-spacing: var(--type-section-letter-spacing);
     word-spacing: var(--type-section-word-spacing);
     line-height: var(--type-section-line-height);
   }
   .services-section-heading h2 span {
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
   }
   .services-section-heading > p:last-child {
-    max-width: 690px;
-    margin: 0 auto;
+    max-width: 720px;
+    margin: 0;
     color: var(--color-body);
-    font-size: var(--type-body-size);
-    line-height: var(--type-body-line-height);
+    font-size: var(--type-intro-size);
+    line-height: var(--type-intro-line-height);
   }
   .services-overview-grid {
     display: grid;
@@ -616,10 +619,8 @@ const serviceDetails = [
     align-items: flex-start;
     padding: 1.35rem 1.4rem 1.2rem;
     overflow: hidden;
-    border: 1px solid rgb(16 27 45 / 9%);
     border-radius: var(--radius-medium);
-    background: linear-gradient(145deg, #fff, #fbf9f6);
-    box-shadow: 0 12px 34px rgb(16 27 45 / 5%);
+    box-shadow: var(--shadow-1);
     color: var(--color-ink);
     transform: translateY(var(--card-lift));
     transition:
@@ -648,7 +649,7 @@ const serviceDetails = [
     border-color: rgb(168 65 33 / 35%);
     background: #fff;
     box-shadow:
-      0 20px 38px rgb(16 27 45 / 12%),
+      0 20px 38px rgb(15 33 54 / 12%),
       0 5px 16px rgb(168 65 33 / 6%);
     color: var(--color-ink);
   }
@@ -665,19 +666,20 @@ const serviceDetails = [
   }
   .overview-card-top > span:first-child {
     color: var(--color-muted);
-    font-size: 0.62rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.11em;
   }
   .overview-card-icon {
+    /* Card icon (design system inc-card-icon): 40px orange-soft circle */
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--orange-soft);
+    color: var(--orange-text);
     display: grid;
-    width: 42px;
-    height: 42px;
     place-items: center;
-    border: 1px solid rgb(168 65 33 / 15%);
-    border-radius: 14px;
-    background: #f4e9df;
-    color: var(--color-orange-dark);
     transition:
       transform 260ms var(--ease-out),
       background 260ms var(--ease-out);
@@ -692,9 +694,9 @@ const serviceDetails = [
     color: var(--color-navy);
     font-family: var(--font-heading);
     font-size: var(--type-card-heading-size);
-    font-weight: 650;
-    letter-spacing: -0.035em;
-    word-spacing: 0.035em;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    word-spacing: normal;
     line-height: 1.25;
   }
   .overview-card-copy {
@@ -712,10 +714,10 @@ const serviceDetails = [
     border-top: 1px solid var(--color-line);
     color: var(--color-navy);
     font-size: 0.75rem;
-    font-weight: 650;
+    font-weight: 600;
   }
   .overview-card-link b {
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
     transition: transform 240ms var(--ease-out);
   }
   .service-overview-card:hover .overview-card-link b,
@@ -725,9 +727,6 @@ const serviceDetails = [
 
   .service-details {
     padding-block: clamp(4.5rem, 7vw, 6.5rem);
-    background:
-      radial-gradient(ellipse at 10% 4%, rgb(84 123 157 / 7%), transparent 30%),
-      linear-gradient(180deg, #fbfaf8 0%, #f7f5f1 100%);
   }
   .services-detail-heading {
     margin-bottom: clamp(2.5rem, 5vw, 4rem);
@@ -745,13 +744,12 @@ const serviceDetails = [
     /* Border, hover lift and orange edge (on the image side): shared
        .accent-card (src/styles/accent-card.css). */
     border-radius: var(--radius-large);
-    background: linear-gradient(135deg, #fff 0%, #fbf9f6 100%);
-    box-shadow: 0 12px 34px rgb(16 27 45 / 4%);
+    box-shadow: var(--shadow-1);
     scroll-margin-top: calc(var(--site-header-height) + 1rem);
   }
   .service-detail:nth-child(even) {
-    --accent-card-border: rgb(84 123 157 / 14%);
     background: linear-gradient(135deg, #f4f7f9 0%, #fff 100%);
+    --accent-card-border: rgb(84 123 157 / 14%);
   }
   /* Image on the left: keep the wider column for the image. */
   .service-detail-reverse {
@@ -771,8 +769,8 @@ const serviceDetails = [
     align-items: center;
     gap: 0.65rem;
     margin-bottom: 0.9rem;
-    color: var(--color-orange-dark);
-    font-size: 0.64rem;
+    color: var(--color-orange-text);
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.13em;
   }
@@ -783,7 +781,7 @@ const serviceDetails = [
     place-items: center;
     border: 1px solid #e3c6b3;
     border-radius: 50%;
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     letter-spacing: 0;
   }
   .service-detail-copy h3 {
@@ -798,8 +796,8 @@ const serviceDetails = [
   .service-detail-description {
     margin-bottom: 1.1rem;
     color: var(--color-body);
-    font-size: 0.94rem;
-    line-height: 1.7;
+    font-size: var(--type-body-size); /* body 16px */
+    line-height: var(--type-body-line-height);
   }
   .service-detail-challenge {
     padding: 0.85rem 1rem;
@@ -810,8 +808,8 @@ const serviceDetails = [
   .service-detail-deliverable > span {
     display: block;
     margin-bottom: 0.3rem;
-    color: var(--color-orange-dark);
-    font-size: 0.59rem;
+    color: var(--color-orange-text);
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.11em;
   }
@@ -830,8 +828,8 @@ const serviceDetails = [
     font-family: var(--font-heading);
     font-size: 0.82rem;
     font-weight: 700;
-    letter-spacing: -0.02em;
-    word-spacing: 0.02em;
+    letter-spacing: -0.01em;
+    word-spacing: normal;
   }
   .service-detail-scope ul {
     display: grid;
@@ -872,12 +870,12 @@ const serviceDetails = [
   .service-detail-deliverable p {
     margin: 0;
     color: var(--color-muted);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     line-height: 1.45;
   }
   .service-detail-link {
     margin-top: 1rem;
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
     font-size: 0.78rem;
   }
   /* Every service image is 3:2, so the frame matches it and the whole
@@ -887,10 +885,10 @@ const serviceDetails = [
     min-width: 0;
     aspect-ratio: 3 / 2;
     overflow: hidden;
-    border: 1px solid rgb(16 27 45 / 10%);
+    border: 1px solid rgb(15 33 54 / 10%);
     border-radius: var(--radius-large);
     background: #f6efe8;
-    box-shadow: 0 18px 48px rgb(16 27 45 / 8%);
+    box-shadow: 0 18px 48px rgb(15 33 54 / 8%);
   }
   .service-detail-image {
     position: absolute;
@@ -912,13 +910,13 @@ const serviceDetails = [
     position: relative;
     z-index: 1;
     padding: 0.7rem 0.8rem;
-    border: 1px solid rgb(16 27 45 / 9%);
+    border: 1px solid rgb(15 33 54 / 9%);
     border-radius: 999px;
     background: rgb(255 255 255 / 82%);
-    box-shadow: 0 8px 24px rgb(16 27 45 / 8%);
+    box-shadow: var(--shadow-1);
     backdrop-filter: blur(12px);
     color: var(--color-muted);
-    font-size: 0.55rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.12em;
   }
@@ -927,8 +925,8 @@ const serviceDetails = [
     align-items: center;
     gap: 0.45rem;
     color: var(--color-body);
-    font-size: 0.62rem;
-    font-weight: 500;
+    font-size: 0.75rem;
+    font-weight: 400;
     letter-spacing: 0;
   }
   .detail-visual-state i {
@@ -936,15 +934,15 @@ const serviceDetails = [
     height: 5px;
     border-radius: 50%;
     background: var(--color-orange);
-    box-shadow: 0 0 0 4px rgb(201 84 43 / 10%);
+    box-shadow: 0 0 0 4px rgb(194 76 18 / 10%);
   }
   .detail-visual-foot {
     position: relative;
     z-index: 1;
     padding-top: 0.65rem;
-    border-top: 1px solid rgb(16 27 45 / 9%);
+    border-top: 1px solid rgb(15 33 54 / 9%);
     color: var(--color-muted);
-    font-size: 0.5rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-shadow: 0 1px 8px rgb(255 255 255 / 80%);
@@ -966,21 +964,21 @@ const serviceDetails = [
     align-content: center;
     gap: 0.32rem;
     padding: 0.75rem 0.85rem;
-    border: 1px solid rgb(16 27 45 / 10%);
-    border-radius: 10px;
+    border: 1px solid rgb(15 33 54 / 10%);
+    border-radius: var(--radius-md);
     background: rgb(255 255 255 / 90%);
-    box-shadow: 0 10px 25px rgb(16 27 45 / 6%);
+    box-shadow: var(--shadow-1);
   }
   .automation-node span {
     color: var(--color-muted);
-    font-size: 0.53rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.12em;
   }
   .automation-node b {
     color: var(--color-navy);
     font-size: 0.85rem;
-    font-weight: 650;
+    font-weight: 600;
   }
   .automation-node-accent {
     border-color: rgb(168 65 33 / 24%);
@@ -1008,7 +1006,7 @@ const serviceDetails = [
     height: 5px;
     border-radius: 50%;
     background: var(--color-orange);
-    box-shadow: 0 0 10px rgb(201 84 43 / 48%);
+    box-shadow: var(--shadow-1);
     animation: service-packet 3.8s ease-in-out infinite;
   }
   .automation-path i:nth-child(2) {
@@ -1024,7 +1022,7 @@ const serviceDetails = [
     grid-column: 1 / -1;
     justify-self: center;
     color: var(--color-muted);
-    font-size: 0.63rem;
+    font-size: 0.75rem;
     letter-spacing: 0.02em;
     text-align: center;
   }
@@ -1037,9 +1035,9 @@ const serviceDetails = [
     align-self: center;
     padding: 1.1rem 1rem 2.2rem;
     border: 1px solid #d9dfe4;
-    border-radius: 13px;
+    border-radius: var(--radius-lg);
     background: #fff;
-    box-shadow: 0 18px 35px rgb(16 27 45 / 9%);
+    box-shadow: var(--shadow-1);
   }
   .software-sidebar {
     display: grid;
@@ -1053,7 +1051,7 @@ const serviceDetails = [
   .software-sidebar i {
     width: 13px;
     height: 13px;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     background: #e9eef2;
   }
   .software-sidebar span:first-child {
@@ -1080,7 +1078,7 @@ const serviceDetails = [
   .software-workspace-top span {
     width: 38%;
     height: 7px;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     background: #dce4e9;
   }
   .software-workspace-top i {
@@ -1095,7 +1093,7 @@ const serviceDetails = [
     gap: 0.35rem;
     padding: 0.55rem;
     border: 1px solid #e6e9eb;
-    border-radius: 7px;
+    border-radius: var(--radius-md);
     background: #fbfcfc;
   }
   .software-module-wide {
@@ -1103,7 +1101,7 @@ const serviceDetails = [
   }
   .software-module small {
     color: var(--color-muted);
-    font-size: 0.48rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.1em;
   }
@@ -1111,12 +1109,12 @@ const serviceDetails = [
     color: var(--color-navy);
     font-family: var(--font-heading);
     font-size: 0.76rem;
-    font-weight: 650;
+    font-weight: 600;
   }
   .software-module > span {
     width: 70%;
     height: 4px;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     background: #e4e9ec;
   }
   .software-module > span:last-child {
@@ -1133,7 +1131,7 @@ const serviceDetails = [
   .software-module-grid .software-module i {
     width: 13px;
     height: 13px;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     background: #e2ebf0;
   }
   .software-module-grid .software-module-highlight {
@@ -1148,20 +1146,20 @@ const serviceDetails = [
     right: 1rem;
     bottom: 0.75rem;
     color: var(--color-muted);
-    font-size: 0.57rem;
+    font-size: 0.75rem;
   }
   .software-board-caption b,
   .browser-caption b {
-    color: var(--color-orange);
+    color: var(--color-orange-text);
   }
   .web-browser {
     width: min(100%, 470px);
     align-self: center;
     overflow: hidden;
     border: 1px solid #d9dfe4;
-    border-radius: 11px;
+    border-radius: var(--radius-md);
     background: #fff;
-    box-shadow: 0 18px 35px rgb(16 27 45 / 9%);
+    box-shadow: var(--shadow-1);
   }
   .browser-bar {
     display: flex;
@@ -1184,7 +1182,7 @@ const serviceDetails = [
   .browser-bar i {
     margin-left: 0.6rem;
     color: #8793a0;
-    font-size: 0.52rem;
+    font-size: 0.75rem;
     font-style: normal;
   }
   .web-dashboard {
@@ -1204,7 +1202,7 @@ const serviceDetails = [
   .web-dashboard aside span {
     width: 12px;
     height: 12px;
-    border-radius: 3px;
+    border-radius: var(--radius-sm);
     background: #e4eaee;
   }
   .web-dashboard aside b {
@@ -1217,8 +1215,8 @@ const serviceDetails = [
     padding: 0.75rem;
   }
   .web-dashboard-main > small {
-    color: var(--color-orange-dark);
-    font-size: 0.47rem;
+    color: var(--color-orange-text);
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.1em;
   }
@@ -1226,7 +1224,7 @@ const serviceDetails = [
     color: var(--color-navy);
     font-family: var(--font-heading);
     font-size: 0.75rem;
-    font-weight: 650;
+    font-weight: 600;
   }
   .web-stats {
     display: grid;
@@ -1238,19 +1236,19 @@ const serviceDetails = [
     gap: 0.3rem;
     padding: 0.38rem;
     border: 1px solid #e9ecee;
-    border-radius: 5px;
+    border-radius: var(--radius-sm);
     background: #fbfcfc;
   }
   .web-stats b {
     width: 42%;
     height: 6px;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     background: #e7c7b4;
   }
   .web-stats span {
     width: 75%;
     height: 4px;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     background: #e5eaed;
   }
   .web-chart {
@@ -1258,7 +1256,7 @@ const serviceDetails = [
     height: 63px;
     overflow: hidden;
     border: 1px solid #e9ecee;
-    border-radius: 5px;
+    border-radius: var(--radius-sm);
     background: repeating-linear-gradient(
       to bottom,
       transparent 0 15px,
@@ -1277,7 +1275,7 @@ const serviceDetails = [
   .web-chart > div span {
     width: 5%;
     height: 35%;
-    border-radius: 3px 3px 0 0;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
     background: rgb(84 123 157 / 20%);
   }
   .web-chart > div span:nth-child(2n) {
@@ -1285,7 +1283,7 @@ const serviceDetails = [
   }
   .web-chart > div span:nth-child(3n) {
     height: 78%;
-    background: rgb(201 84 43 / 32%);
+    background: rgb(194 76 18 / 32%);
   }
   .web-chart svg {
     position: absolute;
@@ -1296,7 +1294,7 @@ const serviceDetails = [
   }
   .web-chart svg path {
     fill: none;
-    stroke: var(--action-hover);
+    stroke: #a83f0a;
     stroke-width: 2;
     vector-effect: non-scaling-stroke;
   }
@@ -1304,7 +1302,7 @@ const serviceDetails = [
     padding: 0.6rem 0.8rem;
     border-top: 1px solid #e9ecee;
     color: var(--color-muted);
-    font-size: 0.55rem;
+    font-size: 0.75rem;
     text-align: center;
   }
   .mobile-product {
@@ -1321,15 +1319,15 @@ const serviceDetails = [
     height: 230px;
     padding: 1.1rem 0.65rem 0.65rem;
     border: 4px solid #1b2a40;
-    border-radius: 22px;
+    border-radius: var(--radius-lg);
     background: #fff;
-    box-shadow: 0 17px 35px rgb(16 27 45 / 15%);
+    box-shadow: var(--shadow-1);
   }
   .mobile-device-back {
     width: 125px;
     height: 205px;
     margin-top: 1.4rem;
-    border-color: var(--blue);
+    border-color: #547b9d;
     background: #f7fafb;
     transform: rotate(-7deg);
   }
@@ -1344,7 +1342,7 @@ const serviceDetails = [
     left: 50%;
     width: 36px;
     height: 4px;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     background: #b7c0c6;
     transform: translateX(-50%);
   }
@@ -1352,14 +1350,14 @@ const serviceDetails = [
     width: 60%;
     height: 15px;
     margin-bottom: 0.6rem;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     background: #e7edf1;
   }
   .mobile-mini-row {
     height: 17px;
     margin-bottom: 0.35rem;
     border: 1px solid #e9edef;
-    border-radius: 5px;
+    border-radius: var(--radius-sm);
   }
   .mobile-mini-card {
     display: grid;
@@ -1367,19 +1365,19 @@ const serviceDetails = [
     margin-top: 0.6rem;
     padding: 0.55rem;
     border: 1px solid #ead8cd;
-    border-radius: 7px;
+    border-radius: var(--radius-md);
     background: #fff9f5;
   }
   .mobile-mini-card i {
     width: 18px;
     height: 18px;
-    border-radius: 5px;
+    border-radius: var(--radius-sm);
     background: #efddcf;
   }
   .mobile-mini-card span,
   .mobile-mini-button {
     height: 4px;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     background: #e8ecee;
   }
   .mobile-mini-card span:last-child {
@@ -1389,7 +1387,7 @@ const serviceDetails = [
     width: 70%;
     height: 13px;
     margin: 0.7rem auto 0;
-    background: var(--action);
+    background: #c24c12;
   }
   .mobile-device-top {
     display: grid;
@@ -1397,15 +1395,15 @@ const serviceDetails = [
     margin-bottom: 0.7rem;
   }
   .mobile-device-top span {
-    color: var(--color-orange-dark);
-    font-size: 0.4rem;
+    color: var(--color-orange-text);
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.12em;
   }
   .mobile-device-top b {
     color: var(--color-navy);
     font-family: var(--font-heading);
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     line-height: 1.25;
   }
   .mobile-task {
@@ -1415,7 +1413,7 @@ const serviceDetails = [
     margin-bottom: 0.4rem;
     padding: 0.4rem;
     border: 1px solid #e8ecee;
-    border-radius: 6px;
+    border-radius: var(--radius-md);
   }
   .mobile-task > i {
     display: grid;
@@ -1423,10 +1421,10 @@ const serviceDetails = [
     height: 18px;
     flex: 0 0 auto;
     place-items: center;
-    border-radius: 5px;
+    border-radius: var(--radius-sm);
     background: #f4e9df;
-    color: var(--color-orange-dark);
-    font-size: 0.42rem;
+    color: var(--color-orange-text);
+    font-size: 0.75rem;
     font-style: normal;
   }
   .mobile-task > span {
@@ -1436,18 +1434,18 @@ const serviceDetails = [
   .mobile-task b {
     overflow: hidden;
     color: var(--color-navy);
-    font-size: 0.5rem;
+    font-size: 0.75rem;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
   .mobile-task small {
     color: var(--color-muted);
-    font-size: 0.42rem;
+    font-size: 0.75rem;
   }
   .mobile-task em {
     margin-left: auto;
-    color: var(--color-orange-dark);
-    font-size: 0.65rem;
+    color: var(--color-orange-text);
+    font-size: 0.75rem;
     font-style: normal;
   }
   .mobile-mobile-nav {
@@ -1463,11 +1461,11 @@ const serviceDetails = [
   .mobile-mobile-nav i {
     width: 12px;
     height: 5px;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     background: #d9e1e6;
   }
   .mobile-mobile-nav i:first-child {
-    background: var(--action);
+    background: #c24c12;
   }
   .mobile-caption {
     position: absolute;
@@ -1475,7 +1473,7 @@ const serviceDetails = [
     bottom: -0.25rem;
     left: 0;
     color: var(--color-muted);
-    font-size: 0.58rem;
+    font-size: 0.75rem;
     text-align: center;
   }
   .enterprise-map {
@@ -1498,7 +1496,7 @@ const serviceDetails = [
     vector-effect: non-scaling-stroke;
   }
   .enterprise-map svg .enterprise-map-pulse {
-    stroke: var(--action);
+    stroke: #c24c12;
     stroke-dasharray: 3 10;
     animation: service-flow 6s linear infinite;
   }
@@ -1514,13 +1512,13 @@ const serviceDetails = [
     border: 1px solid rgb(168 65 33 / 22%);
     border-radius: 50%;
     background: radial-gradient(circle at 36% 30%, #fff, #f2e9e2);
-    box-shadow: 0 14px 32px rgb(16 27 45 / 10%);
+    box-shadow: var(--shadow-1);
     text-align: center;
     transform: translate(-50%, -50%);
   }
   .enterprise-hub span {
-    color: var(--color-orange-dark);
-    font-size: 0.48rem;
+    color: var(--color-orange-text);
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.12em;
   }
@@ -1539,19 +1537,19 @@ const serviceDetails = [
     gap: 0.45rem;
     padding: 0.55rem 0.65rem;
     border: 1px solid #dfe4e7;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     background: rgb(255 255 255 / 94%);
-    box-shadow: 0 9px 22px rgb(16 27 45 / 7%);
+    box-shadow: var(--shadow-1);
   }
   .enterprise-node i {
-    color: var(--color-orange-dark);
-    font-size: 0.5rem;
+    color: var(--color-orange-text);
+    font-size: 0.75rem;
     font-style: normal;
     font-weight: 700;
   }
   .enterprise-node b {
     color: var(--color-navy);
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     font-weight: 600;
   }
   .enterprise-node-one {
@@ -1576,7 +1574,7 @@ const serviceDetails = [
     bottom: 0.25rem;
     left: 0;
     color: var(--color-muted);
-    font-size: 0.57rem;
+    font-size: 0.75rem;
     text-align: center;
   }
   .automation-caption,
@@ -1586,10 +1584,10 @@ const serviceDetails = [
   .enterprise-map-caption {
     z-index: 1;
     padding: 0.38rem 0.62rem;
-    border: 1px solid rgb(16 27 45 / 8%);
-    border-radius: 0.65rem;
+    border: 1px solid rgb(15 33 54 / 8%);
+    border-radius: var(--radius-md);
     background: rgb(255 255 255 / 86%);
-    box-shadow: 0 5px 16px rgb(16 27 45 / 7%);
+    box-shadow: var(--shadow-1);
     backdrop-filter: blur(10px);
     color: var(--color-body);
     line-height: 1.4;
@@ -1615,26 +1613,26 @@ const serviceDetails = [
     align-content: center;
     gap: 0.25rem;
     padding: 0.6rem;
-    border: 1px solid rgb(16 27 45 / 10%);
-    border-radius: 9px;
+    border: 1px solid rgb(15 33 54 / 10%);
+    border-radius: var(--radius-md);
     background: #fff;
-    box-shadow: 0 9px 22px rgb(16 27 45 / 6%);
+    box-shadow: var(--shadow-1);
   }
   .cloud-pipeline-nodes > div > i {
-    color: var(--color-orange-dark);
-    font-size: 0.48rem;
+    color: var(--color-orange-text);
+    font-size: 0.75rem;
     font-style: normal;
     font-weight: 700;
   }
   .cloud-pipeline-nodes > div > b {
     color: var(--color-navy);
-    font-size: 0.66rem;
-    font-weight: 650;
+    font-size: 0.75rem;
+    font-weight: 600;
     line-height: 1.25;
   }
   .cloud-pipeline-nodes > div > small {
     color: var(--color-muted);
-    font-size: 0.48rem;
+    font-size: 0.75rem;
     line-height: 1.3;
   }
   .cloud-pipeline-nodes .cloud-pipeline-center {
@@ -1661,10 +1659,10 @@ const serviceDetails = [
   }
   .cloud-console {
     padding: 0.65rem 0.8rem 0.55rem;
-    border: 1px solid rgb(16 27 45 / 10%);
-    border-radius: 9px;
+    border: 1px solid rgb(15 33 54 / 10%);
+    border-radius: var(--radius-md);
     background: #fff;
-    box-shadow: 0 9px 22px rgb(16 27 45 / 5%);
+    box-shadow: var(--shadow-1);
   }
   .cloud-console-head,
   .cloud-console-foot {
@@ -1675,13 +1673,13 @@ const serviceDetails = [
   }
   .cloud-console-head {
     color: var(--color-muted);
-    font-size: 0.47rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.1em;
   }
   .cloud-console-head i {
-    color: var(--color-orange-dark);
-    font-size: 0.45rem;
+    color: var(--color-orange-text);
+    font-size: 0.75rem;
     font-style: normal;
   }
   .cloud-bars {
@@ -1696,7 +1694,7 @@ const serviceDetails = [
   .cloud-bars span {
     width: 7%;
     height: var(--bar);
-    border-radius: 3px 3px 0 0;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
     background: linear-gradient(
       180deg,
       rgb(84 123 157 / 70%),
@@ -1706,13 +1704,13 @@ const serviceDetails = [
   .cloud-bars span:nth-child(3n) {
     background: linear-gradient(
       180deg,
-      rgb(201 84 43 / 66%),
-      rgb(201 84 43 / 20%)
+      rgb(194 76 18 / 66%),
+      rgb(194 76 18 / 20%)
     );
   }
   .cloud-console-foot {
     color: var(--color-muted);
-    font-size: 0.52rem;
+    font-size: 0.75rem;
   }
   .cloud-console-foot b {
     display: inline-flex;
@@ -1730,7 +1728,6 @@ const serviceDetails = [
 
   .services-experience {
     padding-block: clamp(3.5rem, 6vw, 5rem);
-    background: var(--color-paper);
   }
   .experience-panel {
     display: grid;
@@ -1741,24 +1738,18 @@ const serviceDetails = [
     align-items: center;
     gap: clamp(1.5rem, 4vw, 4rem);
     padding: clamp(2rem, 4vw, 3.5rem);
-    border: 1px solid rgb(255 255 255 / 12%);
+    border: 0;
     border-radius: var(--radius-large);
-    background:
-      radial-gradient(
-        ellipse at 12% 80%,
-        rgb(84 123 157 / 16%),
-        transparent 34%
-      ),
-      linear-gradient(130deg, #17253a, var(--color-navy) 70%, #18263a);
-    box-shadow: 0 22px 50px rgb(16 27 45 / 14%);
-    color: #fff;
+    background: var(--surface); /* Card, elevated */
+    box-shadow: var(--shadow-1);
+    color: var(--ink);
   }
   .experience-number {
     display: grid;
     justify-items: start;
   }
   .experience-number > span {
-    color: #fff;
+    color: var(--ink);
     font-family: var(--font-heading);
     font-size: clamp(4.5rem, 7vw, 6.8rem);
     font-weight: 600;
@@ -1768,37 +1759,38 @@ const serviceDetails = [
   }
   .experience-number small {
     margin-top: 0.6rem;
-    color: #e7a17f;
-    font-size: 0.58rem;
+    color: var(--orange-text);
+    font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.13em;
+    letter-spacing: 0.12em;
     line-height: 1.55;
+    text-transform: uppercase;
   }
   .experience-number i {
     width: 3.5rem;
     height: 1px;
     margin-top: 1.1rem;
-    background: #dd8a61;
+    background: var(--orange);
   }
   .experience-message .eyebrow {
     margin-bottom: 0.7rem;
   }
   .experience-message h2 {
     margin-bottom: 0.85rem;
-    color: #fff;
+    color: var(--ink);
     font-size: var(--type-section-size);
-    font-weight: 550;
-    letter-spacing: -0.06em;
-    word-spacing: 0.06em;
+    font-weight: var(--type-section-weight);
+    letter-spacing: -0.01em;
+    word-spacing: normal;
     line-height: 1.1;
   }
   .services-page .experience-message h2 span {
-    color: #e9a17e;
+    color: var(--orange-text);
   }
   .experience-message > p:not(.eyebrow) {
     max-width: 620px;
     margin-bottom: 1rem;
-    color: rgb(255 255 255 / 72%);
+    color: var(--ink-muted);
     font-size: var(--type-intro-size);
     line-height: 1.65;
   }
@@ -1809,33 +1801,33 @@ const serviceDetails = [
     display: grid;
     gap: 0.35rem;
     padding-left: 1.2rem;
-    border-left: 1px solid rgb(255 255 255 / 16%);
+    border-left: 1px solid var(--line);
   }
   .experience-principles > div {
     display: grid;
     grid-template-columns: 1.8rem minmax(0, 1fr);
     gap: 0.15rem 0.5rem;
     padding-block: 0.7rem;
-    border-bottom: 1px solid rgb(255 255 255 / 10%);
+    border-bottom: 1px solid var(--line);
   }
   .experience-principles > div:last-child {
     border-bottom: 0;
   }
   .experience-principles > div > span {
     grid-row: span 2;
-    color: #e8a080;
-    font-size: 0.56rem;
+    color: var(--orange-text);
+    font-size: 0.75rem;
     font-weight: 700;
   }
   .experience-principles b {
-    color: #fff;
+    color: var(--ink);
     font-family: var(--font-heading);
-    font-size: 0.72rem;
-    font-weight: 650;
+    font-size: 0.75rem;
+    font-weight: 600;
   }
   .experience-principles small {
-    color: rgb(255 255 255 / 58%);
-    font-size: 0.61rem;
+    color: var(--ink-muted);
+    font-size: 0.75rem;
     line-height: 1.45;
   }
 
@@ -1867,7 +1859,7 @@ const serviceDetails = [
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 0.5rem;
       padding: 1rem 0 0;
-      border-top: 1px solid rgb(255 255 255 / 16%);
+      border-top: 1px solid var(--line);
       border-left: 0;
     }
     .experience-principles > div {
@@ -1896,7 +1888,7 @@ const serviceDetails = [
     .services-hero-visual {
       min-height: 0;
       aspect-ratio: 1.27;
-      border-radius: 16px;
+      border-radius: var(--radius-lg);
     }
     .services-section-heading {
       margin-bottom: 2rem;
@@ -1907,6 +1899,7 @@ const serviceDetails = [
     }
     .services-section-heading h2 {
       font-size: var(--type-section-size);
+      font-weight: var(--type-section-weight);
     }
     .services-overview-grid {
       gap: 0.7rem;
@@ -1953,6 +1946,7 @@ const serviceDetails = [
     }
     .experience-message h2 {
       font-size: var(--type-section-size);
+      font-weight: var(--type-section-weight);
     }
     .experience-principles {
       grid-column: auto;
@@ -1988,7 +1982,7 @@ const serviceDetails = [
       padding: 0.45rem;
     }
     .enterprise-node b {
-      font-size: 0.59rem;
+      font-size: 0.75rem;
     }
     .enterprise-hub {
       width: 88px;
@@ -1996,7 +1990,7 @@ const serviceDetails = [
     }
     .enterprise-map-caption {
       bottom: -0.4rem;
-      font-size: 0.49rem;
+      font-size: 0.75rem;
     }
     .cloud-pipeline-nodes {
       grid-template-columns: minmax(0, 1fr) 12px minmax(0, 1fr) 12px minmax(
@@ -2010,10 +2004,10 @@ const serviceDetails = [
       padding: 0.4rem;
     }
     .cloud-pipeline-nodes > div > b {
-      font-size: 0.56rem;
+      font-size: 0.75rem;
     }
     .cloud-pipeline-nodes > div > small {
-      font-size: 0.43rem;
+      font-size: 0.75rem;
     }
   }
   @media (prefers-reduced-motion: reduce) {

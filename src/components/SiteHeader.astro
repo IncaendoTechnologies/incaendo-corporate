@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets'
 import { navigation } from '../data/site-content.js'
 import logo from '../assets/incaendo-logo.png'
 
@@ -8,11 +9,11 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
 <header class="site-header">
   <div class="site-container header-inner">
     <a class="site-logo site-logo-header" href="/" aria-label="Incaendo home">
-      <img
-        src={logo.src}
-        width={logo.width}
-        height={logo.height}
+      <Image
+        src={logo}
+        width={348}
         alt="Incaendo Technologies"
+        loading="eager"
         decoding="async"
       />
     </a>
@@ -47,6 +48,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
         })}
         <li class="header-cta">
           <a
+            class="button button-primary"
             href="/contact"
             class="button button-primary header-cta-btn"
             data-contact-page-link
@@ -56,8 +58,12 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
           </a>
         </li>
         <li class="mobile-contact-link">
-          <a href="/contact" data-contact-page-link>
-            Contact
+          <a
+            class="button button-primary"
+            href="/contact"
+            data-contact-page-link
+          >
+            Book a call
           </a>
         </li>
       </ul>
@@ -107,7 +113,17 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
     })
 
     window.addEventListener('resize', () => {
-      if (window.matchMedia('(min-width: 900px)').matches) closeMenu()
+      if (window.matchMedia('(min-width: 1024px)').matches) closeMenu()
     })
+  }
+
+  // Design system: the sticky header gains its shadow-2 edge once the page
+  // has scrolled.
+  const header = document.querySelector('.site-header')
+  if (header instanceof HTMLElement) {
+    const updateScrolled = () =>
+      header.classList.toggle('is-scrolled', window.scrollY > 4)
+    updateScrolled()
+    window.addEventListener('scroll', updateScrolled, { passive: true })
   }
 </script>

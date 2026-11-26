@@ -1,70 +1,39 @@
 /*
- * Incaendo design system tokens — November 2026.
- * Canonical source for colours, typography, spacing, layout, radius, shadow
- * and motion. All page and component styles reference these tokens.
+ * Site tokens for every Incaendo page.
  *
- * Legacy `--color-*` aliases are kept so existing component CSS picks up the
- * new palette without a find-and-replace across every file.
+ * All values come from the Incaendo Design System (src/styles/incaendo/
+ * tokens.css and components.css, copied from the design system). This file
+ * only gives the site's own role names (--color-ink, --surface-page, ...) to
+ * those tokens, so there is one source for every colour, size and shadow.
  */
 :root {
   color-scheme: light;
 
-  /* ===== Design-system palette (canonical) ===== */
-  --surface: #ffffff;
-  --canvas: #f8f7f4;
-  --surface-raised: #f2ede7;
-  --surface-sunk: #ebe4dc;
-  --line: #e6ddd3;
-  --ink: #0f2136;
-  --ink-muted: #4b5b6e;
-  --navy: #0f2136;
-  --on-navy: #ffffff;
-  --blue: #145aa8;
-  --blue-soft: #e5eef8;
-  --on-blue: #ffffff;
-  --action: #c24c12;
-  --action-hover: #a83f0a;
-  --action-pressed: #8f3608;
-  --overlay: rgba(15, 33, 54, 0.6);
-  --on-action: #ffffff;
-  --orange: #ee5d10;
-  --orange-text: #b5450b;
-  --orange-soft: #fdede3;
-  --on-orange: #0f2136;
-  --success: #1d7446;
-  --success-soft: #e3f3ea;
-  --warning: #8f5b00;
-  --warning-soft: #fbf0d9;
-  --danger: #b3261e;
-  --danger-soft: #fbe7e5;
-  --focus: #145aa8;
-  --link: var(--orange-text);
-  --chart-1: var(--action);
-  --chart-2: var(--navy);
-  --chart-3: var(--blue);
-  --chart-4: #d9773f;
-  --chart-5: #7a8799;
-
-  /* ===== Legacy aliases (existing component CSS) ===== */
+  /* Colour roles -> design system colour tokens */
   --color-ink: var(--ink);
   --color-navy: var(--navy);
-  --color-navy-soft: #1a2c45;
+  --color-navy-soft: #1a2c45; /* dark navy text (dark-theme navy) */
   --color-body: var(--ink-muted);
   --color-muted: var(--ink-muted);
   --color-line: var(--line);
   --color-paper: var(--canvas);
   --color-white: var(--surface);
-  --color-peach: var(--surface-raised);
+  --color-peach: var(--orange-soft);
   --color-orange: var(--action);
   --color-orange-dark: var(--action-hover);
+  --color-orange-pressed: var(--action-pressed);
+  --color-orange-text: var(--orange-text);
+  --color-orange-logo: var(--orange);
   --color-orange-gradient-start: var(--action);
-  --color-orange-gradient-end: #d96d39;
+  --color-orange-gradient-end: var(--action);
   --color-focus: var(--focus);
-  --color-button-outline: var(--line);
+  --color-button-outline: var(--ink);
   --color-green: var(--success);
   --color-blue: var(--blue);
+  --color-blue-soft: var(--blue-soft);
+  --color-overlay: var(--overlay);
 
-  /* Semantic surfaces and text aliases */
+  /* Surface and text roles */
   --surface-page: var(--canvas);
   --surface-card: var(--surface);
   --surface-subtle: var(--surface-raised);
@@ -75,157 +44,126 @@
   --text-intro: var(--ink-muted);
   --accent-primary: var(--action);
   --accent-hover: var(--action-hover);
+  --accent-text: var(--orange-text);
 
-  /* ===== Typography ===== */
-  --font-display: 'Plus Jakarta Sans', Arial, sans-serif;
-  --font-sans: 'Plus Jakarta Sans', Arial, sans-serif;
-  --font-mono: 'JetBrains Mono', Menlo, Consolas, monospace;
-  /* Legacy aliases */
+  /* Type families */
   --font-body: var(--font-sans);
   --font-heading: var(--font-display);
 
-  /* Design-system type scale */
-  --text-web-display: 800 64px/72px var(--font-display);
-  --text-web-h1: 800 48px/56px var(--font-display);
-  --text-web-h2: 700 40px/48px var(--font-display);
-  --text-display: 800 48px/56px var(--font-display);
-  --text-h1: 700 36px/44px var(--font-display);
-  --text-h2: 700 28px/36px var(--font-display);
-  --text-h3: 700 20px/28px var(--font-display);
-  --text-eyebrow: 700 12px/16px var(--font-display);
-  --text-web-lead: 400 20px/30px var(--font-sans);
-  --text-body-lg: 400 18px/28px var(--font-sans);
-  --text-body: 400 16px/24px var(--font-sans);
-  --text-body-strong: 600 16px/24px var(--font-sans);
-  --text-small: 400 14px/20px var(--font-sans);
-  --text-caption: 400 12px/16px var(--font-sans);
-  --text-code: 400 14px/20px var(--font-mono);
-
-  /* Legacy type roles (existing component CSS) */
-  --type-hero-h1-size: 59.64px;
-  --type-hero-h1-weight: 700;
-  --type-hero-h1-line-height: 1.08;
-  --type-hero-h1-letter-spacing: -0.04em;
-  --type-hero-h1-word-spacing: 0.03em;
-  --type-hero-desc-size: 17.04px;
+  /*
+   * Type styles. Sizes move between the phone and the 1024px value of each
+   * design system style:
+   *   web-display 36/44 -> 64/72, 800, -0.02em (the Home hero, one per page)
+   *   web-h1      32/40 -> 48/56, 800, -0.01em (inner page titles)
+   *   web-h2      28/36 -> 40/48, section titles (800 in SectionHeader web)
+   *   web-lead    18/28 -> 20/30 (from 768px)
+   */
+  --type-hero-h1-size: clamp(2.25rem, 1.05rem + 4.7vw, 4rem);
+  --type-hero-h1-weight: 800;
+  --type-hero-h1-line-height: calc(1em + 0.5rem);
+  --type-hero-h1-letter-spacing: -0.02em;
+  --type-hero-h1-word-spacing: normal;
+  --type-page-title-size: clamp(2rem, 1.2rem + 2.5vw, 3rem);
+  --type-page-title-letter-spacing: -0.01em;
+  --type-hero-desc-size: clamp(1.125rem, 1rem + 0.5vw, 1.25rem);
   --type-hero-desc-weight: 400;
-  --type-hero-desc-line-height: 1.65;
-  --type-hero-title-measure: 16ch;
+  --type-hero-desc-line-height: 1.5;
+  --type-hero-title-measure: 20ch;
   --type-hero-desc-measure: 46ch;
 
-  /* Shared hero geometry */
-  --hero-space-top: clamp(3rem, 5.4vw, 5rem);
-  --hero-space-bottom: clamp(3rem, 4.8vw, 4.5rem);
-  --hero-gap: clamp(2.5rem, 5vw, 5rem);
+  --type-display-size: var(--type-hero-h1-size);
+  --type-page-hero-size: var(--type-page-title-size);
+  --type-section-size: clamp(1.75rem, 1.2rem + 2.2vw, 2.5rem);
+  --type-feature-size: var(--type-section-size);
+  --type-compact-heading-size: 1.75rem; /* h2: 28/36 */
+  --type-card-heading-size: 1.125rem; /* card title: 18/26 */
+  --type-body-size: 16px; /* body: 16/24 */
+  --type-body-line-height: 1.5;
+  --type-lead-size: clamp(1.125rem, 1rem + 0.5vw, 1.25rem);
+  --type-lead-line-height: 1.5;
+  --type-heading-weight: 700;
+  --type-display-weight: 800;
+  --type-section-weight: 800; /* SectionHeader on the web */
+  --type-display-line-height: calc(1em + 0.5rem);
+  --type-page-hero-line-height: calc(1em + 0.5rem);
+  --type-section-line-height: calc(1em + 0.5rem);
+  --type-display-letter-spacing: -0.02em;
+  --type-section-letter-spacing: 0;
+  --type-display-word-spacing: normal;
+  --type-section-word-spacing: normal;
+  --type-statement-size: var(--type-section-size);
+  --type-intro-size: 18px; /* section lead: 18/28 */
+  --type-intro-line-height: 1.5556;
+  --type-card-title-size: 1.125rem; /* 18/26 */
+  --type-card-title-lg-size: 1.25rem; /* h3: 20/28 */
+  --type-card-text-size: 0.875rem; /* card text, small: 14/20 */
+  --type-card-text-line-height: 1.4286;
+  --type-ui-size: 0.875rem;
+  --type-link-size: 1rem;
+  --type-link-weight: 600;
+  --type-button-size: 16px;
+  --type-button-weight: 600;
+  --type-meta-size: 0.875rem;
+  --type-label-size: 0.75rem;
+  --type-eyebrow-size: 12px;
+
+  /*
+   * Layout: content at most container-content (1200px); page side padding
+   * gutter-mobile (16px) on phones, gutter (24px) from 768px. Sections use
+   * space-8 (64px) on phones and space-9 (96px) from 768px; the hero uses
+   * space-7/space-8 on phones and space-9 from 768px.
+   */
+  --content-width: 1320px; /* the site's original frame; wider screens use 1440px */
+  --gutter: var(--gutter-mobile);
+  --section-space-sm: var(--space-8);
+  --section-space-md: var(--space-8);
+  --section-space-lg: var(--space-8);
+  --space-section: var(--space-8);
+  --hero-space-top: var(--space-7);
+  --hero-space-bottom: var(--space-8);
+  --hero-gap: var(--space-6);
   --hero-stage-height: clamp(24rem, 34vw, 32rem);
   --hero-visual-max: 41rem;
   --hero-visual-ratio: 1.27;
+  --site-header-height: 65px; /* SiteHeader: 64px bar + 1px line */
+  --site-header-row-height: 64px;
+  --nav-font-size: 16px;
+  --nav-gap: var(--space-5);
 
-  /* Type roles */
-  --type-display-size: var(--type-hero-h1-size);
-  --type-page-title-size: var(--type-hero-h1-size);
-  --type-page-hero-size: var(--type-hero-h1-size);
-  --type-section-size: 52px;
-  --type-feature-size: var(--type-section-size);
-  --type-compact-heading-size: clamp(1.6rem, 2.4vw, 2.2rem);
-  --type-card-heading-size: clamp(1.05rem, 1.15vw, 1.2rem);
-  --type-body-size: 15.04px;
-  --type-body-line-height: 1.72;
-  --type-lead-size: clamp(1.1rem, 1.6vw, 1.3rem);
-  --type-lead-line-height: 1.65;
-  --type-heading-weight: 600;
-  --type-display-weight: 700;
-  --type-display-line-height: 1.08;
-  --type-page-hero-line-height: 1.08;
-  --type-section-line-height: 1.1;
-  --type-display-letter-spacing: -0.04em;
-  --type-section-letter-spacing: -0.06em;
-  --type-display-word-spacing: 0.075em;
-  --type-section-word-spacing: 0.06em;
-  --type-statement-size: clamp(1.875rem, 4.2vw, 3.75rem);
-  --type-intro-size: 15.04px;
-  --type-intro-line-height: 1.65;
-  --type-card-title-size: 1.125rem;
-  --type-card-title-lg-size: clamp(1.375rem, 1.1rem + 0.8vw, 1.625rem);
-  --type-card-text-size: 0.9375rem;
-  --type-card-text-line-height: 1.6;
-  --type-ui-size: 0.875rem;
-  --type-link-size: 0.85rem;
-  --type-link-weight: 650;
-  --type-button-size: 0.84rem;
-  --type-button-weight: 650;
-  --type-meta-size: 0.8125rem;
-  --type-label-size: 0.75rem;
-  --type-eyebrow-size: 11.2px;
-
-  /* ===== Spacing ===== */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 24px;
-  --space-6: 32px;
-  --space-7: 48px;
-  --space-8: 64px;
-  --space-9: 96px;
-  --space-10: 128px;
-
-  /* Legacy spacing */
-  --section-space-sm: clamp(3rem, 4.5vw, 4rem);
-  --section-space-md: clamp(4rem, 6.7vw, 6rem);
-  --section-space-lg: clamp(5rem, 8.9vw, 8rem);
-  --space-section: clamp(5rem, 9vw, 8.25rem);
-
-  /* ===== Layout ===== */
-  --bp-sm: 640px;
-  --bp-md: 768px;
-  --bp-lg: 1024px;
-  --bp-xl: 1280px;
-  --container-text: 720px;
-  --container-content: 1200px;
-  --gutter: clamp(1.25rem, 4vw, 4rem);
-  --gutter-mobile: 16px;
-  --tap-min: 44px;
-  --site-header-height: 72px;
-  --site-header-row-height: 72px;
-  --nav-font-size: 0.9375rem;
-  --nav-gap: clamp(1.5rem, 2.5vw, 2.5rem);
-  --content-width: 1320px;
-
-  /* ===== Radius ===== */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 16px;
-  --radius-pill: 999px;
-  /* Legacy aliases */
+  /* Shape and depth roles */
   --radius-small: var(--radius-sm);
   --radius-medium: var(--radius-md);
   --radius-large: var(--radius-lg);
-
-  /* ===== Shadow ===== */
-  --shadow-1: 0 1px 2px rgba(15, 33, 54, 0.08), 0 2px 8px rgba(15, 33, 54, 0.06);
-  --shadow-2: 0 4px 12px rgba(15, 33, 54, 0.10), 0 2px 4px rgba(15, 33, 54, 0.06);
-  --shadow-3: 0 16px 40px rgba(15, 33, 54, 0.18), 0 4px 12px rgba(15, 33, 54, 0.08);
-  /* Legacy aliases */
   --shadow-soft: var(--shadow-1);
   --shadow-header: var(--shadow-2);
-  --shadow-footer:
-    0 -2px 4px rgb(16 27 45 / 4%), 0 -6px 16px rgb(16 27 45 / 6%),
-    0 -16px 32px -2px rgb(201 84 43 / 7%);
-
-  /* ===== Motion ===== */
-  --motion-fast: 150ms;
-  --motion-base: 250ms;
-  --motion-slow: 400ms;
-  --ease-out: cubic-bezier(0.2, 0, 0, 1);
-  /* Legacy aliases */
+  --shadow-footer: none;
   --duration-fast: var(--motion-fast);
   --duration-standard: var(--motion-base);
 
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   scroll-behavior: auto !important;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 24px; /* gutter */
+    --section-space-sm: var(--space-9);
+    --section-space-md: var(--space-9);
+    --section-space-lg: var(--space-9);
+    --space-section: var(--space-9);
+    --hero-space-top: var(--space-9);
+    --hero-space-bottom: var(--space-9);
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --site-header-height: 73px; /* 72px bar + 1px line */
+    --site-header-row-height: 72px;
+    --hero-gap: var(--space-8);
+  }
 }
 
 html {

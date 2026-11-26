@@ -1,4 +1,6 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
+@import './incaendo/tokens.css';
+@import './incaendo/components.css';
 @import './design-tokens.css';
 @import './inc-tokens.css';
 @import './inc-bundle.css';
@@ -15,6 +17,6 @@
 @import './archive-pages.css';
 @import './contact.css';
 @import './privacy.css';
-@import './footer.css';
 @import './motion.css';
 @import './home.css';
+@import './section-rhythm.css';

@@ -28,9 +28,9 @@ const rgb = (r, g, b) => [r / 255, g / 255, b / 255]
 
 // Surrounding field: navy, blue-grey, brand red-orange and a warm orange.
 const FIELD_COLORS = [
-  rgb(16, 27, 45),
+  rgb(15, 33, 54),
   rgb(84, 123, 157),
-  rgb(201, 84, 43),
+  rgb(194, 76, 18),
   rgb(232, 133, 64),
 ]
 const FIELD_WEIGHTS = [0.56, 0.2, 0.14, 0.1]
@@ -49,13 +49,13 @@ const MATERIALS = [
       rgb(252, 178, 110),
     ],
     spec: rgb(255, 238, 220),
-    speck: rgb(16, 27, 45),
+    speck: rgb(15, 33, 54),
   },
   {
     ramp: [
       rgb(2, 4, 9),
       rgb(8, 13, 24),
-      rgb(16, 27, 45),
+      rgb(15, 33, 54),
       rgb(32, 50, 76),
       rgb(58, 82, 112),
     ],
@@ -63,7 +63,7 @@ const MATERIALS = [
     speck: rgb(240, 128, 52),
   },
 ]
-const SHADOW_COLOR = rgb(16, 27, 45)
+const SHADOW_COLOR = rgb(15, 33, 54)
 
 // Key light from the upper left, in front of the letters.
 const LIGHT = normalize3(-0.5, -0.62, 0.6)

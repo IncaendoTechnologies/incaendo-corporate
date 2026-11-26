@@ -288,12 +288,12 @@ const relatedArticles = articles
     gap: 0.55rem;
     margin-bottom: 1rem;
     color: #828b97;
-    font-size: 0.69rem;
+    font-size: 0.75rem;
   }
 
   .article-breadcrumbs a {
-    color: var(--color-orange-dark);
-    font-weight: 650;
+    color: var(--color-orange-text);
+    font-weight: 600;
   }
 
   .article-intro h1 {
@@ -323,7 +323,7 @@ const relatedArticles = articles
     gap: 0.55rem 1rem;
     margin-top: 1.35rem;
     color: #7e8895;
-    font-size: 0.67rem;
+    font-size: 0.75rem;
   }
 
   .article-main {
@@ -335,9 +335,8 @@ const relatedArticles = articles
     max-width: 1080px;
     margin: 0 auto 0.75rem;
     overflow: hidden;
-    border: 1px solid #e7e4de;
     border-radius: var(--radius-large);
-    box-shadow: 0 20px 55px rgb(16 27 45 / 8%);
+    box-shadow: var(--shadow-1);
   }
 
   .article-cover :global(.insight-art),
@@ -353,7 +352,7 @@ const relatedArticles = articles
     max-width: 1080px;
     margin: 0 auto 3.7rem;
     color: #89919c;
-    font-size: 0.66rem;
+    font-size: 0.75rem;
     line-height: 1.5;
   }
 
@@ -387,7 +386,7 @@ const relatedArticles = articles
 
   .article-toc a {
     color: #657183;
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     line-height: 1.5;
     transition: color 180ms ease;
   }
@@ -401,9 +400,9 @@ const relatedArticles = articles
     align-items: center;
     gap: 0.35rem;
     margin-top: 1rem;
-    color: var(--color-orange-dark);
-    font-size: 0.72rem;
-    font-weight: 650;
+    color: var(--color-orange-text);
+    font-size: 0.75rem;
+    font-weight: 600;
   }
 
   .article-body {
@@ -417,9 +416,9 @@ const relatedArticles = articles
   .article-body h2 {
     margin: 0 0 0.85rem;
     font-size: var(--type-compact-heading-size);
-    font-weight: 620;
-    letter-spacing: -0.05em;
-    word-spacing: 0.05em;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    word-spacing: normal;
     line-height: 1.2;
   }
 
@@ -436,7 +435,7 @@ const relatedArticles = articles
     border: 1px solid var(--color-line);
     border-radius: var(--radius-medium);
     background: #fff;
-    box-shadow: 0 10px 30px rgb(16 27 45 / 5%);
+    box-shadow: 0 10px 30px rgb(15 33 54 / 5%);
   }
 
   .article-inline-image img {
@@ -462,7 +461,7 @@ const relatedArticles = articles
     border: 1px solid var(--color-line);
     border-radius: var(--radius-medium);
     background: #fff;
-    box-shadow: 0 6px 20px rgb(16 27 45 / 4%);
+    box-shadow: 0 6px 20px rgb(15 33 54 / 4%);
   }
 
   .article-table {
@@ -482,7 +481,7 @@ const relatedArticles = articles
   .article-table thead th {
     background: #f7f5f1;
     color: var(--color-ink);
-    font-weight: 650;
+    font-weight: 600;
     font-size: 0.82rem;
     letter-spacing: 0.02em;
     text-transform: uppercase;
@@ -519,7 +518,7 @@ const relatedArticles = articles
   }
 
   .article-body li::marker {
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
   }
 
   .article-body pre {
@@ -540,7 +539,7 @@ const relatedArticles = articles
     border-left: 2px solid var(--color-orange-dark);
     background: #f2efeb;
     color: #778292 !important;
-    font-size: 0.72rem !important;
+    font-size: 0.75rem !important;
   }
 
   .article-related {
@@ -558,7 +557,7 @@ const relatedArticles = articles
   .article-related-heading h2 {
     margin: 0;
     font-size: var(--type-section-size);
-    font-weight: var(--type-heading-weight);
+    font-weight: var(--type-section-weight);
     letter-spacing: var(--type-section-letter-spacing);
     word-spacing: var(--type-section-word-spacing);
   }

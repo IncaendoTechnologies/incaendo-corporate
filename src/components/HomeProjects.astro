@@ -24,12 +24,12 @@ const projectHref = (project) =>
       <div>
         <p class="eyebrow">Selected projects</p>
         <h2 id="home-projects-heading">
-          Different Challenges.{' '}
-          <span class="hero-title-accent">Thoughtful Digital Work.</span>
+          Different challenges.{' '}
+          <span class="hero-title-accent">Thoughtful digital work.</span>
         </h2>
         <p class="section-intro">
           Explore products and platforms across commerce, mobile experiences,
-          and publishing—each shaped around a different audience and business
+          and publishing – each shaped around a different audience and business
           context.
         </p>
       </div>
@@ -209,9 +209,14 @@ const projectHref = (project) =>
       rotationTimer = undefined
     }
 
+    // Design system ("Web foundations", Motion): nothing auto-advances while
+    // someone is reading, so slides change only by indicator, swipe or drag.
+    const AUTO_ADVANCE = false
+
     const scheduleRotation = () => {
       stopRotation()
       if (
+        !AUTO_ADVANCE ||
         reducedMotion.matches ||
         pointerInside ||
         isDragging ||
@@ -526,7 +531,6 @@ const projectHref = (project) =>
 <style>
   .home-projects-section {
     padding-block: var(--section-space-md) var(--section-space-sm);
-    background: var(--color-paper);
   }
 
   .home-projects-content {
@@ -554,7 +558,7 @@ const projectHref = (project) =>
     color: var(--color-ink);
     font-family: var(--font-heading);
     font-size: var(--type-section-size);
-    font-weight: var(--type-heading-weight);
+    font-weight: var(--type-section-weight);
     letter-spacing: var(--type-section-letter-spacing);
     word-spacing: var(--type-section-word-spacing);
     line-height: var(--type-section-line-height);
@@ -576,25 +580,22 @@ const projectHref = (project) =>
     min-width: 0;
     overflow: hidden;
     padding: clamp(0.65rem, 1vw, 0.9rem);
-    border: 1px solid rgb(16 27 45 / 9%);
+    border: 0;
     border-radius: var(--radius-large);
     background:
-      radial-gradient(ellipse at 8% 12%, rgb(201 84 43 / 9%), transparent 36%),
+      radial-gradient(ellipse at 8% 12%, rgb(194 76 18 / 9%), transparent 36%),
       radial-gradient(
         ellipse at 92% 88%,
         rgb(84 123 157 / 10%),
         transparent 38%
       ),
       #f2f0ec;
-    box-shadow:
-      0 1px 2px rgb(16 27 45 / 4%),
-      0 16px 34px -22px rgb(16 27 45 / 24%),
-      0 34px 70px -48px rgb(16 27 45 / 24%);
+    box-shadow: var(--shadow-1);
   }
 
   .home-projects-carousel:focus-visible {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
+    outline: 2px solid var(--color-focus);
+    outline-offset: 4px;
   }
 
   .home-projects-carousel.is-dragging,
@@ -627,8 +628,8 @@ const projectHref = (project) =>
     align-items: stretch;
     gap: clamp(1.5rem, 3.5vw, 3.5rem);
     padding: clamp(0.75rem, 1.4vw, 1rem);
-    border: 1.5px solid rgb(16 27 45 / 8%);
-    border-right: 2.5px solid rgb(16 27 45 / 8%);
+    border: 1.5px solid rgb(15 33 54 / 8%);
+    border-right: 2.5px solid rgb(15 33 54 / 8%);
     border-radius: var(--radius-medium);
     background: var(--color-white);
     overflow: hidden;
@@ -653,15 +654,15 @@ const projectHref = (project) =>
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    border-color: rgba(232, 93, 38, 0.38);
-    border-right-color: var(--action);
+    border-color: rgba(238, 93, 16, 0.38);
+    border-right-color: #ee5d10;
     transform: translate3d(0, 0, 0) scale(1);
     box-shadow:
-      0 20px 48px -12px rgba(16, 27, 45, 0.2),
-      0 6px 18px -2px rgba(16, 27, 45, 0.1),
-      12px 0 28px -4px rgba(232, 93, 38, 0.3),
-      4px 0 12px -2px rgba(232, 93, 38, 0.34),
-      0 0 0 1px rgba(232, 93, 38, 0.12),
+      0 20px 48px -12px rgba(15, 33, 54, 0.2),
+      0 6px 18px -2px rgba(15, 33, 54, 0.1),
+      12px 0 28px -4px rgba(238, 93, 16, 0.3),
+      4px 0 12px -2px rgba(238, 93, 16, 0.34),
+      0 0 0 1px rgba(238, 93, 16, 0.12),
       inset 0 1px 0 rgba(255, 255, 255, 0.95);
   }
 
@@ -681,8 +682,8 @@ const projectHref = (project) =>
     transform: translate3d(calc(100% - var(--preview-overlap, 22px)), 0, 0)
       scale(0.975);
     box-shadow:
-      0 8px 24px -8px rgba(16, 27, 45, 0.12),
-      0 2px 8px -2px rgba(16, 27, 45, 0.06);
+      0 8px 24px -8px rgba(15, 33, 54, 0.12),
+      0 2px 8px -2px rgba(15, 33, 54, 0.06);
     filter: saturate(0.96);
   }
 
@@ -700,8 +701,8 @@ const projectHref = (project) =>
     opacity: 0.94;
     filter: saturate(1);
     box-shadow:
-      0 12px 30px -8px rgba(16, 27, 45, 0.18),
-      0 3px 8px -2px rgba(16, 27, 45, 0.08);
+      0 12px 30px -8px rgba(15, 33, 54, 0.18),
+      0 3px 8px -2px rgba(15, 33, 54, 0.08);
   }
 
   .home-project-slide.is-exiting-next {
@@ -710,7 +711,7 @@ const projectHref = (project) =>
     visibility: visible;
     pointer-events: none;
     transform: translate3d(-102%, 0, 0) scale(0.96);
-    box-shadow: 0 4px 14px rgb(16 27 45 / 6%);
+    box-shadow: var(--shadow-1);
   }
 
   .home-project-slide.is-exiting-prev {
@@ -719,7 +720,7 @@ const projectHref = (project) =>
     visibility: visible;
     pointer-events: none;
     transform: translate3d(calc(100% + 60px), 0, 0) scale(0.95);
-    box-shadow: 0 4px 14px rgb(16 27 45 / 6%);
+    box-shadow: var(--shadow-1);
   }
 
   .home-project-slide[data-state='hidden'] {
@@ -738,11 +739,11 @@ const projectHref = (project) =>
     align-self: center;
     aspect-ratio: 1.72;
     padding: clamp(0.4rem, 0.8vw, 0.65rem);
-    border: 1px solid rgb(16 27 45 / 10%);
+    border: 1px solid rgb(15 33 54 / 10%);
     border-radius: var(--radius-medium);
     background: linear-gradient(145deg, #f5eee8 0%, #f0f3f4 100%);
     box-shadow:
-      0 12px 26px -16px rgb(16 27 45 / 32%),
+      0 12px 26px -16px rgb(15 33 54 / 32%),
       inset 0 1px 0 rgb(255 255 255 / 90%);
     transition:
       transform 300ms var(--ease-out),
@@ -773,9 +774,9 @@ const projectHref = (project) =>
 
   .home-project-image:hover {
     transform: translateY(-2px);
-    border-color: rgb(201 84 43 / 28%);
+    border-color: rgb(194 76 18 / 28%);
     box-shadow:
-      0 18px 32px -18px rgb(16 27 45 / 36%),
+      0 18px 32px -18px rgb(15 33 54 / 36%),
       inset 0 1px 0 rgb(255 255 255 / 90%);
   }
 
@@ -790,7 +791,7 @@ const projectHref = (project) =>
     bottom: 0.75rem;
     padding: 0.4rem 0.55rem;
     border: 1px solid rgb(255 255 255 / 32%);
-    background: rgb(16 27 45 / 78%);
+    background: rgb(15 33 54 / 78%);
     color: var(--color-white);
     font-size: var(--type-label-size);
     font-weight: 700;
@@ -810,7 +811,7 @@ const projectHref = (project) =>
 
   .home-project-category {
     margin: 0;
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
     font-size: var(--type-label-size);
     font-weight: 700;
     letter-spacing: 0.1em;
@@ -824,8 +825,8 @@ const projectHref = (project) =>
     font-family: var(--font-heading);
     font-size: var(--type-card-title-lg-size);
     font-weight: var(--type-heading-weight);
-    letter-spacing: -0.045em;
-    word-spacing: 0.045em;
+    letter-spacing: -0.01em;
+    word-spacing: normal;
     line-height: 1.2;
   }
 
@@ -841,7 +842,7 @@ const projectHref = (project) =>
     align-items: center;
     gap: 0.4rem;
     margin-top: 0.75rem;
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
     font-size: var(--type-ui-size);
     font-weight: 600;
     text-decoration: underline;
@@ -862,7 +863,7 @@ const projectHref = (project) =>
     justify-content: space-between;
     gap: 1rem;
     padding: 0.8rem clamp(0.75rem, 2vw, 1.5rem) 0.35rem;
-    border-top: 1px solid rgb(16 27 45 / 8%);
+    border-top: 1px solid rgb(15 33 54 / 8%);
     margin-top: 0.35rem;
   }
 
@@ -878,8 +879,8 @@ const projectHref = (project) =>
 
   .home-project-indicator {
     display: grid;
-    width: 26px;
-    height: 26px;
+    width: var(--tap-min);
+    height: var(--tap-min);
     flex: 0 0 auto;
     padding: 0;
     border: 0;
@@ -917,14 +918,14 @@ const projectHref = (project) =>
     width: 38px;
     height: 38px;
     padding: 0;
-    border: 1px solid rgb(16 27 45 / 11%);
+    border: 1px solid rgb(15 33 54 / 11%);
     border-radius: 50%;
     background: #faf8f5;
     color: var(--color-navy);
     cursor: pointer;
     box-shadow:
-      0 1px 2px rgb(16 27 45 / 5%),
-      0 3px 8px -2px rgb(16 27 45 / 6%),
+      0 1px 2px rgb(15 33 54 / 5%),
+      0 3px 8px -2px rgb(15 33 54 / 6%),
       inset 0 1px 0 rgb(255 255 255 / 95%);
     transition:
       background-color 220ms cubic-bezier(0.2, 0.75, 0.25, 1),
@@ -949,9 +950,7 @@ const projectHref = (project) =>
     border-color: var(--color-orange);
     color: var(--color-white);
     transform: translateY(-2px) scale(1.04);
-    box-shadow:
-      0 4px 14px -2px rgb(201 84 43 / 36%),
-      0 2px 6px -1px rgb(16 27 45 / 8%);
+    box-shadow: var(--shadow-2);
   }
 
   .home-project-arrow[data-project-previous]:hover .home-project-arrow-icon {
@@ -967,12 +966,12 @@ const projectHref = (project) =>
     border-color: var(--color-orange-dark);
     color: var(--color-white);
     transform: translateY(0) scale(0.96);
-    box-shadow: 0 1px 3px rgb(16 27 45 / 12%);
+    box-shadow: var(--shadow-1);
     transition-duration: 80ms;
   }
 
   .home-project-arrow:focus-visible {
-    outline: 2px solid var(--color-orange);
+    outline: 2px solid var(--color-focus);
     outline-offset: 3px;
   }
 

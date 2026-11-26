@@ -34,20 +34,15 @@ html[data-entrance='active'] [data-motion='pending'] {
   }
   .service-card {
     padding-inline: 1.2rem;
+    border-right: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+    border-left: 1px solid var(--color-line);
   }
 }
 
 @media (max-width: 899px) {
-  :root {
-    --site-header-height: 71px;
-    --site-header-row-height: 70px;
-  }
-  .hero-section,
   .section-intro-block {
     min-height: 0;
-  }
-  .header-inner {
-    min-height: var(--site-header-row-height);
   }
   .awards-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -56,66 +51,6 @@ html[data-entrance='active'] [data-motion='pending'] {
     grid-column: 1 / -1;
     width: calc((100% - 1rem) / 2);
     justify-self: center;
-  }
-  .menu-toggle {
-    display: flex;
-    width: 42px;
-    height: 42px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    margin-left: auto;
-    border: 1px solid var(--color-line);
-    border-radius: 50%;
-    background: transparent;
-  }
-  .menu-toggle span {
-    width: 15px;
-    height: 1px;
-    background: var(--color-navy);
-    transition: transform var(--duration-fast) ease;
-  }
-  .menu-toggle[aria-expanded='true'] span:first-child {
-    transform: translateY(3.5px) rotate(45deg);
-  }
-  .menu-toggle[aria-expanded='true'] span:last-child {
-    transform: translateY(-3.5px) rotate(-45deg);
-  }
-  .primary-navigation {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    left: 0;
-    display: none;
-    padding: 0.7rem var(--gutter) 1.4rem;
-    border-bottom: 1px solid var(--color-line);
-    background: var(--color-paper);
-    box-shadow: var(--shadow-soft);
-  }
-  .primary-navigation.is-open {
-    display: block;
-  }
-  .primary-navigation ul {
-    display: grid;
-    gap: 0;
-  }
-  .primary-navigation li {
-    border-bottom: 1px solid var(--color-line);
-  }
-  .primary-navigation a {
-    display: block;
-    padding: 0.85rem 0;
-    font-size: 0.9rem;
-  }
-  .primary-navigation a[aria-current='page']::after {
-    display: none;
-  }
-  .mobile-contact-link {
-    display: block;
-  }
-  .header-cta {
-    display: none;
   }
   .hero-layout {
     grid-template-columns: minmax(0, 1fr);
@@ -149,14 +84,6 @@ html[data-entrance='active'] [data-motion='pending'] {
 }
 
 @media (max-width: 700px) {
-  :root {
-    --space-section: 4.5rem;
-    --type-page-title-size: clamp(2.45rem, 8.5vw, 3.65rem);
-  }
-  .hero-section {
-    min-height: 0;
-    padding-top: 2rem;
-  }
   .hero-copy,
   .hero-copy h1,
   .hero-description {
@@ -212,11 +139,11 @@ html[data-entrance='active'] [data-motion='pending'] {
   }
   .ai-showcase-heading {
     padding-inline: 0.2rem;
-    font-size: 0.66rem;
+    font-size: 0.75rem;
   }
   .ai-showcase-index,
   .ai-caption-kicker {
-    font-size: 0.66rem;
+    font-size: 0.75rem;
   }
   /* Phone widths already shrink the diagram; keep it full width for legibility. */
   .ai-showcase-stage {
@@ -244,7 +171,7 @@ html[data-entrance='active'] [data-motion='pending'] {
     font-size: 0.93rem;
   }
   .ai-capability-detail {
-    font-size: 0.74rem;
+    font-size: 0.75rem;
   }
   .client-row {
     grid-template-columns: 1fr;
@@ -270,11 +197,6 @@ html[data-entrance='active'] [data-motion='pending'] {
   .review-card {
     width: 82vw;
     min-height: 0;
-  }
-  .reachout-inner {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 1.7rem;
   }
   .faq-layout {
     grid-template-columns: 1fr;

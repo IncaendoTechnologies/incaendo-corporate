@@ -13,9 +13,9 @@
       <div class="ai-closing-copy">
         <p class="eyebrow">START WITH THE BUSINESS NEED</p>
         <h2 id="ai-closing-title">
-          Your Business Challenge.
+          Your business challenge.
           <br />
-          <span>A Practical AI Solution.</span>
+          <span>A practical AI solution.</span>
         </h2>
         <p>
           Every business is different. Let’s explore where AI and automation
@@ -27,7 +27,7 @@
         href="/contact#project-inquiry"
         data-open-contact-modal
       >
-        Let’s Talk About AI{' '}
+        Let’s talk about AI{' '}
         <span class="link-arrow" aria-hidden="true">
           →
         </span>
@@ -43,11 +43,10 @@
 <style>
   .ai-closing {
     /* Same rhythm as the homepage AI section it was split from */
-    padding-block: var(--space-8, 64px) var(--space-9, 96px);
-    background: var(--color-paper);
+    padding-block: var(--section-space-sm) var(--section-space-md);
   }
   .ai-closing-copy h2 span {
-    color: var(--orange, #ee5d10);
+    color: var(--color-orange-text);
   }
 
   /* Closing CTA */
@@ -58,11 +57,11 @@
     justify-content: space-between;
     gap: 2rem;
     overflow: hidden;
-    padding: clamp(2.5rem, 5vw, 4rem);
-    border: none;
-    border-radius: var(--radius-lg, 16px);
-    background: var(--navy, #0f2136);
-    color: var(--on-navy, #ffffff);
+    padding: clamp(1.6rem, 4vw, 3rem);
+    border: 0;
+    border-radius: var(--radius-large);
+    background: var(--surface);
+    box-shadow: var(--shadow-1);
   }
   .ai-closing-copy {
     position: relative;
@@ -71,22 +70,20 @@
   }
   .ai-closing-copy .eyebrow {
     margin-bottom: 0.6rem;
-    color: var(--orange, #ee5d10);
   }
   .ai-closing-copy h2 {
     margin: 0 0 0.6rem;
-    color: var(--on-navy, #ffffff);
+    color: var(--color-ink);
     font-size: var(--type-section-size);
-    font-weight: var(--type-heading-weight);
-    letter-spacing: -0.065em;
-    word-spacing: 0.065em;
+    font-weight: var(--type-section-weight);
+    letter-spacing: -0.01em;
+    word-spacing: normal;
     line-height: 1.08;
   }
   .ai-closing-copy > p:last-child {
     max-width: 620px;
     margin: 0;
-    color: var(--on-navy, #ffffff);
-    opacity: 0.85;
+    color: var(--color-body);
     font-size: var(--type-intro-size);
     line-height: var(--type-intro-line-height);
   }
@@ -94,8 +91,6 @@
     position: relative;
     z-index: 1;
     min-width: max-content;
-    min-height: 52px;
-    gap: 0.75rem;
   }
   .ai-closing-accent {
     position: absolute;
@@ -109,9 +104,9 @@
   .ai-closing-accent span {
     width: 44px;
     height: 180px;
-    border: 1px solid rgba(238, 93, 16, 0.2);
+    border: 1px solid rgb(194 76 18 / 16%);
     border-radius: 999px;
-    background: linear-gradient(180deg, rgba(238, 93, 16, 0.12), transparent);
+    background: linear-gradient(180deg, rgb(194 76 18 / 8%), transparent);
   }
 
   .ai-reveal {

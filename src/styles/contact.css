@@ -2,24 +2,12 @@
 .contact-hero {
   position: relative;
   overflow: hidden;
-  background:
-    radial-gradient(
-      ellipse at 73% 42%,
-      rgb(225 237 249 / 38%),
-      transparent 34%
-    ),
-    radial-gradient(
-      ellipse at 58% 80%,
-      rgb(248 221 209 / 18%),
-      transparent 28%
-    ),
-    linear-gradient(180deg, #fbfaf8 0%, var(--color-paper) 100%);
 }
 .contact-hero::before {
   position: absolute;
   inset: 0;
   background-image: radial-gradient(
-    rgb(16 27 45 / 4%) 0.6px,
+    rgb(15 33 54 / 4%) 0.6px,
     transparent 0.6px
   );
   background-size: 15px 15px;
@@ -32,7 +20,7 @@
   position: relative;
 }
 .contact-hero-copy h1 span {
-  color: var(--color-orange-dark);
+  color: var(--color-orange-text);
 }
 .contact-hero-email {
   display: inline-flex;
@@ -40,13 +28,13 @@
   gap: 0.45rem;
   color: var(--color-ink);
   font-size: 0.82rem;
-  font-weight: 650;
+  font-weight: 600;
   transition: color var(--duration-fast) ease;
 }
 .contact-hero-email span,
 .contact-direct-email .contact-detail-arrow,
 .contact-direct-address a span {
-  color: var(--color-orange-dark);
+  color: var(--color-orange-text);
   transition: transform var(--duration-fast) var(--ease-out);
 }
 .contact-hero-email:hover span,
@@ -58,11 +46,9 @@
   position: relative;
   margin: 0;
   border-radius: clamp(1.25rem, 2vw, 1.75rem);
-  border: 1px solid rgba(16, 27, 45, 0.08);
+  border: 1px solid rgba(15, 33, 54, 0.08);
   background: #ffffff;
-  box-shadow:
-    0 20px 50px rgba(16, 27, 45, 0.08),
-    0 4px 14px rgba(16, 27, 45, 0.03);
+  box-shadow: var(--shadow-1);
   overflow: hidden;
   animation: float-y 7.5s ease-in-out infinite;
 }
@@ -78,13 +64,13 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.55rem 1.05rem 0.55rem 0.55rem;
-  border: 1px solid rgb(16 27 45 / 7%);
-  border-radius: 16px;
+  border: 1px solid rgb(15 33 54 / 7%);
+  border-radius: var(--radius-lg);
   background: rgb(255 255 255 / 92%);
   box-shadow:
     0 1px 0 #fff inset,
-    0 22px 44px -24px rgb(16 27 45 / 40%),
-    0 2px 6px -3px rgb(16 27 45 / 10%);
+    0 22px 44px -24px rgb(15 33 54 / 40%),
+    0 2px 6px -3px rgb(15 33 54 / 10%);
   color: inherit;
   backdrop-filter: blur(6px);
   white-space: nowrap;
@@ -108,19 +94,21 @@ a.contact-hero-card:hover {
   color: inherit;
   box-shadow:
     0 1px 0 #fff inset,
-    0 28px 50px -24px rgb(16 27 45 / 46%),
-    0 4px 10px -2px rgb(16 27 45 / 12%);
+    0 28px 50px -24px rgb(15 33 54 / 46%),
+    0 4px 10px -2px rgb(15 33 54 / 12%);
   transform: translateY(-4px);
 }
 .contact-hero-card-icon {
+  /* Card icon (design system inc-card-icon): 40px orange-soft circle */
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--orange-soft);
+  color: var(--orange-text);
   display: grid;
-  width: 2.35rem;
-  height: 2.35rem;
   flex: none;
   place-items: center;
-  border-radius: 12px;
-  background: color-mix(in srgb, var(--color-orange) 11%, #fff);
-  color: var(--color-orange-dark);
   font-size: 1.05rem;
   font-weight: 700;
   transition:
@@ -140,7 +128,7 @@ a.contact-hero-card:hover .contact-hero-card-icon {
 }
 .contact-hero-card small {
   color: var(--color-muted);
-  font-size: 0.66rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -150,7 +138,7 @@ a.contact-hero-card:hover .contact-hero-card-icon {
   font-family: var(--font-heading);
   font-size: 0.98rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   transition: color 200ms ease;
 }
 a.contact-hero-card--email:hover strong {
@@ -174,12 +162,12 @@ a.contact-hero-card--office:hover strong {
   align-items: baseline;
   color: var(--color-ink);
   font-size: 0.92rem;
-  font-weight: 550;
+  font-weight: 600;
   line-height: 1.4;
 }
 .contact-hero-steps li span {
-  color: var(--color-orange-dark);
-  font-size: 0.72rem;
+  color: var(--color-orange-text);
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.04em;
 }
@@ -287,7 +275,6 @@ a.contact-hero-card--office:hover strong {
 }
 .contact-workspace {
   padding-block: clamp(3.25rem, 5vw, 4.8rem);
-  background: #fff;
 }
 .contact-workspace-grid {
   display: grid;
@@ -301,7 +288,7 @@ a.contact-hero-card--office:hover strong {
   border: 1px solid var(--color-line);
   border-radius: var(--radius-large);
   background: #fdfcfa;
-  box-shadow: 0 20px 60px rgb(16 27 45 / 7%);
+  box-shadow: var(--shadow-1);
 }
 .contact-workspace-heading {
   margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
@@ -319,7 +306,7 @@ a.contact-hero-card--office:hover strong {
   word-spacing: var(--type-section-word-spacing);
 }
 .contact-workspace-heading h2 .hero-title-accent {
-  color: var(--color-orange-dark);
+  color: var(--color-orange-text);
 }
 .contact-workspace-heading > p:last-child {
   margin: 0;
@@ -347,7 +334,7 @@ a.contact-hero-card--office:hover strong {
 }
 .contact-form-card .form-field-error {
   display: block;
-  color: var(--color-orange-dark);
+  color: var(--color-orange-text);
   font-size: 0.84rem;
   line-height: 1.4;
 }
@@ -359,7 +346,7 @@ a.contact-hero-card--office:hover strong {
 .contact-form-card .form-field textarea {
   min-width: 0;
   border: 1px solid #d9d5ce;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   background-color: var(--color-white);
   color: var(--color-ink);
   font-size: 1rem;
@@ -398,7 +385,7 @@ a.contact-hero-card--office:hover strong {
 .contact-form-card .form-field textarea:focus {
   border-color: var(--color-orange);
   outline: none;
-  box-shadow: 0 0 0 4px rgb(201 84 43 / 14%);
+  box-shadow: 0 0 0 4px rgb(194 76 18 / 14%);
 }
 /* Dropdowns: one custom arrow, same size and inset in every select. */
 .contact-form-card .form-field select {
@@ -426,7 +413,7 @@ a.contact-hero-card--office:hover strong {
   padding: 0 0.7rem 0 0.85rem;
   border: 1px solid #d9d5ce;
   border-right: 0;
-  border-radius: 10px 0 0 10px;
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
   background: #f8f6f2;
   color: var(--color-ink);
   font-size: inherit;
@@ -445,7 +432,7 @@ a.contact-hero-card--office:hover strong {
   z-index: 1;
   border-color: var(--color-orange);
   outline: none;
-  box-shadow: 0 0 0 4px rgb(201 84 43 / 14%);
+  box-shadow: 0 0 0 4px rgb(194 76 18 / 14%);
 }
 .contact-form-card .phone-country-button:disabled {
   cursor: not-allowed;
@@ -456,8 +443,8 @@ a.contact-hero-card--office:hover strong {
   flex: 0 0 auto;
   width: 22px;
   height: 16px;
-  border-radius: 3px;
-  box-shadow: 0 0 0 1px rgb(16 27 45 / 10%);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 0 1px rgb(15 33 54 / 10%);
   object-fit: cover;
 }
 .contact-form-card .phone-country-chevron {
@@ -477,7 +464,7 @@ a.contact-hero-card--office:hover strong {
 }
 .contact-form-card .form-field .phone-input input[type='tel'] {
   flex: 1 1 auto;
-  border-radius: 0 10px 10px 0;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
 }
 .contact-form-card .form-field .phone-input input[type='tel']:focus {
   position: relative;
@@ -496,9 +483,9 @@ a.contact-hero-card--office:hover strong {
   width: min(100%, 340px);
   padding: 0.5rem;
   border: 1px solid #e3dfd8;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   background: var(--color-white);
-  box-shadow: 0 18px 40px rgb(16 27 45 / 14%);
+  box-shadow: var(--shadow-3);
 }
 .contact-form-card .phone-country-menu[hidden] {
   display: none;
@@ -508,7 +495,7 @@ a.contact-hero-card--office:hover strong {
   min-height: 38px;
   margin-bottom: 0.4rem;
   padding: 0.45rem 0.75rem;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   font-size: 0.875rem;
 }
 .contact-form-card .phone-country-list {
@@ -525,7 +512,7 @@ a.contact-hero-card--office:hover strong {
   align-items: center;
   gap: 0.65rem;
   padding: 0.5rem 0.6rem;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   color: var(--color-ink);
   font-size: 0.875rem;
   cursor: pointer;
@@ -537,7 +524,7 @@ a.contact-hero-card--office:hover strong {
   background: #f6f1eb;
 }
 .contact-form-card .phone-country-list li[aria-selected='true'] {
-  color: var(--color-orange-dark);
+  color: var(--color-orange-text);
   font-weight: 600;
 }
 .contact-form-card .phone-country-name {
@@ -555,7 +542,7 @@ a.contact-hero-card--office:hover strong {
   font-size: 0.875rem;
 }
 .contact-form-card .form-field label span:not(.form-optional) {
-  color: var(--color-orange-dark);
+  color: var(--color-orange-text);
 }
 .contact-form-card .form-optional {
   color: var(--color-muted);
@@ -580,7 +567,7 @@ a.contact-hero-card--office:hover strong {
   accent-color: var(--color-orange-dark);
 }
 .contact-form-card .contact-privacy-consent input:focus-visible {
-  outline: 3px solid rgb(201 84 43 / 30%);
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
 }
 .contact-form-card .contact-consent .form-field-error {
@@ -588,8 +575,8 @@ a.contact-hero-card--office:hover strong {
 }
 .contact-form-card .contact-consent a,
 .contact-form-card .form-submit-row a {
-  color: var(--color-orange-dark);
-  font-weight: 650;
+  color: var(--color-orange-text);
+  font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -630,7 +617,7 @@ a.contact-hero-card--office:hover strong {
   background:
     radial-gradient(circle at 105% 0%, rgb(84 123 157 / 28%), transparent 40%),
     var(--color-navy);
-  box-shadow: 0 20px 60px rgb(16 27 45 / 13%);
+  box-shadow: var(--shadow-1);
   color: var(--color-white);
   scroll-margin-top: clamp(2rem, 4vw, 3.5rem);
   transition:
@@ -641,28 +628,20 @@ a.contact-hero-card--office:hover strong {
 .contact-direct-panel:hover {
   transform: translateY(-4px);
   border-color: rgb(255 255 255 / 18%);
-  box-shadow:
-    0 28px 75px -12px rgb(16 27 45 / 35%),
-    0 0 40px -10px rgba(84, 123, 157, 0.35);
+  box-shadow: var(--shadow-2);
 }
 .contact-direct-panel:target {
   animation: panel-focus-glint 1.4s ease-out;
 }
 @keyframes panel-focus-glint {
   0% {
-    box-shadow:
-      0 0 0 0 rgba(77, 143, 255, 0.5),
-      0 20px 60px rgb(16 27 45 / 13%);
+    box-shadow: var(--shadow-1);
   }
   30% {
-    box-shadow:
-      0 0 0 4px rgba(77, 143, 255, 0.4),
-      0 26px 70px rgb(16 27 45 / 25%);
+    box-shadow: var(--shadow-1);
   }
   100% {
-    box-shadow:
-      0 0 0 0 rgba(77, 143, 255, 0),
-      0 20px 60px rgb(16 27 45 / 13%);
+    box-shadow: var(--shadow-1);
   }
 }
 .contact-direct-panel::before {
@@ -736,10 +715,10 @@ a.contact-hero-card--office:hover strong {
   place-items: center;
   border: 1px solid rgb(232 160 128 / 32%);
   border-radius: 50%;
-  color: #e8a080;
+  color: #ff9a62;
   font-family: var(--font-heading);
   font-size: 0.95rem;
-  font-weight: 650;
+  font-weight: 600;
 }
 .contact-direct-email > span:nth-child(2) {
   display: grid;
@@ -749,7 +728,7 @@ a.contact-hero-card--office:hover strong {
 .contact-direct-email small,
 .contact-direct-address small {
   color: rgb(255 255 255 / 60%);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.12em;
 }
@@ -762,7 +741,7 @@ a.contact-hero-card--office:hover strong {
 }
 .contact-direct-email .contact-detail-arrow {
   margin-left: auto;
-  color: #e8a080;
+  color: #ff9a62;
 }
 .contact-direct-address {
   display: flex;
@@ -784,9 +763,9 @@ a.contact-hero-card--office:hover strong {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  color: #e8a080;
+  color: #ff9a62;
   font-size: 0.9rem;
-  font-weight: 650;
+  font-weight: 600;
 }
 .contact-map-frame {
   position: relative;
@@ -812,16 +791,16 @@ a.contact-hero-card--office:hover strong {
   align-items: center;
   gap: 0.35rem;
   padding: 0.55rem 0.8rem;
-  border: 1px solid rgb(16 27 45 / 10%);
-  border-radius: 6px;
+  border: 1px solid rgb(15 33 54 / 10%);
+  border-radius: var(--radius-md);
   background: rgb(255 255 255 / 96%);
-  box-shadow: 0 4px 15px rgb(16 27 45 / 12%);
+  box-shadow: var(--shadow-1);
   color: var(--color-ink);
   font-size: 0.82rem;
-  font-weight: 650;
+  font-weight: 600;
 }
 .contact-map-open span {
-  color: var(--color-orange-dark);
+  color: var(--color-orange-text);
 }
 .contact-followthrough {
   padding-block: clamp(2.6rem, 4vw, 3.5rem);
@@ -866,17 +845,17 @@ a.contact-hero-card--office:hover strong {
   background: transparent;
 }
 .contact-followthrough-step span {
-  color: var(--color-orange-dark);
+  color: var(--color-orange-text);
   font-family: var(--font-heading);
-  font-size: 0.65rem;
-  font-weight: 750;
+  font-size: 0.75rem;
+  font-weight: 800;
   letter-spacing: 0.1em;
 }
 .contact-followthrough-step p {
   margin: 0;
   color: var(--color-ink);
   font-size: 0.78rem;
-  font-weight: 550;
+  font-weight: 600;
   line-height: 1.45;
 }
 .contact-finish {
@@ -1021,7 +1000,7 @@ a.contact-hero-card--office:hover strong {
   height: 18rem;
   top: -9rem;
   right: max(3vw, calc((100vw - var(--content-width)) / 2));
-  border-color: rgb(201 84 43 / 10%);
+  border-color: rgb(194 76 18 / 10%);
 }
 .page-intro-contact .page-intro-inner {
   justify-content: center;
@@ -1071,8 +1050,8 @@ a.contact-hero-card--office:hover strong {
   margin-bottom: 0.65rem;
   font-size: var(--type-compact-heading-size);
   font-weight: var(--type-heading-weight);
-  letter-spacing: -0.05em;
-  word-spacing: 0.05em;
+  letter-spacing: -0.01em;
+  word-spacing: normal;
   line-height: var(--type-section-line-height);
 }
 .contact-column-heading > p:last-child {
@@ -1085,14 +1064,14 @@ a.contact-hero-card--office:hover strong {
   border: 1px solid var(--color-line);
   border-radius: var(--radius-medium);
   background: var(--color-white);
-  box-shadow: 0 12px 36px rgb(16 27 45 / 5%);
+  box-shadow: var(--shadow-1);
 }
 .form-setup-note {
   margin-bottom: 0.85rem;
   padding: 0.65rem 0.8rem;
   border: 1px solid #ead8ca;
   border-left: 3px solid var(--color-orange-dark);
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   background: #fcf7f2;
   color: #725c4e;
   font-size: 0.76rem;
@@ -1102,7 +1081,7 @@ a.contact-hero-card--office:hover strong {
 .form-field select,
 .form-field textarea {
   border-color: #dedbd5;
-  border-radius: 5px;
+  border-radius: var(--radius-sm);
   background-color: #fff;
   transition:
     border-color var(--duration-fast) ease,
@@ -1119,7 +1098,7 @@ a.contact-hero-card--office:hover strong {
 }
 .form-optional {
   color: var(--color-muted);
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   font-weight: 450;
 }
 .contact-consent {
@@ -1133,8 +1112,8 @@ a.contact-hero-card--office:hover strong {
 }
 .contact-consent a,
 .text-link {
-  color: var(--color-orange-dark);
-  font-weight: 650;
+  color: var(--color-orange-text);
+  font-weight: 600;
   text-decoration: underline;
   text-decoration-color: rgb(168 65 33 / 35%);
   text-underline-offset: 3px;
@@ -1146,18 +1125,18 @@ a.contact-hero-card--office:hover strong {
 .form-field label {
   color: #354356;
   font-size: 0.75rem;
-  font-weight: 650;
+  font-weight: 600;
 }
 .form-field label span,
 .form-submit-row p span {
-  color: var(--color-orange-dark);
+  color: var(--color-orange-text);
 }
 .form-field input,
 .form-field select,
 .form-field textarea {
   width: 100%;
   border: 1px solid #dcdad5;
-  border-radius: 2px;
+  border-radius: var(--radius-sm);
   background: #fff;
   color: var(--color-ink);
   font-size: 0.84rem;
@@ -1188,7 +1167,7 @@ a.contact-hero-card--office:hover strong {
 .form-submit-row p {
   margin: 0;
   color: #818994;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
 }
 .form-status {
   margin: 0.8rem 0 0;
@@ -1204,7 +1183,7 @@ a.contact-hero-card--office:hover strong {
   border: 1px solid var(--color-line);
   border-radius: var(--radius-medium);
   background: linear-gradient(145deg, #fff 0%, #f8f5f0 100%);
-  box-shadow: 0 12px 36px rgb(16 27 45 / 5%);
+  box-shadow: var(--shadow-1);
 }
 .contact-direct-copy {
   padding: clamp(1.1rem, 2vw, 1.5rem);
@@ -1217,12 +1196,12 @@ a.contact-hero-card--office:hover strong {
   align-items: center;
   gap: 0.55rem;
   margin: 0.1rem 0 0.9rem;
-  color: var(--color-orange-dark);
+  color: var(--color-orange-text);
   font-family: var(--font-heading);
   font-size: clamp(1.05rem, 1.7vw, 1.32rem);
-  font-weight: 650;
-  letter-spacing: -0.035em;
-  word-spacing: 0.035em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  word-spacing: normal;
 }
 .contact-email span {
   transition: transform var(--duration-fast) var(--ease-out);
@@ -1295,7 +1274,7 @@ a.contact-hero-card--office:hover strong {
   background: rgb(255 255 255 / 68%);
 }
 .contact-next-step span {
-  color: var(--color-orange-dark);
+  color: var(--color-orange-text);
   font-family: var(--font-heading);
   font-size: 0.76rem;
   font-weight: 700;
@@ -1305,7 +1284,7 @@ a.contact-hero-card--office:hover strong {
   margin: 0;
   color: var(--color-ink);
   font-size: 0.84rem;
-  font-weight: 550;
+  font-weight: 600;
   line-height: 1.5;
 }
 .contact-closing {
@@ -1330,8 +1309,7 @@ a.contact-hero-card--office:hover strong {
 /* Contact Value Section (Dark Navy Experience Panel) */
 .contact-value-section {
   padding-block: clamp(3.5rem, 6vw, 5.2rem);
-  background: var(--color-paper);
-  border-top: 1px solid rgb(16 27 45 / 7%);
+  border-top: 1px solid rgb(15 33 54 / 7%);
 }
 
 .contact-value-panel {
@@ -1343,13 +1321,11 @@ a.contact-hero-card--office:hover strong {
   align-items: center;
   gap: clamp(1.5rem, 4vw, 4rem);
   padding: clamp(2.2rem, 4.5vw, 3.8rem);
-  border: 1px solid rgb(255 255 255 / 12%);
+  border: 0;
   border-radius: var(--radius-large);
-  background:
-    radial-gradient(ellipse at 12% 80%, rgb(84 123 157 / 18%), transparent 36%),
-    linear-gradient(130deg, #17253a, var(--color-navy) 70%, #18263a);
-  box-shadow: 0 24px 55px rgb(16 27 45 / 15%);
-  color: #fff;
+  background: var(--surface); /* Card, elevated */
+  box-shadow: var(--shadow-1);
+  color: var(--ink);
   position: relative;
   overflow: hidden;
   transition:
@@ -1359,7 +1335,7 @@ a.contact-hero-card--office:hover strong {
 
 .contact-value-panel:hover {
   transform: translateY(-3px);
-  box-shadow: 0 28px 65px rgb(16 27 45 / 22%);
+  box-shadow: var(--shadow-2);
 }
 
 .contact-value-stat {
@@ -1368,18 +1344,18 @@ a.contact-hero-card--office:hover strong {
 }
 
 .contact-value-stat > span {
-  color: #fff;
+  color: var(--ink);
   font-family: var(--font-heading);
   font-size: clamp(3.8rem, 6.5vw, 5.8rem);
   font-weight: 600;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.01em;
   line-height: 0.95;
 }
 
 .contact-value-stat small {
   margin-top: 0.65rem;
-  color: #e7a17f;
-  font-size: 0.6rem;
+  color: var(--orange-text);
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   line-height: 1.55;
@@ -1391,7 +1367,7 @@ a.contact-hero-card--office:hover strong {
   width: 3.5rem;
   height: 1px;
   margin-top: 1.1rem;
-  background: #dd8a61;
+  background: var(--orange);
 }
 
 .contact-value-message .eyebrow {
@@ -1400,21 +1376,21 @@ a.contact-hero-card--office:hover strong {
 
 .contact-value-message h2 {
   margin-bottom: 0.85rem;
-  color: #fff;
+  color: var(--ink);
   font-size: var(--type-section-size);
-  font-weight: 550;
-  letter-spacing: -0.04em;
+  font-weight: var(--type-section-weight);
+  letter-spacing: -0.01em;
   line-height: 1.15;
 }
 
 .contact-value-message h2 span {
-  color: #e9a17e;
+  color: var(--orange-text);
 }
 
 .contact-value-message > p:not(.eyebrow) {
   max-width: 620px;
   margin-bottom: 1.25rem;
-  color: rgb(255 255 255 / 75%);
+  color: var(--ink-muted);
   font-size: var(--type-intro-size);
   line-height: 1.65;
 }
@@ -1423,7 +1399,7 @@ a.contact-hero-card--office:hover strong {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  color: #e8a080;
+  color: var(--orange-text);
   font-size: 0.84rem;
   font-weight: 600;
   text-decoration: none;
@@ -1433,7 +1409,7 @@ a.contact-hero-card--office:hover strong {
 }
 
 .contact-value-message .text-link:hover {
-  color: #fff;
+  color: var(--ink);
   gap: 0.6rem;
 }
 
@@ -1441,7 +1417,7 @@ a.contact-hero-card--office:hover strong {
   display: grid;
   gap: 0.35rem;
   padding-left: clamp(1.2rem, 2.5vw, 2.2rem);
-  border-left: 1px solid rgb(255 255 255 / 16%);
+  border-left: 1px solid var(--line);
 }
 
 .contact-value-points > div {
@@ -1449,7 +1425,7 @@ a.contact-hero-card--office:hover strong {
   grid-template-columns: 1.8rem minmax(0, 1fr);
   gap: 0.2rem 0.65rem;
   padding-block: 0.85rem;
-  border-bottom: 1px solid rgb(255 255 255 / 10%);
+  border-bottom: 1px solid var(--line);
 }
 
 .contact-value-points > div:last-child {
@@ -1458,15 +1434,15 @@ a.contact-hero-card--office:hover strong {
 
 .contact-value-points > div > span {
   grid-row: span 2;
-  color: #e8a080;
+  color: var(--orange-text);
   font-family: var(--font-heading);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.05em;
 }
 
 .contact-value-points b {
-  color: #fff;
+  color: var(--ink);
   font-family: var(--font-heading);
   font-size: 0.95rem;
   font-weight: 600;
@@ -1474,7 +1450,7 @@ a.contact-hero-card--office:hover strong {
 }
 
 .contact-value-points small {
-  color: rgb(255 255 255 / 65%);
+  color: var(--ink-muted);
   font-size: 0.78rem;
   line-height: 1.5;
 }
@@ -1491,7 +1467,7 @@ a.contact-hero-card--office:hover strong {
     padding-left: 0;
     padding-top: 1.5rem;
     border-left: 0;
-    border-top: 1px solid rgb(255 255 255 / 16%);
+    border-top: 1px solid var(--line);
   }
   .contact-value-points > div {
     grid-template-columns: 1fr;
@@ -1532,7 +1508,7 @@ a.contact-hero-card--office:hover strong {
   }
   .contact-value-points > div {
     grid-template-columns: 1.8rem minmax(0, 1fr);
-    border-bottom: 1px solid rgb(255 255 255 / 10%);
+    border-bottom: 1px solid var(--line);
     padding-bottom: 1rem;
   }
   .contact-value-points > div:last-child {

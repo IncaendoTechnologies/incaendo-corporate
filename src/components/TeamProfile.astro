@@ -40,7 +40,7 @@ try {
     aria-hidden={member.image ? undefined : 'true'}
     role={member.image ? 'img' : undefined}
     aria-label={
-      member.image ? `${member.name} — ${member.designation}` : undefined
+      member.image ? `${member.name} – ${member.designation}` : undefined
     }
   >
     {member.image ? (
@@ -71,7 +71,7 @@ try {
     flex-direction: column;
     min-width: 0;
     padding: 0.75rem;
-    border: 1px solid rgb(16 27 45 / 9%);
+    border: 1px solid rgb(15 33 54 / 9%);
     border-radius: var(--radius-medium);
     background: linear-gradient(145deg, #fff 0%, #fbf9f6 100%);
     transition:
@@ -83,7 +83,7 @@ try {
   .team-profile:hover {
     transform: translateY(-3px);
     border-color: rgb(168 65 33 / 32%);
-    box-shadow: 0 14px 34px rgb(16 27 45 / 8%);
+    box-shadow: var(--shadow-2);
   }
 
   .team-avatar {
@@ -93,18 +93,18 @@ try {
     flex: 0 0 auto;
     place-items: center;
     overflow: hidden;
-    border: 1px solid rgb(16 27 45 / 7%);
+    border: 1px solid rgb(15 33 54 / 7%);
     border-radius: calc(var(--radius-medium) - 0.25rem);
     font-family: var(--font-heading);
     font-size: clamp(1.6rem, 3vw, 2.25rem);
     font-weight: 700;
-    letter-spacing: -0.04em;
-    word-spacing: 0.04em;
+    letter-spacing: -0.01em;
+    word-spacing: normal;
   }
 
   .team-avatar-clay {
     background: #f3e4dc;
-    color: var(--color-orange-dark);
+    color: var(--color-orange-text);
   }
 
   .team-avatar-blue {
@@ -153,9 +153,9 @@ try {
     overflow-wrap: anywhere;
     color: var(--color-navy);
     font-size: 0.97rem;
-    font-weight: 650;
-    letter-spacing: -0.035em;
-    word-spacing: 0.035em;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    word-spacing: normal;
     line-height: 1.35;
   }
 
@@ -180,7 +180,7 @@ try {
     width: 2.1rem;
     height: 2.1rem;
     flex: 0 0 auto;
-    border-radius: 6px;
+    border-radius: var(--radius-md);
     background: transparent;
     transition:
       transform 200ms ease,
@@ -191,7 +191,7 @@ try {
     width: 1.65rem;
     height: 1.65rem;
     display: block;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     transition:
       transform 180ms ease,
       filter 180ms ease;

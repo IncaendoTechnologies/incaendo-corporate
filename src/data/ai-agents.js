@@ -46,7 +46,7 @@ export const aiAgents = [
     name: 'Sales Qualification Agent',
     capability: 'Sales',
     description:
-      'Organizes incoming leads, summarizes what each prospect needs, and helps sales teams decide which follow-ups to prioritize.',
+      'Organises incoming leads, summarises what each prospect needs, and helps sales teams decide which follow-ups to prioritise.',
     context: 'CRM pipelines and website enquiry forms.',
     image: salesQualification,
     alt: 'A list of incoming enquiries with priority labels beside a lead summary of requirements and a follow-up button.',
@@ -76,7 +76,7 @@ export const aiAgents = [
     name: 'Data & Reporting Agent',
     capability: 'Decision support',
     description:
-      'Summarizes business data, highlights patterns worth a closer look, and helps teams understand what their operational reports are saying.',
+      'Summarises business data, highlights patterns worth a closer look, and helps teams understand what their operational reports are saying.',
     context: 'Operational dashboards and recurring management reports.',
     image: dataReporting,
     alt: 'An operations dashboard with a weekly chart and an insight panel noting a regional trend worth checking.',
@@ -96,21 +96,21 @@ export const aiAgents = [
     name: 'Recruitment Assistant Agent',
     capability: 'People & hiring',
     description:
-      'Analyzes job descriptions, organizes candidate information against clear criteria, and keeps structured hiring workflows moving.',
+      'Analyses job descriptions, organises candidate information against clear criteria, and keeps structured hiring workflows moving.',
     context: 'Applicant tracking and structured hiring processes.',
     image: recruitmentAssistant,
     alt: 'A job description with highlighted requirements beside candidate cards showing structured requirement matches.',
   },
   {
     id: 'personalized-recommendation',
-    name: 'Personalized Recommendation Agent',
-    capability: 'Personalization',
+    name: 'Personalised Recommendation Agent',
+    capability: 'Personalisation',
     description:
       'Uses stated preferences and available application data to suggest useful next actions or content, and explains why each was suggested.',
     context: 'Consumer apps, learning platforms, and wellbeing products.',
     related: {
       project: 'Tomo',
-      note: 'Tomo, an iOS habit app in our projects, is documented as offering personalized habit suggestions through a conversational experience.',
+      note: 'Tomo, an iOS habit app in our projects, is documented as offering personalised habit suggestions through a conversational experience.',
     },
     image: personalizedRecommendation,
     alt: 'A mobile app showing suggested activities based on saved preferences, with a panel explaining why a suggestion was made.',

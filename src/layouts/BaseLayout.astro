@@ -2,15 +2,21 @@
 import '../styles/global.css'
 import SiteHeader from '../components/SiteHeader.astro'
 import SiteFooter from '../components/SiteFooter.astro'
+import CtaBand from '../components/CtaBand.astro'
 import ContactModal from '../components/ContactModal.astro'
 import HubSpotTracking from '../components/HubSpotTracking.astro'
 import SEO from '../components/SEO.astro'
 import EntranceMotionBoot from '../components/EntranceMotionBoot.astro'
-import introLogo from '../assets/Modern Blue and Orange iN Logo.png'
+import introLogo from '../assets/incaendo-mark.png'
 
 const {
   title = 'Incaendo | Software Development & Technology',
-  description = 'Incaendo is a software development and technology company with 15+ years of industry experience.',
+  description = 'Incaendo is a software development and technology company in Noida, building software since 2012.',
+  // The design system CtaBand just above the footer, for pages with one
+  // main section (they pass `cta` with its props, or `true`). Longer pages
+  // place <CtaBand /> themselves, one section before the end, so the navy
+  // band does not sit against the navy footer.
+  cta = false,
   // canonicalPath, noindex, openGraphType, image, imageAlt, pageType,
   // breadcrumbs, article and schema pass through to the SEO component.
   ...seo
@@ -23,7 +29,6 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f8f7f4" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
     <EntranceMotionBoot />
     <script is:inline>
       try {
@@ -47,7 +52,7 @@ const {
       crossorigin="anonymous"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <HubSpotTracking />
@@ -99,6 +104,7 @@ const {
     </a>
     <SiteHeader />
     <slot />
+    {cta && <CtaBand {...(cta === true ? {} : cta)} />}
     <SiteFooter />
     <ContactModal />
     <script>
