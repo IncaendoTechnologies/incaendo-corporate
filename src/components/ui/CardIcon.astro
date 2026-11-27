@@ -1,0 +1,12 @@
+---
+/**
+ * Icon circle for a shared Card (inc-card-icon). Put a Lucide icon or an
+ * inline SVG in the slot; its size follows the card size (card.css). Other
+ * attributes (including the parent's style scope) pass through.
+ */
+const { class: className, ...rest } = Astro.props
+---
+
+<span class:list={['inc-card-icon', className]} aria-hidden="true" {...rest}>
+  <slot />
+</span>

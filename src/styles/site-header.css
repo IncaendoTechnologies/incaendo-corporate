@@ -56,7 +56,7 @@ body.menu-is-open .site-header {
 .primary-navigation ul {
   display: flex;
   align-items: center;
-  gap: var(--space-5); /* inc-nav-list */
+  gap: clamp(1.75rem, 2.8vw, 2.75rem);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -84,7 +84,7 @@ body.menu-is-open .site-header {
   color: var(--color-orange-text);
 }
 .header-cta {
-  margin-left: var(--space-2); /* 24px list gap + 8px = inc-nav's 32px */
+  margin-left: var(--space-2);
   white-space: nowrap;
 }
 .menu-toggle,
@@ -173,7 +173,4 @@ body.menu-is-open .site-header {
 
 .hero-title-accent {
   color: var(--color-orange-text);
-}
-.hero-title-accent-start {
-  margin-inline-start: 0.1em;
 }

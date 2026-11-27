@@ -344,7 +344,9 @@ const relatedArticles = articles
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 18 / 9;
+    /* Cover images are 3:2 designed banners with text near the edges, so
+       the frame matches them instead of cropping. */
+    aspect-ratio: 3 / 2;
     object-fit: cover;
   }
 
@@ -627,7 +629,7 @@ const relatedArticles = articles
     }
     .article-cover :global(.insight-art),
     .article-cover > :global(img) {
-      aspect-ratio: 16 / 10;
+      aspect-ratio: 3 / 2;
     }
     .article-draft-warning {
       margin-bottom: 2.4rem;

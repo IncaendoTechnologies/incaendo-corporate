@@ -46,11 +46,13 @@ const linkRel = target === '_blank' ? rel || 'noopener noreferrer' : rel
       />
     )}
     {variant === 'hero' && !article.author && !article.isPublishedBlog && (
-      <span class="insight-featured-stamp">EDITORIAL DRAFT</span>
+      <span class="insight-card-stamp inc-badge inc-badge-warning">
+        Editorial draft
+      </span>
     )}
     {article.isCaseStudy && (
-      <span class="insight-featured-stamp insight-case-study-stamp">
-        CASE STUDY
+      <span class="insight-card-stamp inc-badge inc-badge-brand">
+        Case study
       </span>
     )}
   </a>
@@ -135,7 +137,8 @@ const linkRel = target === '_blank' ? rel || 'noopener noreferrer' : rel
     display: block;
     flex: 0 0 auto;
     overflow: hidden;
-    aspect-ratio: 18 / 11;
+    /* Matches the 3:2 cover banners so their text is not cropped. */
+    aspect-ratio: 3 / 2;
     background: #edf1f2;
     color: inherit;
   }
@@ -159,23 +162,12 @@ const linkRel = target === '_blank' ? rel || 'noopener noreferrer' : rel
     transform: scale(1.025);
   }
 
-  .insight-featured-stamp {
+  /* Design system badge pinned to the cover's bottom-right corner. */
+  .insight-card-stamp {
     position: absolute;
     right: 1rem;
     bottom: 1rem;
-    padding: 0.45rem 0.6rem;
-    border: 1px solid rgb(255 255 255 / 35%);
-    background: rgb(15 33 54 / 88%);
-    color: #fff;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.13em;
-  }
-
-  .insight-featured-stamp.insight-case-study-stamp {
-    background: var(--color-navy);
-    border-color: rgb(255 255 255 / 25%);
-    letter-spacing: 0.12em;
+    box-shadow: var(--shadow-1);
   }
 
   .insight-card-content {
@@ -251,13 +243,19 @@ const linkRel = target === '_blank' ? rel || 'noopener noreferrer' : rel
     flex: 0 0 auto;
     align-items: center;
     gap: 0.35rem;
-    color: var(--color-ink);
+    color: var(--color-orange-text);
     font-size: 0.75rem;
     font-weight: 600;
+    transition: color 180ms ease;
   }
 
   .insight-read-link span {
-    color: var(--color-orange-text);
+    color: inherit;
+  }
+
+  /* Links are orange-text; pressed, they turn ink. */
+  .insight-read-link:active {
+    color: var(--color-ink);
   }
 
   .insight-card-lead {
@@ -271,9 +269,10 @@ const linkRel = target === '_blank' ? rel || 'noopener noreferrer' : rel
   }
 
   .insight-card-lead .insight-card-art-link {
-    height: 100%;
-    min-height: 340px;
-    aspect-ratio: auto;
+    align-self: start;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 3 / 2;
   }
 
   .insight-card-lead .insight-card-art-link > :global(img) {
@@ -309,9 +308,10 @@ const linkRel = target === '_blank' ? rel || 'noopener noreferrer' : rel
     }
 
     .insight-card-lead .insight-card-art-link {
+      align-self: stretch;
       height: auto;
       min-height: 0;
-      aspect-ratio: 18 / 11;
+      aspect-ratio: 3 / 2;
     }
 
     .insight-card-lead .insight-card-art-link :global(.insight-art) {

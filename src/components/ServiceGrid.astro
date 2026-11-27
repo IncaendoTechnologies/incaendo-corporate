@@ -1,73 +1,51 @@
 ---
-import { homepageServices, services } from '../data/site-content.js'
-
-const { compact = false, variant = 'default' } = Astro.props
-const isHomepage = variant === 'home'
-const serviceItems = isHomepage ? homepageServices : services
+// Home "Services & solutions" grid: one shared Card (md, elevated, lift)
+// per service, from homepageServices.
+import Card from './ui/Card.astro'
+import CardIcon from './ui/CardIcon.astro'
+import { homepageServices } from '../data/site-content.js'
 ---
 
-<div
-  class:list={[
-    'service-grid',
-    compact && 'service-grid-compact',
-    isHomepage && 'service-grid-home reveal',
-  ]}
-  data-reveal-stagger={isHomepage ? '' : undefined}
->
-  {serviceItems.map((service) => {
+<div class="service-grid service-grid-home reveal" data-reveal-stagger>
+  {homepageServices.map((service) => {
     const Icon = service.icon
     return (
-      <article
-        class:list={[
-          'service-card',
-          isHomepage ? 'service-card-featured' : 'reveal',
-        ]}
+      <Card
+        as="article"
+        look="elevated"
+        effect="lift"
+        class="service-card service-card-featured"
         id={service.id ?? service.href.split('#')[1]}
-        data-reveal-item={isHomepage ? '' : undefined}
+        data-reveal-item
       >
         <div class="service-card-top">
           <span class="service-number">{service.number}</span>
-          <span class="service-icon" aria-hidden="true">
-            <Icon size={23} strokeWidth={1.6} />
-          </span>
+          <CardIcon>
+            <Icon strokeWidth={1.6} />
+          </CardIcon>
         </div>
         <div class="service-card-copy">
           <h3>{service.title}</h3>
           <p>{service.description}</p>
-          {isHomepage && (
-            <ul class="service-points">
-              {service.points.map((point) => (
-                <li>{point}</li>
-              ))}
-            </ul>
-          )}
+          <ul class="service-points">
+            {service.points.map((point) => (
+              <li>{point}</li>
+            ))}
+          </ul>
         </div>
-        {isHomepage ? (
-          <a
-            class="service-card-explore"
-            href={service.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Explore ${service.title}`}
-          >
-            <span>Explore</span>
-            <span class="link-arrow" aria-hidden="true">
-              →
-            </span>
-          </a>
-        ) : (
-          <div class="service-card-bottom">
-            <span class="review-tag">{service.detail}</span>
-            <a
-              class="icon-link"
-              href={service.href}
-              aria-label={`Explore ${service.title}`}
-            >
-              <span aria-hidden="true">↗</span>
-            </a>
-          </div>
-        )}
-      </article>
+        <a
+          class="service-card-explore"
+          href={service.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Explore ${service.title}`}
+        >
+          <span>Explore</span>
+          <span class="link-arrow" aria-hidden="true">
+            →
+          </span>
+        </a>
+      </Card>
     )
   })}
 </div>

@@ -1,8 +1,7 @@
 ---
 import TeamProfile from './TeamProfile.astro'
-import { Image } from 'astro:assets'
 import { teamMembers } from '../data/team.js'
-import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
+import TeamHeroMark from './TeamHeroMark.astro'
 ---
 
 <section
@@ -35,23 +34,7 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
       </div>
     </div>
 
-    <div class="team-hero-visual hero-system__visual reveal">
-      <figure class="team-hero-photo team-hero-photo-single">
-        <Image
-          src={teamHeroImage}
-          alt="A software team collaborating around a monitor showing code and a system diagram"
-          width={1600}
-          sizes="(max-width: 600px) 92vw, (max-width: 899px) 44vw, 48vw"
-          quality={88}
-          loading="eager"
-          class="hero-system__image"
-        />
-        <figcaption>People behind digital products</figcaption>
-      </figure>
-      <span class="team-hero-photo-index" aria-hidden="true">
-        INCAENDO / PEOPLE &amp; PRODUCT
-      </span>
-    </div>
+    <TeamHeroMark />
   </div>
 </section>
 
@@ -224,74 +207,7 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
     color: var(--color-orange-text);
   }
 
-  /* Same frame as the approved Services hero image (656 x 517 at desktop);
-     the photo fills it above the caption row. Mobile min-heights below
-     keep the photo tall enough on narrow screens. */
-  .team-hero-visual {
-    position: relative;
-    min-width: 0;
-    aspect-ratio: var(--hero-visual-ratio);
-  }
-
-  .team-hero-photo {
-    position: absolute;
-    overflow: hidden;
-    margin: 0;
-    border: 0;
-    border-radius: var(--radius-large);
-    background: #ebe8e2;
-    box-shadow: var(--shadow-1);
-  }
-
-  .team-hero-photo-single {
-    inset: 0 0 2.4rem;
-  }
-
-  .team-hero-photo img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 35%;
-    transition: transform 500ms var(--ease-out);
-  }
-
-  .team-hero-photo:hover img {
-    transform: scale(1.025);
-  }
-
-  .team-hero-photo-single figcaption {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    padding: 0.5rem 0.7rem;
-    border: 1px solid rgb(255 255 255 / 58%);
-    border-radius: 999px;
-    background: rgb(255 255 255 / 88%);
-    color: var(--color-navy);
-    font-size: 0.75rem;
-    font-weight: 600;
-  }
-
-  .team-hero-photo-index {
-    position: absolute;
-    right: 0.1rem;
-    bottom: 0.8rem;
-    color: var(--color-muted);
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-  }
-
   /* Hero snapshot: real team photos and size, linking to the directory */
-  .team-hero-snapshot {
-    display: flex;
-    align-items: center;
-    gap: 0.9rem;
-    width: fit-content;
-    color: inherit;
-  }
-
   .team-section-heading {
     display: flex;
     align-items: end;
@@ -306,11 +222,6 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
 
   .team-section-heading h2 {
     margin: 0;
-    font-size: var(--type-section-size);
-    font-weight: var(--type-section-weight);
-    letter-spacing: var(--type-section-letter-spacing);
-    word-spacing: var(--type-section-word-spacing);
-    line-height: var(--type-section-line-height);
   }
 
   .team-section-heading > p {
@@ -334,16 +245,6 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
   .team-profile-grid > :global(.team-profile) {
     flex: 0 1 calc((100% - 3rem) / 4);
     min-width: 0;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .team-hero-photo img {
-      transition: none;
-    }
-
-    .team-hero-photo:hover img {
-      transform: none;
-    }
   }
 
   .team-expertise-section {
@@ -426,9 +327,6 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
   }
 
   @media (max-width: 899px) {
-    .team-hero-visual {
-      min-height: 350px;
-    }
     .team-section-heading {
       align-items: flex-start;
       flex-direction: column;
@@ -443,22 +341,6 @@ import teamHeroImage from '../assets/Collaborative Tech Team Workspace.png'
   }
 
   @media (max-width: 600px) {
-    .team-hero-visual {
-      min-height: 320px;
-    }
-    .team-hero-photo-single {
-      inset: 0 0 1.7rem;
-    }
-    .team-hero-photo-single figcaption {
-      top: 0.7rem;
-      left: 0.7rem;
-      font-size: 0.75rem;
-    }
-    .team-hero-photo-index {
-      right: 0;
-      bottom: 0.45rem;
-      font-size: 0.75rem;
-    }
     .team-section-heading h2 {
       font-size: var(--type-section-size);
       font-weight: var(--type-section-weight);

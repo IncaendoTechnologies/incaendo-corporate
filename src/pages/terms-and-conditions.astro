@@ -156,10 +156,13 @@ import {
               provided for general informational purposes and does not
               automatically constitute a binding offer or contract.
             </p>
-            <div class="legal-highlight">
-              Project-specific terms may be defined separately through
-              proposals, quotations, statements of work, service agreements, or
-              other written agreements.
+            <div class="inc-callout">
+              <span class="inc-callout-dot" aria-hidden="true"></span>
+              <p>
+                <strong>Project-specific terms</strong> may be defined
+                separately through proposals, quotations, statements of work,
+                service agreements, or other written agreements.
+              </p>
             </div>
           </div>
 
@@ -604,15 +607,17 @@ import {
     margin-bottom: 0.45rem;
   }
 
-  .legal-highlight {
-    background: #fbf7f3;
-    border-left: 3px solid var(--color-orange);
-    padding: 1rem 1.25rem;
-    border-radius: 0 var(--radius-md) var(--radius-md) 0;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: var(--color-navy);
+  /* Design system Callout, spaced from the text above it. */
+  .legal-section .inc-callout {
     margin-top: 1.25rem;
+  }
+  /* The section's paragraph style would add a gap and grey text; the
+     callout keeps the design system body text. */
+  .legal-section .inc-callout p {
+    margin: 0;
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 24px;
   }
 
   /* =========================

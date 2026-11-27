@@ -8,11 +8,6 @@
 }
 .faq-layout h2 {
   margin-bottom: 1.4rem;
-  font-size: var(--type-section-size);
-  font-weight: var(--type-section-weight);
-  letter-spacing: var(--type-section-letter-spacing);
-  word-spacing: var(--type-section-word-spacing);
-  line-height: var(--type-section-line-height);
 }
 .faq-list {
   border-top: 1px solid var(--color-line);

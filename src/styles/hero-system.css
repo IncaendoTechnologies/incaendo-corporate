@@ -25,7 +25,6 @@
 }
 
 .hero-system.hero-system--split,
-.hero-system.hero-system--center,
 .hero-system.hero-system--text,
 .hero-system.hero-system--article {
   padding-block: var(--hero-system-pad-top) var(--hero-system-pad-bottom);
@@ -161,20 +160,6 @@
   text-transform: uppercase;
 }
 
-.hero-system.hero-system--center .hero-system__inner {
-  max-width: 56rem;
-  text-align: center;
-}
-
-.hero-system.hero-system--center .hero-system__title {
-  max-width: 20ch;
-}
-
-.hero-system.hero-system--center .hero-system__title,
-.hero-system.hero-system--center .hero-system__description {
-  margin-inline: auto;
-}
-
 .hero-system.hero-system--text .hero-system__inner {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -190,11 +175,6 @@
   max-width: 20ch;
 }
 
-.hero-system--text .hero-system__index {
-  align-self: end;
-  margin-bottom: 0.4rem;
-}
-
 .hero-system.hero-system--article .hero-system__inner {
   max-width: 58rem;
 }
@@ -205,18 +185,6 @@
 
 .hero-system.hero-system--article .hero-system__description {
   max-width: 68ch;
-}
-
-.hero-system.hero-system--dark .hero-system__title {
-  color: var(--color-white);
-}
-
-.hero-system.hero-system--dark .hero-system__description {
-  color: rgb(255 255 255 / 84%);
-}
-
-.hero-system.hero-system--dark .hero-system__accent {
-  color: #8ed0ff;
 }
 
 /* Feature heroes (AI, Teams, Insights, Contact): on desktop the visual gets
@@ -293,10 +261,6 @@
 
   .hero-system.hero-system--text .hero-system__inner {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .hero-system--text .hero-system__index {
-    justify-self: end;
   }
 }
 

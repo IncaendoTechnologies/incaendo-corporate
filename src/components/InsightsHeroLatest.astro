@@ -33,15 +33,15 @@ const href = `/insights/${article.slug}/`
           prefix={`hero-${article.slug}`}
         />
       )}
-      <span class="insights-latest-badge">
-        <span aria-hidden="true"></span> Latest insight
-      </span>
     </span>
     <span class="insights-latest-body">
-      <span class="insights-latest-kicker">
-        <span>{article.category}</span>
-        <span>{article.readMinutes} min read</span>
+      <span class="insights-latest-top">
+        <span class="insights-latest-badge">
+          <span aria-hidden="true"></span> Latest insight
+        </span>
+        <span class="insights-latest-time">{article.readMinutes} min read</span>
       </span>
+      <span class="insights-latest-kicker">{article.category}</span>
       <h2 id="insights-latest-title">{article.title}</h2>
       <span class="insights-latest-excerpt">{article.excerpt}</span>
       <span class="insights-latest-link">
@@ -105,7 +105,7 @@ const href = `/insights/${article.slug}/`
     position: relative;
     display: block;
     overflow: hidden;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 3 / 2;
     background: #edf1f2;
   }
 
@@ -125,29 +125,51 @@ const href = `/insights/${article.slug}/`
     transform: scale(1.025);
   }
 
+  /* Badge row above the text, clear of the cover image (the banners carry
+     their own logo and title, so nothing sits on top of them). */
+  .insights-latest-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid #ece9e4;
+  }
+
   .insights-latest-badge {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
-    padding: 0.42rem 0.65rem;
+    gap: 0.5rem;
+    padding: 0.38rem 0.75rem;
     border-radius: 999px;
-    background: rgb(15 33 54 / 86%);
-    color: #fff;
+    background: var(--success-soft, #e3f3ea);
+    color: var(--success, #1d7446);
     font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
   }
 
   .insights-latest-badge span {
-    width: 0.38rem;
-    height: 0.38rem;
+    width: 0.45rem;
+    height: 0.45rem;
     border-radius: 50%;
-    background: var(--color-orange);
-    box-shadow: 0 0 0 3px rgb(194 76 18 / 28%);
+    background: var(--success, #1d7446);
+    box-shadow: 0 0 0 3px rgb(29 116 70 / 22%);
+    animation: insights-latest-pulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes insights-latest-pulse {
+    50% {
+      box-shadow: 0 0 0 6px rgb(29 116 70 / 0%);
+    }
+  }
+
+  .insights-latest-time {
+    color: #8a929d;
+    font-size: 0.75rem;
+    font-weight: 600;
   }
 
   .insights-latest-body {
@@ -157,19 +179,11 @@ const href = `/insights/${article.slug}/`
   }
 
   .insights-latest-kicker {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0.4rem 0.75rem;
     color: var(--color-orange-text);
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.09em;
     text-transform: uppercase;
-  }
-
-  .insights-latest-kicker span + span {
-    color: #8a929d;
   }
 
   .insights-latest-body h2 {
@@ -204,23 +218,24 @@ const href = `/insights/${article.slug}/`
     margin-top: 1rem;
     padding-top: 0.9rem;
     border-top: 1px solid #ece9e4;
-    color: var(--color-ink);
+    color: var(--color-orange-text);
     font-size: 0.75rem;
     font-weight: 600;
+    transition: color 180ms ease;
   }
 
   .insights-latest-link span {
-    color: var(--color-orange-text);
+    color: inherit;
+  }
+
+  /* Links are orange-text; pressed, they turn ink. */
+  .insights-latest-preview:active .insights-latest-link {
+    color: var(--color-ink);
   }
 
   @media (max-width: 600px) {
     .insights-hero-latest {
       padding: 0.6rem 0.25rem 0.8rem;
-    }
-
-    .insights-latest-badge {
-      top: 0.75rem;
-      left: 0.75rem;
     }
   }
 
@@ -228,8 +243,11 @@ const href = `/insights/${article.slug}/`
     .insights-latest-preview,
     .insights-latest-media > :global(img),
     .insights-latest-media > :global(.insight-art),
-    .insights-latest-link span {
+    .insights-latest-link,
+    .insights-latest-link span,
+    .insights-latest-badge span {
       transition: none;
+      animation: none;
     }
 
     .insights-latest-preview:hover,

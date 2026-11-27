@@ -38,6 +38,7 @@ const workflowSteps = [
 
 <section
   class="ai-path"
+  data-motion-scope
   aria-labelledby="ai-practical-path-title"
   data-ai-experience
 >
@@ -373,11 +374,6 @@ const workflowSteps = [
   }
   .ai-workflow-heading h2 {
     margin: 0;
-    font-size: var(--type-section-size);
-    font-weight: var(--type-section-weight);
-    letter-spacing: var(--type-section-letter-spacing);
-    word-spacing: var(--type-section-word-spacing);
-    line-height: var(--type-section-line-height);
     color: var(--color-navy);
     text-wrap: balance;
   }
@@ -508,7 +504,11 @@ const workflowSteps = [
 
   .ai-overview-card.is-active {
     border-color: var(--color-orange-text);
-    background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-peach) 100%);
+    background: linear-gradient(
+      180deg,
+      var(--color-surface) 0%,
+      var(--color-peach) 100%
+    );
     transform: translateY(-4px);
     box-shadow:
       0 16px 36px -6px rgb(168 65 33 / 22%),
@@ -1194,17 +1194,6 @@ const workflowSteps = [
     .ai-workflow-demo {
       padding: 0.85rem;
       border-radius: var(--radius-lg);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .ai-path *,
-    .ai-path *::before,
-    .ai-path *::after {
-      scroll-behavior: auto !important;
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
     }
   }
 </style>
