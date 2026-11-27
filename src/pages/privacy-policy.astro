@@ -206,10 +206,16 @@ import {
               <li>Preventing misuse, fraud, or unauthorized activity</li>
               <li>Meeting applicable legal and regulatory requirements</li>
             </ul>
-            <div class="legal-highlight">
-              We aim to use personal information only for appropriate and
-              relevant business purposes and to collect information that is
-              reasonably necessary for those purposes.
+            <div class="inc-callout">
+              <span class="inc-callout-dot" aria-hidden="true"></span>
+              <p>
+                We aim to use personal information{' '}
+                <strong>
+                  only for appropriate and relevant business purposes
+                </strong>{' '}
+                and to collect information that is reasonably necessary for
+                those purposes.
+              </p>
             </div>
           </div>
 
@@ -670,15 +676,17 @@ import {
     margin-bottom: 0.45rem;
   }
 
-  .legal-highlight {
-    background: #fbf7f3;
-    border-left: 3px solid var(--color-orange);
-    padding: 1rem 1.25rem;
-    border-radius: 0 var(--radius-md) var(--radius-md) 0;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: var(--color-navy);
+  /* Design system Callout, spaced from the text above it. */
+  .legal-section .inc-callout {
     margin-top: 1.25rem;
+  }
+  /* The section's paragraph style would add a gap and grey text; the
+     callout keeps the design system body text. */
+  .legal-section .inc-callout p {
+    margin: 0;
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 24px;
   }
 
   /* =========================
