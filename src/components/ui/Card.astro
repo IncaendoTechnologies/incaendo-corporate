@@ -1,0 +1,49 @@
+---
+/**
+ * Shared card: the design system card (inc-card) with a size, a look and a
+ * hover effect. Styles live in src/styles/card.css; the content is the slot.
+ *
+ * Props:
+ *   as         element to render ('div' by default; 'article', 'li', 'a')
+ *   size       'sm' | 'md' | 'lg'                    (default 'md')
+ *   look       'raised' | 'elevated' | 'outline' | 'tint' | 'navy' | 'blue'
+ *                                                     (default 'raised')
+ *   effect     'none' | 'lift' | 'accent'            (default 'none')
+ *   accentSide 'left' | 'right'   side of the orange edge for effect="accent"
+ *   class      extra classes for the section's own layout
+ * Any other attribute (href, id, data-*) is passed to the element.
+ */
+const {
+  as: Tag = 'div',
+  size = 'md',
+  look = 'raised',
+  effect = 'none',
+  accentSide = 'right',
+  class: className,
+  ...rest
+} = Astro.props
+
+const looks = {
+  raised: '',
+  elevated: 'inc-card-elevated',
+  outline: 'card--outline',
+  tint: 'inc-card-tint',
+  navy: 'inc-card-navy',
+  blue: 'inc-card-blue',
+}
+---
+
+<Tag
+  class:list={[
+    'inc-card',
+    `card--${size}`,
+    looks[look],
+    effect === 'lift' && 'card--lift',
+    effect === 'accent' && 'accent-card',
+    className,
+  ]}
+  data-accent-side={effect === 'accent' ? accentSide : undefined}
+  {...rest}
+>
+  <slot />
+</Tag>

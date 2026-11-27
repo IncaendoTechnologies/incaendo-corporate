@@ -86,6 +86,8 @@ const traits = [
     y: 91,
   },
 ]
+import Card from './ui/Card.astro'
+import CardIcon from './ui/CardIcon.astro'
 ---
 
 <div
@@ -136,18 +138,15 @@ const traits = [
         class={`tc-trait is-${trait.accent}`}
         style={`left: ${trait.x}%; top: ${trait.y}%; --order: ${index}`}
       >
-        <div class="tc-trait-card">
-          <svg
-            class="tc-trait-icon"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            set:html={ICONS[trait.icon]}
-          />
+        <Card size="sm" look="tint" class="tc-trait-card">
+          <CardIcon class="tc-trait-icon">
+            <svg viewBox="0 0 24 24" set:html={ICONS[trait.icon]} />
+          </CardIcon>
           <div>
             <b>{trait.value}</b>
             <span>{trait.label}</span>
           </div>
-        </div>
+        </Card>
       </li>
     ))}
   </ul>
@@ -259,17 +258,20 @@ const traits = [
   .tc-trait.is-blue {
     --accent: var(--tc-blue);
   }
+  /* Box, corners, tint and icon circle come from the shared Card (sm,
+     tint); the hero adds its fixed size, float and light sweep. */
+  .tc-trait-card.inc-card {
+    /* Tighter than the shared sm padding: these sit on fixed-size spots. */
+    padding: var(--space-3);
+  }
   .tc-trait-card {
-    display: flex;
+    flex-direction: row;
     align-items: center;
     gap: clamp(0.65rem, 1.8cqw, 0.9rem);
     box-sizing: border-box;
     width: clamp(11.5rem, 32cqw, 14rem);
     height: clamp(5.25rem, 14cqw, 5.75rem);
-    padding: clamp(0.7rem, 1.9cqw, 0.95rem);
     border: 1px solid rgb(238 93 16 / 14%);
-    border-radius: var(--radius-lg, 16px);
-    background: var(--orange-soft, #fdede3);
     box-shadow:
       0 1px 0 #fff inset,
       0 22px 44px -24px rgb(15 33 54 / 40%),
@@ -335,14 +337,9 @@ const traits = [
       0 10px 26px -16px color-mix(in srgb, var(--accent) 60%, transparent);
   }
   .tc-trait-icon {
-    flex: none;
-    box-sizing: border-box;
-    width: clamp(2.4rem, 7cqw, 3rem);
-    height: clamp(2.4rem, 7cqw, 3rem);
-    padding: clamp(0.55rem, 1.6cqw, 0.7rem);
-    border-radius: 12px;
-    background: var(--surface, #fff);
     box-shadow: 0 2px 6px -3px rgb(15 33 54 / 18%);
+  }
+  .tc-trait-icon svg {
     fill: none;
     stroke: var(--accent);
     stroke-linecap: round;

@@ -150,6 +150,8 @@ const serviceDetails = [
     linkLabel: 'Discuss cloud & data',
   },
 ]
+import Card from './ui/Card.astro'
+import CardIcon from './ui/CardIcon.astro'
 ---
 
 <div class="services-page">
@@ -246,23 +248,26 @@ const serviceDetails = [
         {homepageServices.map((service) => {
           const Icon = service.icon
           return (
-            <a
+            <Card
+              as="a"
+              look="elevated"
+              effect="lift"
               class="service-overview-card"
               href={`#${service.id}`}
               data-reveal-item
             >
               <span class="overview-card-top">
                 <span>{service.number} / 06</span>
-                <span class="overview-card-icon" aria-hidden="true">
-                  <Icon size={21} strokeWidth={1.7} />
-                </span>
+                <CardIcon>
+                  <Icon strokeWidth={1.7} />
+                </CardIcon>
               </span>
               <span class="overview-card-title">{service.title}</span>
               <span class="overview-card-copy">{service.description}</span>
               <span class="overview-card-link">
                 View service <b aria-hidden="true">↘</b>
               </span>
-            </a>
+            </Card>
           )
         })}
       </div>
@@ -604,29 +609,6 @@ const serviceDetails = [
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1rem;
   }
-  .service-overview-card {
-    position: relative;
-    display: flex;
-    min-width: 0;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: var(--space-5, 24px);
-    border-radius: var(--radius-md, 8px);
-    background: var(--surface, #ffffff);
-    box-shadow: var(--shadow-1);
-    color: var(--ink);
-    transition:
-      transform var(--motion-fast, 150ms) var(--ease-out),
-      box-shadow var(--motion-fast, 150ms) var(--ease-out);
-  }
-  .service-overview-card::before {
-    display: none;
-  }
-  .service-overview-card:hover,
-  .service-overview-card:focus-visible {
-    box-shadow: var(--shadow-2);
-    transform: translateY(-3px);
-  }
   .overview-card-top {
     display: flex;
     width: 100%;
@@ -639,25 +621,6 @@ const serviceDetails = [
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.11em;
-  }
-  .overview-card-icon {
-    /* Card icon (design system inc-card-icon): 40px orange-soft circle */
-    width: 40px;
-    height: 40px;
-    border: 0;
-    border-radius: 50%;
-    background: var(--orange-soft);
-    color: var(--orange-text);
-    display: grid;
-    place-items: center;
-    transition:
-      transform 260ms var(--ease-out),
-      background 260ms var(--ease-out);
-  }
-  .service-overview-card:hover .overview-card-icon,
-  .service-overview-card:focus-visible .overview-card-icon {
-    transform: translateY(-2px) scale(1.04);
-    background: #fff2e9;
   }
   .overview-card-title {
     margin-bottom: 0.45rem;
@@ -1876,7 +1839,6 @@ const serviceDetails = [
     }
     .service-overview-card {
       min-height: 220px;
-      padding: 1.05rem;
     }
     .overview-card-copy {
       font-size: 0.75rem;
@@ -1987,11 +1949,6 @@ const serviceDetails = [
       scroll-behavior: auto !important;
       animation: none !important;
       transition: none !important;
-    }
-    .service-overview-card,
-    .service-overview-card:hover,
-    .service-overview-card:focus-visible {
-      transform: none;
     }
   }
 </style>

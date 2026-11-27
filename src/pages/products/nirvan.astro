@@ -1,5 +1,7 @@
 ---
 import StandaloneLayout from '../../layouts/StandaloneLayout.astro'
+import Card from '../../components/ui/Card.astro'
+import CardIcon from '../../components/ui/CardIcon.astro'
 import { Image } from 'astro:assets'
 import logo from '../../assets/incaendo-logo.png'
 import heroDashboard from '../../assets/Modern Tech Dashboard with Devices and Metrics.png'
@@ -434,17 +436,25 @@ const softwareSchema = [
           {solutions.map((item) => {
             const Icon = item.icon
             return (
-              <article class="nirvan-solution-card">
-                <div class="solution-card-top">
-                  <div class="solution-icon-wrap" aria-hidden="true">
-                    <Icon size={24} />
-                  </div>
-                  <span class="solution-badge">{item.badge}</span>
+              <Card
+                as="article"
+                size="lg"
+                look="raised"
+                effect="lift"
+                class="nirvan-solution-card"
+              >
+                <div class="card-top">
+                  <CardIcon>
+                    <Icon />
+                  </CardIcon>
+                  <span class="solution-badge inc-badge inc-badge-brand">
+                    {item.badge}
+                  </span>
                 </div>
 
-                <h3 class="solution-title">{item.title}</h3>
+                <h3 class="inc-card-title">{item.title}</h3>
                 <p class="solution-headline">{item.headline}</p>
-                <p class="solution-desc">{item.description}</p>
+                <p class="inc-card-text solution-desc">{item.description}</p>
 
                 <div class="solution-divider"></div>
 
@@ -471,7 +481,7 @@ const softwareSchema = [
                     <ChevronRight size={14} aria-hidden="true" />
                   </a>
                 </div>
-              </article>
+              </Card>
             )
           })}
         </div>
@@ -500,16 +510,21 @@ const softwareSchema = [
           {coreFeatures.map((feat, index) => {
             const Icon = feat.icon
             return (
-              <article class="nirvan-feature-card">
-                <div class="feature-card-header">
-                  <span class="feature-card-icon" aria-hidden="true">
-                    <Icon size={22} />
-                  </span>
+              <Card
+                as="article"
+                look="elevated"
+                effect="lift"
+                class="nirvan-feature-card"
+              >
+                <div class="card-top">
+                  <CardIcon>
+                    <Icon />
+                  </CardIcon>
                   <span class="feature-index">0{index + 1}</span>
                 </div>
-                <h3 class="feature-title">{feat.title}</h3>
-                <p class="feature-desc">{feat.description}</p>
-              </article>
+                <h3 class="inc-card-title">{feat.title}</h3>
+                <p class="inc-card-text">{feat.description}</p>
+              </Card>
             )
           })}
         </div>
@@ -538,11 +553,11 @@ const softwareSchema = [
           {benefits.map((benefit) => {
             const Icon = benefit.icon
             return (
-              <article class="nirvan-benefit-card">
-                <div class="benefit-card-top">
-                  <div class="benefit-icon" aria-hidden="true">
-                    <Icon size={22} />
-                  </div>
+              <Card as="article" size="lg" class="nirvan-benefit-card">
+                <div class="card-top">
+                  <CardIcon>
+                    <Icon />
+                  </CardIcon>
                   <div class="benefit-stat-box">
                     <span class="benefit-metric">{benefit.metric}</span>
                     <span class="benefit-metric-label">
@@ -551,9 +566,9 @@ const softwareSchema = [
                   </div>
                 </div>
 
-                <h3 class="benefit-title">{benefit.title}</h3>
-                <p class="benefit-desc">{benefit.description}</p>
-              </article>
+                <h3 class="inc-card-title">{benefit.title}</h3>
+                <p class="inc-card-text">{benefit.description}</p>
+              </Card>
             )
           })}
         </div>
@@ -604,17 +619,23 @@ const softwareSchema = [
 
         <div class="nirvan-pricing-grid reveal" data-reveal-stagger>
           {pricingPlans.map((plan) => (
-            <article
-              class={`nirvan-pricing-card ${plan.popular ? 'is-popular' : ''}`}
+            <Card
+              as="article"
+              size="lg"
+              look="elevated"
+              effect="lift"
+              class:list={['nirvan-pricing-card', plan.popular && 'is-popular']}
             >
               {plan.popular && (
-                <span class="pricing-badge-popular">
-                  Recommended for Hospitals
+                <span class="pricing-badge-popular inc-badge inc-badge-orange">
+                  Recommended for hospitals
                 </span>
               )}
 
               <div class="pricing-card-header">
-                <span class="pricing-tier-tag">{plan.tier}</span>
+                <span class="pricing-tier-tag inc-badge inc-badge-brand">
+                  {plan.tier}
+                </span>
                 <h3 class="pricing-plan-name">{plan.name}</h3>
                 <p class="pricing-plan-desc">{plan.description}</p>
               </div>
@@ -650,7 +671,7 @@ const softwareSchema = [
                   {plan.cta}
                 </a>
               </div>
-            </article>
+            </Card>
           ))}
         </div>
       </div>
@@ -878,9 +899,11 @@ const softwareSchema = [
     padding-block: clamp(3.5rem, 6vw, 6rem);
   }
 
+  /* Section intros start at the container's left edge, like the home and
+     AI pages; the max-width only limits the line length. */
   .section-intro {
     max-width: 760px;
-    margin: 0 auto clamp(2.5rem, 4vw, 3.5rem);
+    margin: 0 0 clamp(2.5rem, 4vw, 3.5rem);
     text-align: left;
   }
 
@@ -900,7 +923,7 @@ const softwareSchema = [
     font-family: var(--font-heading);
     font-size: var(--type-section-size);
     font-weight: var(--type-section-weight);
-    line-height: 1.2;
+    line-height: var(--type-section-line-height);
     letter-spacing: -0.01em;
     text-wrap: balance;
   }
@@ -932,7 +955,6 @@ const softwareSchema = [
         transparent 50%
       ),
       var(--color-paper);
-    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
   }
 
   .nirvan-hero-copy h1 span {
@@ -1117,58 +1139,9 @@ const softwareSchema = [
     gap: clamp(1.5rem, 2.5vw, 2.25rem);
   }
 
-  .nirvan-solution-card {
-    display: flex;
-    flex-direction: column;
-    padding: clamp(1.75rem, 2.5vw, 2.35rem);
-    background: #fbf9f6;
-    border: 1px solid #e8e2d8;
-    border-radius: var(--radius-large, 16px);
-    transition:
-      transform var(--duration-fast) ease,
-      box-shadow var(--duration-fast) ease,
-      border-color var(--duration-fast) ease;
-  }
-
-  .nirvan-solution-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px -18px rgba(15, 23, 42, 0.12);
-    border-color: rgba(194, 76, 18, 0.35);
-  }
-
-  .solution-card-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1.25rem;
-  }
-
-  .solution-icon-wrap {
-    display: grid;
-    place-items: center;
-    width: 48px;
-    height: 48px;
-    border-radius: var(--radius-lg);
-    background: rgba(194, 76, 18, 0.1);
-    color: var(--color-orange-text);
-  }
-
+  /* Category labels use the design system badge (inc-badge-brand). */
   .solution-badge {
-    padding: 0.3rem 0.7rem;
-    background: #ede6dc;
-    border-radius: 999px;
-    color: var(--color-navy);
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-  }
-
-  .solution-title {
-    margin: 0 0 0.4rem;
-    font-family: var(--font-heading);
-    font-size: 1.35rem;
-    font-weight: 800;
-    color: var(--color-navy);
+    white-space: nowrap;
   }
 
   .solution-headline {
@@ -1180,10 +1153,7 @@ const softwareSchema = [
   }
 
   .solution-desc {
-    margin: 0 0 1.25rem;
-    color: var(--color-body);
-    font-size: 0.92rem;
-    line-height: 1.6;
+    margin-bottom: var(--space-4);
     flex-grow: 1;
   }
 
@@ -1253,70 +1223,11 @@ const softwareSchema = [
     gap: 1.5rem;
   }
 
-  .nirvan-feature-card {
-    padding: 1.75rem 1.45rem;
-    background: #ffffff;
-    border: 1px solid #e7ded3;
-    border-radius: var(--radius-large, 16px);
-    box-shadow: 0 8px 24px -14px rgba(15, 23, 42, 0.08);
-    transition:
-      transform var(--duration-fast) ease,
-      border-color var(--duration-fast) ease,
-      box-shadow var(--duration-fast) ease;
-  }
-
-  .nirvan-feature-card:hover {
-    transform: translateY(-3px);
-    border-color: rgba(194, 76, 18, 0.35);
-    box-shadow: 0 16px 36px -16px rgba(15, 23, 42, 0.14);
-  }
-
-  .feature-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1.25rem;
-  }
-
-  .feature-card-icon {
-    display: grid;
-    place-items: center;
-    width: 44px;
-    height: 44px;
-    border-radius: var(--radius-md);
-    background: rgba(43, 87, 126, 0.09);
-    color: #2b577e;
-    transition:
-      background var(--duration-fast) ease,
-      color var(--duration-fast) ease;
-  }
-
-  .nirvan-feature-card:hover .feature-card-icon {
-    background: var(--color-orange);
-    color: #ffffff;
-  }
-
   .feature-index {
     font-size: 0.8rem;
     font-weight: 700;
     color: #94a3b8;
     font-family: monospace;
-  }
-
-  .feature-title {
-    margin: 0 0 0.65rem;
-    font-family: var(--font-heading);
-    font-size: 1.12rem;
-    font-weight: 800;
-    color: var(--color-navy);
-    line-height: 1.35;
-  }
-
-  .feature-desc {
-    margin: 0;
-    color: var(--color-body);
-    font-size: 0.88rem;
-    line-height: 1.55;
   }
 
   /* 4. Benefits Section */
@@ -1329,33 +1240,6 @@ const softwareSchema = [
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
-  }
-
-  .nirvan-benefit-card {
-    display: flex;
-    flex-direction: column;
-    padding: 2.25rem;
-    background: #fcfbf9;
-    border: 1px solid #e9e2d7;
-    border-radius: var(--radius-large, 16px);
-  }
-
-  .benefit-card-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .benefit-icon {
-    display: grid;
-    place-items: center;
-    width: 46px;
-    height: 46px;
-    border-radius: var(--radius-lg);
-    background: rgba(194, 76, 18, 0.1);
-    color: var(--color-orange-text);
   }
 
   .benefit-stat-box {
@@ -1379,21 +1263,6 @@ const softwareSchema = [
     letter-spacing: 0.02em;
   }
 
-  .benefit-title {
-    margin: 0 0 0.75rem;
-    font-family: var(--font-heading);
-    font-size: 1.25rem;
-    font-weight: 800;
-    color: var(--color-navy);
-  }
-
-  .benefit-desc {
-    margin: 0;
-    color: var(--color-body);
-    font-size: 0.94rem;
-    line-height: 1.6;
-  }
-
   /* 5. Pricing Section */
   .nirvan-pricing-section {
     background: var(--color-paper);
@@ -1405,8 +1274,7 @@ const softwareSchema = [
     display: flex;
     align-items: flex-start;
     gap: 1rem;
-    max-width: 900px;
-    margin: 0 auto 3rem;
+    margin: 0 0 3rem;
     padding: 1.15rem 1.45rem;
     background: #fff8f1;
     border: 1px solid rgba(194, 76, 18, 0.28);
@@ -1446,23 +1314,10 @@ const softwareSchema = [
     align-items: stretch;
   }
 
+  /* Box styling comes from the shared Card (lg, elevated, lift); the
+     pricing card only anchors its "Recommended" badge. */
   .nirvan-pricing-card {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    padding: 2.25rem 1.85rem;
-    background: #ffffff;
-    border: 1px solid #e4dccc;
-    border-radius: var(--radius-large, 16px);
-    box-shadow: 0 10px 30px -18px rgba(15, 23, 42, 0.1);
-    transition:
-      transform var(--duration-fast) ease,
-      box-shadow var(--duration-fast) ease;
-  }
-
-  .nirvan-pricing-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 22px 48px -20px rgba(15, 23, 42, 0.16);
   }
 
   .nirvan-pricing-card.is-popular {
@@ -1470,31 +1325,17 @@ const softwareSchema = [
     box-shadow: 0 18px 44px -16px rgba(194, 76, 18, 0.22);
   }
 
+  /* Design system badge (inc-badge-orange) centred on the card's top edge. */
   .pricing-badge-popular {
     position: absolute;
-    top: -13px;
+    top: -12px;
     left: 50%;
     transform: translateX(-50%);
-    padding: 0.3rem 0.85rem;
-    background: var(--color-orange);
-    color: #ffffff;
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    border-radius: 999px;
     white-space: nowrap;
   }
 
   .pricing-tier-tag {
-    display: inline-block;
-    padding: 0.25rem 0.65rem;
     margin-bottom: 0.75rem;
-    background: #f4ede3;
-    color: var(--color-navy);
-    font-size: 0.75rem;
-    font-weight: 700;
-    border-radius: 999px;
   }
 
   .pricing-plan-name {
@@ -1579,8 +1420,7 @@ const softwareSchema = [
   }
 
   .final-cta-card {
-    max-width: 980px;
-    margin: 0 0;
+    margin: 0;
     padding: clamp(2.5rem, 4.5vw, 4rem) clamp(1.5rem, 3.5vw, 3.5rem);
     background: #0f172a;
     border-radius: var(--radius-large, 24px);
@@ -1615,7 +1455,7 @@ const softwareSchema = [
   }
 
   .final-cta-text {
-    margin: 0 auto 2.25rem;
+    margin: 0 0 2.25rem;
     max-width: 620px;
     font-size: 1.05rem;
     color: #cbd5e1;
@@ -1627,7 +1467,7 @@ const softwareSchema = [
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1rem;
     margin-bottom: 1.5rem;
   }
@@ -1753,8 +1593,7 @@ const softwareSchema = [
     }
     .nirvan-pricing-grid {
       grid-template-columns: 1fr;
-      max-width: 520px;
-      margin-inline: auto;
+      max-width: 640px;
     }
   }
 

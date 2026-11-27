@@ -1,0 +1,107 @@
+/*
+ * Shared cards, built on the design system card (inc-card in
+ * incaendo/components.css). Use them through src/components/ui/Card.astro:
+ *
+ *   <Card size="sm | md | lg" look="raised | elevated | outline | tint |
+ *         navy | blue" effect="none | lift | accent">
+ *
+ * - size   sets padding, corner radius, icon size and title size, so cards
+ *          of one size look the same wherever they appear.
+ * - look   is the design system variant (raised is the default warm panel).
+ * - effect is the hover behaviour; "accent" is the orange-edge card from
+ *          accent-card.css.
+ *
+ * Inside a card, the shared parts are .card-top (icon left, badge or figure
+ * right), CardIcon (.inc-card-icon), .inc-card-title and .inc-card-text.
+ * Section components only add what is genuinely theirs (grid placement,
+ * a highlighted state, extra content), never the card's own box styling.
+ *
+ * The size classes (card--sm, card--md, card--lg) are built in Card.astro
+ * as `card--${size}`, so a search for the literal class name finds nothing:
+ * keep them.
+ */
+
+/* Sizes (two classes, so they win over the design system's single class) */
+.inc-card.card--sm {
+  --card-icon-size: 40px;
+  padding: var(--space-4);
+}
+.inc-card.card--md {
+  --card-icon-size: 40px;
+  padding: var(--space-5);
+}
+.inc-card.card--lg {
+  --card-icon-size: 48px;
+  padding: var(--space-6);
+  border-radius: var(--radius-lg);
+}
+
+/* Extra look: a white card with a hairline instead of a shadow */
+.inc-card.card--outline {
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+/* Top row: icon on the left, a badge or figure on the right */
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+/* Icon circle: size follows the card size */
+.inc-card .inc-card-icon {
+  flex: none;
+  width: var(--card-icon-size, 40px);
+  height: var(--card-icon-size, 40px);
+}
+.inc-card .inc-card-icon svg {
+  width: 50%;
+  height: 50%;
+}
+
+/* Title and text sizes per card size (md keeps the design system's 18/26) */
+.card--sm .inc-card-title {
+  font-size: 16px;
+  line-height: 24px;
+}
+.card--lg .inc-card-title {
+  font-size: 20px;
+  line-height: 28px;
+}
+.card--lg .inc-card-text {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* Effect: lift on hover */
+.card--lift {
+  transition:
+    transform var(--motion-fast, 150ms) var(--ease-out),
+    box-shadow var(--motion-fast, 150ms) var(--ease-out);
+}
+/* The icon rises a little with the card */
+.card--lift .inc-card-icon {
+  transition: transform var(--motion-fast, 150ms) var(--ease-out);
+}
+@media (hover: hover) {
+  .card--lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-2);
+  }
+  .card--lift:hover .inc-card-icon {
+    transform: translateY(-2px) scale(1.05);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card--lift,
+  .card--lift .inc-card-icon {
+    transition: none;
+  }
+  .card--lift:hover,
+  .card--lift:hover .inc-card-icon {
+    transform: none;
+  }
+}

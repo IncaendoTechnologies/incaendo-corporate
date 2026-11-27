@@ -196,61 +196,15 @@
   border: 0;
 }
 
-/* Design system Card: surface-raised panel, radius-md, space-5 padding.
-   No coloured top borders or gradient bars. */
-.service-card-featured {
-  position: relative;
-  display: flex;
-  min-width: 0;
-  height: 100%;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: var(--space-2, 8px);
-  padding: var(--space-5, 24px);
-  border-radius: var(--radius-md, 8px);
-  background: var(--surface, #ffffff);
-  box-shadow: var(--shadow-1);
-  transition:
-    box-shadow var(--motion-fast, 150ms) var(--ease-out),
-    transform var(--motion-fast, 150ms) var(--ease-out);
-}
-
-.service-card-featured::before {
-  display: none;
-}
-
-.service-card-featured:hover,
-.service-card-featured:focus-within {
-  box-shadow: var(--shadow-2);
-  transform: translateY(-3px);
-}
+/* Home service cards: the box, icon and hover come from the shared Card
+   (src/components/ui/Card.astro, md / elevated / lift); only the content
+   styles below are the section's own. */
 
 .service-card-featured .service-card-top,
 .service-card-featured .service-card-copy,
 .service-card-featured .service-card-explore {
   position: relative;
   z-index: 1;
-}
-
-.service-card-featured .service-icon {
-  width: 40px;
-  height: 40px;
-  border: 0;
-  border-radius: 50%;
-  background: var(--orange-soft, #fdede3);
-  color: var(--orange-text, #b5450b);
-  transform: translateZ(0) rotate(0deg);
-  transition:
-    transform 280ms var(--ease-out),
-    border-color 280ms var(--ease-out),
-    background-color 280ms var(--ease-out);
-}
-
-.service-card-featured:hover .service-icon,
-.service-card-featured:focus-within .service-icon {
-  border-color: rgb(168 65 33 / 34%);
-  background: #fff4ed;
-  transform: translate3d(0, -3px, 10px) scale(1.07);
 }
 
 .service-card-featured .service-card-copy {
@@ -346,23 +300,10 @@
 
   .service-card-featured {
     min-height: 285px;
-    padding: 1rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .service-card-featured,
-  .service-card-featured:hover,
-  .service-card-featured:focus-within {
-    --service-card-lift: 0px;
-    transform: none;
-    transition: none;
-  }
-
-  .service-card-featured::before,
-  .service-card-featured .service-icon,
-  .service-card-featured:hover .service-icon,
-  .service-card-featured:focus-within .service-icon,
   .service-card-featured .service-card-explore span:last-child,
   .service-card-featured:hover .service-card-explore span:last-child,
   .service-card-featured:focus-within .service-card-explore span:last-child {
